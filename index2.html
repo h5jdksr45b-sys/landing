@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orientação para familiares — Borderline (TPB)</title>
+  <meta name="description" content="Guia direto, clínico e humano para lidar com pessoas com TPB sem piorar crises, afastamentos ou ciclos de culpa." />
+
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --card:#111114;
+      --line:#232327;
+      --text:#f2efe7;
+      --muted:#bdb7ad;
+      --accent:#d17957;    /* terracotta */
+      --accent2:#f2c7a4;
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 1040px;
+    }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
+      background:
+        radial-gradient(1100px 700px at 18% -10%, rgba(209,121,87,.28), transparent 62%),
+        radial-gradient(900px 600px at 92% 10%, rgba(242,199,164,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.35;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:24px 18px 120px; }
+
+    /* Topbar */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 0 20px;
+      border-bottom:1px solid var(--line);
+    }
+    .brand{
+      font-weight:800;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:var(--muted);
+      user-select:none;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:12px;
+      user-select:none;
+    }
+    .dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px rgba(209,121,87,.16); }
+
+    /* Layout */
+    .hero{
+      padding:30px 0 8px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      align-items:start;
+    }
+    @media (max-width: 920px){
+      .hero{ grid-template-columns:1fr; }
+    }
+
+    .kicker{
+      color:var(--accent2);
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:12px;
+      margin:0 0 10px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:44px;
+      line-height:1.03;
+      letter-spacing:-.02em;
+    }
+    @media (max-width: 520px){
+      h1{ font-size:36px; }
+    }
+    .sub{
+      margin:0 0 14px;
+      font-size:16px;
+      color:var(--muted);
+      max-width:56ch;
+    }
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin:18px 0 10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px 18px;
+      border-radius:999px;
+      border:1px solid rgba(209,121,87,.45);
+      background: linear-gradient(180deg, rgba(209,121,87,.95), rgba(209,121,87,.78));
+      color:#151414;
+      font-weight:900;
+      box-shadow: 0 14px 34px rgba(209,121,87,.18);
+      transition: transform .12s ease, filter .12s ease;
+      will-change: transform;
+    }
+    .btn:hover{ filter:brightness(1.05); transform: translateY(-1px); }
+    .btn:active{ transform: translateY(0px) scale(.99); }
+    .btn.secondary{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      box-shadow:none;
+      font-weight:800;
+    }
+
+    .micro{
+      margin:0;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .card{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow: var(--shadow);
+    }
+    .stack{ display:grid; gap:12px; }
+    .bullets{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+    .bullets li{ margin:8px 0; }
+    .quote{
+      border-left:3px solid rgba(209,121,87,.85);
+      background:rgba(209,121,87,.06);
+      border-radius:14px;
+      padding:12px 12px;
+      color:var(--muted);
+    }
+
+    /* Images */
+    .img{
+      width:100%;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.07);
+      background:rgba(255,255,255,.02);
+      box-shadow: 0 16px 45px rgba(0,0,0,.45);
+    }
+    .img img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    /* Sections */
+    .hr{ height:1px; background:var(--line); margin:22px 0; }
+    section{ padding:22px 0 0; }
+    h2{
+      margin:0 0 12px;
+      font-size:24px;
+      letter-spacing:-.01em;
+    }
+    .grid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 920px){
+      .grid2{ grid-template-columns:1fr; }
+    }
+    .small{ font-size:12px; color:var(--muted); }
+    .footer{
+      margin-top:26px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      display:grid;
+      gap:8px;
+    }
+
+    /* Scroll reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(10px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .reveal.in{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* Sticky mobile CTA */
+    .stickyCta{
+      position:fixed;
+      left:0; right:0;
+      bottom:0;
+      padding:10px 12px 12px;
+      background: linear-gradient(180deg, rgba(11,11,12,0), rgba(11,11,12,.78) 25%, rgba(11,11,12,.92));
+      backdrop-filter: blur(10px);
+      display:none;
+      z-index:50;
+    }
+    .stickyCta .inner{
+      max-width: var(--max);
+      margin:0 auto;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .stickyCta .inner .txt{
+      display:grid;
+      gap:2px;
+      min-width:0;
+    }
+    .stickyCta .inner .txt b{
+      font-size:12px;
+      letter-spacing:.02em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .stickyCta .inner .txt span{
+      font-size:11px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .stickyCta .inner .btn{
+      padding:12px 14px;
+      font-size:13px;
+      white-space:nowrap;
+    }
+
+    /* CTA pulse at 70% */
+    .pulse{
+      animation: pulse 1.25s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%{ box-shadow: 0 14px 34px rgba(209,121,87,.18); }
+      50%{ box-shadow: 0 14px 34px rgba(209,121,87,.26), 0 0 0 8px rgba(209,121,87,.12); }
+      100%{ box-shadow: 0 14px 34px rgba(209,121,87,.18); }
+    }
+
+    /* Utility */
+    .spacer8{ height:8px; }
+    .spacer12{ height:12px; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap" id="top">
+    <div class="topbar">
+      <div class="brand">VONTADE DIGNA</div>
+      <div class="chip"><span class="dot"></span> Guia prático • sem romantização • com limites</div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="reveal">
+        <p class="kicker">Para familiares e parceiros (TPB / Borderline)</p>
+        <h1>Você não precisa ser mais forte.<br>Precisa parar de piorar as crises sem perceber.</h1>
+        <p class="sub">
+          Um guia direto, clínico e humano para lidar com pessoas com Transtorno de Personalidade Borderline
+          sem alimentar explosões, afastamentos ou ciclos de culpa.
+        </p>
+
+        <div class="img" aria-label="Imagem principal">
+          <img loading="eager" alt="Tentou acalmar e piorou" src="data:image/jpeg;base64,REPLACE_IMG1" />
+        </div>
+
+        <div class="ctaRow">
+          <a class="btn js-cta" data-cta="1" href="REPLACE_CTA" target="_blank" rel="noopener">Quero o guia agora</a>
+          <a class="btn secondary" href="#conteudo">Ver o que tem dentro</a>
+        </div>
+
+        <p class="micro">
+          Por <strong>Dr. Fabio Henrique de Lima Schmidt</strong> • Médico • Pós-graduado em Psiquiatria • CRM-SP 183549 • Atuação em CAPS
+        </p>
+      </div>
+
+      <aside class="card stack reveal">
+        <div>
+          <p class="kicker">Se isso acontece, é pra você</p>
+          <ul class="bullets">
+            <li>Você anda em “casca de ovo” pra não dar gatilho.</li>
+            <li>Qualquer conversa vira briga, sumiço ou teste.</li>
+            <li>Você valida e mesmo assim tudo piora.</li>
+            <li>Depois da crise vem culpa — e o ciclo recomeça.</li>
+          </ul>
+        </div>
+        <div class="quote">
+          Você não está lidando com “drama”.<br>
+          Está lidando com um sistema emocional que entra em <strong>modo ameaça</strong> muito rápido.<br>
+          E pequenas falas suas podem virar combustível — mesmo com boa intenção.
+        </div>
+        <div class="small">
+          Conteúdo educativo. Não substitui consulta médica ou psicoterapia.
+        </div>
+      </aside>
+    </section>
+
+    <div class="hr"></div>
+
+    <!-- IDENTIFICAÇÃO -->
+    <section id="identificacao" class="reveal">
+      <h2>Sem orientação, você vira vilão acidental</h2>
+      <div class="grid2">
+        <div class="card">
+          <p class="sub" style="margin:0">
+            Você tenta fazer o certo — e piora. Aí vem:
+          </p>
+          <ul class="bullets">
+            <li>culpa</li>
+            <li>cansaço</li>
+            <li>medo de falar</li>
+            <li>e o ciclo recomeça</li>
+          </ul>
+          <div class="spacer12"></div>
+          <p class="small" style="margin:0">
+            Este guia não é “fofinho”. É prático: linguagem, timing, limites e previsibilidade.
+          </p>
+        </div>
+
+        <div class="img" aria-label="Imagem de identificação">
+          <img loading="lazy" alt="Sem orientação é fácil virar vilão acidental" src="data:image/jpeg;base64,REPLACE_IMG2" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CLAREZA -->
+    <section id="clareza" class="reveal">
+      <h2>O problema não é falta de amor. É excesso de ameaça.</h2>
+      <div class="card">
+        <p class="sub" style="margin:0">
+          No borderline, pequenas falas podem ser sentidas como rejeição, abandono ou desprezo.
+          Mesmo tentando ajudar, você pode estar alimentando a escalada sem perceber.
+        </p>
+        <div class="spacer12"></div>
+        <p class="small" style="margin:0">
+          Objetivo: reduzir ameaça, organizar previsibilidade e manter limites com consistência — sem virar terapeuta.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTEÚDO -->
+    <section id="conteudo" class="reveal">
+      <h2>O que você vai receber</h2>
+      <div class="grid2">
+        <div class="card">
+          <ul class="bullets" style="margin-top:0">
+            <li>Entendimento real das crises (sem demonizar ninguém)</li>
+            <li>Validação sem passar pano</li>
+            <li>Previsibilidade que reduz terror emocional</li>
+            <li>Comunicação que desarma em vez de inflamar</li>
+            <li>O que fazer (e não fazer) durante a crise</li>
+            <li>Como cuidar de você sem se apagar</li>
+          </ul>
+
+          <div class="ctaRow">
+            <a class="btn js-cta" data-cta="2" href="REPLACE_CTA" target="_blank" rel="noopener">Acessar o guia</a>
+            <a class="btn secondary" href="#final">Ir pro final</a>
+          </div>
+
+          <p class="small" style="margin:0">
+            Linguagem direta. Sem promessas mágicas. Sem romantização.
+          </p>
+        </div>
+
+        <div class="img" aria-label="Imagem do produto">
+          <img loading="lazy" alt="Orientação para familiares de pessoas com borderline" src="data:image/jpeg;base64,REPLACE_IMG3" />
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL -->
+    <section id="final" class="reveal">
+      <h2>Se você está cansado de errar tentando acertar, este material é pra você.</h2>
+      <div class="card">
+        <p class="sub" style="margin:0">
+          Ajudar não é falar mais. É reduzir ameaça, organizar previsibilidade e sustentar limites com dignidade.
+        </p>
+        <div class="spacer12"></div>
+        <div class="ctaRow">
+          <a class="btn js-cta" data-cta="3" href="REPLACE_CTA" target="_blank" rel="noopener">Comprar agora</a>
+          <a class="btn secondary" href="#top">Voltar ao topo</a>
+        </div>
+        <p class="small" style="margin:0">
+          Conteúdo educativo. Não substitui consulta médica ou psicoterapia. Em caso de risco imediato, procure um serviço de emergência.
+        </p>
+      </div>
+
+      <div class="footer">
+        <div><strong>Dr. Fabio Henrique de Lima Schmidt</strong> — CRM/SP 183549</div>
+        <div>Médico • Pós-graduado em Psiquiatria • Atuação em CAPS</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Sticky CTA (mobile) -->
+  <div class="stickyCta" id="stickyCta" aria-hidden="true">
+    <div class="inner">
+      <div class="txt">
+        <b>Guia para familiares (TPB)</b>
+        <span>Ajude sem piorar crises • com limites</span>
+      </div>
+      <a class="btn js-cta" data-cta="sticky" href="REPLACE_CTA" target="_blank" rel="noopener">Comprar</a>
+    </div>
+  </div>
+
+  <script>
+    // ====== CONFIG ======
+    const CHECKOUT_URL = "https://pay.hotmart.com/L103544810O?off=622o2a97&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767229031679&bid=1767229033713";
+
+    // Replace CTA URLs
+    document.querySelectorAll('a[href="REPLACE_CTA"]').forEach(a => a.href = CHECKOUT_URL);
+
+    // Scroll reveal
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('in');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Sticky CTA show after 25% scroll (mainly for mobile)
+    const sticky = document.getElementById('stickyCta');
+    function handleSticky(){
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      const p = docH > 0 ? (scrollY / docH) : 0;
+
+      const isSmall = window.matchMedia("(max-width: 920px)").matches;
+      if(isSmall && p > 0.25 && p < 0.96){
+        sticky.style.display = "block";
+        sticky.setAttribute("aria-hidden","false");
+      } else {
+        sticky.style.display = "none";
+        sticky.setAttribute("aria-hidden","true");
+      }
+
+      // Pulse CTA buttons near 70% scroll
+      document.querySelectorAll(".js-cta").forEach(btn => btn.classList.remove("pulse"));
+      if(p >= 0.70 && p <= 0.92){
+        document.querySelectorAll(".js-cta").forEach(btn => btn.classList.add("pulse"));
+      }
+    }
+    window.addEventListener("scroll", handleSticky, { passive:true });
+    window.addEventListener("resize", handleSticky);
+    handleSticky();
+
+    // Optional: basic click tag (no external analytics; keeps page self-contained)
+    document.querySelectorAll(".js-cta").forEach(btn => {
+      btn.addEventListener("click", () => {
+        try{
+          const v = (btn.getAttribute("data-cta") || "unknown");
+          sessionStorage.setItem("last_cta_click", v);
+        }catch(e){}
+      });
+    });
+  </script>
+
+  <!--
+    IMPORTANT:
+    This HTML is fully self-contained. Images are embedded as base64 placeholders.
+    Next step: Replace the base64 placeholders below (REPLACE_IMG1/2/3) with the provided data URIs.
+  -->
+</body>
+</html>
