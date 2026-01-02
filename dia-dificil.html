@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TPB — 5 ferramentas para um dia difícil</title>
-<meta name="description" content="Guia prático e direto para regular emoções, conter impulsos e evitar decisões destrutivas em dias difíceis no TPB.">
+<meta name="description" content="Ferramentas práticas para conter impulsos, regular emoções e atravessar dias difíceis no TPB.">
 <style>
 :root{
   --bg:#fff7f2;
@@ -16,7 +16,6 @@
   --accent2:#9b3f25;
   --soft:#f3e1d8;
   --max:1040px;
-  --r:16px;
 }
 *{box-sizing:border-box}
 body{
@@ -31,104 +30,39 @@ body{
 }
 a{text-decoration:none;color:inherit}
 .container{max-width:var(--max);margin:0 auto;padding:42px 18px 150px}
-.top{
-  display:flex;justify-content:space-between;align-items:center;gap:10px;
-  padding-bottom:16px;border-bottom:1px solid var(--line);
-}
-.brand{font-weight:900;letter-spacing:.08em;font-size:12px;color:var(--muted);text-transform:uppercase}
-.pill{
-  font-size:12px;font-weight:800;color:var(--accent2);
-  border:1px solid rgba(155,63,37,.18);
-  background:rgba(243,225,216,.65);
-  padding:8px 12px;border-radius:999px;white-space:nowrap;
-}
-.hero{
-  margin-top:18px;
-  background:rgba(255,255,255,.78);
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:22px;
-  box-shadow:0 18px 45px rgba(0,0,0,.07);
-}
+.top{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.brand{font-weight:900;font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.pill{font-size:12px;font-weight:800;color:var(--accent2);background:rgba(243,225,216,.7);border:1px solid rgba(155,63,37,.2);padding:8px 12px;border-radius:999px}
+.hero{margin-top:18px;background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 18px 45px rgba(0,0,0,.07)}
 .kickers{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.tag{
-  font-size:12px;font-weight:900;color:var(--accent2);
-  padding:7px 10px;border-radius:999px;
-  background:rgba(243,225,216,.9);
-  border:1px solid rgba(198,90,46,.15);
-}
+.tag{font-size:12px;font-weight:900;color:var(--accent2);padding:7px 10px;border-radius:999px;background:var(--soft);border:1px solid rgba(198,90,46,.15)}
 h1{margin:0 0 10px;font-size:clamp(30px,4.2vw,44px);line-height:1.08}
 .lead{margin:0;color:var(--muted);font-size:16px;max-width:70ch}
 .ctaRow{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  padding:14px 18px;border-radius:14px;font-weight:900;
-  border:1px solid var(--line);background:#fff;
-}
-.btn.primary{
-  background:linear-gradient(180deg, var(--accent), var(--accent2));
-  color:#fff;border:none;
-}
-.btn.primary:active{transform:translateY(1px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 18px;border-radius:14px;font-weight:900;border:1px solid var(--line);background:#fff}
+.btn.primary{background:linear-gradient(180deg,var(--accent),var(--accent2));color:#fff;border:none}
 .section{margin-top:28px}
 .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
 @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
-.card{
-  background:rgba(255,255,255,.86);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:18px;
-}
+.card{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:18px;padding:18px}
 .card h2{margin:0 0 10px;font-size:18px}
 .item{display:flex;gap:12px;align-items:flex-start;margin-top:12px}
-.ico{
-  width:36px;height:36px;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--soft);
-  border:1px solid rgba(198,90,46,.15);
-  flex:0 0 auto;
-}
+.ico{width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--soft);border:1px solid rgba(198,90,46,.15)}
 .item b{display:block}
 .item span{display:block;color:var(--muted);font-size:14px;margin-top:2px}
 .hr{height:1px;background:var(--line);margin:22px 0}
-.footer{
-  margin-top:24px;
-  color:var(--muted);font-size:12px;
-  border-top:1px solid var(--line);
-  padding-top:14px;
-}
-.sticky{
-  position:fixed;left:0;right:0;bottom:0;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(10px);
-  border-top:1px solid var(--line);
-  padding:10px 12px;
-}
-.sticky .inner{
-  max-width:var(--max);margin:0 auto;
-  display:flex;justify-content:space-between;align-items:center;gap:10px;
-}
-.sticky .t{min-width:0}
-.sticky .t b{
-  display:block;
-  font-size:13px;
-  white-space:normal;
-  overflow:visible;
-}
-.sticky .t span{
-  display:block;
-  font-size:11px;
-  color:var(--muted);
-  white-space:normal;
-  overflow:visible;
-}
+.footer{margin-top:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:14px}
+.sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px 12px}
+.sticky .inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
 </style>
 </head>
+
 <body>
 
-<!-- LINK ÚNICO DO CHECKOUT (correto) -->
-<!-- Se um dia mudar, troque aqui e replique nas 3 ocorrências abaixo -->
-<!-- https://pay.hotmart.com/J103203459N?off=sr8z19ij&hotfeature=51&_hi=... -->
+<script>
+const CHECKOUT_URL = "https://pay.hotmart.com/J103203459N?off=sr8z19ij&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767315755181&bid=1767315755871";
+function buy(){ window.location.href = CHECKOUT_URL; return false; }
+</script>
 
 <div class="container">
   <div class="top">
@@ -139,30 +73,20 @@ h1{margin:0 0 10px;font-size:clamp(30px,4.2vw,44px);line-height:1.08}
   <div class="hero">
     <div class="kickers">
       <div class="tag">⚡ Dia difícil</div>
-      <div class="tag">🧠 Sem autoajuda</div>
+      <div class="tag">🧠 Regulação emocional</div>
       <div class="tag">🧯 Redução de dano</div>
     </div>
 
-    <h1>TPB: 5 ferramentas para sobreviver a um dia difícil</h1>
+    <h1>5 ferramentas para sobreviver a um dia difícil</h1>
     <p class="lead">
-      Quando a emoção sobe rápido, a decisão vem torta.
-      Este PDF é um kit objetivo para reduzir impulsos, organizar pensamento e atravessar o dia
-      com o mínimo de dano possível — sem discurso, só ferramenta.
+      Quando a emoção sobe rápido, decidir vira erro.
+      Este PDF entrega ferramentas objetivas para conter impulsos,
+      organizar a mente e atravessar o dia sem se machucar.
     </p>
 
     <div class="ctaRow">
-      <a class="btn primary" href="https://pay.hotmart.com/J103203459N?off=sr8z19ij&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767315531867&bid=1767315532678">Comprar agora</a>
-      <a class="btn" href="#conteudo">Ver o que tem dentro</a>
-    </div>
-
-    <div class="hr"></div>
-
-    <div class="item">
-      <div class="ico">🟡</div>
-      <div>
-        <b>Zona amarela (o ponto certo de intervir)</b>
-        <span>Você aprende a reconhecer cedo e agir antes do “vermelho”.</span>
-      </div>
+      <a class="btn primary" href="#" onclick="return buy()">Comprar agora</a>
+      <a class="btn" href="#conteudo">Ver o conteúdo</a>
     </div>
   </div>
 
@@ -171,71 +95,35 @@ h1{margin:0 0 10px;font-size:clamp(30px,4.2vw,44px);line-height:1.08}
 
       <div class="card">
         <h2>O que tem dentro</h2>
-
-        <div class="item">
-          <div class="ico">✅</div>
-          <div><b>1) Gatilho × Emoção × Fato</b><span>Separar emoção de realidade antes de agir.</span></div>
-        </div>
-
-        <div class="item">
-          <div class="ico">⚡</div>
-          <div><b>2) Impulso × Ação contrária</b><span>Interromper o ciclo antes da consequência.</span></div>
-        </div>
-
-        <div class="item">
-          <div class="ico">🚦</div>
-          <div><b>3) Semáforo emocional</b><span>Identificar escalada e aplicar resposta mínima.</span></div>
-        </div>
-
-        <div class="item">
-          <div class="ico">🗣️</div>
-          <div><b>4) Frases prontas</b><span>Comunicar sem destruir vínculo quando ativado.</span></div>
-        </div>
-
-        <div class="item">
-          <div class="ico">🛑</div>
-          <div><b>5) Mini plano de crise</b><span>Protocolo curto para conter e adiar decisões destrutivas.</span></div>
-        </div>
+        <div class="item"><div class="ico">✅</div><div><b>Gatilho × Emoção × Fato</b><span>Separar emoção de realidade.</span></div></div>
+        <div class="item"><div class="ico">⚡</div><div><b>Impulso × Ação contrária</b><span>Interromper antes da consequência.</span></div></div>
+        <div class="item"><div class="ico">🚦</div><div><b>Semáforo emocional</b><span>Agir no amarelo.</span></div></div>
+        <div class="item"><div class="ico">🗣️</div><div><b>Frases prontas</b><span>Comunicar sem destruir vínculo.</span></div></div>
+        <div class="item"><div class="ico">🛑</div><div><b>Mini plano de crise</b><span>Conter e adiar decisões.</span></div></div>
       </div>
 
       <div class="card">
         <h2>Pra quem é</h2>
-
-        <div class="item">
-          <div class="ico">🔥</div>
-          <div><b>Emoção intensa</b><span>Quando o corpo acelera e a mente “some”.</span></div>
-        </div>
-
-        <div class="item">
-          <div class="ico">💬</div>
-          <div><b>Gatilho relacional</b><span>Vontade de resolver tudo agora / medo de abandono.</span></div>
-        </div>
-
-        <div class="item">
-          <div class="ico">🧨</div>
-          <div><b>Impulso</b><span>Textão, sumir, compra, decisão no pico.</span></div>
-        </div>
+        <div class="item"><div class="ico">🔥</div><div><b>Emoção intensa</b><span>Dias instáveis.</span></div></div>
+        <div class="item"><div class="ico">💬</div><div><b>Gatilho relacional</b><span>Medo de abandono.</span></div></div>
+        <div class="item"><div class="ico">🧨</div><div><b>Impulso</b><span>Decisão no pico.</span></div></div>
 
         <div class="hr"></div>
-
-        <a class="btn primary" href="https://pay.hotmart.com/J103203459N?off=sr8z19ij&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767315531867&bid=1767315532678" style="width:100%;text-align:center">Quero o PDF</a>
+        <a class="btn primary" href="#" onclick="return buy()" style="width:100%">Quero o PDF</a>
       </div>
 
     </div>
   </div>
 
   <div class="footer">
-    Conteúdo educativo. Não substitui consulta médica ou psicoterapia. Em risco imediato, procure um serviço de emergência.
+    Conteúdo educativo. Não substitui consulta médica ou psicoterapia.
   </div>
 </div>
 
 <div class="sticky">
   <div class="inner">
-    <div class="t">
-      <b>TPB — 5 ferramentas para um dia difícil</b>
-      <span>Compra direta no Hotmart</span>
-    </div>
-    <a class="btn primary" href="https://pay.hotmart.com/J103203459N?off=sr8z19ij&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767315531867&bid=1767315532678">Comprar</a>
+    <strong>5 ferramentas para um dia difícil</strong>
+    <a class="btn primary" href="#" onclick="return buy()">Comprar</a>
   </div>
 </div>
 
