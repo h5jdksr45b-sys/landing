@@ -3,19 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dr. Fabio Schmidt — Conteúdos</title>
-<meta name="description" content="Conteúdos clínicos e materiais educativos sobre TPB, regulação emocional e relações.">
+<title>TPB — 5 ferramentas para um dia difícil</title>
+
+<meta name="description" content="Guia clínico e prático para atravessar dias emocionalmente difíceis no transtorno de personalidade borderline, com ferramentas objetivas e aplicáveis.">
+
 <style>
 :root{
-  --bg:#f6f4f2;
-  --card:#ffffff;
-  --text:#151515;
-  --muted:#5c5c5c;
-  --line:#e5e3df;
-  --accent:#9b3f25;
-  --soft:#f1e4df;
+  --bg:#fff9f6;
+  --panel:#ffffff;
+  --text:#1a1a1a;
+  --muted:#666;
+  --accent:#c65a2e;
+  --accent-dark:#9b3f25;
+  --soft:#f3e1d8;
+  --line:#eadfd9;
+  --max:1080px;
   --r:16px;
-  --max:560px;
 }
 *{box-sizing:border-box}
 body{
@@ -23,118 +26,164 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
+  line-height:1.6;
 }
 .container{
   max-width:var(--max);
   margin:0 auto;
-  padding:28px 18px 60px;
+  padding:48px 20px 140px;
 }
-.header{
-  text-align:center;
-  margin-bottom:28px;
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:40px;
 }
-.name{
-  font-weight:900;
-  font-size:20px;
-}
-.role{
-  font-size:13px;
-  color:var(--muted);
-  margin-top:4px;
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--r);
-  padding:18px;
-  margin-bottom:14px;
-}
-.card.primary{
-  border:2px solid var(--accent);
-  background:linear-gradient(180deg,#fff,#faf7f6);
-}
-.icon{
-  font-size:22px;
-}
-.title{
-  font-weight:900;
-  margin:8px 0 4px;
-}
-.desc{
+.badge{
+  background:var(--soft);
+  color:var(--accent-dark);
+  padding:6px 14px;
+  border-radius:999px;
+  font-weight:600;
   font-size:14px;
-  color:var(--muted);
 }
-.btn{
-  display:block;
-  margin-top:12px;
-  padding:14px;
-  text-align:center;
-  border-radius:12px;
+.hero{
+  display:grid;
+  gap:28px;
+  margin-bottom:56px;
+}
+.hero h1{
+  font-size:clamp(32px,4vw,44px);
+  line-height:1.15;
+  margin:0;
+}
+.hero p{
+  font-size:18px;
+  color:var(--muted);
+  max-width:680px;
+}
+.cta{
+  display:inline-block;
   background:var(--accent);
   color:#fff;
-  font-weight:900;
+  padding:18px 28px;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:700;
+  text-decoration:none;
 }
-.btn.light{
-  background:#fff;
-  color:var(--text);
+.cta:hover{background:var(--accent-dark)}
+.section{
+  margin:64px 0;
+}
+.section h2{
+  font-size:28px;
+  margin-bottom:20px;
+}
+.cards{
+  display:grid;
+  gap:20px;
+}
+.card{
+  background:var(--panel);
   border:1px solid var(--line);
+  border-radius:var(--r);
+  padding:22px;
 }
-.footer{
-  text-align:center;
-  font-size:12px;
+.card h3{
+  margin:0 0 8px;
+  font-size:20px;
+}
+.card p{
+  margin:0;
   color:var(--muted);
-  margin-top:24px;
 }
+.author{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  padding:26px;
+  margin-top:72px;
+}
+.author strong{font-size:18px}
+footer{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  background:#fff;
+  border-top:1px solid var(--line);
+  padding:14px 16px;
+}
+footer a{
+  display:block;
+  background:var(--accent);
+  color:#fff;
+  text-align:center;
+  padding:16px;
+  border-radius:14px;
+  font-weight:700;
+  text-decoration:none;
+}
+footer a:hover{background:var(--accent-dark)}
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
-<div class="header">
-  <div class="name">Dr. Fabio Schmidt</div>
-  <div class="role">Médico • Psiquiatria • CRM/SP 183549</div>
-</div>
+<header>
+  <div class="badge">Guia clínico prático</div>
+</header>
 
-<div class="card primary">
-  <div class="icon">📘</div>
-  <div class="title">Orientação para familiares (TPB)</div>
-  <div class="desc">
-    Guia clínico e prático para ajudar sem piorar crises,
-    brigas ou afastamentos.
-  </div>
-  <a class="btn" href="https://h5jdksr45b-sys.github.io/landing/" target="_blank">
-    Acessar
+<section class="hero">
+  <h1>5 ferramentas para atravessar um dia emocionalmente difícil</h1>
+  <p>
+    Quando o dia sai do controle, pensar não resolve.  
+    Este guia foi criado para interromper impulsos, organizar a mente e evitar decisões que pioram tudo — mesmo em crise.
+  </p>
+  <a class="cta" href="https://pay.hotmart.com/L103544810O?off=622o2a97">
+    Comprar agora
   </a>
-</div>
+</section>
 
-<div class="card">
-  <div class="icon">⚡</div>
-  <div class="title">5 ferramentas para um dia difícil</div>
-  <div class="desc">
-    Regule emoção, reduza impulsos e evite decisões
-    destrutivas em dias instáveis.
+<section class="section">
+  <h2>O que você vai encontrar</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>✔ Gatilho × Emoção × Fato</h3>
+      <p>Matriz prática para separar sentimento de realidade antes de agir.</p>
+    </div>
+    <div class="card">
+      <h3>✔ Impulso × Ação contrária</h3>
+      <p>Ferramenta rápida para interromper comportamentos que trazem arrependimento.</p>
+    </div>
+    <div class="card">
+      <h3>✔ Janela de atraso decisório</h3>
+      <p>Estratégia para ganhar tempo quando tudo pede reação imediata.</p>
+    </div>
+    <div class="card">
+      <h3>✔ Regulação fisiológica simples</h3>
+      <p>Técnicas diretas para baixar ativação corporal sem intelectualizar.</p>
+    </div>
+    <div class="card">
+      <h3>✔ Plano de contenção do dia</h3>
+      <p>Como atravessar o dia sem se machucar, romper vínculos ou se sabotar.</p>
+    </div>
   </div>
-  <a class="btn light" href="https://h5jdksr45b-sys.github.io/landing/dia-dificil.html" target="_blank">
-    Ver material
-  </a>
-</div>
+</section>
 
-<div class="card">
-  <div class="icon">📲</div>
-  <div class="title">Instagram</div>
-  <div class="desc">
-    Conteúdos clínicos, diretos e sem romantização.
+<section class="section">
+  <h2>Para quem é</h2>
+  <div class="cards">
+    <div class="card">
+      <p>• Pessoas com TPB em dias de desorganização emocional</p>
+      <p>• Quem já tentou “se acalmar” e só piorou</p>
+      <p>• Quem precisa de algo concreto, não discurso</p>
+    </div>
   </div>
-  <a class="btn light" href="https://www.instagram.com/drfabioschmidt" target="_blank">
-    Acessar perfil
-  </a>
-</div>
+</section>
 
-<div class="footer">
-Conteúdo educativo • Não substitui consulta médica
-</div>
-
-</div>
-</body>
-</html>
+<section class="author">
+  <strong>Dr. Fabio Henrique de Lima Schmidt</strong><br>
+  Médico — CRM/SP 183549<br><br>
+  Psiquiatra com
