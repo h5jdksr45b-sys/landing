@@ -1,479 +1,215 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Borderline e Uso de Substâncias — Dr. Fabio Schmidt</title>
-  <meta name="description" content="Material educativo e clínico sobre TPB e uso de substâncias: dor antes do uso, diferença entre recreação e anestesia emocional, sinais e manejo integrado." />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Borderline e uso de substâncias — Guia clínico</title>
+<meta name="description" content="Guia clínico e prático sobre Transtorno de Personalidade Borderline e uso de substâncias.">
 
-  <style>
-    :root{
-      --bg:#fbf7f4;
-      --paper:#ffffff;
-      --text:#151515;
-      --muted:#616161;
-      --line:#eadfd8;
-      --accent:#b24a2f;      /* terracota */
-      --accent2:#7f2e1c;
-      --soft:#f3e7e1;
-      --ok:#0f7a4a;
-      --warn:#8f3a25;
-      --shadow: 0 18px 45px rgba(0,0,0,.08);
-      --radius: 18px;
-      --max: 1080px;
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,Helvetica,sans-serif;
-      background:
-        radial-gradient(1200px 650px at 20% -10%, rgba(178,74,47,.12), transparent 60%),
-        radial-gradient(900px 600px at 90% 20%, rgba(178,74,47,.09), transparent 55%),
-        var(--bg);
-      color:var(--text);
-      line-height:1.55;
-    }
-
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:40px 18px 130px}
-
-    /* Top bar */
-    .top{
-      display:flex; gap:12px; align-items:center; justify-content:space-between;
-      padding:12px 14px;
-      background:rgba(255,255,255,.7);
-      border:1px solid var(--line);
-      border-radius:999px;
-      backdrop-filter: blur(10px);
-    }
-    .brand{
-      display:flex; gap:10px; align-items:center;
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-    .pill{
-      font-size:13px;
-      font-weight:700;
-      padding:7px 12px;
-      border-radius:999px;
-      background:var(--soft);
-      color:var(--accent2);
-      border:1px solid rgba(178,74,47,.15);
-      white-space:nowrap;
-    }
-
-    /* Hero */
-    .hero{
-      margin-top:26px;
-      background:var(--paper);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .hero-inner{
-      padding:28px 22px;
-      display:grid;
-      gap:18px;
-    }
-    .kicker{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-    }
-    .kicker .tag{
-      display:inline-flex; align-items:center; gap:8px;
-      font-size:13px; font-weight:800;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:#fff;
-    }
-    h1{
-      margin:0;
-      font-size: clamp(30px, 4.1vw, 46px);
-      line-height:1.12;
-      letter-spacing:-.6px;
-    }
-    .sub{
-      margin:0;
-      color:var(--muted);
-      font-size:17px;
-      max-width:850px;
-    }
-
-    .cta-row{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-top:6px;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:16px 18px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
-      font-weight:800;
-      cursor:pointer;
-      min-width:220px;
-    }
-    .btn-primary{
-      background: linear-gradient(180deg, var(--accent), var(--accent2));
-      color:#fff;
-      border-color: rgba(0,0,0,.05);
-      box-shadow: 0 10px 22px rgba(178,74,47,.22);
-    }
-    .btn-primary:active{transform: translateY(1px)}
-    .btn-ghost{
-      background: #fff;
-      color: var(--accent2);
-    }
-
-    .micro{
-      font-size:13px; color:var(--muted);
-      margin: 6px 0 0;
-    }
-
-    /* Grid sections */
-    .section{margin-top:28px}
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-    }
-    .card{
-      background: rgba(255,255,255,.78);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: 0 14px 36px rgba(0,0,0,.06);
-      padding:18px 16px;
-    }
-    .card h2{
-      margin:0 0 10px;
-      font-size: 20px;
-      letter-spacing:-.2px;
-    }
-    .card p{margin:0; color:var(--muted)}
-    .span-12{grid-column: span 12}
-    .span-8{grid-column: span 8}
-    .span-6{grid-column: span 6}
-    .span-4{grid-column: span 4}
-
-    @media (max-width: 900px){
-      .span-8,.span-6,.span-4{grid-column: span 12}
-      .btn{min-width: 100%}
-      .top{border-radius:16px}
-    }
-
-    /* Icon rows */
-    .feat{
-      display:flex; gap:12px; align-items:flex-start;
-      padding:14px;
-      border-radius:16px;
-      background:#fff;
-      border:1px solid var(--line);
-    }
-    .ico{
-      width:40px; height:40px;
-      border-radius:12px;
-      display:grid; place-items:center;
-      background: var(--soft);
-      border:1px solid rgba(178,74,47,.15);
-      flex:0 0 auto;
-    }
-    .feat b{display:block; margin-bottom:4px}
-    .feat small{color:var(--muted); font-size:13px}
-
-    /* Quote */
-    .quote{
-      padding:18px 16px;
-      background: linear-gradient(180deg, rgba(178,74,47,.10), rgba(178,74,47,.03));
-      border:1px solid rgba(178,74,47,.18);
-      border-radius: var(--radius);
-    }
-    .quote strong{color:var(--accent2)}
-    .quote p{margin:10px 0 0; color:var(--muted)}
-
-    /* Author */
-    .author{
-      display:flex; gap:14px; align-items:flex-start;
-    }
-    .stamp{
-      width:52px;height:52px;border-radius:16px;
-      background: linear-gradient(180deg, var(--accent), var(--accent2));
-      color:#fff;
-      display:grid; place-items:center;
-      font-weight:900;
-      box-shadow: 0 10px 22px rgba(178,74,47,.22);
-      flex:0 0 auto;
-    }
-
-    /* Footer sticky */
-    .sticky{
-      position:fixed;
-      left:0; right:0; bottom:0;
-      padding:12px 12px 16px;
-      background: rgba(255,255,255,.9);
-      border-top:1px solid var(--line);
-      backdrop-filter: blur(10px);
-    }
-    .sticky-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .sticky-title{
-      font-weight:900;
-      letter-spacing:-.2px;
-      font-size:14px;
-    }
-    .sticky-sub{font-size:12px; color:var(--muted)}
-    .sticky .btn{min-width: 220px}
-    @media(max-width: 900px){
-      .sticky-inner{flex-direction:column; align-items:stretch}
-      .sticky .btn{min-width: 100%}
-    }
-
-    /* Simple SVG color */
-    svg{display:block}
-  </style>
+<style>
+:root{
+  --bg:#faf7f4;
+  --panel:#ffffff;
+  --text:#181818;
+  --muted:#5f5f5f;
+  --line:#eadfd8;
+  --accent:#b24a2f;
+  --accent-dark:#8f3a25;
+  --soft:#f3e7e1;
+  --max:1080px;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.55;
+}
+a{text-decoration:none;color:inherit}
+.container{max-width:var(--max);margin:0 auto;padding:48px 18px 140px}
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:20px;border-bottom:1px solid var(--line);
+}
+.header .title{
+  font-weight:800;letter-spacing:.08em;font-size:14px;color:var(--muted);text-transform:uppercase;
+}
+.hero{
+  margin-top:28px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px;
+  box-shadow:0 16px 42px rgba(0,0,0,.07);
+}
+.kickers{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.kickers .tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;padding:8px 12px;
+  border-radius:999px;
+  background:var(--soft);
+  border:1px solid rgba(178,74,47,.15);
+  color:var(--accent-dark);
+}
+.hero h1{
+  margin:0 0 12px;
+  font-size:clamp(30px,4vw,48px);
+  line-height:1.12;
+}
+.hero p{
+  margin:0;
+  color:var(--muted);
+  font-size:17px;
+}
+.ctaRow{
+  display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 20px;border-radius:14px;font-weight:800;
+  border:1px solid var(--line);background:#fff;
+}
+.btn.primary{
+  background:linear-gradient(180deg,var(--accent),var(--accent-dark));
+  color:#fff;border:none;
+}
+.btn.primary:active{transform:translateY(1px)}
+.section{margin-top:40px}
+.section h2{
+  margin:0 0 18px;
+  font-size:28px;
+}
+.grid{
+  display:grid;gap:20px;
+}
+@media(min-width:900px){
+  .grid{grid-template-columns:1fr 1fr}
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:20px;
+}
+.card h3{
+  margin:0 0 8px;
+  font-size:20px;
+}
+.card p{
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+}
+.footer{
+  margin-top:30px;
+  color:var(--muted);
+  font-size:12px;
+  border-top:1px solid var(--line);
+  padding-top:14px;
+}
+.sticky{
+  position:fixed;left:0;right:0;bottom:0;
+  background:rgba(255,255,255,.94);
+  border-top:1px solid var(--line);
+  backdrop-filter:blur(10px);
+  padding:10px 12px;
+}
+.sticky .inner{
+  max-width:var(--max);margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+}
+.sticky .btn{padding:12px 18px;border-radius:12px;font-weight:800}
+</style>
 </head>
 
 <body>
 
-  <div class="wrap">
+<div class="container">
 
-    <div class="top">
-      <div class="brand">
-        <span class="pill">Material educativo</span>
-        <span>Dr. Fabio Schmidt — CRM/SP 183549</span>
-      </div>
-      <span class="pill">TPB • Substâncias • Manejo clínico</span>
-    </div>
-
-    <section class="hero" id="topo">
-      <div class="hero-inner">
-        <div class="kicker">
-          <span class="tag">
-            <span class="ico" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M12 3l9 4.5-9 4.5L3 7.5 12 3Z" stroke="rgba(127,46,28,.9)" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M21 7.5V16.5L12 21 3 16.5V7.5" stroke="rgba(127,46,28,.9)" stroke-width="2" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            Guia clínico (premium)
-          </span>
-
-          <span class="tag">
-            <span class="ico" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M6 4h10a2 2 0 0 1 2 2v14H8a2 2 0 0 0-2 2V4Z" stroke="rgba(127,46,28,.9)" stroke-width="2"/>
-                <path d="M8 20h12" stroke="rgba(127,46,28,.9)" stroke-width="2"/>
-              </svg>
-            </span>
-            Leitura rápida e prática
-          </span>
-
-          <span class="tag">
-            <span class="ico" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M12 21s7-4.35 7-10a4 4 0 0 0-7-2 4 4 0 0 0-7 2c0 5.65 7 10 7 10Z" stroke="rgba(127,46,28,.9)" stroke-width="2" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            Sem moralismo
-          </span>
-        </div>
-
-        <h1>Borderline e uso de substâncias</h1>
-
-        <p class="sub">
-          <b>Dor não é vício. É o que vem antes.</b><br/>
-          No TPB, o uso costuma aparecer como tentativa de interromper sofrimento emocional intenso —
-          não como busca de prazer. Este material organiza o mecanismo, os sinais e o manejo integrado.
-        </p>
-
-        <div class="cta-row">
-          <a class="btn btn-primary" href="https://drfabioschmidt.hotmart.host/pagina-de-vendas-213b1341-523c-443f-b174-3565ef0f4c82">
-            <span aria-hidden="true">🛒</span>
-            Comprar / Acessar agora
-          </a>
-
-          <a class="btn btn-ghost" href="#conteudo">
-            <span aria-hidden="true">📌</span>
-            Ver o que tem dentro
-          </a>
-        </div>
-
-        <p class="micro">
-          *Conteúdo educativo. Não substitui psicoterapia nem consulta médica.
-        </p>
-      </div>
-    </section>
-
-    <section class="section" id="conteudo">
-      <div class="grid">
-
-        <div class="card span-12 quote">
-          <strong>Ideia central</strong>
-          <p>
-            No TPB, o foco do uso costuma ser <b>interromper dor</b> e reduzir estados internos intoleráveis.
-            Quando isso não é reconhecido, a pessoa vira só “usuário” — e o que está por trás fica invisível.
-          </p>
-        </div>
-
-        <div class="card span-6">
-          <h2>O que você vai entender</h2>
-          <div class="feat">
-            <div class="ico" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2v6" stroke="rgba(127,46,28,.9)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M7 5.5c-2.6 1.5-4 4.2-4 6.7A9 9 0 1 0 21 12.2c0-2.5-1.4-5.2-4-6.7" stroke="rgba(127,46,28,.9)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 12l4 2" stroke="rgba(127,46,28,.9)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <b>O ciclo “rejeição → tensão → impulso → uso”</b>
-              <small>Como a crise emocional vira urgência e ato rápido.</small>
-            </div>
-          </div>
-
-          <div class="feat" style="margin-top:12px">
-            <div class="ico" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9Z" stroke="rgba(127,46,28,.9)" stroke-width="2"/>
-                <path d="M8.5 13.5s1.4 2 3.5 2 3.5-2 3.5-2" stroke="rgba(127,46,28,.9)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M9 10h.01M15 10h.01" stroke="rgba(127,46,28,.9)" stroke-width="3" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <b>Diferença clínica: recreação vs anestesia</b>
-              <small>Motivação, gatilhos e pós-uso (culpa x vergonha extrema).</small>
-            </div>
-          </div>
-
-          <div class="feat" style="margin-top:12px">
-            <div class="ico" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M12 3l10 6-10 6L2 9l10-6Z" stroke="rgba(127,46,28,.9)" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M6 12v6c0 1 3 3 6 3s6-2 6-3v-6" stroke="rgba(127,46,28,.9)" stroke-width="2" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div>
-              <b>Manejo integrado</b>
-              <small>DBT/estratégias de crise + estabilidade + redução de vergonha pós-uso.</small>
-            </div>
-          </div>
-        </div>
-
-        <div class="card span-6">
-          <h2>Para quem é</h2>
-          <p>
-            • Pessoas com TPB (ou suspeita) que entram em ciclo de uso em momentos de crise.<br/>
-            • Familiares/parceiros que querem entender a função do uso sem “passar pano”.<br/>
-            • Profissionais de saúde que precisam de raciocínio clínico e manejo prático.
-          </p>
-
-          <div class="quote" style="margin-top:16px">
-            <strong>Leitura do autor</strong>
-            <p>“Este trecho explica mecanismos. Não justifica comportamentos.”</p>
-          </div>
-
-          <p class="micro" style="margin-top:12px">
-            Linguagem direta, clínica, sem drama e sem moralismo.
-          </p>
-        </div>
-
-        <div class="card span-12">
-          <h2>O núcleo do material</h2>
-          <p>
-            No TPB, é comum o uso aparecer <b>após conflito, abandono percebido, humilhação ou crítica</b>.
-            A emoção sobe rápido, o freio cai, e o corpo busca desligar o intolerável.
-            O pós-uso tende a virar <b>vergonha extrema</b> — que alimenta o próximo ciclo.
-          </p>
-        </div>
-
-        <div class="card span-8">
-          <h2>Sinais de que há TPB por trás do uso</h2>
-          <p>
-            • Uso após conflitos interpessoais.<br/>
-            • Vazio intenso antes do uso.<br/>
-            • Medo de abandono acoplado ao impulso.<br/>
-            • Alívio breve, seguido de culpa/vergonha forte.<br/>
-            • História de relações instáveis.
-          </p>
-        </div>
-
-        <div class="card span-4">
-          <h2>O que muda no tratamento</h2>
-          <p>
-            Não é “tratar só a substância”. É intervir <b>antes do impulso</b>:
-            gatilho emocional, previsibilidade, plano de crise, redução de vergonha, rotina e habilidades.
-          </p>
-        </div>
-
-        <div class="card span-12">
-          <h2>O que você recebe</h2>
-          <div class="grid" style="margin-top:12px">
-            <div class="card span-4" style="background:#fff">
-              <h2 style="font-size:18px;margin-bottom:8px">🧠 Neurobiologia (sem enrolar)</h2>
-              <p>Amígdala hiper-reativa, modulação pré-frontal baixa, urgência e automedicação emocional.</p>
-            </div>
-            <div class="card span-4" style="background:#fff">
-              <h2 style="font-size:18px;margin-bottom:8px">🧩 Comparações clínicas claras</h2>
-              <p>Motivação, gatilho, intensidade e pós-uso: usuário típico vs TPB + uso.</p>
-            </div>
-            <div class="card span-4" style="background:#fff">
-              <h2 style="font-size:18px;margin-bottom:8px">🧰 Manejo integrado</h2>
-              <p>DBT, GPM, plano de crise, ações contrárias, rotina, coordenação multiprofissional.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="card span-12">
-          <h2>Sobre o autor</h2>
-          <div class="author">
-            <div class="stamp">FS</div>
-            <div>
-              <b>Dr. Fabio Henrique de Lima Schmidt</b><br/>
-              Médico — CRM/SP 183549<br/><br/>
-              <span style="color:var(--muted)">
-                Atuação com foco em transtorno de personalidade borderline, regulação emocional e manejo clínico
-                de quadros complexos. Material desenvolvido a partir de prática clínica e literatura científica,
-                com objetivo de reduzir estigmas e qualificar o cuidado.
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card span-12" style="background:rgba(255,255,255,.78)">
-          <h2>Nota ética</h2>
-          <p>
-            Este conteúdo tem caráter educativo. Não substitui psicoterapia, consulta médica ou avaliação individual.
-            Se houver risco agudo, procure atendimento presencial e rede de suporte local.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
+  <div class="header">
+    <div class="title">TPB • Borderline e uso de substâncias</div>
   </div>
 
-  <div class="sticky" role="region" aria-label="Barra de compra">
-    <div class="sticky-inner">
-      <div>
-        <div class="sticky-title">Borderline e uso de substâncias</div>
-        <div class="sticky-sub">Dor não é vício. É o que vem antes.</div>
-      </div>
-      <a class="btn btn-primary" href="https://drfabioschmidt.hotmart.host/pagina-de-vendas-213b1341-523c-443f-b174-3565ef0f4c82">
+  <!-- HERO -->
+  <section class="hero" id="topo">
+    <div class="kickers">
+      <span class="tag">📘 Guia clínico</span>
+      <span class="tag">🧠 PF/TPB & substâncias</span>
+      <span class="tag">🔬 Prático e direto</span>
+    </div>
+
+    <h1>Borderline e uso de substâncias</h1>
+
+    <p>
+      “Dor não é vício — é o que vem antes.”<br>
+      Neste guia você entende por que o uso aparece como tentativa de desligar sofrimento emocional,
+      quais são os sinais clínicos e como manejar de forma integrada, sem julgamento.
+    </p>
+
+    <div class="ctaRow">
+      <a class="btn primary" href="https://pay.hotmart.com/G103259997F?off=3b8jf9qc&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767316434277&bid=1767316435032">
         🛒 Comprar / Acessar agora
       </a>
+      <a class="btn" href="#conteudo">🔍 Ver o que tem dentro</a>
     </div>
+  </section>
+
+  <!-- Conteúdo -->
+  <section class="section" id="conteudo">
+    <h2>O que você vai aprender</h2>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🔁 Ciclo emocional e uso</h3>
+        <p>
+          Como estados intensos de emoção, rejeição e tensão acabam empurrando para uso de substâncias.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🧠 Diferença: busca de prazer x fuga da dor</h3>
+        <p>
+          O que distingue uso recreativo de uso como tentativa de reduzir sofrimento interno.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🔬 Sinais clínicos</h3>
+        <p>
+          Itens observáveis que ajudam você a identificar quando o uso é desencadeado por estados emocionais intensos.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🛠️ Manejo integrado</h3>
+        <p>
+          Estratégias específicas combinando psicoeducação, habilidades comportamentais e suporte familiar.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer">
+    Conteúdo educativo. Não substitui consulta médica nem psicoterapia. Em situação de risco,
+    procure atendimento presencial ou serviços de emergência.
   </div>
+
+</div>
+
+<div class="sticky">
+  <div class="inner">
+    <div>
+      <strong>Borderline e uso de substâncias</strong><br>
+      Entenda o que vem antes da dor.
+    </div>
+    <a class="btn primary" href="https://pay.hotmart.com/G103259997F?off=3b8jf9qc&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767316434277&bid=1767316435032">
+      🛒 Comprar agora
+    </a>
+  </div>
+</div>
 
 </body>
 </html>
