@@ -14,14 +14,10 @@
       --primary-dark: #7d341a;
       --border: #e2d6cf;
       --radius: 16px;
-      --shadow: 0 12px 30px rgba(0,0,0,0.04);
+      --shadow: 0 8px 20px rgba(0,0,0,0.04);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -31,30 +27,26 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-    }
+    a { color: inherit; }
 
     .page {
       max-width: 960px;
       margin: 0 auto;
-      padding: 24px 16px 80px;
+      padding: 20px 14px 40px;
     }
 
-    header {
+    .card {
       background: var(--card);
-      border-radius: 0 0 var(--radius) var(--radius);
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 20px 16px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 20;
+      padding: 18px 16px;
+      margin-bottom: 14px;
     }
 
     .hero-image {
       border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .hero-image img {
@@ -74,7 +66,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-size: 12px;
       color: var(--sub);
     }
@@ -87,22 +79,27 @@
     }
 
     h1 {
-      font-size: 26px;
+      font-size: 24px;
       line-height: 1.1;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin-bottom: 6px;
     }
 
     .subtitle {
       font-size: 14px;
       color: var(--sub);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .hero-list {
       list-style: none;
       font-size: 13px;
       color: var(--sub);
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .hero-list li::before {
@@ -110,9 +107,7 @@
     }
 
     .cta-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: inline-block;
       padding: 10px 18px;
       border-radius: 999px;
       border: none;
@@ -121,27 +116,22 @@
       font-size: 14px;
       font-weight: 600;
       text-decoration: none;
-      cursor: pointer;
-      transition: background .15s ease, transform .1s ease;
-    }
-
-    .cta-primary:hover {
-      background: var(--primary-dark);
-      transform: translateY(-1px);
+      text-align: center;
+      width: 100%;
+      margin-bottom: 6px;
     }
 
     .cta-secondary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 16px;
+      display: inline-block;
+      padding: 9px 16px;
       border-radius: 999px;
       border: 1px solid var(--border);
       background: #fff;
       color: var(--texto);
       font-size: 13px;
       text-decoration: none;
-      margin-left: 8px;
+      text-align: center;
+      width: 100%;
     }
 
     .hero-credenciais {
@@ -150,43 +140,26 @@
       color: var(--sub);
     }
 
-    main {
-      margin-top: 18px;
-    }
-
-    .section {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 18px 16px 16px;
-      box-shadow: var(--shadow);
-      margin-bottom: 14px;
-    }
-
-    .section h2 {
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-
-    .section p {
+    .section-text {
       font-size: 13px;
       color: var(--sub);
       margin-bottom: 6px;
     }
 
-    .section ul {
+    .section-list {
       font-size: 13px;
       color: var(--sub);
       padding-left: 18px;
     }
 
-    .sobre-autor {
+    .sobre-autor-grid {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
     }
 
-    .sobre-autor img {
+    .sobre-autor-grid img {
       width: 100%;
       border-radius: 14px;
       display: block;
@@ -198,74 +171,22 @@
       margin-top: 8px;
     }
 
-    .footer-section {
-      text-align: left;
-      font-size: 12px;
-      color: var(--sub);
-      margin-top: 10px;
-    }
-
-    .bottom-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border-top: 1px solid var(--border);
-      background: #fdf9f6ee;
-      backdrop-filter: blur(8px);
-      padding: 8px 12px 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      z-index: 30;
-    }
-
-    .bottom-bar-wrap {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .bottom-bar-title {
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .bottom-bar-sub {
+    .footer {
       font-size: 11px;
       color: var(--sub);
+      margin-top: 10px;
+      text-align: left;
     }
 
-    .bottom-cta {
-      padding: 8px 18px;
-      border-radius: 999px;
-      border: none;
-      background: var(--primary);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      white-space: nowrap;
+    @media (min-width: 640px) {
+      h1 { font-size: 28px; }
+      .cta-primary, .cta-secondary { width: auto; }
+      .cta-secondary { margin-left: 8px; }
     }
 
     @media (max-width: 640px) {
-      .sobre-autor {
+      .sobre-autor-grid {
         grid-template-columns: 1fr;
-      }
-    }
-
-    @media (min-width: 720px) {
-      header {
-        padding: 24px 28px 26px;
-      }
-      .section {
-        padding: 20px 22px 18px;
-      }
-      .page {
-        padding: 32px 16px 96px;
-      }
-      h1 {
-        font-size: 30px;
       }
     }
   </style>
@@ -273,15 +194,18 @@
 <body>
 
   <div class="page">
-    <header>
+
+    <!-- HERO -->
+    <section class="card">
       <div class="hero-image">
         <img src="imagens/667EC6D1-E493-4440-8BF0-D347A493D913.jpeg" alt="Imagem de porta entreaberta com frase sobre crises emocionais">
       </div>
 
       <div class="top-label">Guia digital para familiares de pessoas com TPB</div>
+
       <div class="badge-row">
         <span class="badge">Aplicação prática em crises</span>
-        <span class="badge">Conteúdo clínico traduzido para família</span>
+        <span class="badge">Linguagem pensada para família</span>
       </div>
 
       <h1>Tentou ajudar e tudo só piorou?</h1>
@@ -294,7 +218,7 @@
 
       <ul class="hero-list">
         <li>Para familiares, parceiros e amigos de pessoas com TPB.</li>
-        <li>Linguagem clara, sem termos técnicos confusos.</li>
+        <li>Explicações clínicas sem jargão confuso.</li>
         <li>Passo a passo para usar já na próxima crise.</li>
       </ul>
 
@@ -311,128 +235,117 @@
         </a>
       </div>
 
-      <div class="hero-credenciais">
+      <p class="hero-credenciais">
         Dr. Fabio Henrique de Lima Schmidt • Psiquiatra • CRM‑SP 183549 • Atuação clínica em CAPS e atendimento on‑line.
-      </div>
-    </header>
+      </p>
+    </section>
 
-    <main>
+    <!-- DOR -->
+    <section class="card" id="dor">
+      <h2>Quando falta orientação, a ajuda vira gatilho</h2>
+      <p class="section-text">
+        Sem compreender o funcionamento emocional do TPB, é comum que tentativas de acalmar
+        terminem em mais conflito e desgaste do vínculo.
+      </p>
+      <ul class="section-list">
+        <li>Cada conversa séria termina em discussão, bloqueio ou ameaça de rompimento.</li>
+        <li>Você pisa em ovos, com medo de acionar mais uma crise.</li>
+        <li>Culpa por “perder a paciência”, misturada com exaustão e sensação de impotência.</li>
+      </ul>
+    </section>
 
-      <section class="section" id="dor">
-        <h2>Quando falta orientação, a ajuda vira gatilho</h2>
-        <p>
-          Sem entender o funcionamento emocional do TPB, é comum que tentativas de acalmar
-          acabem intensificando a crise e o desgaste do relacionamento.
-        </p>
-        <ul>
-          <li>Cada tentativa de conversar termina em discussão, bloqueio ou ameaça de rompimento.</li>
-          <li>Você pisa em ovos o tempo todo, com medo de uma nova explosão.</li>
-          <li>Sente culpa por “perder a cabeça”, mas também se sente exausto e sobrecarregado.</li>
-        </ul>
-      </section>
+    <!-- CONTEÚDO -->
+    <section class="card" id="conteudo">
+      <h2>O que você vai encontrar no guia</h2>
+      <p class="section-text">
+        O conteúdo foi construído para traduzir a visão clínica do TPB para a realidade de casa,
+        oferecendo referências claras para situações que se repetem.
+      </p>
+      <ul class="section-list">
+        <li>Por que as crises escalam tão rápido e parecem desproporcionais ao gatilho.</li>
+        <li>O papel da validação sem “passar a mão na cabeça”.</li>
+        <li>Erros comuns de familiares bem‑intencionados que pioram o quadro.</li>
+        <li>Como diferenciar pedido de ajuda de ameaça de rompimento ou abandono.</li>
+      </ul>
+    </section>
 
-      <section class="section" id="conteudo">
-        <h2>O que você vai encontrar no guia</h2>
-        <p>
-          O material foi construído para oferecer compreensão clínica em linguagem de família
-          e estratégias diretas para manejo de crise, comunicação e limites.
-        </p>
-        <ul>
-          <li>Por que a crise escala tão rápido e parece desproporcional ao gatilho.</li>
-          <li>O papel da validação sem “passar a mão na cabeça”.</li>
-          <li>Os erros mais comuns de cuidadores bem‑intencionados.</li>
-          <li>Como diferenciar pedido de ajuda de ameaça de rompimento.</li>
-        </ul>
-      </section>
+    <!-- MANEJO PRÁTICO -->
+    <section class="card">
+      <h2>O que fazer na próxima crise</h2>
+      <p class="section-text">
+        Em vez de orientações genéricas, você recebe exemplos concretos de frases, atitudes e limites,
+        para agir com firmeza e previsibilidade, sem romper o vínculo.
+      </p>
+      <ul class="section-list">
+        <li>O que dizer nos primeiros minutos da crise.</li>
+        <li>Como interromper ciclos de culpa, perseguição e chantagem emocional.</li>
+        <li>Como se proteger emocionalmente sem abandonar a pessoa.</li>
+      </ul>
+    </section>
 
-      <section class="section">
-        <h2>O que fazer na próxima crise</h2>
-        <p>
-          Você recebe frases de referência, limites recomendados e estratégias para agir com firmeza
-          e previsibilidade, sem romper o vínculo nem se anular completamente.
-        </p>
-        <ul>
-          <li>O que dizer nos primeiros minutos da crise.</li>
-          <li>Como interromper ciclos de culpa, perseguição e chantagem emocional.</li>
-          <li>Como se proteger emocionalmente sem abandonar a pessoa.</li>
-        </ul>
-      </section>
+    <!-- FORMATO -->
+    <section class="card">
+      <h2>Como o guia é organizado</h2>
+      <p class="section-text">
+        O material é digital e pode ser consultado tanto em momentos de crise quanto em momentos de calma,
+        para estudo mais aprofundado.
+      </p>
+      <ul class="section-list">
+        <li>Acesso imediato após a compra, em qualquer dispositivo.</li>
+        <li>Dividido em blocos: compreensão clínica, comunicação, limites e autocuidado.</li>
+        <li>Atualizações futuras incluídas se o conteúdo for ampliado.</li>
+      </ul>
+      <p class="notice">
+        Este material é educativo. Não substitui consulta médica ou psicoterapia.
+        Em situações de risco imediato, procure um serviço de emergência.
+      </p>
+    </section>
 
-      <section class="section">
-        <h2>Formato do material</h2>
-        <p>
-          Guia digital em texto objetivo, para consulta rápida em momentos de crise
-          e leitura mais aprofundada em momentos de calma.
-        </p>
-        <ul>
-          <li>Acesso imediato após a compra, em qualquer dispositivo.</li>
-          <li>Conteúdo organizado por temas: compreensão, comunicação, limites e autocuidado.</li>
-          <li>Atualizações futuras incluídas se o conteúdo for ampliado.</li>
-        </ul>
-        <p class="notice">
-          Este material é educativo. Não substitui consulta médica ou psicoterapia.
-          Em situações de risco imediato, procure um serviço de emergência.
-        </p>
-      </section>
-
-      <section class="section">
-        <h2>Sobre o autor</h2>
-        <div class="sobre-autor">
-          <div>
-            <p>
-              Fabio Henrique de Lima Schmidt é médico, pós‑graduado em Psiquiatria, com atuação clínica em CAPS e
-              atendimento on‑line. Produz conteúdo educativo focado em transtorno de personalidade borderline,
-              com ênfase em leitura clínica rigorosa, combate a estigmas e comunicação direta com pacientes e familiares.
-            </p>
-            <p>
-              É autor de materiais educativos sobre regulação emocional, impulsividade e funcionamento borderline,
-              ajudando famílias e profissionais a compreenderem o quadro para além de rótulos moralizantes.
-            </p>
-          </div>
-          <div>
-            <img src="imagens/5E684D7C-F304-48F4-971B-ADCEC05E7427.png" alt="Foto do autor do guia de manejo de crises no transtorno borderline">
-          </div>
+    <!-- SOBRE O AUTOR -->
+    <section class="card">
+      <h2>Sobre o autor</h2>
+      <div class="sobre-autor-grid">
+        <div>
+          <p class="section-text">
+            Fabio Henrique de Lima Schmidt é médico, pós‑graduado em Psiquiatria, com atuação clínica em CAPS e
+            atendimento on‑line. Produz conteúdo educativo focado em transtorno de personalidade borderline,
+            com ênfase em leitura clínica rigorosa, combate a estigmas e comunicação direta com pacientes e familiares.
+          </p>
+          <p class="section-text">
+            É autor de materiais educativos sobre regulação emocional, impulsividade e funcionamento borderline,
+            ajudando famílias e profissionais a compreenderem o quadro para além de rótulos moralizantes.
+          </p>
         </div>
-      </section>
-
-      <section class="section" id="comprar">
-        <h2>Orientação acessível para toda a família</h2>
-        <p>
-          O investimento no guia costuma ser menor do que o valor de uma sessão individual,
-          com a vantagem de poder ser consultado por todos que convivem com a pessoa que tem TPB.
-        </p>
-        <p>
-          Se você sente que está fazendo o melhor que consegue, mas ainda assim as crises pioram,
-          este passo a passo foi construído justamente para essa situação.
-        </p>
-        <a
-          class="cta-primary"
-          href="https://pay.hotmart.com/L103544810O?off=622o2a97&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767229031679&bid=1767229033713&fbclid=PAVERFWAPGC7lleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafIXWR4twp8-oE_4NQuyFN9l6mQXBPCg54_LQqptUnGu41MYxmVIzInYK2KZg_aem_M4OxbBv8BEMPY0Ag2j6ljw"
-          target="_blank" rel="noopener noreferrer"
-        >
-          Acessar o guia agora
-        </a>
-      </section>
-
-      <div class="footer-section">
-        Conteúdo educativo. Não substitui avaliação individual, psicoterapia ou emergência psiquiátrica.
+        <div>
+          <img src="imagens/5E684D7C-F304-48F4-971B-ADCEC05E7427.png" alt="Foto do autor do guia sobre manejo de crises no transtorno borderline">
+        </div>
       </div>
+    </section>
 
-    </main>
-  </div>
+    <!-- CTA FINAL -->
+    <section class="card" id="comprar">
+      <h2>Orientação acessível para quem convive com TPB</h2>
+      <p class="section-text">
+        O investimento no guia costuma ser menor do que o valor de uma sessão individual,
+        com a vantagem de poder ser consultado por todos que convivem com a pessoa que tem TPB.
+      </p>
+      <p class="section-text">
+        Se você sente que está fazendo o melhor que consegue, mas ainda assim as crises pioram,
+        este passo a passo foi construído justamente para essa situação.
+      </p>
+      <a
+        class="cta-primary"
+        href="https://pay.hotmart.com/L103544810O?off=622o2a97&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767229031679&bid=1767229033713&fbclid=PAVERFWAPGC7lleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafIXWR4twp8-oE_4NQuyFN9l6mQXBPCg54_LQqptUnGu41MYxmVIzInYK2KZg_aem_M4OxbBv8BEMPY0Ag2j6ljw"
+        target="_blank" rel="noopener noreferrer"
+      >
+        Comprar agora
+      </a>
+    </section>
 
-  <div class="bottom-bar">
-    <div class="bottom-bar-wrap">
-      <div class="bottom-bar-title">Orientação para familiares — TPB</div>
-      <div class="bottom-bar-sub">Guia digital com passo a passo para crises e comunicação.</div>
-    </div>
-    <a
-      class="bottom-cta"
-      href="https://pay.hotmart.com/L103544810O?off=622o2a97&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767229031679&bid=1767229033713&fbclid=PAVERFWAPGC7lleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafIXWR4twp8-oE_4NQuyFN9l6mQXBPCg54_LQqptUnGu41MYxmVIzInYK2KZg_aem_M4OxbBv8BEMPY0Ag2j6ljw"
-      target="_blank" rel="noopener noreferrer"
-    >
-      Comprar agora
-    </a>
+    <p class="footer">
+      Conteúdo educativo. Não substitui avaliação individual, psicoterapia ou emergência psiquiátrica.
+    </p>
+
   </div>
 
 </body>
