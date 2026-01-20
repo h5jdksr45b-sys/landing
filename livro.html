@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quando Escolher Não É Possível — Guia Clínico da Impulsividade</title>
+
+  <meta name="description" content="Entenda o mecanismo por trás da impulsividade e organize o caos emocional com um guia clínico direto, aplicável e sem autoajuda." />
+  <meta name="theme-color" content="#0b0b0b" />
+
+  <!-- Open Graph / WhatsApp / Instagram -->
+  <meta property="og:title" content="Quando Escolher Não É Possível" />
+  <meta property="og:description" content="Não é autoajuda. É explicação clínica do mecanismo da impulsividade + passos práticos pra você agir antes do estrago." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      --bg:#070707;
+      --panel:#111111;
+      --panel2:#0e0e0e;
+      --ink:#f5f2ea;
+      --muted:rgba(245,242,234,.72);
+      --muted2:rgba(245,242,234,.58);
+      --line:rgba(245,242,234,.14);
+      --line2:rgba(245,242,234,.10);
+      --accent:#c9553b;     /* terracota */
+      --accent2:#f1d27a;    /* dourado suave */
+      --good:#7fe3b4;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 1120px;
+
+      --btn-bg: linear-gradient(135deg, rgba(201,85,59,.95), rgba(241,210,122,.85));
+      --btn-ink:#0b0b0b;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 700px at 10% 0%, rgba(201,85,59,.24), transparent 60%),
+        radial-gradient(900px 600px at 90% 12%, rgba(241,210,122,.18), transparent 60%),
+        linear-gradient(180deg, #050505 0%, #0b0b0b 55%, #060606 100%);
+      letter-spacing:.2px;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:26px 20px 70px}
+
+    /* Topbar */
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border:1px solid var(--line);
+      background:rgba(17,17,17,.55);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.25);
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-transform:uppercase;
+      font-weight:800;
+      letter-spacing:.9px;
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(201,85,59,.10);
+      flex:0 0 auto;
+    }
+    .nav{
+      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+      justify-content:flex-end;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .nav a{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+    }
+    .nav a:hover{
+      background:rgba(245,242,234,.06);
+      border-color: rgba(245,242,234,.10);
+      color:rgba(245,242,234,.92);
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:14px 18px;
+      border-radius: 999px;
+      font-weight:900;
+      letter-spacing:.4px;
+      border:1px solid rgba(241,210,122,.28);
+      background: var(--btn-bg);
+      color: var(--btn-ink);
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      transform: translateY(0);
+      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 18px 55px rgba(0,0,0,.45);
+    }
+    .btn:active{transform: translateY(0)}
+    .btn-outline{
+      background: transparent;
+      color: rgba(245,242,234,.92);
+      border: 1px solid rgba(245,242,234,.18);
+      box-shadow:none;
+      font-weight:750;
+    }
+    .btn-outline:hover{
+      background: rgba(245,242,234,.06);
+      border-color: rgba(245,242,234,.24);
+    }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      margin-top:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .hero{grid-template-columns: 1fr; gap:16px}
+      .topbar{position:static}
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(17,17,17,.70), rgba(12,12,12,.65));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card-pad{padding:22px}
+
+    .kicker{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .pill{
+      font-size:12px;
+      color:rgba(245,242,234,.86);
+      border:1px solid rgba(245,242,234,.16);
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(245,242,234,.04);
+    }
+    .pill strong{color:rgba(245,242,234,.96)}
+    h1{
+      margin: 10px 0 10px;
+      font-size: clamp(30px, 3.6vw, 48px);
+      line-height:1.05;
+      letter-spacing:-.6px;
+    }
+    .sub{
+      margin:0;
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+    .sub b{color:rgba(245,242,234,.92)}
+    .strike{
+      text-decoration: line-through;
+      color: rgba(245,242,234,.52);
+      font-weight:700;
+    }
+    .price-row{
+      display:flex; gap:14px; align-items:baseline; flex-wrap:wrap;
+      margin:16px 0 6px;
+    }
+    .price{
+      font-size: 28px;
+      font-weight: 950;
+      letter-spacing: -.4px;
+    }
+    .micro{
+      font-size: 13px;
+      color: var(--muted2);
+      margin-top:8px;
+    }
+
+    .actions{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top:16px;
+      align-items:center;
+    }
+    .trust{
+      display:flex; gap:16px; flex-wrap:wrap;
+      margin-top:16px;
+      padding-top:14px;
+      border-top:1px solid var(--line2);
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .trust span{display:flex; gap:8px; align-items:center}
+    .check{
+      width:18px; height:18px; border-radius:6px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background: rgba(127,227,180,.12);
+      border: 1px solid rgba(127,227,180,.28);
+      color: var(--good);
+      font-weight:900;
+      font-size:12px;
+      flex:0 0 auto;
+    }
+
+    /* Right panel (cover mock) */
+    .cover{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+      background:
+        radial-gradient(700px 420px at 50% -10%, rgba(201,85,59,.22), transparent 60%),
+        linear-gradient(180deg, rgba(14,14,14,.70), rgba(10,10,10,.72));
+    }
+    .mock{
+      display:flex; align-items:center; justify-content:center;
+      padding:22px;
+      min-height: 320px;
+    }
+    .book{
+      width:min(320px, 86%);
+      aspect-ratio: 3/4;
+      border-radius: 26px 26px 18px 18px;
+      background:
+        radial-gradient(500px 260px at 50% 10%, rgba(255,255,255,.08), transparent 60%),
+        linear-gradient(180deg, rgba(201,85,59,.92), rgba(201,85,59,.70));
+      border: 1px solid rgba(245,242,234,.18);
+      box-shadow: 0 26px 90px rgba(0,0,0,.55);
+      position:relative;
+      overflow:hidden;
+    }
+    .book::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(135deg, rgba(241,210,122,.22), transparent 55%);
+      mix-blend-mode: screen;
+      opacity:.8;
+    }
+    .book-inner{
+      position:absolute; inset:0;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      padding:26px;
+      text-align:center;
+      z-index:2;
+    }
+    .book-title{
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      font-size: clamp(18px, 2.1vw, 26px);
+      line-height:1.15;
+      color: rgba(245,242,234,.95);
+      text-shadow: 0 10px 26px rgba(0,0,0,.22);
+    }
+    .book-author{
+      margin-top:14px;
+      font-size: 12px;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: rgba(245,242,234,.78);
+    }
+    .book-line{
+      margin: 14px 0 0;
+      width: 64%;
+      height: 1px;
+      background: rgba(245,242,234,.25);
+    }
+    .cover-bottom{
+      padding: 0 22px 22px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.5;
+    }
+
+    /* Sections */
+    section{margin-top:18px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
+
+    .mini{
+      padding:16px;
+      border:1px solid var(--line);
+      background: rgba(17,17,17,.50);
+      border-radius: 16px;
+    }
+    .mini h3{
+      margin:0 0 8px;
+      font-size: 14px;
+      letter-spacing:.3px;
+      text-transform:uppercase;
+      color: rgba(245,242,234,.92);
+    }
+    .mini p{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height:1.55;
+    }
+
+    /* Bullets */
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 980px){ .two{grid-template-columns:1fr} }
+    .list{
+      padding:18px;
+      border:1px solid var(--line);
+      background: rgba(14,14,14,.55);
+      border-radius: 16px;
+    }
+    .list h2{
+      margin:0 0 10px;
+      font-size: 16px;
+      letter-spacing:.2px;
+    }
+    .ul{
+      margin:0; padding:0; list-style:none;
+      display:grid; gap:10px;
+    }
+    .ul li{
+      display:flex; gap:10px; align-items:flex-start;
+      color: var(--muted);
+      line-height:1.45;
+      font-size: 14px;
+    }
+    .ul .b{color:rgba(245,242,234,.92); font-weight:800}
+
+    /* CTA band */
+    .cta-band{
+      margin-top:18px;
+      padding:18px;
+      border:1px solid rgba(241,210,122,.20);
+      border-radius: 16px;
+      background:
+        radial-gradient(900px 420px at 20% 0%, rgba(201,85,59,.18), transparent 60%),
+        linear-gradient(135deg, rgba(241,210,122,.08), rgba(201,85,59,.06));
+      display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    }
+    .cta-band .txt{
+      max-width: 70ch;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .cta-band .txt b{color:rgba(245,242,234,.92)}
+    .cta-band .right{display:flex; gap:10px; flex-wrap:wrap}
+
+    /* FAQ */
+    details{
+      border:1px solid var(--line);
+      background: rgba(17,17,17,.50);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+    details + details{margin-top:10px}
+    summary{
+      cursor:pointer;
+      font-weight:850;
+      color: rgba(245,242,234,.92);
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin:10px 0 0;
+      color: var(--muted);
+      line-height:1.6;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer{
+      margin-top:22px;
+      padding-top:18px;
+      border-top:1px solid var(--line2);
+      color: rgba(245,242,234,.58);
+      font-size: 12px;
+      line-height:1.55;
+    }
+    .foot-links{display:flex; gap:12px; flex-wrap:wrap; margin-top:8px}
+    .foot-links a{
+      color: rgba(245,242,234,.72);
+      border:1px solid rgba(245,242,234,.14);
+      padding:8px 10px;
+      border-radius:999px;
+    }
+    .foot-links a:hover{background: rgba(245,242,234,.06)}
+  </style>
+</head>
+
+<body>
+  <!-- DEFINIÇÕES -->
+  <!-- Link do botão -->
+  <!-- (Mantido aqui também para fácil troca) -->
+  <script>
+    const SALES_URL = "https://pay.hotmart.com/U103950622S?off=3xv992tf&hotfeature=51&_hi=eyJjaWQiOiIxNzY4ODI2Njc3MzMwNDI5NjIwODIyOTgxNzE1MjAwIiwiYmlkIjoiMTc2ODgyNjY3NzMzMDQyOTYyMDgyMjk4MTcxNTIwMCIsInNpZCI6IjU2YzZkMmJkYTk3ZjRkNzBiZGUxZTZhMWU3ZjcyN2IyIn0=.1768870014918&bid=1768870016316&fbclid=PAVERFWAPbr9VleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadwtyozCqJ721ouvAyjfol58yt89Jf-ZKA9RGke2EplfSUAjy8L33lK8ujSaQ_aem_mMHJjA1jn9iGETY_3RP9vA";
+  </script>
+
+  <div class="wrap">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        Fabio Schmidt
+      </div>
+      <div class="nav">
+        <a href="#conteudo">O que tem</a>
+        <a href="#praquem">Pra quem é</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-outline" href="#comprar">Comprar</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero" id="comprar">
+      <!-- LEFT -->
+      <div class="card">
+        <div class="card-pad">
+          <div class="kicker">
+            <span class="pill"><strong>Guia clínico</strong> (direto e aplicável)</span>
+            <span class="pill">Sem autoajuda</span>
+            <span class="pill">Pra ler e usar</span>
+          </div>
+
+          <h1>Quando Escolher Não É Possível.</h1>
+
+          <p class="sub">
+            Se você <b>entende tudo depois</b> — mas na hora faz o oposto — isso não é “falta de caráter” nem “fraqueza”.
+            É um <b>mecanismo</b>. E quando você enxerga o mecanismo, você para de brigar com a própria mente e começa a agir com estratégia.
+          </p>
+
+          <div class="price-row">
+            <span class="price">Acesso imediato</span>
+            <span class="pill">conteúdo objetivo</span>
+            <span class="pill">linguagem simples</span>
+          </div>
+
+          <div class="actions">
+            <a class="btn" id="buyBtnTop" href="#" target="_blank" rel="noopener noreferrer">
+              COMPRAR AGORA
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn-outline" href="#conteudo">Ver o que você recebe</a>
+          </div>
+
+          <div class="trust">
+            <span><span class="check">✓</span> Compra segura (Hotmart)</span>
+            <span><span class="check">✓</span> Acesso imediato após pagamento</span>
+            <span><span class="check">✓</span> Conteúdo clínico, sem romantização</span>
+          </div>
+
+          <p class="micro">
+            Você não precisa “virar outra pessoa”. Você precisa de um <b>mapa do que acontece antes do impulso</b> — e do que fazer nesse intervalo.
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="card cover">
+        <div class="mock">
+          <!-- Mock de capa (sem depender de imagem externa) -->
+          <div class="book" role="img" aria-label="Capa do produto Quando Escolher Não É Possível">
+            <div class="book-inner">
+              <div class="book-title">
+                QUANDO<br/>ESCOLHER<br/>NÃO É<br/>POSSÍVEL
+              </div>
+              <div class="book-line"></div>
+              <div class="book-author">FABIO SCHMIDT</div>
+            </div>
+          </div>
+        </div>
+        <div class="cover-bottom">
+          <b>O que você já vê logo de cara ao entrar:</b><br/>
+          uma proposta clara, uma promessa verificável (“entender o mecanismo”), e um CTA forte.
+          Sem visual amador, sem texto fraco, sem cara de autoajuda.
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOCO: O QUE TEM -->
+    <section id="conteudo" class="card">
+      <div class="card-pad">
+        <div class="grid">
+          <div class="mini">
+            <h3>O mecanismo</h3>
+            <p>Você entende como o impulso “passa por cima” da parte racional — e por que a culpa depois não resolve nada.</p>
+          </div>
+          <div class="mini">
+            <h3>O intervalo</h3>
+            <p>Você aprende a reconhecer os sinais antes do ato e a usar esse microtempo como alavanca de controle real.</p>
+          </div>
+          <div class="mini">
+            <h3>O plano</h3>
+            <p>Você sai com um roteiro prático de como agir quando o cérebro entra em modo “agora ou nunca”.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCO: PRA QUEM É / O QUE VOCÊ RECEBE -->
+    <section class="two">
+      <div class="list" id="praquem">
+        <h2>Pra quem é</h2>
+        <ul class="ul">
+          <li><span class="check">✓</span><span><span class="b">Pra quem explode</span> e depois pensa: “eu não queria ter feito isso”.</span></li>
+          <li><span class="check">✓</span><span><span class="b">Pra quem se sabota</span> no relacionamento, trabalho, dinheiro, vícios ou decisões rápidas.</span></li>
+          <li><span class="check">✓</span><span><span class="b">Pra quem tem traços borderline</span> ou sofre com instabilidade e impulsividade (com ou sem diagnóstico).</span></li>
+          <li><span class="check">✓</span><span><span class="b">Pra familiares</span> entenderem o que acontece “por trás” do ato e pararem de piorar a crise.</span></li>
+        </ul>
+      </div>
+
+      <div class="list">
+        <h2>O que você recebe (objetivo)</h2>
+        <ul class="ul">
+          <li><span class="check">✓</span><span><span class="b">Explicação clínica</span> do mecanismo (sem psicologês).</span></li>
+          <li><span class="check">✓</span><span><span class="b">Checklist de sinais</span> de escalada emocional.</span></li>
+          <li><span class="check">✓</span><span><span class="b">Plano de 10 minutos</span> pra reduzir dano (antes do estrago).</span></li>
+          <li><span class="check">✓</span><span><span class="b">Frases prontas</span> pra você usar quando estiver “no limite”.</span></li>
+          <li><span class="check">✓</span><span><span class="b">Estratégia de pós-crise</span>: como reparar sem se humilhar.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <section class="cta-band">
+      <div class="txt">
+        <b>Você não precisa esperar a próxima crise pra “aprender na dor”.</b><br/>
+        O objetivo aqui é simples: você entender o mecanismo e ter um plano curto pra aplicar
+        <b>na hora em que escolher parece impossível</b>.
+      </div>
+      <div class="right">
+        <a class="btn" id="buyBtnMid" href="#" target="_blank" rel="noopener noreferrer">COMPRAR AGORA →</a>
+        <a class="btn btn-outline" href="#faq">Tirar dúvidas</a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="card">
+      <div class="card-pad">
+        <h2 style="margin:0 0 12px; font-size:18px;">FAQ (o que o cliente vai perguntar)</h2>
+
+        <details>
+          <summary>Isso é autoajuda?</summary>
+          <p>Não. É uma explicação clínica do mecanismo da impulsividade + estratégias práticas de manejo. Sem “positividade”, sem frases vazias.</p>
+        </details>
+
+        <details>
+          <summary>Serve mesmo se eu não tiver diagnóstico?</summary>
+          <p>Sim. O foco é o <b>mecanismo</b> (instabilidade + urgência emocional + arrependimento). Diagnóstico ajuda a organizar, mas não é pré-requisito.</p>
+        </details>
+
+        <details>
+          <summary>Como eu acesso depois da compra?</summary>
+          <p>Você compra pela Hotmart e recebe acesso imediatamente conforme o fluxo da plataforma.</p>
+        </details>
+
+        <details>
+          <summary>Isso substitui terapia ou tratamento?</summary>
+          <p>Não. Isso é um guia de entendimento e estratégia. Se você está em sofrimento significativo, o ideal é acompanhamento profissional.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta-band" style="margin-top:14px;">
+      <div class="txt">
+        <b>Último recado (sem romantizar):</b> se você vive no ciclo “impulso → culpa → promessa → repetição”, você não precisa de mais culpa.
+        Você precisa de um mapa e de um protocolo curto. É isso.
+      </div>
+      <div class="right">
+        <a class="btn" id="buyBtnBottom" href="#" target="_blank" rel="noopener noreferrer">COMPRAR AGORA →</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>
+        Conteúdo informativo e educativo. Não substitui avaliação médica/psiquiátrica individual.
+      </div>
+      <div class="foot-links">
+        <a href="#comprar">Voltar ao topo</a>
+        <a href="#" id="buyBtnFooter" target="_blank" rel="noopener noreferrer">Link de compra</a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram (trocar link)</a>
+      </div>
+      <div style="margin-top:10px;">
+        © <span id="year"></span> Fabio Schmidt. Todos os direitos reservados.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // aplica o link de compra em todos os botões
+    const ids = ["buyBtnTop","buyBtnMid","buyBtnBottom","buyBtnFooter"];
+    ids.forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.href = SALES_URL;
+    });
+
+    // ano automático
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
