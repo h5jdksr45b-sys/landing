@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TPB Alto Funcionamento — App Clínico</title>
+
+  <!-- Ícones (Font Awesome CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#0e0e10;
+      --card:#18181c;
+      --card-soft:#202026;
+      --ink:#f8f8fb;
+      --muted:#9b9bad;
+      --accent:#b3384a;      /* vinho terroso */
+      --accent-soft:#322027;
+      --border:#2a2a32;
+      --radius:18px;
+      --shadow:0 18px 40px rgba(0,0,0,.45);
+      --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif;
+      --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+
+    body{
+      min-height:100vh;
+      background: radial-gradient(circle at top,#1e1e24 0,#050508 55%);
+      color:var(--ink);
+      font:15px/1.5 var(--sans);
+      -webkit-font-smoothing:antialiased;
+      padding:16px;
+    }
+
+    .app-shell{
+      max-width:420px;
+      margin:0 auto;
+      border-radius:32px;
+      background:linear-gradient(160deg,#111118,#050507);
+      box-shadow:0 0 0 1px rgba(255,255,255,.02),var(--shadow);
+      padding:14px 14px 22px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* Barra superior tipo app */
+    .status-bar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:2px 4px 10px;
+      color:var(--muted);
+      font-size:11px;
+      font-family:var(--mono);
+    }
+    .status-dots{
+      display:flex;
+      gap:5px;
+      align-items:center;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:999px;
+      background:#2c2c34;
+    }
+    .dot.red{background:#ff5f57;}
+    .dot.amber{background:#febc2e;}
+    .dot.green{background:#28c840;}
+
+    /* Cabeçalho */
+    .app-header{
+      padding:8px 4px 14px;
+    }
+    .app-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font:11px/1.1 var(--mono);
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:var(--muted);
+      background-color:rgba(179,56,74,.08);
+      border-radius:999px;
+      padding:4px 10px;
+      border:1px solid rgba(179,56,74,.35);
+    }
+    .app-tag i{color:var(--accent);}
+
+    .app-title{
+      margin-top:10px;
+    }
+    .app-title h1{
+      font-size:20px;
+      line-height:1.25;
+      letter-spacing:.02em;
+    }
+    .app-title span.accent{
+      color:var(--accent);
+    }
+    .app-sub{
+      margin-top:6px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .app-chips{
+      margin-top:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .chip{
+      font:11px/1 var(--mono);
+      border-radius:999px;
+      padding:5px 10px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .chip i{font-size:11px;color:var(--accent);}
+
+    /* Área de conteúdo com rolagem */
+    .app-body{
+      margin-top:12px;
+      background:radial-gradient(circle at top,#191922 0,#050507 45%);
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.04);
+      padding:10px;
+      max-height:72vh;
+      overflow-y:auto;
+      scrollbar-width:thin;
+      scrollbar-color:#3a3a46 transparent;
+    }
+    .app-body::-webkit-scrollbar{width:6px;}
+    .app-body::-webkit-scrollbar-thumb{
+      background:#3a3a46;
+      border-radius:999px;
+    }
+
+    /* Botões de setor */
+    .sector-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:8px;
+      margin-bottom:10px;
+    }
+    .sector-btn{
+      border-radius:16px;
+      padding:10px 10px 9px;
+      border:1px solid var(--border);
+      background:linear-gradient(150deg,#181822,#101018);
+      color:var(--ink);
+      display:flex;
+      align-items:flex-start;
+      gap:9px;
+      cursor:pointer;
+      transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease,background .12s ease;
+      position:relative;
+    }
+    .sector-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 24px rgba(0,0,0,.55);
+      border-color:rgba(179,56,74,.6);
+      background:linear-gradient(160deg,#221826,#121218);
+    }
+    .sector-btn.active{
+      border-color:var(--accent);
+      background:radial-gradient(circle at top,#2a1820,#101018);
+    }
+    .sector-icon{
+      width:26px;height:26px;
+      border-radius:12px;
+      background:var(--accent-soft);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--accent);
+      flex-shrink:0;
+    }
+    .sector-text{
+      flex:1;
+    }
+    .sector-label{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:var(--muted);
+      font-family:var(--mono);
+      margin-bottom:2px;
+    }
+    .sector-title{
+      font-size:13px;
+      font-weight:600;
+    }
+
+    .sector-pill{
+      position:absolute;
+      bottom:7px;
+      right:8px;
+      font-size:10px;
+      color:var(--muted);
+      font-family:var(--mono);
+      opacity:.7;
+    }
+
+    /* Cards de conteúdo (setores) */
+    .sector-panel{
+      display:none;
+      border-radius:18px;
+      padding:12px 11px;
+      background:linear-gradient(145deg,#15151c,#101018);
+      border:1px solid var(--border);
+      margin-bottom:10px;
+    }
+    .sector-panel.active{
+      display:block;
+    }
+
+    .sector-panel h2{
+      font-size:15px;
+      margin-bottom:6px;
+    }
+    .sector-panel h3{
+      font-size:13px;
+      margin-top:10px;
+      margin-bottom:4px;
+    }
+    .sector-panel p{
+      font-size:13px;
+      color:#d8d8e4;
+      margin-bottom:6px;
+    }
+    .sector-panel small,
+    .sector-panel .note{
+      font-size:11px;
+      color:var(--muted);
+    }
+
+    .tagline{
+      font:10px/1.2 var(--mono);
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--muted);
+      margin-bottom:4px;
+    }
+
+    ul{
+      list-style:none;
+      margin:4px 0 6px;
+      padding:0;
+    }
+    li{
+      position:relative;
+      padding-left:14px;
+      margin-bottom:3px;
+      font-size:13px;
+      color:#e3e3ee;
+    }
+    li::before{
+      content:"•";
+      position:absolute;
+      left:3px;top:0;
+      color:var(--accent);
+      font-size:12px;
+    }
+
+    ol{
+      margin:4px 0 6px 18px;
+      padding:0;
+      font-size:13px;
+      color:#e3e3ee;
+    }
+    ol li{padding-left:0;margin-bottom:3px;}
+    ol li::before{display:none;}
+
+    /* Tabelas compactas em estilo app */
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:4px;
+      font-size:11.5px;
+      color:#e3e3ee;
+    }
+    th,td{
+      border:1px solid #262633;
+      padding:5px 6px;
+      vertical-align:top;
+    }
+    th{
+      background:#1d1d26;
+      font-weight:600;
+      text-align:left;
+    }
+
+    /* Rodapé da app */
+    .app-footer{
+      margin-top:12px;
+      padding:6px 4px 0;
+      border-top:1px solid rgba(255,255,255,.04);
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      align-items:center;
+    }
+    .app-footer-left{
+      font-size:10px;
+      color:var(--muted);
+    }
+    .app-footer-right{
+      font-size:11px;
+      font-family:var(--mono);
+      color:var(--muted);
+    }
+    .app-footer-right span{
+      color:var(--accent);
+      font-weight:600;
+    }
+
+    /* Pequenas melhorias em telas maiores */
+    @media(min-width:768px){
+      body{padding:30px;}
+      .app-shell{max-width:480px;}
+      .app-body{max-height:76vh;}
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+
+    <div class="status-bar">
+      <div class="status-dots">
+        <span class="dot red"></span>
+        <span class="dot amber"></span>
+        <span class="dot green"></span>
+      </div>
+      <div>TPB • DBT</div>
+      <div><i class="fa-solid fa-signal"></i> <i class="fa-solid fa-battery-three-quarters"></i></div>
+    </div>
+
+    <header class="app-header">
+      <div class="app-tag">
+        <i class="fa-solid fa-heart-pulse"></i>
+        MATERIAL CLÍNICO · APP
+      </div>
+      <div class="app-title">
+        <h1>TPB — <span class="accent">Alto Funcionamento</span></h1>
+      </div>
+      <p class="app-sub">
+        Caso: <strong>Anna Laura Alves</strong> (27 anos) · Plano clínico + autoacompanhamento.
+      </p>
+
+      <div class="app-chips">
+        <span class="chip"><i class="fa-solid fa-brain"></i> DBT espinha dorsal</span>
+        <span class="chip"><i class="fa-regular fa-clipboard"></i> Monitoramento objetivo</span>
+        <span class="chip"><i class="fa-regular fa-calendar"></i> 12 meses</span>
+        <span class="chip"><i class="fa-solid fa-print"></i> Versão imprimível</span>
+      </div>
+    </header>
+
+    <main class="app-body">
+
+      <!-- BOTÕES DOS SETORES -->
+      <section class="sector-grid">
+        <button class="sector-btn active" data-target="resumo">
+          <div class="sector-icon">
+            <i class="fa-solid fa-gauge-high"></i>
+          </div>
+          <div class="sector-text">
+            <div class="sector-label">Setor 1</div>
+            <div class="sector-title">Resumo executivo</div>
+          </div>
+          <div class="sector-pill">3 min</div>
+        </button>
+
+        <button class="sector-btn" data-target="quick">
+          <div class="sector-icon">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div class="sector-text">
+            <div class="sector-label">Setor 2</div>
+            <div class="sector-title">1 página rápida</div>
+          </div>
+          <div class="sector-pill">Uso diário</div>
+        </button>
+
+        <button class="sector-btn" data-target="monitor">
+          <div class="sector-icon">
+            <i class="fa-regular fa-chart-bar"></i>
+          </div>
+          <div class="sector-text">
+            <div class="sector-label">Setor 3</div>
+            <div class="sector-title">Escalas & métricas</div>
+          </div>
+          <div class="sector-pill">5–12 min</div>
+        </button>
+
+        <button class="sector-btn" data-target="planilha">
+          <div class="sector-icon">
+            <i class="fa-regular fa-pen-to-square"></i>
+          </div>
+          <div class="sector-text">
+            <div class="sector-label">Setor 4</div>
+            <div class="sector-title">Planilha diária</div>
+          </div>
+          <div class="sector-pill">10 min/noite</div>
+        </button>
+
+        <button class="sector-btn" data-target="scripts">
+          <div class="sector-icon">
+            <i class="fa-solid fa-comments"></i>
+          </div>
+          <div class="sector-text">
+            <div class="sector-label">Setor 5</div>
+            <div class="sector-title">Scripts de sessão</div>
+          </div>
+          <div class="sector-pill">Uso clínico</div>
+        </button>
+
+        <button class="sector-btn" data-target="cronograma">
+          <div class="sector-icon">
+            <i class="fa-regular fa-clock"></i>
+          </div>
+          <div class="sector-text">
+            <div class="sector-label">Setor 6</div>
+            <div class="sector-title">Cronograma 12m</div>
+          </div>
+          <div class="sector-pill">Macro</div>
+        </button>
+
+        <button class="sector-btn" data-target="refs">
+          <div class="sector-icon">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <div class="sector-text">
+            <div class="sector-label">Setor 7</div>
+            <div class="sector-title">Referências</div>
+          </div>
+          <div class="sector-pill">Links</div>
+        </button>
+      </section>
+
+      <!-- SETOR 1: RESUMO EXECUTIVO -->
+      <section id="resumo" class="sector-panel active">
+        <div class="tagline">Resumo executivo</div>
+        <h2>1) Síntese do caso</h2>
+        <ul>
+          <li><strong>Perfil:</strong> alto funcionamento (desempenho ocupacional preservado com sofrimento interno relevante).</li>
+          <li><strong>Eixo central:</strong> desregulação emocional reativa a contextos interpessoais (abandono/rejeição/ambivalência).</li>
+          <li><strong>Padrões-alvo:</strong> urgência de contato, checagem/reasseguramento, explosões/isolamento, oscilação humor-reativa, ruminação, vergonha pós-crise.</li>
+        </ul>
+
+        <h2>2) Hipótese clínica operacional</h2>
+        <h3>Modelo biossocial (DBT)</h3>
+        <p>Vulnerabilidade emocional + história de invalidação/rupturas → sistema de ameaça hiperativo e respostas rápidas/fortes a sinais de distância.</p>
+
+        <h3>Alvos mensuráveis</h3>
+        <p>Reduzir intensidade e duração pós-gatilho, diminuir checagem/urgência, aumentar habilidades antes de agir, e ampliar fontes de regulação além da “pessoa favorita”.</p>
+
+        <h2>3) Plano terapêutico (macro)</h2>
+        <ol>
+          <li><strong>Psicoterapia:</strong> DBT estruturada (individual semanal + habilidades; ajustes conforme aderência).</li>
+          <li><strong>Monitoramento:</strong> escalas breves + planilha diária.</li>
+          <li><strong>Farmacoterapia:</strong> direcionada a comorbidades e sintomas-alvo (quando indicado), com reavaliação objetiva por tempo definido.</li>
+          <li><strong>Rede e previsibilidade:</strong> regras claras de contato, rotinas, e scripts de comunicação (para reduzir escalada).</li>
+        </ol>
+
+        <h2>4) O que é “melhora” aqui</h2>
+        <ul>
+          <li>Não é “nunca mais sentir”. É <strong>sentir sem piorar</strong>.</li>
+          <li>Tempo de recuperação cai (horas → 1–2h → &lt; 30–60 min).</li>
+          <li>Checagem cai (muitas vezes/dia → poucas vezes → uso consciente).</li>
+          <li>Conflitos passam a ter habilidade (DEAR MAN/GIVE/FAST) com menos culpa/ruína.</li>
+        </ul>
+
+        <p class="note"><strong>Nota:</strong> guia de acompanhamento e psicoeducação; urgências seguem avaliação clínica e serviços locais.</p>
+      </section>
+
+      <!-- SETOR 2: QUICK REFERENCE -->
+      <section id="quick" class="sector-panel">
+        <div class="tagline">1 página — referência rápida</div>
+        <h2>Diagnóstico funcional</h2>
+        <ul>
+          <li>TPB (alto funcionamento) — reatividade interpessoal.</li>
+          <li>Ansiedade/episódios depressivos reativos (avaliar com escalas).</li>
+          <li>Comorbidades a investigar: TDAH adulto, trauma complexo, padrão alimentar.</li>
+        </ul>
+
+        <h3>Foco terapêutico (ordem)</h3>
+        <ol>
+          <li>Segurança + prevenção de escalada.</li>
+          <li>Habilidades de crise (tolerância ao sofrimento).</li>
+          <li>Regulação emocional (reduzir vulnerabilidade).</li>
+          <li>Efetividade interpessoal (limites e pedidos).</li>
+        </ol>
+
+        <h3>Rotina prática</h3>
+        <ul>
+          <li><strong>Diário (10 min):</strong> planilha + 1 habilidade aplicada.</li>
+          <li><strong>Semanal:</strong> revisão dos piores gatilhos + 1 role-play.</li>
+          <li><strong>Quinzenal:</strong> ver tendências (gráficos simples).</li>
+          <li><strong>Mensal:</strong> ajuste do plano (metas e módulos).</li>
+        </ul>
+
+        <h3>Escalas (sugestão)</h3>
+        <ul>
+          <li><strong>Semanal:</strong> BSL-23, PHQ-9, GAD-7.</li>
+          <li><strong>Mensal:</strong> WHODAS (ou breve).</li>
+          <li><strong>Alimentação:</strong> SCOFF/EAT-26 (mensal se ativo).</li>
+        </ul>
+
+        <h3>Indicadores de melhora</h3>
+        <ul>
+          <li>Recupera mais rápido.</li>
+          <li>Menos checagem.</li>
+          <li>Menos impulsos virando ação.</li>
+          <li>Mais limites sem explosão.</li>
+        </ul>
+
+        <h3>Red flags</h3>
+        <ul>
+          <li>Piora funcional sustentada.</li>
+          <li>Isolamento progressivo.</li>
+          <li>Aumento de comportamentos de risco.</li>
+          <li>Queda forte de adesão ao plano.</li>
+        </ul>
+
+        <h3>Regra de ouro</h3>
+        <p><strong>Em crise:</strong> primeiro estabilizar o corpo, depois conversar. Evitar decisões de relacionamento “no pico”.</p>
+      </section>
+
+      <!-- SETOR 3: MONITORAMENTO -->
+      <section id="monitor" class="sector-panel">
+        <div class="tagline">Monitoramento objetivo</div>
+        <h2>Escalas recomendadas</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Domínio</th>
+              <th>Instrumento</th>
+              <th>Frequência</th>
+              <th>Uso prático</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Severidade TPB</td>
+              <td><strong>BSL-23</strong></td>
+              <td>Semanal</td>
+              <td>Ver tendência; aumentos abruptos pedem revisão de gatilhos e habilidades.</td>
+            </tr>
+            <tr>
+              <td>Depressão</td>
+              <td><strong>PHQ-9</strong></td>
+              <td>Semanal/Quinzenal</td>
+              <td>Distinguir reatividade vs episódio sustentado; se persistente, ajustar abordagem.</td>
+            </tr>
+            <tr>
+              <td>Ansiedade</td>
+              <td><strong>GAD-7</strong></td>
+              <td>Semanal/Quinzenal</td>
+              <td>Checar efeito de rotina/sono/evitação; direciona foco de habilidades.</td>
+            </tr>
+            <tr>
+              <td>Funcionamento</td>
+              <td><strong>WHODAS</strong> (ou breve)</td>
+              <td>Mensal</td>
+              <td>Se humor melhora mas função cai, investigar desalinhamentos (relacionamentos, sono, trabalho, autocuidado).</td>
+            </tr>
+            <tr>
+              <td>Sono</td>
+              <td><strong>ISI</strong></td>
+              <td>Quinzenal (se necessário)</td>
+              <td>Sono ruim multiplica crises; priorizar rotina e higiene do sono.</td>
+            </tr>
+            <tr>
+              <td>Alimentação</td>
+              <td><strong>SCOFF</strong> / EAT-26</td>
+              <td>Mensal (se ativo)</td>
+              <td>Piora alimentar demanda ajuste de plano (nutrição + terapia focada).</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">Registrar escores em tabela simples e gerar gráfico mensal (linha) ajuda a visualizar tendência.</p>
+      </section>
+
+      <!-- SETOR 4: PLANILHA DIÁRIA -->
+      <section id="planilha" class="sector-panel">
+        <div class="tagline">Planilha diária</div>
+        <h2>Modelo de planilha</h2>
+        <p>Colunas sugeridas para Google Sheets/Excel:</p>
+        <p class="note">Data · Emoção · Intensidade (0–10) · Gatilho · Pensamento · Comportamento · Habilidade · Após 1h (0–10) · PF ativada? · Checagem · Sono · Alimentação · Exercício · Conflito? · Habilidade interpessoal · Notas.</p>
+
+        <h3>Legenda rápida</h3>
+        <ul>
+          <li><strong>Alimentação:</strong> normal / compulsão / restrição / misto.</li>
+          <li><strong>Habilidades:</strong> mindfulness, tolerância ao sofrimento, regulação emocional, DEAR MAN, GIVE, FAST.</li>
+          <li><strong>PF:</strong> “pessoa favorita” (ativação de apego/validação).</li>
+        </ul>
+
+        <h3>Regra prática</h3>
+        <p>Quando intensidade ≥ 8: registrar <strong>o que aconteceu antes</strong> e <strong>qual habilidade foi tentada</strong>. O objetivo é padrão e intervenção, não perfeição.</p>
+      </section>
+
+      <!-- SETOR 5: SCRIPTS -->
+      <section id="scripts" class="sector-panel">
+        <div class="tagline">Scripts clínicos</div>
+        <h2>1) Validação durante crise relacional</h2>
+        <p><strong>Terapeuta:</strong> “Eu acredito no seu sofrimento. Seu sistema reage como se fosse emergência. Isso explica a urgência — não justifica agir no impulso.”</p>
+        <p><strong>Terapeuta:</strong> “Vamos separar: emoção é válida. Comportamento é treinável. Hoje a meta é atravessar o pico sem piorar.”</p>
+        <p><strong>Pergunta final:</strong> “Qual é a menor ação possível agora que não destrói sua semana?”</p>
+
+        <h2>2) “Pessoa favorita”</h2>
+        <p>“Pessoa favorita não é ‘amor demais’. É <strong>dependência de validação</strong>. A meta é ampliar fontes: rotina, amigos, propósito, autocuidado e habilidade.”</p>
+        <p>“O parceiro pode ser previsível e respeitoso. Mas ele não pode ser seu regulador emocional exclusivo.”</p>
+
+        <h2>3) Treino DEAR MAN</h2>
+        <p><strong>D:</strong> “Quando você some sem avisar…”</p>
+        <p><strong>E:</strong> “Eu fico ansiosa e começo a imaginar rejeição.”</p>
+        <p><strong>A:</strong> “Eu preciso de uma frase curta: ‘Estou ocupado, respondo depois’.”</p>
+        <p><strong>R:</strong> “Isso reduz briga e melhora nossa relação.”</p>
+
+        <h2>4) Pós-crise</h2>
+        <p>“Você não precisa se punir para aprender. A pergunta é: <strong>o que funcionou 10% melhor</strong> desta vez?”</p>
+        <p>“Vamos registrar isso e repetir. Repetição vira estabilidade.”</p>
+
+        <p class="note">Scripts devem ser ajustados ao contexto e à avaliação clínica.</p>
+      </section>
+
+      <!-- SETOR 6: CRONOGRAMA -->
+      <section id="cronograma" class="sector-panel">
+        <div class="tagline">Cronograma 12 meses</div>
+        <h2>Fases de implementação</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Período</th>
+              <th>Foco</th>
+              <th>Rotina</th>
+              <th>Meta prática</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sem. 1–4</strong></td>
+              <td>Estrutura + prevenção de escalada.</td>
+              <td>Planilha diária, DBT semanal, escalas semanais.</td>
+              <td>Reduzir picos e “piora por impulso”; criar previsibilidade.</td>
+            </tr>
+            <tr>
+              <td><strong>Sem. 5–12</strong></td>
+              <td>Tolerância ao sofrimento + rotina.</td>
+              <td>Habilidades de crise + revisão de gatilhos.</td>
+              <td>Checagem ↓; recuperação pós-gatilho ↓.</td>
+            </tr>
+            <tr>
+              <td><strong>Meses 3–6</strong></td>
+              <td>Regulação emocional.</td>
+              <td>PLEASE/rotina, sono, alimentação, exercício.</td>
+              <td>Menos vulnerabilidade “de base”.</td>
+            </tr>
+            <tr>
+              <td><strong>Meses 6–12</strong></td>
+              <td>Efetividade interpessoal.</td>
+              <td>DEAR MAN/GIVE/FAST, limites, escolhas.</td>
+              <td>Conflitos com habilidade sem destruir vínculo.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="note">Revisão formal mensal: tendência de escalas + padrões da planilha → reajuste de metas.</p>
+      </section>
+
+      <!-- SETOR 7: REFERÊNCIAS -->
+      <section id="refs" class="sector-panel">
+        <div class="tagline">Referências</div>
+        <h2>Leituras essenciais</h2>
+        <ul>
+          <li>NICE — Borderline personality disorder: recognition and management (CG78): https://www.nice.org.uk/guidance/cg78</li>
+          <li>Cochrane — Psychological therapies for BPD: https://www.cochranelibrary.com/</li>
+          <li>Cochrane — Pharmacological interventions for BPD: https://www.cochranelibrary.com/</li>
+          <li>DBT benchmarks (artigos recentes): https://pmc.ncbi.nlm.nih.gov/</li>
+        </ul>
+        <p class="note">Para versão paciente, em geral bastam 5–10 referências núcleo.</p>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div class="app-footer-left">
+        Material clínico • Uso supervisionado.
+      </div>
+      <div class="app-footer-right">
+        <span>@drfabioschmidt</span> · CRM/SP 183549
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.sector-btn');
+    const panels  = document.querySelectorAll('.sector-panel');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        panels.forEach(p => {
+          p.classList.toggle('active', p.id === target);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
