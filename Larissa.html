@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quiz Rápido 💭</title>
+
+  <style>
+    :root {
+      --bg:#0b0c10;
+      --card:#12131a;
+      --text:#f2f2f7;
+      --muted:#a9abbb;
+      --line:#23243a;
+      --accent:#ff4d6d;
+    }
+
+    * { box-sizing:border-box; }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;
+      background:radial-gradient(1200px 600px at 30% 0%, #1a1c2c 0%, var(--bg) 55%);
+      color:var(--text);
+    }
+
+    .app{ width:min(520px,100%); }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px 16px;
+      box-shadow:0 18px 60px rgba(0,0,0,.45);
+    }
+
+    h1{
+      margin:0 0 6px 0;
+      font-size:20px;
+    }
+
+    .sub{
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:14px;
+    }
+
+    .q{
+      border-top:1px solid var(--line);
+      padding-top:14px;
+    }
+
+    .q p{
+      margin:0 0 12px 0;
+      font-size:16px;
+      line-height:1.4;
+    }
+
+    .opts{
+      display:grid;
+      gap:10px;
+    }
+
+    button.opt{
+      width:100%;
+      text-align:left;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#0f1017;
+      color:var(--text);
+      font-size:14px;
+      cursor:pointer;
+      transition:.15s;
+    }
+
+    button.opt:hover{
+      background:#15172c;
+      border-color:#3a3d66;
+    }
+
+    .progress{
+      margin-top:14px;
+      font-size:12px;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+
+    .bar{
+      flex:1;
+      height:8px;
+      border-radius:999px;
+      background:#0f1017;
+      border:1px solid var(--line);
+      overflow:hidden;
+    }
+
+    .bar div{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,#ff4d6d,#ff9f1c);
+      transition:width .25s ease;
+    }
+
+    .result{
+      display:none;
+      border-top:1px solid var(--line);
+      padding-top:16px;
+      margin-top:12px;
+    }
+
+    .result h2{
+      margin:0 0 10px 0;
+      font-size:18px;
+    }
+
+    .box{
+      background:#0f1017;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px 14px;
+      line-height:1.5;
+    }
+
+    .big{
+      font-size:15px;
+      margin:0 0 10px 0;
+    }
+
+    .small{
+      font-size:13px;
+      color:var(--muted);
+      margin:0;
+    }
+
+    .actions{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+    }
+
+    .actions button{
+      flex:1;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#12131a;
+      color:var(--text);
+      cursor:pointer;
+    }
+
+    .actions button:hover{
+      border-color:#3a3d66;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="card">
+
+      <h1>Quiz rápido 🔍</h1>
+      <div class="sub">Responda sem pensar demais.</div>
+
+      <div class="q" id="questionArea">
+        <p id="questionText"></p>
+        <div class="opts" id="options"></div>
+
+        <div class="progress">
+          <span id="progressText">0%</span>
+          <div class="bar"><div id="barFill"></div></div>
+        </div>
+      </div>
+
+      <div class="result" id="resultArea">
+        <h2>Resultado 💫</h2>
+        <div class="box">
+          <p class="big" id="resultMain"></p>
+          <p class="small" id="resultSub"></p>
+        </div>
+        <div class="actions">
+          <button onclick="restart()">Refazer</button>
+          <button onclick="copyResult()">Copiar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  const PSIQUIATRA_F = "um médico psiquiatra que começa com a letra F";
+
+  const questions = [
+    { q: "Seu nome é Larissa?", a: ["Não", "Sim"] },
+    { q: "Você se apaixona mais por:", a: ["Conforto", "Inteligência + ironia"] },
+    { q: "Em conversa boa você prefere:", a: ["Leve", "Provocativa"] },
+    { q: "Relacionamento ideal é aquele que:", a: ["Não dá trabalho", "Dá assunto"] },
+    { q: "Você se atrai mais por pessoas que:", a: ["Seguem o roteiro", "Pensam fora dele"] },
+    { q: "Última pergunta: você gosta de alguém que te lê fácil?", a: ["Mais ou menos", "Sim"] }
+  ];
+
+  let i = 0;
+
+  const qText = document.getElementById("questionText");
+  const opts = document.getElementById("options");
+  const bar = document.getElementById("barFill");
+  const pText = document.getElementById("progressText");
+  const qArea = document.getElementById("questionArea");
+  const rArea = document.getElementById("resultArea");
+  const rMain = document.getElementById("resultMain");
+  const rSub = document.getElementById("resultSub");
+
+  function render(){
+    const pct = Math.round((i / questions.length) * 100);
+    bar.style.width = pct + "%";
+    pText.textContent = pct + "%";
+
+    qText.textContent = questions[i].q;
+    opts.innerHTML = "";
+
+    questions[i].a.forEach(a=>{
+      const b = document.createElement("button");
+      b.className="opt";
+      b.textContent="☐ " + a;
+      b.onclick = next;
+      opts.appendChild(b);
+    });
+  }
+
+  function next(){
+    i++;
+    if(i >= questions.length){
+      showResult();
+    } else {
+      render();
+    }
+  }
+
+  function showResult(){
+    bar.style.width = "100%";
+    pText.textContent = "100%";
+    qArea.style.display="none";
+    rArea.style.display="block";
+
+    rMain.innerHTML =
+      `✨ Larissa, sua melhor escolha é namorar <strong>${PSIQUIATRA_F}</strong>.<br>
+       Não por carência.<br>
+       Por compatibilidade mesmo. 😌`;
+
+    rSub.innerHTML =
+      `Café resolve o primeiro encontro ☕<br>
+       O resto a gente improvisa 😏💖💘💞`;
+  }
+
+  function restart(){
+    i = 0;
+    rArea.style.display="none";
+    qArea.style.display="block";
+    render();
+  }
+
+  function copyResult(){
+    navigator.clipboard.writeText(rMain.innerText + "\n\n" + rSub.innerText);
+  }
+
+  render();
+</script>
+
+</body>
+</html>
