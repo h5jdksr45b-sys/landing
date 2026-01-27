@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quiz Inevitável™</title>
+  <style>
+    :root { --bg:#0b0c10; --card:#12131a; --text:#e9e9ee; --muted:#a9abbb; --line:#23243a; }
+    * { box-sizing: border-box; }
+    body{
+      margin:0; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+      background: radial-gradient(1200px 600px at 30% 0%, #1a1c2c 0%, var(--bg) 55%);
+      color:var(--text); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+    }
+    .app{ width:min(520px, 100%); }
+    .card{
+      background: color-mix(in oklab, var(--card) 92%, #000 8%);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px 16px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+    }
+    .top{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px;
+    }
+    .badge{
+      font-size:12px; color:var(--muted);
+      border:1px solid var(--line); padding:6px 10px; border-radius:999px;
+      letter-spacing:.2px;
+    }
+    h1{ font-size:18px; margin:0; letter-spacing:.2px; }
+    .q{
+      margin-top:10px;
+      border-top:1px solid var(--line);
+      padding-top:14px;
+    }
+    .q p{ margin:0 0 10px 0; font-size:16px; line-height:1.35; }
+    .opts{ display:grid; gap:10px; }
+    button.opt{
+      width:100%;
+      text-align:left;
+      border:1px solid var(--line);
+      background: #0f1017;
+      color:var(--text);
+      padding:12px 12px;
+      border-radius:12px;
+      font-size:14px;
+      cursor:pointer;
+      transition: transform .05s ease, border-color .15s ease, background .15s ease;
+    }
+    button.opt:hover{ border-color:#3a3d66; background:#111225; }
+    button.opt:active{ transform: scale(.99); }
+    .footer{
+      display:flex; align-items:center; justify-content:space-between; margin-top:12px; gap:12px;
+      color:var(--muted); font-size:12px;
+    }
+    .bar{
+      height:8px; background:#0f1017; border:1px solid var(--line);
+      border-radius:999px; overflow:hidden; flex:1;
+    }
+    .bar > div{
+      height:100%; width:0%;
+      background: linear-gradient(90deg, #7c5cff, #2ee59d);
+      transition: width .25s ease;
+    }
+    .result{
+      margin-top:12px;
+      border-top:1px solid var(--line);
+      padding-top:14px;
+      display:none;
+    }
+    .result h2{ margin:0 0 10px 0; font-size:16px; }
+    .result .box{
+      border:1px solid var(--line);
+      background:#0f1017;
+      border-radius:14px;
+      padding:14px 12px;
+      line-height:1.45;
+    }
+    .result .box .big{
+      font-size:15px;
+      margin:0 0 10px 0;
+    }
+    .result .box .small{
+      margin:0; color:var(--muted); font-size:13px;
+    }
+    .actions{ display:flex; gap:10px; margin-top:12px; }
+    .actions button{
+      flex:1;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#12131a;
+      color:var(--text);
+      padding:10px 12px;
+      cursor:pointer;
+    }
+    .actions button:hover{ border-color:#3a3d66; }
+    .hint{ margin-top:10px; color:var(--muted); font-size:12px; line-height:1.35; }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <div class="top">
+        <div>
+          <h1>Quiz Inevitável™</h1>
+          <div class="badge">todas as escolhas levam ao mesmo destino</div>
+        </div>
+        <div class="badge mono" id="stepLabel">Q1/6</div>
+      </div>
+
+      <div class="footer" aria-hidden="true">
+        <span id="progressText">Progresso: 0%</span>
+        <div class="bar"><div id="barFill"></div></div>
+      </div>
+
+      <div class="q" id="questionArea">
+        <p id="questionText"></p>
+        <div class="opts" id="options"></div>
+      </div>
+
+      <div class="result" id="resultArea">
+        <h2>Resultado</h2>
+        <div class="box">
+          <p class="big" id="resultMain"></p>
+          <p class="small" id="resultSub"></p>
+        </div>
+        <div class="actions">
+          <button id="restartBtn">Reiniciar</button>
+          <button id="copyBtn">Copiar texto</button>
+        </div>
+        <div class="hint" id="hint"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Troque aqui o "F____" pelo seu nome/identificador com F.
+    const PSIQUIATRA_COM_F = "um médico psiquiatra com a letra F";
+
+    const questions = [
+      { q: "Seu nome é Letícia?", a: ["Não", "Sim (óbvio)"] },
+      { q: "Você gosta de gente interessante ou de gente tranquila demais?", a: ["Tranquila demais", "Interessante (com leve risco emocional)"] },
+      { q: "Você prefere alguém que:", a: ["Finja não perceber as coisas", "Perceba tudo e finja costume"] },
+      { q: "Quando você faz uma piada ácida, você espera:", a: ["Ofensa", "Uma melhor em cima"] },
+      { q: "Em um relacionamento, você valoriza mais:", a: ["Mistério vazio", "Lucidez com sarcasmo funcional"] },
+      { q: "Pergunta final (eliminatória): você namoraria alguém que não se intimida e ainda acha graça do caos?", a: ["Não", "Sim"] }
+    ];
+
+    const resultText = {
+      main:
+        `✨ Sua melhor opção é namorar ${PSIQUIATRA_COM_F}.\n` +
+        `✨ Não por terapia… por eficiência.\n` +
+        `✨ E porque você claramente não veio ao mundo pra sofrer com amador.`,
+      sub:
+        `Deseja reiniciar o jogo? Aviso: as respostas não mudam o resultado.\n` +
+        `Café desbloqueia a fase bônus. (Sem diagnóstico. Talvez.)`
+    };
+
+    let idx = 0;
+
+    const questionArea = document.getElementById("questionArea");
+    const questionText = document.getElementById("questionText");
+    const options = document.getElementById("options");
+
+    const resultArea = document.getElementById("resultArea");
+    const resultMain = document.getElementById("resultMain");
+    const resultSub = document.getElementById("resultSub");
+
+    const stepLabel = document.getElementById("stepLabel");
+    const progressText = document.getElementById("progressText");
+    const barFill = document.getElementById("barFill");
+
+    const restartBtn = document.getElementById("restartBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const hint = document.getElementById("hint");
+
+    function setProgress() {
+      const pct = Math.round((idx / questions.length) * 100);
+      progressText.textContent = `Progresso: ${pct}%`;
+      barFill.style.width = `${pct}%`;
+      stepLabel.textContent = `Q${Math.min(idx + 1, questions.length)}/${questions.length}`;
+    }
+
+    function renderQuestion() {
+      setProgress();
+      const current = questions[idx];
+      questionText.textContent = current.q;
+
+      options.innerHTML = "";
+      current.a.forEach((label) => {
+        const btn = document.createElement("button");
+        btn.className = "opt";
+        btn.type = "button";
+        btn.textContent = "☐ " + label;
+        btn.addEventListener("click", () => next());
+        options.appendChild(btn);
+      });
+    }
+
+    function next() {
+      // Independente da escolha, avança igual.
+      idx++;
+      if (idx >= questions.length) return showResult();
+      renderQuestion();
+    }
+
+    function showResult() {
+      setProgress();
+      barFill.style.width = "100%";
+      progressText.textContent = "Progresso: 100%";
+      stepLabel.textContent = `OK/${questions.length}`;
+
+      questionArea.style.display = "none";
+      resultArea.style.display = "block";
+
+      resultMain.textContent = resultText.main;
+      resultSub.textContent = resultText.sub;
+
+      hint.textContent =
+        "Dica: no código, edite a linha PSIQUIATRA_COM_F para colocar o nome com F do jeito que você quiser.";
+    }
+
+    restartBtn.addEventListener("click", () => {
+      idx = 0;
+      resultArea.style.display = "none";
+      questionArea.style.display = "block";
+      renderQuestion();
+    });
+
+    copyBtn.addEventListener("click", async () => {
+      const payload =
+        "Quiz Inevitável™\n\n" +
+        questions.map((x, i) => `Q${i+1}: ${x.q}\nA) ${x.a[0]}\nB) ${x.a[1]}\n`).join("\n") +
+        "\nResultado:\n" + resultText.main + "\n\n" + resultText.sub;
+
+      try {
+        await navigator.clipboard.writeText(payload);
+        copyBtn.textContent = "Copiado ✓";
+        setTimeout(() => (copyBtn.textContent = "Copiar texto"), 1200);
+      } catch (e) {
+        // fallback simples
+        const ta = document.createElement("textarea");
+        ta.value = payload;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        copyBtn.textContent = "Copiado ✓";
+        setTimeout(() => (copyBtn.textContent = "Copiar texto"), 1200);
+      }
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
