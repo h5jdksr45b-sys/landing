@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plano Interativo — Mariana Borges Pereira</title>
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --panel:#12141a;
+      --panel2:#161924;
+      --text:#e8eaf0;
+      --muted:#a7adbf;
+      --line:#23283a;
+      --accent:#7aa2ff;
+      --ok:#36d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 14px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background: radial-gradient(1200px 700px at 15% 10%, rgba(122,162,255,.15), transparent 60%),
+                  radial-gradient(900px 500px at 90% 30%, rgba(54,211,153,.12), transparent 55%),
+                  linear-gradient(180deg, #07080c, var(--bg));
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 22px 16px 40px;
+    }
+
+    header{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom: 14px;
+    }
+
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    .badge{
+      width:46px;height:46px;
+      border-radius:14px;
+      background: linear-gradient(135deg, rgba(122,162,255,.95), rgba(54,211,153,.85));
+      box-shadow: var(--shadow);
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      letter-spacing:.5px;
+      color:#0b0c10;
+      user-select:none;
+    }
+
+    h1{
+      margin:0;
+      font-size: 18px;
+      line-height:1.2;
+      letter-spacing: .2px;
+    }
+    .sub{
+      margin-top:6px;
+      color:var(--muted);
+      font-size: 13px;
+      line-height:1.4;
+      max-width: 72ch;
+    }
+
+    .top-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .chip{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:10px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      user-select:none;
+    }
+    .chip b{color:var(--text); font-weight:650}
+
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 14px 0 16px;
+    }
+    .tab-btn{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-size: 13px;
+      transition: .15s ease;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .tab-btn:hover{transform: translateY(-1px); border-color: rgba(122,162,255,.55)}
+    .tab-btn[aria-selected="true"]{
+      background: rgba(122,162,255,.16);
+      border-color: rgba(122,162,255,.65);
+    }
+
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .panel-head{
+      padding: 16px 16px 10px;
+      border-bottom:1px solid rgba(35,40,58,.7);
+      background: linear-gradient(180deg, rgba(255,255,255,.02), transparent);
+    }
+    .panel-head h2{
+      margin:0;
+      font-size: 15px;
+      letter-spacing:.2px;
+    }
+    .panel-head p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size: 13px;
+      line-height:1.45;
+      max-width: 80ch;
+    }
+
+    .panel-body{
+      padding: 16px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 820px){
+      .grid.two{grid-template-columns: 1.1fr .9fr;}
+      .grid.three{grid-template-columns: 1fr 1fr 1fr;}
+    }
+
+    .card{
+      background: rgba(18,20,26,.75);
+      border:1px solid rgba(35,40,58,.85);
+      border-radius: var(--radius2);
+      padding: 14px;
+    }
+
+    .card h3{
+      margin:0 0 8px;
+      font-size: 14px;
+      letter-spacing:.2px;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size: 13px;
+      line-height:1.5;
+    }
+
+    .btn{
+      border:1px solid rgba(122,162,255,.55);
+      background: rgba(122,162,255,.14);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-size: 13px;
+      transition: .15s ease;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn.secondary{
+      border-color: rgba(35,40,58,.95);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+    }
+    .btn.danger{
+      border-color: rgba(251,113,133,.65);
+      background: rgba(251,113,133,.12);
+    }
+
+    .callout{
+      border:1px solid rgba(251,191,36,.45);
+      background: rgba(251,191,36,.08);
+      border-radius: 14px;
+      padding: 12px;
+      color: var(--text);
+      font-size: 13px;
+      line-height:1.5;
+    }
+    .callout b{color:#ffe8a3}
+    .callout.small{font-size:12px;color:var(--muted);border-color:rgba(35,40,58,.95);background:rgba(255,255,255,.02)}
+    .callout.good{border-color:rgba(54,211,153,.45);background:rgba(54,211,153,.08)}
+    .callout.bad{border-color:rgba(251,113,133,.5);background:rgba(251,113,133,.08)}
+
+    .divider{height:1px;background:rgba(35,40,58,.8);margin: 12px 0}
+
+    .list{
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.55;
+    }
+    .list li{margin: 6px 0}
+
+    .kvs{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .kv{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding: 10px 12px;
+      border:1px solid rgba(35,40,58,.9);
+      border-radius: 12px;
+      background: rgba(255,255,255,.02);
+    }
+    .kv .k{
+      min-width: 110px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .kv .v{
+      font-size: 13px;
+      color: var(--text);
+      line-height:1.4;
+    }
+    .mono{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+    /* Breathing */
+    .breath-wrap{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .orb{
+      width: 160px;
+      height: 160px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(122,162,255,.25), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(54,211,153,.18), transparent 55%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(122,162,255,.35);
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+    .orb::after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: conic-gradient(from 120deg, rgba(122,162,255,.0), rgba(122,162,255,.20), rgba(54,211,153,.18), rgba(122,162,255,.0));
+      animation: spin 6s linear infinite;
+      opacity:.9;
+    }
+    @keyframes spin {to{transform: rotate(360deg)}}
+
+    .orb-inner{
+      width: 70%;
+      height: 70%;
+      border-radius: 999px;
+      background: rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,.08);
+      display:grid;
+      place-items:center;
+      position:relative;
+      z-index:1;
+      text-align:center;
+      padding: 10px;
+    }
+
+    .breath-state{
+      font-weight: 700;
+      letter-spacing:.4px;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .breath-time{
+      font-size: 26px;
+      font-weight: 800;
+    }
+    .breath-hint{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height:1.35;
+    }
+
+    .orb.breathing{
+      animation: breathe var(--cycle, 10s) ease-in-out infinite;
+      border-color: rgba(54,211,153,.35);
+    }
+    @keyframes breathe{
+      0%   { transform: scale(0.96); }
+      50%  { transform: scale(1.06); }
+      100% { transform: scale(0.96); }
+    }
+
+    .breath-controls{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-width: 240px;
+      flex:1 1 240px;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    select, input[type="text"]{
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(35,40,58,.95);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 13px;
+      outline:none;
+    }
+    select:focus, input[type="text"]:focus{
+      border-color: rgba(122,162,255,.6);
+      box-shadow: 0 0 0 3px rgba(122,162,255,.12);
+    }
+
+    /* Checklists */
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding: 10px 10px;
+      border:1px solid rgba(35,40,58,.9);
+      border-radius: 12px;
+      background: rgba(255,255,255,.02);
+      margin-top: 8px;
+    }
+    .check input{ margin-top: 2px; transform: scale(1.12); }
+    .check .t{ font-size: 13px; line-height:1.45; color: var(--text); }
+    .check .m{ font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .mini{
+      font-size: 12px;
+      color: var(--muted);
+      line-height:1.45;
+    }
+
+    .footer{
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height:1.55;
+    }
+
+    .hide{display:none !important}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="badge">MP</div>
+        <div>
+          <h1>Plano Interativo — Mariana Borges Pereira</h1>
+          <div class="sub">
+            Material de apoio para uso no dia a dia. Conteúdo local (sem internet/sem trackers).
+            Não substitui consulta médica nem atendimento de urgência.
+          </div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <div class="chip" title="Diagnósticos (CID)">
+          <span>🧾</span>
+          <span><b>CID</b>: F60.3 | F31 (?)</span>
+        </div>
+        <div class="chip" title="Privacidade">
+          <span>🔒</span>
+          <span><b>Local</b>: sem dados enviados</span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Abas do plano">
+      <button class="tab-btn" role="tab" aria-selected="true" data-tab="crise">🚨 Urgência / Crise</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="organizar">🧭 Organizar a semana</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="familia">🏠 Família: 3 pilares</button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="plano">💊 Plano atual & notas</button>
+    </nav>
+
+    <!-- TAB: CRISE -->
+    <section class="panel" id="tab-crise">
+      <div class="panel-head">
+        <h2>🚨 Urgência / Crise</h2>
+        <p>
+          Objetivo: reduzir ativação fisiológica, recuperar controle mínimo e impedir decisões impulsivas.
+          Se houver risco imediato, procure ajuda presencial.
+        </p>
+      </div>
+
+      <div class="panel-body">
+        <div class="callout bad">
+          <b>Se você estiver em risco agora</b> (ex.: intenção de se machucar, descontrole grave, confusão intensa):
+          ligue <b>192 (SAMU)</b> ou vá ao pronto atendimento.
+          Para apoio emocional: <b>188 (CVV)</b>.
+          Se for seguro, peça para alguém ficar com você.
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="grid two">
+          <div class="card">
+            <h3>1) Respiração guiada (com animação)</h3>
+            <p>Use por 2–4 minutos. A ideia é “baixar o alarme do corpo” antes de pensar.</p>
+
+            <div class="divider"></div>
+
+            <div class="breath-wrap">
+              <div class="orb" id="orb">
+                <div class="orb-inner">
+                  <div>
+                    <div class="breath-state" id="breathState">Pronta</div>
+                    <div class="breath-time" id="breathTime">00</div>
+                    <div class="breath-hint" id="breathHint">Selecione um protocolo e aperte Iniciar.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="breath-controls">
+                <div class="row">
+                  <label class="mini" for="protocol">Protocolo</label>
+                  <select id="protocol">
+                    <option value="4-6" selected>4–6 (inspirar 4s / expirar 6s)</option>
+                    <option value="4-7-8">4–7–8 (inspirar 4s / segurar 7s / expirar 8s)</option>
+                    <option value="box">Box (4–4–4–4)</option>
+                  </select>
+                </div>
+
+                <div class="row">
+                  <button class="btn" id="startBreath">Iniciar</button>
+                  <button class="btn secondary" id="pauseBreath">Pausar</button>
+                  <button class="btn danger" id="stopBreath">Parar</button>
+                </div>
+
+                <div class="callout good">
+                  Dica curta: <b>exalar mais longo</b> costuma reduzir a ativação mais rápido.
+                  Mantenha o ombro solto e a língua relaxada no céu da boca.
+                </div>
+
+                <div class="mini mono" id="breathMeta">Ciclo: —</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>2) Aterramento 5–4–3–2–1 (2 minutos)</h3>
+            <p>Quando a mente acelera, você puxa o foco para o corpo e o ambiente.</p>
+
+            <div class="check">
+              <input type="checkbox" id="c5">
+              <div>
+                <div class="t"><b>5 coisas</b> que eu consigo ver agora.</div>
+                <div class="m">Nomeie mentalmente, sem pressa.</div>
+              </div>
+            </div>
+
+            <div class="check">
+              <input type="checkbox" id="c4">
+              <div>
+                <div class="t"><b>4 coisas</b> que eu consigo tocar agora.</div>
+                <div class="m">Texturas, temperatura, peso.</div>
+              </div>
+            </div>
+
+            <div class="check">
+              <input type="checkbox" id="c3">
+              <div>
+                <div class="t"><b>3 sons</b> que eu consigo ouvir agora.</div>
+                <div class="m">Sem interpretar; só perceber.</div>
+              </div>
+            </div>
+
+            <div class="check">
+              <input type="checkbox" id="c2">
+              <div>
+                <div class="t"><b>2 cheiros</b> (ou lembranças de cheiro) que eu noto.</div>
+                <div class="m">Se não houver cheiro: imagine um cheiro familiar.</div>
+              </div>
+            </div>
+
+            <div class="check">
+              <input type="checkbox" id="c1">
+              <div>
+                <div class="t"><b>1 frase</b> realista para hoje.</div>
+                <div class="m">Ex.: “Agora eu só preciso passar pelos próximos 15 minutos.”</div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top:10px;">
+              <button class="btn secondary" id="resetGrounding">Zerar checklist</button>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3>3) Micro-roteiro de crise (30–60s)</h3>
+            <ul class="list">
+              <li><b>Pausa:</b> “Eu não decido nada nos próximos 20 minutos.”</li>
+              <li><b>Corpo:</b> respiração por 2 minutos.</li>
+              <li><b>Ação mínima:</b> água / banho morno / caminhar 3–5 minutos em local seguro.</li>
+              <li><b>Contato:</b> mandar mensagem curta pedindo presença (sem discutir).</li>
+            </ul>
+
+            <div class="callout small" style="margin-top:10px;">
+              Observação: se sintomas diferentes do seu padrão aparecerem (ex.: agitação extrema, euforia incomum, pensamento acelerado fora do habitual, redução importante do sono com aumento de energia), anote e converse em consulta.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: ORGANIZAR -->
+    <section class="panel hide" id="tab-organizar">
+      <div class="panel-head">
+        <h2>🧭 Organizar a semana</h2>
+        <p>
+          Objetivo: tirar excesso de carga mental e reduzir “tudo ou nada”. Pouco, todo dia, funciona melhor do que muito de vez em quando.
+        </p>
+      </div>
+
+      <div class="panel-body">
+        <div class="grid two">
+          <div class="card">
+            <h3>1) Objetivos curtos (máximo 3 por dia)</h3>
+            <p>Escreva pequeno. Se for grande, quebre em “próximo passo”.</p>
+
+            <div class="divider"></div>
+
+            <div class="kvs" id="goals">
+              <div class="kv">
+                <div class="k">Hoje (1)</div>
+                <input type="text" placeholder="Ex.: 15 min de caminhada" data-goal="1" />
+              </div>
+              <div class="kv">
+                <div class="k">Hoje (2)</div>
+                <input type="text" placeholder="Ex.: responder 1 mensagem importante" data-goal="2" />
+              </div>
+              <div class="kv">
+                <div class="k">Hoje (3)</div>
+                <input type="text" placeholder="Ex.: organizar 1 gaveta (10 min)" data-goal="3" />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top:10px;">
+              <button class="btn" id="saveGoals">Salvar</button>
+              <button class="btn secondary" id="loadGoals">Carregar</button>
+              <button class="btn danger" id="clearGoals">Limpar</button>
+            </div>
+
+            <div class="mini" style="margin-top:10px;">
+              Dica: se você não consegue começar, torne o objetivo “ridículo”: <b>2 minutos</b>. O cérebro precisa de entrada, não de motivação.
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>2) Limites simples (para evitar escalada)</h3>
+            <ul class="list">
+              <li><b>Regra 20 min:</b> em pico emocional, adiar conversa/decisão por 20 minutos.</li>
+              <li><b>Uma conversa por vez:</b> sem “lista de acusações”. Um tema, um pedido.</li>
+              <li><b>Sem madrugada:</b> assuntos difíceis não entram depois do seu horário de sono.</li>
+              <li><b>Recuperação:</b> depois de conflito, priorizar corpo (sono/comida/banho/movimento) antes de interpretar.</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <h3>3) Rotina mínima (quando o dia está ruim)</h3>
+            <ul class="list">
+              <li>Água + refeição simples.</li>
+              <li>Banho ou lavar o rosto.</li>
+              <li>5–10 min de movimento leve.</li>
+              <li>Uma tarefa de 2 minutos.</li>
+              <li>Reduzir estímulos (tela, discussão, excesso de decisão).</li>
+            </ul>
+
+            <div class="callout good" style="margin-top:10px;">
+              A meta não é “render”. A meta é <b>não piorar</b>. Isso já é tratamento.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: FAMÍLIA -->
+    <section class="panel hide" id="tab-familia">
+      <div class="panel-head">
+        <h2>🏠 Família: 3 pilares</h2>
+        <p>
+          Para reduzir crises: menos julgamento, mais estrutura. Três pilares sustentam o vínculo no dia a dia.
+        </p>
+      </div>
+
+      <div class="panel-body">
+        <div class="grid three">
+          <div class="card">
+            <h3>1) Validação</h3>
+            <p>Validação não é concordar. É reconhecer a emoção como real, sem ridicularizar.</p>
+            <div class="divider"></div>
+            <ul class="list">
+              <li><b>Frase-base:</b> “Faz sentido você se sentir assim.”</li>
+              <li><b>Evitar:</b> “Para com isso”, “É drama”, “Você sempre…”</li>
+              <li><b>Trocar por:</b> “Eu tô aqui. Me diz o que piorou agora.”</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>2) Comunicação assertiva</h3>
+            <p>Curta, específica, sem ironia. Pedido claro > crítica ampla.</p>
+            <div class="divider"></div>
+            <ul class="list">
+              <li><b>Modelo:</b> “Quando X acontece, eu sinto Y. Eu preciso de Z.”</li>
+              <li><b>Um tema:</b> não misturar passado inteiro no assunto.</li>
+              <li><b>Tom:</b> voz baixa e ritmo lento reduzem escalada.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>3) Previsibilidade</h3>
+            <p>Rotina e combinados reduzem insegurança e interpretações em crise.</p>
+            <div class="divider"></div>
+            <ul class="list">
+              <li><b>Combinados:</b> horários, mensagens, limites.</li>
+              <li><b>Antecipar:</b> “Vou ficar offline 2 horas, volto às 18h.”</li>
+              <li><b>Reparar:</b> se falhar, explicar e retomar (sem sumir).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="callout small">
+          Nota: se o tema “culpa” aparecer na família, o foco é sair do tribunal e ir para o plano:
+          <b>o que ajuda agora</b>, o que piora, e qual é o próximo passo prático.
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: PLANO -->
+    <section class="panel hide" id="tab-plano">
+      <div class="panel-head">
+        <h2>💊 Plano atual & notas</h2>
+        <p>
+          Informações clínicas resumidas para organização. Medicamentos não devem ser ajustados sem orientação.
+        </p>
+      </div>
+
+      <div class="panel-body">
+        <div class="grid two">
+          <div class="card">
+            <h3>Medicações em uso (relato / plano atual)</h3>
+            <div class="divider"></div>
+
+            <div class="kvs">
+              <div class="kv"><div class="k">Latuda</div><div class="v">40 mg</div></div>
+              <div class="kv"><div class="k">Bupropiona</div><div class="v">150 mg (reduzida de 300 mg)</div></div>
+              <div class="kv"><div class="k">Pregabalina</div><div class="v">150 mg</div></div>
+              <div class="kv"><div class="k">Lamotrigina</div><div class="v">100 mg/dia (aumentada de 50 mg)</div></div>
+              <div class="kv"><div class="k">Hidroxizina</div><div class="v">25 mg</div></div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="callout small">
+              Observações referidas: boa aderência, menos irritada e mais disposta; episódio de insônia.
+              Se houver piora do sono, agitação incomum, ou mudança importante de energia/humor, registrar e comunicar em consulta.
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Registro rápido (para trazer na consulta)</h3>
+            <p>Se acontecer algo relevante, anote em 30 segundos. Isso acelera o ajuste do plano.</p>
+
+            <div class="divider"></div>
+
+            <div class="kvs">
+              <div class="kv"><div class="k">Data</div><input type="text" id="logDate" placeholder="Ex.: 28/01/2026" /></div>
+              <div class="kv"><div class="k">Sono</div><input type="text" id="logSleep" placeholder="Ex.: 4h / acordou 3x" /></div>
+              <div class="kv"><div class="k">Humor</div><input type="text" id="logMood" placeholder="Ex.: irritada 6/10, depois 3/10" /></div>
+              <div class="kv"><div class="k">Gatilho</div><input type="text" id="logTrigger" placeholder="Ex.: discussão / cobrança / trabalho" /></div>
+              <div class="kv"><div class="k">O que ajudou</div><input type="text" id="logHelp" placeholder="Ex.: respiração + banho + pausa" /></div>
+            </div>
+
+            <div class="row" style="margin-top:10px;">
+              <button class="btn" id="saveLog">Salvar registro</button>
+              <button class="btn secondary" id="loadLog">Carregar</button>
+              <button class="btn danger" id="clearLog">Limpar</button>
+            </div>
+
+            <div class="footer">
+              Este material é um apoio educativo. Em situação de risco, procure atendimento imediato.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div class="divider"></div>
+      <div class="mono">
+        Sugestão de uso: deixe esta página salva na tela inicial do celular (Adicionar à Tela de Início no iOS/Android).
+        Para publicar no GitHub Pages: crie um repositório e suba este arquivo como <b>index.html</b>.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tabs
+    const btns = document.querySelectorAll('.tab-btn');
+    const tabs = {
+      crise: document.getElementById('tab-crise'),
+      organizar: document.getElementById('tab-organizar'),
+      familia: document.getElementById('tab-familia'),
+      plano: document.getElementById('tab-plano'),
+    };
+
+    btns.forEach(b=>{
+      b.addEventListener('click', ()=>{
+        btns.forEach(x=>x.setAttribute('aria-selected','false'));
+        b.setAttribute('aria-selected','true');
+        const key = b.dataset.tab;
+        Object.keys(tabs).forEach(k=>tabs[k].classList.toggle('hide', k !== key));
+        window.scrollTo({top:0, behavior:'smooth'});
+      });
+    });
+
+    // Breathing logic
+    const orb = document.getElementById('orb');
+    const breathState = document.getElementById('breathState');
+    const breathTime = document.getElementById('breathTime');
+    const breathHint = document.getElementById('breathHint');
+    const breathMeta = document.getElementById('breathMeta');
+    const protocolSel = document.getElementById('protocol');
+    const startBtn = document.getElementById('startBreath');
+    const pauseBtn = document.getElementById('pauseBreath');
+    const stopBtn  = document.getElementById('stopBreath');
+
+    let timer = null;
+    let paused = false;
+    let phaseIndex = 0;
+    let phaseRemaining = 0;
+    let phases = [];
+    let totalCycle = 0;
+
+    function setProtocol(){
+      const v = protocolSel.value;
+      if(v === '4-6'){
+        phases = [
+          {name:'INSPIRAR', seconds:4, hint:'Puxe o ar pelo nariz, sem forçar.'},
+          {name:'EXPIRAR', seconds:6, hint:'Solte o ar mais lento do que entrou.'},
+        ];
+      }else if(v === '4-7-8'){
+        phases = [
+          {name:'INSPIRAR', seconds:4, hint:'Puxe o ar pelo nariz, suave.'},
+          {name:'SEGURAR', seconds:7, hint:'Segure com conforto, sem tensão.'},
+          {name:'EXPIRAR', seconds:8, hint:'Solte devagar. Ombros soltos.'},
+        ];
+      }else{ // box
+        phases = [
+          {name:'INSPIRAR', seconds:4, hint:'Puxe o ar, ritmo constante.'},
+          {name:'SEGURAR', seconds:4, hint:'Segure com conforto.'},
+          {name:'EXPIRAR', seconds:4, hint:'Solte o ar, lento.'},
+          {name:'SEGURAR', seconds:4, hint:'Pausa curta.'},
+        ];
+      }
+      totalCycle = phases.reduce((a,p)=>a+p.seconds,0);
+      orb.style.setProperty('--cycle', totalCycle + 's');
+      breathMeta.textContent = `Ciclo: ${totalCycle}s • Protocolo: ${protocolSel.options[protocolSel.selectedIndex].text}`;
+    }
+
+    function renderPhase(){
+      const p = phases[phaseIndex];
+      breathState.textContent = p.name;
+      breathTime.textContent  = String(phaseRemaining).padStart(2,'0');
+      breathHint.textContent  = p.hint;
+      // Animate orb only when running
+      orb.classList.add('breathing');
+    }
+
+    function tick(){
+      if(paused) return;
+      phaseRemaining -= 1;
+      if(phaseRemaining <= 0){
+        phaseIndex = (phaseIndex + 1) % phases.length;
+        phaseRemaining = phases[phaseIndex].seconds;
+      }
+      renderPhase();
+    }
+
+    function startBreathing(){
+      setProtocol();
+      paused = false;
+      phaseIndex = 0;
+      phaseRemaining = phases[0].seconds;
+      renderPhase();
+
+      if(timer) clearInterval(timer);
+      timer = setInterval(tick, 1000);
+    }
+
+    function pauseBreathing(){
+      paused = !paused;
+      if(paused){
+        orb.classList.remove('breathing');
+        breathHint.textContent = 'Pausado. Quando quiser, aperte Pausar novamente para continuar.';
+      }else{
+        orb.classList.add('breathing');
+        renderPhase();
+      }
+    }
+
+    function stopBreathing(){
+      if(timer) clearInterval(timer);
+      timer = null;
+      paused = false;
+      orb.classList.remove('breathing');
+      breathState.textContent = 'Pronta';
+      breathTime.textContent = '00';
+      breathHint.textContent = 'Selecione um protocolo e aperte Iniciar.';
+    }
+
+    protocolSel.addEventListener('change', ()=>{
+      setProtocol();
+      // If running, restart to keep consistent
+      if(timer) startBreathing();
+    });
+
+    startBtn.addEventListener('click', startBreathing);
+    pauseBtn.addEventListener('click', pauseBreathing);
+    stopBtn.addEventListener('click', stopBreathing);
+
+    setProtocol();
+
+    // Grounding reset
+    document.getElementById('resetGrounding').addEventListener('click', ()=>{
+      ['c5','c4','c3','c2','c1'].forEach(id=>document.getElementById(id).checked=false);
+    });
+
+    // Local storage helpers
+    function saveInputs(selector, key){
+      const inputs = document.querySelectorAll(selector);
+      const data = {};
+      inputs.forEach(inp=>{
+        data[inp.dataset.goal || inp.id] = inp.value || '';
+      });
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+    function loadInputs(selector, key){
+      const raw = localStorage.getItem(key);
+      if(!raw) return;
+      const data = JSON.parse(raw);
+      const inputs = document.querySelectorAll(selector);
+      inputs.forEach(inp=>{
+        const k = inp.dataset.goal || inp.id;
+        if(data[k] !== undefined) inp.value = data[k];
+      });
+    }
+    function clearKey(key){
+      localStorage.removeItem(key);
+    }
+
+    // Goals
+    document.getElementById('saveGoals').addEventListener('click', ()=>{
+      saveInputs('#goals input', 'mp_goals');
+    });
+    document.getElementById('loadGoals').addEventListener('click', ()=>{
+      loadInputs('#goals input', 'mp_goals');
+    });
+    document.getElementById('clearGoals').addEventListener('click', ()=>{
+      document.querySelectorAll('#goals input').forEach(i=>i.value='');
+      clearKey('mp_goals');
+    });
+
+    // Log
+    document.getElementById('saveLog').addEventListener('click', ()=>{
+      saveInputs('#tab-plano input', 'mp_log');
+    });
+    document.getElementById('loadLog').addEventListener('click', ()=>{
+      loadInputs('#tab-plano input', 'mp_log');
+    });
+    document.getElementById('clearLog').addEventListener('click', ()=>{
+      ['logDate','logSleep','logMood','logTrigger','logHelp'].forEach(id=>document.getElementById(id).value='');
+      clearKey('mp_log');
+    });
+  </script>
+</body>
+</html>
