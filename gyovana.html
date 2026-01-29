@@ -1,0 +1,768 @@
+Abaixo vai um HTML único (um arquivo só), no mesmo estilo “app clínico” que você vem usando: abas, crise/urgência com animação de respiração, organização, ambiente controlador, apego/relacionamento, impulsividade/gastos, e medicações com mecanismo + indicação (explicado de forma segura e leiga).
+Sem dependências externas.
+
+Observação clínica/ética: ela escreveu “só quero fugir de tudo”. No app eu deixei um bloco “Sinais de risco” com ação de segurança e contatos de emergência, sem detalhes indevidos.
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plano Pessoal — Gyovana</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#0f1722;
+      --muted:#8da0b6;
+      --text:#e9f0f8;
+      --line:#1b2a3d;
+      --accent:#7fb2ff;
+      --accent2:#7fffd4;
+      --warn:#ffd37f;
+      --danger:#ff7f9f;
+      --ok:#8bff7f;
+      --soft:#0c1320;
+      --shadow: 0 18px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:14px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Inter, Roboto, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(127,178,255,.20), transparent 55%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(127,255,212,.12), transparent 55%),
+                  linear-gradient(180deg, #070a0f, #0b0f14);
+      color:var(--text);
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:22px 16px 44px}
+    .top{
+      display:flex; gap:14px; align-items:stretch; flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .hero{
+      flex:1;
+      background: linear-gradient(145deg, rgba(127,178,255,.14), rgba(127,255,212,.06));
+      border:1px solid rgba(127,178,255,.18);
+      border-radius:var(--radius);
+      padding:18px 18px 14px;
+      box-shadow:var(--shadow);
+      min-width:280px;
+    }
+    .hero h1{
+      margin:0 0 6px;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .hero .sub{color:var(--muted);font-size:12.5px;line-height:1.35}
+    .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .pill{
+      font-size:12px;
+      color:var(--text);
+      border:1px solid rgba(233,240,248,.14);
+      background: rgba(15,23,34,.55);
+      padding:7px 10px;
+      border-radius:999px;
+      backdrop-filter: blur(6px);
+    }
+    .pill b{color:var(--accent)}
+    .disclaimer{
+      flex:0.9;
+      background: rgba(15,23,34,.65);
+      border:1px solid rgba(233,240,248,.10);
+      border-radius:var(--radius);
+      padding:14px 16px;
+      box-shadow:var(--shadow);
+      min-width:280px;
+    }
+    .disclaimer h2{margin:0 0 8px;font-size:13.5px;color:var(--accent)}
+    .disclaimer p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.45}
+    .tabs{
+      display:flex; gap:8px; flex-wrap:wrap;
+      margin:14px 0 12px;
+    }
+    .tabbtn{
+      border:1px solid rgba(233,240,248,.12);
+      background: rgba(15,23,34,.55);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:12.5px;
+      cursor:pointer;
+      transition: .15s ease;
+      user-select:none;
+    }
+    .tabbtn:hover{transform: translateY(-1px)}
+    .tabbtn.active{
+      background: linear-gradient(135deg, rgba(127,178,255,.22), rgba(127,255,212,.10));
+      border-color: rgba(127,178,255,.35);
+    }
+    .panel{
+      display:none;
+      background: rgba(15,23,34,.60);
+      border:1px solid rgba(233,240,248,.10);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .panel.active{display:block}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:12px;
+    }
+    @media (max-width: 860px){ .grid{grid-template-columns: 1fr} }
+    .card{
+      background: rgba(12,19,32,.65);
+      border:1px solid rgba(233,240,248,.08);
+      border-radius:var(--radius2);
+      padding:14px;
+    }
+    .card h3{
+      margin:0 0 10px;
+      font-size:13px;
+      letter-spacing:.2px;
+      color: var(--accent);
+    }
+    .card p, .card li{
+      color: var(--text);
+      font-size:13px;
+      line-height:1.5;
+    }
+    .muted{color:var(--muted)}
+    .list{margin:8px 0 0 18px}
+    .list li{margin:6px 0}
+    .tag{
+      display:inline-block;
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(233,240,248,.10);
+      color:var(--muted);
+      margin-right:6px;
+      margin-bottom:6px;
+    }
+    .kbd{
+      font-family:var(--mono);
+      font-size:11.5px;
+      padding:2px 6px;
+      border-radius:8px;
+      border:1px solid rgba(233,240,248,.14);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      white-space:nowrap;
+    }
+    .callout{
+      border-left:3px solid rgba(127,178,255,.8);
+      background: rgba(127,178,255,.08);
+      padding:10px 12px;
+      border-radius:12px;
+      margin-top:10px;
+    }
+    .callout.warn{border-left-color: rgba(255,211,127,.9); background: rgba(255,211,127,.10)}
+    .callout.danger{border-left-color: rgba(255,127,159,.95); background: rgba(255,127,159,.10)}
+    .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .btn{
+      border:1px solid rgba(233,240,248,.14);
+      background: rgba(15,23,34,.55);
+      color:var(--text);
+      padding:9px 10px;
+      border-radius:12px;
+      font-size:12.5px;
+      cursor:pointer;
+    }
+    .btn.primary{
+      border-color: rgba(127,178,255,.35);
+      background: rgba(127,178,255,.16);
+    }
+    .btn.danger{
+      border-color: rgba(255,127,159,.40);
+      background: rgba(255,127,159,.14);
+    }
+    /* Breathing widget */
+    .breath{
+      display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .orb{
+      width:150px; height:150px; border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(127,255,212,.35), rgba(127,178,255,.12) 50%, rgba(0,0,0,.15));
+      border:1px solid rgba(127,178,255,.25);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
+    }
+    .orb::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 180deg, rgba(127,178,255,.0), rgba(127,178,255,.35), rgba(127,255,212,.25), rgba(127,178,255,.0));
+      animation: spin 6s linear infinite;
+      opacity:.7;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .pulse{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      z-index:2;
+    }
+    .ring{
+      width:70px; height:70px; border-radius:999px;
+      border:2px solid rgba(233,240,248,.25);
+      animation: breathe 10s ease-in-out infinite;
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(6px);
+    }
+    @keyframes breathe{
+      0%{transform:scale(.85); opacity:.8}
+      40%{transform:scale(1.25); opacity:1}
+      70%{transform:scale(1.25); opacity:1}
+      100%{transform:scale(.85); opacity:.8}
+    }
+    .breathtext{
+      min-width:220px;
+      flex:1;
+    }
+    .breathtext h4{margin:0 0 6px;font-size:13px;color:var(--accent2)}
+    .breathtext p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.45}
+    .stepbox{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    @media (max-width: 860px){ .stepbox{grid-template-columns:1fr} }
+    .step{
+      border:1px solid rgba(233,240,248,.10);
+      background: rgba(0,0,0,.18);
+      border-radius:14px;
+      padding:12px;
+    }
+    .step b{color:var(--accent)}
+    .footer{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:11.5px;
+      line-height:1.45;
+    }
+    .hr{height:1px;background:rgba(233,240,248,.10);margin:12px 0}
+    textarea{
+      width:100%;
+      background: rgba(0,0,0,.22);
+      color:var(--text);
+      border:1px solid rgba(233,240,248,.14);
+      border-radius:14px;
+      padding:12px;
+      min-height:110px;
+      font-size:12.8px;
+      line-height:1.4;
+      resize:vertical;
+      outline:none;
+    }
+    .smallnote{font-size:11.5px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="hero">
+        <h1>Plano Pessoal — Gyovana</h1>
+        <div class="sub">
+          Conteúdo de apoio para uso diário: <b>crise</b>, <b>organização</b>, <b>limites</b> e <b>autonomia</b>.
+          <br/>A ideia não é “virar outra pessoa”. É <b>recuperar chão</b> quando o emocional te puxa.
+        </div>
+        <div class="pillrow">
+          <span class="pill"><b>Foco:</b> reduzir impulsividade</span>
+          <span class="pill"><b>Foco:</b> encontrar direção</span>
+          <span class="pill"><b>Foco:</b> proteger rotina</span>
+          <span class="pill"><b>Foco:</b> não decidir em crise</span>
+        </div>
+      </div>
+
+      <div class="disclaimer">
+        <h2>Importante</h2>
+        <p>
+          Este material é educativo e de organização. Não substitui consulta, psicoterapia nem atendimento de urgência.
+          Se houver risco imediato à sua integridade, procure ajuda presencial.
+        </p>
+        <div class="hr"></div>
+        <p class="smallnote">
+          Emergência: <span class="kbd">SAMU 192</span> &nbsp;|&nbsp; Apoio emocional: <span class="kbd">CVV 188</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <button class="tabbtn active" data-tab="crise">Crise / Urgência</button>
+      <button class="tabbtn" data-tab="direcao">Direção e Identidade</button>
+      <button class="tabbtn" data-tab="ambiente">Ambiente e Limites</button>
+      <button class="tabbtn" data-tab="impulsos">Impulsividade e Gastos</button>
+      <button class="tabbtn" data-tab="relacao">Apego e Relacionamentos</button>
+      <button class="tabbtn" data-tab="meds">Medicações</button>
+      <button class="tabbtn" data-tab="anotacoes">Notas rápidas</button>
+    </div>
+
+    <!-- CRISE -->
+    <section class="panel active" id="crise">
+      <div class="grid">
+        <div class="card">
+          <h3>Quando usar esta aba</h3>
+          <p class="muted">
+            Quando aparecer: <span class="tag">angústia</span><span class="tag">vazio</span><span class="tag">urgência</span>
+            <span class="tag">impulso</span><span class="tag">pensamento acelerado</span><span class="tag">“quero fugir”</span>
+          </p>
+          <div class="callout">
+            Regra central: <b>eu não decido nada importante em crise</b>.
+            A crise faz tudo parecer “agora ou nunca” — mas isso é alarme, não verdade.
+          </div>
+
+          <div class="breath">
+            <div class="orb" aria-hidden="true">
+              <div class="pulse"><div class="ring"></div></div>
+            </div>
+            <div class="breathtext">
+              <h4>Respiração guiada (2–4 minutos)</h4>
+              <p>
+                Inspire pelo nariz <b>4s</b> → solte o ar <b>6s</b>.  
+                Se vier pensamento intrusivo, não discuta: <b>volte para a expiração</b>.
+              </p>
+              <div class="btnrow">
+                <button class="btn primary" onclick="copyText('Inspire 4s. Solte 6s. Repita por 3 minutos. Eu não decido nada em crise.')">Copiar frase</button>
+                <button class="btn" onclick="vibrate()">Marcar começo</button>
+              </div>
+              <p class="smallnote">Dica: expiração mais longa ajuda o corpo a sair do modo “alarme”.</p>
+            </div>
+          </div>
+
+          <div class="stepbox">
+            <div class="step">
+              <b>1) Pausa de 20 minutos</b><br/>
+              Diga: “Eu volto nisso depois. Agora eu só atravesso os próximos 20 minutos.”
+            </div>
+            <div class="step">
+              <b>2) Aterramento 5-4-3-2-1</b><br/>
+              5 coisas que vejo • 4 que toco • 3 que ouço • 2 cheiros • 1 frase realista.
+            </div>
+            <div class="step">
+              <b>3) Ação corporal mínima</b><br/>
+              Água no rosto, banho morno, caminhar 5 minutos, alongar pescoço/ombros.
+            </div>
+            <div class="step">
+              <b>4) Mensagem curta (sem debate)</b><br/>
+              “Não tô bem. Preciso de presença, não de conversa difícil.”
+            </div>
+          </div>
+
+          <div class="callout warn">
+            <b>Checklist anti-impulso (1 minuto)</b><br/>
+            Estou com sono/ fome/ exausta? &nbsp;|&nbsp; Estou tentando resolver “vida inteira” agora? &nbsp;|&nbsp; Estou prestes a gastar/ decidir/ mudar tudo?
+            <br/>Se sim: <b>adiar</b> + fazer 10 minutos de rotina mínima.
+          </div>
+
+          <div class="callout danger">
+            <b>Sinais de risco</b><br/>
+            Se aparecer sensação de “não aguento”, desespero intenso, ou medo de perder controle:
+            <br/>1) Não ficar sozinha; 2) procurar ajuda presencial; 3) usar <span class="kbd">SAMU 192</span> se necessário.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Objetivo da crise</h3>
+          <p><b>Não é “ficar bem”.</b> É <b>ficar segura</b> até a onda baixar.</p>
+          <ul class="list">
+            <li>Evitar decisões grandes</li>
+            <li>Evitar “fechar diagnóstico de vida”</li>
+            <li>Evitar mensagem longa em discussão</li>
+            <li>Evitar gastos e mudanças repentinas</li>
+          </ul>
+
+          <div class="hr"></div>
+
+          <h3>Rotina mínima (modo sobrevivência)</h3>
+          <ul class="list">
+            <li>Comer algo simples</li>
+            <li>Banho ou lavar o rosto</li>
+            <li>Deitar 20 min (sem celular)</li>
+            <li>Andar 5 min</li>
+          </ul>
+
+          <div class="footer">
+            Se você fizer só isso, já está tratando a crise.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIREÇÃO -->
+    <section class="panel" id="direcao">
+      <div class="grid">
+        <div class="card">
+          <h3>O que está te afetando agora (resumo do que você trouxe)</h3>
+          <ul class="list">
+            <li>Vazio grande + sensação de “sem chão” após vínculo rápido (1 mês)</li>
+            <li>Angústia e falta de propósito</li>
+            <li>Sensação de “não sei quem eu sou”</li>
+            <li>Impulsividade e gastos sem controle</li>
+            <li>Infelicidade no lugar onde vive + ambiente controlador</li>
+            <li>Desmotivação para trabalhar</li>
+          </ul>
+
+          <div class="callout">
+            A meta aqui é simples: <b>trocar fuga por direção</b> — em passos pequenos, repetidos.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Plano de 7 dias (curto e realista)</h3>
+          <p class="muted">Você escolhe direção com ações pequenas, não com decisões gigantes em crise.</p>
+          <ul class="list">
+            <li><b>1 ação de corpo/dia:</b> 10 min caminhada ou alongamento</li>
+            <li><b>1 ação de vida/dia:</b> organizar 1 coisa pequena (documento, e-mail, gaveta)</li>
+            <li><b>1 ação de futuro/dia:</b> pesquisar 15 min sobre trabalho/curso/alternativas</li>
+          </ul>
+          <div class="callout warn">
+            Regra: <b>sem “tudo ou nada”</b>. Melhor 20% todo dia do que 100% por 2 dias e colapso depois.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Identidade (prática, sem filosofia)</h3>
+          <p>
+            A sensação de “não sei quem sou” piora quando você tenta resolver identidade por pensamento.
+            Identidade fica mais estável quando você repete <b>comportamentos consistentes</b>.
+          </p>
+          <div class="stepbox">
+            <div class="step"><b>Âncora 1</b><br/>O que eu faço quando estou bem?</div>
+            <div class="step"><b>Âncora 2</b><br/>O que eu nunca aceito como padrão?</div>
+            <div class="step"><b>Âncora 3</b><br/>Qual hábito mínimo eu topo manter 7 dias?</div>
+            <div class="step"><b>Âncora 4</b><br/>Qual decisão eu adio 48h?</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Frase-âncora (para repetição)</h3>
+          <div class="callout">
+            “Quando o vazio grita, eu não corro. Eu <b>estruturo</b>.”
+          </div>
+          <div class="btnrow">
+            <button class="btn primary" onclick="copyText('Quando o vazio grita, eu não corro. Eu estruturo.')">Copiar</button>
+          </div>
+          <p class="smallnote">Repetição não é motivação. É treino.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AMBIENTE -->
+    <section class="panel" id="ambiente">
+      <div class="grid">
+        <div class="card">
+          <h3>Ambiente controlador: como isso te afeta</h3>
+          <p>
+            Um ambiente controlador costuma gerar:
+            <span class="tag">hipervigilância</span><span class="tag">raiva</span><span class="tag">desmotivação</span>
+            <span class="tag">vontade de sumir</span><span class="tag">impulsos</span>
+          </p>
+          <div class="callout">
+            A meta não é “mudar o ambiente de uma vez”.  
+            É criar <b>bolsões de autonomia</b> dentro do dia.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>3 limites práticos (sem briga)</h3>
+          <ul class="list">
+            <li><b>Limite 1:</b> “Eu vou pensar e te respondo depois.” (sem justificar)</li>
+            <li><b>Limite 2:</b> “Agora não.” + sair do ambiente por 2 minutos</li>
+            <li><b>Limite 3:</b> reduzir explicações longas (explicação vira discussão)</li>
+          </ul>
+          <div class="callout warn">
+            Em ambiente controlador, quanto mais você explica, mais você vira refém de argumento.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Trabalho e motivação</h3>
+          <p>
+            Sem motivação, você não precisa “amar trabalhar”.  
+            Você precisa de <b>ritual</b> e <b>fricção baixa</b>.
+          </p>
+          <ul class="list">
+            <li>Começar com 10 minutos (cronômetro)</li>
+            <li>Uma tarefa mínima (não a mais difícil)</li>
+            <li>Parar antes de odiar (para conseguir repetir amanhã)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Decisão grande: “ir embora / mudar tudo”</h3>
+          <div class="callout danger">
+            Regra de segurança: <b>decisão grande = 48h</b> (mínimo).  
+            Se estiver em crise, vira 72h.
+          </div>
+          <p class="smallnote">Não é proibir mudança. É evitar mudança como anestesia.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPULSOS -->
+    <section class="panel" id="impulsos">
+      <div class="grid">
+        <div class="card">
+          <h3>Impulsividade: o “curto prazo” mandando em você</h3>
+          <p>
+            Impulso geralmente não é vontade real. É tentativa de aliviar desconforto rápido.
+            O alvo aqui é criar um <b>atraso</b> entre vontade e ação.
+          </p>
+          <div class="callout">
+            Regra: <b>vontade não é ordem</b>.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Gastos sem controle: protocolo de trava</h3>
+          <ul class="list">
+            <li><b>Regra 24h:</b> nada de compra não essencial no mesmo dia</li>
+            <li><b>Carrinho:</b> colocar e sair do app</li>
+            <li><b>1 pergunta:</b> “Isso resolve dor ou constrói vida?”</li>
+            <li><b>Se for dor:</b> voltar para a aba Crise</li>
+          </ul>
+          <div class="btnrow">
+            <button class="btn primary" onclick="copyText('Antes de comprar: eu espero 24h. Se é dor, eu volto pro plano de crise.')">Copiar trava</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Substitutos rápidos (2 a 10 minutos)</h3>
+          <ul class="list">
+            <li>banho morno</li>
+            <li>andar 5 minutos</li>
+            <li>música + respiração (3 min)</li>
+            <li>organizar um canto pequeno</li>
+          </ul>
+          <p class="smallnote">A ideia é baixar a urgência, não “virar zen”.</p>
+        </div>
+
+        <div class="card">
+          <h3>Registro simples</h3>
+          <p class="muted">Use só 1 linha, sem drama, sem texto longo.</p>
+          <div class="callout">
+            <b>Gatilho</b> → <b>vontade</b> → <b>o que eu fiz em vez</b> → <b>nota 0–10</b>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELAÇÃO -->
+    <section class="panel" id="relacao">
+      <div class="grid">
+        <div class="card">
+          <h3>Por que doeu tanto em 1 mês?</h3>
+          <p>
+            Quando um vínculo vira “chão” rápido, a separação parece queda livre.
+            Isso não prova fraqueza. Prova que o seu sistema emocional
+            está buscando segurança onde encontra.
+          </p>
+          <div class="callout">
+            O objetivo não é “não sentir”.  
+            É não transformar sentimento em <b>decisão impulsiva</b>.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>3 regras para não piorar</h3>
+          <ul class="list">
+            <li><b>Regra 1:</b> mensagem curta, não monólogo</li>
+            <li><b>Regra 2:</b> não negociar valor próprio em crise</li>
+            <li><b>Regra 3:</b> não usar “ir embora/mudar tudo” como anestesia</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Frase que protege</h3>
+          <div class="callout warn">
+            “Eu posso sentir saudade sem me abandonar.”
+          </div>
+          <div class="btnrow">
+            <button class="btn primary" onclick="copyText('Eu posso sentir saudade sem me abandonar.')">Copiar</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Meta realista</h3>
+          <p>
+            “Não quero me apegar em ninguém” pode virar autoexigência.
+            A meta mais útil é: <b>apegar sem se perder</b>.
+          </p>
+          <ul class="list">
+            <li>manter rotina mínima mesmo apaixonada</li>
+            <li>não fazer do outro o seu único regulador</li>
+            <li>voltar pra si todos os dias</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEDICAÇÕES -->
+    <section class="panel" id="meds">
+      <div class="grid">
+        <div class="card">
+          <h3>Medicações (resumo)</h3>
+          <p class="muted">Informação educativa. Ajustes e mudanças somente em consulta.</p>
+
+          <div class="callout">
+            <b>Sertralina 100 mg</b><br/>
+            <span class="muted">Mecanismo:</span> inibidor seletivo da recaptação de serotonina (ISRS).  
+            Aumenta a disponibilidade de serotonina nas sinapses, ajudando a reduzir sintomas de ansiedade e humor deprimido ao longo de semanas.<br/><br/>
+            <span class="muted">Indicações comuns:</span> depressão, transtornos de ansiedade, pânico, TOC, estresse pós-traumático, ansiedade social.
+          </div>
+
+          <div class="callout">
+            <b>Lítio 225 mg</b><br/>
+            <span class="muted">Mecanismo:</span> estabilizador do humor. Modula sinais intracelulares e neurotransmissores envolvidos em oscilação de humor; ajuda a reduzir instabilidade afetiva ao longo do tempo.<br/><br/>
+            <span class="muted">Indicações comuns:</span> transtorno bipolar (estabilização e prevenção de recaídas), episódios de instabilidade do humor, redução de risco de recaídas em pacientes com oscilações marcadas (quando indicado clinicamente).<br/><br/>
+            <span class="muted">Observação:</span> em geral exige acompanhamento clínico e, quando indicado, monitorização laboratorial conforme orientação médica.
+          </div>
+
+          <div class="callout">
+            <b>Aripiprazol 3 ml à noite</b><br/>
+            <span class="muted">Mecanismo:</span> antipsicótico atípico com ação moduladora em dopamina e serotonina (agonismo parcial D2/5-HT1A e antagonismo 5-HT2A).  
+            Pode ajudar a reduzir irritabilidade, impulsividade, pensamentos acelerados e instabilidade do humor em alguns perfis clínicos.<br/><br/>
+            <span class="muted">Indicações comuns:</span> transtorno bipolar, esquizofrenia, irritabilidade/impulsividade em alguns quadros, e adjuvante em depressão resistente (conforme avaliação).
+          </div>
+
+          <div class="callout warn">
+            <b>Regra de segurança</b><br/>
+            Não interromper por conta própria. Se aparecer efeito colateral importante, piora clara do sono/humor, ou agitação marcante, comunicar em consulta.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>O que observar (para trazer na consulta)</h3>
+          <ul class="list">
+            <li><b>Sono:</b> horas/noite + despertares</li>
+            <li><b>Humor:</b> estabilidade vs. “picos”</li>
+            <li><b>Impulso:</b> gastos, mensagens, decisões</li>
+            <li><b>Energia:</b> apatia vs. aceleração</li>
+            <li><b>Ansiedade:</b> intensidade 0–10</li>
+          </ul>
+          <div class="hr"></div>
+          <p class="smallnote">
+            Se quiser, anote 1 linha/dia na aba “Notas rápidas”. Isso vira dado clínico, não “achismo”.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTAS -->
+    <section class="panel" id="anotacoes">
+      <div class="grid">
+        <div class="card">
+          <h3>Notas rápidas (1 linha por dia)</h3>
+          <p class="muted">Sem texto longo. Só dado útil.</p>
+          <textarea id="notes" placeholder="Ex.: Hoje: gatilho X → vontade Y → fiz Z → ansiedade 6/10 → sono 5h"></textarea>
+          <div class="btnrow">
+            <button class="btn primary" onclick="saveNotes()">Salvar no aparelho</button>
+            <button class="btn" onclick="loadNotes()">Carregar</button>
+            <button class="btn danger" onclick="clearNotes()">Apagar</button>
+          </div>
+          <p class="smallnote">Fica salvo só no aparelho (localStorage). Não envia para lugar nenhum.</p>
+        </div>
+
+        <div class="card">
+          <h3>Frases curtas para usar em hora ruim</h3>
+          <div class="callout">“Eu não decido em crise.”</div>
+          <div class="callout">“Eu atravesso 20 minutos.”</div>
+          <div class="callout">“Vontade não é ordem.”</div>
+          <div class="btnrow">
+            <button class="btn primary" onclick="copyText('Eu não decido em crise. Eu atravesso 20 minutos. Vontade não é ordem.')">Copiar conjunto</button>
+          </div>
+
+          <div class="hr"></div>
+          <p class="footer">
+            Se você quiser, esta página pode virar “home” com botões grandes (Crise / Gastos / Limites / Medicações).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      Material de apoio clínico individual • Uso pessoal • Não substitui avaliação presencial quando necessária.
+    </div>
+  </div>
+
+  <script>
+    // Tabs
+    const tabBtns = document.querySelectorAll(".tabbtn");
+    const panels = document.querySelectorAll(".panel");
+    tabBtns.forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        tabBtns.forEach(b=>b.classList.remove("active"));
+        panels.forEach(p=>p.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+        window.scrollTo({top:0, behavior:"smooth"});
+      });
+    });
+
+    function copyText(txt){
+      navigator.clipboard.writeText(txt).then(()=>{
+        toast("Copiado.");
+      }).catch(()=>{ toast("Não foi possível copiar."); });
+    }
+
+    function vibrate(){
+      if(navigator.vibrate) navigator.vibrate([60,40,60]);
+      toast("Início marcado.");
+    }
+
+    // Notes localStorage
+    const KEY="gyovana_notes_v1";
+    function saveNotes(){
+      const v = document.getElementById("notes").value || "";
+      localStorage.setItem(KEY, v);
+      toast("Salvo no aparelho.");
+    }
+    function loadNotes(){
+      const v = localStorage.getItem(KEY) || "";
+      document.getElementById("notes").value = v;
+      toast("Carregado.");
+    }
+    function clearNotes(){
+      localStorage.removeItem(KEY);
+      document.getElementById("notes").value = "";
+      toast("Apagado.");
+    }
+
+    // Simple toast
+    let tEl;
+    function toast(msg){
+      if(!tEl){
+        tEl = document.createElement("div");
+        tEl.style.position="fixed";
+        tEl.style.left="50%";
+        tEl.style.bottom="18px";
+        tEl.style.transform="translateX(-50%)";
+        tEl.style.background="rgba(15,23,34,.92)";
+        tEl.style.border="1px solid rgba(233,240,248,.14)";
+        tEl.style.color="#e9f0f8";
+        tEl.style.padding="10px 12px";
+        tEl.style.borderRadius="14px";
+        tEl.style.fontSize="12.5px";
+        tEl.style.boxShadow="0 12px 40px rgba(0,0,0,.45)";
+        tEl.style.zIndex="9999";
+        tEl.style.opacity="0";
+        tEl.style.transition="opacity .15s ease";
+        document.body.appendChild(tEl);
+      }
+      tEl.textContent = msg;
+      tEl.style.opacity="1";
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=>{ tEl.style.opacity="0"; }, 1100);
+    }
+
+    // Auto-load notes
+    loadNotes();
+  </script>
+</body>
+</html>
