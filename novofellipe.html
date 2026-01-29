@@ -1,0 +1,749 @@
+<!--
+Baseado no conteúdo do PDF "MANUAL PRÁTICO — RELACIONAMENTOS E EMOÇÕES (Fellipe Arrojo, 16 anos)"  [oai_citation:0‡Fellipe_Arrojo_Guia_Pessoal_HTML.pdf](sediment://file_00000000cdd8720eae1eddf7684c0d72)
+Arquivo único (HTML + CSS + JS). Cole no GitHub Pages como fellipe.html (ou outro nome).
+-->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Manual Prático — Relacionamentos e Emoções | Guia pessoal</title>
+  <meta name="description" content="Guia prático e direto para lidar com conflitos de casal sem perder foco em estudo, música e bem-estar." />
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --card:#11131a;
+      --card2:#0f1117;
+      --text:#e8eaf2;
+      --muted:#a8afc3;
+      --line:rgba(255,255,255,.10);
+      --line2:rgba(255,255,255,.14);
+      --accent:#7c5cff;
+      --accent2:#34d399;
+      --warn:#fbbf24;
+      --danger:#fb7185;
+      --shadow: 0 18px 45px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:14px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 18% 12%, rgba(124,92,255,.20), transparent 65%),
+        radial-gradient(700px 500px at 82% 18%, rgba(52,211,153,.14), transparent 60%),
+        radial-gradient(900px 700px at 50% 92%, rgba(251,191,36,.10), transparent 60%),
+        var(--bg);
+    }
+    a{color:inherit}
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:22px 18px 70px;
+    }
+
+    /* Header */
+    .topbar{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      justify-content:space-between;
+      margin:10px 0 16px;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo{
+      width:44px;height:44px;border-radius:14px;
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(52,211,153,.9));
+      box-shadow: var(--shadow);
+      flex:0 0 auto;
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 45%);
+      transform: rotate(18deg);
+    }
+    .title h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+      line-height:1.2;
+    }
+    .title p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--line2);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:13px;
+      cursor:pointer;
+      transition:.15s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.22)}
+    .btn:active{transform: translateY(0)}
+    .btn.primary{
+      border-color: rgba(124,92,255,.45);
+      background: rgba(124,92,255,.10);
+    }
+    .pill{
+      border:1px solid var(--line2);
+      background:rgba(255,255,255,.03);
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:12px;
+      color:var(--muted);
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      white-space:nowrap;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:99px;
+      background: var(--accent2);
+      box-shadow: 0 0 0 4px rgba(52,211,153,.12);
+    }
+
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width: 920px){
+      .grid{grid-template-columns: 1fr}
+      .actions{justify-content:flex-start}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .inner{padding:16px}
+    .card h2{
+      margin:0 0 8px;
+      font-size:15px;
+      letter-spacing:.2px;
+    }
+    .muted{color:var(--muted)}
+    .small{font-size:12.5px; line-height:1.45}
+    .divider{height:1px; background:var(--line); margin:12px 0}
+
+    /* Tabs */
+    .tabs{
+      display:flex;
+      gap:8px;
+      padding:10px;
+      border-bottom:1px solid var(--line);
+      background: rgba(0,0,0,.12);
+      flex-wrap:wrap;
+    }
+    .tab{
+      border:1px solid var(--line2);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+      border-radius: 999px;
+      padding:10px 12px;
+      font-size:13px;
+      cursor:pointer;
+      transition:.15s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+    }
+    .tab:hover{border-color: rgba(255,255,255,.22); color:var(--text)}
+    .tab.active{
+      background: rgba(124,92,255,.12);
+      border-color: rgba(124,92,255,.45);
+      color: var(--text);
+    }
+    .tab .badge{
+      font-size:11px;
+      padding:3px 8px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color: var(--muted);
+    }
+    .tab.active .badge{
+      background: rgba(124,92,255,.16);
+      border-color: rgba(124,92,255,.35);
+      color: rgba(255,255,255,.85);
+    }
+    .panel{display:none}
+    .panel.active{display:block}
+
+    /* Content components */
+    ul{
+      margin:10px 0 0 18px;
+      padding:0;
+    }
+    li{margin:8px 0; line-height:1.45}
+    .callout{
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.14);
+      padding:14px;
+      border-radius: var(--radius2);
+      margin:12px 0;
+    }
+    .callout strong{display:block; margin-bottom:6px}
+    .kpi{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+    @media (max-width: 560px){
+      .kpi{grid-template-columns: 1fr}
+    }
+    .kpi .box{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding:12px;
+      background: rgba(255,255,255,.02);
+    }
+    .kpi .box .t{font-size:12px;color:var(--muted)}
+    .kpi .box .v{margin-top:6px;font-size:14px}
+    .tagrow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .tag{
+      font-size:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      padding:7px 10px;
+      border-radius: 999px;
+    }
+    .tag.accent{border-color: rgba(124,92,255,.38); background: rgba(124,92,255,.10); color: rgba(255,255,255,.88)}
+    .tag.warn{border-color: rgba(251,191,36,.35); background: rgba(251,191,36,.10); color: rgba(255,255,255,.88)}
+    .tag.danger{border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10); color: rgba(255,255,255,.88)}
+
+    /* Forms */
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top:10px;
+    }
+    label{
+      font-size:12px;
+      color: var(--muted);
+    }
+    input[type="text"], textarea, input[type="number"]{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line2);
+      background: rgba(0,0,0,.22);
+      color: var(--text);
+      outline:none;
+      transition:.15s ease;
+      font-size:13.5px;
+    }
+    textarea{min-height:92px; resize: vertical}
+    input:focus, textarea:focus{
+      border-color: rgba(124,92,255,.55);
+      box-shadow: 0 0 0 4px rgba(124,92,255,.14);
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 560px){
+      .row{grid-template-columns: 1fr}
+    }
+    .minihelp{
+      margin-top:8px;
+      font-size:12px;
+      color: var(--muted);
+      line-height:1.45;
+    }
+
+    /* Right column */
+    .side .inner{padding:16px}
+    .side h3{
+      margin:0 0 10px;
+      font-size:14px;
+    }
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px 10px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      margin:10px 0;
+    }
+    .check input{margin-top:3px}
+    .check .txt{font-size:13px; line-height:1.35}
+    .quote{
+      font-family: var(--mono);
+      font-size:12.5px;
+      padding:12px;
+      border-radius: 14px;
+      border:1px dashed rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.92);
+      line-height:1.55;
+      margin-top:12px;
+      white-space:pre-wrap;
+    }
+    .footer{
+      margin-top:14px;
+      padding:14px 16px;
+      border-top:1px solid var(--line);
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.5;
+      background: rgba(0,0,0,.10);
+    }
+    .dangerline{
+      border-left: 4px solid var(--danger);
+      padding-left: 12px;
+    }
+    .warnline{
+      border-left: 4px solid var(--warn);
+      padding-left: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="title">
+          <h1>Manual Prático — Relacionamentos e Emoções</h1>
+          <p>Guia pessoal (adolescente) para lidar com conflitos de casal sem perder foco em estudo, música e bem-estar.</p>
+        </div>
+      </div>
+      <div class="actions">
+        <span class="pill"><span class="dot"></span>Versão pessoal • 3 abas</span>
+        <button class="btn primary" onclick="window.print()" title="Salvar/Imprimir em PDF">
+          ⬇︎ Imprimir / PDF
+        </button>
+        <button class="btn" id="btnCopy" title="Copiar resumo rápido">
+          ⎘ Copiar resumo
+        </button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- MAIN -->
+      <div class="card">
+        <div class="tabs" role="tablist" aria-label="Abas do guia">
+          <button class="tab active" data-tab="urgente" role="tab" aria-selected="true">
+            🚨 Urgente agora <span class="badge">crise</span>
+          </button>
+          <button class="tab" data-tab="programa" role="tab" aria-selected="false">
+            🗓 Programação terapêutica <span class="badge">semana</span>
+          </button>
+          <button class="tab" data-tab="relacao" role="tab" aria-selected="false">
+            💬 Relacionamento (roteiros) <span class="badge">conversa</span>
+          </button>
+        </div>
+
+        <div class="inner">
+          <!-- PANEL 1 -->
+          <section class="panel active" id="urgente" role="tabpanel">
+            <h2>🚨 Urgente agora (quando a briga estourou ou você “travou”)</h2>
+            <p class="small muted">
+              Objetivo: baixar ativação do corpo para não tomar decisão/mandar mensagem no modo alarme.
+            </p>
+
+            <div class="callout warnline">
+              <strong>Regra principal: 20 minutos</strong>
+              Seu corpo precisa de tempo para sair do “alarme”. Antes disso, quase tudo vira impulsividade ou defesa.
+            </div>
+
+            <ul>
+              <li><strong>Pause o contato por 20 min</strong> (sem discutir no WhatsApp).</li>
+              <li><strong>Respiração 3–3:</strong> 3 respirações lentas + 3 frases âncora antes de responder.</li>
+              <li><strong>Frase interna:</strong> “Meu corpo tá reagindo a um alarme, não a uma certeza.”</li>
+              <li><strong>Volte só quando</strong> conseguir separar <em>Fato</em> de <em>Interpretação</em> (aba 3).</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <div class="callout dangerline">
+              <strong>Quando pedir ajuda imediatamente</strong>
+              <div class="small muted">
+                Se aparecer desespero crescendo, pensamentos de se machucar, ou se as discussões virarem humilhação/controle
+                e você não consegue parar. Nesses cenários, chame um adulto de confiança e procure ajuda na hora.
+              </div>
+            </div>
+
+            <div class="kpi">
+              <div class="box">
+                <div class="t">Meta da crise</div>
+                <div class="v">Não responder no calor</div>
+              </div>
+              <div class="box">
+                <div class="t">Tempo mínimo</div>
+                <div class="v">20 minutos</div>
+              </div>
+              <div class="box">
+                <div class="t">Regulador rápido</div>
+                <div class="v">Corpo → depois conversa</div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h2>Checklist “antes de mandar mensagem”</h2>
+            <div class="check"><input type="checkbox" /> <div class="txt">Eu esperei pelo menos 20 min.</div></div>
+            <div class="check"><input type="checkbox" /> <div class="txt">Eu consigo escrever 1 fato sem acusar.</div></div>
+            <div class="check"><input type="checkbox" /> <div class="txt">Eu consigo nomear 1 emoção (sem xingar).</div></div>
+            <div class="check"><input type="checkbox" /> <div class="txt">Eu tenho 1 pedido concreto (não “você nunca…”).</div></div>
+
+            <div class="divider"></div>
+
+            <h2>Âncoras rápidas (edite e salve)</h2>
+            <div class="row">
+              <div class="field">
+                <label for="ancora1">Frase âncora 1</label>
+                <input id="ancora1" type="text" placeholder="Ex.: Estou seguro. Posso esperar." />
+              </div>
+              <div class="field">
+                <label for="ancora2">Frase âncora 2</label>
+                <input id="ancora2" type="text" placeholder="Ex.: Posso perguntar depois. Não preciso atacar." />
+              </div>
+            </div>
+            <div class="field">
+              <label for="pedidoPadrao">Pedido padrão por texto (curto, limpo, sem acusação)</label>
+              <input id="pedidoPadrao" type="text" placeholder="Ex.: Tô ativado. Vou dar 20 min e depois falo com calma." />
+            </div>
+          </section>
+
+          <!-- PANEL 2 -->
+          <section class="panel" id="programa" role="tabpanel">
+            <h2>🗓 Programação terapêutica (7 dias) — para não virar refém do humor do outro</h2>
+            <p class="small muted">
+              O foco aqui é simples: você estabiliza o corpo e protege rotina. Isso reduz brigas e melhora leitura social.
+            </p>
+
+            <div class="callout">
+              <strong>Alvos desta semana</strong>
+              <ul>
+                <li>Evitar respostas no calor do momento.</li>
+                <li>Registrar <strong>1 fato</strong> e <strong>1 interpretação</strong> por conflito.</li>
+                <li>Proteger sono e prática de bateria como reguladores.</li>
+              </ul>
+            </div>
+
+            <h2>Micro-hábitos (curtos e reais)</h2>
+
+            <div class="callout">
+              <strong>Ritual 90–90</strong>
+              <div class="small muted">
+                Primeiros 90 min do dia sem discussões por WhatsApp. Banho, café e 20 min de rudimentos de bateria.
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>Regra 3–3</strong>
+              <div class="small muted">
+                Três respirações lentas + três frases âncora antes de responder.
+              </div>
+              <div class="tagrow">
+                <span class="tag">“Estou seguro”</span>
+                <span class="tag">“Posso esperar”</span>
+                <span class="tag">“Posso perguntar depois”</span>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>Janela de estudo</strong>
+              <div class="small muted">
+                Blocos de 25 min focados. Telefone fora do alcance. Conflitos só após o bloco.
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>Desligamento</strong>
+              <div class="small muted">
+                Sem tela 45 min antes de dormir. Playlist calma ou pad eletrônico leve.
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h2>Plano pessoal (preencha agora)</h2>
+            <div class="row">
+              <div class="field">
+                <label for="pausaPref">Pausa preferida (min)</label>
+                <input id="pausaPref" type="number" min="5" max="120" placeholder="20" />
+              </div>
+              <div class="field">
+                <label for="ritualPre">Ritual pré-conversa</label>
+                <input id="ritualPre" type="text" placeholder="Ex.: água, 3 respirações, anotar 1 fato, 1 emoção, 1 pedido" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="gatilhos">Gatilhos mais comuns (para você reconhecer antes)</label>
+              <textarea id="gatilhos" placeholder="Ex.: demora pra responder, tom seco, silêncio depois de um assunto..."></textarea>
+            </div>
+            <div class="field">
+              <label for="reguladores">O que regula você de verdade (lista curta)</label>
+              <textarea id="reguladores" placeholder="Ex.: bateria, banho quente, caminhar 10 min, comer algo, dormir cedo..."></textarea>
+            </div>
+          </section>
+
+          <!-- PANEL 3 -->
+          <section class="panel" id="relacao" role="tabpanel">
+            <h2>💬 Relacionamento (roteiros para conversar sem explosão)</h2>
+            <p class="small muted">
+              Ponto central: intensidade não é prova. Emoção é sinal, não sentença.
+            </p>
+
+            <div class="callout">
+              <strong>O que mais atrapalha (e te derruba)</strong>
+              <ul>
+                <li><strong>Testar o amor o tempo todo:</strong> nasce do medo, desgasta o vínculo.</li>
+                <li><strong>Confundir intensidade com verdade:</strong> emoção é sinal, não prova.</li>
+                <li><strong>Perder o foco de si:</strong> humor do outro vira seu centro e derruba estudo/criação.</li>
+              </ul>
+            </div>
+
+            <div class="divider"></div>
+
+            <h2>Ferramenta “Fato × Interpretação” (faça antes de conversar)</h2>
+            <div class="row">
+              <div class="field">
+                <label for="fato">Fato (o que aconteceu, sem julgamento)</label>
+                <input id="fato" type="text" placeholder="Ex.: Ela demorou 1h para responder." />
+              </div>
+              <div class="field">
+                <label for="interp">Interpretação (o que sua mente concluiu)</label>
+                <input id="interp" type="text" placeholder="Ex.: Ela não liga pra mim." />
+              </div>
+            </div>
+            <div class="field">
+              <label for="acao">Ação (o que você vai fazer depois de separar os dois)</label>
+              <input id="acao" type="text" placeholder="Ex.: Vou falar disso só quando eu estiver calmo, com 1 pedido claro." />
+            </div>
+
+            <div class="divider"></div>
+
+            <h2>Roteiro F-I-N-E (abrir diálogo sem acusar)</h2>
+            <div class="callout">
+              <strong>F-I-N-E</strong>
+              <ul>
+                <li><strong>Feelings:</strong> o que você sente</li>
+                <li><strong>I’m:</strong> quem sente é você</li>
+                <li><strong>Not:</strong> não é acusação</li>
+                <li><strong>Expressing:</strong> expresse com pedido claro</li>
+              </ul>
+            </div>
+
+            <div class="callout">
+              <strong>Exemplo pronto</strong>
+              <div class="small muted">
+                “Eu fico inseguro quando demora a resposta. Não é culpa sua. Queria alinhar como combinamos mensagens em dia puxado.”
+              </div>
+            </div>
+
+            <h2>Checklist de conversa difícil</h2>
+            <ul>
+              <li><strong>Hora neutra.</strong> Nada de madrugada ou pós-briga.</li>
+              <li><strong>Objetivo:</strong> “Quero entender e combinar.”</li>
+              <li><strong>1 fato, 1 emoção, 1 pedido concreto.</strong></li>
+              <li>Se subir o tom: <strong>pausa de 20 min</strong> e retoma.</li>
+            </ul>
+
+            <div class="divider"></div>
+
+            <h2>“Conclusão direta” (leia quando quiser atacar)</h2>
+            <div class="quote" id="conclusao">
+Sensibilidade é talento. Sem manejo, vira dor.
+Seu treino é sentir com dignidade e não deixar o medo escolher por você.
+            </div>
+
+            <div class="tagrow">
+              <span class="tag accent">equilíbrio é treino seu</span>
+              <span class="tag warn">emoção ≠ prova</span>
+              <span class="tag danger">não discuta no alarme</span>
+            </div>
+          </section>
+        </div>
+
+        <div class="footer">
+          <div>
+            Fonte de referência do conteúdo-base: GPM-A (Bom Manejo Clínico para Adolescentes) + Instituto de Psiquiatria da FMUSP / McLean Hospital (conforme material original).  [oai_citation:1‡Fellipe_Arrojo_Guia_Pessoal_HTML.pdf](sediment://file_00000000cdd8720eae1eddf7684c0d72)
+          </div>
+          <div style="margin-top:8px">
+            Observação: material educativo e de apoio pessoal; não substitui avaliação profissional individual.
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDE -->
+      <aside class="card side">
+        <div class="inner">
+          <h3>Resumo rápido (para colar em mensagem)</h3>
+          <div class="quote" id="resumo">
+1) Quando brigar: pausa 20 min.
+2) Antes de responder: 3 respirações + 3 âncoras.
+3) Separe Fato x Interpretação.
+4) Converse com 1 fato, 1 emoção, 1 pedido.
+5) Proteja sono + bateria/rotina: isso regula você.
+          </div>
+
+          <div class="divider"></div>
+
+          <h3>Regras de sobrevivência emocional</h3>
+          <div class="check"><input type="checkbox" /> <div class="txt"><strong>Esfriar 20 min</strong> (o corpo precisa desse tempo).</div></div>
+          <div class="check"><input type="checkbox" /> <div class="txt"><strong>Rotina antes de debate</strong> (dormir/comer/tocar estabilizam).</div></div>
+          <div class="check"><input type="checkbox" /> <div class="txt"><strong>Equilíbrio é seu</strong> (apoio ajuda, mas regulação é treino seu).</div></div>
+
+          <div class="divider"></div>
+
+          <h3>Notas rápidas</h3>
+          <div class="field">
+            <label for="notaLivre">Escreva aqui (fica salvo no seu navegador)</label>
+            <textarea id="notaLivre" placeholder="Ex.: próxima conversa: alinhar combinação de mensagens em dia puxado..."></textarea>
+            <div class="minihelp">Dica: use isso para não discutir “no calor” e não esquecer o pedido concreto.</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <button class="btn primary" id="btnSave">💾 Salvar campos</button>
+          <button class="btn" id="btnClear">🧹 Limpar campos</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // Tabs
+    const tabs = document.querySelectorAll(".tab");
+    const panels = document.querySelectorAll(".panel");
+    tabs.forEach(t => t.addEventListener("click", () => {
+      tabs.forEach(x => { x.classList.remove("active"); x.setAttribute("aria-selected","false"); });
+      panels.forEach(p => p.classList.remove("active"));
+      t.classList.add("active");
+      t.setAttribute("aria-selected","true");
+      const id = t.dataset.tab;
+      document.getElementById(id).classList.add("active");
+      // scroll gently to content on mobile
+      if (window.innerWidth < 920) {
+        document.querySelector(".card").scrollIntoView({behavior:"smooth", block:"start"});
+      }
+    }));
+
+    // Local storage (so user doesn't need to edit every time)
+    const fields = ["ancora1","ancora2","pedidoPadrao","pausaPref","ritualPre","gatilhos","reguladores","fato","interp","acao","notaLivre"];
+    const KEY = "manual_relacionamentos_emocoes_v1";
+
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if(!raw) return;
+        const data = JSON.parse(raw);
+        fields.forEach(id => {
+          const el = document.getElementById(id);
+          if(el && data[id] !== undefined) el.value = data[id];
+        });
+      }catch(e){}
+    }
+
+    function saveState(){
+      const data = {};
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) data[id] = el.value;
+      });
+      localStorage.setItem(KEY, JSON.stringify(data));
+    }
+
+    function clearState(){
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.value = "";
+      });
+      localStorage.removeItem(KEY);
+    }
+
+    document.getElementById("btnSave").addEventListener("click", () => {
+      saveState();
+      const b = document.getElementById("btnSave");
+      const old = b.textContent;
+      b.textContent = "✅ Salvo";
+      setTimeout(()=> b.textContent = old, 1100);
+    });
+
+    document.getElementById("btnClear").addEventListener("click", () => {
+      clearState();
+      const b = document.getElementById("btnClear");
+      const old = b.textContent;
+      b.textContent = "✅ Limpo";
+      setTimeout(()=> b.textContent = old, 1100);
+    });
+
+    // Auto-save on typing (lightweight)
+    fields.forEach(id => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.addEventListener("input", () => {
+        // debounce-ish
+        window.clearTimeout(window.__msave);
+        window.__msave = window.setTimeout(saveState, 350);
+      });
+    });
+
+    // Copy resumo
+    document.getElementById("btnCopy").addEventListener("click", async () => {
+      const text = document.getElementById("resumo").innerText.trim();
+      try{
+        await navigator.clipboard.writeText(text);
+        const b = document.getElementById("btnCopy");
+        const old = b.textContent;
+        b.textContent = "✅ Copiado";
+        setTimeout(()=> b.textContent = old, 1100);
+      }catch(e){
+        alert("Não consegui copiar automaticamente. Selecione e copie manualmente.");
+      }
+    });
+
+    loadState();
+  </script>
+</body>
+</html>
