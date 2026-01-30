@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plano Ambulatorial — Veronica</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#101826;
+      --card2:#0f1722;
+      --line:rgba(255,255,255,.10);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --soft:rgba(255,255,255,.06);
+      --accent:#8be9fd;
+      --warn:#ffd166;
+      --danger:#ff5c7a;
+      --ok:#69db7c;
+      --shadow: 0 18px 45px rgba(0,0,0,.35);
+      --radius:16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background: radial-gradient(1200px 650px at 15% -10%, rgba(139,233,253,.16), transparent 55%),
+                  radial-gradient(1000px 600px at 90% 0%, rgba(255,92,122,.14), transparent 60%),
+                  linear-gradient(180deg, #070a0e, #0b0f14 30%, #070a0e);
+      color:var(--text);
+      line-height:1.45;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1100px; margin:0 auto; padding:24px 16px 42px}
+    header{
+      display:flex; gap:14px; align-items:flex-start; justify-content:space-between;
+      padding:18px 18px 10px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .title{display:flex; flex-direction:column; gap:6px}
+    .badgeRow{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px}
+    .badge{
+      font-size:12px; letter-spacing:.2px;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color:var(--muted);
+    }
+    .badge strong{color:var(--text)}
+    h1{margin:0; font-size:20px; letter-spacing:.2px}
+    .sub{margin:0; color:var(--muted); font-size:13px}
+    .ctaTop{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+      align-items:center; margin-top:2px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      cursor:pointer;
+      transition:.15s transform ease, .15s background ease;
+      font-size:13px;
+    }
+    .btn:hover{transform:translateY(-1px); background: rgba(255,255,255,.06)}
+    .btn .dot{width:10px; height:10px; border-radius:999px; background:var(--accent)}
+    .btn.danger .dot{background:var(--danger)}
+    .btn.warn .dot{background:var(--warn)}
+    .btn.ok .dot{background:var(--ok)}
+    .grid{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width: 920px){
+      .grid{grid-template-columns:1fr}
+    }
+    .side, .main{
+      border:1px solid var(--line);
+      background: rgba(16,24,38,.75);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .side{position:sticky; top:14px; align-self:start}
+    @media (max-width: 920px){
+      .side{position:relative; top:auto}
+    }
+    .nav{
+      padding:10px;
+      display:flex; flex-direction:column; gap:8px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), transparent);
+    }
+    .nav button{
+      width:100%;
+      text-align:left;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      cursor:pointer;
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px;
+      transition:.15s background ease, .15s transform ease;
+      font-size:13px;
+    }
+    .nav button:hover{background: rgba(255,255,255,.06); transform:translateY(-1px)}
+    .nav button.active{
+      background: linear-gradient(180deg, rgba(139,233,253,.18), rgba(255,255,255,.05));
+      border-color: rgba(139,233,253,.35);
+    }
+    .pill{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .main{padding:14px}
+    .panel{display:none; animation: fade .18s ease}
+    .panel.active{display:block}
+    @keyframes fade{from{opacity:.6; transform:translateY(2px)} to{opacity:1; transform:translateY(0)}}
+    .card{
+      border:1px solid var(--line);
+      background: rgba(15,23,34,.65);
+      border-radius: 16px;
+      padding:14px;
+      margin-bottom:12px;
+    }
+    .card h2{margin:0 0 8px; font-size:16px}
+    .card h3{margin:0 0 8px; font-size:14px; color:var(--text)}
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    .list{margin:8px 0 0; padding-left:18px; color:var(--text)}
+    .list li{margin:6px 0}
+    .k{
+      display:inline-block;
+      font-family: var(--mono);
+      font-size:12px;
+      padding:2px 6px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.86);
+      white-space:nowrap;
+    }
+    .callouts{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin-top:10px;
+    }
+    @media (max-width: 920px){
+      .callouts{grid-template-columns:1fr}
+    }
+    .callout{
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      padding:12px;
+    }
+    .callout .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; color:var(--muted);
+      margin-bottom:6px;
+    }
+    .tag .dot{width:10px; height:10px; border-radius:999px; background:var(--accent)}
+    .tag.warn .dot{background:var(--warn)}
+    .tag.danger .dot{background:var(--danger)}
+    .tag.ok .dot{background:var(--ok)}
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .sep{height:1px; background: var(--line); margin:12px 0}
+    details{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius: 14px;
+      padding:10px 12px;
+      margin-top:10px;
+    }
+    summary{
+      cursor:pointer; list-style:none;
+      font-size:13px;
+      color:var(--text);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+    }
+    summary::-webkit-details-marker{display:none}
+    .foot{
+      margin-top:10px;
+      color:rgba(255,255,255,.65);
+      font-size:12px;
+      border-top:1px solid var(--line);
+      padding-top:10px;
+    }
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      background: rgba(10,16,24,.92);
+      border:1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.9);
+      padding: 10px 12px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      display:none;
+      max-width: 95vw;
+      font-size: 13px;
+      z-index: 9999;
+    }
+    .toast.show{display:block; animation: pop .18s ease}
+    @keyframes pop{from{opacity:.5; transform:translateX(-50%) translateY(6px)} to{opacity:1; transform:translateX(-50%) translateY(0)}}
+    .warnBox{
+      border:1px solid rgba(255,209,102,.38);
+      background: rgba(255,209,102,.10);
+      border-radius:16px;
+      padding:12px;
+    }
+    .dangerBox{
+      border:1px solid rgba(255,92,122,.45);
+      background: rgba(255,92,122,.10);
+      border-radius:16px;
+      padding:12px;
+    }
+    .okBox{
+      border:1px solid rgba(105,219,124,.42);
+      background: rgba(105,219,124,.10);
+      border-radius:16px;
+      padding:12px;
+    }
+    input[type="text"], textarea{
+      width:100%;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      outline:none;
+      font-size:13px;
+    }
+    textarea{min-height:86px; resize:vertical}
+    .copyline{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top:8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="title">
+        <h1>Plano Ambulatorial — <span id="patientNameHeader">Veronica</span></h1>
+        <p class="sub">Página de orientação objetiva: medicações, monitoramento e plano por níveis (urgência).</p>
+        <div class="badgeRow">
+          <span class="badge"><strong>Atendimento:</strong> ambulatorial</span>
+          <span class="badge"><strong>Objetivo:</strong> segurança + clareza</span>
+          <span class="badge"><strong>Atualizado:</strong> <span id="today"></span></span>
+        </div>
+      </div>
+
+      <div class="ctaTop">
+        <button class="btn danger" onclick="scrollToPanel('p-urgente')">
+          <span class="dot"></span> Urgente agora
+        </button>
+        <button class="btn warn" onclick="copyText('SAMU: 192 | Polícia: 190 | CVV: 188')">
+          <span class="dot"></span> Copiar números
+        </button>
+        <button class="btn ok" onclick="window.print()">
+          <span class="dot"></span> Imprimir / PDF
+        </button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <aside class="side">
+        <div class="nav">
+          <button class="active" data-target="p-urgente">
+            Urgente agora <span class="pill">níveis</span>
+          </button>
+          <button data-target="p-meds">
+            Medicações <span class="pill">lamo + olan</span>
+          </button>
+          <button data-target="p-monitor">
+            Peso / glicose <span class="pill">plano</span>
+          </button>
+          <button data-target="p-rotina">
+            Plano terapêutico <span class="pill">dia a dia</span>
+          </button>
+          <button data-target="p-contato">
+            Contato e limites <span class="pill">claro</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <!-- URGENTE -->
+        <section id="p-urgente" class="panel active">
+          <div class="card">
+            <h2>Veronica — plano por níveis (urgência)</h2>
+            <p class="muted small">
+              Esta página existe por um motivo: <strong>deixar previsível</strong> onde buscar ajuda e <strong>evitar frustração</strong>.
+              Meu atendimento é <strong>ambulatorial</strong>. Eu <strong>não posso assumir</strong> responsabilidade por urgência/emergência.
+            </p>
+
+            <div class="dangerBox small">
+              <strong>Regra de ouro:</strong> se houver risco imediato, piora rápida ou algo “fora do controle”, <strong>não espere mensagem</strong>.
+              Procure o local correto.
+              <div class="copyline">
+                <span class="k">SAMU 192</span>
+                <span class="k">Polícia 190</span>
+                <span class="k">UPA / Pronto-socorro</span>
+                <span class="k">CVV 188</span>
+              </div>
+            </div>
+
+            <div class="callouts">
+              <div class="callout">
+                <div class="tag ok"><span class="dot"></span><strong>Nível 1</strong> — desconforto tolerável</div>
+                <ul class="list small">
+                  <li>Sintomas incômodos, mas você consegue manter rotina.</li>
+                  <li>Faça registro objetivo: <span class="k">hora</span>, <span class="k">intensidade 0–10</span>, <span class="k">gatilho</span>, <span class="k">o que ajudou</span>.</li>
+                  <li>Se possível: caminhar 10–15 min, hidratação, alimentação regular, higiene do sono.</li>
+                  <li>Envie mensagem <strong>não-urgente</strong> (em horário comercial) com dados, não com “sensação solta”.</li>
+                </ul>
+              </div>
+
+              <div class="callout">
+                <div class="tag warn"><span class="dot"></span><strong>Nível 2</strong> — piora relevante / efeitos adversos</div>
+                <ul class="list small">
+                  <li>Ansiedade forte, insônia persistente, agitação, sedação excessiva, tremor intenso, confusão, reação alérgica <strong>leve</strong>, etc.</li>
+                  <li>Conduta: <strong>não ajuste dose por conta</strong>. Documente sinais e procure <strong>avaliação médica presencial</strong> se estiver piorando.</li>
+                  <li>Se for fora do horário / piora progressiva: <span class="k">UPA</span> ou <span class="k">PS</span>.</li>
+                </ul>
+              </div>
+
+              <div class="callout">
+                <div class="tag danger"><span class="dot"></span><strong>Nível 3</strong> — emergência</div>
+                <ul class="list small">
+                  <li>Risco imediato, desorganização intensa, sensação de não dar conta, piora súbita ou qualquer quadro que “não dá para esperar”.</li>
+                  <li><strong>Não</strong> aguardar resposta por app.</li>
+                  <li>Acione <span class="k">192</span> / vá ao <span class="k">Pronto-socorro</span> / peça apoio de alguém de confiança para te acompanhar.</li>
+                  <li>Se precisar conversar imediatamente: <span class="k">CVV 188</span>.</li>
+                </ul>
+              </div>
+            </div>
+
+            <details>
+              <summary>
+                Checklist rápido antes de mandar mensagem (quando não é urgência)
+                <span class="pill">copiar</span>
+              </summary>
+              <p class="small muted" style="margin:10px 0 6px">
+                Copie e cole esta estrutura para eu entender rápido e responder melhor:
+              </p>
+              <div class="card" style="margin:0; background:rgba(0,0,0,.14)">
+                <div class="small" style="font-family:var(--mono); white-space:pre-wrap; line-height:1.4">
+1) O que aconteceu (1–2 linhas):
+2) Intensidade (0–10) e desde quando:
+3) Sono (últimas 2 noites):
+4) Medicações (o que tomou + horário):
+5) Efeitos colaterais (objetivos):
+6) O que você já tentou que ajudou/piorou:
+7) O que você precisa agora: orientação / ajuste na próxima consulta / avaliação presencial.
+                </div>
+                <div class="copyline">
+                  <button class="btn" onclick="copyText(document.querySelector('#p-urgente pre')?.innerText || '')"><span class="dot"></span>Copiar</button>
+                </div>
+              </div>
+            </details>
+
+            <div class="foot">
+              Assinatura: <strong>Dr. Fabio Henrique de Lima Schmidt</strong> — CRM/SP 183549 • Orientação educativa • Não substitui atendimento presencial em urgência/emergência.
+            </div>
+          </div>
+        </section>
+
+        <!-- MEDS -->
+        <section id="p-meds" class="panel">
+          <div class="card">
+            <h2>Medicações atuais — explicação prática</h2>
+            <p class="muted small">
+              Objetivo aqui é: <strong>entender o porquê</strong>, <strong>o que observar</strong> e <strong>quando procurar avaliação presencial</strong>.
+            </p>
+
+            <div class="card">
+              <h3>1) Lamotrigina <span class="k">25 mg</span> — <span class="k">2x ao dia</span></h3>
+              <p class="small">
+                <strong>Para que serve (na prática):</strong> estabilização do humor, redução de oscilações, melhora de irritabilidade e reatividade emocional (efeito gradual).
+              </p>
+              <p class="small">
+                <strong>Como funciona (explicação simples):</strong> reduz “picos” de excitabilidade neuronal (principalmente via canais de sódio) e modula liberação de glutamato — isso tende a diminuir instabilidade ao longo das semanas.
+              </p>
+              <div class="warnBox small">
+                <strong>Ponto crítico:</strong> qualquer <strong>erupção cutânea</strong> nova deve ser levada a <strong>avaliação médica presencial</strong> para orientar conduta com segurança.
+              </div>
+              <details>
+                <summary>O que observar nos primeiros dias/semanas <span class="pill">check</span></summary>
+                <ul class="list small">
+                  <li>Náusea leve, dor de cabeça, tontura: podem ocorrer e geralmente são transitórios.</li>
+                  <li>Se a piora for importante ou progressiva: usar o plano por níveis (UPA/PS se necessário).</li>
+                  <li>Evitar “testes” mudando horários/doses por conta própria.</li>
+                </ul>
+              </details>
+            </div>
+
+            <div class="card">
+              <h3>2) Olanzapina <span class="k">5 mg</span> — <span class="k">à noite</span></h3>
+              <p class="small">
+                <strong>Para que serve (na prática):</strong> reduzir ansiedade/ruminação, ajudar sono, diminuir hiperativação e “aceleros” emocionais.
+              </p>
+              <p class="small">
+                <strong>Como funciona (explicação simples):</strong> ação em receptores dopaminérgicos e serotoninérgicos, com efeito sedativo em parte por bloqueio histamínico — por isso costuma ajudar a dormir.
+              </p>
+
+              <div class="warnBox small">
+                <strong>Atenção para peso e glicose:</strong> a olanzapina pode aumentar apetite e favorecer ganho de peso e alteração glicêmica em parte das pessoas.
+                Como você já tem <strong>obesidade grau 1</strong> e <strong>glicose um pouco elevada</strong>, o monitoramento precisa ser <strong>objetivo e rápido</strong> (ver aba “Peso / glicose”).
+              </div>
+
+              <details>
+                <summary>Reposição hormonal (menopausa) x olanzapina/lamotrigina <span class="pill">nota</span></summary>
+                <p class="small muted" style="margin-top:10px">
+                  Pode haver variação individual. A regra prática é: <strong>acompanhar sintomas e exames</strong> e manter os profissionais alinhados.
+                  Se houver mudança de esquema hormonal, vale avisar para ajustarmos monitoramento.
+                </p>
+              </details>
+
+              <details>
+                <summary>O que observar (e quando procurar presencial) <span class="pill">níveis</span></summary>
+                <ul class="list small">
+                  <li>Sedação excessiva, sonolência importante ou confusão: se atrapalhar o funcionamento, usar o plano por níveis.</li>
+                  <li>Aumento rápido de apetite, compulsão alimentar piorando: aplicar plano de intervenção do monitoramento.</li>
+                  <li>Qualquer piora súbita relevante: avaliação presencial.</li>
+                </ul>
+              </details>
+            </div>
+
+            <div class="foot">
+              Medicações devem ser usadas conforme prescrição. Em caso de dúvida com risco ou piora importante: priorize avaliação presencial (UPA/PS).
+            </div>
+          </div>
+        </section>
+
+        <!-- MONITOR -->
+        <section id="p-monitor" class="panel">
+          <div class="card">
+            <h2>Peso / apetite / glicose — plano concreto (Veronica)</h2>
+            <p class="muted small">
+              Aqui é “mão na massa”: métricas simples + gatilhos de ação. O foco é <strong>prevenir</strong>, não correr atrás depois.
+            </p>
+
+            <div class="okBox small">
+              <strong>Meta:</strong> tornar o ganho de peso “difícil de acontecer sem ser notado”. Monitorar pouco, mas monitorar direito.
+            </div>
+
+            <div class="card">
+              <h3>Rotina de monitoramento (simples e sustentável)</h3>
+              <ul class="list small">
+                <li><strong>Peso:</strong> 2x por semana (ex.: seg/qui), pela manhã, após urinar, sem roupa/padrão semelhante.</li>
+                <li><strong>Cintura:</strong> 1x por semana (mesmo ponto), para não depender só da balança.</li>
+                <li><strong>Apetite/compulsão:</strong> nota 0–10 ao final do dia + “o que disparou”.</li>
+                <li><strong>Glicose/exames:</strong> combinar com seu clínico/endócrino; aqui a orientação é manter acompanhamento regular.</li>
+              </ul>
+
+              <details>
+                <summary>Modelo rápido de registro (copiar/colar) <span class="pill">copiar</span></summary>
+                <div class="card" style="margin:10px 0 0; background:rgba(0,0,0,.14)">
+                  <div class="small" style="font-family:var(--mono); white-space:pre-wrap; line-height:1.4">
+Data:
+Peso:
+Cintura:
+Apetite/compulsão (0–10):
+Sono (0–10):
+Atividade (min):
+Gatilho principal:
+O que ajudou:
+                  </div>
+                  <div class="copyline">
+                    <button class="btn" onclick="copyText(this.parentElement.previousElementSibling.innerText)"><span class="dot"></span>Copiar</button>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <div class="card">
+              <h3>Gatilhos de ação (sem drama, com regra)</h3>
+              <div class="callouts">
+                <div class="callout">
+                  <div class="tag ok"><span class="dot"></span><strong>Verde</strong> — segue o plano</div>
+                  <ul class="list small">
+                    <li>Variação de peso pequena e oscilante.</li>
+                    <li>Compulsão não piorou.</li>
+                    <li>Manter rotina e sono.</li>
+                  </ul>
+                </div>
+
+                <div class="callout">
+                  <div class="tag warn"><span class="dot"></span><strong>Amarelo</strong> — ajustar rápido</div>
+                  <ul class="list small">
+                    <li>Peso subindo de forma contínua por 2–3 medidas.</li>
+                    <li>Compulsão piorou (≥7/10 em vários dias).</li>
+                    <li>Ação em 7 dias: higiene do sono + proteína/fibra no café/almoço + cortar beliscos + 15–20min caminhada diária.</li>
+                  </ul>
+                </div>
+
+                <div class="callout">
+                  <div class="tag danger"><span class="dot"></span><strong>Vermelho</strong> — reavaliar presencial</div>
+                  <ul class="list small">
+                    <li>Ganho rápido importante, ou fome/compulsão “fora do controle”.</li>
+                    <li>Sedação forte prejudicando funcionamento.</li>
+                    <li>Ação: avaliação médica presencial para revisar estratégia.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="foot">
+              Observação: este plano não substitui acompanhamento clínico/endócrino quando há glicose alterada. O objetivo aqui é reduzir risco e aumentar previsibilidade.
+            </div>
+          </div>
+        </section>
+
+        <!-- ROTINA -->
+        <section id="p-rotina" class="panel">
+          <div class="card">
+            <h2>Plano terapêutico — dia a dia (ambulatorial)</h2>
+            <p class="muted small">
+              O tratamento funciona melhor quando você mede o que importa e reduz “decisões na crise”.
+            </p>
+
+            <div class="card">
+              <h3>3 pilares práticos (para reduzir desorganização)</h3>
+              <ul class="list small">
+                <li><strong>Previsibilidade:</strong> horários fixos de sono, alimentação e medicações.</li>
+                <li><strong>Registro objetivo:</strong> humor 0–10 + sono + gatilhos (2 min por dia).</li>
+                <li><strong>Plano por níveis:</strong> se piorar, você já sabe o que fazer (não depende de “inspiração”).</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3>Rotina mínima (sem perfeccionismo)</h3>
+              <ul class="list small">
+                <li><strong>Manhã:</strong> água + café da manhã com proteína/fibra (para reduzir compulsão depois).</li>
+                <li><strong>Tarde:</strong> 10–20 min de movimento (andar já conta).</li>
+                <li><strong>Noite:</strong> reduzir tela 60 min antes; rotina curta de desaceleração; olanzapina conforme prescrição.</li>
+              </ul>
+              <details>
+                <summary>O que não fazer quando estiver piorando <span class="pill">evitar</span></summary>
+                <ul class="list small">
+                  <li>“Ajustar” medicação por conta própria.</li>
+                  <li>Esperar mensagem quando é caso de avaliação presencial.</li>
+                  <li>Ficar sem comer e depois compensar — isso piora compulsão.</li>
+                </ul>
+              </details>
+            </div>
+
+            <div class="foot">
+              Próximo passo (ideal): revisar em consulta o que melhorou/piorou com dados objetivos (sono, apetite, peso, intensidade).
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTATO -->
+        <section id="p-contato" class="panel">
+          <div class="card">
+            <h2>Contato e limites (para evitar frustração)</h2>
+
+            <div class="warnBox small">
+              <strong>Mensagem importante:</strong> por eu atender ambulatorialmente, posso demorar para ver mensagens.
+              Entre você mandar algo e eu ler, pode acontecer algo mais grave — e isso <strong>não pode</strong> depender de aplicativo.
+              Por isso existe o plano por níveis.
+            </div>
+
+            <div class="sep"></div>
+
+            <div class="card">
+              <h3>Como me mandar mensagem (quando NÃO é urgência)</h3>
+              <ul class="list small">
+                <li>Preferir horário comercial.</li>
+                <li>Usar o checklist objetivo (aba “Urgente agora”).</li>
+                <li>Deixar claro no final: <span class="k">orientação</span> / <span class="k">ajuste na consulta</span> / <span class="k">apenas registro</span>.</li>
+              </ul>
+
+              <details>
+                <summary>Texto curto pronto (copiar e colar) <span class="pill">copiar</span></summary>
+                <div class="card" style="margin:10px 0 0; background:rgba(0,0,0,.14)">
+                  <div class="small" style="font-family:var(--mono); white-space:pre-wrap; line-height:1.4">
+Dr. Fabio, não é urgência.
+Resumo objetivo:
+1) O que aconteceu:
+2) Intensidade (0–10) e desde quando:
+3) Sono:
+4) Medicações + horários:
+5) Efeitos colaterais:
+6) O que ajudou/piorou:
+Preciso de: orientação / ajuste na próxima consulta.
+                  </div>
+                  <div class="copyline">
+                    <button class="btn" onclick="copyText(this.parentElement.previousElementSibling.innerText)"><span class="dot"></span>Copiar</button>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <div class="card">
+              <h3>Números úteis (Brasil)</h3>
+              <div class="row">
+                <span class="k">SAMU 192</span>
+                <span class="k">Polícia 190</span>
+                <span class="k">Bombeiros 193</span>
+                <span class="k">CVV 188</span>
+                <span class="k">UPA / Pronto-socorro</span>
+              </div>
+              <p class="muted small" style="margin-top:10px">
+                Se você quiser, eu posso adicionar aqui o endereço/UPA mais próxima e o contato de um familiar de referência (sem expor em grupos).
+              </p>
+            </div>
+
+            <div class="foot">
+              <strong>Dr. Fabio Henrique de Lima Schmidt</strong> — CRM/SP 183549 • Atendimento ambulatorial • Em emergência, procurar serviços de urgência.
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <div class="toast" id="toast">Copiado.</div>
+  </div>
+
+  <script>
+    // Date
+    (function(){
+      const d = new Date();
+      const pad = n => String(n).padStart(2,'0');
+      const s = `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`;
+      document.getElementById('today').textContent = s;
+    })();
+
+    // Nav switching
+    const navButtons = document.querySelectorAll('.nav button');
+    const panels = document.querySelectorAll('.panel');
+    navButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        navButtons.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.getAttribute('data-target');
+        panels.forEach(p=>p.classList.toggle('active', p.id === target));
+        // smooth scroll on mobile
+        if (window.matchMedia('(max-width: 920px)').matches){
+          document.getElementById(target).scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
+    });
+
+    function scrollToPanel(id){
+      // activate and scroll
+      navButtons.forEach(b=>{
+        const active = b.getAttribute('data-target') === id;
+        b.classList.toggle('active', active);
+      });
+      panels.forEach(p=>p.classList.toggle('active', p.id === id));
+      document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    // Copy helper
+    function toast(msg){
+      const t = document.getElementById('toast');
+      t.textContent = msg || 'Copiado.';
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'), 1600);
+    }
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        toast('Copiado para a área de transferência.');
+      }catch(e){
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        toast('Copiado.');
+      }
+    }
+    window.copyText = copyText;
+    window.scrollToPanel = scrollToPanel;
+  </script>
+</body>
+</html>
