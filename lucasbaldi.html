@@ -1,238 +1,1008 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Plano Terapêutico – Lucas Baldi</title>
 
 <style>
-:root{
---bg:#0b1220;
---card:#0f1a2e;
---line:rgba(255,255,255,.12);
---ink:#e7eefc;
---muted:#a9b6d3;
---accent:#7c3aed;
---danger:#ef4444;
---radius:16px;
---shadow:0 15px 45px rgba(0,0,0,.45);
-}
+  :root{
+    --bg:#0b1220;
+    --card:#0f1a2e;
+    --card2:#0c1628;
+    --ink:#e7eefc;
+    --muted:#a9b6d3;
+    --line:rgba(255,255,255,.12);
+    --accent:#7c3aed;
+    --accent2:#22c55e;
+    --warn:#f59e0b;
+    --danger:#ef4444;
+    --radius:16px;
+    --shadow:0 16px 46px rgba(0,0,0,.48);
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+    --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 700px at 25% 10%, rgba(124,58,237,.22), transparent 60%),
+      radial-gradient(1000px 650px at 78% 18%, rgba(34,197,94,.12), transparent 60%),
+      radial-gradient(900px 700px at 50% 88%, rgba(245,158,11,.10), transparent 60%),
+      var(--bg);
+    min-height:100vh;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:22px 14px 60px;}
+  .top{
+    display:flex;gap:14px;flex-wrap:wrap;align-items:stretch;justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .brand{
+    flex:1 1 560px;
+    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 18px 16px;
+    box-shadow:var(--shadow);
+    position:relative; overflow:hidden;
+  }
+  .brand:before{
+    content:"";
+    position:absolute; inset:-60px -90px auto auto;
+    width:240px;height:240px;
+    background:radial-gradient(circle at 30% 30%, rgba(124,58,237,.42), rgba(124,58,237,0) 62%);
+    transform:rotate(12deg);
+    pointer-events:none;
+  }
+  .brand h1{margin:0 0 6px;font-size:18px;letter-spacing:.2px}
+  .brand p{margin:0;color:var(--muted);font-size:13px;line-height:1.35}
+  .meta{
+    flex:0 1 360px; min-width:280px;
+    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:14px 14px 12px;
+    box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .pillrow{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{
+    font-size:12px; padding:7px 10px;border-radius:999px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.03);
+    color:var(--muted);
+    display:flex;align-items:center;gap:8px;
+    user-select:none;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+  .dot.g{background:var(--accent2);box-shadow:0 0 0 4px rgba(34,197,94,.10)}
+  .dot.w{background:var(--warn);box-shadow:0 0 0 4px rgba(245,158,11,.10)}
+  .dot.r{background:var(--danger);box-shadow:0 0 0 4px rgba(239,68,68,.12)}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+  .btn{
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.03);
+    color:var(--ink);
+    padding:9px 11px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:700;
+    font-size:13px;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:.15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.05)}
+  .btn.primary{border-color:rgba(124,58,237,.55);background:rgba(124,58,237,.18)}
+  .btn.danger{border-color:rgba(239,68,68,.55);background:rgba(239,68,68,.14)}
+  .btn.ghost{background:transparent}
 
-body{
-margin:0;
-font-family:system-ui,-apple-system,Segoe UI,Roboto;
-background:var(--bg);
-color:var(--ink);
-}
+  .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 12px}
+  .tab{
+    padding:10px 12px;border-radius:999px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.03);
+    color:var(--muted);
+    font-weight:800;font-size:13px;
+    cursor:pointer; user-select:none;
+    transition:.15s ease;
+  }
+  .tab.active{
+    color:var(--ink);
+    border-color:rgba(124,58,237,.55);
+    background:rgba(124,58,237,.20);
+    box-shadow:0 10px 22px rgba(124,58,237,.10);
+  }
 
-.wrapper{
-max-width:1000px;
-margin:auto;
-padding:24px 16px 60px;
-}
+  .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;align-items:start}
+  @media(max-width:980px){.grid{grid-template-columns:1fr}}
+  .panel{
+    border:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .hd{
+    padding:14px 16px;
+    border-bottom:1px solid var(--line);
+    background:rgba(255,255,255,.02);
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .hd h2{margin:0;font-size:14px;letter-spacing:.2px}
+  .hint{font-size:12px;color:var(--muted)}
+  .bd{padding:16px}
+  .callout{
+    padding:12px 12px;border-radius:14px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.03);
+    margin-bottom:12px;
+    color:var(--muted);
+    line-height:1.45;
+    font-size:13px;
+  }
+  .callout strong{color:var(--ink)}
+  .callout.accent{border-color:rgba(124,58,237,.45);background:rgba(124,58,237,.12);color:#ddd8ff}
+  .callout.warn{border-color:rgba(245,158,11,.55);background:rgba(245,158,11,.10);color:#ffe6b5}
+  .callout.danger{border-color:rgba(239,68,68,.55);background:rgba(239,68,68,.10);color:#ffd2d2}
 
-header{
-background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-border:1px solid var(--line);
-border-radius:var(--radius);
-padding:20px;
-margin-bottom:18px;
-box-shadow:var(--shadow);
-}
+  .list{display:flex;flex-direction:column;gap:10px}
+  .item{
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.02);
+    border-radius:14px;
+    padding:12px 12px;
+  }
+  .ttl{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px}
+  .ttl b{font-size:13px}
+  .ttl span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .item p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
 
-header h1{
-margin:0 0 6px;
-font-size:20px;
-}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .field{flex:1 1 220px;display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+  label{font-size:12px;color:var(--muted);font-weight:800}
+  input[type="text"], textarea, select{
+    width:100%;
+    padding:10px 10px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.02);
+    color:var(--ink);
+    outline:none;
+    font-size:13px;
+    transition:.15s ease;
+  }
+  textarea{min-height:92px;resize:vertical}
+  input:focus, textarea:focus, select:focus{
+    border-color:rgba(124,58,237,.55);
+    box-shadow:0 0 0 4px rgba(124,58,237,.12);
+  }
+  .help{font-size:12px;color:var(--muted);line-height:1.35}
 
-header p{
-margin:0;
-font-size:13px;
-color:var(--muted);
-}
+  .checklist{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+  .ck{
+    display:flex;gap:10px;align-items:flex-start;
+    padding:10px 10px;border:1px solid var(--line);
+    border-radius:14px;background:rgba(255,255,255,.02);
+    transition:.15s ease;
+  }
+  .ck:hover{background:rgba(255,255,255,.04)}
+  .ck input{margin-top:2px;transform:scale(1.1)}
+  .ck .txt{display:flex;flex-direction:column;gap:3px}
+  .ck .txt b{font-size:13px}
+  .ck .txt span{font-size:12px;color:var(--muted);line-height:1.35}
+  .progress{
+    margin-top:10px;height:10px;border-radius:999px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.02);
+    overflow:hidden;
+  }
+  .bar{
+    height:100%;width:0%;
+    background:linear-gradient(90deg, rgba(124,58,237,.95), rgba(34,197,94,.85));
+    transition:.25s ease;
+  }
 
-.tabs{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-margin-bottom:14px;
-}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  @media(max-width:560px){.kpis{grid-template-columns:1fr}}
+  .kpi{
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:rgba(255,255,255,.02);
+    padding:10px 10px;
+  }
+  .kpi .n{font-size:18px;font-weight:950;letter-spacing:.2px}
+  .kpi .t{font-size:12px;color:var(--muted);font-weight:800;margin-top:2px}
 
-.tab{
-padding:9px 14px;
-border-radius:999px;
-border:1px solid var(--line);
-cursor:pointer;
-font-weight:700;
-font-size:13px;
-background:rgba(255,255,255,.04);
-color:var(--muted);
-}
+  .ratio{
+    position:relative;width:100%;
+    padding-top:56.25%;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.10);
+    background:rgba(255,255,255,.02);
+  }
+  .ratio iframe{position:absolute;inset:0;width:100%;height:100%}
 
-.tab.active{
-background:rgba(124,58,237,.25);
-color:var(--ink);
-border-color:rgba(124,58,237,.6);
-}
+  /* Respiração interativa */
+  .breathWrap{
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.02);
+    border-radius:14px;
+    padding:12px 12px;
+  }
+  .breathTop{
+    display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .phase{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--muted);
+  }
+  .circle{
+    width:160px;height:160px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.14);
+    background:radial-gradient(circle at 30% 30%, rgba(124,58,237,.25), rgba(255,255,255,.02) 60%);
+    box-shadow:0 16px 50px rgba(0,0,0,.45);
+    margin:10px auto 12px;
+    transform:scale(.78);
+  }
+  .circle.anim{
+    transition: transform 4s linear;
+  }
+  .circle.inhale{transform:scale(1.0)}
+  .circle.hold{transform:scale(1.0)}
+  .circle.exhale{transform:scale(.75)}
+  .breathBtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .mini{
+    font-size:12px;
+    padding:8px 10px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.03);
+    color:var(--ink);
+    cursor:pointer;
+    font-weight:800;
+  }
+  .mini:hover{background:rgba(255,255,255,.05)}
+  .mini.primary{border-color:rgba(124,58,237,.55);background:rgba(124,58,237,.18)}
+  .mini.warn{border-color:rgba(245,158,11,.55);background:rgba(245,158,11,.12)}
+  .mini.danger{border-color:rgba(239,68,68,.55);background:rgba(239,68,68,.12)}
 
-.panel{
-background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
-border:1px solid var(--line);
-border-radius:var(--radius);
-padding:18px;
-box-shadow:var(--shadow);
-}
+  /* Tabela scripts */
+  .table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    overflow:hidden;
+    border-radius:14px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.02);
+  }
+  .table th, .table td{
+    text-align:left;
+    padding:10px 10px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+    font-size:12px;
+    color:var(--muted);
+    line-height:1.35;
+  }
+  .table th{
+    color:var(--muted);
+    background:rgba(255,255,255,.02);
+    font-weight:900;
+  }
+  .table td b{color:var(--ink)}
+  .table tr:last-child td{border-bottom:none}
 
-.callout{
-border-radius:14px;
-border:1px solid var(--line);
-padding:12px;
-margin-bottom:12px;
-font-size:13px;
-color:var(--muted);
-background:rgba(255,255,255,.04);
-}
+  /* Toast */
+  .toast{
+    position:fixed;left:50%;bottom:16px;transform:translateX(-50%);
+    background:rgba(15,26,46,.95);
+    border:1px solid rgba(255,255,255,.14);
+    color:rgba(231,238,252,.95);
+    padding:10px 12px;
+    border-radius:999px;
+    box-shadow:0 14px 40px rgba(0,0,0,.45);
+    z-index:60;
+    font-size:13px;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s ease;
+  }
+  .toast.on{opacity:1}
 
-.callout.danger{
-border-color:rgba(239,68,68,.6);
-background:rgba(239,68,68,.12);
-color:#ffd2d2;
-}
-
-button{
-background:rgba(124,58,237,.3);
-border:1px solid rgba(124,58,237,.6);
-color:var(--ink);
-padding:8px 12px;
-border-radius:12px;
-cursor:pointer;
-font-weight:600;
-font-size:13px;
-margin-top:8px;
-}
-
-button:hover{
-opacity:.9;
-}
-
-img{
-max-width:100%;
-border-radius:14px;
-border:1px solid var(--line);
-margin-top:10px;
-}
-
-.hidden{display:none;}
-
-footer{
-text-align:center;
-margin-top:20px;
-font-size:12px;
-color:var(--muted);
-}
+  @media print{
+    body{background:#fff;color:#000}
+    .tabs,.toolbar{display:none !important}
+    .panel{box-shadow:none;border:1px solid #ddd}
+    .wrap{max-width:980px}
+  }
 </style>
 </head>
 
 <body>
-<div class="wrapper">
+<div class="wrap">
+  <div class="top">
+    <div class="brand">
+      <h1>Plano Terapêutico Integrado – Lucas Baldi</h1>
+      <p>
+        Uso terapêutico ambulatorial • Foco: manejo de crise, impulsividade, comunicação e suporte familiar.<br>
+        <b>Dr. Fabio Henrique de Lima Schmidt – CRM/SP 183549</b>
+      </p>
+    </div>
 
-<header>
-<h1>Plano de Organização Emocional 2.0</h1>
-<p>Paciente: Lucas Baldi<br>
-Dr. Fabio Henrique de Lima Schmidt – CRM/SP 183549</p>
-</header>
+    <div class="meta">
+      <div class="pillrow">
+        <div class="pill"><span class="dot"></span> Plano ativo</div>
+        <div class="pill"><span class="dot g"></span> Foco: habilidades</div>
+        <div class="pill"><span class="dot w"></span> Crise = pausa</div>
+        <div class="pill"><span class="dot r"></span> Linha vermelha: ameaça</div>
+      </div>
+      <div class="toolbar">
+        <button class="btn primary" id="btnPrint">🖨️ Imprimir</button>
+        <button class="btn" id="btnExport">⤓ Exportar</button>
+        <button class="btn danger" id="btnReset">⟲ Reset</button>
+      </div>
+    </div>
+  </div>
 
-<div class="tabs">
-<div class="tab active" data-tab="t1">Urgência</div>
-<div class="tab" data-tab="t2">Comunicação</div>
-<div class="tab" data-tab="t3">Previsibilidade</div>
-<div class="tab" data-tab="t4">Validação</div>
-<div class="tab" data-tab="t5">Coping & Crise</div>
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-tab="t1">Crise agora</div>
+    <div class="tab" data-tab="t2">Coping & respiração</div>
+    <div class="tab" data-tab="t3">Família: scripts & checklists</div>
+    <div class="tab" data-tab="t4">Família: comunicação</div>
+    <div class="tab" data-tab="t5">Sobre o TPB</div>
+  </div>
+
+  <div class="grid">
+    <!-- Main -->
+    <div class="panel">
+      <div class="hd">
+        <h2 id="panelTitle">Crise agora</h2>
+        <div class="hint" id="panelHint">Se está ativado: procedimento > conversa.</div>
+      </div>
+      <div class="bd" id="panelBody"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="panel">
+      <div class="hd">
+        <h2>Marcadores</h2>
+        <div class="hint">Progresso local</div>
+      </div>
+      <div class="bd">
+        <div class="callout accent">
+          <strong>Regra-mãe</strong><br>
+          Urgência não é prova. É sintoma. Seu objetivo agora é <b>não piorar</b>.
+        </div>
+
+        <div class="kpis">
+          <div class="kpi">
+            <div class="n" id="kpiDays">0</div>
+            <div class="t">dias desde recomeço</div>
+          </div>
+          <div class="kpi">
+            <div class="n" id="kpiChecks">0%</div>
+            <div class="t">checklist</div>
+          </div>
+          <div class="kpi">
+            <div class="n" id="kpiCopies">0</div>
+            <div class="t">scripts copiados</div>
+          </div>
+        </div>
+
+        <div class="progress"><div class="bar" id="bar"></div></div>
+
+        <div class="checklist" id="checklist"></div>
+
+        <div style="margin-top:12px" class="help">
+          Tudo aqui é salvo <b>neste dispositivo</b>. Se abrir em outro celular, não aparece.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer style="text-align:center;color:rgba(169,182,211,.9);font-size:12px;margin-top:18px;">
+    Material terapêutico individual (ambulatorial) • Não substitui atendimento presencial em emergência.
+  </footer>
 </div>
 
-<div class="panel" id="content"></div>
-
-<footer>
-Material clínico individual – uso terapêutico ambulatorial
-</footer>
-
-</div>
+<div class="toast" id="toast">Copiado.</div>
 
 <script>
-const tabs = document.querySelectorAll(".tab");
-const content = document.getElementById("content");
+/* =========================
+   CONFIG
+========================= */
+const IMG_INFOGRAFICO = "https://raw.githubusercontent.com/h5jdksr45b-sys/landing/main/Controlando%20a%20Impulsividade%20no%20TPB.png";
 
-const views = {
+/* =========================
+   STATE (localStorage)
+========================= */
+const KEY = "lucasbaldi_plano_final_v1";
+const defaultState = () => ({
+  version: "final-1.0",
+  patient: "Lucas Baldi",
+  startDate: new Date().toISOString().slice(0,10),
+  copies: 0,
+  checklist: {
+    pause: false,
+    leave: false,
+    noThreat: false,
+    noAlcohol: false,
+    returnTime: false,
+    breathe: false
+  },
+  family: {
+    phraseCode: "PAUSA LIMPA",
+    returnMinutes: 20,
+    eventPlan: "Sem discutir na volta. Conversa no dia seguinte.",
+  }
+});
+function loadState(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(!raw) return defaultState();
+    const parsed = JSON.parse(raw);
+    return { ...defaultState(), ...parsed, checklist: {...defaultState().checklist, ...(parsed.checklist||{})}, family:{...defaultState().family, ...(parsed.family||{})} };
+  }catch(e){ return defaultState(); }
+}
+function saveState(s){ localStorage.setItem(KEY, JSON.stringify(s)); }
+let state = loadState();
 
-t1: `
-<div class="callout danger">
-<strong>Regra de segurança:</strong><br>
-Em escalada emocional: pausa + afastamento físico.
-</div>
+const $ = (sel)=>document.querySelector(sel);
+const todayISO = ()=>new Date().toISOString().slice(0,10);
+function daysBetween(aISO,bISO){
+  const a=new Date(aISO+"T00:00:00");
+  const b=new Date(bISO+"T00:00:00");
+  return Math.max(0, Math.round((b-a)/(1000*60*60*24)));
+}
+function esc(str=""){ return (str+"").replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])); }
 
-<p><strong>Script imediato:</strong><br>
-"Eu estou ativado. Vou pausar 20 minutos e volto depois."</p>
-
-<p><strong>Proibido em crise:</strong><br>
-Ameaças, confronto, mensagens repetidas, álcool.</p>
-`,
-
-t2: `
-<p><strong>Ciúme:</strong><br>
-"Eu estou ficando inseguro. Preciso de um pouco de segurança."</p>
-
-<p><strong>Interpretação:</strong><br>
-"Minha cabeça leu isso como rejeição. Pode me explicar?"</p>
-`,
-
-t3: `
-<p><strong>Código de pausa:</strong> PAUSA LIMPA</p>
-<p><strong>Tempo:</strong> 20 minutos</p>
-<p><strong>Eventos sociais:</strong> combinar check-ins + saída honrosa.</p>
-`,
-
-t4: `
-<p><strong>Validação + Limite:</strong><br>
-"Eu entendo que você ficou inseguro. Não vou discutir agora."</p>
-
-<p><strong>Auto-validação:</strong><br>
-"Medo não é prova. Posso sentir sem agir."</p>
-`,
-
-t5: `
-<div class="callout">
-<strong>Mapa Visual – Consulta Rápida</strong><br>
-Use quando estiver calmo para reforçar aprendizado.
-</div>
-
-<img src="https://raw.githubusercontent.com/h5jdksr45b-sys/landing/main/Controlando%20a%20Impulsividade%20no%20TPB.png" 
-alt="Infográfico Impulsividade TPB">
-
-<div class="callout">
-<strong>Nova Sequência:</strong><br>
-Percepção → Nomear insegurança → Pedir segurança → Pausa → Retomar
-</div>
-
-<p><strong>Coping 10 minutos:</strong><br>
-• Água fria no rosto<br>
-• Caminhada rápida<br>
-• Escrever 3 interpretações alternativas
-</p>
-`
-};
-
-function render(tab){
-tabs.forEach(t=>t.classList.remove("active"));
-document.querySelector('[data-tab="'+tab+'"]').classList.add("active");
-content.innerHTML = views[tab];
+function toast(msg){
+  const t=$("#toast");
+  t.textContent=msg;
+  t.classList.add("on");
+  setTimeout(()=>t.classList.remove("on"), 1200);
 }
 
-tabs.forEach(tab=>{
-tab.addEventListener("click", ()=>render(tab.dataset.tab));
+async function copyText(text){
+  try{
+    await navigator.clipboard.writeText(text);
+    state.copies = (state.copies||0)+1;
+    saveState(state);
+    refreshKPIs();
+    toast("Copiado.");
+  }catch(e){
+    toast("Não foi possível copiar.");
+  }
+}
+
+/* =========================
+   CHECKLIST
+========================= */
+const CHECK_ITEMS = [
+  {key:"pause", title:"Pausa imediata", desc:"Eu pauso discussão assim que ativar."},
+  {key:"leave", title:"Afastamento físico", desc:"Eu saio do ambiente para reduzir escalada."},
+  {key:"noThreat", title:"Sem ameaça", desc:"Ameaça/intimidação é linha vermelha. Não uso."},
+  {key:"noAlcohol", title:"Sem álcool/substâncias", desc:"Eu não uso isso para ‘acalmar’ porque piora controle."},
+  {key:"returnTime", title:"Retorno garantido", desc:"Eu marco horário para retomar, ou aviso no horário."},
+  {key:"breathe", title:"Respiração guiada", desc:"Eu faço 2 minutos de respiração antes de falar qualquer coisa."}
+];
+function renderChecklist(){
+  const box=$("#checklist");
+  box.innerHTML = CHECK_ITEMS.map(it=>{
+    const checked = !!state.checklist[it.key];
+    return `
+      <div class="ck">
+        <input type="checkbox" ${checked?"checked":""} onchange="toggleChecklist('${it.key}', this.checked)" />
+        <div class="txt">
+          <b>${esc(it.title)}</b>
+          <span>${esc(it.desc)}</span>
+        </div>
+      </div>
+    `;
+  }).join("");
+  updateProgress();
+}
+function toggleChecklist(key,val){
+  state.checklist[key]=!!val;
+  saveState(state);
+  updateProgress();
+}
+function updateProgress(){
+  const total = CHECK_ITEMS.length;
+  const done = Object.values(state.checklist).filter(Boolean).length;
+  const pct = Math.round((done/total)*100);
+  $("#bar").style.width = pct+"%";
+  $("#kpiChecks").textContent = pct+"%";
+}
+
+/* =========================
+   KPI
+========================= */
+function refreshKPIs(){
+  $("#kpiDays").textContent = daysBetween(state.startDate, todayISO());
+  $("#kpiChecks").textContent = $("#kpiChecks").textContent || "0%";
+  $("#kpiCopies").textContent = state.copies || 0;
+}
+
+/* =========================
+   RESPIRAÇÃO GUIADA (4-4-6)
+========================= */
+let breathTimer=null;
+let breathRunning=false;
+let breathCycle=0;
+let breathConfig={inhale:4, hold:4, exhale:6, cycles:5};
+
+function setPhase(text){
+  const el=$("#breathPhase");
+  if(el) el.textContent = text;
+}
+function setCircle(phase){
+  const c=$("#breathCircle");
+  if(!c) return;
+  c.classList.add("anim");
+  c.classList.remove("inhale","hold","exhale");
+  c.classList.add(phase);
+}
+function stopBreath(){
+  breathRunning=false;
+  if(breathTimer) clearTimeout(breathTimer);
+  breathTimer=null;
+  setPhase("Pronto. Se estiver ativado, não converse: execute a pausa.");
+  const c=$("#breathCircle");
+  if(c){
+    c.classList.remove("anim","inhale","hold","exhale");
+  }
+}
+function runBreathStep(step){
+  if(!breathRunning) return;
+
+  const {inhale, hold, exhale, cycles} = breathConfig;
+  const steps = [
+    {name:"Inspire", sec: inhale, phase:"inhale"},
+    {name:"Segure", sec: hold, phase:"hold"},
+    {name:"Expire", sec: exhale, phase:"exhale"},
+  ];
+
+  const current = steps[step % 3];
+  setCircle(current.phase);
+
+  let remaining = current.sec;
+  setPhase(`${current.name} — ${remaining}s`);
+
+  const tick = () => {
+    if(!breathRunning) return;
+    remaining--;
+    if(remaining <= 0){
+      // next step
+      const nextStep = (step+1);
+      if(nextStep % 3 === 0) breathCycle++; // completed one full cycle after exhale
+      if(breathCycle >= cycles){
+        state.checklist.breathe = true;
+        saveState(state);
+        renderChecklist();
+        refreshKPIs();
+        setPhase("Concluído. Agora: pausa + retorno garantido.");
+        breathRunning=false;
+        breathTimer=null;
+        return;
+      }
+      breathTimer = setTimeout(()=>runBreathStep(nextStep), 50);
+      return;
+    }
+    setPhase(`${current.name} — ${remaining}s`);
+    breathTimer = setTimeout(tick, 1000);
+  };
+  breathTimer = setTimeout(tick, 1000);
+}
+function startBreath(){
+  if(breathRunning) return;
+  breathRunning=true;
+  breathCycle=0;
+  runBreathStep(0);
+}
+
+/* =========================
+   TABS CONTENT
+========================= */
+const TABS = {
+  t1:{
+    title:"Crise agora",
+    hint:"Se está ativado: procedimento > conversa.",
+    render:()=>`
+      <div class="callout danger">
+        <strong>Prioridade de segurança</strong><br>
+        Em escalada emocional: <b>pausa</b> + <b>afastamento físico</b>. A conversa vem depois.
+      </div>
+
+      <div class="list">
+        <div class="item">
+          <div class="ttl"><b>Script de interrupção imediata</b><span>copiar/usar</span></div>
+          <p>“Eu estou ativado e não sou confiável agora. Vou pausar ${esc(state.family.returnMinutes)} minutos e volto em horário marcado.”</p>
+          <p style="margin-top:8px;">“Eu não quero te ferir. Eu preciso baixar a ativação antes de conversar.”</p>
+          <div class="row" style="margin-top:8px">
+            <button class="btn" onclick="copyText('Eu estou ativado e não sou confiável agora. Vou pausar ${state.family.returnMinutes} minutos e volto em horário marcado.')">📋 Copiar 1</button>
+            <button class="btn" onclick="copyText('Eu não quero te ferir. Eu preciso baixar a ativação antes de conversar.')">📋 Copiar 2</button>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="ttl"><b>Proibido em crise</b><span>linha vermelha</span></div>
+          <p>Ameaça/intimidação • confronto • mensagens repetidas • “só mais uma frase” • álcool/substâncias.</p>
+        </div>
+
+        <div class="item">
+          <div class="ttl"><b>Retorno garantido</b><span>previsibilidade</span></div>
+          <p>“${esc(state.family.phraseCode)}. Eu volto em ${esc(state.family.returnMinutes)} minutos. Se eu não voltar, eu aviso no horário.”</p>
+          <button class="btn" onclick="copyText('${state.family.phraseCode}. Eu volto em ${state.family.returnMinutes} minutos. Se eu não voltar, eu aviso no horário.')">📋 Copiar</button>
+        </div>
+      </div>
+
+      <div class="callout warn" style="margin-top:12px">
+        <strong>Se o impulso vier forte</strong><br>
+        Não tente “explicar”. Execute: <b>pausa + afastamento físico + respiração (aba Coping)</b>.
+      </div>
+
+      <div class="row">
+        <button class="btn primary" onclick="resetStart()">🔁 Recomeçar contador hoje</button>
+        <button class="btn" onclick="goTab('t2')">🫁 Ir para respiração</button>
+      </div>
+    `
+  },
+
+  t2:{
+    title:"Coping & respiração",
+    hint:"Baixar corpo antes de tentar pensar.",
+    render:()=>`
+      <div class="callout accent">
+        <strong>Respiração guiada (4–4–6)</strong><br>
+        Inspire 4s • segure 4s • expire 6s. Faça 5 ciclos.
+      </div>
+
+      <div class="breathWrap">
+        <div class="breathTop">
+          <div>
+            <div style="font-weight:950">Respiração interativa</div>
+            <div class="phase" id="breathPhase">Pronto. Se estiver ativado, não converse: execute a pausa.</div>
+          </div>
+          <div class="pill" title="Configuração padrão">
+            <span class="dot g"></span> 4–4–6 • 5 ciclos
+          </div>
+        </div>
+
+        <div class="circle" id="breathCircle" aria-label="animação de respiração"></div>
+
+        <div class="breathBtns">
+          <button class="mini primary" onclick="startBreath()">▶ Iniciar</button>
+          <button class="mini warn" onclick="stopBreath()">⏸ Parar</button>
+        </div>
+
+        <div class="help" style="margin-top:10px">
+          Meta: reduzir ativação. Você não precisa “resolver”. Você precisa <b>não escalar</b>.
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:12px">
+        <strong>Coping rápido (10 minutos, sem negociação)</strong><br>
+        1) água fria no rosto + respiração<br>
+        2) caminhada rápida sem celular<br>
+        3) escrever: “o que eu acho / 3 alternativas / o que eu preciso”
+      </div>
+
+      <div class="item">
+        <div class="ttl"><b>Mapa visual (consulta rápida)</b><span>infográfico</span></div>
+        <p>Use para relembrar o mecanismo “alarme forte + freio fraco” e a lógica do intervalo consciente.</p>
+        <img src="${IMG_INFOGRAFICO}" alt="Infográfico: Controlando a Impulsividade no TPB" style="width:100%;border-radius:14px;border:1px solid rgba(255,255,255,.10);margin-top:10px;">
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <button class="btn" onclick="state.checklist.pause=true; saveState(state); renderChecklist(); updateProgress(); toast('Checklist atualizado: pausa.');">✅ Marcar “pausa”</button>
+        <button class="btn" onclick="goTab('t1')">⚡ Voltar para crise agora</button>
+      </div>
+    `
+  },
+
+  t3:{
+    title:"Família: scripts & checklists",
+    hint:"Validação + limite. Sem debate em crise.",
+    render:()=>`
+      <div class="callout warn">
+        <strong>Para a família</strong><br>
+        Este material é para aumentar segurança e reduzir escalada. Em crise: <b>pausa e limite</b>.
+      </div>
+
+      <div class="item">
+        <div class="ttl"><b>Checklist da família em crise</b><span>executável</span></div>
+        <div class="list">
+          <div class="item" style="background:rgba(255,255,255,.01)">
+            <div class="ttl"><b>1) Não discutir</b><span>regra</span></div>
+            <p>“Eu não vou discutir agora. Eu volto quando você estiver regulado.”</p>
+            <button class="btn" onclick="copyText('Eu não vou discutir agora. Eu volto quando você estiver regulado.')">📋 Copiar</button>
+          </div>
+          <div class="item" style="background:rgba(255,255,255,.01)">
+            <div class="ttl"><b>2) Validar sem concordar</b><span>técnica</span></div>
+            <p>“Eu entendi que você ficou inseguro. Isso não justifica ameaça. Pausa agora.”</p>
+            <button class="btn" onclick="copyText('Eu entendi que você ficou inseguro. Isso não justifica ameaça. Pausa agora.')">📋 Copiar</button>
+          </div>
+          <div class="item" style="background:rgba(255,255,255,.01)">
+            <div class="ttl"><b>3) Limite claro</b><span>segurança</span></div>
+            <p>“Se você levantar o tom / insistir / intimidar, eu me afasto e retomo depois.”</p>
+            <button class="btn" onclick="copyText('Se você levantar o tom, insistir ou intimidar, eu me afasto e retomo depois.')">📋 Copiar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout danger">
+        <strong>Linha vermelha</strong><br>
+        Ameaça e intimidação não são “ruído emocional”. São quebra de segurança.
+        A família deve priorizar <b>afastamento e ajuda externa</b> se houver risco.
+      </div>
+
+      <div class="item">
+        <div class="ttl"><b>Scripts prontos (família)</b><span>copiar/colar</span></div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:220px">Situação</th>
+              <th>Script</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Quando ele ativa</b></td>
+              <td>“Eu estou vendo que você está ativado. Eu me importo, mas não vou discutir agora. Pausa e retorno.”</td>
+            </tr>
+            <tr>
+              <td><b>Quando ele acusa</b></td>
+              <td>“Eu entendi seu medo. Mas acusação agora só piora. Vamos pausar e retomar com calma.”</td>
+            </tr>
+            <tr>
+              <td><b>Quando ele pede prova</b></td>
+              <td>“Eu posso te dar segurança, mas não sob pressão. Pausa primeiro, conversa depois.”</td>
+            </tr>
+            <tr>
+              <td><b>Quando a conversa voltar</b></td>
+              <td>“Um problema por vez. Um pedido concreto. Sem reabrir tudo.”</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="row" style="margin-top:10px">
+          <button class="btn" onclick="copyText('Eu estou vendo que você está ativado. Eu me importo, mas não vou discutir agora. Pausa e retorno.')">📋 Copiar 1</button>
+          <button class="btn" onclick="copyText('Eu entendi seu medo. Mas acusação agora só piora. Vamos pausar e retomar com calma.')">📋 Copiar 2</button>
+          <button class="btn" onclick="copyText('Eu posso te dar segurança, mas não sob pressão. Pausa primeiro, conversa depois.')">📋 Copiar 3</button>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Mini-regra do casal</strong><br>
+        “Sem conversa na volta do evento social. Só check-in básico e descanso. Conversa no dia seguinte.”
+      </div>
+    `
+  },
+
+  t4:{
+    title:"Família: comunicação",
+    hint:"Comunicação, validação e previsibilidade (família).",
+    render:()=>`
+      <div class="callout accent">
+        <strong>Três pilares</strong><br>
+        <b>Validação</b> (reconhecer emoção) + <b>Previsibilidade</b> (retorno garantido) + <b>Comunicação</b> (pedido concreto).
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Frase-código (pausa)</label>
+          <input type="text" id="phraseCode" value="${esc(state.family.phraseCode)}" />
+        </div>
+        <div class="field">
+          <label>Minutos de pausa</label>
+          <select id="returnMinutes">
+            ${[15,20,30,40].map(n=>`<option value="${n}" ${state.family.returnMinutes==n?"selected":""}>${n}</option>`).join("")}
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Plano para eventos sociais (combinado do casal)</label>
+        <textarea id="eventPlan">${esc(state.family.eventPlan)}</textarea>
+        <div class="help">Objetivo: reduzir ambiguidade. Ambiguidade vira gatilho.</div>
+      </div>
+
+      <div class="row">
+        <button class="btn primary" onclick="saveFamily()">💾 Salvar</button>
+        <button class="btn" onclick="copyText('${state.family.phraseCode}. Eu volto em ${state.family.returnMinutes} minutos. Se eu não voltar, eu aviso no horário.')">📋 Copiar frase de pausa</button>
+      </div>
+
+      <div class="item" style="margin-top:12px">
+        <div class="ttl"><b>Scripts “pedido concreto” (para evitar acusação)</b><span>modelo</span></div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width:220px">Em vez de…</th>
+              <th>Use…</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>“Você tá me ignorando.”</td>
+              <td>“Eu fiquei inseguro. Você pode me dizer onde você está / como você está?”</td>
+            </tr>
+            <tr>
+              <td>“Você riu de mim.”</td>
+              <td>“Minha cabeça interpretou isso mal. Você pode me explicar?”</td>
+            </tr>
+            <tr>
+              <td>“Então termina.”</td>
+              <td>“Eu estou ativado. Pausa. Eu volto e converso.”</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warn" style="margin-top:12px">
+        <strong>Princípio anti-escalada</strong><br>
+        Quando a emoção sobe, a família não “vence debate”. A família <b>muda o ponto de partida</b>: pausa + retorno + pedido concreto.
+      </div>
+    `
+  },
+
+  t5:{
+    title:"Sobre o TPB",
+    hint:"Explicação clara, sem estigma, com foco prático.",
+    render:()=>`
+      <div class="callout">
+        <strong>O que é TPB (explicação prática)</strong><br>
+        TPB é um padrão de funcionamento em que o sistema emocional ativa rápido e forte.
+        O problema não é “caráter” — é <b>regulação</b> + <b>interpretação</b> sob estresse.
+      </div>
+
+      <div class="list">
+        <div class="item">
+          <div class="ttl"><b>Três mecanismos que importam aqui</b><span>clareza</span></div>
+          <p>
+            1) <b>Alarme</b> (ameaça de rejeição/abandono) fica hiperativo.<br>
+            2) <b>Freio</b> (planejamento/inibição) falha quando a ativação sobe.<br>
+            3) <b>Ambiguidade</b> vira “prova” no cérebro ativado — e aí vem a urgência.
+          </p>
+        </div>
+
+        <div class="item">
+          <div class="ttl"><b>O que melhora com tratamento</b><span>realista</span></div>
+          <p>
+            • aumento do “intervalo” entre sentir e agir<br>
+            • melhor comunicação de necessidades<br>
+            • redução de impulsos em crise<br>
+            • reparo mais rápido depois de ativação
+          </p>
+        </div>
+
+        <div class="item">
+          <div class="ttl"><b>O que NÃO é</b><span>sem ruído</span></div>
+          <p>
+            • não é desculpa para ameaça/intimidação<br>
+            • não é “maldade” como regra<br>
+            • não se resolve com “força de vontade” no pico do alarme — se resolve com <b>procedimento</b>
+          </p>
+        </div>
+      </div>
+
+      <div class="callout accent" style="margin-top:12px">
+        <strong>Frase para lembrar</strong><br>
+        “Quando eu fico com medo, meu cérebro vira urgência. Eu não preciso resolver agora. Eu preciso não piorar agora.”
+      </div>
+
+      <div class="row">
+        <button class="btn" onclick="copyText('Quando eu fico com medo, meu cérebro vira urgência. Eu não preciso resolver agora. Eu preciso não piorar agora.')">📋 Copiar frase</button>
+        <button class="btn" onclick="goTab('t2')">🫁 Ir para respiração</button>
+      </div>
+    `
+  }
+};
+
+/* =========================
+   TAB RENDER
+========================= */
+let currentTab="t1";
+function renderTab(key){
+  currentTab=key;
+  const t=TABS[key];
+  $("#panelTitle").textContent=t.title;
+  $("#panelHint").textContent=t.hint;
+  $("#panelBody").innerHTML=t.render();
+
+  // se saiu da aba respiração, para o timer
+  if(key!=="t2") stopBreath();
+}
+function goTab(key){
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelector(`.tab[data-tab="${key}"]`).classList.add("active");
+  renderTab(key);
+}
+
+/* =========================
+   FAMILY SAVE
+========================= */
+function saveFamily(){
+  const pc = document.getElementById("phraseCode");
+  const rm = document.getElementById("returnMinutes");
+  const ep = document.getElementById("eventPlan");
+  if(pc) state.family.phraseCode = pc.value.trim() || "PAUSA LIMPA";
+  if(rm) state.family.returnMinutes = parseInt(rm.value,10) || 20;
+  if(ep) state.family.eventPlan = ep.value.trim() || state.family.eventPlan;
+  saveState(state);
+  toast("Salvo.");
+  // re-render pra atualizar scripts que dependem desses campos
+  renderTab(currentTab);
+}
+
+/* =========================
+   EXPORT / RESET / PRINT
+========================= */
+function exportData(){
+  const lines=[];
+  lines.push(`Plano – ${state.patient} (${state.version})`);
+  lines.push(`Data: ${todayISO()}`);
+  lines.push(`Início (contador): ${state.startDate}`);
+  lines.push(`Cópias de scripts: ${state.copies||0}`);
+  lines.push(`--- Checklist`);
+  CHECK_ITEMS.forEach(it=>{
+    lines.push(`- [${state.checklist[it.key]?"x":" "}] ${it.title}`);
+  });
+  lines.push(`--- Família`);
+  lines.push(`Frase-código: ${state.family.phraseCode}`);
+  lines.push(`Minutos pausa: ${state.family.returnMinutes}`);
+  lines.push(`Plano eventos: ${state.family.eventPlan}`);
+  lines.push(`---`);
+  const blob = new Blob([lines.join("\n")], {type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="lucasbaldi_plano_export.txt";
+  document.body.appendChild(a);
+  a.click(); a.remove();
+  URL.revokeObjectURL(url);
+  toast("Exportado.");
+}
+function resetAll(){
+  if(!confirm("Apagar tudo salvo neste dispositivo?")) return;
+  localStorage.removeItem(KEY);
+  state = loadState();
+  renderChecklist();
+  refreshKPIs();
+  renderTab(currentTab);
+  toast("Reset concluído.");
+}
+function resetStart(){
+  state.startDate = todayISO();
+  saveState(state);
+  refreshKPIs();
+  toast("Contador reiniciado.");
+}
+
+/* =========================
+   INIT
+========================= */
+document.getElementById("tabs").addEventListener("click",(e)=>{
+  const t=e.target.closest(".tab");
+  if(!t) return;
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");
+  renderTab(t.dataset.tab);
 });
 
-render("t1");
-</script>
+document.getElementById("btnPrint").onclick=()=>window.print();
+document.getElementById("btnExport").onclick=exportData;
+document.getElementById("btnReset").onclick=resetAll;
 
+renderChecklist();
+refreshKPIs();
+renderTab("t1");
+</script>
 </body>
 </html>
