@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano Terapêutico – Lucas Baldi</title>
+
+<style>
+:root{
+--bg:#0b1220;
+--card:#0f1a2e;
+--line:rgba(255,255,255,.12);
+--ink:#e7eefc;
+--muted:#a9b6d3;
+--accent:#7c3aed;
+--danger:#ef4444;
+--radius:16px;
+--shadow:0 15px 45px rgba(0,0,0,.45);
+}
+
+body{
+margin:0;
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+background:var(--bg);
+color:var(--ink);
+}
+
+.wrapper{
+max-width:1000px;
+margin:auto;
+padding:24px 16px 60px;
+}
+
+header{
+background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+border:1px solid var(--line);
+border-radius:var(--radius);
+padding:20px;
+margin-bottom:18px;
+box-shadow:var(--shadow);
+}
+
+header h1{
+margin:0 0 6px;
+font-size:20px;
+}
+
+header p{
+margin:0;
+font-size:13px;
+color:var(--muted);
+}
+
+.tabs{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-bottom:14px;
+}
+
+.tab{
+padding:9px 14px;
+border-radius:999px;
+border:1px solid var(--line);
+cursor:pointer;
+font-weight:700;
+font-size:13px;
+background:rgba(255,255,255,.04);
+color:var(--muted);
+}
+
+.tab.active{
+background:rgba(124,58,237,.25);
+color:var(--ink);
+border-color:rgba(124,58,237,.6);
+}
+
+.panel{
+background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+border:1px solid var(--line);
+border-radius:var(--radius);
+padding:18px;
+box-shadow:var(--shadow);
+}
+
+.callout{
+border-radius:14px;
+border:1px solid var(--line);
+padding:12px;
+margin-bottom:12px;
+font-size:13px;
+color:var(--muted);
+background:rgba(255,255,255,.04);
+}
+
+.callout.danger{
+border-color:rgba(239,68,68,.6);
+background:rgba(239,68,68,.12);
+color:#ffd2d2;
+}
+
+button{
+background:rgba(124,58,237,.3);
+border:1px solid rgba(124,58,237,.6);
+color:var(--ink);
+padding:8px 12px;
+border-radius:12px;
+cursor:pointer;
+font-weight:600;
+font-size:13px;
+margin-top:8px;
+}
+
+button:hover{
+opacity:.9;
+}
+
+img{
+max-width:100%;
+border-radius:14px;
+border:1px solid var(--line);
+margin-top:10px;
+}
+
+.hidden{display:none;}
+
+footer{
+text-align:center;
+margin-top:20px;
+font-size:12px;
+color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+
+<header>
+<h1>Plano de Organização Emocional 2.0</h1>
+<p>Paciente: Lucas Baldi<br>
+Dr. Fabio Henrique de Lima Schmidt – CRM/SP 183549</p>
+</header>
+
+<div class="tabs">
+<div class="tab active" data-tab="t1">Urgência</div>
+<div class="tab" data-tab="t2">Comunicação</div>
+<div class="tab" data-tab="t3">Previsibilidade</div>
+<div class="tab" data-tab="t4">Validação</div>
+<div class="tab" data-tab="t5">Coping & Crise</div>
+</div>
+
+<div class="panel" id="content"></div>
+
+<footer>
+Material clínico individual – uso terapêutico ambulatorial
+</footer>
+
+</div>
+
+<script>
+const tabs = document.querySelectorAll(".tab");
+const content = document.getElementById("content");
+
+const views = {
+
+t1: `
+<div class="callout danger">
+<strong>Regra de segurança:</strong><br>
+Em escalada emocional: pausa + afastamento físico.
+</div>
+
+<p><strong>Script imediato:</strong><br>
+"Eu estou ativado. Vou pausar 20 minutos e volto depois."</p>
+
+<p><strong>Proibido em crise:</strong><br>
+Ameaças, confronto, mensagens repetidas, álcool.</p>
+`,
+
+t2: `
+<p><strong>Ciúme:</strong><br>
+"Eu estou ficando inseguro. Preciso de um pouco de segurança."</p>
+
+<p><strong>Interpretação:</strong><br>
+"Minha cabeça leu isso como rejeição. Pode me explicar?"</p>
+`,
+
+t3: `
+<p><strong>Código de pausa:</strong> PAUSA LIMPA</p>
+<p><strong>Tempo:</strong> 20 minutos</p>
+<p><strong>Eventos sociais:</strong> combinar check-ins + saída honrosa.</p>
+`,
+
+t4: `
+<p><strong>Validação + Limite:</strong><br>
+"Eu entendo que você ficou inseguro. Não vou discutir agora."</p>
+
+<p><strong>Auto-validação:</strong><br>
+"Medo não é prova. Posso sentir sem agir."</p>
+`,
+
+t5: `
+<div class="callout">
+<strong>Mapa Visual – Consulta Rápida</strong><br>
+Use quando estiver calmo para reforçar aprendizado.
+</div>
+
+<img src="https://raw.githubusercontent.com/h5jdksr45b-sys/landing/main/Controlando%20a%20Impulsividade%20no%20TPB.png" 
+alt="Infográfico Impulsividade TPB">
+
+<div class="callout">
+<strong>Nova Sequência:</strong><br>
+Percepção → Nomear insegurança → Pedir segurança → Pausa → Retomar
+</div>
+
+<p><strong>Coping 10 minutos:</strong><br>
+• Água fria no rosto<br>
+• Caminhada rápida<br>
+• Escrever 3 interpretações alternativas
+</p>
+`
+};
+
+function render(tab){
+tabs.forEach(t=>t.classList.remove("active"));
+document.querySelector('[data-tab="'+tab+'"]').classList.add("active");
+content.innerHTML = views[tab];
+}
+
+tabs.forEach(tab=>{
+tab.addEventListener("click", ()=>render(tab.dataset.tab));
+});
+
+render("t1");
+</script>
+
+</body>
+</html>
