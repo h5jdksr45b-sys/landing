@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plano Interativo - Christiane Cionek</title>
+  <meta name="description" content="Plano interativo de manejo de crises, rotina e comunicação para Christiane Cionek." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a2e;
+      --panel2:#0c1628;
+      --text:#eaf0ff;
+      --muted:#a9b5d6;
+      --line:rgba(255,255,255,.10);
+      --accent:#7aa2ff;
+      --accent2:#9bffc9;
+      --warn:#ffcc66;
+      --danger:#ff6b6b;
+      --ok:#7dff9f;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --r:16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(122,162,255,.25), transparent 55%),
+        radial-gradient(900px 600px at 90% 10%, rgba(155,255,201,.14), transparent 55%),
+        radial-gradient(900px 600px at 55% 100%, rgba(255,204,102,.10), transparent 55%),
+        var(--bg);
+      line-height:1.35;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1040px; margin:0 auto; padding:22px 16px 80px}
+    header{
+      display:flex; gap:14px; align-items:flex-start; justify-content:space-between;
+      padding:18px 18px; border:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border-radius:var(--r); box-shadow:var(--shadow);
+      position:sticky; top:10px; z-index:20; backdrop-filter: blur(10px);
+    }
+    .hdr-left{min-width:0}
+    .kicker{font-family:var(--mono); letter-spacing:.08em; text-transform:uppercase; font-size:12px; color:var(--muted)}
+    h1{font-size:18px; margin:6px 0 4px}
+    .sub{font-size:13px; color:var(--muted); margin:0}
+    .badge-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .badge{
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line); background:rgba(255,255,255,.03);
+      color:var(--muted);
+    }
+    .badge strong{color:var(--text); font-weight:600}
+    .hdr-right{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
+    .btn{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      font-size:13px;
+      cursor:pointer;
+      transition:.15s transform ease, .15s background ease, .15s border-color ease;
+      display:inline-flex; align-items:center; gap:8px;
+      user-select:none;
+    }
+    .btn:hover{background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.18)}
+    .btn:active{transform:scale(.98)}
+    .btn.primary{background:rgba(122,162,255,.16); border-color:rgba(122,162,255,.35)}
+    .btn.danger{background:rgba(255,107,107,.16); border-color:rgba(255,107,107,.38)}
+    .btn.ok{background:rgba(125,255,159,.14); border-color:rgba(125,255,159,.30)}
+    .grid{display:grid; grid-template-columns: 280px 1fr; gap:14px; margin-top:14px}
+    @media (max-width: 920px){
+      header{position:relative; top:auto}
+      .grid{grid-template-columns: 1fr}
+    }
+
+    nav{
+      border:1px solid var(--line); background:rgba(255,255,255,.03);
+      border-radius:var(--r); padding:12px; box-shadow:var(--shadow);
+      position:sticky; top:104px; height:fit-content;
+    }
+    @media (max-width: 920px){ nav{position:relative; top:auto} }
+    .nav-title{font-family:var(--mono); color:var(--muted); font-size:12px; letter-spacing:.08em; text-transform:uppercase; margin:4px 6px 10px}
+    .tab{
+      width:100%;
+      text-align:left;
+      padding:10px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+      background:transparent;
+      color:var(--text);
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      font-size:13px;
+    }
+    .tab:hover{background:rgba(255,255,255,.04)}
+    .tab.active{background:rgba(122,162,255,.12); border-color:rgba(122,162,255,.32)}
+    .tab small{color:var(--muted)}
+    .main{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .panel{
+      display:none;
+      padding:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+    }
+    .panel.active{display:block}
+    h2{font-size:16px; margin:2px 0 10px}
+    h3{font-size:14px; margin:14px 0 8px; color:var(--text)}
+    p{margin:8px 0; color:var(--text)}
+    .muted{color:var(--muted)}
+    .card{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.12);
+      border-radius:14px;
+      padding:12px;
+      margin:10px 0;
+    }
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .row > *{flex:1 1 220px}
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:12px; color:var(--muted);
+      margin:4px 8px 0 0;
+    }
+    .pill b{color:var(--text); font-weight:600}
+    .danger-text{color:var(--danger)}
+    .warn-text{color:var(--warn)}
+    .ok-text{color:var(--ok)}
+    details{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      border-radius:14px;
+      padding:10px 12px;
+      margin:10px 0;
+    }
+    summary{cursor:pointer; font-weight:600}
+    .list{margin:6px 0 0 18px; color:var(--text)}
+    .list li{margin:6px 0}
+    .checklist label{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 10px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      margin:8px 0;
+      cursor:pointer;
+    }
+    .checklist input{margin-top:3px}
+    .checklist small{color:var(--muted)}
+    .input, textarea{
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+      outline:none;
+      font-size:13px;
+    }
+    textarea{min-height:92px; resize:vertical}
+    .divider{height:1px; background:var(--line); margin:14px 0}
+    .mini{
+      display:grid; grid-template-columns: 1fr 1fr; gap:10px;
+    }
+    @media (max-width: 560px){ .mini{grid-template-columns: 1fr} }
+    .timer{
+      font-family:var(--mono);
+      font-size:22px;
+      letter-spacing:.06em;
+    }
+    .footer{
+      margin-top:18px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .toast{
+      position:fixed; left:50%; bottom:14px; transform:translateX(-50%);
+      background:rgba(0,0,0,.55); border:1px solid var(--line);
+      padding:10px 12px; border-radius:12px; color:var(--text);
+      box-shadow:var(--shadow); opacity:0; pointer-events:none; transition: .2s opacity ease;
+      max-width:94vw;
+    }
+    .toast.show{opacity:1}
+    .kbd{font-family:var(--mono); font-size:12px; padding:2px 6px; border:1px solid var(--line); border-radius:8px; background:rgba(255,255,255,.02); color:var(--muted)}
+    .cta-bar{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;
+    }
+    .callout{
+      border:1px solid rgba(255,107,107,.30);
+      background:rgba(255,107,107,.08);
+      border-radius:14px;
+      padding:12px;
+      margin:10px 0;
+    }
+    .callout b{color:var(--text)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header aria-label="Cabecalho">
+      <div class="hdr-left">
+        <div class="kicker">plano interativo - manejo clinico</div>
+        <h1>Christiane Cionek - TPB (com suspeita de TEA) - Rotina, crise e comunicacao</h1>
+        <p class="sub">Material de apoio pratico para uso diario. Atualize junto ao seu medico conforme mudancas de sintomas/medicacao.</p>
+        <div class="badge-row">
+          <div class="badge"><strong>Foco:</strong> crises + impulsividade + vinculos</div>
+          <div class="badge"><strong>Extra:</strong> sensibilidade social (suspeita TEA)</div>
+          <div class="badge"><strong>Modo:</strong> checklist + exercicios + scripts</div>
+        </div>
+      </div>
+
+      <div class="hdr-right">
+        <button class="btn primary" id="btnQuickCrisis" title="Abrir aba Emergencia">
+          ⚡ Emergencia
+        </button>
+        <button class="btn" id="btnPrint" title="Imprimir / salvar em PDF">🖨️ Imprimir</button>
+        <button class="btn" id="btnReset" title="Zerar checklists e notas deste dispositivo">↺ Reset</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <nav aria-label="Navegacao">
+        <div class="nav-title">Abas</div>
+
+        <button class="tab active" data-tab="crise">
+          <span>⚡ Emergencia (crise)</span><small>passo a passo</small>
+        </button>
+        <button class="tab" data-tab="rotina">
+          <span>🧭 Rotina anti-crise</span><small>prevencao</small>
+        </button>
+        <button class="tab" data-tab="entender">
+          <span>🧠 Entender TPB + TEA</span><small>mapa do cerebro</small>
+        </button>
+        <button class="tab" data-tab="relacoes">
+          <span>🗣️ Relacionamentos</span><small>scripts prontos</small>
+        </button>
+        <button class="tab" data-tab="checklists">
+          <span>✅ Checklists</span><small>pratico</small>
+        </button>
+        <button class="tab" data-tab="med">
+          <span>💊 Medicacao & sintomas</span><small>monitoramento</small>
+        </button>
+        <button class="tab" data-tab="familia">
+          <span>👥 Familia / parceiro</span><small>como ajudar</small>
+        </button>
+        <button class="tab" data-tab="docs">
+          <span>📎 Documentos</span><small>exames/receitas</small>
+        </button>
+      </nav>
+
+      <main class="main">
+        <!-- CRISE -->
+        <section class="panel active" id="panel-crise">
+          <h2>⚡ Emergencia (Crise) - use quando "o cerebro apertou o botao do panico"</h2>
+
+          <div class="callout">
+            <b>Se houver risco real imediato</b> (ameaca de autoagressao, agressao a terceiros, desorientacao importante, sintomas neurologicos novos intensos, desmaio):<br/>
+            <span class="danger-text">Ligue 192 (SAMU) / 190 (PM).</span> Se for sofrimento emocional intenso sem risco imediato: <span class="warn-text">188 (CVV)</span>.
+          </div>
+
+          <div class="row">
+            <div class="card">
+              <h3>1) Pare a escalada (30-90s)</h3>
+              <ul class="list">
+                <li><b>Regra:</b> nao decidir nada grande na crise.</li>
+                <li><b>Frase-ancora:</b> "Isso e um pico. Vai passar. Eu so preciso atravessar."</li>
+                <li><b>Se estiver discutindo:</b> diga: "Pausa de 20 min. Eu volto." e saia do estimulo.</li>
+              </ul>
+              <div class="cta-bar">
+                <button class="btn danger" onclick="playBeep()">🔔 Sinal de pausa</button>
+                <button class="btn" onclick="copyText('Eu preciso de uma pausa de 20 minutos. Eu volto e converso com calma.')">📋 Copiar frase</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>2) Respiracao guiada (3 min)</h3>
+              <p class="muted">Objetivo: baixar o "alarme" fisiologico. Faca junto com o timer.</p>
+              <div class="timer" id="breathTimer">03:00</div>
+              <div class="cta-bar">
+                <button class="btn primary" id="btnBreathStart">▶️ Iniciar</button>
+                <button class="btn" id="btnBreathPause">⏸️ Pausar</button>
+                <button class="btn" id="btnBreathReset">⟲ Reset</button>
+              </div>
+              <details>
+                <summary>Como fazer (simples e eficaz)</summary>
+                <ul class="list">
+                  <li>Inspire 4s -> segure 2s -> solte 6s.</li>
+                  <li>Repita. O foco e na expiracao mais longa.</li>
+                  <li>Se tiver tontura, reduza: inspire 3s / solte 5s.</li>
+                </ul>
+              </details>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="card">
+              <h3>3) Grounding (2 min) - "voltar pro corpo"</h3>
+              <div class="mini">
+                <button class="btn ok" onclick="start54321()">👁️ 5-4-3-2-1</button>
+                <button class="btn" onclick="copyText('5 coisas que eu vejo. 4 que eu toco. 3 que eu ouco. 2 cheiros. 1 gosto.')">📋 Copiar</button>
+              </div>
+              <p class="muted" id="groundingOut">Clique em 5-4-3-2-1 para guiar.</p>
+
+              <details>
+                <summary>Se a mente estiver "correndo" (ruminacao)</summary>
+                <ul class="list">
+                  <li>Nomeie: "isso e uma historia que meu cerebro esta contando".</li>
+                  <li>Volte para uma tarefa fisica simples: banho, caminhar, lavar louca, arrumar cama.</li>
+                  <li>Evite: redes sociais, alcool, mensagens longas, "investigar" o outro.</li>
+                </ul>
+              </details>
+            </div>
+
+            <div class="card">
+              <h3>4) Checklist de contencao (faca 3 itens)</h3>
+              <div class="checklist" data-store="criseChecklist">
+                <label><input type="checkbox" data-k="1"/><div><b>Agua + alimento leve</b><br><small>hipoglicemia piora irritacao/ansiedade</small></div></label>
+                <label><input type="checkbox" data-k="2"/><div><b>Banho morno</b><br><small>reduz tensao corporal</small></div></label>
+                <label><input type="checkbox" data-k="3"/><div><b>Andar 10 min</b><br><small>sem musica triste / sem ruminando</small></div></label>
+                <label><input type="checkbox" data-k="4"/><div><b>Ambiente seguro</b><br><small>tirar objetos perigosos; ficar acompanhada se necessario</small></div></label>
+                <label><input type="checkbox" data-k="5"/><div><b>Mensagem curta</b><br><small>pedir presenca, sem discussao</small></div></label>
+              </div>
+              <div class="cta-bar">
+                <button class="btn" onclick="copyText('Estou em pico emocional. Preciso de presenca e calma. Nao consigo discutir agora. Voce pode so ficar comigo 20 minutos?')">📋 Copiar mensagem</button>
+                <button class="btn" onclick="scrollToTop()">↑ Topo</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>5) Se a crise foi por relacionamento (script "anti-incendio")</h3>
+            <details open>
+              <summary>Modelo (curto, sem ataque)</summary>
+              <p class="muted">Use do jeito mais simples possivel. Sem "lista de erros".</p>
+              <ul class="list">
+                <li><b>Fato:</b> "Quando voce ficou offline..."</li>
+                <li><b>Reacao:</b> "...meu corpo interpretou como rejeicao e eu acelerei."</li>
+                <li><b>Pedido:</b> "Preciso de uma frase curta: 'to ocupado, volto em X'."</li>
+                <li><b>Limite:</b> "Se virar discussao, eu pauso e volto."</li>
+              </ul>
+              <div class="cta-bar">
+                <button class="btn" onclick="copyText('Quando voce some, meu corpo interpreta como rejeicao e eu acelero. Eu nao quero briga. Preciso so de uma frase curta: “to ocupado, volto em X”. Se virar discussao eu pauso e volto.')">📋 Copiar script</button>
+              </div>
+            </details>
+          </div>
+
+          <div class="footer">
+            <span class="kbd">Dica</span> Se voce sente que "vai fazer besteira", use a aba <b>⚡ Emergencia</b>, complete respiracao + grounding + 3 itens do checklist, e so entao mande uma mensagem curta. Nao negocie com a urgencia.
+          </div>
+        </section>
+
+        <!-- ROTINA -->
+        <section class="panel" id="panel-rotina">
+          <h2>🧭 Rotina anti-crise - o que reduz picos (sem romantizar)</h2>
+
+          <div class="row">
+            <div class="card">
+              <h3>Higiene do sono (minimo viavel)</h3>
+              <ul class="list">
+                <li>Horario de acordar <b>fixo</b> (mesmo no fim de semana).</li>
+                <li>Luz forte pela manha (janela/sol 10-15 min).</li>
+                <li>Noite: reduzir telas 60 min antes.</li>
+                <li>Se pesadelos piorarem apos mudanca de medicacao: registrar e avisar.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Rotina de regulacao (10-20 min)</h3>
+              <div class="checklist" data-store="rotinaChecklist">
+                <label><input type="checkbox" data-k="1"/><div><b>Corpo:</b> caminhada leve / alongamento</div></label>
+                <label><input type="checkbox" data-k="2"/><div><b>Foco:</b> 1 tarefa simples (sem perfeccionismo)</div></label>
+                <label><input type="checkbox" data-k="3"/><div><b>Contato:</b> 1 mensagem segura (sem cobranca)</div></label>
+                <label><input type="checkbox" data-k="4"/><div><b>Ambiente:</b> 5 min organizando um espaco</div></label>
+              </div>
+              <p class="muted">Se houver suspeita de TEA: rotinas previsiveis reduzem o "ruido social" e a exaustao.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>3 gatilhos silenciosos (comuns em TPB + sensibilidade social)</h3>
+            <ul class="list">
+              <li><b>Fadiga social</b> -> irritacao, impulsividade, vontade de sumir.</li>
+              <li><b>Ambiguidade</b> ("ok." / silencio / mudanca de tom) -> cerebro completa com ameaca.</li>
+              <li><b>Fome/sono</b> -> o "cortex" cai, o impulso manda.</li>
+            </ul>
+          </div>
+
+          <details>
+            <summary>Plano semanal simples (para evitar caos)</summary>
+            <div class="card">
+              <p class="muted">Escolha 2 coisas fixas por semana e nao negocie na crise.</p>
+              <ul class="list">
+                <li><b>Movimento:</b> 3x na semana (mesmo 12 min).</li>
+                <li><b>Higiene:</b> banho + alimentacao basica.</li>
+                <li><b>Vinculos:</b> 1 encontro curto com pessoa segura (sem "DR").</li>
+                <li><b>Recuperacao:</b> 1 bloco de descanso real (sem tela infinita).</li>
+              </ul>
+            </div>
+          </details>
+        </section>
+
+        <!-- ENTENDER -->
+        <section class="panel" id="panel-entender">
+          <h2>🧠 Entender TPB + suspeita de TEA - sem moralismo, sem desculpa</h2>
+
+          <div class="card">
+            <h3>O que costuma acontecer no TPB</h3>
+            <ul class="list">
+              <li><b>Detector de ameaca hipersensivel</b>: rejeicao parece "risco real".</li>
+              <li><b>Impulsividade</b>: o "freio" (ponderacao) chega <i>depois</i>.</li>
+              <li><b>Vinculos intensos</b>: necessidade de seguranca + medo de perder.</li>
+              <li><b>Oscilacoes</b>: idealizacao <-> desvalorizacao quando o corpo entra em alarme.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Como a suspeita de TEA pode se misturar</h3>
+            <ul class="list">
+              <li><b>Leitura social dificil</b> (tons, indiretas, sutilezas) -> aumenta mal-entendidos.</li>
+              <li><b>Sobrecarga sensorial</b> (barulho/luz/multidao) -> exaustao -> irritabilidade.</li>
+              <li><b>Necessidade de previsibilidade</b> -> mudancas bruscas disparam ansiedade.</li>
+              <li><b>Mascaramento</b> (se esforcar demais socialmente) -> "apagao" depois.</li>
+            </ul>
+            <p class="muted">Nao e rotulo por moda. E hipotese clinica: entender isso ajuda a ajustar comunicacao e rotina.</p>
+          </div>
+
+          <details>
+            <summary>Diferenca pratica (o que fazer com essa informacao)</summary>
+            <div class="card">
+              <ul class="list">
+                <li><b>Menos ambiguidade:</b> combine horarios e combine "mensagens-padrao".</li>
+                <li><b>Menos estimulo na crise:</b> reduzir discussao e "provar ponto".</li>
+                <li><b>Mais estrutura:</b> checklists, passos, rotinas, limites claros.</li>
+              </ul>
+            </div>
+          </details>
+
+          <div class="divider"></div>
+
+          <h3>Mini-mapa: "acelerador e freio" (pra lembrar na crise)</h3>
+          <div class="card">
+            <p><span class="pill"><b>Acelerador</b> ameaca + urgencia</span> -> <span class="pill"><b>Corpo</b> panico/raiva</span> -> <span class="pill"><b>Acao</b> impulsiva</span></p>
+            <p class="muted">O freio chega depois. Por isso a regra e: <b>pausar primeiro</b>, comunicar depois, decidir por ultimo.</p>
+          </div>
+        </section>
+
+        <!-- RELACOES -->
+        <section class="panel" id="panel-relacoes">
+          <h2>🗣️ Relacionamentos - scripts prontos para reduzir briga e aumentar clareza</h2>
+
+          <div class="row">
+            <div class="card">
+              <h3>Script 1 - "Eu nao quero brigar"</h3>
+              <p class="muted">Use quando percebe que vai escalar.</p>
+              <div class="cta-bar">
+                <button class="btn" onclick="copyText('Eu nao quero brigar. Meu corpo acelerou e eu preciso de 20 minutos pra voltar ao normal. Eu volto e a gente conversa com calma.')">📋 Copiar</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Script 2 - "Ambiguidade me derruba"</h3>
+              <p class="muted">Bom para suspeita de TEA + TPB.</p>
+              <div class="cta-bar">
+                <button class="btn" onclick="copyText('Quando fica ambiguo (silencio/ok seco), meu cerebro preenche com ameaca. Me ajuda com uma frase clara? “to ocupado, volto em X”.')">📋 Copiar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Script 3 - "Pedido especifico" (sem cobranca)</h3>
+            <div class="cta-bar">
+              <button class="btn" onclick="copyText('Eu preciso de uma coisa especifica: quando voce mudar de plano, me avisa antes. Isso evita que eu entre em alarme.')">📋 Copiar</button>
+              <button class="btn" onclick="copyText('Eu to sensivel hoje. Se eu parecer dura, nao e contra voce. Me da um pouco de previsibilidade e carinho simples.')">📋 Copiar 2</button>
+            </div>
+          </div>
+
+          <details>
+            <summary>Quando voce esta impulsiva: regras simples</summary>
+            <ul class="list">
+              <li>Nao mandar textao.</li>
+              <li>Nao "investigar" (stalk, checar, confirmar).</li>
+              <li>Nao decidir termino, bloquear, expor, pedir prova.</li>
+              <li>Fazer: pausa + mensagem curta + combinar horario pra conversar.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Se o outro esta agressivo / invalidador</summary>
+            <ul class="list">
+              <li><b>Limite:</b> "Eu converso quando houver respeito. Agora eu pauso."</li>
+              <li>Se persistir: afastar-se do ambiente e procurar pessoa segura.</li>
+              <li>Prioridade: seguranca e nao escalada.</li>
+            </ul>
+          </details>
+        </section>
+
+        <!-- CHECKLISTS -->
+        <section class="panel" id="panel-checklists">
+          <h2>✅ Checklists - use como "piloto automatico"</h2>
+
+          <div class="row">
+            <div class="card">
+              <h3>Checklist diario (5 itens)</h3>
+              <div class="checklist" data-store="dailyChecklist">
+                <label><input type="checkbox" data-k="1"/><div><b>Comi algo</b><br><small>nao precisa ser perfeito</small></div></label>
+                <label><input type="checkbox" data-k="2"/><div><b>Bebi agua</b></div></label>
+                <label><input type="checkbox" data-k="3"/><div><b>Dormi minimamente</b><br><small>se nao, priorizar recuperacao</small></div></label>
+                <label><input type="checkbox" data-k="4"/><div><b>Me movi 10 min</b></div></label>
+                <label><input type="checkbox" data-k="5"/><div><b>Fiz 1 coisa pequena</b><br><small>evitar "tudo ou nada"</small></div></label>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Checklist "antes de mandar mensagem"</h3>
+              <div class="checklist" data-store="msgChecklist">
+                <label><input type="checkbox" data-k="1"/><div><b>Eu respirei 2 min</b></div></label>
+                <label><input type="checkbox" data-k="2"/><div><b>Eu sei o que estou pedindo (1 coisa)</b></div></label>
+                <label><input type="checkbox" data-k="3"/><div><b>Eu consigo escrever em 2 linhas</b></div></label>
+                <label><input type="checkbox" data-k="4"/><div><b>Eu aceito "agora nao" sem escalar</b></div></label>
+              </div>
+              <div class="cta-bar">
+                <button class="btn" onclick="copyText('Estou sensivel e preciso de uma coisa simples: me avisa quando puder falar. Sem pressa.')">📋 Copiar mensagem curta</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Checklist "minha crise esta virando perigosa?"</h3>
+            <p class="muted">Se marcar 2 ou mais, procure ajuda imediata (pessoa segura / emergencia).</p>
+            <div class="checklist" data-store="riskChecklist">
+              <label><input type="checkbox" data-k="1"/><div><b>Eu nao confio em mim agora</b></div></label>
+              <label><input type="checkbox" data-k="2"/><div><b>Estou com impulso de me machucar / me colocar em risco</b></div></label>
+              <label><input type="checkbox" data-k="3"/><div><b>Estou desorientada / fora de mim</b></div></label>
+              <label><input type="checkbox" data-k="4"/><div><b>Usei alcool/drogas e piorou</b></div></label>
+              <label><input type="checkbox" data-k="5"/><div><b>Nao tenho ninguem por perto</b></div></label>
+            </div>
+            <div class="cta-bar">
+              <button class="btn danger" onclick="showToast('Se houver risco real, ligue 192/190. Se for crise emocional, 188. Nao fique sozinha.')">📌 Lembrete</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- MED -->
+        <section class="panel" id="panel-med">
+          <h2>💊 Medicacao & sintomas - monitoramento objetivo</h2>
+
+          <div class="card">
+            <h3>Regra de ouro</h3>
+            <ul class="list">
+              <li><b>Nao ajuste dose por conta propria.</b> Use este espaco para registrar e levar ao medico.</li>
+              <li>Alguns efeitos podem ocorrer em mudancas de medicacao (ex.: tontura, sono, alteracao de apetite). <b>O que importa e intensidade, duracao e risco.</b></li>
+            </ul>
+          </div>
+
+          <div class="row">
+            <div class="card">
+              <h3>Diario rapido (preencher 1x/dia)</h3>
+              <label class="muted">Data</label>
+              <input class="input" id="logDate" type="date" />
+              <label class="muted" style="margin-top:10px; display:block">Sintomas (0-10)</label>
+              <div class="mini">
+                <input class="input" id="logAns" placeholder="Ansiedade (0-10)" inputmode="numeric" />
+                <input class="input" id="logImp" placeholder="Impulsividade (0-10)" inputmode="numeric" />
+                <input class="input" id="logSono" placeholder="Sono (horas)" inputmode="numeric" />
+                <input class="input" id="logApet" placeholder="Apetite/compulsao (0-10)" inputmode="numeric" />
+              </div>
+              <label class="muted" style="margin-top:10px; display:block">Notas (curto)</label>
+              <textarea id="logNotes" placeholder="Ex.: 'tontura pela manha', 'pesadelos', 'briga por mensagem', 'muita fome'..."></textarea>
+              <div class="cta-bar">
+                <button class="btn primary" id="btnSaveLog">💾 Salvar registro</button>
+                <button class="btn" id="btnExportLog">⬇️ Exportar (texto)</button>
+              </div>
+              <p class="muted" id="logCount"></p>
+            </div>
+
+            <div class="card">
+              <h3>Quando avisar rapido (sinais de alerta)</h3>
+              <ul class="list">
+                <li><span class="danger-text"><b>Desmaio</b>, confusao, fraqueza em um lado, fala enrolada.</span></li>
+                <li><span class="danger-text"><b>Agitacao extrema</b>, insonia total varios dias, ideias aceleradas fora do seu padrao.</span></li>
+                <li><span class="danger-text"><b>Ideias de autoagressao</b> ou risco real.</span></li>
+                <li><span class="warn-text"><b>Ganho de peso rapido</b> + compulsao intensa persistente.</span></li>
+                <li><span class="warn-text"><b>Pesadelos</b> e piora de tontura persistente.</span></li>
+              </ul>
+              <details>
+                <summary>Dramin ajuda tontura?</summary>
+                <p class="muted">Algumas pessoas usam anti-histaminicos para nausea/tontura, mas pode dar sono e nao resolve causa. Em tontura persistente, o ideal e <b>avaliar origem</b> (pressao, labirinto, efeito de medicacao, ansiedade, etc.).</p>
+                <p class="muted"><b>Regra:</b> nao misturar medicamentos sem orientar com seu medico. Registre e comunique.</p>
+              </details>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Suplementos / "Juba de leao" (cogumelo)</h3>
+            <p class="muted">Pode ter relatos de melhora de foco/atencao em algumas pessoas, mas evidencia e variavel e qualidade do produto e um ponto critico. Se decidir usar, faca isso de forma <b>padronizada</b> e avise seu medico para checar interacoes e efeitos.</p>
+          </div>
+        </section>
+
+        <!-- FAMILIA -->
+        <section class="panel" id="panel-familia">
+          <h2>👥 Para familia / parceiro - como ajudar sem virar refem</h2>
+
+          <div class="row">
+            <div class="card">
+              <h3>Pilar 1 - Validacao (sem concordar com tudo)</h3>
+              <ul class="list">
+                <li>"Eu entendi que voce ficou com medo."</li>
+                <li>"Faz sentido que isso te acione."</li>
+                <li><b>Evitar:</b> "voce esta exagerando", "isso e drama".</li>
+              </ul>
+              <div class="cta-bar">
+                <button class="btn" onclick="copyText('Eu entendi que isso te assustou. Eu to aqui. Vamos respirar e depois a gente decide o que fazer.')">📋 Copiar frase</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Pilar 2 - Previsibilidade</h3>
+              <ul class="list">
+                <li>Combinar "mensagens-padrao" para ausencia.</li>
+                <li>Combinar <b>pausa</b> em discussao (20-40 min).</li>
+                <li>Em suspeita de TEA: clareza reduz caos.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Pilar 3 - Comunicacao (curta, concreta)</h3>
+            <details open>
+              <summary>Modelo em 3 linhas</summary>
+              <ul class="list">
+                <li><b>Eu vejo:</b> "Voce esta muito ativada."</li>
+                <li><b>Eu faco:</b> "Vou ficar aqui e te ajudar a atravessar."</li>
+                <li><b>Eu peco:</b> "Vamos pausar mensagens e respirar 3 min."</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>O que NAO fazer na crise</summary>
+              <ul class="list">
+                <li>Debater "quem tem razao".</li>
+                <li>Fazer ameaca ("vou embora", "acabou").</li>
+                <li>Ironia / humilhacao / sermao.</li>
+                <li>Textoes e prints.</li>
+              </ul>
+            </details>
+          </div>
+
+          <div class="card">
+            <h3>Limite saudavel (frase pronta)</h3>
+            <div class="cta-bar">
+              <button class="btn" onclick="copyText('Eu te amo, mas eu nao converso sob grito/ofensa. Eu pauso e volto quando estiver respeitoso.')">📋 Copiar</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- DOCS -->
+        <section class="panel" id="panel-docs">
+          <h2>📎 Documentos - organize para nao virar caos</h2>
+
+          <div class="row">
+            <div class="card">
+              <h3>Checklist de documentos (pasta no celular)</h3>
+              <div class="checklist" data-store="docsChecklist">
+                <label><input type="checkbox" data-k="1"/><div><b>Receitas (PDF)</b><br><small>nome + data</small></div></label>
+                <label><input type="checkbox" data-k="2"/><div><b>Atestados</b><br><small>se aplicavel</small></div></label>
+                <label><input type="checkbox" data-k="3"/><div><b>Exames</b><br><small>em PDF ou foto legivel</small></div></label>
+                <label><input type="checkbox" data-k="4"/><div><b>Lista atual de medicacoes</b><br><small>dose + horario</small></div></label>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Notas rapidas para enviar ao medico</h3>
+              <textarea id="noteToDoc" placeholder="Escreva aqui: o que mudou, quando comecou, intensidade, impacto no trabalho/sono/apetite."></textarea>
+              <div class="cta-bar">
+                <button class="btn primary" onclick="copyNoteToDoc()">📋 Copiar nota</button>
+                <button class="btn" onclick="saveNote()">💾 Salvar</button>
+              </div>
+              <p class="muted">Dica: envie texto curto + diario de sintomas (aba Medicacao).</p>
+            </div>
+          </div>
+
+          <details>
+            <summary>Como organizar nomes de arquivo</summary>
+            <div class="card">
+              <p class="muted">Padrao simples:</p>
+              <ul class="list">
+                <li><span class="kbd">2025-07-14_receita_aripiprazol.pdf</span></li>
+                <li><span class="kbd">2025-12-01_atestado_1dia.pdf</span></li>
+                <li><span class="kbd">2025-08-01_exames_shiftcloud.pdf</span></li>
+              </ul>
+            </div>
+          </details>
+        </section>
+      </main>
+    </div>
+
+    <div class="footer" style="margin-top:16px">
+      <b>Assinatura clinica</b><br/>
+      Dr. Fabio Henrique de Lima Schmidt - CRM/SP 183549<br/>
+      <span class="muted">Material educativo de apoio. Nao substitui consulta nem atendimento de urgencia.</span>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+  // Tabs
+  const tabs = document.querySelectorAll('.tab');
+  const panels = {
+    crise: document.getElementById('panel-crise'),
+    rotina: document.getElementById('panel-rotina'),
+    entender: document.getElementById('panel-entender'),
+    relacoes: document.getElementById('panel-relacoes'),
+    checklists: document.getElementById('panel-checklists'),
+    med: document.getElementById('panel-med'),
+    familia: document.getElementById('panel-familia'),
+    docs: document.getElementById('panel-docs'),
+  };
+
+  function openTab(key){
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === key));
+    Object.entries(panels).forEach(([k, el]) => el.classList.toggle('active', k === key));
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    localStorage.setItem('cc_activeTab', key);
+  }
+  tabs.forEach(t => t.addEventListener('click', () => openTab(t.dataset.tab)));
+  document.getElementById('btnQuickCrisis').addEventListener('click', () => openTab('crise'));
+
+  const savedTab = localStorage.getItem('cc_activeTab');
+  if(savedTab && panels[savedTab]) openTab(savedTab);
+
+  // Toast
+  const toast = document.getElementById('toast');
+  let toastTimer = null;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  // Copy
+  async function copyText(txt){
+    try{
+      await navigator.clipboard.writeText(txt);
+      showToast('Copiado.');
+    }catch(e){
+      const ta = document.createElement('textarea');
+      ta.value = txt;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Copiado.');
+    }
+  }
+
+  // Print / Reset
+  document.getElementById('btnPrint').addEventListener('click', () => window.print());
+  document.getElementById('btnReset').addEventListener('click', () => {
+    if(!confirm('Zerar checklists, registros e notas deste dispositivo?')) return;
+    Object.keys(localStorage).forEach(k => {
+      if(k.startsWith('cc_') || k.startsWith('ccLog_') || k === 'ccLog_items' || k === 'cc_noteToDoc') localStorage.removeItem(k);
+    });
+    location.reload();
+  });
+
+  // Checklists store
+  function initChecklists(){
+    document.querySelectorAll('.checklist').forEach(box => {
+      const store = box.dataset.store;
+      const key = 'cc_' + store;
+      const data = JSON.parse(localStorage.getItem(key) || '{}');
+      box.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        const id = cb.dataset.k;
+        cb.checked = !!data[id];
+        cb.addEventListener('change', () => {
+          data[id] = cb.checked;
+          localStorage.setItem(key, JSON.stringify(data));
+        });
+      });
+    });
+  }
+  initChecklists();
+
+  // Breathing timer
+  let breathLeft = 180;
+  let breathInterval = null;
+  const breathTimerEl = document.getElementById('breathTimer');
+  function fmt(sec){
+    const m = String(Math.floor(sec/60)).padStart(2,'0');
+    const s = String(sec%60).padStart(2,'0');
+    return `${m}:${s}`;
+  }
+  function renderBreath(){ breathTimerEl.textContent = fmt(breathLeft); }
+  function breathStart(){
+    if(breathInterval) return;
+    breathInterval = setInterval(() => {
+      breathLeft--;
+      if(breathLeft <= 0){
+        breathLeft = 0;
+        renderBreath();
+        breathStop();
+        showToast('Respiracao concluida.');
+        playBeep(880, 0.10);
+      }else{
+        renderBreath();
+      }
+    }, 1000);
+    showToast('Respiracao: inspire 4s, segure 2s, solte 6s.');
+  }
+  function breathStop(){ clearInterval(breathInterval); breathInterval = null; }
+  function breathReset(){ breathStop(); breathLeft = 180; renderBreath(); }
+  document.getElementById('btnBreathStart').addEventListener('click', breathStart);
+  document.getElementById('btnBreathPause').addEventListener('click', breathStop);
+  document.getElementById('btnBreathReset').addEventListener('click', breathReset);
+  renderBreath();
+
+  // 5-4-3-2-1
+  const groundingOut = document.getElementById('groundingOut');
+  const steps = [
+    '5 coisas que voce ve (nomeie em voz baixa).',
+    '4 coisas que voce toca (sinta a textura).',
+    '3 sons que voce ouve.',
+    '2 cheiros.',
+    '1 gosto (ou um gole de agua).',
+    'Feito. Agora decida a proxima acao pequena.'
+  ];
+  function start54321(){
+    let i = 0;
+    groundingOut.textContent = steps[i];
+    showToast('Grounding iniciado.');
+    const interval = setInterval(() => {
+      i++;
+      groundingOut.textContent = steps[i] || 'Feito.';
+      if(i >= steps.length - 1) clearInterval(interval);
+    }, 2200);
+  }
+
+  // Beep
+  function playBeep(freq=660, dur=0.08){
+    try{
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      o.type = 'sine';
+      o.frequency.value = freq;
+      g.gain.value = 0.06;
+      o.connect(g); g.connect(ctx.destination);
+      o.start();
+      setTimeout(() => { o.stop(); ctx.close(); }, dur*1000);
+    }catch(e){}
+    showToast('Pausa.');
+  }
+
+  function scrollToTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+
+  // Notes
+  const noteEl = document.getElementById('noteToDoc');
+  const savedNote = localStorage.getItem('cc_noteToDoc');
+  if(savedNote) noteEl.value = savedNote;
+
+  function saveNote(){ localStorage.setItem('cc_noteToDoc', noteEl.value.trim()); showToast('Nota salva.'); }
+  function copyNoteToDoc(){ const txt = noteEl.value.trim() || 'Sem nota preenchida.'; copyText(txt); }
+  noteEl.addEventListener('input', () => localStorage.setItem('cc_noteToDoc', noteEl.value));
+
+  // Symptom log
+  const logKey = 'ccLog_items';
+  function getLogs(){ return JSON.parse(localStorage.getItem(logKey) || '[]'); }
+  function setLogs(items){ localStorage.setItem(logKey, JSON.stringify(items)); updateLogCount(); }
+  function updateLogCount(){
+    const c = getLogs().length;
+    document.getElementById('logCount').textContent = c ? `${c} registro(s) salvo(s) neste dispositivo.` : 'Nenhum registro salvo ainda.';
+  }
+  updateLogCount();
+
+  document.getElementById('btnSaveLog').addEventListener('click', () => {
+    const item = {
+      date: document.getElementById('logDate').value || new Date().toISOString().slice(0,10),
+      ansiedade: document.getElementById('logAns').value.trim(),
+      impulsividade: document.getElementById('logImp').value.trim(),
+      sono: document.getElementById('logSono').value.trim(),
+      apetite: document.getElementById('logApet').value.trim(),
+      notas: document.getElementById('logNotes').value.trim(),
+      ts: Date.now()
+    };
+    const items = getLogs();
+    items.unshift(item);
+    setLogs(items.slice(0, 120));
+    showToast('Registro salvo.');
+    document.getElementById('logNotes').value = '';
+  });
+
+  document.getElementById('btnExportLog').addEventListener('click', async () => {
+    const items = getLogs();
+    if(!items.length){ showToast('Nada para exportar.'); return; }
+    const lines = items.map((x, idx) => {
+      return [
+        `#${items.length-idx} - ${x.date}`,
+        `Ansiedade: ${x.ansiedade || '-'} | Impulsividade: ${x.impulsividade || '-'} | Sono: ${x.sono || '-'} | Apetite/compulsao: ${x.apetite || '-'}`,
+        `Notas: ${x.notas || '-'}`,
+        '-'
+      ].join('\\n');
+    }).join('\\n');
+    await copyText(lines);
+    showToast('Exportado para a area de transferencia.');
+  });
+</script>
+</body>
+</html>
