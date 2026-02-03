@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Guia de Bolso — Família | Crise sem refém</title>
-  <meta name="description" content="Guia de bolso para familiares: scripts prontos para crise, prevenção e APP SOS. Conteúdo completo em videoaulas com 50% OFF por tempo limitado."/>
+  <title>SOS Crises — Guia de bolso</title>
+  <meta name="description" content="SOS Crises: respiração guiada, o que dizer / não dizer e semáforo de gravidade. Conteúdo completo em videoaulas com 50% OFF por tempo limitado."/>
   <style>
     :root{
       --bg:#0b0f14; --card:#121826; --muted:#9aa4b2; --text:#e6edf3;
-      --accent:#4fd1c5; --accent2:#7aa2ff; --danger:#ff6b6b;
+      --accent:#4fd1c5; --accent2:#7aa2ff; --danger:#ff4d4d; --warn:#ffd166; --ok:#2ee59d;
       --border: rgba(255,255,255,.08);
       --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
@@ -22,116 +22,192 @@
       color:var(--text);
     }
     .wrap{max-width:980px; margin:0 auto; padding:22px 18px 140px;}
-    header{
-      border:1px solid var(--border); background:rgba(18,24,38,.78); backdrop-filter: blur(10px);
-      border-radius:18px; padding:18px 16px; box-shadow: var(--shadow);
-      position:relative; overflow:hidden;
+
+    /* HERO banner */
+    .banner{
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(18,24,38,.82), rgba(18,24,38,.62));
+      backdrop-filter: blur(10px);
+      border-radius:20px;
+      padding:18px 16px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
     }
-    header:before{
-      content:""; position:absolute; inset:-60px -80px auto auto; width:240px; height:240px; border-radius:999px;
-      background: radial-gradient(circle at 30% 30%, rgba(79,209,197,.28), transparent 60%);
-      filter: blur(0px);
+    .banner:before{
+      content:""; position:absolute; inset:-90px -120px auto auto; width:320px; height:320px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,77,77,.22), transparent 60%);
+      pointer-events:none;
+    }
+    .banner:after{
+      content:""; position:absolute; inset:auto auto -120px -140px; width:360px; height:360px; border-radius:999px;
+      background: radial-gradient(circle at 40% 40%, rgba(79,209,197,.16), transparent 60%);
       pointer-events:none;
     }
 
-    /* HERO / COPY */
-    .brandbar{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+    .toprow{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap}
     .eyebrow{
       font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
       display:flex; align-items:center; gap:8px;
     }
     .dot{
       width:8px; height:8px; border-radius:999px;
-      background:linear-gradient(135deg, rgba(79,209,197,.9), rgba(122,162,255,.9));
-      box-shadow:0 0 0 4px rgba(79,209,197,.12);
+      background:linear-gradient(135deg, rgba(255,77,77,.95), rgba(122,162,255,.80));
+      box-shadow:0 0 0 4px rgba(255,77,77,.12);
     }
     .headline{
-      margin:8px 0 6px; font-size:28px; letter-spacing:.2px; line-height:1.05;
+      margin:8px 0 6px; font-size:30px; letter-spacing:.2px; line-height:1.05;
+      font-weight:950;
     }
     .sub{margin:0; color:var(--muted); font-size:14px; line-height:1.45}
-    .value{
-      margin:10px 0 0;
-      font-size:15px; line-height:1.35; color:var(--text);
-      max-width:720px;
+    .micro{
+      margin-top:10px; color:var(--text); font-size:15px; line-height:1.35; max-width:760px;
     }
-    .value b{font-weight:900}
-    .tagrow{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
-    .tag{
+    .micro b{font-weight:950}
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    .chip{
       border:1px solid var(--border);
       background:rgba(255,255,255,.04);
       padding:7px 10px; border-radius:999px;
-      font-size:12px; font-weight:850;
+      font-size:12px; font-weight:900;
     }
-    .tag.hot{border-color:rgba(255,107,107,.28); background:rgba(255,107,107,.12)}
-    .tag.cool{border-color:rgba(79,209,197,.25); background:rgba(79,209,197,.10)}
-    .tag.blue{border-color:rgba(122,162,255,.25); background:rgba(122,162,255,.10)}
-    .microproof{
-      margin-top:10px; color:var(--muted); font-size:12px; line-height:1.4;
-    }
+    .chip.red{border-color:rgba(255,77,77,.30); background:rgba(255,77,77,.12)}
+    .chip.blue{border-color:rgba(122,162,255,.25); background:rgba(122,162,255,.10)}
+    .chip.teal{border-color:rgba(79,209,197,.25); background:rgba(79,209,197,.10)}
 
-    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-    button,.btn{
-      border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text);
-      padding:11px 13px; border-radius:12px; cursor:pointer; font-weight:900;
+    /* Ícones de navegação (cards) */
+    .navgrid{display:grid; grid-template-columns:1fr; gap:10px; margin-top:14px}
+    @media(min-width:780px){ .navgrid{grid-template-columns:1.2fr 1fr 1fr} }
+
+    .navcard{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:14px;
+      cursor:pointer;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+      text-align:left;
     }
-    .primary{
-      background:linear-gradient(135deg, rgba(79,209,197,.26), rgba(122,162,255,.20));
-      border-color:rgba(79,209,197,.30)
+    .navcard:hover{transform:translateY(-1px)}
+    .navtitle{font-weight:950; font-size:16px; margin:0}
+    .navdesc{margin:8px 0 0; color:var(--muted); font-size:12px; line-height:1.35}
+    .icon{
+      width:42px; height:42px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:20px; font-weight:950;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      margin-bottom:10px;
+    }
+    .navcard.red{border-color:rgba(255,77,77,.25); background:rgba(255,77,77,.08)}
+    .navcard.red .icon{border-color:rgba(255,77,77,.32); background:rgba(255,77,77,.16)}
+    .navcard.green{border-color:rgba(46,229,157,.22); background:rgba(46,229,157,.08)}
+    .navcard.green .icon{border-color:rgba(46,229,157,.28); background:rgba(46,229,157,.14)}
+    .navcard.yellow{border-color:rgba(255,209,102,.20); background:rgba(255,209,102,.08)}
+    .navcard.yellow .icon{border-color:rgba(255,209,102,.26); background:rgba(255,209,102,.14)}
+
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    button{
+      border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text);
+      padding:11px 13px; border-radius:12px; cursor:pointer; font-weight:950;
     }
     .ghost{background:rgba(255,255,255,.02)}
-    .danger{background:rgba(255,107,107,.14); border-color:rgba(255,107,107,.25)}
-    .hint{
-      font-size:12px; color:var(--muted); margin-top:10px; line-height:1.45;
-    }
+    .copy{background:linear-gradient(135deg, rgba(79,209,197,.26), rgba(122,162,255,.20)); border-color:rgba(79,209,197,.30)}
 
+    /* Sections */
     .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:12px; margin-top:14px}
     .card{
       grid-column: span 12;
-      border:1px solid var(--border); background:rgba(18,24,38,.62); backdrop-filter: blur(8px);
-      border-radius:16px; padding:14px; box-shadow: var(--shadow);
+      border:1px solid var(--border);
+      background:rgba(18,24,38,.62);
+      backdrop-filter: blur(8px);
+      border-radius:16px;
+      padding:14px;
+      box-shadow: var(--shadow);
     }
     .kicker{color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.12em}
-    .title{margin:6px 0 10px; font-size:16px}
-    .pillrow{display:flex; gap:10px; flex-wrap:wrap}
-    .pill{
-      padding:9px 11px; border-radius:999px; border:1px solid var(--border);
-      background:rgba(255,255,255,.03); cursor:pointer; font-weight:900;
-    }
-    .pill.active{outline:2px solid rgba(79,209,197,.35); border-color:rgba(79,209,197,.35)}
+    .title{margin:6px 0 10px; font-size:16px; font-weight:950}
     .two{display:grid; grid-template-columns:1fr; gap:10px}
     @media(min-width:780px){ .two{grid-template-columns:1fr 1fr} }
     .box{
-      border:1px solid var(--border); background:rgba(255,255,255,.03);
-      border-radius:14px; padding:12px;
-    }
-    .box h3{margin:0 0 8px; font-size:14px}
-    .box p{margin:0 0 8px; line-height:1.5}
-    .muted{color:var(--muted)}
-    .small{font-size:12px}
-    .copyrow{display:flex; gap:10px; flex-wrap:wrap}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;}
-    details{border:1px solid var(--border); border-radius:14px; padding:10px 12px; background:rgba(255,255,255,.02)}
-    details summary{cursor:pointer; font-weight:900}
-    details p{margin:10px 0 0; color:var(--muted); line-height:1.55}
-    a{color:var(--text); text-decoration:none}
-
-    /* APP SOS */
-    .sosGrid{display:grid; grid-template-columns:1fr; gap:10px}
-    @media(min-width:780px){ .sosGrid{grid-template-columns:1fr 1fr 1fr} }
-    .sosBtn{
-      width:100%; text-align:left;
-      padding:12px; border-radius:14px;
       border:1px solid var(--border);
       background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:12px;
+    }
+    .box h3{margin:0 0 8px; font-size:14px; font-weight:950}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;}
+    .muted{color:var(--muted)}
+    .small{font-size:12px}
+
+    /* Respiração */
+    .breathWrap{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
+    .breathTitle{margin:0; font-weight:950; font-size:14px}
+    .breathControls{display:flex; gap:8px; flex-wrap:wrap}
+    .redbtn{background:rgba(255,77,77,.16); border-color:rgba(255,77,77,.32)}
+    .circleArea{
+      display:flex; align-items:center; justify-content:center;
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:rgba(255,255,255,.02);
+      margin-top:12px;
+      position:relative;
+      overflow:hidden;
+    }
+    .circle{
+      width:160px; height:160px; border-radius:999px;
+      border:2px solid rgba(255,255,255,.10);
+      display:flex; align-items:center; justify-content:center;
+      position:relative;
+      background: radial-gradient(circle at 30% 30%, rgba(255,77,77,.10), transparent 60%);
+      transform: scale(1);
+      transition: transform 3.9s ease-in-out;
+    }
+    .circle:before{
+      content:"";
+      position:absolute; inset:12px;
+      border-radius:999px;
+      border:2px solid rgba(255,255,255,.08);
+    }
+    .phase{
+      text-align:center;
+      font-weight:950;
+      font-size:14px;
+      line-height:1.25;
+    }
+    .phase span{display:block; font-size:12px; color:var(--muted); font-weight:800; margin-top:6px}
+    .expand{
+      position:absolute; top:10px; right:10px;
+      width:38px; height:38px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
       cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
       font-weight:950;
     }
-    .sosBtn span{display:block; margin-top:6px; font-weight:700; color:var(--muted); font-size:12px; line-height:1.35}
-    .sosBtn.red{border-color:rgba(255,107,107,.25); background:rgba(255,107,107,.10)}
-    .sosBtn.teal{border-color:rgba(79,209,197,.25); background:rgba(79,209,197,.10)}
-    .sosBtn.blue{border-color:rgba(122,162,255,.25); background:rgba(122,162,255,.10)}
+    .circle.big{width:240px; height:240px}
+    .circle.big:before{inset:18px}
 
-    /* CTA fixo (conversão) */
+    /* Semáforo */
+    .traffic{display:grid; grid-template-columns:1fr; gap:10px}
+    @media(min-width:780px){ .traffic{grid-template-columns:1fr 1fr 1fr} }
+    .tcard{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:12px;
+      background:rgba(255,255,255,.03);
+    }
+    .tcard h3{margin:0 0 8px; font-size:14px; font-weight:950}
+    .tcard ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.45}
+    .tcard.green{border-color:rgba(46,229,157,.25); background:rgba(46,229,157,.08)}
+    .tcard.yellow{border-color:rgba(255,209,102,.22); background:rgba(255,209,102,.08)}
+    .tcard.red{border-color:rgba(255,77,77,.25); background:rgba(255,77,77,.08)}
+
+    /* CTA fixo (mantido exatamente) */
     .sticky{
       position:fixed; left:0; right:0; bottom:0;
       background:rgba(11,15,20,.74); backdrop-filter: blur(12px);
@@ -170,9 +246,6 @@
       padding:10px 12px; border-radius:12px; display:none;
       box-shadow: var(--shadow); z-index:99;
     }
-
-    /* pequena ênfase nos textos */
-    .emph{font-weight:950}
   </style>
 </head>
 
@@ -180,188 +253,174 @@
   <div class="toast" id="toast"></div>
 
   <div class="wrap">
-    <header>
-      <div class="brandbar">
+    <!-- BANNER -->
+    <section class="banner">
+      <div class="toprow">
         <div>
-          <div class="eyebrow"><span class="dot"></span> Guia rápido para familiares</div>
-          <div class="headline">Crise sem refém.</div>
-          <p class="sub">Scripts curtos. Limites claros. Sem escalar.</p>
-
-          <p class="value">
-            Quando a casa vira campo de guerra, o erro não é “falta de amor”.
-            É <b>falar a coisa certa do jeito errado</b>.
-            Aqui você tem <b>frases prontas</b> para reduzir crise em <b>20 segundos</b> — e parar de virar refém do momento.
+          <div class="eyebrow"><span class="dot"></span> SOS CRISES</div>
+          <div class="headline">Pare de piorar sem querer.</div>
+          <p class="sub">Abra. Escolha. Copie. Use. Em <b>20 segundos</b>.</p>
+          <p class="micro">
+            Este guia é para quando a conversa já virou gatilho.
+            O foco aqui é <b>reduzir ativação</b> e <b>evitar frases que explodem tudo</b>.
           </p>
-
-          <div class="tagrow">
-            <span class="tag cool">copiar e colar</span>
-            <span class="tag blue">modo crise</span>
-            <span class="tag hot">APP SOS</span>
-          </div>
-
-          <div class="microproof">
-            Use agora → compartilhe com quem convive com você → volte aqui nas próximas crises.
+          <div class="chips">
+            <span class="chip red">🆘 crise</span>
+            <span class="chip teal">🫁 respiração</span>
+            <span class="chip blue">🟢🟡🔴 semáforo</span>
           </div>
         </div>
 
-        <div class="tagrow" style="align-self:flex-start; margin-top:0">
-          <span class="tag">2 min</span>
-          <span class="tag">prático</span>
-          <span class="tag">compartilhável</span>
+        <div class="btnrow">
+          <button class="ghost" id="btnShare">Compartilhar</button>
+          <button class="ghost" id="btnCopyLink">Copiar link</button>
         </div>
       </div>
 
-      <div class="actions">
-        <button class="primary" id="btnCrisis">Crise agora</button>
-        <button class="ghost" id="btnSOS">APP SOS</button>
-        <button class="ghost" id="btnPrevent">Prevenir</button>
-        <button class="ghost" id="btnShare">Compartilhar</button>
-        <button class="ghost" id="btnCopyLink">Copiar link</button>
+      <!-- ÍCONES / ROTAS -->
+      <div class="navgrid">
+        <div class="navcard red" id="goSOS" role="button" aria-label="Abrir SOS crise">
+          <div class="icon">🆘</div>
+          <p class="navtitle">SOS crise (agora)</p>
+          <p class="navdesc">Respiração guiada + frases curtas que reduzem escalada.</p>
+        </div>
+
+        <div class="navcard green" id="goSay" role="button" aria-label="Abrir o que dizer e o que não dizer">
+          <div class="icon">💬</div>
+          <p class="navtitle">O que dizer / não dizer</p>
+          <p class="navdesc">Sucinto. Copiável. Sem “sermão”.</p>
+        </div>
+
+        <div class="navcard yellow" id="goTraffic" role="button" aria-label="Abrir semáforo da crise">
+          <div class="icon">🚦</div>
+          <p class="navtitle">Semáforo da crise</p>
+          <p class="navdesc">Verde / Amarelo / Vermelho: quando buscar ajuda.</p>
+        </div>
       </div>
+    </section>
 
-      <p class="hint">
-        Aviso: conteúdo educativo e não substitui avaliação profissional. Se houver risco imediato/violência, procure emergência local.
-      </p>
-    </header>
-
-    <!-- APP SOS -->
+    <!-- SOS (respiração + sucinto) -->
     <section class="grid" id="secSOS" style="display:none">
       <div class="card">
-        <div class="kicker">APP SOS</div>
-        <div class="title">Três botões. Um objetivo: <span class="emph">parar a escalada</span>.</div>
+        <div class="kicker">SOS crise</div>
+        <div class="title">1 minuto para baixar ativação</div>
 
-        <div class="sosGrid">
-          <button class="sosBtn red" id="sos1">
-            1) Frase de contenção
-            <span>Baixa ativação e mostra presença sem ceder ao caos.</span>
-          </button>
-
-          <button class="sosBtn teal" id="sos2">
-            2) Limite simples
-            <span>Limite sem ameaça + retorno marcado (para não virar abandono).</span>
-          </button>
-
-          <button class="sosBtn blue" id="sos3">
-            3) Próximo passo
-            <span>Transforma “tudo ou nada” em 1 passo concreto agora.</span>
-          </button>
+        <div class="breathWrap">
+          <p class="breathTitle">Respiração guiada (4–2–6)</p>
+          <div class="breathControls">
+            <button class="redbtn" id="startBreath">Iniciar</button>
+            <button class="ghost" id="stopBreath">Parar</button>
+          </div>
         </div>
+
+        <div class="circleArea">
+          <button class="expand" id="toggleExpand" title="Expandir">⤢</button>
+          <div class="circle" id="circle">
+            <div class="phase" id="phase">
+              Pronto.
+              <span>Toque em “Iniciar”.</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="muted small" style="margin-top:10px">
+          Regra: se você tentar “explicar” com a pessoa desregulada, vira briga. Primeiro baixa ativação. Depois conversa.
+        </p>
       </div>
 
       <div class="card">
         <div class="two">
           <div class="box">
-            <h3>Texto SOS (copiável)</h3>
-            <p class="mono" id="sosText"></p>
-            <div class="copyrow">
-              <button class="primary" id="copySOS">Copiar SOS</button>
-              <button id="copySOSWhats">Copiar + WhatsApp</button>
+            <h3>O que dizer (1 frase)</h3>
+            <p class="mono" id="sayOne"></p>
+            <div class="btnrow">
+              <button class="copy" id="copySayOne">Copiar</button>
             </div>
-            <p class="muted small" style="margin-top:8px">
-              Dica: mande 1 frase só. Se você mandar um parágrafo, vira briga.
-            </p>
           </div>
 
           <div class="box">
-            <h3>O que você está fazendo aqui</h3>
-            <p class="muted">Você não está “ganhando a conversa”. Você está <span class="emph">reduzindo ativação</span>.</p>
-            <p class="muted">Ativação baixa → o cérebro volta a negociar. Ativação alta → qualquer frase vira ataque.</p>
+            <h3>O que não dizer</h3>
+            <p class="mono" id="dontOne"></p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- MODO CRISE -->
-    <section class="grid" id="secCrisis" style="display:none">
+    <!-- O QUE DIZER / NÃO DIZER (sucinto) -->
+    <section class="grid" id="secSay" style="display:none">
       <div class="card">
-        <div class="kicker">Modo crise</div>
-        <div class="title">Escolha o cenário. Use o script. <span class="emph">Pare de piorar sem perceber.</span></div>
-        <div class="pillrow" id="scenarioPills"></div>
-      </div>
+        <div class="kicker">Frases prontas</div>
+        <div class="title">Curto. Sem ironia. Sem ameaça.</div>
 
-      <div class="card">
         <div class="two">
           <div class="box">
-            <h3>O que dizer (curto e eficaz)</h3>
+            <h3>O que dizer</h3>
             <p class="mono" id="sayText"></p>
-            <div class="copyrow">
-              <button class="primary" id="copySay">Copiar</button>
-              <button id="copyWhats">Copiar + WhatsApp</button>
+            <div class="btnrow">
+              <button class="copy" id="copySay">Copiar</button>
             </div>
-            <p class="muted small" style="margin-top:8px">Regra: frase curta + tom baixo + retorno marcado.</p>
+            <p class="muted small">Envie 1 frase. Não mande um parágrafo.</p>
           </div>
 
           <div class="box">
-            <h3>O que evitar (piora na hora)</h3>
-            <p class="mono" id="avoidText"></p>
-            <p class="muted small">Se você usar isso, a crise ganha combustível.</p>
+            <h3>O que não dizer</h3>
+            <p class="mono" id="dontText"></p>
+            <p class="muted small">Essas frases acendem gasolina.</p>
           </div>
         </div>
-
-        <div class="box" style="margin-top:10px">
-          <h3>Próximo passo (1 linha)</h3>
-          <p class="mono" id="nextText"></p>
-        </div>
-      </div>
-
-      <div class="card">
-        <details>
-          <summary>Regra de ouro</summary>
-          <p>Em crise, o objetivo não é “convencer”. É <span class="emph">baixar ativação</span>. Clareza vem depois. Primeiro: presença, limite simples, frase curta.</p>
-        </details>
       </div>
     </section>
 
-    <!-- MODO PREVENÇÃO -->
-    <section class="grid" id="secPrevent" style="display:none">
+    <!-- SEMÁFORO -->
+    <section class="grid" id="secTraffic" style="display:none">
       <div class="card">
-        <div class="kicker">Modo prevenção</div>
-        <div class="title">Faça isso quando está tudo “bem” — é assim que você evita o inferno.</div>
+        <div class="kicker">Semáforo da crise</div>
+        <div class="title">Verde / Amarelo / Vermelho: quando buscar ajuda</div>
 
-        <div class="two">
-          <div class="box">
-            <h3>1) Validação (sem passar pano)</h3>
-            <p class="mono">“Eu entendi que isso doeu. Eu tô aqui. A gente resolve sem gritar.”</p>
-            <p class="mono">“Faz sentido você ficar ativado. Mesmo assim, eu não vou entrar em briga.”</p>
+        <div class="traffic">
+          <div class="tcard green">
+            <h3>🟢 Verde (manejo em casa)</h3>
+            <ul>
+              <li>Discussão sem ameaça real.</li>
+              <li>Choro/raiva, mas sem risco.</li>
+              <li>Melhora após pausa/respiração.</li>
+            </ul>
           </div>
 
-          <div class="box">
-            <h3>2) Previsibilidade (reduz paranoia)</h3>
-            <p class="mono">Aviso curto + horário: “Vou sair 1h. Volto às 18:30. Te mando msg quando chegar.”</p>
-            <p class="mono">Combinar regra simples: “Se começar a escalar, a gente pausa 20 min.”</p>
+          <div class="tcard yellow">
+            <h3>🟡 Amarelo (apoio e plano)</h3>
+            <ul>
+              <li>Crises repetidas na semana.</li>
+              <li>Ameaças vagas (“sumir”, “não aguento”).</li>
+              <li>Uso de álcool/drogas no calor do conflito.</li>
+            </ul>
           </div>
 
-          <div class="box">
-            <h3>3) Comunicação (limite sem humilhar)</h3>
-            <p class="mono">“Eu converso com você. Eu não converso com insulto. Quando baixar, eu volto.”</p>
-            <p class="mono">“Eu não vou embora da relação, mas eu vou embora da briga.”</p>
-          </div>
-
-          <div class="box">
-            <h3>Checklist rápido (para salvar)</h3>
-            <p class="mono">✅ frase curta • ✅ tom baixo • ✅ 1 limite • ✅ 1 próximo passo • ❌ sermão</p>
+          <div class="tcard red">
+            <h3>🔴 Vermelho (buscar ajuda agora)</h3>
+            <ul>
+              <li>Ameaça concreta de auto/heteroagressão.</li>
+              <li>Violência, objetos, fuga, risco real.</li>
+              <li>Desorientação, intoxicação importante.</li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      <div class="card">
-        <details>
-          <summary>Erros comuns que parecem “corretos” e detonam tudo</summary>
-          <p>1) Explicar demais. 2) “Você tá louco(a)”. 3) Ironia. 4) Ameaça como ferramenta. 5) “Se você me amasse…”</p>
-        </details>
+        <p class="muted small" style="margin-top:10px">
+          Se houver risco imediato, acione serviços locais de emergência e rede de apoio. Este material é educativo.
+        </p>
       </div>
     </section>
-
   </div>
 
-  <!-- CTA STICKY: 50% OFF por tempo limitado -->
+  <!-- CTA STICKY: (mantido exatamente como você pediu) -->
   <div class="sticky">
     <div class="stickyin">
       <div class="ctawrap">
         <span class="badge hot">50% OFF • por tempo limitado</span>
         <div class="ctatext">
-          <b>Quer o passo a passo completo em videoaulas?</b>
-          <div class="ctasub">Tem demonstração (parte da Aula 1) e o conteúdo completo.</div>
+          <b>Conteúdo completo em videoaulas</b>
+          <div class="ctasub">No site tem demonstração (parte da Aula 1) + acesso ao curso.</div>
         </div>
       </div>
 
@@ -384,82 +443,22 @@
       el.textContent = msg;
       el.style.display = 'block';
       clearTimeout(window.__t);
-      window.__t = setTimeout(() => el.style.display = 'none', 1800);
+      window.__t = setTimeout(() => el.style.display = 'none', 1700);
     };
 
-    const showOnly = (sectionId) => {
-      const ids = ['secCrisis','secPrevent','secSOS'];
-      ids.forEach(id => document.getElementById(id).style.display = (id === sectionId) ? 'grid' : 'none');
-
-      const set = (btnId, on) => {
-        const b = document.getElementById(btnId);
-        b.classList.toggle('primary', on);
-        b.classList.toggle('ghost', !on);
-      };
-      set('btnCrisis', sectionId === 'secCrisis');
-      set('btnPrevent', sectionId === 'secPrevent');
-      set('btnSOS', sectionId === 'secSOS');
-    };
-
-    document.getElementById('btnCrisis').onclick = () => showOnly('secCrisis');
-    document.getElementById('btnPrevent').onclick = () => showOnly('secPrevent');
-    document.getElementById('btnSOS').onclick = () => showOnly('secSOS');
-
-    // Cenários (copy mais “cirúrgica” e curta)
-    const scenarios = [
-      {
-        key: 'terminar',
-        label: 'Ameaça terminar / sumir',
-        say: '“Eu entendi que você tá no limite. Eu tô aqui. Agora eu vou falar curto: eu não vou discutir. Pausa 20 minutos. Eu volto e a gente resolve.”',
-        avoid: '“Então vai.” • “Drama.” • “Cresce.” • “Chega.” • “Você sempre faz isso.”',
-        next: 'Pausa + horário fechado de retomada.'
-      },
-      {
-        key: 'explosao',
-        label: 'Explosão e acusações',
-        say: '“Eu ouvi. Eu vou responder sem grito e sem insulto. Eu fico por perto. Quando baixar, eu volto pra conversar.”',
-        avoid: '“Ridículo(a).” • “Louco(a).” • Ironia • “Cala a boca.”',
-        next: 'Limite simples + presença (sem debate).'
-      },
-      {
-        key: 'choro',
-        label: 'Choro e desespero',
-        say: '“Eu tô aqui. Respira comigo. Agora é 1 coisa de cada vez. A gente resolve em passos.”',
-        avoid: '“Para.” • “Não é nada.” • “Você exagera.” • “Se controla.”',
-        next: 'Co-regulação + um passo concreto (água/pausa).'
-      },
-      {
-        key: 'silencio',
-        label: 'Silêncio e afastamento',
-        say: '“Eu percebi que você fechou. Eu não vou te pressionar. Eu tô disponível às 19:00. Se quiser antes, me chama.”',
-        avoid: '“Joguinho.” • “Infantil.” • “Fala logo.” • “Você tá me punindo.”',
-        next: 'Previsibilidade (convite sem perseguição).'
-      },
-    ];
-
-    const pills = document.getElementById('scenarioPills');
-    const sayEl = document.getElementById('sayText');
-    const avoidEl = document.getElementById('avoidText');
-    const nextEl = document.getElementById('nextText');
-
-    let active = scenarios[0].key;
-
-    const render = () => {
-      pills.innerHTML = '';
-      const s = scenarios.find(x => x.key === active);
-      sayEl.textContent = s.say;
-      avoidEl.textContent = s.avoid;
-      nextEl.textContent = s.next;
-
-      scenarios.forEach(sc => {
-        const b = document.createElement('button');
-        b.className = 'pill' + (sc.key === active ? ' active' : '');
-        b.textContent = sc.label;
-        b.onclick = () => { active = sc.key; render(); };
-        pills.appendChild(b);
+    const showOnly = (id) => {
+      ['secSOS','secSay','secTraffic'].forEach(x => {
+        document.getElementById(x).style.display = (x === id) ? 'grid' : 'none';
       });
+      window.scrollTo({ top: document.querySelector('.banner').offsetHeight, behavior: 'smooth' });
     };
 
+    // Banner nav
+    document.getElementById('goSOS').onclick = () => showOnly('secSOS');
+    document.getElementById('goSay').onclick = () => showOnly('secSay');
+    document.getElementById('goTraffic').onclick = () => showOnly('secTraffic');
+
+    // Share / Copy
     const copyText = async (text) => {
       try{
         await navigator.clipboard.writeText(text);
@@ -475,51 +474,99 @@
       }
     };
 
-    document.getElementById('copySay').onclick = () => copyText(sayEl.textContent);
-    document.getElementById('copyWhats').onclick = async () => {
-      await copyText(sayEl.textContent);
-      toast('Copiado. Cole no WhatsApp.');
-    };
-
     document.getElementById('btnCopyLink').onclick = () => copyText(location.href);
 
     document.getElementById('btnShare').onclick = async () => {
-      const shareData = {
-        title: 'Guia de bolso — família',
-        text: 'Scripts prontos para reduzir crise sem virar refém.',
-        url: location.href
-      };
+      const shareData = { title:'SOS Crises', text:'Guia rápido (respiração + o que dizer / não dizer + semáforo).', url:location.href };
       if (navigator.share) {
         try { await navigator.share(shareData); } catch(e){}
       } else {
         await copyText(location.href);
-        toast('Compartilhamento não abriu. Link copiado.');
+        toast('Link copiado.');
       }
     };
 
-    // APP SOS (copy mais forte)
-    const sosText = document.getElementById('sosText');
-    const sosPresets = {
-      s1: '“Eu entendi. Eu tô aqui. Eu não vou discutir. A gente resolve sem grito.”',
-      s2: '“Eu converso com você. Eu não converso com insulto. Pausa 20 minutos. Eu volto.”',
-      s3: '“Agora é 1 passo: pausa + água + 10 respirações. Depois a gente escolhe 1 coisa.”'
+    // Copy buttons
+    document.getElementById('copySay').onclick = () => copyText(document.getElementById('sayText').textContent);
+    document.getElementById('copySayOne').onclick = () => copyText(document.getElementById('sayOne').textContent);
+
+    // Content (sucinto e forte)
+    const SAY = '“Eu entendi que doeu. Eu tô aqui. Eu não vou discutir. Pausa 20 minutos. Eu volto e a gente resolve.”';
+    const DONT = '“Drama.” • “Cresce.” • “Então vai.” • Ironia • “Você é louco(a).”';
+
+    document.getElementById('sayText').textContent = SAY;
+    document.getElementById('dontText').textContent = DONT;
+    document.getElementById('sayOne').textContent = SAY;
+    document.getElementById('dontOne').textContent = DONT;
+
+    // Breathing (4–2–6) + circle pulse
+    const phaseEl = document.getElementById('phase');
+    const circle = document.getElementById('circle');
+    const startBtn = document.getElementById('startBreath');
+    const stopBtn = document.getElementById('stopBreath');
+    const expandBtn = document.getElementById('toggleExpand');
+
+    let running = false;
+    let t = null;
+
+    const setPhase = (label, sub) => {
+      phaseEl.innerHTML = `${label}<span>${sub}</span>`;
     };
-    const setSOS = (key) => { sosText.textContent = sosPresets[key]; };
 
-    document.getElementById('sos1').onclick = () => { setSOS('s1'); toast('SOS pronto.'); };
-    document.getElementById('sos2').onclick = () => { setSOS('s2'); toast('SOS pronto.'); };
-    document.getElementById('sos3').onclick = () => { setSOS('s3'); toast('SOS pronto.'); };
-
-    document.getElementById('copySOS').onclick = () => copyText(sosText.textContent);
-    document.getElementById('copySOSWhats').onclick = async () => {
-      await copyText(sosText.textContent);
-      toast('Copiado. Cole no WhatsApp.');
+    const inhale = () => {
+      circle.style.transform = 'scale(1.18)';
+      setPhase('Inspira', '4 segundos');
     };
 
-    // Inicial
-    render();
-    setSOS('s1');
-    showOnly('secCrisis');
+    const hold = () => {
+      circle.style.transform = 'scale(1.18)';
+      setPhase('Segura', '2 segundos');
+    };
+
+    const exhale = () => {
+      circle.style.transform = 'scale(1.00)';
+      setPhase('Solta', '6 segundos');
+    };
+
+    const cycle = () => {
+      if (!running) return;
+      inhale();
+      t = setTimeout(() => {
+        if (!running) return;
+        hold();
+        t = setTimeout(() => {
+          if (!running) return;
+          exhale();
+          t = setTimeout(() => {
+            if (!running) return;
+            cycle();
+          }, 6000);
+        }, 2000);
+      }, 4000);
+    };
+
+    startBtn.onclick = () => {
+      if (running) return;
+      running = true;
+      toast('Respiração iniciada.');
+      cycle();
+    };
+
+    stopBtn.onclick = () => {
+      running = false;
+      clearTimeout(t);
+      circle.style.transform = 'scale(1)';
+      setPhase('Pausado.', 'Toque em “Iniciar”.');
+      toast('Parado.');
+    };
+
+    expandBtn.onclick = () => {
+      circle.classList.toggle('big');
+      toast(circle.classList.contains('big') ? 'Expandido.' : 'Normal.');
+    };
+
+    // Default: mostra nada aberto (só banner) — se quiser abrir SOS direto, descomente:
+    // showOnly('secSOS');
 
     // Tracking simples (opcional)
     document.getElementById('ctaCourse').addEventListener('click', () => {
