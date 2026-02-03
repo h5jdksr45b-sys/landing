@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Manual de Bolso — Família</title>
+  <style>
+    :root{
+      --bg:#0b0f14; --card:#121826; --muted:#9aa4b2; --text:#e6edf3;
+      --accent:#4fd1c5; --accent2:#7aa2ff; --danger:#ff6b6b;
+      --border: rgba(255,255,255,.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 800px at 20% -10%, rgba(122,162,255,.18), transparent 60%),
+        radial-gradient(900px 700px at 90% 10%, rgba(79,209,197,.14), transparent 55%),
+        var(--bg);
+      color:var(--text);
+    }
+    .wrap{max-width:980px; margin:0 auto; padding:22px 18px 122px;}
+    header{
+      border:1px solid var(--border); background:rgba(18,24,38,.75); backdrop-filter: blur(10px);
+      border-radius:18px; padding:18px 16px; box-shadow: var(--shadow);
+    }
+    h1{margin:0 0 6px; font-size:22px; letter-spacing:.2px}
+    .sub{margin:0; color:var(--muted); font-size:14px; line-height:1.35}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    button,.btn{
+      border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text);
+      padding:10px 12px; border-radius:12px; cursor:pointer; font-weight:650;
+    }
+    .primary{background:linear-gradient(135deg, rgba(79,209,197,.22), rgba(122,162,255,.18)); border-color:rgba(79,209,197,.25)}
+    .danger{background:rgba(255,107,107,.14); border-color:rgba(255,107,107,.25)}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:12px; margin-top:14px}
+    .card{
+      grid-column: span 12;
+      border:1px solid var(--border); background:rgba(18,24,38,.6); backdrop-filter: blur(8px);
+      border-radius:16px; padding:14px; box-shadow: var(--shadow);
+    }
+    .kicker{color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.12em}
+    .title{margin:6px 0 10px; font-size:16px}
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap}
+    .pill{padding:8px 10px; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,.03); cursor:pointer}
+    .pill.active{outline:2px solid rgba(79,209,197,.35); border-color:rgba(79,209,197,.35)}
+    .two{display:grid; grid-template-columns:1fr; gap:10px}
+    @media(min-width:780px){ .two{grid-template-columns:1fr 1fr} .span6{grid-column: span 6} .span12{grid-column: span 12} }
+    .box{
+      border:1px solid var(--border); background:rgba(255,255,255,.03);
+      border-radius:14px; padding:12px;
+    }
+    .box h3{margin:0 0 8px; font-size:14px}
+    .box p{margin:0 0 8px; line-height:1.4}
+    .muted{color:var(--muted)}
+    .small{font-size:12px}
+    .copyrow{display:flex; gap:10px; flex-wrap:wrap}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;}
+    details{border:1px solid var(--border); border-radius:14px; padding:10px 12px; background:rgba(255,255,255,.02)}
+    details summary{cursor:pointer; font-weight:650}
+    details p{margin:10px 0 0; color:var(--muted); line-height:1.45}
+    a{color:var(--text); text-decoration:none}
+
+    .sticky{
+      position:fixed; left:0; right:0; bottom:0;
+      background:rgba(11,15,20,.72); backdrop-filter: blur(12px);
+      border-top:1px solid var(--border);
+      padding:12px 14px;
+      z-index:50;
+    }
+    .stickyin{
+      max-width:980px; margin:0 auto;
+      display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    }
+    .ctawrap{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    .ctatext{line-height:1.2}
+    .ctatext b{display:block}
+    .ctasub{color:var(--muted); font-size:12px}
+    .ctaBtn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px; border-radius:14px; border:1px solid rgba(79,209,197,.35);
+      background:linear-gradient(135deg, rgba(79,209,197,.26), rgba(122,162,255,.22));
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .badge{
+      display:inline-block; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      font-size:12px; font-weight:700;
+    }
+    .badge.hot{border-color:rgba(255,107,107,.28); background:rgba(255,107,107,.12)}
+    .link{color:var(--muted); font-size:12px}
+    .toast{
+      position:fixed; top:14px; left:50%; transform:translateX(-50%);
+      background:rgba(18,24,38,.95); border:1px solid var(--border);
+      padding:10px 12px; border-radius:12px; display:none;
+      box-shadow: var(--shadow); z-index:99;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="toast" id="toast"></div>
+
+  <div class="wrap">
+    <header>
+      <h1>Manual de bolso — família</h1>
+      <p class="sub">Use isso para <b>não piorar</b> crises em casa. Leitura rápida. Frases copiáveis. Sem romantizar, sem demonizar.</p>
+      <div class="actions">
+        <button class="primary" id="btnCrisis">Estou em crise agora</button>
+        <button id="btnPrevent">Quero prevenir</button>
+        <button id="btnShare">Compartilhar</button>
+        <button id="btnCopyLink">Copiar link</button>
+      </div>
+      <p class="sub small muted" style="margin-top:10px">
+        Aviso: conteúdo educativo e não substitui avaliação profissional. Risco imediato/violência: procure emergência local.
+      </p>
+    </header>
+
+    <!-- MODO CRISE -->
+    <section class="grid" id="secCrisis" style="display:none">
+      <div class="card span12">
+        <div class="kicker">Modo crise (20 segundos)</div>
+        <div class="title">Escolha o cenário. Pegue o script. Envie. Respire.</div>
+        <div class="pillrow" id="scenarioPills"></div>
+      </div>
+
+      <div class="card span12">
+        <div class="two">
+          <div class="box">
+            <h3>O que dizer (script pronto)</h3>
+            <p class="mono" id="sayText"></p>
+            <div class="copyrow">
+              <button class="primary" id="copySay">Copiar</button>
+              <button id="copyWhats">Copiar + WhatsApp</button>
+            </div>
+          </div>
+
+          <div class="box">
+            <h3>O que evitar (piora na hora)</h3>
+            <p class="mono" id="avoidText"></p>
+          </div>
+        </div>
+
+        <div class="box" style="margin-top:10px">
+          <h3>Próximo passo em 1 linha</h3>
+          <p class="mono" id="nextText"></p>
+        </div>
+      </div>
+
+      <div class="card span12">
+        <details>
+          <summary>Regra de ouro</summary>
+          <p>Em crise, o objetivo não é “vencer a conversa”. É <b>baixar ativação</b>. Clareza vem depois. Primeiro: presença, limite simples, frase curta.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- MODO PREVENÇÃO -->
+    <section class="grid" id="secPrevent" style="display:none">
+      <div class="card span12">
+        <div class="kicker">Modo prevenção</div>
+        <div class="title">Três pilares que diminuem explosões e desgaste — sem virar refém.</div>
+
+        <div class="two">
+          <div class="box">
+            <h3>1) Validação (sem passar pano)</h3>
+            <p class="mono">“Eu entendi que isso doeu. Eu tô aqui. A gente resolve sem gritar.”</p>
+            <p class="mono">“Faz sentido você ficar ativado. Mesmo assim, eu não vou entrar em briga.”</p>
+          </div>
+
+          <div class="box">
+            <h3>2) Previsibilidade (reduz paranoia)</h3>
+            <p class="mono">Aviso curto + horário: “Vou sair 1h. Volto às 18:30. Te mando msg quando chegar.”</p>
+            <p class="mono">Combinar regra simples: “Se começar a escalar, a gente pausa 20 min.”</p>
+          </div>
+
+          <div class="box">
+            <h3>3) Comunicação (limite sem humilhar)</h3>
+            <p class="mono">“Eu converso com você. Eu não converso com insulto. Quando baixar, eu volto.”</p>
+            <p class="mono">“Eu não vou embora da relação, mas eu vou embora da briga.”</p>
+          </div>
+
+          <div class="box">
+            <h3>Checklist rápido (salvar)</h3>
+            <p class="mono">✅ frase curta • ✅ tom baixo • ✅ 1 limite claro • ✅ 1 próximo passo • ❌ sermão</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card span12">
+        <details>
+          <summary>Erros comuns que parecem “corretos” e detonam tudo</summary>
+          <p>1) Explicar demais. 2) “Você tá louco(a)”. 3) Ironia. 4) Ameaça como ferramenta. 5) “Se você me amasse…”</p>
+        </details>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- CTA STICKY: 50% OFF por tempo limitado -->
+  <div class="sticky">
+    <div class="stickyin">
+      <div class="ctawrap">
+        <span class="badge hot">50% OFF • por tempo limitado</span>
+        <div class="ctatext">
+          <b>Quer o conteúdo completo em videoaulas?</b>
+          <div class="ctasub">No site tem demonstração (parte da Aula 1) + acesso ao curso.</div>
+        </div>
+      </div>
+
+      <div class="ctawrap">
+        <a class="ctaBtn" id="ctaCourse" target="_blank" rel="noopener noreferrer"
+           href="https://h5jdksr45b-sys.github.io/landing/curso7.html?fbclid=PAZnRzaAPs6GFleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadzaIonBcZ7Xd1acjPRmJ8cNP0zpdlbseKo-abVCHRsrCaVi5u4yugJvOtkRg_aem_vdiL3-Z0KnB3khvIFncZWQ">
+          Ver videoaulas com 50% OFF
+        </a>
+        <a class="link" target="_blank" rel="noopener noreferrer"
+           href="https://h5jdksr45b-sys.github.io/landing/curso7.html?fbclid=PAZnRzaAPs6GFleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadzaIonBcZ7Xd1acjPRmJ8cNP0zpdlbseKo-abVCHRsrCaVi5u4yugJvOtkRg_aem_vdiL3-Z0KnB3khvIFncZWQ">
+          Abrir site do curso
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const toast = (msg) => {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.style.display = 'block';
+      clearTimeout(window.__t);
+      window.__t = setTimeout(() => el.style.display = 'none', 1800);
+    };
+
+    const setVisible = (crisisOn) => {
+      document.getElementById('secCrisis').style.display = crisisOn ? 'grid' : 'none';
+      document.getElementById('secPrevent').style.display = crisisOn ? 'none' : 'grid';
+      document.getElementById('btnCrisis').classList.toggle('primary', crisisOn);
+      document.getElementById('btnPrevent').classList.toggle('primary', !crisisOn);
+    };
+
+    document.getElementById('btnCrisis').onclick = () => setVisible(true);
+    document.getElementById('btnPrevent').onclick = () => setVisible(false);
+
+    const scenarios = [
+      {
+        key: 'terminar',
+        label: 'Ameaça terminar / sumir',
+        say: '“Eu entendi que você tá no limite. Eu tô aqui. Agora eu vou falar curto: eu não vou discutir. A gente pausa 20 minutos e depois eu volto pra conversar.”',
+        avoid: '“Então vai embora.” • “Você tá fazendo drama.” • “Cresce.” • “Chega.”',
+        next: 'Reduza estímulo + combine horário de retomada.'
+      },
+      {
+        key: 'explosao',
+        label: 'Explosão e acusações',
+        say: '“Eu ouvi o que você disse. Eu vou responder quando não tiver grito/insulto. Eu fico aqui perto. Quando baixar, eu volto.”',
+        avoid: '“Você é ridículo(a).” • “Você sempre…” • “Tá igual doido(a).”',
+        next: 'Limite simples + presença sem debate.'
+      },
+      {
+        key: 'choro',
+        label: 'Choro e desespero',
+        say: '“Eu tô aqui com você. Respira comigo. A gente resolve isso em passos. Agora: 1 coisa de cada vez.”',
+        avoid: '“Para de chorar.” • “Não é nada.” • “Você tá exagerando.”',
+        next: 'Co-regulação (tom baixo) + um passo concreto.'
+      },
+      {
+        key: 'silencio',
+        label: 'Silêncio e afastamento',
+        say: '“Eu percebi que você fechou. Eu não vou te pressionar. Eu vou estar disponível às 19:00 pra conversar. Se você quiser antes, me chama.”',
+        avoid: '“Tá fazendo joguinho.” • “Você é infantil.” • “Fala logo.”',
+        next: 'Previsibilidade e convite sem perseguição.'
+      },
+    ];
+
+    const pills = document.getElementById('scenarioPills');
+    const sayEl = document.getElementById('sayText');
+    const avoidEl = document.getElementById('avoidText');
+    const nextEl = document.getElementById('nextText');
+
+    let active = scenarios[0].key;
+
+    const render = () => {
+      pills.innerHTML = '';
+      const s = scenarios.find(x => x.key === active);
+      sayEl.textContent = s.say;
+      avoidEl.textContent = s.avoid;
+      nextEl.textContent = s.next;
+
+      scenarios.forEach(sc => {
+        const b = document.createElement('button');
+        b.className = 'pill' + (sc.key === active ? ' active' : '');
+        b.textContent = sc.label;
+        b.onclick = () => { active = sc.key; render(); };
+        pills.appendChild(b);
+      });
+    };
+
+    const copyText = async (text) => {
+      try{
+        await navigator.clipboard.writeText(text);
+        toast('Copiado.');
+      }catch(e){
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        toast('Copiado.');
+      }
+    };
+
+    document.getElementById('copySay').onclick = () => copyText(sayEl.textContent);
+
+    document.getElementById('copyWhats').onclick = async () => {
+      await copyText(sayEl.textContent);
+      toast('Copiado. Cole no WhatsApp.');
+    };
+
+    document.getElementById('btnCopyLink').onclick = () => copyText(location.href);
+
+    document.getElementById('btnShare').onclick = async () => {
+      const shareData = {
+        title: 'Manual de bolso — família',
+        text: 'Manual rápido com scripts prontos para não piorar crises em casa.',
+        url: location.href
+      };
+      if (navigator.share) {
+        try { await navigator.share(shareData); } catch(e){}
+      } else {
+        await copyText(location.href);
+        toast('Seu celular não abriu o compartilhamento. Link copiado.');
+      }
+    };
+
+    // Inicial
+    setVisible(true);
+    render();
+
+    // Tracking simples (opcional): marque clique no CTA
+    document.getElementById('ctaCourse').addEventListener('click', () => {
+      try { localStorage.setItem('manual_cta_clicked', String(Date.now())); } catch(e){}
+    });
+  </script>
+</body>
+</html>
