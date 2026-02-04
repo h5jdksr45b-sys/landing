@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Scripts prontos — Curso Protocolo 7 Dias</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#121825;
+      --muted:#a8b6c7;
+      --text:#eef5ff;
+      --line:#223044;
+      --accent:#4da3ff;
+      --good:#2bd67b;
+      --btn:#1a2435;
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(77,163,255,.22), transparent 55%),
+                  radial-gradient(900px 700px at 80% 0%, rgba(255,92,122,.16), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      font-family:var(--font);
+    }
+    header{
+      padding:18px 16px 10px;
+      position:sticky; top:0;
+      background: linear-gradient(to bottom, rgba(11,15,20,.92), rgba(11,15,20,.65));
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(34,48,68,.4);
+      z-index:10;
+    }
+    .wrap{max-width:1050px; margin:0 auto;}
+    .top{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
+    }
+    h1{margin:0; font-size:16px; font-weight:800; letter-spacing:.2px}
+    .sub{margin:6px 0 0; color:var(--muted); font-size:12px; line-height:1.35}
+    main{max-width:1050px; margin:0 auto; padding:14px 16px 34px;}
+    .grid{
+      display:grid; gap:12px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 900px){
+      .grid{grid-template-columns: 1fr 420px;}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(18,24,37,.92), rgba(18,24,37,.78));
+      border:1px solid rgba(34,48,68,.65);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:14px;
+    }
+    .filters{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin:10px 0 0;
+    }
+    .chip{
+      border:1px solid rgba(34,48,68,.9);
+      background: rgba(15,21,34,.9);
+      padding:9px 10px;
+      border-radius: 14px;
+      font-size:13px;
+      color:var(--text);
+      cursor:pointer;
+      user-select:none;
+      transition:.15s transform ease, .15s border-color ease, .15s background ease;
+      white-space:nowrap;
+    }
+    .chip:hover{transform: translateY(-1px); border-color: rgba(77,163,255,.8);}
+    .chip.active{
+      border-color: rgba(77,163,255,.95);
+      box-shadow: 0 0 0 3px rgba(77,163,255,.15) inset;
+    }
+    .list{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:8px;
+      margin-top:12px;
+    }
+    .item{
+      border:1px solid rgba(34,48,68,.85);
+      background: rgba(11,15,20,.35);
+      border-radius: 14px;
+      padding:12px 12px;
+      cursor:pointer;
+      transition:.15s transform ease, .15s border-color ease;
+    }
+    .item:hover{transform: translateY(-1px); border-color: rgba(77,163,255,.7);}
+    .item .t{
+      font-size:13px; font-weight:800; margin:0 0 6px; letter-spacing:.2px;
+    }
+    .item .m{
+      font-size:12px; color:var(--muted); margin:0; line-height:1.35;
+    }
+    .outTitle{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.4px;
+      text-transform:uppercase;
+    }
+    .metaRow{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin:0 0 10px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .tag{
+      border:1px solid rgba(34,48,68,.75);
+      padding:6px 10px;
+      border-radius: 999px;
+      background: rgba(15,21,34,.6);
+    }
+    .box{
+      background: rgba(9,12,18,.55);
+      border:1px solid rgba(34,48,68,.7);
+      border-radius: 18px;
+      padding:14px;
+      line-height: 1.35;
+      font-size: 15px;
+      white-space: pre-wrap;
+      min-height: 260px;
+    }
+    .actions{display:flex; gap:10px; margin-top:12px;}
+    button{
+      flex:1;
+      background: var(--btn);
+      border:1px solid rgba(34,48,68,.95);
+      color:var(--text);
+      padding:12px 12px;
+      border-radius:14px;
+      font-size:14px;
+      cursor:pointer;
+    }
+    button.good{
+      background: linear-gradient(180deg, rgba(43,214,123,.95), rgba(43,214,123,.72));
+      border-color: rgba(43,214,123,.85);
+      color:#07101d; font-weight:900;
+    }
+    button.primary{
+      background: linear-gradient(180deg, rgba(77,163,255,.95), rgba(77,163,255,.75));
+      border-color: rgba(77,163,255,.9);
+      color:#07101d; font-weight:900;
+    }
+    button:active{transform: scale(.99);}
+    .hint{color:var(--muted); font-size:12px; margin-top:8px; line-height:1.35}
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(10,15,22,.92);
+      border:1px solid rgba(34,48,68,.85);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      opacity:0;
+      pointer-events:none;
+      transition: .18s ease;
+    }
+    .toast.show{opacity:1}
+    .small{font-size:12px;color:var(--muted)}
+    .divider{
+      height:1px; background: rgba(34,48,68,.55);
+      margin:12px 0;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap top">
+    <div>
+      <h1>Scripts prontos — divulgação</h1>
+      <div class="sub">Toque em um card → o texto aparece à direita → toque em <b>Copiar</b>.</div>
+    </div>
+    <div class="small">www.drfabioschmidt.com</div>
+  </div>
+</header>
+
+<main class="grid">
+
+  <!-- LISTA -->
+  <section class="card">
+    <div class="outTitle">Filtros</div>
+    <div class="filters" id="filterRow">
+      <div class="chip active" data-filter="todos">Todos</div>
+      <div class="chip" data-filter="pais">Pais</div>
+      <div class="chip" data-filter="conjuge">Cônjuges</div>
+      <div class="chip" data-filter="filho_envia">Filho(a) → Pais</div>
+      <div class="chip" data-filter="mae">Mãe</div>
+      <div class="chip" data-filter="pai">Pai</div>
+      <div class="chip" data-filter="esposa">Esposa</div>
+      <div class="chip" data-filter="marido">Marido</div>
+      <div class="chip" data-filter="casa">Conflito em casa</div>
+      <div class="chip" data-filter="relacao">Relacionamento</div>
+      <div class="chip" data-filter="explosoes">Explosões</div>
+      <div class="chip" data-filter="agressiva">Alta conversão</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="outTitle">Opções</div>
+    <div class="list" id="list"></div>
+
+    <p class="hint">
+      Dica: use filtros para achar rápido o script certo. Você pode editar depois.
+    </p>
+  </section>
+
+  <!-- OUTPUT -->
+  <section class="card">
+    <div class="outTitle">Texto selecionado</div>
+    <div class="metaRow" id="meta"></div>
+    <div class="box" id="output">Toque em um dos cards à esquerda.</div>
+
+    <div class="actions">
+      <button class="good" id="btnCopy">Copiar</button>
+      <button class="primary" id="btnRandom">Aleatório</button>
+    </div>
+
+    <p class="hint">
+      “Aleatório” escolhe um script que passe no filtro atual.
+    </p>
+  </section>
+
+</main>
+
+<div class="toast" id="toast">Copiado.</div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+
+  function toast(msg){
+    const t = $("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(()=>t.classList.remove("show"), 1200);
+  }
+
+  // --- Scripts (curso gravado) ---
+  // tags: use os filtros (pais, conjuge, filho_envia, mae, pai, esposa, marido, casa, relacao, explosoes, agressiva)
+  const SCRIPTS = [
+    {
+      title: "Pais/cônjuges — direto e aplicável",
+      tags: ["pais","conjuge","casa"],
+      text:
+`Se sua casa vive em crise, isso é pra você.
+Eu gravei aulas práticas pra familiares aprenderem:
+– O que fazer durante a crise
+– O que NÃO dizer
+– Como colocar limites sem piorar tudo
+– Como parar de alimentar o caos
+
+Direto ao ponto. Aplicável no dia seguinte.
+Acesse: www.drfabioschmidt.com`
+    },
+    {
+      title: "Pais/cônjuges — método (mais duro)",
+      tags: ["pais","conjuge","casa","agressiva"],
+      text:
+`Você não precisa “aguentar” crise. Precisa de método.
+Aulas gravadas pra familiares:
+– Desescalar briga na hora
+– Parar frases que explodem tudo
+– Limites sem chantagem emocional
+– Previsibilidade pra reduzir recaídas
+
+Acesse: www.drfabioschmidt.com`
+    },
+    {
+      title: "Pais/cônjuges — exaustão (mais emocional)",
+      tags: ["pais","conjuge","casa"],
+      text:
+`Você ama… mas tá exausto.
+Eu gravei aulas pra você conviver com menos guerra e mais direção:
+– O que fazer na crise
+– O que evitar
+– Limites sem “punir”
+– Scripts prontos pra não piorar
+
+Acesse: www.drfabioschmidt.com`
+    },
+    {
+      title: "Jovens → Pais (encaminhar)",
+      tags: ["filho_envia","casa"],
+      text:
+`Se seus pais pioram sua crise sem querer, manda isso pra eles.
+É um curso pra familiares aprenderem:
+– O que NÃO fazer
+– Como ajudar sem te esmagar
+– Como colocar limite sem virar briga
+– O que dizer quando você tá no limite
+
+Link: www.drfabioschmidt.com`
+    },
+    {
+      title: "Jovens → Pais (sem “neuro”, mais direto)",
+      tags: ["filho_envia","casa","agressiva"],
+      text:
+`Se toda crise vira guerra em casa: encaminha isso.
+É um curso pra família parar de te ferir tentando te “consertar”:
+– Resposta certa na hora
+– Frases que pioram (e quais usar)
+– Limites com firmeza, sem humilhar
+
+Link: www.drfabioschmidt.com`
+    },
+    {
+      title: "Jovens em relacionamento (comprar/indicar)",
+      tags: ["relacao","conjuge"],
+      text:
+`Se seu relacionamento vira teste, cobrança e arrependimento… isso ajuda.
+Curso pra quem convive com você aprender:
+– Como não escalar conflito
+– Como responder sem sumir
+– Como colocar limite sem abandono
+– Scripts prontos pra crise
+
+Acesse: www.drfabioschmidt.com`
+    },
+    {
+      title: "Mãe lidando com filho(a)",
+      tags: ["mae","pais","casa"],
+      text:
+`Se você ama seu filho(a), mas as crises estão destruindo o clima da casa, você precisa de método — não de mais culpa.
+Eu gravei aulas práticas pra familiares aprenderem:
+– O que fazer na crise
+– O que NÃO dizer
+– Como colocar limites sem piorar
+– Como reduzir explosões
+
+Direto. Aplicável no dia seguinte.
+Acesse: www.drfabioschmidt.com`
+    },
+    {
+      title: "Esposa lidando com parceiro(a)",
+      tags: ["esposa","conjuge","relacao"],
+      text:
+`Se você sente que vive pisando em ovos, isso é pra você.
+O curso ensina:
+– Como desescalar conflito
+– Como responder sem provocar “abandono”
+– Como colocar limite sem virar guerra
+– Como parar o ciclo de briga e arrependimento
+
+Está aqui: www.drfabioschmidt.com`
+    },
+    {
+      title: "Pai lidando com filho(a)",
+      tags: ["pai","pais","casa","agressiva"],
+      text:
+`Se você não sabe mais o que fazer quando a crise começa, você não precisa gritar mais — precisa de estratégia.
+Eu gravei aulas práticas pra familiares aprenderem:
+– Como conter sem humilhar
+– Como colocar limite com firmeza
+– Como evitar frases que detonam tudo
+– Como trazer previsibilidade
+
+Acesse: www.drfabioschmidt.com`
+    },
+    {
+      title: "Marido lidando com parceira(o)",
+      tags: ["marido","conjuge","relacao","agressiva"],
+      text:
+`Se toda conversa vira conflito, você precisa mudar a forma de responder.
+No curso você aprende:
+– Como não escalar discussão
+– Como validar sem passar a mão na cabeça
+– Como interromper crise antes de explodir
+– Como parar de alimentar o caos
+
+Link: www.drfabioschmidt.com`
+    },
+    {
+      title: "Conflito constante em casa",
+      tags: ["casa","pais","conjuge","agressiva"],
+      text:
+`Se sua casa virou um campo de guerra emocional, isso é pra você.
+O curso ensina:
+– Como interromper escalada
+– Como responder na hora certa
+– Como evitar frases que detonam tudo
+– Como reconstruir previsibilidade
+
+Acesse: www.drfabioschmidt.com`
+    },
+    {
+      title: "Ciúme/insegurança no relacionamento",
+      tags: ["relacao","conjuge"],
+      text:
+`Se cada demora vira crise, você precisa de direção.
+Aulas práticas para:
+– Não reagir no impulso
+– Não alimentar abandono imaginado
+– Criar acordos claros
+– Reduzir ciclos de teste e punição
+
+www.drfabioschmidt.com`
+    },
+    {
+      title: "Explosões + arrependimento",
+      tags: ["explosoes","casa","relacao","agressiva"],
+      text:
+`Se sempre termina em culpa e pedido de desculpa, você precisa quebrar o ciclo.
+O curso mostra:
+– Como evitar escalada
+– Como reparar sem repetir
+– Como colocar limite antes da explosão
+
+Link: www.drfabioschmidt.com`
+    },
+    {
+      title: "Alta conversão (curto e incisivo)",
+      tags: ["agressiva","casa","pais","conjuge"],
+      text:
+`Se você está exausto de crise, culpa e arrependimento, pare de tentar “resolver no amor”.
+Amor sem método vira desgaste.
+
+Eu gravei aulas pra familiares aprenderem exatamente como agir na crise, colocar limites e parar o caos.
+
+Está aqui: www.drfabioschmidt.com`
+    }
+  ];
+
+  // --- Render ---
+  let activeFilter = "todos";
+  let currentScript = null;
+
+  function renderList(){
+    const list = $("list");
+    list.innerHTML = "";
+
+    const items = SCRIPTS.filter(s => activeFilter==="todos" || s.tags.includes(activeFilter));
+
+    items.forEach((s, idx)=>{
+      const div = document.createElement("div");
+      div.className = "item";
+      div.dataset.index = idx;
+
+      const t = document.createElement("p");
+      t.className = "t";
+      t.textContent = s.title;
+
+      const m = document.createElement("p");
+      m.className = "m";
+      m.textContent = s.text.split("\n")[0].slice(0, 90) + (s.text.split("\n")[0].length>90 ? "…" : "");
+
+      div.appendChild(t);
+      div.appendChild(m);
+
+      div.addEventListener("click", ()=>{
+        selectScript(s);
+      });
+
+      list.appendChild(div);
+    });
+
+    if(items.length===0){
+      const empty = document.createElement("div");
+      empty.className = "item";
+      empty.innerHTML = `<p class="t">Nada aqui</p><p class="m">Troque o filtro.</p>`;
+      list.appendChild(empty);
+    }
+  }
+
+  function renderMeta(s){
+    const meta = $("meta");
+    meta.innerHTML = "";
+    const tags = s ? s.tags : [];
+    tags.forEach(t=>{
+      const span = document.createElement("span");
+      span.className = "tag";
+      span.textContent = t;
+      meta.appendChild(span);
+    });
+  }
+
+  function selectScript(s){
+    currentScript = s;
+    $("output").textContent = s.text;
+    renderMeta(s);
+    toast("Texto carregado.");
+  }
+
+  // --- Filtros (chips) ---
+  $("filterRow").addEventListener("click", (e)=>{
+    const chip = e.target.closest(".chip");
+    if(!chip) return;
+    activeFilter = chip.dataset.filter;
+    [...$("filterRow").querySelectorAll(".chip")].forEach(c=>{
+      c.classList.toggle("active", c.dataset.filter === activeFilter);
+    });
+    renderList();
+  });
+
+  // --- Copiar ---
+  $("btnCopy").addEventListener("click", async ()=>{
+    const txt = $("output").textContent.trim();
+    if(!txt || txt === "Toque em um dos cards à esquerda."){ toast("Selecione um texto."); return; }
+    try{
+      await navigator.clipboard.writeText(txt);
+      toast("Copiado.");
+    }catch(err){
+      // fallback
+      const ta = document.createElement("textarea");
+      ta.value = txt;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      toast("Copiado.");
+    }
+  });
+
+  // --- Aleatório (respeita filtro) ---
+  $("btnRandom").addEventListener("click", ()=>{
+    const pool = SCRIPTS.filter(s => activeFilter==="todos" || s.tags.includes(activeFilter));
+    if(pool.length===0){ toast("Sem opções no filtro."); return; }
+    const s = pool[Math.floor(Math.random()*pool.length)];
+    selectScript(s);
+  });
+
+  // init
+  renderList();
+</script>
+</body>
+</html>
