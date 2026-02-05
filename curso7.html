@@ -1,956 +1,638 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Protocolo 7 Dias — Família de TPB | Dr. Fabio Schmidt</title>
-  <meta name="description" content="Aulas gravadas + scripts prontos: o que dizer, o que evitar e como reduzir crises sem virar refém delas." />
-  <meta name="theme-color" content="#0b0f0d" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet">
+  <meta name="description" content="Aulas gravadas + scripts prontos para familiares lidarem melhor com crises emocionais. Método objetivo, aplicável e ético. Acesso imediato." />
 
   <style>
     :root{
-      --bg:#070a08;
-      --bg2:#0b0f0d;
-      --card:#0f1511;
-      --card2:#0c120e;
-      --text:#e7efe9;
-      --muted:#aab7ae;
-      --muted2:#7f9186;
-      --line:rgba(255,255,255,.08);
-      --shadow: 0 18px 55px rgba(0,0,0,.55);
-      --gold:#d6b46b;
-      --amber:#ffcc66;
-      --green:#2fe39a;
-      --red:#ff4d4d;
-      --blue:#69b8ff;
-      --radius:18px;
-      --radius2:24px;
-      --max: 1080px;
+      --bg:#0b0d10;
+      --card:#12151b;
+      --card2:#0f1217;
+      --text:#e9edf5;
+      --muted:#aeb7c6;
+      --line:#222836;
+      --gold:#e0a52b;
+      --red:#e63946;
+      --red2:#d62839;
+      --ok:#39d98a;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius:16px;
     }
-
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica, "Apple Color Emoji","Segoe UI Emoji";
       background:
-        radial-gradient(1100px 700px at 12% 10%, rgba(214,180,107,.18), transparent 55%),
-        radial-gradient(900px 600px at 90% 16%, rgba(47,227,154,.12), transparent 60%),
-        radial-gradient(900px 700px at 60% 100%, rgba(105,184,255,.10), transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      overflow-x:hidden;
+        radial-gradient(1200px 600px at 50% -10%, rgba(224,165,43,.18), transparent 60%),
+        radial-gradient(900px 500px at 10% 20%, rgba(230,57,70,.12), transparent 55%),
+        radial-gradient(900px 500px at 90% 30%, rgba(57,217,138,.08), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:24px 18px 90px}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1080px;margin:0 auto;padding:0 18px}
+
+    /* TOPBAR */
     .topbar{
-      position:sticky; top:0; z-index:50;
+      position:sticky;top:0;z-index:30;
       backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(7,10,8,.92), rgba(7,10,8,.62));
-      border-bottom:1px solid var(--line);
+      background: rgba(11,13,16,.7);
+      border-bottom:1px solid rgba(34,40,54,.6);
     }
-    .topbar .inner{
-      max-width:var(--max); margin:0 auto; padding:14px 18px;
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    .topbar-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;padding:12px 0;
     }
-    .brand{display:flex; align-items:center; gap:12px; min-width:0;}
-    .avatar{
-      width:40px; height:40px; border-radius:50%;
-      border:1px solid rgba(214,180,107,.45);
-      background: radial-gradient(circle at 30% 30%, rgba(214,180,107,.35), rgba(214,180,107,.06));
-      display:grid; place-items:center;
-      box-shadow: 0 10px 28px rgba(0,0,0,.35);
-      flex:0 0 auto;
+    .brand{
+      display:flex;flex-direction:column;gap:2px;
+      min-width:220px;
     }
-    .avatar svg{opacity:.9}
-    .brand .txt{min-width:0;}
-    .brand .name{
-      font-weight:700; letter-spacing:.2px; font-size:14px; line-height:1.1;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-    .brand .sub{
-      color:var(--muted2); font-size:12px; margin-top:2px;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-    .top-actions{display:flex; align-items:center; gap:10px; flex:0 0 auto;}
-    .chip{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px; border-radius:999px;
-      border:1px solid rgba(214,180,107,.28);
-      background: rgba(15,21,17,.65);
-      color:var(--text);
-      font-weight:600; font-size:12px;
-    }
-    .chip small{color:var(--muted2); font-weight:600}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 14px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(15,21,17,.72);
-      color:var(--text);
-      font-weight:700; font-size:13px;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-      cursor:pointer;
-      user-select:none;
-    }
-    .btn:hover{transform: translateY(-1px); border-color: rgba(214,180,107,.35)}
-    .btn.primary{
-      background: linear-gradient(180deg, rgba(214,180,107,.95), rgba(214,180,107,.72));
-      color:#1a1406;
-      border-color: rgba(214,180,107,.65);
-      box-shadow: 0 16px 45px rgba(214,180,107,.16);
-    }
-    .btn.primary:hover{transform: translateY(-1px)}
-    .btn.ghost{
-      background: transparent;
-      border-color: rgba(255,255,255,.12);
-      color: var(--text);
-    }
-
-    /* Hero */
-    .hero{padding:28px 0 18px}
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.12fr .88fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    @media (max-width: 920px){
-      .hero-grid{grid-template-columns:1fr; }
-    }
-    .panel{
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(15,21,17,.85), rgba(12,18,14,.72));
-      border-radius: var(--radius2);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .panel::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background:
-        radial-gradient(700px 280px at 10% 0%, rgba(214,180,107,.20), transparent 60%),
-        radial-gradient(700px 280px at 95% 10%, rgba(47,227,154,.10), transparent 55%);
-      pointer-events:none;
-      opacity:.85;
-    }
-    .panel > *{position:relative}
-    .pad{padding:22px}
-
-    .kicker{
-      display:flex; flex-wrap:wrap; gap:8px; align-items:center;
-      margin-bottom:12px;
-    }
-    .tag{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      color: var(--muted);
-      font-weight:700; font-size:12px;
-    }
-    .tag b{color: var(--text)}
-    .h1{
-      font-family: Fraunces, serif;
-      font-size:42px;
-      line-height:1.05;
-      margin:0 0 10px;
-      letter-spacing:.2px;
-    }
-    @media (max-width: 520px){
-      .h1{font-size:34px}
-    }
-    .lead{
-      color: var(--muted);
-      font-size:15.5px;
-      line-height:1.5;
-      margin:0 0 16px;
-      max-width: 60ch;
-    }
-    .bullets{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top:14px;
-    }
-    @media (max-width: 520px){
-      .bullets{grid-template-columns:1fr}
-    }
-    .bullet{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      border-radius:14px;
-      padding:12px 12px;
-      display:flex; gap:10px; align-items:flex-start;
-    }
-    .icon{
-      width:34px; height:34px;
-      border-radius:12px;
-      display:grid; place-items:center;
-      flex:0 0 auto;
-      border:1px solid rgba(214,180,107,.30);
-      background: radial-gradient(circle at 30% 30%, rgba(214,180,107,.22), rgba(214,180,107,.04));
-    }
-    .bullet .t{font-weight:800; font-size:13px; margin:0 0 3px}
-    .bullet .d{color:var(--muted2); font-size:12.5px; line-height:1.35; margin:0}
-
-    .cta-row{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      margin-top:16px;
-    }
-    .note{
-      margin-top:10px;
-      color: var(--muted2);
-      font-size:12.5px;
-      line-height:1.35;
-      opacity:.95;
-    }
-    .note a{color: var(--gold); text-decoration:underline; text-underline-offset:3px}
-
-    /* Video card */
-    .video-head{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
-      padding:18px 18px 0;
-    }
-    .video-head .title{
-      font-weight:900; letter-spacing:.2px;
-      font-size:13px; color: var(--muted);
-      text-transform:uppercase;
-    }
-    .video-head .headline{
-      font-family: Fraunces, serif;
-      font-size:22px; margin:6px 0 6px;
-      line-height:1.1;
-    }
-    .video-head .sub{
-      color: var(--muted2);
-      font-size:12.8px; line-height:1.35; margin:0 0 12px;
-    }
-    .video-wrap{
-      padding:0 18px 18px;
-    }
-    .ratio{
-      border-radius: 16px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.10);
-      background: #000;
-      box-shadow: 0 14px 42px rgba(0,0,0,.55);
-      position:relative;
-    }
-    .ratio::before{
-      content:"";
-      display:block;
-      padding-top: 56.25%; /* 16:9 */
-    }
-    .ratio iframe{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      border:0;
-    }
-    .mini-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      padding:0 18px 18px;
-    }
-    @media (max-width: 920px){
-      .mini-grid{grid-template-columns:1fr}
-    }
-    .mini{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      border-radius: 16px;
-      padding:14px 14px;
-      display:flex; gap:12px; align-items:flex-start;
-    }
-    .mini h4{margin:0 0 4px; font-size:13px; letter-spacing:.2px}
-    .mini p{margin:0; color:var(--muted2); font-size:12.8px; line-height:1.35}
-
-    /* Sections */
-    .section{margin-top:18px}
-    .section .head{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
-      margin:18px 0 10px;
-    }
-    .section h2{
-      margin:0;
-      font-family: Fraunces, serif;
-      font-size:26px;
-      letter-spacing:.2px;
-    }
-    .section .hint{
-      color: var(--muted2);
-      font-size:12.5px;
-    }
-
-    /* Audience cards */
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
-    @media (max-width: 920px){ .cards{grid-template-columns:1fr} }
-    .card{
-      border:1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(15,21,17,.68), rgba(12,18,14,.55));
-      border-radius: var(--radius);
-      padding:16px;
-      position:relative;
-      overflow:hidden;
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(600px 220px at 0% 0%, rgba(214,180,107,.14), transparent 55%);
-      opacity:.7; pointer-events:none;
-    }
-    .card > *{position:relative}
-    .card .row{display:flex; gap:10px; align-items:flex-start}
-    .card h3{margin:2px 0 6px; font-size:14px; letter-spacing:.2px}
-    .card p{margin:0; color:var(--muted2); font-size:12.8px; line-height:1.4}
-    .list{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:8px}
-    .list li{
-      display:flex; gap:10px; align-items:flex-start;
-      color: var(--muted);
-      font-size:12.8px;
-    }
-    .check{
-      width:18px; height:18px; border-radius:6px;
-      border:1px solid rgba(47,227,154,.35);
-      background: rgba(47,227,154,.10);
-      display:grid; place-items:center;
-      flex:0 0 auto;
-      margin-top:1px;
-    }
-    .x{
-      width:18px; height:18px; border-radius:6px;
-      border:1px solid rgba(255,77,77,.35);
-      background: rgba(255,77,77,.10);
-      display:grid; place-items:center;
-      flex:0 0 auto;
-      margin-top:1px;
-    }
-
-    /* FAQ */
-    .faq{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:12px;
-    }
-    @media (max-width: 920px){ .faq{grid-template-columns:1fr} }
-    details{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      border-radius: 16px;
-      padding:14px 14px;
-    }
-    details summary{
-      cursor:pointer;
-      list-style:none;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      font-weight:800;
-      font-size:13px;
-      color: var(--text);
-      outline:none;
-    }
-    details summary::-webkit-details-marker{display:none}
-    details .ans{
-      margin-top:10px;
-      color: var(--muted2);
-      font-size:12.8px;
-      line-height:1.45;
-    }
-    .aside{
-      border:1px solid rgba(214,180,107,.22);
-      background: radial-gradient(600px 260px at 30% 0%, rgba(214,180,107,.12), rgba(15,21,17,.45));
-      border-radius: 18px;
-      padding:16px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.35);
-    }
-    .aside .big{
-      font-family: Fraunces, serif;
-      font-size:20px;
-      line-height:1.15;
-      margin:0 0 8px;
-    }
-    .aside .small{
-      margin:0 0 12px;
-      color: var(--muted2);
-      font-size:12.8px;
-      line-height:1.45;
-    }
-    .aside .minirow{
-      display:flex; gap:10px; align-items:flex-start;
-      border-top:1px solid rgba(255,255,255,.10);
-      padding-top:12px; margin-top:12px;
-    }
-
-    /* Sticky bottom CTA (mobile-first) */
-    .sticky{
-      position:fixed; left:0; right:0; bottom:0; z-index:80;
-      background: linear-gradient(180deg, rgba(7,10,8,0), rgba(7,10,8,.92) 24%, rgba(7,10,8,.98));
-      padding:10px 12px 12px;
-      border-top:1px solid rgba(255,255,255,.08);
-      backdrop-filter: blur(10px);
-    }
-    .sticky .inner{
-      max-width:var(--max); margin:0 auto;
-      display:flex; gap:10px; align-items:center; justify-content:space-between;
-    }
-    .sticky .meta{
-      display:flex; flex-direction:column; gap:2px; min-width:0;
-    }
-    .sticky .meta b{
-      font-size:12.5px; letter-spacing:.2px;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-    .sticky .meta span{
-      color:var(--muted2); font-size:11.5px;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-    .sticky .inner .btn{padding:12px 14px}
-    @media (min-width: 920px){
-      .sticky{display:none}
-    }
-
-    /* Footer */
-    footer{
-      margin-top:22px;
-      border-top:1px solid var(--line);
-      padding-top:14px;
-      color: var(--muted2);
-      font-size:12px;
-      line-height:1.45;
-    }
-
-    /* Small helpers */
-    .sep{height:1px; background: rgba(255,255,255,.08); margin:16px 0}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
-    .pillline{
-      display:flex; flex-wrap:wrap; gap:8px;
-      margin-top:10px;
+    .brand strong{font-weight:800;letter-spacing:.2px}
+    .brand span{color:var(--muted);font-size:12.5px}
+    .nav{
+      display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;
+      align-items:center;
     }
     .pill{
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      color: var(--muted);
+      font-size:13px;color:var(--muted);
+      padding:8px 10px;border:1px solid rgba(34,40,54,.8);
+      border-radius:999px;background:rgba(18,21,27,.55);
+    }
+    .pill:hover{border-color:rgba(224,165,43,.6);color:var(--text)}
+
+    /* BUTTONS */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:10px;
+      font-weight:900;
+      padding:12px 16px;
+      border-radius:12px;
+      border:1px solid rgba(230,57,70,.35);
+      background: linear-gradient(180deg, rgba(230,57,70,.95), rgba(214,40,57,.95));
+      color:#fff;
+      box-shadow: 0 14px 40px rgba(230,57,70,.22);
+      transition: transform .15s ease, filter .15s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px);filter:brightness(1.04)}
+    .btn:active{transform: translateY(0px)}
+    .btn.secondary{
+      background: rgba(18,21,27,.7);
+      border:1px solid rgba(224,165,43,.35);
+      box-shadow:none;
+      color:var(--text);
+    }
+    .btn.secondary:hover{border-color:rgba(224,165,43,.7)}
+
+    /* LAYOUT */
+    .hero{padding:18px 0 14px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:18px;
+      align-items:start;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(18,21,27,.9), rgba(15,18,23,.85));
+      border:1px solid rgba(34,40,54,.8);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-copy{padding:18px}
+
+    /* HERO BANNER (ggg.png) */
+    .hero-banner{
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(34,40,54,.8);
+      background:#000;
+      margin-bottom:14px;
+      position:relative;
+    }
+    .hero-banner img{
+      width:100%;
+      display:block;
+      height:auto;
+    }
+    /* optional: subtle overlay to keep text readable below if needed */
+    .hero-banner::after{
+      content:"";
+      position:absolute;inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.18));
+      pointer-events:none;
+    }
+
+    .kicker{
+      display:inline-flex;gap:8px;align-items:center;
       font-size:12px;
-      font-weight:700;
+      color:rgba(233,237,245,.85);
+      padding:6px 10px;border:1px solid rgba(224,165,43,.35);
+      border-radius:999px;
+      background: rgba(224,165,43,.10);
+      margin-bottom:10px;
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size: 34px;
+      line-height:1.1;
+      letter-spacing:-.6px;
+    }
+    .hero h1 .gold{color:var(--gold)}
+    .hero p{
+      margin:0 0 12px;
+      color:var(--muted);
+      font-size:16px;
+    }
+
+    .bullets{
+      display:grid;gap:10px;margin:14px 0 16px;padding:0;list-style:none;
+    }
+    .bullets li{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:10px 12px;border-radius:12px;
+      background: rgba(18,21,27,.55);
+      border:1px solid rgba(34,40,54,.65);
+    }
+    .dot{
+      width:18px;height:18px;border-radius:6px;margin-top:2px;
+      background: rgba(57,217,138,.12);
+      border:1px solid rgba(57,217,138,.35);
+      display:grid;place-items:center;flex:0 0 auto;
+      color: var(--ok);font-weight:900;font-size:12px;
+    }
+    .hero-cta{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+      margin-top:10px;
+    }
+    .micro{
+      color:rgba(174,183,198,.9);
+      font-size:12.5px;
+      margin-top:10px;
+    }
+
+    /* VIDEO */
+    .video-card{padding:14px}
+    .video-wrap{
+      position:relative;
+      width:100%;
+      padding-top:56.25%;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(34,40,54,.8);
+      background:#000;
+    }
+    .video-wrap iframe{
+      position:absolute;inset:0;width:100%;height:100%;border:0;
+    }
+    .video-meta{
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      margin-top:10px;color:var(--muted);font-size:12.5px;
+    }
+    .tag{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(34,40,54,.75);
+      background: rgba(18,21,27,.55);
+      color:rgba(233,237,245,.8);
+      font-size:12px;
+    }
+
+    /* SECTIONS */
+    .section{padding:18px 0}
+    .grid-3{
+      display:grid;grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .mini{padding:16px}
+    .mini h3{margin:0 0 6px;font-size:16px;color:var(--text)}
+    .mini p{margin:0;color:var(--muted);font-size:13.5px}
+    .icon{
+      width:34px;height:34px;border-radius:12px;
+      border:1px solid rgba(224,165,43,.35);
+      background: rgba(224,165,43,.10);
+      display:grid;place-items:center;
+      margin-bottom:10px;
+      color:var(--gold);
+      font-weight:900;
+    }
+
+    .split{
+      display:grid;grid-template-columns: 1fr 1fr; gap:14px;
+    }
+    .box{padding:18px}
+    .box h2{margin:0 0 10px;font-size:20px}
+    .box p{margin:0 0 10px;color:var(--muted)}
+    .list{
+      margin:0;padding:0;list-style:none;display:grid;gap:10px;
+    }
+    .list li{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid rgba(34,40,54,.65);
+      background: rgba(18,21,27,.55);
+      color:rgba(233,237,245,.92);
+      font-size:14px;
+    }
+    .x{
+      background: rgba(230,57,70,.10);
+      border-color: rgba(230,57,70,.25);
+    }
+    .x .dot{
+      background: rgba(230,57,70,.12);
+      border-color: rgba(230,57,70,.35);
+      color: var(--red);
+    }
+
+    /* TABS */
+    .tabs{padding:18px}
+    .tabbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .tabbtn{
+      cursor:pointer;
+      font-weight:900;
+      font-size:13px;
+      padding:10px 12px;border-radius:999px;
+      border:1px solid rgba(34,40,54,.75);
+      background: rgba(18,21,27,.55);
+      color:rgba(233,237,245,.85);
+      user-select:none;
+    }
+    .tabbtn.active{
+      border-color: rgba(224,165,43,.65);
+      background: rgba(224,165,43,.12);
+      color: var(--text);
+    }
+    .tabpanel{display:none}
+    .tabpanel.active{display:block}
+    .tabpanel h3{margin:6px 0 8px;font-size:16px}
+    .paneltext{color:var(--muted);font-size:14px;margin:0 0 10px}
+
+    /* FAQ */
+    details{
+      border:1px solid rgba(34,40,54,.75);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: rgba(18,21,27,.55);
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:900;
+      list-style:none;
+      display:flex;align-items:center;justify-content:space-between;
+      gap:10px;
+    }
+    summary::-webkit-details-marker{display:none}
+    .chev{opacity:.65;transition:transform .15s ease}
+    details[open] .chev{transform: rotate(180deg)}
+    details p{margin:10px 0 0;color:var(--muted);font-size:14px}
+
+    /* TRUST */
+    .trust{
+      padding:18px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    .trust .note{
+      padding:12px 14px;border-radius:14px;
+      background: rgba(15,18,23,.7);
+      border:1px solid rgba(34,40,54,.75);
+      color:rgba(233,237,245,.88);
+      font-size:13.5px;
+    }
+    .note b{color:var(--text)}
+    .note .small{display:block;color:var(--muted);font-size:12.5px;margin-top:6px}
+
+    /* FINAL */
+    .final{padding:22px;text-align:center}
+    .final h2{margin:0 0 10px;font-size:26px;letter-spacing:-.2px}
+    .final p{margin:0 0 14px;color:var(--muted)}
+    .footer{
+      padding:22px 0 80px;
+      color:rgba(174,183,198,.85);
+      font-size:12.5px;
+    }
+    .footer .row{
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      border-top:1px solid rgba(34,40,54,.6);
+      padding-top:14px;
+    }
+
+    /* Floating CTA */
+    .floating{
+      position:fixed;left:0;right:0;bottom:0;z-index:40;
+      background: rgba(11,13,16,.80);
+      border-top:1px solid rgba(34,40,54,.65);
+      backdrop-filter: blur(10px);
+      padding:10px 12px;
+    }
+    .floating-inner{
+      max-width:1080px;margin:0 auto;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .floating .miniTxt{
+      display:flex;flex-direction:column;gap:2px;
+      color:rgba(233,237,245,.9);
+      font-size:12.5px;
+    }
+    .floating .miniTxt span{color:var(--muted);font-size:12px}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero-grid{grid-template-columns: 1fr}
+      .hero h1{font-size:30px}
+      .grid-3{grid-template-columns: 1fr}
+      .split{grid-template-columns: 1fr}
+      .brand{min-width:auto}
+      .nav{justify-content:flex-start}
     }
   </style>
 </head>
 
 <body>
-  <!-- Topbar -->
+
+  <!-- TOPBAR -->
   <div class="topbar">
-    <div class="inner">
-      <div class="brand">
-        <div class="avatar" aria-hidden="true">
-          <!-- minimal icon -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5Z" stroke="rgba(231,239,233,.9)" stroke-width="1.6"/>
-            <path d="M20 22c0-4.418-3.582-8-8-8s-8 3.582-8 8" stroke="rgba(231,239,233,.75)" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="brand">
+          <strong>Dr. Fabio Schmidt</strong>
+          <span>Médico | CRM-SP 183549 • Mogi das Cruzes – SP</span>
         </div>
-        <div class="txt">
-          <div class="name">Dr. Fabio Schmidt</div>
-          <div class="sub">Médico | CRM-SP 183549 • Mogi das Cruzes – SP</div>
+
+        <div class="nav">
+          <a class="pill" href="#video">Vídeo</a>
+          <a class="pill" href="#paraquem">Pra quem é</a>
+          <a class="pill" href="#conteudo">O que tem</a>
+          <a class="pill" href="#duvidas">Dúvidas</a>
+          <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Comprar agora</a>
         </div>
-      </div>
-      <div class="top-actions">
-        <a class="chip" href="#video">
-          <span>▶</span><span>Comece por aqui</span>
-        </a>
-        <a class="btn primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
-          Comprar agora
-          <span aria-hidden="true">→</span>
-        </a>
       </div>
     </div>
   </div>
 
-  <main class="wrap">
-    <!-- Hero -->
-    <section class="hero">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="container">
       <div class="hero-grid">
-        <div class="panel">
-          <div class="pad">
-            <div class="kicker">
-              <div class="tag">Curso <b>gravado</b> • acesso imediato</div>
-              <div class="tag">+ <b>Scripts prontos</b> para crise</div>
-              <div class="tag">Foco: <b>família</b> de TPB</div>
-            </div>
-
-            <h1 class="h1">Protocolo 7 Dias<br/>para Família de TPB</h1>
-
-            <p class="lead">
-              Você aprende <b>o que dizer</b>, <b>o que evitar</b> e <b>como reduzir crises</b> sem virar refém delas.
-              Conteúdo direto, aplicável e feito para quem convive com desregulação emocional em casa.
-            </p>
-
-            <div class="cta-row">
-              <a class="btn primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
-                Quero acesso às aulas
-                <span aria-hidden="true">→</span>
-              </a>
-              <a class="btn ghost" href="#conteudo">
-                Ver o que tem dentro
-              </a>
-              <a class="btn ghost" href="#faq">
-                Dúvidas rápidas
-              </a>
-            </div>
-
-            <div class="bullets">
-              <div class="bullet">
-                <div class="icon" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M4 6h16M4 12h16M4 18h10" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <p class="t">Aulas gravadas</p>
-                  <p class="d">Sem enrolação. Só o que muda o dia a dia de verdade.</p>
-                </div>
-              </div>
-              <div class="bullet">
-                <div class="icon" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2v6" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linecap="round"/>
-                    <path d="M12 22v-6" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linecap="round"/>
-                    <path d="M4.93 4.93l4.24 4.24" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linecap="round"/>
-                    <path d="M19.07 19.07l-4.24-4.24" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linecap="round"/>
-                    <path d="M2 12h6" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linecap="round"/>
-                    <path d="M22 12h-6" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linecap="round"/>
-                    <path d="M4.93 19.07l4.24-4.24" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linecap="round"/>
-                    <path d="M19.07 4.93l-4.24 4.24" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <p class="t">Scripts prontos</p>
-                  <p class="d">Frases para desescalar, com versão “dizer” e “não dizer”.</p>
-                </div>
-              </div>
-              <div class="bullet">
-                <div class="icon" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 21s8-4.5 8-11V5l-8-3-8 3v5c0 6.5 8 11 8 11Z" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linejoin="round"/>
-                    <path d="m9 12 2 2 4-5" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <p class="t">Plano de crise</p>
-                  <p class="d">Sinal verde/amarelo/vermelho: quando segurar e quando pedir ajuda.</p>
-                </div>
-              </div>
-              <div class="bullet">
-                <div class="icon" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linejoin="round"/>
-                    <path d="M8 8h8M8 12h6" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <p class="t">Comunicação que funciona</p>
-                  <p class="d">Validação + limite + direção (sem “palestra” e sem humilhação).</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="note">
-              Conteúdo educativo para familiares. Não substitui atendimento médico/psicológico individual.
-              Se houver risco imediato, procure emergência/serviços locais.
-            </div>
-          </div>
-        </div>
-
-        <!-- Video panel -->
-        <div id="video" class="panel" style="background: linear-gradient(180deg, rgba(12,18,14,.74), rgba(10,14,11,.68));">
-          <div class="video-head">
-            <div>
-              <div class="title">COMECE POR AQUI</div>
-              <div class="headline">Assista o resumo<br/>do que muda em casa</div>
-              <p class="sub">Vídeo curto, letra grande, direto ao ponto — pra entender em 60 segundos se isso é pra você.</p>
-            </div>
+        <!-- LEFT: COPY + BANNER -->
+        <div class="card hero-copy">
+          <!-- Banner image (place ggg.png in the same folder as this HTML, or adjust path) -->
+          <div class="hero-banner" aria-label="Protocolo 7 Dias">
+            <img src="ggg.png" alt="Crise não espera. Protocolo 7 Dias. Baseado em anos de prática clínica." />
           </div>
 
-          <div class="video-wrap">
-            <div class="ratio" aria-label="Vídeo de introdução (Vimeo)">
-              <!-- Vimeo: use player embed para melhor UX -->
-              <iframe
-                src="https://player.vimeo.com/video/1161630681?h=0&title=0&byline=0&portrait=0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowfullscreen
-                title="Comece por aqui — Protocolo 7 Dias"
-              ></iframe>
-            </div>
-          </div>
+          <div class="kicker">Curso gravado • acesso imediato • scripts prontos</div>
 
-          <div class="mini-grid">
-            <div class="mini">
-              <div class="icon" aria-hidden="true" style="border-color: rgba(105,184,255,.28); background: radial-gradient(circle at 30% 30%, rgba(105,184,255,.18), rgba(105,184,255,.04));">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 8v4l3 3" stroke="rgba(231,239,233,.9)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="rgba(231,239,233,.75)" stroke-width="1.8"/>
-                </svg>
-              </div>
-              <div>
-                <h4>Sem tempo? Ótimo.</h4>
-                <p>É feito pra gente real: crise acontecendo, cansaço alto, paciência baixa.</p>
-              </div>
-            </div>
-            <div class="mini">
-              <div class="icon" aria-hidden="true" style="border-color: rgba(47,227,154,.28); background: radial-gradient(circle at 30% 30%, rgba(47,227,154,.18), rgba(47,227,154,.04));">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path d="M7 20h10" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linecap="round"/>
-                  <path d="M12 4v12" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linecap="round"/>
-                  <path d="m8 10 4-6 4 6" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <div>
-                <h4>Aplicável no mesmo dia</h4>
-                <p>Você sai com frases e estrutura. Não é motivacional. É operacional.</p>
-              </div>
-            </div>
-          </div>
+          <h1><span class="gold">Protocolo 7 Dias</span><br/>para família de TPB</h1>
 
-          <div style="padding:0 18px 18px;">
-            <a class="btn primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener" style="width:100%; justify-content:center;">
-              Quero entrar no Protocolo 7 Dias
-              <span aria-hidden="true">→</span>
-            </a>
-            <div class="pillline">
-              <div class="pill">Acesso imediato</div>
-              <div class="pill">Aulas gravadas</div>
-              <div class="pill">Scripts prontos</div>
-              <div class="pill">Plano de crise</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- For who -->
-    <section id="conteudo" class="section">
-      <div class="head">
-        <h2>Pra quem é (e pra quem não é)</h2>
-        <div class="hint">Sem autoengano: isso melhora a conversão e evita frustração.</div>
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <div class="row">
-            <div class="icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="rgba(231,239,233,.85)" stroke-width="1.8"/>
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87" stroke="rgba(231,239,233,.7)" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="rgba(231,239,233,.7)" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Família / cônjuge / pais</h3>
-              <p>Convive com explosões, rupturas, acusações e “tudo vira discussão”.</p>
-            </div>
-          </div>
-          <ul class="list">
-            <li><span class="check" aria-hidden="true">✓</span>Quer reduzir crise sem aumentar a briga</li>
-            <li><span class="check" aria-hidden="true">✓</span>Precisa de frase pronta pra hora do caos</li>
-            <li><span class="check" aria-hidden="true">✓</span>Quer limite sem crueldade</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="row">
-            <div class="icon" aria-hidden="true" style="border-color: rgba(105,184,255,.28); background: radial-gradient(circle at 30% 30%, rgba(105,184,255,.18), rgba(105,184,255,.04));">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M6.5 2H20v20" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M7 7h8M7 11h10M7 15h7" stroke="rgba(231,239,233,.75)" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Quem quer clareza</h3>
-              <p>Sem psicologês. Sem frase bonita. Com estrutura e direção.</p>
-            </div>
-          </div>
-          <ul class="list">
-            <li><span class="check" aria-hidden="true">✓</span>Quer um “manual curto” pra casa</li>
-            <li><span class="check" aria-hidden="true">✓</span>Precisa de um roteiro de conversa difícil</li>
-            <li><span class="check" aria-hidden="true">✓</span>Quer diminuir culpa e aumentar firmeza</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="row">
-            <div class="icon" aria-hidden="true" style="border-color: rgba(255,77,77,.30); background: radial-gradient(circle at 30% 30%, rgba(255,77,77,.16), rgba(255,77,77,.03));">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="m18 6-12 12" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="m6 6 12 12" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Não é pra você se…</h3>
-              <p>Você quer uma “cura rápida” ou quer usar isso pra vencer discussão.</p>
-            </div>
-          </div>
-          <ul class="list">
-            <li><span class="x" aria-hidden="true">×</span>Quer humilhar / “ganhar” debate</li>
-            <li><span class="x" aria-hidden="true">×</span>Quer prova de que o outro é “monstro”</li>
-            <li><span class="x" aria-hidden="true">×</span>Ignora risco e recusa ajuda quando necessário</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- What you get -->
-    <section class="section">
-      <div class="head">
-        <h2>O que você leva na prática</h2>
-        <div class="hint">Sem promessa vazia. Entregáveis concretos.</div>
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <div class="row">
-            <div class="icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M8 7V3h8v4" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M6 7h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z" stroke="rgba(231,239,233,.85)" stroke-width="1.8"/>
-                <path d="M8 12h8M8 16h6" stroke="rgba(231,239,233,.75)" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Checklist de crise</h3>
-              <p>O que fazer em ordem, com linguagem simples e ação rápida.</p>
-            </div>
-          </div>
-          <ul class="list">
-            <li><span class="check" aria-hidden="true">✓</span>Primeiros 60 segundos</li>
-            <li><span class="check" aria-hidden="true">✓</span>Como não virar combustível</li>
-            <li><span class="check" aria-hidden="true">✓</span>Como encerrar sem abandono</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="row">
-            <div class="icon" aria-hidden="true" style="border-color: rgba(214,180,107,.30); background: radial-gradient(circle at 30% 30%, rgba(214,180,107,.22), rgba(214,180,107,.04));">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M9 11l3 3L22 4" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="rgba(231,239,233,.75)" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Scripts “Diga / Não diga”</h3>
-              <p>Frases que desarmam sem infantilizar e sem escalar.</p>
-            </div>
-          </div>
-          <ul class="list">
-            <li><span class="check" aria-hidden="true">✓</span>Para acusação (“você não liga”)</li>
-            <li><span class="check" aria-hidden="true">✓</span>Para ameaça de ruptura</li>
-            <li><span class="check" aria-hidden="true">✓</span>Para silêncio e sumiço</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="row">
-            <div class="icon" aria-hidden="true" style="border-color: rgba(47,227,154,.28); background: radial-gradient(circle at 30% 30%, rgba(47,227,154,.18), rgba(47,227,154,.04));">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M12 22s8-4.5 8-11V5l-8-3-8 3v5c0 6.5 8 11 8 11Z" stroke="rgba(231,239,233,.8)" stroke-width="1.8" stroke-linejoin="round"/>
-                <path d="M12 7v6" stroke="rgba(231,239,233,.8)" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M12 16h.01" stroke="rgba(231,239,233,.8)" stroke-width="2.2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div>
-              <h3>Sem virar refém</h3>
-              <p>Limites que protegem o vínculo, sem chantagem e sem abandono.</p>
-            </div>
-          </div>
-          <ul class="list">
-            <li><span class="check" aria-hidden="true">✓</span>Limite com validação</li>
-            <li><span class="check" aria-hidden="true">✓</span>Previsibilidade (reduz “alarme”)</li>
-            <li><span class="check" aria-hidden="true">✓</span>Quando buscar ajuda de fora</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="sep"></div>
-
-      <div class="panel" style="background: linear-gradient(180deg, rgba(12,18,14,.62), rgba(10,14,11,.58));">
-        <div class="pad">
-          <div style="display:flex; gap:12px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;">
-            <div style="max-width:70ch;">
-              <div class="tag" style="display:inline-flex;">Objetivo real do curso</div>
-              <h2 style="margin:10px 0 8px; font-family:Fraunces,serif; font-size:26px; line-height:1.15;">
-                Menos crise. Menos desgaste. Mais previsibilidade.
-              </h2>
-              <p style="margin:0; color:var(--muted); font-size:13.5px; line-height:1.5;">
-                A meta não é “nunca mais ter crise”. A meta é <b>diminuir frequência</b>, <b>diminuir duração</b> e <b>parar de piorar</b> com as mesmas frases que parecem lógicas, mas detonam o vínculo.
-              </p>
-            </div>
-            <div style="min-width:260px; flex:1;">
-              <a class="btn primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener" style="width:100%; justify-content:center; margin-top:4px;">
-                Entrar no Protocolo 7 Dias
-                <span aria-hidden="true">→</span>
-              </a>
-              <p class="note" style="margin:10px 0 0;">
-                Se você quer um ponto de partida simples e seguro, é aqui.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="section">
-      <div class="head">
-        <h2>Dúvidas que travam compra</h2>
-        <div class="hint">Respostas diretas. Sem “depende”.</div>
-      </div>
-
-      <div class="faq">
-        <div style="display:grid; gap:10px;">
-          <details open>
-            <summary>
-              É pra familiares mesmo (não para profissionais)?
-              <span aria-hidden="true">+</span>
-            </summary>
-            <div class="ans">
-              Sim. É pensado para quem convive em casa: pai/mãe, cônjuge, namorado(a), irmãos.
-              Linguagem simples e foco em comportamento, comunicação e manejo de crise.
-            </div>
-          </details>
-
-          <details>
-            <summary>
-              Eu não sei se é TPB “confirmado”. Serve?
-              <span aria-hidden="true">+</span>
-            </summary>
-            <div class="ans">
-              Serve quando o problema central é <b>desregulação emocional</b> + <b>conflito relacional</b> (explosões, rupturas, acusações, medo de abandono).
-              Se houver dúvidas diagnósticas, o curso ainda ajuda a organizar <b>como responder</b> sem piorar.
-            </div>
-          </details>
-
-          <details>
-            <summary>
-              Isso substitui terapia / psiquiatra?
-              <span aria-hidden="true">+</span>
-            </summary>
-            <div class="ans">
-              Não. Isso é educação + ferramentas de comunicação.
-              Em risco de auto/heteroagressão, ideação suicida, intoxicação por substâncias ou violência, procure ajuda presencial de emergência.
-            </div>
-          </details>
-
-          <details>
-            <summary>
-              O que eu ganho além das aulas?
-              <span aria-hidden="true">+</span>
-            </summary>
-            <div class="ans">
-              O diferencial é o <b>complementar de scripts prontos</b> (frases “diga / não diga”) e a estrutura de crise em camadas.
-              É feito pra você não ficar “pensando” na hora — você só executa.
-            </div>
-          </details>
-
-          <details>
-            <summary>
-              Dá pra assistir pelo celular?
-              <span aria-hidden="true">+</span>
-            </summary>
-            <div class="ans">
-              Sim. A ideia é ser consumido no celular, com aplicação prática imediata.
-              O vídeo “comece por aqui” já foi pensado com letra maior e ritmo rápido.
-            </div>
-          </details>
-        </div>
-
-        <aside class="aside">
-          <div class="tag" style="margin-bottom:8px;">Resumo em 15 segundos</div>
-          <p class="big">Você vai parar de falar “a frase certa” do jeito errado.</p>
-          <p class="small">
-            A maior parte das brigas não começa pelo conteúdo.
-            Começa pelo <b>tom</b>, pela <b>sequência</b> e pelo <b>momento</b>.
-            O curso te dá a sequência.
+          <p>
+            Você aprende <b>o que dizer</b>, <b>o que evitar</b> e <b>como reduzir crises</b> sem virar refém delas.
+            Conteúdo direto, aplicável e feito para quem convive com desregulação emocional em casa.
           </p>
 
-          <div class="minirow">
-            <div class="icon" aria-hidden="true" style="border-color: rgba(214,180,107,.30); background: radial-gradient(circle at 30% 30%, rgba(214,180,107,.18), rgba(214,180,107,.04));">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M12 20h9" stroke="rgba(231,239,233,.7)" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z" stroke="rgba(231,239,233,.85)" stroke-width="1.8" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div>
-              <h4 style="margin:0 0 4px; font-size:13px;">Frases prontas, sem clichê</h4>
-              <p style="margin:0; color:var(--muted2); font-size:12.8px; line-height:1.35;">
-                Diretas, utilizáveis e feitas para reduzir escalada.
-              </p>
-            </div>
+          <ul class="bullets">
+            <li><span class="dot">✓</span><div><b>Aulas práticas</b> para crises emocionais reais.</div></li>
+            <li><span class="dot">✓</span><div><b>Gravadas</b> para assistir quando quiser.</div></li>
+            <li><span class="dot">✓</span><div><b>Protocolo prático</b> para agir com segurança.</div></li>
+          </ul>
+
+          <div class="hero-cta">
+            <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Quero acesso imediato</a>
+            <a class="btn secondary" href="#conteudo">Ver o que tem dentro</a>
           </div>
 
-          <div style="margin-top:12px;">
-            <a class="btn primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener" style="width:100%; justify-content:center;">
-              Comprar agora
-              <span aria-hidden="true">→</span>
-            </a>
-            <p class="note" style="margin:10px 0 0;">
-              Link de pagamento: <span class="mono">pay.hotmart.com/S104212285E</span>
-            </p>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <footer>
-      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;">
-        <div>
-          <b style="color:var(--text);">Dr. Fabio Schmidt</b> — Médico | CRM-SP 183549 • Mogi das Cruzes – SP
-          <div style="margin-top:6px;">
-            Este site apresenta conteúdo educativo. Não substitui avaliação individual.
+          <div class="micro">
+            Conteúdo educativo para familiares. Não substitui avaliação individual. Em risco imediato, procure emergência/serviços locais.
           </div>
         </div>
-        <div style="opacity:.95;">
-          <a class="btn" href="#video" style="padding:10px 12px;">Voltar ao vídeo</a>
+
+        <!-- RIGHT: VIDEO -->
+        <div id="video" class="card video-card">
+          <div class="video-wrap">
+            <iframe
+              src="https://player.vimeo.com/video/1161630681?title=0&byline=0&portrait=0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+          <div class="video-meta">
+            <span class="tag">▶ Assista antes de comprar</span>
+            <span class="tag">60s • letra grande • direto</span>
+          </div>
         </div>
       </div>
-    </footer>
-  </main>
 
-  <!-- Sticky CTA (mobile) -->
-  <div class="sticky" role="region" aria-label="CTA fixo">
-    <div class="inner">
-      <div class="meta">
-        <b>Protocolo 7 Dias — Família de TPB</b>
-        <span>Aulas gravadas + scripts prontos</span>
+      <!-- quick benefits -->
+      <div class="section">
+        <div class="grid-3">
+          <div class="card mini">
+            <div class="icon">1</div>
+            <h3>Sem tempo? Ótimo.</h3>
+            <p>Feito pra gente real: crise acontecendo, cansaço alto, paciência baixa.</p>
+          </div>
+          <div class="card mini">
+            <div class="icon">2</div>
+            <h3>Aplicável no mesmo dia</h3>
+            <p>Você sai com frases e sequência. Não é motivacional. É operacional.</p>
+          </div>
+          <div class="card mini">
+            <div class="icon">3</div>
+            <h3>Menos desgaste</h3>
+            <p>A meta é reduzir frequência e duração das crises — e parar de piorar com as frases “lógicas” que detonam o vínculo.</p>
+          </div>
+        </div>
       </div>
-      <a class="btn primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
-        Comprar
-        <span aria-hidden="true">→</span>
-      </a>
+
+      <!-- FOR WHO -->
+      <div id="paraquem" class="section">
+        <div class="split">
+          <div class="card box">
+            <h2>Pra quem é</h2>
+            <p>Direto ao ponto: isso é para familiares que querem <b>ação prática</b>, não teorias.</p>
+            <ul class="list">
+              <li><span class="dot">✓</span>Convive com explosões, rupturas e “tudo vira discussão”.</li>
+              <li><span class="dot">✓</span>Precisa de frases prontas pra desarmar sem humilhar.</li>
+              <li><span class="dot">✓</span>Quer limite com firmeza e cuidado (sem virar refém).</li>
+              <li><span class="dot">✓</span>Quer previsibilidade: sequência, timing e tom.</li>
+            </ul>
+          </div>
+
+          <div class="card box">
+            <h2>Não é pra você se…</h2>
+            <p>Evitar frustração também é cuidado.</p>
+            <ul class="list">
+              <li class="x"><span class="dot">×</span>Você quer “ganhar debate” ou humilhar o outro.</li>
+              <li class="x"><span class="dot">×</span>Você quer “cura rápida” e promessa milagrosa.</li>
+              <li class="x"><span class="dot">×</span>Você ignora risco e recusa ajuda quando necessário.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT / TABS -->
+      <div id="conteudo" class="section">
+        <div class="card tabs">
+          <h2 style="margin:0 0 10px;font-size:22px;">O que você leva na prática</h2>
+          <p class="paneltext" style="margin-bottom:14px;">Entregáveis concretos. Tudo organizado pra você não “pensar” na hora — você executa.</p>
+
+          <div class="tabbar" role="tablist" aria-label="Conteúdo do curso">
+            <div class="tabbtn active" data-tab="t1" role="tab" aria-selected="true">Checklist de crise</div>
+            <div class="tabbtn" data-tab="t2" role="tab" aria-selected="false">Scripts: diga / não diga</div>
+            <div class="tabbtn" data-tab="t3" role="tab" aria-selected="false">Limites e plano</div>
+          </div>
+
+          <div id="t1" class="tabpanel active" role="tabpanel">
+            <h3>Checklist de crise (ordem do que fazer)</h3>
+            <p class="paneltext">Passo a passo simples, com ação rápida.</p>
+            <ul class="list">
+              <li><span class="dot">✓</span>Primeiros 60 segundos: reduzir escalada.</li>
+              <li><span class="dot">✓</span>Como não virar combustível (tom, timing, sequência).</li>
+              <li><span class="dot">✓</span>Como encerrar sem abandono (fechamento seguro).</li>
+            </ul>
+          </div>
+
+          <div id="t2" class="tabpanel" role="tabpanel">
+            <h3>Scripts “Diga / Não diga”</h3>
+            <p class="paneltext">Frases que desarmam sem infantilizar e sem escalar.</p>
+            <ul class="list">
+              <li><span class="dot">✓</span>Para acusações (“você não liga”).</li>
+              <li><span class="dot">✓</span>Para ameaça de ruptura.</li>
+              <li><span class="dot">✓</span>Para silêncio e sumiço.</li>
+            </ul>
+          </div>
+
+          <div id="t3" class="tabpanel" role="tabpanel">
+            <h3>Limites + Plano verde/amarelo/vermelho</h3>
+            <p class="paneltext">Firmeza sem crueldade. Previsibilidade reduz “alarme”.</p>
+            <ul class="list">
+              <li><span class="dot">✓</span>Limite com validação: protege o vínculo.</li>
+              <li><span class="dot">✓</span>Previsibilidade: diminui picos desnecessários.</li>
+              <li><span class="dot">✓</span>Quando buscar ajuda de fora: sinal claro.</li>
+            </ul>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;">
+            <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Comprar com acesso imediato</a>
+            <a class="btn secondary" href="#duvidas">Ver dúvidas rápidas</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRUST / ETHICS -->
+      <div class="section">
+        <div class="card trust">
+          <div class="note">
+            <b>Objetivo real do curso:</b> menos crise, menos desgaste, mais previsibilidade.
+            <span class="small">A meta não é “nunca mais ter crise”. A meta é reduzir frequência e duração, e parar de piorar com respostas que parecem lógicas, mas detonam o vínculo.</span>
+          </div>
+          <div class="note">
+            <b>Ética e segurança:</b> conteúdo educativo para familiares. Não substitui atendimento individual.
+            <span class="small">Em risco iminente (auto/heteroagressão, intoxicação por substâncias, violência, ideação suicida), procure ajuda presencial de emergência/serviços locais.</span>
+          </div>
+          <div class="note">
+            <b>Autoridade com sobriedade:</b> Dr. Fabio Schmidt • Médico • CRM-SP 183549.
+            <span class="small">Linguagem simples, foco em comportamento, comunicação e manejo de crise em casa.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div id="duvidas" class="section">
+        <div class="card box">
+          <h2>Dúvidas que travam compra</h2>
+          <p>Respostas diretas. Sem “depende”.</p>
+
+          <details>
+            <summary>É pra familiares mesmo (não para profissionais)? <span class="chev">▾</span></summary>
+            <p>Sim. É pensado para quem convive em casa: pai/mãe, cônjuge, namorado(a), irmãos. Linguagem simples e foco em comportamento, comunicação e manejo de crise.</p>
+          </details>
+
+          <details>
+            <summary>Eu não sei se é TPB “confirmado”. Serve? <span class="chev">▾</span></summary>
+            <p>Serve quando o problema central é desregulação emocional + conflito relacional (explosões, rupturas, acusações, medo de abandono). Mesmo com dúvidas diagnósticas, o curso ajuda a organizar como responder sem piorar.</p>
+          </details>
+
+          <details>
+            <summary>Isso substitui terapia / acompanhamento? <span class="chev">▾</span></summary>
+            <p>Não. É educação + ferramentas de comunicação e manejo. Em situações de risco, procure avaliação presencial e serviços de emergência.</p>
+          </details>
+
+          <details>
+            <summary>Dá pra assistir pelo celular? <span class="chev">▾</span></summary>
+            <p>Sim. A ideia é ser consumido no celular, com aplicação prática imediata.</p>
+          </details>
+
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+            <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Quero acesso agora</a>
+            <a class="btn secondary" href="#video">Voltar ao vídeo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINAL OFFER -->
+      <div class="section">
+        <div class="card final">
+          <h2>Você pode continuar reagindo no impulso…<br/>ou começar a agir com método.</h2>
+          <p>Se faz sentido para sua realidade, o acesso é imediato e as aulas ficam disponíveis para você assistir no seu ritmo.</p>
+          <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Comprar Protocolo 7 Dias</a>
+          <div class="micro" style="margin-top:12px;">
+            Link de pagamento: pay.hotmart.com/S104212285E
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <div class="row">
+          <div>Dr. Fabio Schmidt — Médico | CRM-SP 183549</div>
+          <div>Conteúdo educativo. Não substitui avaliação individual.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating CTA -->
+  <div class="floating" aria-hidden="false">
+    <div class="floating-inner">
+      <div class="miniTxt">
+        <strong>Protocolo 7 Dias</strong>
+        <span>Aulas gravadas + scripts prontos • acesso imediato</span>
+      </div>
+      <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Comprar agora</a>
     </div>
   </div>
 
   <script>
-    // UX: faz o "+" no summary ficar mais coerente
-    document.querySelectorAll('details').forEach(d => {
-      const s = d.querySelector('summary span');
-      const set = () => { if(s) s.textContent = d.open ? "−" : "+"; };
-      d.addEventListener('toggle', set);
-      set();
+    // Tabs
+    const btns = document.querySelectorAll('.tabbtn');
+    const panels = document.querySelectorAll('.tabpanel');
+
+    btns.forEach(b=>{
+      b.addEventListener('click', ()=>{
+        btns.forEach(x=>x.classList.remove('active'));
+        panels.forEach(p=>p.classList.remove('active'));
+        b.classList.add('active');
+        const id = b.getAttribute('data-tab');
+        const panel = document.getElementById(id);
+        if(panel) panel.classList.add('active');
+      });
+    });
+
+    // Close other details when one opens
+    const dts = document.querySelectorAll('details');
+    dts.forEach(d=>{
+      d.addEventListener('toggle', ()=>{
+        if(d.open){
+          dts.forEach(o=>{ if(o !== d) o.open = false; });
+        }
+      });
     });
   </script>
+
 </body>
 </html>
