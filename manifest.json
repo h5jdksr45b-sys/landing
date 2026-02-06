@@ -1,12 +1,15 @@
 {
-  "name": "Borderline Flow",
-  "short_name": "Flow",
-  "start_url": "./appsos.html",
-  "scope": "./",
+  "name": "INTERVALO",
+  "short_name": "INTERVALO",
+  "start_url": "appsos.html",
   "display": "standalone",
-  "background_color": "#0b0b0c",
-  "theme_color": "#0b0b0c",
+  "background_color": "#0B0B0C",
+  "theme_color": "#0B0B0C",
   "icons": [
-    { "src": "./ggg.png", "sizes": "512x512", "type": "image/png" }
+    {
+      "src": "ggg.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }
