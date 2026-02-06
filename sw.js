@@ -1,31 +1,21 @@
-const CACHE = "bf-cache-v1";
-const ASSETS = [
-  "./",
-  "./appsos.html",
-  "./manifest.json",
-  "./ggg.png"
-];
+const CACHE = "intervalo-v1";
 
-self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
-  self.skipWaiting();
-});
-
-self.addEventListener("activate", (e) => {
+self.addEventListener("install", e => {
   e.waitUntil(
-    caches.keys().then(keys => Promise.all(
-      keys.map(k => (k !== CACHE ? caches.delete(k) : null))
-    ))
+    caches.open(CACHE).then(cache => {
+      return cache.addAll([
+        "appsos.html",
+        "manifest.json",
+        "ggg.png"
+      ]);
+    })
   );
-  self.clients.claim();
 });
 
-self.addEventListener("fetch", (e) => {
+self.addEventListener("fetch", e => {
   e.respondWith(
-    caches.match(e.request).then((r) => r || fetch(e.request).then((resp) => {
-      const copy = resp.clone();
-      caches.open(CACHE).then(c => c.put(e.request, copy)).catch(()=>{});
-      return resp;
-    }).catch(()=>r))
+    caches.match(e.request).then(response => {
+      return response || fetch(e.request);
+    })
   );
 });
