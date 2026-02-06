@@ -1,170 +1,663 @@
-<!DOCTYPE html>
+<!-- =========================
+FILE: appsos.html
+Cole este arquivo inteiro como appsos.html
+========================= -->
+<!doctype html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INTERVALO</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>INTERVALO</title>
 
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0B0B0C">
-<link rel="icon" href="ggg.png">
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0B0B0C">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="./ggg.png">
+  <link rel="apple-touch-icon" href="./ggg.png">
 
-<style>
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-  background:#0B0B0C;
-  color:#F2F2F2;
-  text-align:center;
-}
-h1{
-  font-weight:600;
-  margin-top:40px;
-  letter-spacing:2px;
-}
-button{
-  background:#C62828;
-  color:white;
-  border:none;
-  padding:18px 30px;
-  border-radius:14px;
-  font-size:18px;
-  margin-top:40px;
-  cursor:pointer;
-}
-input, select{
-  width:80%;
-  padding:12px;
-  margin:12px 0;
-  border-radius:8px;
-  border:1px solid #333;
-  background:#1a1a1a;
-  color:white;
-}
-.section{
-  display:none;
-  margin-top:20px;
-}
-.card{
-  background:#161616;
-  padding:20px;
-  margin:20px auto;
-  width:90%;
-  border-radius:12px;
-}
-.nav{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:#111;
-  padding:12px 0;
-}
-.nav button{
-  background:none;
-  color:#F2F2F2;
-  border:none;
-  font-size:14px;
-  margin:0 20px;
-}
-</style>
+  <style>
+    :root{
+      --bg:#0B0B0C;
+      --panel:#111114;
+      --panel2:#141418;
+      --line:rgba(255,255,255,.08);
+      --text:#F2F2F2;
+      --muted:#9AA0A6;
+      --danger:#C62828;
+      --ok:#55FF9B;
+      --warn:#FFD27A;
+      --radius:18px;
+      --pad:16px;
+      --max:620px;
+      --shadow: 0 18px 40px rgba(0,0,0,.40);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 700px at 50% -180px, #1a1a1f 0%, var(--bg) 55%);
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial;
+      -webkit-font-smoothing:antialiased;
+    }
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(14px);
+      background: rgba(11,11,12,.78);
+      border-bottom:1px solid var(--line);
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:10px var(--pad);}
+    .top{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+    }
+    .brand img{
+      width:36px; height:36px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .brand .title{
+      display:flex; flex-direction:column; gap:2px;
+    }
+    .brand h1{
+      margin:0; font-size:14px; letter-spacing:.38em; font-weight:700;
+    }
+    .brand p{
+      margin:0; font-size:12px; color:var(--muted);
+    }
+    .pill{
+      font-size:12px; color:var(--muted);
+      padding:8px 10px; border-radius:999px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.12);
+      display:flex; gap:8px; align-items:center;
+      user-select:none;
+    }
+    main{max-width:var(--max); margin:0 auto; padding:14px var(--pad) 92px;}
+    .grid{display:grid; gap:12px;}
+    .panel{
+      background: rgba(17,17,20,.86);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    .panel h2{
+      margin:0 0 10px; font-size:14px; letter-spacing:.02em;
+    }
+    .muted{color:var(--muted); font-size:12px; line-height:1.35}
+    .bigbtn{
+      width:100%;
+      padding:18px 16px;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(198,40,40,.14);
+      color:#FFD1D1;
+      font-weight:800;
+      letter-spacing:.04em;
+      font-size:16px;
+      cursor:pointer;
+    }
+    .bigbtn:active{transform:scale(.99)}
+    .row{display:flex; gap:10px; align-items:center; justify-content:space-between}
+    .kpis{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .kpi{
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding:12px;
+    }
+    .kpi .l{font-size:12px; color:var(--muted)}
+    .kpi .v{font-size:18px; margin-top:6px; letter-spacing:.02em}
+    label{display:block; margin:12px 0 6px; font-size:12px; color:var(--muted)}
+    input, select, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    textarea{min-height:84px; resize:vertical}
+    .btnrow{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px}
+    .btn{
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      font-weight:700;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background:#FFFFFF;
+      color:#0B0B0C;
+      border-color: rgba(255,255,255,.22);
+    }
+    .hint{
+      margin-top:10px;
+      padding:12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .badge{
+      display:inline-block;
+      font-size:11px;
+      padding:6px 9px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      color: var(--muted);
+      background: rgba(255,255,255,.04);
+    }
+    .ok{color:var(--ok)}
+    .warn{color:var(--warn)}
+    .hide{display:none !important}
+    .tabs{
+      position:fixed; bottom:0; left:0; right:0; z-index:30;
+      background: rgba(11,11,12,.86);
+      backdrop-filter: blur(16px);
+      border-top:1px solid var(--line);
+    }
+    .tabs .wrap{padding:10px var(--pad)}
+    .tabrow{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+    .tab{
+      padding:12px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-weight:800;
+      letter-spacing:.02em;
+      text-align:center;
+      user-select:none;
+    }
+    .tab.active{
+      background: rgba(255,255,255,.14);
+      border-color: rgba(255,255,255,.20);
+    }
+    .table{
+      display:grid; gap:8px; margin-top:10px;
+    }
+    .item{
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding:12px;
+      display:grid; gap:6px;
+    }
+    .meta{
+      display:flex; justify-content:space-between; gap:10px;
+      font-size:12px; color:var(--muted);
+    }
+    .line{height:1px; background: rgba(255,255,255,.08); margin:12px 0}
+    .mini{
+      font-size:12px; color:var(--muted);
+    }
+    .actions{
+      display:grid; grid-template-columns:1fr 1fr; gap:10px;
+      margin-top:10px;
+    }
+    .ghost{
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-weight:700;
+      cursor:pointer;
+    }
+  </style>
 </head>
 
 <body>
-
-<h1>INTERVALO</h1>
-<p>O segundo entre o impulso e a decisão</p>
-
-<div id="crise" class="section" style="display:block">
-  <button onclick="mostrarFormulario()">ESTOU ATIVADO</button>
-</div>
-
-<div id="formulario" class="section">
-  <div class="card">
-    <h3>Intensidade (0-10)</h3>
-    <input type="number" id="intensidade" min="0" max="10">
-
-    <h3>Emoção</h3>
-    <select id="emocao">
-      <option>Medo</option>
-      <option>Raiva</option>
-      <option>Vergonha</option>
-      <option>Tristeza</option>
-      <option>Vazio</option>
-    </select>
-
-    <h3>Tipo</h3>
-    <select id="tipo">
-      <option>Medo de abandono</option>
-      <option>Frustração</option>
-      <option>Ciúme</option>
-      <option>Autossabotagem</option>
-    </select>
-
-    <button onclick="salvar()">Salvar</button>
+<header>
+  <div class="wrap top">
+    <div class="brand">
+      <img src="./ggg.png" alt="icon">
+      <div class="title">
+        <h1>INTERVALO</h1>
+        <p>O segundo entre o impulso e a decisão</p>
+      </div>
+    </div>
+    <div class="pill">
+      <span id="streak">0 dias</span>
+      <span class="badge" id="todayBadge">Hoje: —</span>
+    </div>
   </div>
-</div>
+</header>
 
-<div id="historico" class="section">
-  <div class="card">
-    <h3>Histórico</h3>
-    <div id="lista"></div>
+<main>
+  <!-- VIEW: CRISE -->
+  <section id="view-crise" class="grid">
+    <div class="panel">
+      <button class="bigbtn" id="btnAtivado">ESTOU ATIVADO</button>
+      <div class="muted" style="margin-top:10px">
+        Não resolva nada agora. Primeiro reduza 1–2 pontos de ativação.
+      </div>
+    </div>
+
+    <div class="panel hide" id="formCrise">
+      <h2>Registro rápido</h2>
+
+      <label>Intensidade agora (0–10)</label>
+      <input id="c_int" type="number" min="0" max="10" step="1" placeholder="Ex.: 8">
+
+      <label>Emoção predominante</label>
+      <select id="c_emo">
+        <option value="">Selecione…</option>
+        <option>Medo</option>
+        <option>Raiva</option>
+        <option>Vergonha</option>
+        <option>Tristeza</option>
+        <option>Vazio</option>
+        <option>Ansiedade</option>
+        <option>Ciúme</option>
+      </select>
+
+      <label>Tipo de ativação</label>
+      <select id="c_tipo">
+        <option value="">Selecione…</option>
+        <option>Medo de abandono</option>
+        <option>Frustração</option>
+        <option>Ciúme</option>
+        <option>Vergonha / humilhação</option>
+        <option>Vazio / desligamento</option>
+        <option>Autossabotagem</option>
+      </select>
+
+      <div class="hint" id="hintBox">
+        <div class="row">
+          <span class="badge">Protocolo sugerido</span>
+          <span class="mini" id="levelTag">—</span>
+        </div>
+        <div style="margin-top:10px; display:grid; gap:8px">
+          <div><b>Agora:</b> <span id="stepNow" class="muted">—</span></div>
+          <div><b>Técnica:</b> <span id="stepTool" class="muted">—</span></div>
+          <div><b>Frase âncora:</b> <span id="stepLine" class="muted">—</span></div>
+        </div>
+      </div>
+
+      <label>Próxima ação digna (1 passo)</label>
+      <textarea id="c_next" placeholder="Ex.: ‘vou esperar 10 min e mandar uma mensagem curta pedindo presença’"></textarea>
+
+      <div class="btnrow">
+        <button class="btn" id="btnCancelar">Cancelar</button>
+        <button class="btn primary" id="btnSalvar">Salvar</button>
+      </div>
+
+      <div id="msgCrise" class="muted" style="margin-top:10px"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Privacidade</h2>
+      <div class="muted">
+        Tudo fica salvo <b>neste aparelho</b>. Sem login. Sem nuvem.
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW: HISTÓRICO -->
+  <section id="view-historico" class="grid hide">
+    <div class="panel">
+      <h2>Padrão (7 dias)</h2>
+      <div class="kpis">
+        <div class="kpi">
+          <div class="l">Média intensidade</div>
+          <div class="v" id="kpiAvg">—</div>
+        </div>
+        <div class="kpi">
+          <div class="l">Pico</div>
+          <div class="v" id="kpiPeak">—</div>
+        </div>
+        <div class="kpi">
+          <div class="l">Emoção + comum</div>
+          <div class="v" id="kpiEmo">—</div>
+        </div>
+        <div class="kpi">
+          <div class="l">Tipo + comum</div>
+          <div class="v" id="kpiTipo">—</div>
+        </div>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="row">
+        <span class="badge">Filtros</span>
+        <span class="muted">para relatório</span>
+      </div>
+
+      <label>Filtrar por emoção</label>
+      <select id="f_emo">
+        <option value="">Todas</option>
+        <option>Medo</option><option>Raiva</option><option>Vergonha</option>
+        <option>Tristeza</option><option>Vazio</option><option>Ansiedade</option><option>Ciúme</option>
+      </select>
+
+      <label>Filtrar por tipo</label>
+      <select id="f_tipo">
+        <option value="">Todos</option>
+        <option>Medo de abandono</option><option>Frustração</option><option>Ciúme</option>
+        <option>Vergonha / humilhação</option><option>Vazio / desligamento</option><option>Autossabotagem</option>
+      </select>
+
+      <div class="actions">
+        <button class="ghost" id="btnExport">Exportar JSON</button>
+        <button class="ghost" id="btnReset">Zerar dados</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Tabela</h2>
+      <div class="muted">Data • Intensidade • Emoção • Tipo • Ação</div>
+      <div id="list" class="table"></div>
+      <div id="empty" class="muted">Sem registros ainda.</div>
+    </div>
+  </section>
+</main>
+
+<div class="tabs">
+  <div class="wrap">
+    <div class="tabrow">
+      <div class="tab active" data-tab="crise">Crise</div>
+      <div class="tab" data-tab="historico">Histórico</div>
+    </div>
   </div>
-</div>
-
-<div class="nav">
-  <button onclick="mostrar('crise')">Crise</button>
-  <button onclick="mostrar('historico')">Histórico</button>
 </div>
 
 <script>
-let dados = JSON.parse(localStorage.getItem("intervalo")) || [];
+  // ========= PERSISTÊNCIA =========
+  const STORE = "intervalo_v1";
+  const nowISO = () => new Date().toISOString();
+  const dayKey = (d=new Date()) => d.toISOString().slice(0,10);
 
-function mostrar(sec){
-  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
-  document.getElementById(sec).style.display="block";
-  atualizar();
-}
+  const $ = (id) => document.getElementById(id);
 
-function mostrarFormulario(){
-  mostrar("formulario");
-}
+  function load(){
+    try{
+      const raw = localStorage.getItem(STORE);
+      if(!raw) return {events:[]};
+      const obj = JSON.parse(raw);
+      return {events: Array.isArray(obj.events) ? obj.events : []};
+    }catch(e){
+      return {events:[]};
+    }
+  }
+  function save(obj){
+    localStorage.setItem(STORE, JSON.stringify(obj));
+  }
 
-function salvar(){
-  let intensidade = document.getElementById("intensidade").value;
-  let emocao = document.getElementById("emocao").value;
-  let tipo = document.getElementById("tipo").value;
+  // ========= UI / NAVEGAÇÃO =========
+  const views = {
+    crise: $("view-crise"),
+    historico: $("view-historico"),
+  };
 
-  if(intensidade==="") return alert("Preencha intensidade");
+  function show(tab){
+    Object.keys(views).forEach(k => views[k].classList.add("hide"));
+    views[tab].classList.remove("hide");
+    document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab===tab));
+    render();
+  }
 
-  dados.push({
-    data:new Date().toLocaleString(),
-    intensidade,
-    emocao,
-    tipo
+  document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", ()=>show(t.dataset.tab)));
+
+  // ========= PROTOCOLO POR INTENSIDADE =========
+  function protocol(intensity){
+    const i = Number(intensity);
+    if(Number.isNaN(i)) return null;
+
+    if(i >= 8){
+      return {
+        level:"ALTO (8–10)",
+        now:"Pausa. Não discuta. Saia do estímulo por 2–3 minutos.",
+        tool:"Respiração 4–6 por 2 min (4s inspira / 6s expira).",
+        line:"‘Eu não preciso resolver agora. Eu preciso baixar a ativação.’"
+      };
+    }
+    if(i >= 5){
+      return {
+        level:"MÉDIO (5–7)",
+        now:"Reduza 1 ponto antes de responder qualquer coisa.",
+        tool:"Grounding 5-4-3-2-1 (sensações) por 90s.",
+        line:"‘Isso pode ser medo ativado. Eu vou checar fatos depois.’"
+      };
+    }
+    return {
+      level:"BAIXO (0–4)",
+      now:"Você está com controle suficiente para escolher forma e timing.",
+      tool:"Escreva 1 frase curta do que você precisa (sem acusar).",
+      line:"‘Eu posso pedir presença sem atacar.’"
+    };
+  }
+
+  function updateHints(){
+    const val = $("c_int").value;
+    const p = protocol(val);
+    if(!p){
+      $("levelTag").textContent = "—";
+      $("stepNow").textContent = "—";
+      $("stepTool").textContent = "—";
+      $("stepLine").textContent = "—";
+      return;
+    }
+    $("levelTag").textContent = p.level;
+    $("stepNow").textContent = p.now;
+    $("stepTool").textContent = p.tool;
+    $("stepLine").textContent = p.line;
+  }
+
+  // ========= CRISE FLOW =========
+  $("btnAtivado").addEventListener("click", ()=>{
+    $("formCrise").classList.remove("hide");
+    $("msgCrise").textContent = "";
+    $("c_int").focus();
   });
 
-  localStorage.setItem("intervalo", JSON.stringify(dados));
-  mostrar("historico");
-}
-
-function atualizar(){
-  let lista=document.getElementById("lista");
-  lista.innerHTML="";
-  dados.forEach(d=>{
-    lista.innerHTML+=`
-      <div style="margin:10px 0;border-bottom:1px solid #333;padding:6px">
-        <b>${d.data}</b><br>
-        Intensidade: ${d.intensidade} |
-        ${d.emocao} |
-        ${d.tipo}
-      </div>`;
+  $("btnCancelar").addEventListener("click", ()=>{
+    $("formCrise").classList.add("hide");
+    $("msgCrise").textContent = "";
+    $("c_int").value = "";
+    $("c_emo").value = "";
+    $("c_tipo").value = "";
+    $("c_next").value = "";
+    updateHints();
   });
-}
 
-if("serviceWorker" in navigator){
-  navigator.serviceWorker.register("sw.js");
-}
+  $("c_int").addEventListener("input", updateHints);
+
+  $("btnSalvar").addEventListener("click", ()=>{
+    const intensity = $("c_int").value==="" ? null : Number($("c_int").value);
+    const emo = $("c_emo").value.trim();
+    const tipo = $("c_tipo").value.trim();
+    const next = $("c_next").value.trim();
+
+    if(intensity===null || Number.isNaN(intensity) || intensity<0 || intensity>10){
+      $("msgCrise").innerHTML = `<span class="warn">Preencha intensidade (0–10).</span>`;
+      return;
+    }
+    if(!emo || !tipo || !next){
+      $("msgCrise").innerHTML = `<span class="warn">Complete emoção, tipo e próxima ação.</span>`;
+      return;
+    }
+
+    const data = load();
+    const p = protocol(intensity);
+
+    data.events.push({
+      ts: nowISO(),
+      day: dayKey(),
+      intensity,
+      emo,
+      tipo,
+      next,
+      protocol_level: p ? p.level : ""
+    });
+
+    save(data);
+
+    $("msgCrise").innerHTML = `<span class="ok">Registrado.</span>`;
+    $("formCrise").classList.add("hide");
+    $("c_int").value = "";
+    $("c_emo").value = "";
+    $("c_tipo").value = "";
+    $("c_next").value = "";
+    updateHints();
+
+    renderBadges();
+  });
+
+  // ========= HISTÓRICO / KPIs =========
+  function fmt(iso){
+    const d = new Date(iso);
+    return d.toLocaleString("pt-BR", {dateStyle:"short", timeStyle:"short"});
+  }
+
+  function mostCommon(arr){
+    const map = new Map();
+    arr.forEach(x=>{
+      if(!x) return;
+      map.set(x, (map.get(x)||0)+1);
+    });
+    let best = "—", bestN = 0;
+    for(const [k,v] of map.entries()){
+      if(v>bestN){ bestN=v; best=k; }
+    }
+    return best;
+  }
+
+  function inLast7Days(iso){
+    const d = new Date(iso);
+    const now = new Date();
+    const start = new Date(now);
+    start.setDate(start.getDate()-7);
+    return d >= start;
+  }
+
+  function streak(events){
+    const days = [...new Set(events.map(e=>e.day))].sort();
+    if(days.length===0) return 0;
+    let s=1;
+    for(let i=days.length-1; i>0; i--){
+      const a = new Date(days[i]);
+      const b = new Date(days[i-1]);
+      const diff = (a-b)/86400000;
+      if(diff===1) s++; else break;
+    }
+    const last = new Date(days[days.length-1]);
+    const today = new Date(dayKey());
+    const diffNow = (today-last)/86400000;
+    if(diffNow===0 || diffNow===1) return s;
+    return 0;
+  }
+
+  function renderBadges(){
+    const data = load();
+    const t = dayKey();
+    const today = data.events.find(e=>e.day===t);
+    $("todayBadge").textContent = "Hoje: " + (today ? today.intensity : "—");
+    $("streak").textContent = streak(data.events) + " dias";
+  }
+
+  function renderKPIs(events){
+    const last = events.filter(e=>inLast7Days(e.ts));
+    if(!last.length){
+      $("kpiAvg").textContent="—";
+      $("kpiPeak").textContent="—";
+      $("kpiEmo").textContent="—";
+      $("kpiTipo").textContent="—";
+      return;
+    }
+    const avg = last.reduce((s,e)=>s+(Number(e.intensity)||0),0)/last.length;
+    const peak = Math.max(...last.map(e=>Number(e.intensity)||0));
+    $("kpiAvg").textContent = avg.toFixed(1);
+    $("kpiPeak").textContent = String(peak);
+    $("kpiEmo").textContent = mostCommon(last.map(e=>e.emo));
+    $("kpiTipo").textContent = mostCommon(last.map(e=>e.tipo));
+  }
+
+  function applyFilters(events){
+    const fe = $("f_emo").value.trim();
+    const ft = $("f_tipo").value.trim();
+    return events.filter(e=>{
+      const okE = fe ? e.emo===fe : true;
+      const okT = ft ? e.tipo===ft : true;
+      return okE && okT;
+    });
+  }
+
+  function renderTable(events){
+    const list = $("list");
+    const empty = $("empty");
+    const data = [...events].sort((a,b)=>b.ts.localeCompare(a.ts));
+    if(!data.length){
+      list.innerHTML = "";
+      empty.classList.remove("hide");
+      return;
+    }
+    empty.classList.add("hide");
+    list.innerHTML = data.map(e=>`
+      <div class="item">
+        <div class="meta">
+          <span>${fmt(e.ts)}</span>
+          <span class="badge">Int ${e.intensity}</span>
+        </div>
+        <div><b>${e.emo}</b> • <span class="muted">${e.tipo}</span></div>
+        <div class="muted"><b>Ação:</b> ${escapeHtml(e.next)}</div>
+      </div>
+    `).join("");
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, m => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[m]));
+  }
+
+  // ========= EXPORT / RESET =========
+  $("btnExport").addEventListener("click", ()=>{
+    const data = load();
+    const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "intervalo-export.json";
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  $("btnReset").addEventListener("click", ()=>{
+    if(confirm("Zerar todos os dados deste aparelho?")){
+      localStorage.removeItem(STORE);
+      render();
+      renderBadges();
+      alert("Zerado.");
+    }
+  });
+
+  $("f_emo").addEventListener("change", render);
+  $("f_tipo").addEventListener("change", render);
+
+  function render(){
+    const data = load();
+    renderBadges();
+    const filtered = applyFilters(data.events);
+    renderKPIs(filtered);
+    renderTable(filtered);
+  }
+
+  // ========= PWA (força atualização) =========
+  if("serviceWorker" in navigator){
+    window.addEventListener("load", ()=>{
+      navigator.serviceWorker.register("./sw.js?v=100").catch(()=>{});
+    });
+  }
+
+  // INIT
+  updateHints();
+  render();
 </script>
-
 </body>
 </html>
