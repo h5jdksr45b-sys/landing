@@ -1,7 +1,7 @@
 const CACHE = "bf-cache-v1";
 const ASSETS = [
   "./",
-  "./index.html",
+  "./appsos.html",
   "./manifest.json",
   "./ggg.png"
 ];
