@@ -1,612 +1,170 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#0b0b0c" />
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Borderline Flow</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INTERVALO</title>
 
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./ggg.png">
-  <link rel="apple-touch-icon" href="./ggg.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0B0B0C">
+<link rel="icon" href="ggg.png">
 
-  <style>
-    :root{
-      --bg:#0b0b0c; --card:#131316; --muted:#9aa0a6; --text:#f2f2f2;
-      --line:#232327; --accent:#ffffff; --danger:#ff4d4d; --ok:#55ff9b;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius:16px;
-      --pad:16px;
-      --max: 560px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial;
-      background: radial-gradient(1200px 600px at 50% -100px, #1a1a1f 0%, var(--bg) 55%);
-      color:var(--text);
-      -webkit-font-smoothing: antialiased;
-    }
-    header{
-      position: sticky; top:0; z-index: 10;
-      backdrop-filter: blur(12px);
-      background: rgba(11,11,12,.72);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .wrap{max-width:var(--max); margin:0 auto; padding: 10px var(--pad);}
-    .topbar{display:flex; align-items:center; justify-content:space-between; gap:12px;}
-    .brand{display:flex; gap:10px; align-items:center;}
-    .brand img{width:34px; height:34px; border-radius:10px; border:1px solid rgba(255,255,255,.12)}
-    .brand h1{font-size:14px; margin:0; letter-spacing:.3px}
-    .brand p{margin:0; font-size:12px; color:var(--muted)}
-    .pill{
-      font-size:12px; color:var(--muted); border:1px solid rgba(255,255,255,.12);
-      padding:7px 10px; border-radius:999px; background: rgba(255,255,255,.04);
-      display:flex; gap:8px; align-items:center;
-    }
-    main{padding: 14px var(--pad) 88px; max-width:var(--max); margin:0 auto;}
-    .grid{display:grid; gap:12px;}
-    .card{
-      background: rgba(19,19,22,.86);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 14px;
-    }
-    .row{display:flex; gap:10px; align-items:center; justify-content:space-between;}
-    .kpi{display:flex; flex-direction:column; gap:4px;}
-    .kpi .label{font-size:12px; color:var(--muted)}
-    .kpi .value{font-size:18px; letter-spacing:.2px}
-    .btns{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
-    button{
-      appearance:none; border:none; cursor:pointer;
-      border-radius: 14px;
-      padding: 12px 12px;
-      font-weight:600; letter-spacing:.2px;
-      color: var(--bg);
-      background: var(--accent);
-      transition: transform .06s ease;
-    }
-    button:active{transform: scale(.99)}
-    .btn-ghost{
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      border:1px solid rgba(255,255,255,.10);
-      font-weight:600;
-    }
-    .btn-danger{
-      background: rgba(255,77,77,.12);
-      color: #ffd1d1;
-      border:1px solid rgba(255,77,77,.35);
-    }
-    .muted{color:var(--muted); font-size:12px; line-height:1.35}
-    .title{margin:0 0 8px; font-size:14px; letter-spacing:.2px}
-    label{display:block; font-size:12px; color:var(--muted); margin: 10px 0 6px}
-    input, select, textarea{
-      width:100%;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
-      color: var(--text);
-      border-radius: 12px;
-      padding: 11px 12px;
-      outline: none;
-      font-size: 14px;
-    }
-    textarea{min-height:84px; resize: vertical}
-    .tabs{
-      position: fixed; bottom:0; left:0; right:0; z-index: 30;
-      background: rgba(11,11,12,.86);
-      backdrop-filter: blur(16px);
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
-    .tabs .wrap{max-width:var(--max); margin:0 auto; padding: 10px var(--pad);}
-    .tabrow{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;}
-    .tab{
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      color: var(--text);
-      padding:10px 10px;
-      border-radius: 14px;
-      font-size:12px;
-      display:flex; align-items:center; justify-content:center;
-      user-select:none;
-    }
-    .tab.active{background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.18)}
-    .list{display:grid; gap:8px; margin-top:10px}
-    .item{
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03);
-      border-radius: 14px;
-      padding: 12px;
-      display:grid; gap:6px;
-    }
-    .item .meta{display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:12px}
-    .badge{font-size:11px; padding:5px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.12); color:var(--muted)}
-    .hr{height:1px; background: rgba(255,255,255,.08); margin:12px 0}
-    .steps{display:grid; gap:10px}
-    .step{
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03);
-      border-radius: 14px;
-      padding: 12px;
-    }
-    .step h3{margin:0 0 6px; font-size:13px}
-    .step p{margin:0; font-size:12px; color:var(--muted); line-height:1.35}
-    .inline{display:flex; gap:10px; align-items:center; justify-content:space-between}
-    .smallbtn{padding:10px 12px; border-radius: 12px; font-size:12px}
-    .ok{color: var(--ok)}
-    .warn{color:#ffd27a}
-    .hide{display:none !important}
-  </style>
+<style>
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+  background:#0B0B0C;
+  color:#F2F2F2;
+  text-align:center;
+}
+h1{
+  font-weight:600;
+  margin-top:40px;
+  letter-spacing:2px;
+}
+button{
+  background:#C62828;
+  color:white;
+  border:none;
+  padding:18px 30px;
+  border-radius:14px;
+  font-size:18px;
+  margin-top:40px;
+  cursor:pointer;
+}
+input, select{
+  width:80%;
+  padding:12px;
+  margin:12px 0;
+  border-radius:8px;
+  border:1px solid #333;
+  background:#1a1a1a;
+  color:white;
+}
+.section{
+  display:none;
+  margin-top:20px;
+}
+.card{
+  background:#161616;
+  padding:20px;
+  margin:20px auto;
+  width:90%;
+  border-radius:12px;
+}
+.nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:#111;
+  padding:12px 0;
+}
+.nav button{
+  background:none;
+  color:#F2F2F2;
+  border:none;
+  font-size:14px;
+  margin:0 20px;
+}
+</style>
 </head>
 
 <body>
-<header>
-  <div class="wrap topbar">
-    <div class="brand">
-      <img src="./ggg.png" alt="icon">
-      <div>
-        <h1>Borderline Flow</h1>
-        <p id="subtitle">Diário & Protocolo no bolso</p>
-      </div>
-    </div>
-    <div class="pill">
-      <span id="streak">0 dias</span>
-      <span class="badge" id="todayIntensity">Hoje: —</span>
-    </div>
-  </div>
-</header>
 
-<main>
-  <section id="view-home" class="grid">
-    <div class="card">
-      <div class="row">
-        <div class="kpi">
-          <div class="label">Semana</div>
-          <div class="value" id="weekCount">0 registros</div>
-        </div>
-        <div class="kpi" style="text-align:right">
-          <div class="label">Média intensidade</div>
-          <div class="value" id="weekAvg">—</div>
-        </div>
-      </div>
-      <div class="hr"></div>
-      <div class="btns">
-        <button id="goCheckin">Fazer check-in</button>
-        <button class="btn-danger" id="goCrisis">Estou em crise</button>
-      </div>
-      <div style="margin-top:10px" class="muted">
-        Salva no seu aparelho. Sem conta. Sem nuvem. (Privacidade total)
-      </div>
-    </div>
+<h1>INTERVALO</h1>
+<p>O segundo entre o impulso e a decisão</p>
 
-    <div class="card">
-      <h2 class="title">Últimos check-ins</h2>
-      <div id="lastCheckins" class="list"></div>
-      <div class="muted" id="emptyCheckins">Nenhum check-in ainda. Faça o primeiro.</div>
-    </div>
+<div id="crise" class="section" style="display:block">
+  <button onclick="mostrarFormulario()">ESTOU ATIVADO</button>
+</div>
 
-    <div class="card">
-      <h2 class="title">Ferramentas rápidas</h2>
-      <div class="btns">
-        <button class="btn-ghost" id="exportData">Exportar dados</button>
-        <button class="btn-ghost" id="importData">Importar</button>
-      </div>
-      <div style="margin-top:10px" class="btns">
-        <button class="btn-ghost" id="installHint">Como instalar</button>
-        <button class="btn-ghost" id="resetAll">Zerar tudo</button>
-      </div>
-      <input id="fileInput" type="file" accept="application/json" class="hide" />
-      <div id="installBox" class="hide" style="margin-top:10px">
-        <div class="step">
-          <h3>Instalar como app</h3>
-          <p>
-            iPhone: Safari → Compartilhar → <b>Adicionar à Tela de Início</b>.<br>
-            Android: Chrome → menu → <b>Add to Home screen</b>.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+<div id="formulario" class="section">
+  <div class="card">
+    <h3>Intensidade (0-10)</h3>
+    <input type="number" id="intensidade" min="0" max="10">
 
-  <section id="view-checkin" class="grid hide">
-    <div class="card">
-      <h2 class="title">Check-in</h2>
+    <h3>Emoção</h3>
+    <select id="emocao">
+      <option>Medo</option>
+      <option>Raiva</option>
+      <option>Vergonha</option>
+      <option>Tristeza</option>
+      <option>Vazio</option>
+    </select>
 
-      <label>Emoção predominante</label>
-      <select id="emo">
-        <option value="">Selecione…</option>
-        <option>Ansiedade</option>
-        <option>Raiva</option>
-        <option>Tristeza</option>
-        <option>Vazio</option>
-        <option>Vergonha</option>
-        <option>Medo</option>
-        <option>Alívio</option>
-        <option>Alegria</option>
-        <option>Confusão</option>
-      </select>
+    <h3>Tipo</h3>
+    <select id="tipo">
+      <option>Medo de abandono</option>
+      <option>Frustração</option>
+      <option>Ciúme</option>
+      <option>Autossabotagem</option>
+    </select>
 
-      <label>Intensidade (0–10)</label>
-      <input id="intensity" type="number" min="0" max="10" step="1" placeholder="Ex.: 7">
-
-      <label>Gatilho (o que aconteceu?)</label>
-      <input id="trigger" type="text" placeholder="Ex.: silêncio, atraso, discussão, mensagem fria">
-
-      <label>Impulso (o que veio na cabeça/físico?)</label>
-      <input id="impulse" type="text" placeholder="Ex.: ligar 20x, terminar, acusar, sumir, beber, comprar">
-
-      <label>O que você fez</label>
-      <textarea id="did" placeholder="Sem julgamento. Só registro."></textarea>
-
-      <label>Uma ação alternativa (um passo melhor)</label>
-      <textarea id="alt" placeholder="Ex.: esperar 10 min, pedir presença, sair do ambiente, respirar, escrever"></textarea>
-
-      <div class="hr"></div>
-      <div class="btns">
-        <button class="btn-ghost" id="backHome1">Voltar</button>
-        <button id="saveCheckin">Salvar</button>
-      </div>
-
-      <div id="checkinMsg" class="muted" style="margin-top:10px"></div>
-    </div>
-
-    <div class="card">
-      <h2 class="title">Histórico</h2>
-      <div id="allCheckins" class="list"></div>
-      <div class="muted" id="emptyAll">Sem registros.</div>
-    </div>
-  </section>
-
-  <section id="view-crisis" class="grid hide">
-    <div class="card">
-      <h2 class="title">Protocolo de crise (3–5 min)</h2>
-      <label>Intensidade agora (0–10)</label>
-      <input id="c_intensity" type="number" min="0" max="10" step="1" placeholder="Ex.: 9">
-
-      <div class="hr"></div>
-
-      <div class="steps">
-        <div class="step">
-          <div class="inline">
-            <h3>1) Pausa de 60 segundos</h3>
-            <span class="badge" id="timer">60</span>
-          </div>
-          <p>Não negocie, não argumente, não resolva nada agora. Só pausa.</p>
-          <div style="margin-top:10px" class="btns">
-            <button class="btn-ghost smallbtn" id="start60">Iniciar 60s</button>
-            <button class="btn-ghost smallbtn" id="stop60">Parar</button>
-          </div>
-        </div>
-
-        <div class="step">
-          <h3>2) Nomeie a emoção</h3>
-          <p>Dar nome reduz ativação. Escolha sem perfeccionismo.</p>
-          <select id="c_emo">
-            <option value="">Selecione…</option>
-            <option>Medo</option>
-            <option>Raiva</option>
-            <option>Vergonha</option>
-            <option>Tristeza</option>
-            <option>Ansiedade</option>
-            <option>Vazio</option>
-            <option>Ciúme</option>
-            <option>Desespero</option>
-          </select>
-        </div>
-
-        <div class="step">
-          <h3>3) Técnica rápida (escolha 1)</h3>
-          <p>O objetivo é baixar 1–2 pontos de intensidade, não “ficar bem”.</p>
-          <select id="c_tool">
-            <option value="">Selecione…</option>
-            <option value="Respiração 4-6 (4s inspira / 6s expira por 2 min)">Respiração 4-6 (2 min)</option>
-            <option value="Grounding 5-4-3-2-1 (sensações)">Grounding 5-4-3-2-1</option>
-            <option value="Água fria no rosto / gelo 30–60s (se tolerado)">Água fria / gelo</option>
-            <option value="Sair do ambiente por 3 minutos (sem sumir da relação)">Sair 3 min</option>
-          </select>
-        </div>
-
-        <div class="step">
-          <h3>4) Pergunta-chave</h3>
-          <p><b>Isso é abandono real</b> ou <b>medo ativado</b>?</p>
-          <select id="c_q">
-            <option value="">Selecione…</option>
-            <option>Abandono real (fato verificável)</option>
-            <option>Medo ativado (alarme sem incêndio)</option>
-            <option>Não sei ainda</option>
-          </select>
-        </div>
-
-        <div class="step">
-          <h3>5) Próxima ação (um passo digno)</h3>
-          <p>Uma ação pequena que não destrói vínculo.</p>
-          <textarea id="c_next" placeholder="Ex.: ‘Vou esperar 10 min e mandar uma mensagem curta pedindo presença’"></textarea>
-        </div>
-      </div>
-
-      <div class="hr"></div>
-      <div class="btns">
-        <button class="btn-ghost" id="backHome2">Voltar</button>
-        <button id="saveCrisis">Salvar crise</button>
-      </div>
-
-      <div id="crisisMsg" class="muted" style="margin-top:10px"></div>
-    </div>
-
-    <div class="card">
-      <h2 class="title">Crises registradas</h2>
-      <div id="allCrises" class="list"></div>
-      <div class="muted" id="emptyCrises">Sem registros.</div>
-    </div>
-  </section>
-</main>
-
-<div class="tabs">
-  <div class="wrap">
-    <div class="tabrow">
-      <div class="tab active" data-tab="home">Início</div>
-      <div class="tab" data-tab="checkin">Check-in</div>
-      <div class="tab" data-tab="crisis">Crise</div>
-    </div>
+    <button onclick="salvar()">Salvar</button>
   </div>
 </div>
 
+<div id="historico" class="section">
+  <div class="card">
+    <h3>Histórico</h3>
+    <div id="lista"></div>
+  </div>
+</div>
+
+<div class="nav">
+  <button onclick="mostrar('crise')">Crise</button>
+  <button onclick="mostrar('historico')">Histórico</button>
+</div>
+
 <script>
-  const KEY = "bf_v1";
-  const nowISO = () => new Date().toISOString();
-  const dayKey = (d=new Date()) => d.toISOString().slice(0,10);
+let dados = JSON.parse(localStorage.getItem("intervalo")) || [];
 
-  function load(){
-    try{
-      const raw = localStorage.getItem(KEY);
-      if(!raw) return {checkins:[], crises:[]};
-      const obj = JSON.parse(raw);
-      return {checkins: obj.checkins||[], crises: obj.crises||[]};
-    }catch(e){
-      return {checkins:[], crises:[]};
-    }
-  }
-  function save(data){ localStorage.setItem(KEY, JSON.stringify(data)); }
-  const $ = (id)=>document.getElementById(id);
+function mostrar(sec){
+  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+  document.getElementById(sec).style.display="block";
+  atualizar();
+}
 
-  const view = { home:$("view-home"), checkin:$("view-checkin"), crisis:$("view-crisis") };
-  function show(tab){
-    for(const k in view) view[k].classList.add("hide");
-    view[tab].classList.remove("hide");
-    document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active", t.dataset.tab===tab));
-    render();
-  }
-  function fmtDate(iso){
-    const d = new Date(iso);
-    return d.toLocaleString("pt-BR", {dateStyle:"short", timeStyle:"short"});
-  }
-  function weekStart(d=new Date()){
-    const x = new Date(d);
-    const day = (x.getDay()+6)%7;
-    x.setHours(0,0,0,0);
-    x.setDate(x.getDate()-day);
-    return x;
-  }
-  function inThisWeek(iso){
-    const d = new Date(iso);
-    const start = weekStart(new Date());
-    const end = new Date(start); end.setDate(end.getDate()+7);
-    return d>=start && d<end;
-  }
-  function streakDays(checkins){
-    const days = [...new Set(checkins.map(c=>c.day))].sort();
-    if(days.length===0) return 0;
-    let streak = 1;
-    for(let i=days.length-1; i>0; i--){
-      const a = new Date(days[i]);
-      const b = new Date(days[i-1]);
-      const diff = (a-b)/86400000;
-      if(diff===1) streak++;
-      else break;
-    }
-    const last = new Date(days[days.length-1]);
-    const today = new Date(dayKey());
-    const diffNow = (today-last)/86400000;
-    if(diffNow===0 || diffNow===1) return streak;
-    return 0;
-  }
-  function escapeHtml(s){
-    return String(s).replace(/[&<>"']/g, m => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[m]));
-  }
+function mostrarFormulario(){
+  mostrar("formulario");
+}
 
-  function render(){
-    const data = load();
-    const today = dayKey();
-    const todayCI = data.checkins.find(c=>c.day===today);
-    $("todayIntensity").textContent = "Hoje: " + (todayCI ? (todayCI.intensity ?? "—") : "—");
-    $("streak").textContent = streakDays(data.checkins) + " dias";
+function salvar(){
+  let intensidade = document.getElementById("intensidade").value;
+  let emocao = document.getElementById("emocao").value;
+  let tipo = document.getElementById("tipo").value;
 
-    const week = data.checkins.filter(c=>inThisWeek(c.ts));
-    $("weekCount").textContent = week.length + " registros";
-    if(week.length){
-      const avg = week.reduce((s,c)=>s+(Number(c.intensity)||0),0)/week.length;
-      $("weekAvg").textContent = avg.toFixed(1);
-    } else $("weekAvg").textContent = "—";
+  if(intensidade==="") return alert("Preencha intensidade");
 
-    const last = [...data.checkins].sort((a,b)=>b.ts.localeCompare(a.ts)).slice(0,4);
-    $("lastCheckins").innerHTML = last.map(c=>`
-      <div class="item">
-        <div class="meta">
-          <span>${fmtDate(c.ts)}</span>
-          <span class="badge">Int ${c.intensity ?? "—"}</span>
-        </div>
-        <div><b>${c.emo || "—"}</b> • <span class="muted">${escapeHtml(c.trigger||"")}</span></div>
-        ${c.impulse ? `<div class="muted">Impulso: ${escapeHtml(c.impulse)}</div>` : ""}
-      </div>
-    `).join("");
-    $("emptyCheckins").classList.toggle("hide", last.length>0);
-
-    const all = [...data.checkins].sort((a,b)=>b.ts.localeCompare(a.ts));
-    $("allCheckins").innerHTML = all.map(c=>`
-      <div class="item">
-        <div class="meta">
-          <span>${fmtDate(c.ts)}</span>
-          <span class="badge">Int ${c.intensity ?? "—"}</span>
-        </div>
-        <div><b>${c.emo || "—"}</b></div>
-        ${c.trigger ? `<div class="muted">Gatilho: ${escapeHtml(c.trigger)}</div>` : ""}
-        ${c.impulse ? `<div class="muted">Impulso: ${escapeHtml(c.impulse)}</div>` : ""}
-        ${c.did ? `<div class="muted">Fez: ${escapeHtml(c.did)}</div>` : ""}
-        ${c.alt ? `<div class="muted">Alternativa: <span class="ok">${escapeHtml(c.alt)}</span></div>` : ""}
-      </div>
-    `).join("");
-    $("emptyAll").classList.toggle("hide", all.length>0);
-
-    const crises = [...data.crises].sort((a,b)=>b.ts.localeCompare(a.ts));
-    $("allCrises").innerHTML = crises.map(c=>`
-      <div class="item">
-        <div class="meta">
-          <span>${fmtDate(c.ts)}</span>
-          <span class="badge">Int ${c.intensity ?? "—"}</span>
-        </div>
-        <div><b>${c.emo || "—"}</b> • <span class="muted">${escapeHtml(c.q || "")}</span></div>
-        ${c.tool ? `<div class="muted">Técnica: ${escapeHtml(c.tool)}</div>` : ""}
-        ${c.next ? `<div class="muted">Próxima ação: <span class="ok">${escapeHtml(c.next)}</span></div>` : ""}
-      </div>
-    `).join("");
-    $("emptyCrises").classList.toggle("hide", crises.length>0);
-  }
-
-  $("goCheckin").onclick = ()=>show("checkin");
-  $("goCrisis").onclick = ()=>show("crisis");
-  $("backHome1").onclick = ()=>show("home");
-  $("backHome2").onclick = ()=>show("home");
-  document.querySelectorAll(".tab").forEach(t=>t.onclick = ()=>show(t.dataset.tab));
-
-  $("saveCheckin").onclick = ()=>{
-    const emo = $("emo").value.trim();
-    const intensity = $("intensity").value === "" ? null : Number($("intensity").value);
-    const trigger = $("trigger").value.trim();
-    const impulse = $("impulse").value.trim();
-    const did = $("did").value.trim();
-    const alt = $("alt").value.trim();
-
-    if(!emo || intensity===null || Number.isNaN(intensity) || intensity<0 || intensity>10){
-      $("checkinMsg").innerHTML = `<span class="warn">Preencha emoção e intensidade (0–10).</span>`;
-      return;
-    }
-
-    const data = load();
-    data.checkins.push({
-      id: crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2),
-      ts: nowISO(),
-      day: dayKey(),
-      emo, intensity, trigger, impulse, did, alt
-    });
-    save(data);
-
-    $("emo").value=""; $("intensity").value=""; $("trigger").value=""; $("impulse").value=""; $("did").value=""; $("alt").value="";
-    $("checkinMsg").innerHTML = `<span class="ok">Salvo.</span>`;
-    render();
-  };
-
-  $("saveCrisis").onclick = ()=>{
-    const intensity = $("c_intensity").value==="" ? null : Number($("c_intensity").value);
-    const emo = $("c_emo").value.trim();
-    const tool = $("c_tool").value.trim();
-    const q = $("c_q").value.trim();
-    const next = $("c_next").value.trim();
-
-    if(intensity===null || Number.isNaN(intensity) || intensity<0 || intensity>10){
-      $("crisisMsg").innerHTML = `<span class="warn">Preencha a intensidade (0–10).</span>`;
-      return;
-    }
-    if(!emo || !tool || !q || !next){
-      $("crisisMsg").innerHTML = `<span class="warn">Complete os passos 2 a 5.</span>`;
-      return;
-    }
-
-    const data = load();
-    data.crises.push({
-      id: crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2),
-      ts: nowISO(),
-      day: dayKey(),
-      intensity, emo, tool, q, next
-    });
-    save(data);
-
-    $("c_intensity").value=""; $("c_emo").value=""; $("c_tool").value=""; $("c_q").value=""; $("c_next").value="";
-    $("crisisMsg").innerHTML = `<span class="ok">Crise registrada.</span>`;
-    render();
-  };
-
-  $("exportData").onclick = ()=>{
-    const data = load();
-    const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "borderline-flow-backup.json";
-    a.click();
-    URL.revokeObjectURL(a.href);
-  };
-
-  $("importData").onclick = ()=> $("fileInput").click();
-  $("fileInput").addEventListener("change", async (e)=>{
-    const f = e.target.files?.[0];
-    if(!f) return;
-    try{
-      const text = await f.text();
-      const obj = JSON.parse(text);
-      const merged = {
-        checkins: Array.isArray(obj.checkins) ? obj.checkins : [],
-        crises: Array.isArray(obj.crises) ? obj.crises : []
-      };
-      save(merged);
-      render();
-      alert("Importado.");
-    }catch(err){
-      alert("Falha ao importar.");
-    }finally{
-      e.target.value="";
-    }
+  dados.push({
+    data:new Date().toLocaleString(),
+    intensidade,
+    emocao,
+    tipo
   });
 
-  $("resetAll").onclick = ()=>{
-    if(confirm("Zerar todos os dados deste aparelho?")){
-      localStorage.removeItem(KEY);
-      render();
-      alert("Zerado.");
-    }
-  };
+  localStorage.setItem("intervalo", JSON.stringify(dados));
+  mostrar("historico");
+}
 
-  $("installHint").onclick = ()=> $("installBox").classList.toggle("hide");
+function atualizar(){
+  let lista=document.getElementById("lista");
+  lista.innerHTML="";
+  dados.forEach(d=>{
+    lista.innerHTML+=`
+      <div style="margin:10px 0;border-bottom:1px solid #333;padding:6px">
+        <b>${d.data}</b><br>
+        Intensidade: ${d.intensidade} |
+        ${d.emocao} |
+        ${d.tipo}
+      </div>`;
+  });
+}
 
-  let timer = 60, tHandle = null;
-  function paintTimer(){ $("timer").textContent = String(timer).padStart(2,"0"); }
-  $("start60").onclick = ()=>{
-    if(tHandle) return;
-    timer = 60; paintTimer();
-    tHandle = setInterval(()=>{
-      timer--;
-      paintTimer();
-      if(timer<=0){
-        clearInterval(tHandle); tHandle=null;
-        $("timer").textContent = "OK";
-      }
-    },1000);
-  };
-  $("stop60").onclick = ()=>{
-    if(tHandle){ clearInterval(tHandle); tHandle=null; }
-    timer = 60; paintTimer();
-  };
-  paintTimer();
-
-  if("serviceWorker" in navigator){
-    window.addEventListener("load", ()=>{
-      navigator.serviceWorker.register("./sw.js").catch(()=>{});
-    });
-  }
-
-  render();
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("sw.js");
+}
 </script>
+
 </body>
 </html>
