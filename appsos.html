@@ -138,7 +138,6 @@
     .ok{color: var(--ok)}
     .warn{color:#ffd27a}
     .hide{display:none !important}
-    .mono{font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:12px}
   </style>
 </head>
 
@@ -160,7 +159,6 @@
 </header>
 
 <main>
-  <!-- HOME -->
   <section id="view-home" class="grid">
     <div class="card">
       <div class="row">
@@ -212,7 +210,6 @@
     </div>
   </section>
 
-  <!-- CHECKIN -->
   <section id="view-checkin" class="grid hide">
     <div class="card">
       <h2 class="title">Check-in</h2>
@@ -262,7 +259,6 @@
     </div>
   </section>
 
-  <!-- CRISIS -->
   <section id="view-crisis" class="grid hide">
     <div class="card">
       <h2 class="title">Protocolo de crise (3–5 min)</h2>
@@ -358,10 +354,9 @@
 </div>
 
 <script>
-  // ====== Storage ======
   const KEY = "bf_v1";
   const nowISO = () => new Date().toISOString();
-  const dayKey = (d=new Date()) => d.toISOString().slice(0,10); // YYYY-MM-DD
+  const dayKey = (d=new Date()) => d.toISOString().slice(0,10);
 
   function load(){
     try{
@@ -373,48 +368,34 @@
       return {checkins:[], crises:[]};
     }
   }
-  function save(data){
-    localStorage.setItem(KEY, JSON.stringify(data));
-  }
-
-  // ====== UI Helpers ======
+  function save(data){ localStorage.setItem(KEY, JSON.stringify(data)); }
   const $ = (id)=>document.getElementById(id);
-  const view = {
-    home: $("view-home"),
-    checkin: $("view-checkin"),
-    crisis: $("view-crisis"),
-  };
+
+  const view = { home:$("view-home"), checkin:$("view-checkin"), crisis:$("view-crisis") };
   function show(tab){
     for(const k in view) view[k].classList.add("hide");
     view[tab].classList.remove("hide");
-    document.querySelectorAll(".tab").forEach(t=>{
-      t.classList.toggle("active", t.dataset.tab===tab);
-    });
+    document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active", t.dataset.tab===tab));
     render();
   }
-
   function fmtDate(iso){
     const d = new Date(iso);
     return d.toLocaleString("pt-BR", {dateStyle:"short", timeStyle:"short"});
   }
-
   function weekStart(d=new Date()){
     const x = new Date(d);
-    const day = (x.getDay()+6)%7; // Monday=0
+    const day = (x.getDay()+6)%7;
     x.setHours(0,0,0,0);
     x.setDate(x.getDate()-day);
     return x;
   }
-
   function inThisWeek(iso){
     const d = new Date(iso);
     const start = weekStart(new Date());
     const end = new Date(start); end.setDate(end.getDate()+7);
     return d>=start && d<end;
   }
-
   function streakDays(checkins){
-    // streak baseado em check-ins diários (dias consecutivos com pelo menos 1 check-in)
     const days = [...new Set(checkins.map(c=>c.day))].sort();
     if(days.length===0) return 0;
     let streak = 1;
@@ -425,27 +406,25 @@
       if(diff===1) streak++;
       else break;
     }
-    // só conta se o último dia é hoje ou ontem (streak ativo)
     const last = new Date(days[days.length-1]);
     const today = new Date(dayKey());
     const diffNow = (today-last)/86400000;
     if(diffNow===0 || diffNow===1) return streak;
     return 0;
   }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, m => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[m]));
+  }
 
-  // ====== Render ======
   function render(){
     const data = load();
-
-    // today badge
     const today = dayKey();
     const todayCI = data.checkins.find(c=>c.day===today);
     $("todayIntensity").textContent = "Hoje: " + (todayCI ? (todayCI.intensity ?? "—") : "—");
-
-    // streak
     $("streak").textContent = streakDays(data.checkins) + " dias";
 
-    // week metrics
     const week = data.checkins.filter(c=>inThisWeek(c.ts));
     $("weekCount").textContent = week.length + " registros";
     if(week.length){
@@ -453,7 +432,6 @@
       $("weekAvg").textContent = avg.toFixed(1);
     } else $("weekAvg").textContent = "—";
 
-    // home: last checkins
     const last = [...data.checkins].sort((a,b)=>b.ts.localeCompare(a.ts)).slice(0,4);
     $("lastCheckins").innerHTML = last.map(c=>`
       <div class="item">
@@ -467,7 +445,6 @@
     `).join("");
     $("emptyCheckins").classList.toggle("hide", last.length>0);
 
-    // checkin: all
     const all = [...data.checkins].sort((a,b)=>b.ts.localeCompare(a.ts));
     $("allCheckins").innerHTML = all.map(c=>`
       <div class="item">
@@ -484,7 +461,6 @@
     `).join("");
     $("emptyAll").classList.toggle("hide", all.length>0);
 
-    // crises list
     const crises = [...data.crises].sort((a,b)=>b.ts.localeCompare(a.ts));
     $("allCrises").innerHTML = crises.map(c=>`
       <div class="item">
@@ -500,13 +476,6 @@
     $("emptyCrises").classList.toggle("hide", crises.length>0);
   }
 
-  function escapeHtml(s){
-    return String(s).replace(/[&<>"']/g, m => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[m]));
-  }
-
-  // ====== Actions ======
   $("goCheckin").onclick = ()=>show("checkin");
   $("goCrisis").onclick = ()=>show("crisis");
   $("backHome1").onclick = ()=>show("home");
@@ -570,7 +539,6 @@
     render();
   };
 
-  // Export / Import
   $("exportData").onclick = ()=>{
     const data = load();
     const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
@@ -588,7 +556,6 @@
     try{
       const text = await f.text();
       const obj = JSON.parse(text);
-      if(!obj || typeof obj!=="object") throw new Error("Formato inválido");
       const merged = {
         checkins: Array.isArray(obj.checkins) ? obj.checkins : [],
         crises: Array.isArray(obj.crises) ? obj.crises : []
@@ -611,11 +578,8 @@
     }
   };
 
-  $("installHint").onclick = ()=>{
-    $("installBox").classList.toggle("hide");
-  };
+  $("installHint").onclick = ()=> $("installBox").classList.toggle("hide");
 
-  // 60s timer
   let timer = 60, tHandle = null;
   function paintTimer(){ $("timer").textContent = String(timer).padStart(2,"0"); }
   $("start60").onclick = ()=>{
@@ -636,14 +600,12 @@
   };
   paintTimer();
 
-  // Register SW
   if("serviceWorker" in navigator){
     window.addEventListener("load", ()=>{
       navigator.serviceWorker.register("./sw.js").catch(()=>{});
     });
   }
 
-  // Start
   render();
 </script>
 </body>
