@@ -1,7 +1,7 @@
 {
   "name": "Borderline Flow",
   "short_name": "Flow",
-  "start_url": "./index.html",
+  "start_url": "./appsos.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0b0b0c",
