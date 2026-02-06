@@ -1,352 +1,638 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Como Lidar com Borderline Sem Piorar as Crises</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0e1113" />
+  <title>Como lidar com borderline sem piorar as crises — Dr Fabio Schmidt</title>
+
   <style>
-    :root {
-      --bg: #f6f2ef;
-      --card: #ffffff;
-      --texto: #262322;
-      --sub: #5d5450;
-      --primary: #a14524;
-      --primary-dark: #7d341a;
-      --border: #e2d6cf;
-      --radius: 16px;
-      --shadow: 0 8px 20px rgba(0,0,0,0.04);
+    :root{
+      --bg:#0e1113;
+      --panel:#141a1d;
+      --panel2:#101518;
+      --text:#f2f2f2;
+      --muted:rgba(242,242,242,.72);
+      --muted2:rgba(242,242,242,.55);
+      --line:rgba(242,242,242,.10);
+      --cta:#8b4b2f;
+      --cta2:#a85b39;
+      --ok:#2ecc71;
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 14px;
+      --max: 1100px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(255,255,255,.06), transparent 55%),
+                  radial-gradient(900px 600px at 85% 10%, rgba(139,75,47,.20), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(14,17,19,.78), rgba(14,17,19,.35));
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; flex-direction:column; gap:2px;
+      letter-spacing:.2px;
+      min-width:0;
+    }
+    .brand b{font-size:14px; font-weight:650; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .brand span{font-size:12px; color:var(--muted2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .top-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+
+    .btn{
+      appearance:none; border:0; cursor:pointer;
+      padding:12px 16px; border-radius:999px;
+      font-weight:650; letter-spacing:.2px;
+      display:inline-flex; align-items:center; gap:10px;
+      text-decoration:none;
+      transition: transform .08s ease, background .18s ease, opacity .18s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:active{transform: translateY(1px)}
+    .btn-ghost{
+      background: rgba(242,242,242,.06);
+      border:1px solid rgba(242,242,242,.12);
+      color:var(--text);
+    }
+    .btn-ghost:hover{background: rgba(242,242,242,.09)}
+    .btn-cta{
+      background: linear-gradient(135deg, var(--cta), var(--cta2));
+      color:#fff;
+      box-shadow: 0 18px 40px rgba(139,75,47,.28);
+    }
+    .btn-cta:hover{opacity:.95}
+
+    .hero{
+      position:relative;
+      min-height: 58vh;
+      border-bottom:1px solid var(--line);
+      overflow:hidden;
+      background:
+        linear-gradient(to right, rgba(0,0,0,.62), rgba(0,0,0,.32)),
+        url("porta.png") center/cover no-repeat;
+    }
+    .hero .wrap{padding:52px 18px 40px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:end;
+    }
+    @media (max-width: 900px){
+      .hero{min-height: 62vh}
+      .hero-grid{grid-template-columns:1fr; align-items:start}
+      .top-actions .btn-ghost{display:none}
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--texto);
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(242,242,242,.06);
+      border:1px solid rgba(242,242,242,.12);
+      color:var(--muted);
+      font-size:13px;
+      width:fit-content;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:44px;
+      line-height:1.08;
+      letter-spacing:-.6px;
+      font-weight:750;
+    }
+    @media (max-width: 520px){h1{font-size:34px}}
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      max-width: 60ch;
     }
 
-    a { color: inherit; }
-
-    .page {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 20px 14px 40px;
-    }
-
-    .card {
-      background: var(--card);
+    .hero-card{
+      background: rgba(20,26,29,.62);
+      border:1px solid rgba(242,242,242,.14);
       border-radius: var(--radius);
+      padding:16px;
       box-shadow: var(--shadow);
-      padding: 18px 16px;
-      margin-bottom: 14px;
+    }
+    .mini{
+      font-size:12px;
+      color:var(--muted2);
+      margin:0 0 10px;
+    }
+    .bullets{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin:10px 0 14px;
+      padding:0;
+      list-style:none;
+    }
+    .bullets li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 12px;
+      border-radius: var(--radius2);
+      background: rgba(16,21,24,.65);
+      border:1px solid rgba(242,242,242,.10);
+      color:var(--muted);
+      font-size:14px;
+    }
+    .dot{
+      width:9px; height:9px; border-radius:50%;
+      background: rgba(46, 204, 113, .92);
+      margin-top:6px;
+      flex:0 0 9px;
+      box-shadow: 0 0 0 4px rgba(46,204,113,.12);
+    }
+    .hero-cta-row{display:flex; gap:10px; flex-wrap:wrap}
+    .hero-note{
+      margin:10px 0 0;
+      font-size:12px; color:var(--muted2);
     }
 
-    .hero-image {
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 12px;
+    main{padding:26px 0 70px}
+    .section{padding:22px 0}
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+    }
+    @media (max-width: 900px){.grid{grid-template-columns:1fr}}
+
+    .card{
+      background: linear-gradient(180deg, rgba(20,26,29,.85), rgba(16,21,24,.85));
+      border:1px solid rgba(242,242,242,.10);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.22);
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size:20px;
+      letter-spacing:-.2px;
+    }
+    .card p{margin:0; color:var(--muted)}
+
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    .chip{
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(242,242,242,.06);
+      border:1px solid rgba(242,242,242,.10);
+      color:var(--muted);
     }
 
-    .hero-image img {
-      width: 100%;
-      display: block;
+    .vsl{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:start;
+    }
+    @media (max-width: 900px){.vsl{grid-template-columns:1fr}}
+
+    .video{
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      background: #0b0f11;
+      border:1px solid rgba(242,242,242,.10);
+      box-shadow: var(--shadow);
+    }
+    .video::before{content:""; display:block; padding-top:56.25%;}
+    .video iframe{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:0;
+    }
+    .small{
+      font-size:13px; color:var(--muted);
+      margin:10px 0 0;
     }
 
-    .top-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--sub);
-      margin-bottom: 6px;
+    .tabs{
+      display:flex; gap:8px; flex-wrap:wrap;
+      margin:0 0 12px;
+    }
+    .tab{
+      padding:10px 12px;
+      border-radius:999px;
+      background: rgba(242,242,242,.06);
+      border:1px solid rgba(242,242,242,.10);
+      color:var(--muted);
+      font-size:13px;
+      cursor:pointer;
+      user-select:none;
+      transition: background .15s ease, color .15s ease;
+    }
+    .tab[aria-selected="true"]{
+      background: rgba(139,75,47,.26);
+      border-color: rgba(168,91,57,.45);
+      color: var(--text);
+    }
+    .panel{
+      display:none;
+      border:1px solid rgba(242,242,242,.10);
+      background: rgba(16,21,24,.65);
+      border-radius: var(--radius);
+      padding:14px;
+    }
+    .panel.active{display:block}
+    .panel h3{margin:0 0 8px; font-size:16px}
+    .panel ul{margin:0; padding-left:18px; color:var(--muted)}
+    .panel li{margin:8px 0}
+    .callout{
+      margin-top:12px;
+      padding:12px 12px;
+      border-radius: var(--radius2);
+      border:1px solid rgba(242,242,242,.12);
+      background: rgba(242,242,242,.05);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px;
+      padding:2px 6px;
+      border-radius:6px;
+      background: rgba(242,242,242,.08);
+      border:1px solid rgba(242,242,242,.14);
+      color:var(--text);
+      display:inline-block;
+      margin-right:6px;
     }
 
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 8px;
-      font-size: 12px;
-      color: var(--sub);
+    details{
+      border:1px solid rgba(242,242,242,.10);
+      background: rgba(16,21,24,.60);
+      border-radius: var(--radius);
+      padding:14px 14px;
+      margin:10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:650;
+      color:var(--text);
+      outline:none;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{margin:10px 0 0; color:var(--muted)}
+
+    .final-image{
+      margin-top:16px;
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid rgba(242,242,242,.10);
+      background: #0b0f11;
+    }
+    .final-image img{display:block; width:100%; height:auto}
+
+    .footer{
+      padding:24px 0 90px;
+      border-top:1px solid var(--line);
+      color:var(--muted2);
+      font-size:12px;
     }
 
-    .badge {
-      border-radius: 999px;
-      padding: 4px 10px;
-      border: 1px solid var(--border);
-      background: #fbf8f6;
+    .sticky{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      z-index:60;
+      background: linear-gradient(to top, rgba(14,17,19,.96), rgba(14,17,19,.70));
+      border-top:1px solid rgba(242,242,242,.10);
+      padding:10px 0;
+      backdrop-filter: blur(12px);
     }
-
-    h1 {
-      font-size: 24px;
-      line-height: 1.1;
-      margin-bottom: 6px;
+    .sticky .wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
     }
-
-    h2 {
-      font-size: 16px;
-      margin-bottom: 6px;
+    .sticky .txt{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
     }
-
-    .subtitle {
-      font-size: 14px;
-      color: var(--sub);
-      margin-bottom: 10px;
-    }
-
-    .hero-list {
-      list-style: none;
-      font-size: 13px;
-      color: var(--sub);
-      margin-bottom: 14px;
-    }
-
-    .hero-list li::before {
-      content: "• ";
-    }
-
-    .cta-primary {
-      display: inline-block;
-      padding: 10px 18px;
-      border-radius: 999px;
-      border: none;
-      background: var(--primary);
-      color: #fff;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      text-align: center;
-      width: 100%;
-      margin-bottom: 6px;
-    }
-
-    .cta-secondary {
-      display: inline-block;
-      padding: 9px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--texto);
-      font-size: 13px;
-      text-decoration: none;
-      text-align: center;
-      width: 100%;
-    }
-
-    .hero-credenciais {
-      margin-top: 10px;
-      font-size: 11px;
-      color: var(--sub);
-    }
-
-    .section-text {
-      font-size: 13px;
-      color: var(--sub);
-      margin-bottom: 6px;
-    }
-
-    .section-list {
-      font-size: 13px;
-      color: var(--sub);
-      padding-left: 18px;
-    }
-
-    .sobre-autor-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .sobre-autor-grid img {
-      width: 100%;
-      border-radius: 14px;
-      display: block;
-    }
-
-    .notice {
-      font-size: 11px;
-      color: var(--sub);
-      margin-top: 8px;
-    }
-
-    .footer {
-      font-size: 11px;
-      color: var(--sub);
-      margin-top: 10px;
-      text-align: left;
-    }
-
-    @media (min-width: 640px) {
-      h1 { font-size: 28px; }
-      .cta-primary, .cta-secondary { width: auto; }
-      .cta-secondary { margin-left: 8px; }
-    }
-
-    @media (max-width: 640px) {
-      .sobre-autor-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    .sticky .txt b{font-size:13px}
+    .sticky .txt span{font-size:12px; color:var(--muted2)}
+    .hide{display:none !important}
   </style>
 </head>
+
 <body>
-
-  <div class="page">
-
-    <!-- HERO -->
-    <section class="card">
-      <div class="hero-image">
-        <img src="imagens/667EC6D1-E493-4440-8BF0-D347A493D913.jpeg" alt="Imagem de porta entreaberta com frase sobre crises emocionais">
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="wrap">
+      <div class="topbar-inner">
+        <div class="brand">
+          <b>Dr Fabio Schmidt</b>
+          <span>Médico • CRM/SP 183549</span>
+        </div>
+        <div class="top-actions">
+          <a class="btn btn-ghost" href="#conteudo">Ver o que tem no guia</a>
+          <a class="btn btn-cta" href="https://pay.hotmart.com/L103544810O?off=622o2a97&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767229031679&bid=1767229033713&fbclid=PAVERFWAPGC7lleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafIXWR4twp8-oE_4NQuyFN9l6mQXBPCg54_LQqptUnGu41MYxmVIzInYK2KZg_aem_M4OxbBv8BEMPY0Ag2j6ljw"
+             target="_blank" rel="noopener">Comprar agora</a>
+        </div>
       </div>
+    </div>
+  </header>
 
-      <div class="top-label">Guia digital para familiares de pessoas com TPB</div>
-
-      <div class="badge-row">
-        <span class="badge">Aplicação prática em crises</span>
-        <span class="badge">Linguagem pensada para família</span>
-      </div>
-
-      <h1>Tentou ajudar e tudo só piorou?</h1>
-
-      <p class="subtitle">
-        Quando alguém com Transtorno de Personalidade Borderline entra em crise,
-        boas intenções podem ser percebidas como ataque. Este guia mostra como agir
-        sem piorar explosões, afastamentos ou ciclos de culpa.
-      </p>
-
-      <ul class="hero-list">
-        <li>Para familiares, parceiros e amigos de pessoas com TPB.</li>
-        <li>Explicações clínicas sem jargão confuso.</li>
-        <li>Passo a passo para usar já na próxima crise.</li>
-      </ul>
-
-      <div>
-        <a
-          class="cta-primary"
-          href="https://pay.hotmart.com/L103544810O?off=622o2a97&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767229031679&bid=1767229033713&fbclid=PAVERFWAPGC7lleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafIXWR4twp8-oE_4NQuyFN9l6mQXBPCg54_LQqptUnGu41MYxmVIzInYK2KZg_aem_M4OxbBv8BEMPY0Ag2j6ljw"
-          target="_blank" rel="noopener noreferrer"
-        >
-          Quero aprender a ajudar sem piorar
-        </a>
-        <a class="cta-secondary" href="#conteudo">
-          Ver o que tem no guia
-        </a>
-      </div>
-
-      <p class="hero-credenciais">
-        Dr. Fabio Henrique de Lima Schmidt • Psiquiatra • CRM‑SP 183549 • Atuação clínica em CAPS e atendimento on‑line.
-      </p>
-    </section>
-
-    <!-- DOR -->
-    <section class="card" id="dor">
-      <h2>Quando falta orientação, a ajuda vira gatilho</h2>
-      <p class="section-text">
-        Sem compreender o funcionamento emocional do TPB, é comum que tentativas de acalmar
-        terminem em mais conflito e desgaste do vínculo.
-      </p>
-      <ul class="section-list">
-        <li>Cada conversa séria termina em discussão, bloqueio ou ameaça de rompimento.</li>
-        <li>Você pisa em ovos, com medo de acionar mais uma crise.</li>
-        <li>Culpa por “perder a paciência”, misturada com exaustão e sensação de impotência.</li>
-      </ul>
-    </section>
-
-    <!-- CONTEÚDO -->
-    <section class="card" id="conteudo">
-      <h2>O que você vai encontrar no guia</h2>
-      <p class="section-text">
-        O conteúdo foi construído para traduzir a visão clínica do TPB para a realidade de casa,
-        oferecendo referências claras para situações que se repetem.
-      </p>
-      <ul class="section-list">
-        <li>Por que as crises escalam tão rápido e parecem desproporcionais ao gatilho.</li>
-        <li>O papel da validação sem “passar a mão na cabeça”.</li>
-        <li>Erros comuns de familiares bem‑intencionados que pioram o quadro.</li>
-        <li>Como diferenciar pedido de ajuda de ameaça de rompimento ou abandono.</li>
-      </ul>
-    </section>
-
-    <!-- MANEJO PRÁTICO -->
-    <section class="card">
-      <h2>O que fazer na próxima crise</h2>
-      <p class="section-text">
-        Em vez de orientações genéricas, você recebe exemplos concretos de frases, atitudes e limites,
-        para agir com firmeza e previsibilidade, sem romper o vínculo.
-      </p>
-      <ul class="section-list">
-        <li>O que dizer nos primeiros minutos da crise.</li>
-        <li>Como interromper ciclos de culpa, perseguição e chantagem emocional.</li>
-        <li>Como se proteger emocionalmente sem abandonar a pessoa.</li>
-      </ul>
-    </section>
-
-    <!-- FORMATO -->
-    <section class="card">
-      <h2>Como o guia é organizado</h2>
-      <p class="section-text">
-        O material é digital e pode ser consultado tanto em momentos de crise quanto em momentos de calma,
-        para estudo mais aprofundado.
-      </p>
-      <ul class="section-list">
-        <li>Acesso imediato após a compra, em qualquer dispositivo.</li>
-        <li>Dividido em blocos: compreensão clínica, comunicação, limites e autocuidado.</li>
-        <li>Atualizações futuras incluídas se o conteúdo for ampliado.</li>
-      </ul>
-      <p class="notice">
-        Este material é educativo. Não substitui consulta médica ou psicoterapia.
-        Em situações de risco imediato, procure um serviço de emergência.
-      </p>
-    </section>
-
-    <!-- SOBRE O AUTOR -->
-    <section class="card">
-      <h2>Sobre o autor</h2>
-      <div class="sobre-autor-grid">
+  <!-- HERO -->
+  <section class="hero" id="topo" aria-label="Hero">
+    <div class="wrap">
+      <div class="hero-grid">
         <div>
-          <p class="section-text">
-            Fabio Henrique de Lima Schmidt é médico, pós‑graduado em Psiquiatria, com atuação clínica em CAPS e
-            atendimento on‑line. Produz conteúdo educativo focado em transtorno de personalidade borderline,
-            com ênfase em leitura clínica rigorosa, combate a estigmas e comunicação direta com pacientes e familiares.
-          </p>
-          <p class="section-text">
-            É autor de materiais educativos sobre regulação emocional, impulsividade e funcionamento borderline,
-            ajudando famílias e profissionais a compreenderem o quadro para além de rótulos moralizantes.
+          <div class="kicker">Guia prático para familiares • uso em crise e fora da crise</div>
+          <h1>Como lidar com borderline<br>sem piorar as crises</h1>
+          <p class="sub">
+            O que fazer, o que evitar e o que dizer quando tudo sai do controle — com linguagem simples,
+            exemplos práticos e foco em reduzir escaladas.
           </p>
         </div>
-        <div>
-          <img src="imagens/5E684D7C-F304-48F4-971B-ADCEC05E7427.png" alt="Foto do autor do guia sobre manejo de crises no transtorno borderline">
+
+        <aside class="hero-card" aria-label="Resumo">
+          <p class="mini">Você não está errando por mal. O problema é que algumas respostas bem-intencionadas viram gatilho.</p>
+          <ul class="bullets">
+            <li><span class="dot"></span><span><b>Primeiros minutos:</b> como baixar a ativação antes de conversar.</span></li>
+            <li><span class="dot"></span><span><b>Frases prontas:</b> trocas simples que mudam o efeito da fala.</span></li>
+            <li><span class="dot"></span><span><b>Limites sem abandono:</b> firmeza + previsibilidade, sem escalada.</span></li>
+          </ul>
+
+          <div class="hero-cta-row">
+            <a class="btn btn-cta" href="https://pay.hotmart.com/L103544810O?off=622o2a97&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767229031679&bid=1767229033713&fbclid=PAVERFWAPGC7lleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafIXWR4twp8-oE_4NQuyFN9l6mQXBPCg54_LQqptUnGu41MYxmVIzInYK2KZg_aem_M4OxbBv8BEMPY0Ag2j6ljw"
+               target="_blank" rel="noopener">Quero aprender sem piorar</a>
+            <a class="btn btn-ghost" href="#vsl">Ver a explicação</a>
+          </div>
+          <p class="hero-note">Acesso imediato após a compra • funciona no celular • material educativo</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- VSL -->
+    <section class="section" id="vsl">
+      <div class="wrap">
+        <div class="vsl">
+          <div class="video" aria-label="Vídeo VSL">
+            <iframe
+              src="https://player.vimeo.com/video/1161630681?h=0&title=0&byline=0&portrait=0&badge=0&autopause=0&dnt=1"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+              title="VSL — Como lidar com borderline sem piorar as crises">
+            </iframe>
+          </div>
+
+          <div class="card">
+            <h2>Se isso acontece na sua casa…</h2>
+            <p>
+              Às vezes uma frase simples, um silêncio curto ou um atraso pequeno vira uma escalada.
+              Na crise, a pessoa não reage ao fato — reage ao significado emocional que o cérebro atribuiu.
+            </p>
+            <div class="chips">
+              <div class="chip">“Explicar” vira ataque</div>
+              <div class="chip">“Lógica” vira frieza</div>
+              <div class="chip">“Cobrança” vira abandono</div>
+            </div>
+
+            <div style="height:14px"></div>
+            <a class="btn btn-cta" href="https://pay.hotmart.com/L103544810O?off=622o2a97&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767229031679&bid=1767229033713&fbclid=PAVERFWAPGCgkZ6G1A2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafIXWR4twp8-oE_4NQuyFN9l6mQXBPCg54_LQqptUnGu41MYxmVIzInYK2KZg_aem_M4OxbBv8BEMPY0Ag2j6ljw"
+               target="_blank" rel="noopener">Comprar agora</a>
+
+            <p class="small">Você não precisa “acertar sempre”. Precisa saber o que fazer primeiro.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA FINAL -->
-    <section class="card" id="comprar">
-      <h2>Orientação acessível para quem convive com TPB</h2>
-      <p class="section-text">
-        O investimento no guia costuma ser menor do que o valor de uma sessão individual,
-        com a vantagem de poder ser consultado por todos que convivem com a pessoa que tem TPB.
-      </p>
-      <p class="section-text">
-        Se você sente que está fazendo o melhor que consegue, mas ainda assim as crises pioram,
-        este passo a passo foi construído justamente para essa situação.
-      </p>
-      <a
-        class="cta-primary"
-        href="https://pay.hotmart.com/L103544810O?off=622o2a97&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767229031679&bid=1767229033713&fbclid=PAVERFWAPGC7lleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafIXWR4twp8-oE_4NQuyFN9l6mQXBPCg54_LQqptUnGu41MYxmVIzInYK2KZg_aem_M4OxbBv8BEMPY0Ag2j6ljw"
-        target="_blank" rel="noopener noreferrer"
-      >
-        Comprar agora
-      </a>
+    <!-- CONTEÚDO INTERATIVO -->
+    <section class="section" id="conteudo">
+      <div class="wrap">
+        <div class="grid">
+          <div class="card">
+            <h2>Interativo: use conforme a situação</h2>
+            <p>Escolha o bloco abaixo. É um “painel de crise” com ações rápidas e frases prontas.</p>
+
+            <div style="height:12px"></div>
+            <div class="tabs" role="tablist" aria-label="Painéis">
+              <button class="tab" role="tab" aria-selected="true" aria-controls="p1" id="t1">Durante a crise</button>
+              <button class="tab" role="tab" aria-selected="false" aria-controls="p2" id="t2">Depois da crise</button>
+              <button class="tab" role="tab" aria-selected="false" aria-controls="p3" id="t3">Limites</button>
+              <button class="tab" role="tab" aria-selected="false" aria-controls="p4" id="t4">Frases prontas</button>
+            </div>
+
+            <div class="panel active" id="p1" role="tabpanel" aria-labelledby="t1">
+              <h3>Prioridade: reduzir ativação (antes de discutir o fato)</h3>
+              <ul>
+                <li><span class="kbd">Tom</span> baixo e firme. Sem ironia. Sem “aula”.</li>
+                <li><span class="kbd">Falas</span> curtas. Uma ideia por frase.</li>
+                <li><span class="kbd">Ação</span> reduzir estímulos (barulho, gente, perguntas).</li>
+                <li><span class="kbd">Meta</span> acalmar primeiro, conversar depois.</li>
+              </ul>
+              <div class="callout">
+                Exemplo curto: “Eu tô aqui. Vamos respirar um pouco. A gente conversa depois.”
+              </div>
+            </div>
+
+            <div class="panel" id="p2" role="tabpanel" aria-labelledby="t2">
+              <h3>Reconstrução: curta, objetiva, sem reabrir feridas</h3>
+              <ul>
+                <li><span class="kbd">Evite</span> repassar cada detalhe.</li>
+                <li><span class="kbd">Faça</span> validar primeiro, alinhar limite depois.</li>
+                <li><span class="kbd">Foco</span> em “o que vamos fazer diferente na próxima”.</li>
+              </ul>
+              <div class="callout">
+                Exemplo: “Agora que acalmou, vamos entender o gatilho e combinar um limite.”
+              </div>
+            </div>
+
+            <div class="panel" id="p3" role="tabpanel" aria-labelledby="t3">
+              <h3>Limites sem abandono (claro + firme + calmo)</h3>
+              <ul>
+                <li>“Eu fico com você, mas não continuo se houver gritos.”</li>
+                <li>“Eu te escuto, mas preciso de respeito pra continuar aqui.”</li>
+                <li>“A gente conversa, mas não nesse tom.”</li>
+              </ul>
+              <div class="callout">
+                Regra: limite não é punição. É previsibilidade.
+              </div>
+            </div>
+
+            <div class="panel" id="p4" role="tabpanel" aria-labelledby="t4">
+              <h3>Troque isso por isso (na hora)</h3>
+              <ul>
+                <li>“Você tá exagerando” → “Eu entendo que tá pesado pra você.”</li>
+                <li>“De novo isso?” → “Vamos entender o que disparou agora.”</li>
+                <li>“Se controla” → “Tô aqui. Respira comigo.”</li>
+                <li>“Isso é drama” → “Isso é sinal de sofrimento.”</li>
+              </ul>
+              <div class="callout">
+                Na crise, não é a intenção que conta — é o efeito.
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card">
+            <h2>Checklist rápido (60 segundos)</h2>
+            <p>Abra isso quando você perceber que “o clima virou”.</p>
+
+            <div style="height:10px"></div>
+            <details open>
+              <summary>1) Eu estou aumentando ou reduzindo a ameaça?</summary>
+              <p>Se sua fala vira correção, debate ou ironia, você está aumentando ameaça. Troque por presença e frases curtas.</p>
+            </details>
+            <details>
+              <summary>2) O foco agora é emoção, não o fato</summary>
+              <p>Discussão sobre “o que aconteceu” quase sempre vira ataque na crise. Primeiro reduz ativação, depois conversa.</p>
+            </details>
+            <details>
+              <summary>3) Limite claro, sem ameaça de abandono</summary>
+              <p>Firmeza + tom calmo. Limite é estrutura, não castigo.</p>
+            </details>
+
+            <div style="height:12px"></div>
+            <a class="btn btn-cta" href="https://pay.hotmart.com/L103544810O?off=622o2a97&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767229031679&bid=1767229033713&fbclid=PAVERFWAPGC7lleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafIXWR4twp8-oE_4NQuyFN9l6mQXBPCg54_LQqptUnGu41MYxmVIzInYK2KZg_aem_M4OxbBv8BEMPY0Ag2j6ljw"
+               target="_blank" rel="noopener">Quero ter isso no celular</a>
+
+            <p class="small">Acesso imediato • útil em crise e em momentos de calma</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <p class="footer">
-      Conteúdo educativo. Não substitui avaliação individual, psicoterapia ou emergência psiquiátrica.
-    </p>
+    <!-- FAQ + IMAGEM FINAL -->
+    <section class="section" id="faq">
+      <div class="wrap">
+        <div class="card">
+          <h2>Dúvidas comuns</h2>
+          <details>
+            <summary>Isso é “passar a mão na cabeça”?</summary>
+            <p>Não. É escolher o momento certo: primeiro regula a emoção, depois conversa sobre limites, acordos e responsabilidade.</p>
+          </details>
+          <details>
+            <summary>Serve pra parceiro(a), pais e amigos?</summary>
+            <p>Sim. É escrito para quem convive e tenta ajudar — com linguagem direta e exemplos práticos.</p>
+          </details>
+          <details>
+            <summary>Como recebo após a compra?</summary>
+            <p>A entrega é digital, com acesso imediato na plataforma. Você consegue abrir no celular e consultar rápido.</p>
+          </details>
 
+          <div class="final-image" aria-label="Imagem final">
+            <img src="imagens/5E684D7C-F304-48F4-971B-ADCEC05E7427.png" alt="Imagem final do material" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer">
+      <div class="wrap">
+        <div style="display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap">
+          <div>
+            <b style="color:var(--text)">Dr Fabio Schmidt</b><br>
+            Médico • CRM/SP 183549
+          </div>
+          <div style="max-width:70ch">
+            Conteúdo educativo. Não substitui avaliação individual, psicoterapia ou atendimento de emergência.
+            Em situação de risco imediato, procure um serviço de urgência.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- STICKY CTA -->
+  <div class="sticky" id="sticky">
+    <div class="wrap">
+      <div class="txt">
+        <b>Guia prático para agir sem piorar a crise</b>
+        <span>Acesso imediato • frases prontas • limites sem abandono</span>
+      </div>
+      <a class="btn btn-cta" href="https://pay.hotmart.com/L103544810O?off=622o2a97&hotfeature=51&_hi=eyJjaWQiOiIxNzY1ODEwODc4ODQ4NTY3MTk4MTYwMjMyNjgxMjAwIiwiYmlkIjoiMTc2NTgxMDg3ODg0ODU2NzE5ODE2MDIzMjY4MTIwMCIsInNpZCI6IjMyNTExMTIwODEyOTRiMzhhZjYxMTI2MWM0NWI0ZmE0In0=.1767229031679&bid=1767229033713&fbclid=PAVERFWAPGC7lleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAafIXWR4twp8-oE_4NQuyFN9l6mQXBPCg54_LQqptUnGu41MYxmVIzInYK2KZg_aem_M4OxbBv8BEMPY0Ag2j6ljw"
+         target="_blank" rel="noopener">Comprar agora</a>
+    </div>
   </div>
 
+  <script>
+    // Tabs
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const panels = Array.from(document.querySelectorAll('.panel'));
+    function activateTab(idx){
+      tabs.forEach((t,i)=>{
+        const on = i===idx;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      panels.forEach((p,i)=>p.classList.toggle('active', i===idx));
+      localStorage.setItem('tpb_tab', String(idx));
+    }
+    tabs.forEach((t,i)=>t.addEventListener('click', ()=>activateTab(i)));
+    const saved = Number(localStorage.getItem('tpb_tab'));
+    if(!Number.isNaN(saved) && saved>=0 && saved<tabs.length) activateTab(saved);
+
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href');
+        if(!id || id.length<2) return;
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+        history.replaceState(null,'',id);
+      });
+    });
+
+    // Hide sticky when footer visible
+    const sticky = document.getElementById('sticky');
+    const footer = document.querySelector('.footer');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          sticky.classList.add('hide');
+        }else{
+          sticky.classList.remove('hide');
+        }
+      });
+    }, {threshold:0.12});
+    io.observe(footer);
+
+    // Close other details when opening one (cleaner)
+    const all = Array.from(document.querySelectorAll('details'));
+    all.forEach(d=>{
+      d.addEventListener('toggle', ()=>{
+        if(d.open){
+          all.forEach(o=>{ if(o!==d) o.open=false; });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
