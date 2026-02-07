@@ -1,0 +1,1218 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Elizamar — Plano Interativo (Crise • Humor • Identidade • Medicações)</title>
+  <meta name="description" content="Página interativa individual para Elizamar: crise, humor, identidade, medicações e programação terapêutica." />
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --panel:#12141b;
+      --panel2:#0f1117;
+      --text:#e9edf5;
+      --muted:#a9b2c3;
+      --line:rgba(255,255,255,.10);
+      --accent:#7aa7ff;
+      --accent2:#7dffcb;
+      --warn:#ffcc66;
+      --danger:#ff6b6b;
+      --ok:#8cff8c;
+      --shadow:0 14px 40px rgba(0,0,0,.38);
+      --radius:18px;
+      --radius2:14px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 10% 0%, rgba(122,167,255,.16), transparent 55%),
+        radial-gradient(900px 520px at 90% 20%, rgba(125,255,203,.12), transparent 55%),
+        linear-gradient(180deg, #07080b, #0b0c10 40%, #07080b);
+      min-height:100vh;
+    }
+
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .wrap{max-width:1120px;margin:0 auto;padding:22px 18px 72px}
+
+    header{
+      display:flex;
+      gap:14px;
+      align-items:stretch;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
+    .hero{
+      flex:1;
+      min-width:280px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px 16px 14px;
+      box-shadow:var(--shadow);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:10px;
+      user-select:none;
+    }
+
+    .title{
+      margin:0;
+      font-size:22px;
+      line-height:1.15;
+      letter-spacing:.2px;
+    }
+
+    .subtitle{
+      margin:8px 0 0;
+      color:var(--muted);
+      line-height:1.35;
+      font-size:14px;
+    }
+
+    .meta{
+      margin-top:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .chip{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:6px 10px;
+      border-radius:999px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      user-select:none;
+    }
+    .chip b{color:var(--text);font-weight:700}
+
+    .rightPanel{
+      width:min(380px,100%);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+
+    .panel h3{margin:0 0 10px;font-size:14px;letter-spacing:.2px}
+    .panel p{margin:8px 0;color:var(--muted);font-size:13px;line-height:1.45}
+
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+
+    .btn{
+      appearance:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:13px;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      transition:transform .05s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:hover{background:rgba(255,255,255,.06)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{
+      border-color:rgba(122,167,255,.35);
+      background:linear-gradient(180deg, rgba(122,167,255,.18), rgba(122,167,255,.08));
+    }
+    .btn.safe{
+      border-color:rgba(125,255,203,.35);
+      background:linear-gradient(180deg, rgba(125,255,203,.16), rgba(125,255,203,.06));
+    }
+    .btn.danger{
+      border-color:rgba(255,107,107,.35);
+      background:linear-gradient(180deg, rgba(255,107,107,.18), rgba(255,107,107,.07));
+    }
+    .btn.small{
+      padding:8px 10px;
+      border-radius:10px;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    nav{
+      margin:18px 0 12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .tab{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      cursor:pointer;
+      font-weight:900;
+      font-size:13px;
+      transition:background .2s ease, color .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .tab[aria-selected="true"]{
+      color:var(--text);
+      border-color:rgba(122,167,255,.35);
+      background:rgba(122,167,255,.10);
+    }
+
+    main{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      align-items:start;
+    }
+    @media (max-width: 980px){main{grid-template-columns:1fr}}
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+
+    .card h2{margin:0 0 10px;font-size:16px;letter-spacing:.2px}
+
+    .sectionTitle{
+      margin:18px 0 8px;
+      font-size:13px;
+      letter-spacing:.18px;
+      color:var(--muted);
+      text-transform:uppercase;
+    }
+
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width: 700px){.grid2{grid-template-columns:1fr}}
+
+    .mini{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      padding:12px;
+    }
+    .mini h4{margin:0 0 8px;font-size:13px}
+    .mini p,.mini li{margin:6px 0;color:var(--muted);font-size:13px;line-height:1.45}
+    .list{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.5}
+
+    .hr{height:1px;background:var(--line);margin:14px 0}
+
+    .callout{
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      padding:12px;
+      margin:10px 0 0;
+    }
+    .callout strong{color:var(--text)}
+    .callout p{margin:8px 0;color:var(--muted);font-size:13px;line-height:1.45}
+    .callout.danger{
+      border-color:rgba(255,107,107,.28);
+      background:linear-gradient(180deg, rgba(255,107,107,.12), rgba(255,107,107,.04));
+    }
+    .callout.warn{
+      border-color:rgba(255,204,102,.28);
+      background:linear-gradient(180deg, rgba(255,204,102,.12), rgba(255,204,102,.04));
+    }
+    .callout.safe{
+      border-color:rgba(125,255,203,.28);
+      background:linear-gradient(180deg, rgba(125,255,203,.12), rgba(125,255,203,.04));
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:900;
+      user-select:none;
+    }
+    .pill.ok{border-color:rgba(140,255,140,.25);background:rgba(140,255,140,.06)}
+    .pill.warn{border-color:rgba(255,204,102,.25);background:rgba(255,204,102,.06)}
+    .pill.danger{border-color:rgba(255,107,107,.25);background:rgba(255,107,107,.06)}
+    .pill b{color:var(--text)}
+
+    .input, textarea{
+      width:100%;
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 10px;
+      font-size:13px;
+      outline:none;
+    }
+    .input::placeholder, textarea::placeholder{color:rgba(233,237,245,.45)}
+    textarea{min-height:88px;resize:vertical}
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.15);
+    }
+    th,td{
+      padding:10px 10px;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.35;
+    }
+    th{
+      color:var(--text);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.14px;
+      background:rgba(255,255,255,.03);
+    }
+    tr:last-child td{border-bottom:none}
+
+    .mono{font-family:var(--mono)}
+    .small{font-size:12px}
+    .muted{color:var(--muted)}
+    .hidden{display:none !important}
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      background:rgba(18,20,27,.92);
+      border:1px solid var(--line);
+      padding:10px 12px;
+      border-radius:14px;
+      box-shadow:var(--shadow);
+      color:var(--text);
+      font-size:13px;
+      display:none;
+      max-width:min(720px, 92vw);
+      z-index:9999;
+    }
+
+    footer{
+      margin-top:18px;
+      color:rgba(233,237,245,.38);
+      font-size:12px;
+      line-height:1.45;
+    }
+
+    details{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(255,255,255,.02);
+      padding:10px 12px;
+      margin:10px 0 0;
+    }
+    details summary{
+      cursor:pointer;
+      font-weight:900;
+      color:var(--text);
+      user-select:none;
+    }
+    details p, details li{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .row > *{flex:1;min-width:160px}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <section class="hero" aria-label="Identificação e objetivo">
+        <div class="badge">Plano individual • Página interativa • Uso pessoal</div>
+        <h1 class="title">Elizamar de Paula — Plano Interativo</h1>
+        <p class="subtitle">
+          Objetivo: reduzir intensidade das crises, organizar rotina terapêutica e criar um “manual do momento ruim”
+          (crise), com foco em humor, identidade e adesão ao tratamento.
+        </p>
+        <div class="meta">
+          <span class="chip"><b>Idade:</b> 24</span>
+          <span class="chip"><b>Cidade:</b> Dublin (Irlanda)</span>
+          <span class="chip"><b>Hipóteses:</b> Traços Borderline + TAB (a confirmar)</span>
+          <span class="chip"><b>Medicações atuais:</b> Lamotrigina + Aripiprazol</span>
+        </div>
+      </section>
+
+      <aside class="rightPanel" aria-label="Acesso rápido">
+        <div class="panel">
+          <h3>Acesso rápido</h3>
+          <p>Escolha o que você precisa <b>agora</b>. Se for crise, vá direto no botão vermelho.</p>
+          <div class="btnRow">
+            <button class="btn danger" id="btnCrisisNow" type="button">🚨 CRISE AGORA</button>
+            <button class="btn primary" id="btnMedNow" type="button">💊 MEDICAÇÕES</button>
+            <button class="btn safe" id="btnGroundNow" type="button">🧊 REGULAR AGORA</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Nota curta (para lembrar)</h3>
+          <p class="muted">
+            Você cresceu em ambiente caótico. Isso treina o cérebro a viver em “alerta”.<br/>
+            O tratamento aqui é: <b>tirar o alarme do modo incêndio</b> e colocar no modo vida real.
+          </p>
+          <div class="callout warn">
+            <strong>Regra de ouro</strong>
+            <p>
+              Na crise, sua mente vai vender “certeza absoluta”.<br/>
+              Sua tarefa é simples: <b>não tomar decisão importante no pico</b>.
+            </p>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <nav aria-label="Navegação por abas">
+      <button class="tab" data-tab="tab_crise" aria-selected="true" type="button">Crise</button>
+      <button class="tab" data-tab="tab_humor" aria-selected="false" type="button">Humor & TAB</button>
+      <button class="tab" data-tab="tab_identidade" aria-selected="false" type="button">Identidade</button>
+      <button class="tab" data-tab="tab_meds" aria-selected="false" type="button">Medicações</button>
+      <button class="tab" data-tab="tab_rotina" aria-selected="false" type="button">Plano terapêutico</button>
+      <button class="tab" data-tab="tab_diario" aria-selected="false" type="button">Diário (salva no celular)</button>
+    </nav>
+
+    <main>
+      <!-- COLUNA PRINCIPAL -->
+      <section class="card" id="tab_crise" role="tabpanel" aria-label="Crise">
+        <h2>Crise: protocolo de 15 minutos</h2>
+
+        <div class="callout danger">
+          <strong>Prioridade de segurança</strong>
+          <p>
+            Se você sentir que não está segura sozinha, o plano é <b>chamar ajuda agora</b>.
+            Em Dublin/Irlanda: ligue <b>112</b> ou <b>999</b>. Para apoio emocional 24/7, você pode ligar para
+            <b>Samaritans 116 123</b> (Irlanda). Se preferir, vá para um local com gente e peça ajuda.
+          </p>
+          <p class="small muted">
+            Este material é suporte educativo e de organização. Não substitui atendimento de urgência.
+          </p>
+        </div>
+
+        <div class="sectionTitle">1) Travar o impulso (30–60s)</div>
+        <div class="grid2">
+          <div class="mini">
+            <h4>Frase de travamento (curta e direta)</h4>
+            <ul class="list">
+              <li><b>Eu não decido nada agora.</b></li>
+              <li><b>Eu só preciso atravessar os próximos 15 minutos.</b></li>
+              <li>Eu posso sentir isso <i>sem agir</i> em cima disso.</li>
+            </ul>
+            <div class="btnRow">
+              <button class="btn small safe" type="button" data-copy="Eu não decido nada agora. Só atravessar 15 minutos.">Copiar frase</button>
+            </div>
+          </div>
+
+          <div class="mini">
+            <h4>Regra anti-caos (prática)</h4>
+            <ul class="list">
+              <li>Sem conversas longas agora.</li>
+              <li>Sem álcool e sem drogas (piora humor e impulsividade).</li>
+              <li>Sem “provas” de amor / sem cobranças.</li>
+              <li>Sem terminar relação / largar tratamento no pico.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sectionTitle">2) Regular o corpo (3–5 min)</div>
+        <div class="grid2">
+          <div class="mini">
+            <h4>Respiração curta (sem drama)</h4>
+            <p>Faça 6 ciclos:</p>
+            <ul class="list">
+              <li>Inspira 4s</li>
+              <li>Segura 2s</li>
+              <li>Solta 6s</li>
+            </ul>
+            <div class="btnRow">
+              <button class="btn primary" id="btnTimerBreath" type="button">Iniciar timer 3 min</button>
+              <button class="btn small" id="btnStopTimer" type="button">Parar</button>
+            </div>
+            <p class="small muted" id="timerLabel">Timer parado.</p>
+          </div>
+
+          <div class="mini">
+            <h4>“Aterramento” em 60 segundos</h4>
+            <ul class="list">
+              <li>Olhe ao redor e nomeie: 5 coisas que você vê.</li>
+              <li>Toque: 4 coisas (texturas diferentes).</li>
+              <li>Ouça: 3 sons.</li>
+              <li>Sinta: 2 sensações no corpo.</li>
+              <li>Nomeie: 1 coisa que você precisa agora (ex.: água, banho, silêncio).</li>
+            </ul>
+            <div class="btnRow">
+              <button class="btn safe" type="button" data-copy="5-4-3-2-1: 5 coisas que vejo, 4 que toco, 3 sons, 2 sensações, 1 necessidade agora.">Copiar passo</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="sectionTitle">3) Escolher uma saída limpa (5–10 min)</div>
+        <div class="grid2">
+          <div class="mini">
+            <h4>Saídas limpas (sem destruir nada)</h4>
+            <ul class="list">
+              <li>Banho quente + roupa confortável</li>
+              <li>Comer algo simples + água</li>
+              <li>Andar 10 min (sem música triste)</li>
+              <li>Escrever 8 linhas no diário (aba “Diário”)</li>
+              <li>Mandar mensagem curta para alguém seguro</li>
+            </ul>
+          </div>
+
+          <div class="mini">
+            <h4>Mensagem curta (para alguém seguro)</h4>
+            <p class="muted">Copie e envie sem explicar demais:</p>
+            <div class="callout safe">
+              <strong>Modelo</strong>
+              <p class="mono" style="margin:8px 0 0;">
+                "Oi. Tô num pico emocional. Não preciso de conselho agora.
+                Só preciso de presença: 10 min de conversa curta / ou me acompanhar por mensagem até passar."
+              </p>
+            </div>
+            <div class="btnRow">
+              <button class="btn small safe" type="button" data-copy='Oi. Tô num pico emocional. Não preciso de conselho agora. Só preciso de presença: 10 min de conversa curta / ou me acompanhar por mensagem até passar.'>Copiar mensagem</button>
+            </div>
+          </div>
+        </div>
+
+        <details>
+          <summary>Entender o que aconteceu (depois da crise, não durante)</summary>
+          <p><b>Gatilho provável:</b> rejeição percebida, crítica, sensação de controle/autoridade, medo de abandono, ou caos relacional.</p>
+          <p><b>Seu padrão:</b> emoções sobem rápido + mente cria narrativas absolutas + impulsos (vingança/ruptura) parecem “solução”.</p>
+          <p><b>Treino terapêutico:</b> atrasar ação, reduzir ativação corporal e manter vínculo sem escalada.</p>
+        </details>
+      </section>
+
+      <!-- COLUNA LATERAL (sempre visível) -->
+      <aside class="card" aria-label="Resumo e checklist">
+        <h2>Checklist de hoje</h2>
+
+        <div class="mini">
+          <h4>3 coisas que você faz mesmo sem vontade</h4>
+          <ul class="list">
+            <li>Água + comida simples</li>
+            <li>Tomar medicação como combinado</li>
+            <li>Registrar humor (30 segundos)</li>
+          </ul>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="mini">
+          <h4>Termos que te enganam</h4>
+          <ul class="list">
+            <li>“Eu tenho certeza.”</li>
+            <li>“Se eu não agir agora, vai ser pior.”</li>
+            <li>“Eu preciso provar algo.”</li>
+          </ul>
+          <div class="callout warn">
+            <strong>Resposta padrão</strong>
+            <p>“Pode até ser verdade. Mas eu decido <b>depois</b> do pico.”</p>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="mini">
+          <h4>Atalhos</h4>
+          <div class="btnRow">
+            <button class="btn small danger" type="button" id="jumpCrisis">Ir para CRISE</button>
+            <button class="btn small primary" type="button" id="jumpMeds">Ir para MEDS</button>
+            <button class="btn small safe" type="button" id="jumpDiary">Ir para DIÁRIO</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- TAB HUMOR -->
+      <section class="card hidden" id="tab_humor" role="tabpanel" aria-label="Humor e TAB">
+        <h2>Humor & suspeita de TAB (transtorno bipolar): como observar sem paranoia</h2>
+
+        <div class="callout warn">
+          <strong>Objetivo aqui</strong>
+          <p>
+            Diferenciar: <b>picos reativos</b> (borderline/trauma) versus <b>episódios mais sustentados</b> (bipolar).
+            Isso muda tratamento e evita confusão.
+          </p>
+        </div>
+
+        <div class="sectionTitle">Diferença prática (sem academicismo)</div>
+        <table aria-label="Diferenças práticas">
+          <thead>
+            <tr>
+              <th>Situação</th>
+              <th>Mais reativo (trauma/border)</th>
+              <th>Mais episódio (TAB)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Início</b></td>
+              <td>Dispara por gatilho (discussão, rejeição, controle)</td>
+              <td>Pode começar “do nada” ou com gatilho mínimo</td>
+            </tr>
+            <tr>
+              <td><b>Duração típica</b></td>
+              <td>Minutos–horas (às vezes 1–2 dias oscilando)</td>
+              <td>Dias–semanas (mais contínuo)</td>
+            </tr>
+            <tr>
+              <td><b>Ritmo</b></td>
+              <td>Sobe e desce em ondas</td>
+              <td>Fica “ligado” e consistente</td>
+            </tr>
+            <tr>
+              <td><b>Conteúdo</b></td>
+              <td>Foco em vínculo, abandono, injustiça, vingança</td>
+              <td>Foco em energia/sono, aceleração global, aumento de metas</td>
+            </tr>
+            <tr>
+              <td><b>Sono</b></td>
+              <td>Insônia por ansiedade/ruminação</td>
+              <td>Menos necessidade de sono com energia alta (sem cansar)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="sectionTitle">Sinais que merecem registrar</div>
+        <div class="grid2">
+          <div class="mini">
+            <h4>Marcar diariamente (30s)</h4>
+            <ul class="list">
+              <li>Horas de sono</li>
+              <li>Energia (0–10)</li>
+              <li>Irritabilidade (0–10)</li>
+              <li>Impulsos (0–10)</li>
+            </ul>
+            <p class="muted">Use a aba “Diário”. Isso vira dado clínico real.</p>
+          </div>
+          <div class="mini">
+            <h4>Alerta: substâncias</h4>
+            <ul class="list">
+              <li>Maconha pode piorar instabilidade, motivação e paranoia em algumas pessoas.</li>
+              <li>“Bala”/estimulantes aumentam risco de aceleração, ansiedade e impulsos.</li>
+              <li>Em suspeita de TAB, substâncias bagunçam diagnóstico e evolução.</li>
+            </ul>
+          </div>
+        </div>
+
+        <details>
+          <summary>O que fazer quando sentir “aceleração”</summary>
+          <ul class="list">
+            <li>Priorizar sono (rotina, ambiente escuro, reduzir telas).</li>
+            <li>Evitar café/energéticos à tarde/noite.</li>
+            <li>Reduzir compromissos e decisões.</li>
+            <li>Registrar no diário (energia/sono/impulso) e comunicar na consulta.</li>
+          </ul>
+        </details>
+      </section>
+
+      <!-- TAB IDENTIDADE -->
+      <section class="card hidden" id="tab_identidade" role="tabpanel" aria-label="Identidade">
+        <h2>Identidade: fragmentação não é “falta de caráter”. É instabilidade de self.</h2>
+
+        <div class="callout safe">
+          <strong>Tradução</strong>
+          <p>
+            Quando o passado foi caótico e controlador, o cérebro aprende a mudar de “personagem” para sobreviver.
+            O tratamento é construir um <b>núcleo estável</b>, mesmo com emoção alta.
+          </p>
+        </div>
+
+        <div class="sectionTitle">Exercício 1 — Núcleo (7 minutos)</div>
+        <div class="mini">
+          <h4>Três listas (sem perfeição)</h4>
+          <ol class="list">
+            <li><b>Coisas que eu respeito em mim</b> (3 itens mínimos)</li>
+            <li><b>Coisas que eu não negocio</b> (limites reais)</li>
+            <li><b>Coisas que eu quero construir</b> (1–2 metas simples)</li>
+          </ol>
+          <p class="muted">Você não precisa “se encontrar”. Você precisa <b>se sustentar</b>.</p>
+          <div class="btnRow">
+            <button class="btn small primary" type="button" data-copy="NÚCLEO: 1) Respeito em mim: ... 2) Não negocio: ... 3) Construir: ...">Copiar template</button>
+          </div>
+        </div>
+
+        <div class="sectionTitle">Exercício 2 — Identidade sob estresse (3 minutos)</div>
+        <div class="grid2">
+          <div class="mini">
+            <h4>Meu “modo crise”</h4>
+            <ul class="list">
+              <li>O que eu faço quando sinto rejeição?</li>
+              <li>Que história minha cabeça conta?</li>
+              <li>Qual comportamento piora tudo?</li>
+            </ul>
+          </div>
+          <div class="mini">
+            <h4>Meu “modo digno”</h4>
+            <ul class="list">
+              <li>O que eu faço quando eu ajo com dignidade?</li>
+              <li>Que frase me puxa de volta?</li>
+              <li>Qual micro-ação evita estrago?</li>
+            </ul>
+          </div>
+        </div>
+
+        <details>
+          <summary>Vingança: por que parece tão “necessária”</summary>
+          <p>
+            Em história de controle/autoritarismo, “vingança” muitas vezes é uma tentativa de recuperar poder e aliviar humilhação.
+            Só que o custo costuma ser alto: piora vínculo, aumenta culpa e reforça o ciclo.
+          </p>
+          <p><b>Troca objetiva:</b> em vez de “vingar”, você pratica “limite + distância + tempo”. Isso preserva você.</p>
+        </details>
+      </section>
+
+      <!-- TAB MEDS -->
+      <section class="card hidden" id="tab_meds" role="tabpanel" aria-label="Medicações">
+        <h2>Medicações: como tomar (tabela simples)</h2>
+
+        <div class="callout warn">
+          <strong>Importante</strong>
+          <p>
+            Tome exatamente como foi orientado em consulta. Não ajuste por conta própria durante crise.
+            Se tiver efeito colateral importante, registrar e avisar.
+          </p>
+        </div>
+
+        <div class="sectionTitle">Esquema atual</div>
+        <table aria-label="Tabela de medicações">
+          <thead>
+            <tr>
+              <th>Medicação</th>
+              <th>Como tomar</th>
+              <th>Horário sugerido</th>
+              <th>Observações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Lamotrigina</b></td>
+              <td>25 mg <b>2x ao dia</b></td>
+              <td>Manhã + Noite</td>
+              <td>Tomar todos os dias. Se esquecer, não dobre dose sem orientação.</td>
+            </tr>
+            <tr>
+              <td><b>Aripiprazol (solução)</b></td>
+              <td>1 mg/mL — <b>2 mL à noite</b> (= 2 mg)</td>
+              <td>Noite</td>
+              <td>Evitar álcool/drogas. Observar agitação/insônia e relatar.</td>
+            </tr>
+            <tr>
+              <td><b>Clonazepam</b></td>
+              <td>Conforme uso para dormir (já em uso)</td>
+              <td>Noite</td>
+              <td>Evitar aumentar por conta própria. Atenção a dependência e sonolência.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="sectionTitle">Checklist de adesão (diário)</div>
+        <div class="mini">
+          <p class="muted">Marque diariamente aqui (fica salvo no aparelho):</p>
+          <div class="row">
+            <label class="pill"><input id="ck_lamo_am" type="checkbox" /> Lamotrigina manhã</label>
+            <label class="pill"><input id="ck_lamo_pm" type="checkbox" /> Lamotrigina noite</label>
+            <label class="pill"><input id="ck_ari_pm" type="checkbox" /> Aripiprazol noite</label>
+            <label class="pill"><input id="ck_sleep" type="checkbox" /> Higiene do sono feita</label>
+          </div>
+          <div class="btnRow">
+            <button class="btn small primary" id="btnSaveMeds" type="button">Salvar</button>
+            <button class="btn small" id="btnClearMeds" type="button">Limpar dia</button>
+          </div>
+          <p class="small muted" id="medsSavedLabel">Ainda não salvo hoje.</p>
+        </div>
+
+        <details>
+          <summary>Por que essas medicações entram aqui (explicação curta)</summary>
+          <ul class="list">
+            <li><b>Lamotrigina</b>: ajuda a reduzir instabilidade do humor e reatividade em parte das pessoas.</li>
+            <li><b>Aripiprazol</b>: pode ajudar com impulsividade/irritabilidade/aceleração em alguns quadros.</li>
+            <li><b>Clonazepam</b>: pode ajudar sono, mas exige cautela (não é “tratamento do humor”).</li>
+          </ul>
+        </details>
+      </section>
+
+      <!-- TAB ROTINA -->
+      <section class="card hidden" id="tab_rotina" role="tabpanel" aria-label="Plano terapêutico">
+        <h2>Plano terapêutico a partir daqui (sem enrolação)</h2>
+
+        <div class="sectionTitle">1) O que vai mudar o jogo</div>
+        <div class="grid2">
+          <div class="mini">
+            <h4>Psicoterapia (prioridade real)</h4>
+            <ul class="list">
+              <li>Foco: regulação emocional + vínculo + identidade</li>
+              <li>Treino: habilidade “atrasar ação” e “tolerar desconforto”</li>
+              <li>Meta: menos crises e menos estrago pós-crise</li>
+            </ul>
+          </div>
+          <div class="mini">
+            <h4>Rotina mínima (não precisa ser perfeita)</h4>
+            <ul class="list">
+              <li>Hora fixa para dormir/acordar (o máximo possível)</li>
+              <li>Alimentação simples (evita picos de irritação)</li>
+              <li>Movimento leve 3–4x/semana</li>
+              <li>Sem substâncias (principalmente em suspeita de TAB)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sectionTitle">2) Três metas (30 dias)</div>
+        <div class="mini">
+          <ol class="list">
+            <li><b>Reduzir pico</b>: usar “Crise: 15 minutos” em 70% das crises.</li>
+            <li><b>Dados clínicos</b>: registrar humor/sono 5 dias por semana.</li>
+            <li><b>Vínculo sem guerra</b>: substituir vingança por limite + tempo em 1 situação por semana.</li>
+          </ol>
+        </div>
+
+        <details>
+          <summary>Como vamos avaliar se está funcionando</summary>
+          <ul class="list">
+            <li>Menos crises por semana ou crises mais curtas</li>
+            <li>Menos comportamentos impulsivos durante pico</li>
+            <li>Melhora do sono e da previsibilidade</li>
+            <li>Relações menos caóticas (menos “tudo ou nada”)</li>
+          </ul>
+        </details>
+      </section>
+
+      <!-- TAB DIARIO -->
+      <section class="card hidden" id="tab_diario" role="tabpanel" aria-label="Diário">
+        <h2>Diário rápido (salva no seu aparelho)</h2>
+
+        <div class="callout safe">
+          <strong>Regra</strong>
+          <p>
+            Este diário é para <b>tirar a emoção do comando</b> e colocar dado no comando.
+            Quanto mais simples, mais você usa.
+          </p>
+        </div>
+
+        <div class="sectionTitle">Registro de hoje (30–60s)</div>
+        <div class="grid2">
+          <div class="mini">
+            <label class="small muted">Sono (horas)</label>
+            <input class="input" id="inp_sono" type="number" min="0" max="16" step="0.5" placeholder="Ex.: 6.5" />
+            <div style="height:10px"></div>
+
+            <label class="small muted">Energia (0–10)</label>
+            <input class="input" id="inp_energia" type="number" min="0" max="10" step="1" placeholder="0 a 10" />
+            <div style="height:10px"></div>
+
+            <label class="small muted">Irritabilidade (0–10)</label>
+            <input class="input" id="inp_irrit" type="number" min="0" max="10" step="1" placeholder="0 a 10" />
+            <div style="height:10px"></div>
+
+            <label class="small muted">Impulsos (0–10)</label>
+            <input class="input" id="inp_impulso" type="number" min="0" max="10" step="1" placeholder="0 a 10" />
+          </div>
+
+          <div class="mini">
+            <label class="small muted">Gatilho principal (1 linha)</label>
+            <input class="input" id="inp_gatilho" type="text" placeholder="Ex.: mensagem fria / crítica / sensação de controle" />
+            <div style="height:10px"></div>
+
+            <label class="small muted">Ação limpa que eu fiz (mesmo pequena)</label>
+            <input class="input" id="inp_acao" type="text" placeholder="Ex.: respiração / banho / caminhar / pedir presença" />
+            <div style="height:10px"></div>
+
+            <label class="small muted">Notas (máx. 8 linhas)</label>
+            <textarea id="inp_notas" placeholder="Escreva curto. Sem romance. Só fato + sensação + próxima ação."></textarea>
+          </div>
+        </div>
+
+        <div class="btnRow">
+          <button class="btn primary" id="btnSaveDiary" type="button">Salvar diário</button>
+          <button class="btn" id="btnLoadDiary" type="button">Carregar último</button>
+          <button class="btn" id="btnExportDiary" type="button">Exportar texto</button>
+          <button class="btn danger" id="btnClearDiary" type="button">Apagar</button>
+        </div>
+
+        <div class="callout warn">
+          <strong>Exportar para a consulta</strong>
+          <p>
+            Use “Exportar texto” e cole no WhatsApp/Notas para enviar antes da sessão.
+            Isso acelera muito o ajuste do diagnóstico e do tratamento.
+          </p>
+        </div>
+
+        <details>
+          <summary>Modelo de frase para você (quando estiver confusa)</summary>
+          <p class="mono" style="margin:10px 0 0;">
+            "Meu cérebro está tentando resolver dor com impulso. Eu vou resolver com método.
+            Eu não preciso virar outra pessoa para sobreviver."
+          </p>
+          <div class="btnRow">
+            <button class="btn small safe" type="button" data-copy="Meu cérebro está tentando resolver dor com impulso. Eu vou resolver com método. Eu não preciso virar outra pessoa para sobreviver.">Copiar</button>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      <div class="hr"></div>
+      <div>
+        <div class="muted">
+          Documento individual para <b>Elizamar de Paula</b>. Uso pessoal, educativo e de organização.
+          Não substitui atendimento presencial/urgência.
+        </div>
+        <div class="muted" style="margin-top:8px;">
+          Assinatura: <b>Dr. Fabio Henrique de Lima Schmidt</b> — CRM/SP 183549
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function(){
+      "use strict";
+
+      // ---------------------------
+      // Helpers
+      // ---------------------------
+      function $(id){ return document.getElementById(id); }
+
+      function showToast(msg){
+        var t = $("toast");
+        t.textContent = msg;
+        t.style.display = "block";
+        clearTimeout(showToast._timer);
+        showToast._timer = setTimeout(function(){
+          t.style.display = "none";
+        }, 2200);
+      }
+
+      function copyText(text){
+        if(!text){ return; }
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(text).then(function(){
+            showToast("Copiado.");
+          }).catch(function(){
+            fallbackCopy(text);
+          });
+        }else{
+          fallbackCopy(text);
+        }
+      }
+
+      function fallbackCopy(text){
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly","");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        try{
+          document.execCommand("copy");
+          showToast("Copiado.");
+        }catch(e){
+          showToast("Não foi possível copiar automaticamente.");
+        }
+        document.body.removeChild(ta);
+      }
+
+      function setSelectedTab(tabId){
+        var tabs = document.querySelectorAll(".tab");
+        var panels = document.querySelectorAll('[role="tabpanel"]');
+
+        tabs.forEach(function(btn){
+          var isSelected = (btn.getAttribute("data-tab") === tabId);
+          btn.setAttribute("aria-selected", isSelected ? "true" : "false");
+        });
+
+        panels.forEach(function(p){
+          if(p.id === tabId){
+            p.classList.remove("hidden");
+          }else{
+            p.classList.add("hidden");
+          }
+        });
+
+        localStorage.setItem("elizamar_active_tab", tabId);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // ---------------------------
+      // Tabs
+      // ---------------------------
+      document.querySelectorAll(".tab").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          setSelectedTab(btn.getAttribute("data-tab"));
+        });
+      });
+
+      var savedTab = localStorage.getItem("elizamar_active_tab");
+      if(savedTab && $(savedTab)){
+        setSelectedTab(savedTab);
+      }else{
+        setSelectedTab("tab_crise");
+      }
+
+      // Quick access buttons
+      $("btnCrisisNow").addEventListener("click", function(){ setSelectedTab("tab_crise"); });
+      $("btnMedNow").addEventListener("click", function(){ setSelectedTab("tab_meds"); });
+      $("btnGroundNow").addEventListener("click", function(){ setSelectedTab("tab_crise"); });
+
+      $("jumpCrisis").addEventListener("click", function(){ setSelectedTab("tab_crise"); });
+      $("jumpMeds").addEventListener("click", function(){ setSelectedTab("tab_meds"); });
+      $("jumpDiary").addEventListener("click", function(){ setSelectedTab("tab_diario"); });
+
+      // Copy buttons
+      document.querySelectorAll("[data-copy]").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          copyText(btn.getAttribute("data-copy"));
+        });
+      });
+
+      // ---------------------------
+      // Breathing timer (3 minutes)
+      // ---------------------------
+      var timerInterval = null;
+      var timerEndsAt = 0;
+
+      function stopTimer(){
+        if(timerInterval){
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+        timerEndsAt = 0;
+        $("timerLabel").textContent = "Timer parado.";
+      }
+
+      function startTimer(seconds){
+        stopTimer();
+        var now = Date.now();
+        timerEndsAt = now + (seconds * 1000);
+
+        function tick(){
+          var left = Math.max(0, timerEndsAt - Date.now());
+          var s = Math.ceil(left / 1000);
+          var mm = String(Math.floor(s / 60)).padStart(2,"0");
+          var ss = String(s % 60).padStart(2,"0");
+          $("timerLabel").textContent = "Tempo restante: " + mm + ":" + ss;
+
+          if(left <= 0){
+            stopTimer();
+            showToast("Concluído. Agora escolha uma saída limpa.");
+          }
+        }
+
+        tick();
+        timerInterval = setInterval(tick, 250);
+      }
+
+      $("btnTimerBreath").addEventListener("click", function(){
+        startTimer(180);
+        showToast("Timer iniciado (3 min).");
+      });
+
+      $("btnStopTimer").addEventListener("click", function(){
+        stopTimer();
+        showToast("Timer parado.");
+      });
+
+      // ---------------------------
+      // Meds checklist (saved daily)
+      // ---------------------------
+      function todayKey(){
+        var d = new Date();
+        var y = d.getFullYear();
+        var m = String(d.getMonth()+1).padStart(2,"0");
+        var day = String(d.getDate()).padStart(2,"0");
+        return y + "-" + m + "-" + day;
+      }
+
+      var medsKey = "elizamar_meds_" + todayKey();
+
+      function loadMeds(){
+        var raw = localStorage.getItem(medsKey);
+        if(!raw){
+          $("medsSavedLabel").textContent = "Ainda não salvo hoje.";
+          $("ck_lamo_am").checked = false;
+          $("ck_lamo_pm").checked = false;
+          $("ck_ari_pm").checked = false;
+          $("ck_sleep").checked = false;
+          return;
+        }
+        try{
+          var obj = JSON.parse(raw);
+          $("ck_lamo_am").checked = !!obj.lamo_am;
+          $("ck_lamo_pm").checked = !!obj.lamo_pm;
+          $("ck_ari_pm").checked = !!obj.ari_pm;
+          $("ck_sleep").checked = !!obj.sleep;
+          $("medsSavedLabel").textContent = "Salvo hoje (" + obj.savedAt + ").";
+        }catch(e){
+          $("medsSavedLabel").textContent = "Erro ao carregar.";
+        }
+      }
+
+      function saveMeds(){
+        var d = new Date();
+        var obj = {
+          lamo_am: $("ck_lamo_am").checked,
+          lamo_pm: $("ck_lamo_pm").checked,
+          ari_pm: $("ck_ari_pm").checked,
+          sleep: $("ck_sleep").checked,
+          savedAt: d.toLocaleString()
+        };
+        localStorage.setItem(medsKey, JSON.stringify(obj));
+        $("medsSavedLabel").textContent = "Salvo hoje (" + obj.savedAt + ").";
+        showToast("Checklist salvo.");
+      }
+
+      function clearMeds(){
+        localStorage.removeItem(medsKey);
+        loadMeds();
+        showToast("Checklist limpo.");
+      }
+
+      $("btnSaveMeds").addEventListener("click", saveMeds);
+      $("btnClearMeds").addEventListener("click", clearMeds);
+      loadMeds();
+
+      // ---------------------------
+      // Diary (single latest entry)
+      // ---------------------------
+      var diaryKey = "elizamar_diario_latest";
+
+      function getDiaryFromInputs(){
+        return {
+          date: new Date().toLocaleString(),
+          sono: $("inp_sono").value.trim(),
+          energia: $("inp_energia").value.trim(),
+          irrit: $("inp_irrit").value.trim(),
+          impulso: $("inp_impulso").value.trim(),
+          gatilho: $("inp_gatilho").value.trim(),
+          acao: $("inp_acao").value.trim(),
+          notas: $("inp_notas").value.trim()
+        };
+      }
+
+      function setDiaryToInputs(obj){
+        $("inp_sono").value = obj.sono || "";
+        $("inp_energia").value = obj.energia || "";
+        $("inp_irrit").value = obj.irrit || "";
+        $("inp_impulso").value = obj.impulso || "";
+        $("inp_gatilho").value = obj.gatilho || "";
+        $("inp_acao").value = obj.acao || "";
+        $("inp_notas").value = obj.notas || "";
+      }
+
+      function diaryToText(obj){
+        var lines = [];
+        lines.push("ELIZAMAR — REGISTRO");
+        lines.push("Data: " + (obj.date || ""));
+        lines.push("");
+        lines.push("Sono (h): " + (obj.sono || ""));
+        lines.push("Energia (0-10): " + (obj.energia || ""));
+        lines.push("Irritabilidade (0-10): " + (obj.irrit || ""));
+        lines.push("Impulsos (0-10): " + (obj.impulso || ""));
+        lines.push("");
+        lines.push("Gatilho: " + (obj.gatilho || ""));
+        lines.push("Ação limpa: " + (obj.acao || ""));
+        lines.push("");
+        lines.push("Notas:");
+        lines.push(obj.notas || "");
+        return lines.join("\n");
+      }
+
+      function saveDiary(){
+        var obj = getDiaryFromInputs();
+        localStorage.setItem(diaryKey, JSON.stringify(obj));
+        showToast("Diário salvo.");
+      }
+
+      function loadDiary(){
+        var raw = localStorage.getItem(diaryKey);
+        if(!raw){
+          showToast("Sem diário salvo ainda.");
+          return;
+        }
+        try{
+          var obj = JSON.parse(raw);
+          setDiaryToInputs(obj);
+          showToast("Último diário carregado.");
+        }catch(e){
+          showToast("Erro ao carregar diário.");
+        }
+      }
+
+      function exportDiary(){
+        var raw = localStorage.getItem(diaryKey);
+        var obj = null;
+        if(raw){
+          try{ obj = JSON.parse(raw); }catch(e){ obj = getDiaryFromInputs(); }
+        }else{
+          obj = getDiaryFromInputs();
+        }
+        copyText(diaryToText(obj));
+      }
+
+      function clearDiary(){
+        localStorage.removeItem(diaryKey);
+        setDiaryToInputs({});
+        showToast("Diário apagado.");
+      }
+
+      $("btnSaveDiary").addEventListener("click", saveDiary);
+      $("btnLoadDiary").addEventListener("click", loadDiary);
+      $("btnExportDiary").addEventListener("click", exportDiary);
+      $("btnClearDiary").addEventListener("click", clearDiary);
+
+    })();
+  </script>
+</body>
+</html>
