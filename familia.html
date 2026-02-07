@@ -176,7 +176,7 @@
   }
   .mini{color:var(--muted);font-size:12px}
 
-  /* TILE (itens inteligentes) */
+  /* TILE */
   .chips{display:flex;flex-wrap:wrap;gap:8px}
   .tile{
     flex:1 1 260px;
@@ -222,7 +222,7 @@
   .tile.fav{border-color:rgba(255,255,255,.38)}
   .tile.used{outline:1px solid rgba(120,255,180,.22)}
 
-  /* LIST / MODAL */
+  /* MODAL */
   .modalBack{
     position:fixed; inset:0;
     background:rgba(0,0,0,.65);
@@ -301,8 +301,9 @@
 <body>
 <div class="wrap">
 
+  <!-- ✅ HERO (corrigida para a pasta imagens/) -->
   <div class="hero-faixa">
-    <img src="hero22.png" alt="Protocolo Família — Manejo de Crise">
+    <img src="imagens/hero22.png" alt="Protocolo Família — Manejo de Crise">
   </div>
 
   <header>
@@ -351,7 +352,6 @@
         <div class="hr"></div>
 
         <div class="chips">
-          <!-- AÇÕES (sem copiar) -->
           <div class="tile" data-kind="action" data-tag="acao_tom" data-use="Tom baixo. Uma ideia por frase. Sem ironia. Sem sarcasmo.">
             <div class="ico">✅</div>
             <div class="txt">
@@ -423,7 +423,6 @@
               <button class="act" data-usebtn="1">▶︎</button>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -491,7 +490,6 @@
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -535,7 +533,6 @@
               <button class="act" data-usebtn="1">▶︎</button>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -574,7 +571,6 @@
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
-
         </div>
 
         <div class="footer">
@@ -725,7 +721,6 @@
               <button class="act" data-usebtn="1">▶︎</button>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -788,7 +783,6 @@
 </div>
 
 <script>
-/* ===== keys (novas) ===== */
 const K = {
   hist: "pf_hist_v1",
   fav:  "pf_fav_v1",
@@ -819,7 +813,6 @@ function escapeHtml(s){
   return (s||"").replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[m]));
 }
 
-/* ===== toast ===== */
 const toast=$("#toast");
 function showToast(msg){
   toast.textContent=msg;
@@ -836,7 +829,6 @@ async function copyToClipboard(text){
   }
 }
 
-/* ===== stats ===== */
 function bumpStat(key){
   const st=read(K.stats,{opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0,resets:0});
   st[key]=(st[key]||0)+1;
@@ -848,7 +840,6 @@ function bumpStat(key){
   write(K.stats, st);
 })();
 
-/* ===== history ===== */
 function pushHist(type,title,detail){
   const hist=read(K.hist,[]);
   hist.unshift({ts:Date.now(), type, title, detail:detail||""});
@@ -856,7 +847,6 @@ function pushHist(type,title,detail){
   write(K.hist,hist);
 }
 
-/* ===== fav ===== */
 function isFav(tag){ return read(K.fav,[]).includes(tag); }
 function toggleFav(tag){
   const fav=read(K.fav,[]);
@@ -872,7 +862,6 @@ function applyFavUI(){
 }
 applyFavUI();
 
-/* ===== used ===== */
 function isUsed(tag){ return read(K.used,[]).includes(tag); }
 function toggleUsed(tag){
   const arr=read(K.used,[]);
@@ -888,7 +877,7 @@ function applyUsedUI(){
 }
 applyUsedUI();
 
-/* ===== tabs ===== */
+/* tabs */
 $$(".tab").forEach(btn=>{
   btn.addEventListener("click", ()=>{
     $$(".tab").forEach(t=>t.classList.remove("active"));
@@ -900,7 +889,7 @@ $$(".tab").forEach(btn=>{
   });
 });
 
-/* ===== busca ===== */
+/* busca */
 $("#busca").addEventListener("input", ()=>{
   const q=$("#busca").value.trim().toLowerCase();
   let shown=0;
@@ -918,7 +907,7 @@ $("#busca").addEventListener("input", ()=>{
   $("#buscaInfo").textContent=q?`${shown} itens encontrados.`:"";
 });
 
-/* ===== star ===== */
+/* favoritos */
 $$("[data-star]").forEach(btn=>{
   btn.addEventListener("click",(e)=>{
     e.stopPropagation();
@@ -933,7 +922,7 @@ $$("[data-star]").forEach(btn=>{
   });
 });
 
-/* ===== copy ===== */
+/* copiar (só scripts) */
 $$("[data-copybtn]").forEach(btn=>{
   btn.addEventListener("click", async (e)=>{
     e.stopPropagation();
@@ -948,7 +937,7 @@ $$("[data-copybtn]").forEach(btn=>{
   });
 });
 
-/* ===== use ===== */
+/* marcar usado (ações) */
 $$("[data-usebtn]").forEach(btn=>{
   btn.addEventListener("click",(e)=>{
     e.stopPropagation();
@@ -965,7 +954,7 @@ $$("[data-usebtn]").forEach(btn=>{
   });
 });
 
-/* ===== plano ===== */
+/* plano */
 const planoMap={
   "1":[
     "Tom baixo. Uma ideia por frase.",
@@ -995,7 +984,7 @@ $("#btnPlano").addEventListener("click", async ()=>{
   pushHist("plano",`Plano gerado (intensidade ${v})`,steps.join(" | "));
 });
 
-/* ===== timer ===== */
+/* timer */
 let timerOn=false, tLeft=60, tInt=null;
 function setTimerLabel(){ $("#timerTxt").textContent=timerOn?`Timer: ${tLeft}s`:"Timer: parado"; }
 setTimerLabel();
@@ -1025,7 +1014,7 @@ $("#btnTimer").addEventListener("click", ()=>{
   }
 });
 
-/* ===== nota ===== */
+/* nota */
 $("#btnSalvarNota").addEventListener("click", ()=>{
   const v=($("#notaDepois")?.value||"").trim();
   if(!v){ showToast("Escreva a nota"); return; }
@@ -1037,7 +1026,7 @@ $("#btnSalvarNota").addEventListener("click", ()=>{
   showToast("📝 Nota salva");
 });
 
-/* ===== acordos ===== */
+/* acordos */
 function renderAcordos(){
   const arr=read(K.acordos,[]);
   const box=$("#acordosList");
@@ -1076,7 +1065,7 @@ $("#btnLimparAcordos").addEventListener("click", ()=>{
   showToast("Acordos limpos");
 });
 
-/* ===== modal ===== */
+/* modal */
 const modalBack=$("#modalBack");
 const modalTitle=$("#modalTitle");
 const modalDesc=$("#modalDesc");
@@ -1186,7 +1175,7 @@ $("#btnHistorico").addEventListener("click", ()=>openModal("hist"));
 $("#btnFavoritos").addEventListener("click", ()=>openModal("fav"));
 $("#btnStats").addEventListener("click", ()=>openModal("stats"));
 
-/* ===== export ===== */
+/* export */
 $("#btnExportar").addEventListener("click", ()=>{
   const hist=read(K.hist,[]);
   const acordos=read(K.acordos,[]);
@@ -1256,7 +1245,7 @@ $("#btnExportar").addEventListener("click", ()=>{
   pushHist("export","Exportação gerada","TXT");
 });
 
-/* ===== modo crise ===== */
+/* modo crise */
 $("#btnEmergencia").addEventListener("click", ()=>{
   document.querySelector('.tab[data-tab="crise"]').click();
   window.scrollTo({top:0, behavior:"smooth"});
@@ -1264,7 +1253,7 @@ $("#btnEmergencia").addEventListener("click", ()=>{
   pushHist("modo","Modo crise ativado","");
 });
 
-/* ===== resets ===== */
+/* reset local */
 $("#btnResetLocal").addEventListener("click", ()=>{
   localStorage.removeItem(K.hist);
   localStorage.removeItem(K.fav);
@@ -1276,6 +1265,7 @@ $("#btnResetLocal").addEventListener("click", ()=>{
   location.reload();
 });
 
+/* reset sw */
 $("#btnResetSW").addEventListener("click", async ()=>{
   bumpStat("resets");
   try{
@@ -1295,7 +1285,7 @@ $("#btnResetSW").addEventListener("click", async ()=>{
   }
 });
 
-/* ===== PWA: registrar SW NOVO ===== */
+/* registrar SW */
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./familia-sw.js");
