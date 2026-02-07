@@ -1,13 +1,11 @@
-/* familia-sw.js COMPLETO */
-
-const CACHE_NAME = "protocolo-familia-cache-v1";
+const CACHE_NAME = "protocolo-familia-cache-v2";
 
 const CORE_ASSETS = [
   "./",
   "./familia.html",
   "./familia-manifest.json",
   "./familia-sw.js",
-  "./hero22.png",
+  "./imagens/hero22.png",
   "./icon-192.png",
   "./icon-512.png"
 ];
@@ -40,10 +38,9 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(req.url);
 
-  // só mesma origem
   if (url.origin !== self.location.origin) return;
 
-  // HTML: NETWORK FIRST para atualizar de verdade
+  // HTML: NETWORK FIRST
   if (req.headers.get("accept") && req.headers.get("accept").includes("text/html")) {
     event.respondWith(
       fetch(req)
@@ -57,7 +54,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Outros: CACHE FIRST com atualização em background
+  // Outros: CACHE FIRST
   event.respondWith(
     caches.match(req).then((cached) => {
       const networkFetch = fetch(req)
