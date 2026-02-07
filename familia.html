@@ -1,0 +1,1307 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protocolo Família — Manejo de Crise</title>
+
+<link rel="manifest" href="familia-manifest.json">
+<meta name="theme-color" content="#0b0b0f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<style>
+  :root{
+    --bg:#0b0b0f;
+    --text:#f4f4f5;
+    --muted:#9aa0a6;
+    --line:rgba(255,255,255,.10);
+    --panel:#14141c;
+    --chip:#1b1b24;
+
+    --good:rgba(120,255,180,.10);
+    --warn:rgba(255,180,80,.10);
+    --bad:rgba(255,90,90,.10);
+
+    --r:16px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+  }
+
+  .wrap{
+    max-width:1020px;
+    margin:0 auto;
+    padding:14px 14px 70px;
+  }
+
+  /* HERO FAIXA */
+  .hero-faixa{
+    width:100%;
+    overflow:hidden;
+    border-radius:14px;
+    margin:8px 0 14px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.02);
+  }
+  .hero-faixa img{
+    width:100%;
+    height:110px;
+    object-fit:cover;
+    display:block;
+  }
+
+  header{
+    border-bottom:1px solid var(--line);
+    padding:6px 2px 14px;
+    margin-bottom:12px;
+  }
+  h1{
+    margin:0 0 6px;
+    font-size:20px;
+    letter-spacing:.2px;
+  }
+  .sub{
+    margin:0;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.45;
+  }
+
+  .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+  }
+  .btn{
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:var(--text);
+    padding:10px 12px;
+    border-radius:999px;
+    font-weight:900;
+    font-size:12.5px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .btn:active{transform:scale(.99)}
+  .btn.primary{background:rgba(255,255,255,.12)}
+  .btn.danger{
+    border-color:rgba(255,90,90,.22);
+    background:rgba(255,90,90,.08);
+  }
+
+  /* TABS STICKY */
+  .tabs{
+    display:flex;
+    gap:8px;
+    margin:14px 0 12px;
+    position:sticky;
+    top:0;
+    background:rgba(11,11,15,.92);
+    backdrop-filter: blur(10px);
+    padding:10px 2px;
+    border-bottom:1px solid var(--line);
+    z-index:10;
+  }
+  .tab{
+    flex:1;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.03);
+    color:var(--text);
+    padding:10px;
+    border-radius:999px;
+    font-weight:900;
+    font-size:12.5px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .tab.active{background:rgba(255,255,255,.12)}
+
+  /* GRID / CARDS */
+  .grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:8px 2px;
+  }
+  @media(min-width:920px){
+    .grid{grid-template-columns:1fr 1fr}
+  }
+  .card{
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    border-radius:var(--r);
+    padding:14px;
+  }
+  .card h3{
+    margin:0 0 10px;
+    font-size:14px;
+    letter-spacing:.2px;
+  }
+  .hint{
+    margin:0 0 10px;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.4;
+  }
+  .full{grid-column:1/-1}
+  .good{background:var(--good)}
+  .warn{background:var(--warn)}
+  .bad{background:var(--bad)}
+
+  .bar{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  select, input[type="search"]{
+    width:100%;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.03);
+    color:var(--text);
+    padding:10px 12px;
+    border-radius:12px;
+    outline:none;
+    font-size:13px;
+  }
+  .mini{color:var(--muted);font-size:12px}
+
+  /* TILE (itens inteligentes) */
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .tile{
+    flex:1 1 260px;
+    border:1px solid rgba(255,255,255,.14);
+    background:var(--chip);
+    border-radius:14px;
+    padding:10px 10px;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    position:relative;
+  }
+  .tile:active{transform:scale(.99)}
+  .ico{
+    width:32px;height:32px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    flex:0 0 32px;
+    font-size:16px;
+    user-select:none;
+  }
+  .txt{flex:1}
+  .t{font-weight:900;font-size:13.2px;line-height:1.25}
+  .d{color:var(--muted);font-size:12px;line-height:1.35;margin-top:4px}
+  .actions{display:flex;gap:6px;flex:0 0 auto}
+  .act{
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.06);
+    color:var(--text);
+    border-radius:12px;
+    padding:7px 9px;
+    font-weight:900;
+    font-size:12px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .act:active{transform:scale(.99)}
+  .act.copy{background:rgba(255,255,255,.10)}
+  .tile.fav{border-color:rgba(255,255,255,.38)}
+  .tile.used{outline:1px solid rgba(120,255,180,.22)}
+
+  /* LIST / MODAL */
+  .modalBack{
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.65);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+  }
+  .modal{
+    width:min(820px,92vw);
+    background:#0f0f16;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:14px;
+  }
+  .modal h2{margin:0 0 6px;font-size:16px}
+  .modal p{margin:0 0 12px;color:var(--muted);font-size:12.5px;line-height:1.45}
+  .hr{height:1px;background:var(--line);margin:12px 0}
+  .list{
+    max-height:56vh;
+    overflow:auto;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px;
+    background:rgba(255,255,255,.03);
+  }
+  .item{
+    padding:10px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .item:last-child{border-bottom:none}
+  .item .it{font-weight:900;font-size:12.5px}
+  .item .im{color:var(--muted);font-size:12px;margin-top:4px;line-height:1.35}
+  .kpi{
+    display:flex; gap:10px; flex-wrap:wrap;
+  }
+  .kpi .box{
+    flex:1 1 160px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px;
+    background:rgba(255,255,255,.03);
+  }
+  .kpi .n{font-size:18px;font-weight:900}
+  .kpi .l{color:var(--muted);font-size:12px}
+
+  /* TOAST */
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:18px;
+    transform:translateX(-50%);
+    background:rgba(0,0,0,.78);
+    color:white;
+    padding:10px 12px;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:999px;
+    font-size:13px;
+    opacity:0;
+    pointer-events:none;
+    transition:.18s;
+    z-index:1000;
+  }
+  .toast.show{opacity:1}
+
+  .footer{
+    margin-top:18px;
+    font-size:12px;
+    color:var(--muted);
+    border-top:1px solid rgba(255,255,255,.08);
+    padding-top:10px;
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="hero-faixa">
+    <img src="hero22.png" alt="Protocolo Família — Manejo de Crise">
+  </div>
+
+  <header>
+    <h1>Protocolo Família — Manejo de Crise</h1>
+    <p class="sub">Ferramenta interativa: ação primeiro, discussão depois. Regulação antes de conteúdo.</p>
+
+    <div class="row">
+      <button class="btn danger" id="btnEmergencia">⚠️ MODO CRISE</button>
+      <button class="btn primary" id="btnHistorico">🕒 Histórico</button>
+      <button class="btn" id="btnFavoritos">★ Favoritos</button>
+      <button class="btn" id="btnExportar">⬇︎ Exportar TXT</button>
+      <button class="btn" id="btnStats">📊 Uso</button>
+      <button class="btn" id="btnResetLocal">♻︎ Reset local</button>
+      <button class="btn" id="btnResetSW">🧨 Reset SW</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="crise">⚠️ CRISE AGORA</button>
+    <button class="tab" data-tab="depois">🧩 DEPOIS</button>
+    <button class="tab" data-tab="prevencao">🛠️ PREVENÇÃO</button>
+  </nav>
+
+  <!-- CRISE -->
+  <section class="panel" id="crise" style="display:block">
+    <div class="grid">
+
+      <div class="card full good">
+        <h3>Controle rápido (30–90s)</h3>
+        <p class="hint">Sem debate. Tom baixo, frases curtas, sem ironia. O objetivo é reduzir ativação, não “provar ponto”.</p>
+
+        <div class="bar">
+          <div style="flex:1 1 320px">
+            <select id="intensidade">
+              <option value="0">Intensidade da crise: selecione</option>
+              <option value="1">1–3 (leve): tensão / irritação</option>
+              <option value="2">4–6 (média): choro / raiva / impulso</option>
+              <option value="3">7–10 (alta): escalada / risco</option>
+            </select>
+          </div>
+          <button class="btn primary" id="btnPlano">▶︎ Gerar plano</button>
+          <button class="btn" id="btnTimer">⏱️ Timer 60s</button>
+          <div class="mini" id="timerTxt">Timer: parado</div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="chips">
+          <!-- AÇÕES (sem copiar) -->
+          <div class="tile" data-kind="action" data-tag="acao_tom" data-use="Tom baixo. Uma ideia por frase. Sem ironia. Sem sarcasmo.">
+            <div class="ico">✅</div>
+            <div class="txt">
+              <div class="t">Checklist (voz e forma)</div>
+              <div class="d">Isso é ação, não script.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1" title="Favoritar">★</button>
+              <button class="act" data-usebtn="1" title="Marcar como usado">▶︎</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="action" data-tag="acao_ambiente" data-use="Reduza estímulos: menos gente, menos barulho, menos confronto.">
+            <div class="ico">🔇</div>
+            <div class="txt">
+              <div class="t">Ambiente (reduzir estímulo)</div>
+              <div class="d">Ajuste o cenário antes de falar.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="action" data-tag="acao_sequencia" data-use="Sequência: regular corpo → validar → limite curto → conversar depois.">
+            <div class="ico">🧭</div>
+            <div class="txt">
+              <div class="t">Sequência correta</div>
+              <div class="d">A maioria erra aqui e piora.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="action" data-tag="acao_proibidos" data-use="Proibidos: ironia, indireta, sermão, ‘você sempre’, ‘você exagera’, ‘para com isso’.">
+            <div class="ico">⛔</div>
+            <div class="txt">
+              <div class="t">Anti-incêndio</div>
+              <div class="d">Se você está irritado, fale menos.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="action" data-tag="acao_respira" data-use="Se possível: 60s de pausa silenciosa + respiração lenta.">
+            <div class="ico">🫁</div>
+            <div class="txt">
+              <div class="t">Pausa + respiração</div>
+              <div class="d">Não discute durante a pausa.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="action" data-tag="acao_pergunta" data-use="Evite perguntas longas. Use 1 pergunta simples: presença ou clareza?">
+            <div class="ico">❓</div>
+            <div class="txt">
+              <div class="t">Pergunta única</div>
+              <div class="d">Uma pergunta, não interrogatório.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Scripts (copiar só aqui)</h3>
+        <p class="hint">Use 1 só. Fale e pare. Se for mensagem, copie.</p>
+
+        <div class="chips">
+          <div class="tile" data-kind="script" data-tag="sc_presenca" data-script="Eu tô aqui. Vamos respirar um pouco.">
+            <div class="ico">🗣️</div>
+            <div class="txt">
+              <div class="t">“Eu tô aqui.”</div>
+              <div class="d">Presença sem cobrança.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1" title="Copiar">📋</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="script" data-tag="sc_validacao" data-script="Eu vejo que isso tá doendo muito agora.">
+            <div class="ico">🫀</div>
+            <div class="txt">
+              <div class="t">“Eu vejo que dói.”</div>
+              <div class="d">Valida sentimento sem validar explosão.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="script" data-tag="sc_sequencia" data-script="Agora não é hora de discutir. Eu fico aqui e a gente conversa depois.">
+            <div class="ico">🧭</div>
+            <div class="txt">
+              <div class="t">“Depois a gente conversa.”</div>
+              <div class="d">Organiza sem briga.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="script" data-tag="sc_limite" data-script="Eu me importo com você. Eu não vou discutir gritando.">
+            <div class="ico">🛡️</div>
+            <div class="txt">
+              <div class="t">Limite curto</div>
+              <div class="d">Firme, sem humilhar.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="script" data-tag="sc_duvida" data-script="Você precisa de presença ou de clareza agora?">
+            <div class="ico">🧠</div>
+            <div class="txt">
+              <div class="t">“Presença ou clareza?”</div>
+              <div class="d">Pergunta única, poderosa.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card full warn">
+        <h3>Se a pessoa se afastar</h3>
+        <p class="hint">Perseguir costuma piorar. Use 1 frase e pare.</p>
+
+        <div class="chips">
+          <div class="tile" data-kind="script" data-tag="sc_espaco" data-script="Você pode ir. Só me avisa quando chegar.">
+            <div class="ico">🚪</div>
+            <div class="txt">
+              <div class="t">“Pode ir. Só avisa quando chegar.”</div>
+              <div class="d">Espaço com mínima segurança.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="script" data-tag="sc_nao_perseguir" data-script="Eu não vou te perseguir. Eu continuo aqui.">
+            <div class="ico">🧱</div>
+            <div class="txt">
+              <div class="t">“Eu não vou te perseguir.”</div>
+              <div class="d">Espaço sem abandono.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="action" data-tag="acao_eco" data-use="Afastamento não é abandono quando existe comunicação mínima.">
+            <div class="ico">🔁</div>
+            <div class="txt">
+              <div class="t">Reenquadramento</div>
+              <div class="d">Lembrete mental pra não escalar.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card full">
+        <h3>Busca rápida</h3>
+        <p class="hint">Digite “grito”, “afastar”, “validar”, “limite” etc.</p>
+        <input id="busca" type="search" placeholder="Buscar...">
+        <div class="mini" id="buscaInfo" style="margin-top:8px"></div>
+      </div>
+
+      <div class="card full bad">
+        <h3>Quando buscar ajuda</h3>
+        <p class="hint">Crises intensas/frequentes, risco, agressividade, exaustão do cuidador, repetição do ciclo sem melhora.</p>
+
+        <div class="chips">
+          <div class="tile" data-kind="script" data-tag="sc_ajuda1" data-script="Se as crises estão aumentando ou há risco, a gente precisa de ajuda profissional.">
+            <div class="ico">📞</div>
+            <div class="txt">
+              <div class="t">Frase prática</div>
+              <div class="d">Curta, sem atacar.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="script" data-tag="sc_ajuda2" data-script="Pedir ajuda a tempo evita danos maiores depois.">
+            <div class="ico">🧯</div>
+            <div class="txt">
+              <div class="t">Fechamento</div>
+              <div class="d">Direto e não moralista.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="footer">
+          Se houver risco imediato, priorize segurança e suporte local.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DEPOIS -->
+  <section class="panel" id="depois" style="display:none">
+    <div class="grid">
+
+      <div class="card full good">
+        <h3>Depois que acalma</h3>
+        <p class="hint">Validar → nomear → ajustar. Sem tribunal.</p>
+
+        <div class="chips">
+          <div class="tile" data-kind="script" data-tag="dp_abertura" data-script="Agora que acalmou, acho que a gente consegue entender melhor o que aconteceu.">
+            <div class="ico">🧩</div>
+            <div class="txt">
+              <div class="t">Abertura segura</div>
+              <div class="d">Começa sem acusação.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="script" data-tag="dp_reconhecer" data-script="Eu reconheço que doeu. Eu não quero te atacar.">
+            <div class="ico">🫀</div>
+            <div class="txt">
+              <div class="t">Reconhecer dor</div>
+              <div class="d">Sem entrar em defesa.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="script" data-tag="dp_xy" data-script="O que piorou foi X. Da próxima vez, vamos fazer Y.">
+            <div class="ico">🧭</div>
+            <div class="txt">
+              <div class="t">Ajuste prático (X → Y)</div>
+              <div class="d">Curto e executável.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="script" data-tag="dp_limite" data-script="Eu me importo com você. E eu preciso que a gente faça isso sem agressão.">
+            <div class="ico">🧱</div>
+            <div class="txt">
+              <div class="t">Limite + vínculo</div>
+              <div class="d">Firme sem humilhar.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <h3>Registro rápido (vira prevenção)</h3>
+        <p class="hint">Uma linha: gatilho + o que ajudou. Isso vai pro Histórico com data/hora.</p>
+        <div class="bar">
+          <input id="notaDepois" type="search" placeholder="Ex.: gatilho: atraso; ajudou: reduzir estímulo + frase X">
+          <button class="btn primary" id="btnSalvarNota">Salvar</button>
+        </div>
+        <div class="mini" id="notaOk" style="margin-top:8px"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PREVENÇÃO -->
+  <section class="panel" id="prevencao" style="display:none">
+    <div class="grid">
+
+      <div class="card full good">
+        <h3>Prevenção (regras do dia a dia)</h3>
+        <p class="hint">Aqui é comportamento do cuidador. Isso reduz frequência e intensidade de crise.</p>
+
+        <div class="chips">
+          <div class="tile" data-kind="action" data-tag="pv_clareza" data-use="Comunicação clara. Sem indireta. Sem sarcasmo.">
+            <div class="ico">🧠</div>
+            <div class="txt">
+              <div class="t">Regra 1: Clareza</div>
+              <div class="d">Clareza reduz insegurança.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="action" data-tag="pv_previs" data-use="Avisar mudanças com antecedência reduz ativação.">
+            <div class="ico">📅</div>
+            <div class="txt">
+              <div class="t">Regra 2: Previsibilidade</div>
+              <div class="d">Previsibilidade = menos crise.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="action" data-tag="pv_validar" data-use="Validar o sentimento antes de discordar protege o vínculo.">
+            <div class="ico">🫀</div>
+            <div class="txt">
+              <div class="t">Regra 3: Validar primeiro</div>
+              <div class="d">Validação vem antes do limite.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="action" data-tag="pv_limite" data-use="Limite curto e consistente vale mais do que briga longa.">
+            <div class="ico">🧱</div>
+            <div class="txt">
+              <div class="t">Regra 4: Consistência</div>
+              <div class="d">Briga longa vira reforço do ciclo.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="action" data-tag="pv_reparar" data-use="Reparar depois (desculpa + ajuste) vale mais do que discutir ‘quem está certo’.">
+            <div class="ico">🧩</div>
+            <div class="txt">
+              <div class="t">Regra 5: Reparação</div>
+              <div class="d">Repara rápido. Ajusta prático.</div>
+            </div>
+            <div class="actions">
+              <button class="act" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card full">
+        <h3>Acordos (curtos e executáveis)</h3>
+        <p class="hint">Isso vira “regras do jogo”. Fica salvo localmente e exporta junto.</p>
+
+        <div class="bar">
+          <input id="acordoTxt" type="search" placeholder="Ex.: Se subir o tom → pausa de 10 min; depois 1 frase de validação">
+          <button class="btn primary" id="btnAddAcordo">Adicionar</button>
+        </div>
+
+        <div class="list" id="acordosList" style="margin-top:10px"></div>
+
+        <div class="row">
+          <button class="btn danger" id="btnLimparAcordos">Limpar acordos</button>
+        </div>
+      </div>
+
+      <div class="card full warn">
+        <h3>Checklist de consistência semanal</h3>
+        <p class="hint">Marque mentalmente: você está sendo previsível ou reativo?</p>
+        <div class="chips">
+          <div class="tile" data-kind="action" data-tag="ck_1" data-use="Eu tenho usado frases curtas em vez de explicações longas?">
+            <div class="ico">☑️</div>
+            <div class="txt"><div class="t">Pergunta 1</div><div class="d">Autoauditoria do cuidador.</div></div>
+            <div class="actions"><button class="act" data-star="1">★</button><button class="act" data-usebtn="1">▶︎</button></div>
+          </div>
+          <div class="tile" data-kind="action" data-tag="ck_2" data-use="Eu tenho validado sentimento antes de impor limite?">
+            <div class="ico">☑️</div>
+            <div class="txt"><div class="t">Pergunta 2</div><div class="d">Evita escalada desnecessária.</div></div>
+            <div class="actions"><button class="act" data-star="1">★</button><button class="act" data-usebtn="1">▶︎</button></div>
+          </div>
+          <div class="tile" data-kind="action" data-tag="ck_3" data-use="Eu tenho avisado mudanças com antecedência quando dá?">
+            <div class="ico">☑️</div>
+            <div class="txt"><div class="t">Pergunta 3</div><div class="d">Previsibilidade é tratamento indireto.</div></div>
+            <div class="actions"><button class="act" data-star="1">★</button><button class="act" data-usebtn="1">▶︎</button></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast">OK</div>
+
+<div class="modalBack" id="modalBack">
+  <div class="modal">
+    <h2 id="modalTitle">Histórico</h2>
+    <p id="modalDesc"></p>
+    <div class="hr"></div>
+    <div class="list" id="modalList"></div>
+    <div class="row">
+      <button class="btn" id="modalClose">Fechar</button>
+      <button class="btn danger" id="modalClear">Limpar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== keys (novas) ===== */
+const K = {
+  hist: "pf_hist_v1",
+  fav:  "pf_fav_v1",
+  stats:"pf_stats_v1",
+  acordos:"pf_acordos_v1",
+  used: "pf_used_v1"
+};
+
+const $  = (s)=>document.querySelector(s);
+const $$ = (s)=>Array.from(document.querySelectorAll(s));
+
+function read(k, fallback){
+  try{ return JSON.parse(localStorage.getItem(k)) ?? fallback; }
+  catch(e){ return fallback; }
+}
+function write(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+
+function pad(n){ return String(n).padStart(2,"0"); }
+function fmtDT(ts){
+  const d=new Date(ts);
+  return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+function dayKey(ts){
+  const d=new Date(ts);
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+}
+function escapeHtml(s){
+  return (s||"").replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[m]));
+}
+
+/* ===== toast ===== */
+const toast=$("#toast");
+function showToast(msg){
+  toast.textContent=msg;
+  toast.classList.add("show");
+  clearTimeout(showToast.t);
+  showToast.t=setTimeout(()=>toast.classList.remove("show"), 900);
+}
+async function copyToClipboard(text){
+  try{ await navigator.clipboard.writeText(text); }
+  catch(e){
+    const ta=document.createElement("textarea");
+    ta.value=text; document.body.appendChild(ta);
+    ta.select(); document.execCommand("copy"); ta.remove();
+  }
+}
+
+/* ===== stats ===== */
+function bumpStat(key){
+  const st=read(K.stats,{opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0,resets:0});
+  st[key]=(st[key]||0)+1;
+  write(K.stats, st);
+}
+(function initOpen(){
+  const st=read(K.stats,{opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0,resets:0});
+  st.opens=(st.opens||0)+1;
+  write(K.stats, st);
+})();
+
+/* ===== history ===== */
+function pushHist(type,title,detail){
+  const hist=read(K.hist,[]);
+  hist.unshift({ts:Date.now(), type, title, detail:detail||""});
+  if(hist.length>350) hist.pop();
+  write(K.hist,hist);
+}
+
+/* ===== fav ===== */
+function isFav(tag){ return read(K.fav,[]).includes(tag); }
+function toggleFav(tag){
+  const fav=read(K.fav,[]);
+  const i=fav.indexOf(tag);
+  if(i>=0) fav.splice(i,1); else fav.push(tag);
+  write(K.fav,fav);
+}
+function applyFavUI(){
+  $$("[data-tag]").forEach(el=>{
+    const tag=el.dataset.tag;
+    if(isFav(tag)) el.classList.add("fav"); else el.classList.remove("fav");
+  });
+}
+applyFavUI();
+
+/* ===== used ===== */
+function isUsed(tag){ return read(K.used,[]).includes(tag); }
+function toggleUsed(tag){
+  const arr=read(K.used,[]);
+  const i=arr.indexOf(tag);
+  if(i>=0) arr.splice(i,1); else arr.push(tag);
+  write(K.used,arr);
+}
+function applyUsedUI(){
+  $$("[data-tag]").forEach(el=>{
+    const tag=el.dataset.tag;
+    if(isUsed(tag)) el.classList.add("used"); else el.classList.remove("used");
+  });
+}
+applyUsedUI();
+
+/* ===== tabs ===== */
+$$(".tab").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    $$(".tab").forEach(t=>t.classList.remove("active"));
+    btn.classList.add("active");
+    const id=btn.dataset.tab;
+    $$(".panel").forEach(p=>p.style.display=(p.id===id)?"block":"none");
+    window.scrollTo({top:0, behavior:"smooth"});
+    pushHist("navegação","Aba aberta", id.toUpperCase());
+  });
+});
+
+/* ===== busca ===== */
+$("#busca").addEventListener("input", ()=>{
+  const q=$("#busca").value.trim().toLowerCase();
+  let shown=0;
+  $$("[data-tag]").forEach(el=>{
+    const payload=(
+      (el.querySelector(".t")?.innerText||"")+" "+
+      (el.querySelector(".d")?.innerText||"")+" "+
+      (el.dataset.script||"")+" "+
+      (el.dataset.use||"")
+    ).toLowerCase();
+    const ok=(!q || payload.includes(q));
+    el.style.display=ok?"":"none";
+    if(ok) shown++;
+  });
+  $("#buscaInfo").textContent=q?`${shown} itens encontrados.`:"";
+});
+
+/* ===== star ===== */
+$$("[data-star]").forEach(btn=>{
+  btn.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    const tile=btn.closest("[data-tag]");
+    const tag=tile?.dataset?.tag;
+    if(!tag) return;
+    toggleFav(tag);
+    applyFavUI();
+    const status=isFav(tag)?"★ Favoritado":"★ Removido";
+    showToast(status);
+    pushHist("favorito",status,tag);
+  });
+});
+
+/* ===== copy ===== */
+$$("[data-copybtn]").forEach(btn=>{
+  btn.addEventListener("click", async (e)=>{
+    e.stopPropagation();
+    const tile=btn.closest("[data-tag]");
+    const text=tile?.dataset?.script||"";
+    const title=tile?.querySelector(".t")?.innerText||"Script";
+    if(!text) return;
+    await copyToClipboard(text);
+    bumpStat("copies");
+    showToast("📋 Copiado");
+    pushHist("copiado",title,text);
+  });
+});
+
+/* ===== use ===== */
+$$("[data-usebtn]").forEach(btn=>{
+  btn.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    const tile=btn.closest("[data-tag]");
+    const tag=tile?.dataset?.tag||"";
+    const text=tile?.dataset?.use||"";
+    const title=tile?.querySelector(".t")?.innerText||"Ação";
+    if(!tag) return;
+    toggleUsed(tag);
+    applyUsedUI();
+    bumpStat("uses");
+    showToast(isUsed(tag)?"✅ Marcado como usado":"↩︎ Desmarcado");
+    pushHist("ação",title,text||tag);
+  });
+});
+
+/* ===== plano ===== */
+const planoMap={
+  "1":[
+    "Tom baixo. Uma ideia por frase.",
+    "Valide 1 sentimento. Não corrija conteúdo.",
+    "Pausa curta. Sem debate."
+  ],
+  "2":[
+    "Reduz estímulo (ambiente) antes de falar.",
+    "1 frase de presença + 1 frase de validação.",
+    "Timer 60s (repete 1 frase). Depois limite curto."
+  ],
+  "3":[
+    "Reduz estímulo AGORA (menos gente/ruído).",
+    "Não discuta. Presença + limite curto. Depois conversa.",
+    "Se houver risco: priorize segurança e suporte local."
+  ]
+};
+
+$("#btnPlano").addEventListener("click", async ()=>{
+  const v=$("#intensidade").value;
+  if(v==="0"){ showToast("Selecione intensidade"); return; }
+  bumpStat("plans");
+  const steps=planoMap[v]||[];
+  const txt="Plano agora:\n- "+steps.join("\n- ");
+  await copyToClipboard(txt);
+  showToast("▶︎ Plano copiado");
+  pushHist("plano",`Plano gerado (intensidade ${v})`,steps.join(" | "));
+});
+
+/* ===== timer ===== */
+let timerOn=false, tLeft=60, tInt=null;
+function setTimerLabel(){ $("#timerTxt").textContent=timerOn?`Timer: ${tLeft}s`:"Timer: parado"; }
+setTimerLabel();
+
+$("#btnTimer").addEventListener("click", ()=>{
+  bumpStat("timer");
+  if(!timerOn){
+    timerOn=true; tLeft=60; setTimerLabel();
+    $("#btnTimer").textContent="⏹️ Parar";
+    pushHist("timer","Timer iniciado","60s");
+    tInt=setInterval(()=>{
+      tLeft--; setTimerLabel();
+      if(tLeft<=0){
+        clearInterval(tInt); timerOn=false;
+        $("#btnTimer").textContent="⏱️ Timer 60s";
+        setTimerLabel();
+        showToast("⏱️ 60s: repita 1 frase");
+        pushHist("timer","Timer finalizado","Repetir 1 frase curta");
+      }
+    },1000);
+  }else{
+    clearInterval(tInt); timerOn=false;
+    $("#btnTimer").textContent="⏱️ Timer 60s";
+    setTimerLabel();
+    showToast("Timer parado");
+    pushHist("timer","Timer interrompido",`${tLeft}s restantes`);
+  }
+});
+
+/* ===== nota ===== */
+$("#btnSalvarNota").addEventListener("click", ()=>{
+  const v=($("#notaDepois")?.value||"").trim();
+  if(!v){ showToast("Escreva a nota"); return; }
+  bumpStat("notes");
+  pushHist("nota","Registro pós-crise",v);
+  $("#notaDepois").value="";
+  $("#notaOk").textContent="Nota salva no Histórico.";
+  setTimeout(()=>$("#notaOk").textContent="",1200);
+  showToast("📝 Nota salva");
+});
+
+/* ===== acordos ===== */
+function renderAcordos(){
+  const arr=read(K.acordos,[]);
+  const box=$("#acordosList");
+  if(!box) return;
+  if(!arr.length){
+    box.innerHTML=`<div class="item"><div class="im">Sem acordos ainda.</div></div>`;
+    return;
+  }
+  box.innerHTML=arr.map((a,i)=>`
+    <div class="item">
+      <div class="it">Acordo ${i+1}</div>
+      <div class="im">${escapeHtml(a)}</div>
+    </div>
+  `).join("");
+}
+renderAcordos();
+
+$("#btnAddAcordo").addEventListener("click", ()=>{
+  const v=($("#acordoTxt")?.value||"").trim();
+  if(!v){ showToast("Escreva o acordo"); return; }
+  const arr=read(K.acordos,[]);
+  arr.unshift(v);
+  if(arr.length>80) arr.pop();
+  write(K.acordos,arr);
+  $("#acordoTxt").value="";
+  bumpStat("acordos");
+  pushHist("acordo","Acordo adicionado",v);
+  renderAcordos();
+  showToast("➕ Acordo");
+});
+
+$("#btnLimparAcordos").addEventListener("click", ()=>{
+  write(K.acordos,[]);
+  pushHist("acordo","Acordos limpos","");
+  renderAcordos();
+  showToast("Acordos limpos");
+});
+
+/* ===== modal ===== */
+const modalBack=$("#modalBack");
+const modalTitle=$("#modalTitle");
+const modalDesc=$("#modalDesc");
+const modalList=$("#modalList");
+const modalClose=$("#modalClose");
+const modalClear=$("#modalClear");
+let modalMode="hist";
+
+function openModal(mode){
+  modalMode=mode;
+  modalBack.style.display="flex";
+  renderModal();
+}
+function closeModal(){ modalBack.style.display="none"; }
+
+modalClose.addEventListener("click", closeModal);
+modalBack.addEventListener("click",(e)=>{ if(e.target===modalBack) closeModal(); });
+
+function renderModal(){
+  if(modalMode==="hist"){
+    modalTitle.textContent="Histórico";
+    modalDesc.textContent="Eventos com data e hora (uso local).";
+    const hist=read(K.hist,[]);
+    if(!hist.length){
+      modalList.innerHTML=`<div class="item"><div class="im">Sem histórico ainda.</div></div>`;
+    }else{
+      const groups={};
+      hist.forEach(h=>{
+        const k=dayKey(h.ts);
+        (groups[k] ||= []).push(h);
+      });
+      const keys=Object.keys(groups).sort((a,b)=>b.localeCompare(a));
+      let html="";
+      keys.forEach(k=>{
+        const [Y,M,D]=k.split("-");
+        html+=`<div class="item"><div class="it">${D}/${M}/${Y}</div><div class="im">—</div></div>`;
+        groups[k].forEach(h=>{
+          html+=`
+            <div class="item">
+              <div class="it">${escapeHtml(fmtDT(h.ts))} • ${escapeHtml(h.type)} • ${escapeHtml(h.title)}</div>
+              <div class="im">${escapeHtml(h.detail)}</div>
+            </div>
+          `;
+        });
+      });
+      modalList.innerHTML=html;
+    }
+    modalClear.style.display="";
+    modalClear.textContent="Limpar histórico";
+  }
+
+  if(modalMode==="fav"){
+    modalTitle.textContent="Favoritos";
+    modalDesc.textContent="Itens marcados com ★.";
+    const fav=read(K.fav,[]);
+    if(!fav.length){
+      modalList.innerHTML=`<div class="item"><div class="im">Sem favoritos ainda.</div></div>`;
+    }else{
+      const tiles=$$("[data-tag]").filter(el=>fav.includes(el.dataset.tag));
+      if(!tiles.length){
+        modalList.innerHTML=`<div class="item"><div class="im">Favoritos não encontrados na tela atual.</div></div>`;
+      }else{
+        modalList.innerHTML=tiles.map(el=>{
+          const title=el.querySelector(".t")?.innerText||el.dataset.tag;
+          const txt=el.dataset.script||el.dataset.use||"";
+          return `<div class="item"><div class="it">★ ${escapeHtml(title)}</div><div class="im">${escapeHtml(txt)}</div></div>`;
+        }).join("");
+      }
+    }
+    modalClear.style.display="";
+    modalClear.textContent="Limpar favoritos";
+  }
+
+  if(modalMode==="stats"){
+    modalTitle.textContent="Uso";
+    modalDesc.textContent="Métricas locais (não envia dados).";
+    const st=read(K.stats,{opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0,resets:0});
+    modalList.innerHTML=`
+      <div class="kpi">
+        <div class="box"><div class="n">${st.opens||0}</div><div class="l">aberturas</div></div>
+        <div class="box"><div class="n">${st.copies||0}</div><div class="l">cópias</div></div>
+        <div class="box"><div class="n">${st.uses||0}</div><div class="l">ações usadas</div></div>
+        <div class="box"><div class="n">${st.timer||0}</div><div class="l">timers</div></div>
+        <div class="box"><div class="n">${st.plans||0}</div><div class="l">planos</div></div>
+        <div class="box"><div class="n">${st.notes||0}</div><div class="l">notas</div></div>
+        <div class="box"><div class="n">${st.acordos||0}</div><div class="l">acordos</div></div>
+        <div class="box"><div class="n">${st.resets||0}</div><div class="l">resets</div></div>
+      </div>
+      <div class="item"><div class="im">Se “ações usadas” estiver baixo, estão lendo e não aplicando na hora.</div></div>
+    `;
+    modalClear.style.display="";
+    modalClear.textContent="Zerar métricas";
+  }
+}
+
+modalClear.addEventListener("click", ()=>{
+  if(modalMode==="hist"){ write(K.hist,[]); showToast("Histórico limpo"); }
+  if(modalMode==="fav"){ write(K.fav,[]); applyFavUI(); showToast("Favoritos limpos"); }
+  if(modalMode==="stats"){
+    write(K.stats,{opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0,resets:0});
+    showToast("Métricas zeradas");
+  }
+  renderModal();
+});
+
+$("#btnHistorico").addEventListener("click", ()=>openModal("hist"));
+$("#btnFavoritos").addEventListener("click", ()=>openModal("fav"));
+$("#btnStats").addEventListener("click", ()=>openModal("stats"));
+
+/* ===== export ===== */
+$("#btnExportar").addEventListener("click", ()=>{
+  const hist=read(K.hist,[]);
+  const acordos=read(K.acordos,[]);
+  const fav=read(K.fav,[]);
+  const st=read(K.stats,{opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0,resets:0});
+  const used=read(K.used,[]);
+
+  const lines=[];
+  lines.push("Protocolo Família — Exportação");
+  lines.push("Gerado em: "+fmtDT(Date.now()));
+  lines.push("");
+
+  lines.push("=== Resumo de uso ===");
+  lines.push(`Aberturas: ${st.opens||0}`);
+  lines.push(`Cópias: ${st.copies||0}`);
+  lines.push(`Ações usadas: ${st.uses||0}`);
+  lines.push(`Timers: ${st.timer||0}`);
+  lines.push(`Planos: ${st.plans||0}`);
+  lines.push(`Notas: ${st.notes||0}`);
+  lines.push(`Acordos criados: ${st.acordos||0}`);
+  lines.push("");
+
+  lines.push("=== Favoritos (tags) ===");
+  lines.push(fav.length ? fav.join(", ") : "(sem favoritos)");
+  lines.push("");
+
+  lines.push("=== Ações marcadas como usadas (tags) ===");
+  lines.push(used.length ? used.join(", ") : "(nenhuma marcada)");
+  lines.push("");
+
+  lines.push("=== Acordos ===");
+  if(acordos.length){ acordos.forEach((a,i)=>lines.push(`${i+1}. ${a}`)); }
+  else{ lines.push("(sem acordos)"); }
+  lines.push("");
+
+  lines.push("=== Histórico (data/hora • tipo • título → detalhe) ===");
+  if(hist.length){
+    const groups={};
+    hist.forEach(h=>{
+      const k=dayKey(h.ts);
+      (groups[k] ||= []).push(h);
+    });
+    const keys=Object.keys(groups).sort((a,b)=>b.localeCompare(a));
+    keys.forEach(k=>{
+      const [Y,M,D]=k.split("-");
+      lines.push(`-- ${D}/${M}/${Y} --`);
+      groups[k].forEach(h=>{
+        lines.push(`${fmtDT(h.ts)} • ${h.type} • ${h.title} → ${h.detail}`.trim());
+      });
+      lines.push("");
+    });
+  }else{
+    lines.push("(sem histórico)");
+  }
+
+  const blob=new Blob([lines.join("\n")],{type:"text/plain;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="protocolo_familia_export.txt";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+
+  showToast("⬇︎ Exportado");
+  pushHist("export","Exportação gerada","TXT");
+});
+
+/* ===== modo crise ===== */
+$("#btnEmergencia").addEventListener("click", ()=>{
+  document.querySelector('.tab[data-tab="crise"]').click();
+  window.scrollTo({top:0, behavior:"smooth"});
+  showToast("⚠️ Modo crise");
+  pushHist("modo","Modo crise ativado","");
+});
+
+/* ===== resets ===== */
+$("#btnResetLocal").addEventListener("click", ()=>{
+  localStorage.removeItem(K.hist);
+  localStorage.removeItem(K.fav);
+  localStorage.removeItem(K.stats);
+  localStorage.removeItem(K.acordos);
+  localStorage.removeItem(K.used);
+  bumpStat("resets");
+  showToast("Reset local OK");
+  location.reload();
+});
+
+$("#btnResetSW").addEventListener("click", async ()=>{
+  bumpStat("resets");
+  try{
+    if("serviceWorker" in navigator){
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for(const r of regs){ await r.unregister(); }
+    }
+    if("caches" in window){
+      const keys = await caches.keys();
+      for(const k of keys){ await caches.delete(k); }
+    }
+    showToast("SW removido. Reabra a página.");
+    pushHist("reset","Reset SW/cache","unregister + delete caches");
+    setTimeout(()=>location.reload(), 700);
+  }catch(e){
+    showToast("Falha ao resetar SW");
+  }
+});
+
+/* ===== PWA: registrar SW NOVO ===== */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./familia-sw.js");
+  });
+}
+</script>
+
+</body>
+</html>
