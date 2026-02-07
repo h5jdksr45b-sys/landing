@@ -13,9 +13,8 @@
 
 <style>
   :root{
-    --bg:#0b0b0f; --panel:#13131b; --panel2:#171723;
-    --text:#f4f4f5; --muted:#9aa0a6; --line:rgba(255,255,255,.10);
-    --chip:#1c1c28; --chip2:#232334;
+    --bg:#0b0b0f; --text:#f4f4f5; --muted:#9aa0a6; --line:rgba(255,255,255,.10);
+    --panel:#14141c; --chip:#1b1b24; --chip2:#232334;
     --good:rgba(120,255,180,.10); --warn:rgba(255,180,80,.10); --bad:rgba(255,90,90,.10);
     --r:16px;
   }
@@ -26,13 +25,15 @@
   h1{margin:0 0 6px;font-size:22px;letter-spacing:.2px}
   .sub{margin:0;color:var(--muted);font-size:13.5px;line-height:1.45}
   .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
   .btn{
     border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--text);
-    padding:10px 12px; border-radius:999px; font-weight:800; font-size:12.5px; cursor:pointer;
+    padding:10px 12px; border-radius:999px; font-weight:900; font-size:12.5px; cursor:pointer;
   }
   .btn:active{transform:scale(.99)}
   .btn.primary{background:rgba(255,255,255,.12)}
   .btn.danger{border-color:rgba(255,90,90,.22); background:rgba(255,90,90,.08)}
+
   .tabs{
     display:flex; gap:8px; margin:14px 0 12px;
     position:sticky; top:0; background:rgba(11,11,15,.92); backdrop-filter: blur(10px);
@@ -43,6 +44,7 @@
     padding:10px; border-radius:999px; font-weight:900; font-size:12.5px; cursor:pointer;
   }
   .tab.active{background:rgba(255,255,255,.12)}
+
   .grid{display:grid;grid-template-columns:1fr;gap:10px;padding:8px 4px}
   @media(min-width:920px){.grid{grid-template-columns:1fr 1fr}}
   .card{
@@ -53,34 +55,11 @@
   }
   .card h3{margin:0 0 10px;font-size:14px}
   .hint{margin:0 0 10px;color:var(--muted);font-size:12px;line-height:1.4}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{
-    flex:1 1 220px;
-    border:1px solid rgba(255,255,255,.14);
-    background:var(--chip);
-    border-radius:14px;
-    padding:10px 10px;
-    cursor:pointer;
-    font-size:13.2px;
-    line-height:1.25;
-    position:relative;
-  }
-  .chip small{display:block;color:var(--muted);font-size:11px;margin-top:6px}
-  .chip:active{transform:scale(.99)}
-  .chip.fav{border-color:rgba(255,255,255,.34)}
-  .chip .star{
-    position:absolute;right:10px;top:10px;
-    border:1px solid rgba(255,255,255,.14);
-    background:rgba(255,255,255,.06);
-    border-radius:999px;
-    padding:3px 8px;
-    font-size:11px;
-    cursor:pointer;
-  }
   .full{grid-column:1/-1}
   .good{background:var(--good)}
   .warn{background:var(--warn)}
   .bad{background:var(--bad)}
+
   .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
   input[type="search"], select{
     width:100%;
@@ -93,10 +72,52 @@
     font-size:13px;
   }
   .mini{color:var(--muted);font-size:12px}
-  .kpi{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-  .kpi .box{flex:1 1 160px;border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(255,255,255,.03)}
-  .kpi .n{font-size:18px;font-weight:900}
-  .kpi .l{color:var(--muted);font-size:12px}
+
+  /* Item interativo */
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .tile{
+    flex:1 1 240px;
+    border:1px solid rgba(255,255,255,.14);
+    background:var(--chip);
+    border-radius:14px;
+    padding:10px 10px;
+    position:relative;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .tile:active{transform:scale(.99)}
+  .ico{
+    width:32px;height:32px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    flex:0 0 32px;
+    font-size:16px;
+    line-height:1;
+    user-select:none;
+  }
+  .tile .txt{flex:1}
+  .tile .t{font-weight:900;font-size:13.2px;line-height:1.25}
+  .tile .d{color:var(--muted);font-size:12px;line-height:1.35;margin-top:4px}
+  .actions{display:flex;gap:6px;flex:0 0 auto}
+  .act{
+    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.06);
+    color:var(--text);
+    border-radius:12px;
+    padding:7px 9px;
+    font-weight:900;
+    font-size:12px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .act:active{transform:scale(.99)}
+  .act.copy{background:rgba(255,255,255,.10)}
+  .act.star{padding:7px 10px}
+
+  .tile.fav{border-color:rgba(255,255,255,.35)}
+
   .toast{
     position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
     background:rgba(0,0,0,.78); color:white; padding:10px 12px;
@@ -104,18 +125,22 @@
     font-size:13px; opacity:0; pointer-events:none; transition:.18s;
   }
   .toast.show{opacity:1}
+
   /* Modal */
   .modalBack{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:999}
-  .modal{width:min(720px,92vw);background:#0f0f16;border:1px solid var(--line);border-radius:18px;padding:14px}
+  .modal{width:min(760px,92vw);background:#0f0f16;border:1px solid var(--line);border-radius:18px;padding:14px}
   .modal h2{margin:0 0 6px;font-size:16px}
   .modal p{margin:0 0 12px;color:var(--muted);font-size:12.5px;line-height:1.45}
-  .modal .row{margin-top:0}
   .hr{height:1px;background:var(--line);margin:12px 0}
-  .list{max-height:46vh;overflow:auto;border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(255,255,255,.03)}
+  .list{max-height:52vh;overflow:auto;border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(255,255,255,.03)}
   .item{padding:10px;border-bottom:1px solid rgba(255,255,255,.08)}
   .item:last-child{border-bottom:none}
   .item .t{font-weight:900;font-size:12.5px}
   .item .m{color:var(--muted);font-size:12px;margin-top:4px;line-height:1.35}
+  .kpi{display:flex;gap:10px;flex-wrap:wrap}
+  .kpi .box{flex:1 1 160px;border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(255,255,255,.03)}
+  .kpi .n{font-size:18px;font-weight:900}
+  .kpi .l{color:var(--muted);font-size:12px}
 </style>
 </head>
 
@@ -123,14 +148,14 @@
 <div class="wrap">
   <header>
     <h1>Guia de Manejo (Família)</h1>
-    <p class="sub">Objetivo: reduzir escalada rápido e preservar vínculo. Primeiro regula. Depois conversa.</p>
+    <p class="sub">Primeiro regula. Depois conversa. O foco inicial é reduzir escalada e preservar vínculo.</p>
 
     <div class="row">
-      <button class="btn danger" id="btnEmergencia">MODO CRISE (tela cheia)</button>
-      <button class="btn primary" id="btnHistorico">Histórico</button>
-      <button class="btn" id="btnFavoritos">Favoritos</button>
-      <button class="btn" id="btnExportar">Exportar (TXT)</button>
-      <button class="btn" id="btnStats">Uso</button>
+      <button class="btn danger" id="btnEmergencia">⚠️ MODO CRISE</button>
+      <button class="btn primary" id="btnHistorico">🕒 Histórico</button>
+      <button class="btn" id="btnFavoritos">★ Favoritos</button>
+      <button class="btn" id="btnExportar">⬇︎ Exportar</button>
+      <button class="btn" id="btnStats">📊 Uso</button>
     </div>
   </header>
 
@@ -145,109 +170,186 @@
     <div class="grid">
 
       <div class="card full good">
-        <h3>Controle rápido (sem papo) • 30–90s</h3>
-        <p class="hint">Tom baixo, frases curtas, sem ironia/indireta. Não discuta o “fato” com emoção alta.</p>
+        <h3>Controle rápido • 30–90s</h3>
+        <p class="hint">Sem debate. Tom baixo, frases curtas, sem ironia. Primeiro regula o corpo, depois discute o conteúdo.</p>
 
         <div class="bar">
           <div style="flex:1 1 260px">
             <select id="intensidade">
               <option value="0">Intensidade da crise: selecione</option>
-              <option value="1">1–3 (leve): irritação / tensão</option>
+              <option value="1">1–3 (leve): tensão / irritação</option>
               <option value="2">4–6 (média): choro / raiva / impulso</option>
-              <option value="3">7–10 (alta): escalada / risco / desorganização</option>
+              <option value="3">7–10 (alta): escalada / risco</option>
             </select>
           </div>
-          <button class="btn primary" id="btnPlano">Gerar “o que fazer agora”</button>
-          <button class="btn" id="btnTimer">Iniciar Timer 60s</button>
+          <button class="btn primary" id="btnPlano">▶︎ Gerar plano</button>
+          <button class="btn" id="btnTimer">⏱️ Timer 60s</button>
           <div class="mini" id="timerTxt">Timer: parado</div>
         </div>
 
         <div class="hr"></div>
 
-        <div class="chips" id="planoAuto">
-          <div class="chip" data-copy="Tom baixo. Frases curtas. Uma ideia por frase. Sem ironia." data-tag="check">
-            Checklist (voz e forma)
-            <small>toque para copiar</small>
-            <span class="star" data-star="1">★</span>
+        <div class="chips">
+          <!-- AÇÕES (não são scripts, então não têm “copiar” como foco) -->
+          <div class="tile" data-kind="action" data-tag="check" data-use="Tom baixo. Frases curtas. Uma ideia por frase. Sem ironia.">
+            <div class="ico">✅</div>
+            <div class="txt">
+              <div class="t">Checklist (voz e forma)</div>
+              <div class="d">Use agora. Não precisa copiar.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1" title="Favoritar">★</button>
+              <button class="act" data-usebtn="1" title="Marcar como usado">▶︎</button>
+            </div>
           </div>
-          <div class="chip" data-copy="Agora não é hora de discutir. Primeiro a gente acalma. Depois conversa." data-tag="mantra">
-            Mantra (sequência correta)
-            <small>toque para copiar</small>
-            <span class="star" data-star="1">★</span>
+
+          <div class="tile" data-kind="action" data-tag="mantra" data-use="Agora não é hora de discutir. Primeiro a gente acalma. Depois conversa.">
+            <div class="ico">🧠</div>
+            <div class="txt">
+              <div class="t">Mantra (sequência correta)</div>
+              <div class="d">Repita 1 frase, sem explicar.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
           </div>
-          <div class="chip" data-copy="Reduz estímulo: menos barulho, menos gente, menos argumento." data-tag="ambiente">
-            Ambiente (redução de estímulo)
-            <small>toque para copiar</small>
-            <span class="star" data-star="1">★</span>
+
+          <div class="tile" data-kind="action" data-tag="ambiente" data-use="Reduz estímulo: menos barulho, menos gente, menos argumento.">
+            <div class="ico">🔇</div>
+            <div class="txt">
+              <div class="t">Ambiente (reduzir estímulo)</div>
+              <div class="d">Ajuste o cenário antes de falar.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="card">
-        <h3>Frases que organizam (use 1 só)</h3>
-        <p class="hint">Escolha UMA frase. Repetir muda mais do que explicar.</p>
-        <div class="chips" id="frasesCrise">
-          <div class="chip" data-copy="Eu tô aqui. Vamos respirar um pouco." data-tag="presenca">
-            “Eu tô aqui.”
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+        <h3>Scripts (aqui sim faz sentido copiar)</h3>
+        <p class="hint">Escolha 1. Copie se quiser mandar por mensagem. Se estiver presente, só leia e fale.</p>
+
+        <div class="chips">
+          <div class="tile" data-kind="script" data-tag="presenca" data-script="Eu tô aqui. Vamos respirar um pouco.">
+            <div class="ico">🗣️</div>
+            <div class="txt">
+              <div class="t">“Eu tô aqui.”</div>
+              <div class="d">Presença sem pressão.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1" title="Copiar">📋</button>
+            </div>
           </div>
-          <div class="chip" data-copy="Eu vejo que tá doendo muito agora." data-tag="validacao">
-            “Eu vejo que dói.”
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+
+          <div class="tile" data-kind="script" data-tag="validacao" data-script="Eu vejo que tá doendo muito agora.">
+            <div class="ico">🫀</div>
+            <div class="txt">
+              <div class="t">“Eu vejo que dói.”</div>
+              <div class="d">Valida sentimento sem validar comportamento.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
           </div>
-          <div class="chip" data-copy="Eu não vou discutir isso agora. Eu vou ficar do seu lado e a gente conversa depois." data-tag="sequencia">
-            “Depois a gente conversa.”
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+
+          <div class="tile" data-kind="script" data-tag="sequencia" data-script="Agora não é hora de discutir. Eu fico do seu lado e a gente conversa depois.">
+            <div class="ico">🧭</div>
+            <div class="txt">
+              <div class="t">“Depois a gente conversa.”</div>
+              <div class="d">Organiza a sequência sem brigar.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="card bad">
-        <h3>O que NÃO fazer (evita escalada)</h3>
-        <p class="hint">Proibidos clássicos: ironia, indireta, sermão, “calma”, “você tá exagerando”, “para com isso”.</p>
+        <h3>Proibidos (não copie — só lembre)</h3>
+        <p class="hint">Ironia/indireta/sermão = gasolina. Aqui é “ação”, não “texto”.</p>
+
         <div class="chips">
-          <div class="chip" data-copy="Sem ironia. Sem indireta. Sem sarcasmo. Sem humilhação." data-tag="nao1">
-            Regra anti-incêndio
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+          <div class="tile" data-kind="action" data-tag="nao1" data-use="Sem ironia. Sem indireta. Sem sarcasmo. Sem humilhação.">
+            <div class="ico">⛔</div>
+            <div class="txt">
+              <div class="t">Regra anti-incêndio</div>
+              <div class="d">Se você tá irritado, fale menos.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
           </div>
-          <div class="chip" data-copy="Não é hora de convencer. É hora de reduzir ameaça e estímulo." data-tag="nao2">
-            Foco certo
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+
+          <div class="tile" data-kind="action" data-tag="nao2" data-use="Não é hora de convencer. É hora de reduzir ameaça e estímulo.">
+            <div class="ico">🧯</div>
+            <div class="txt">
+              <div class="t">Foco certo</div>
+              <div class="d">Convencer agora piora. Regular melhora.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="card full warn">
         <h3>Se a pessoa se afastar</h3>
-        <p class="hint">Afastar pode ser tentativa de reduzir sobrecarga. Perseguir costuma piorar.</p>
+        <p class="hint">Perseguir costuma piorar. Use 1 script curto.</p>
+
         <div class="chips">
-          <div class="chip" data-copy="Você pode ir. Só me avisa quando chegar." data-tag="af1">
-            “Pode ir. Só avisa quando chegar.”
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+          <div class="tile" data-kind="script" data-tag="af1" data-script="Você pode ir. Só me avisa quando chegar.">
+            <div class="ico">🚪</div>
+            <div class="txt">
+              <div class="t">“Pode ir. Só avisa quando chegar.”</div>
+              <div class="d">Espaço com comunicação mínima.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
           </div>
-          <div class="chip" data-copy="Eu não vou te perseguir. Eu continuo aqui." data-tag="af2">
-            “Eu não vou te perseguir.”
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+
+          <div class="tile" data-kind="script" data-tag="af2" data-script="Eu não vou te perseguir. Eu continuo aqui.">
+            <div class="ico">🧱</div>
+            <div class="txt">
+              <div class="t">“Eu não vou te perseguir.”</div>
+              <div class="d">Dá espaço sem abandono.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
           </div>
-          <div class="chip" data-copy="Afastamento não é abandono quando existe comunicação mínima." data-tag="af3">
-            Reenquadramento
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+
+          <div class="tile" data-kind="action" data-tag="af3" data-use="Afastamento não é abandono quando existe comunicação mínima.">
+            <div class="ico">🔁</div>
+            <div class="txt">
+              <div class="t">Reenquadramento</div>
+              <div class="d">Lembrete mental pra não escalar.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="card full">
-        <h3>Busca rápida (frases)</h3>
-        <p class="hint">Digite “grito”, “afastar”, “validar”, “limite” etc. Filtra tudo na tela.</p>
-        <input id="busca" type="search" placeholder="Buscar frases...">
+        <h3>Busca rápida</h3>
+        <p class="hint">Digite “grito”, “afastar”, “validar”, “limite” etc. Filtra os cards.</p>
+        <input id="busca" type="search" placeholder="Buscar...">
       </div>
 
     </div>
@@ -256,68 +358,85 @@
   <!-- DEPOIS -->
   <section class="panel" id="depois" style="display:none">
     <div class="grid">
+
       <div class="card full good">
-        <h3>Reconstrução (curta, sem reabrir tudo)</h3>
-        <p class="hint">Depois que acalma: validar → nomear → ajustar. Sem tribunal.</p>
+        <h3>Depois que acalma</h3>
+        <p class="hint">Validar → nomear → ajustar. Sem tribunal.</p>
+
         <div class="chips">
-          <div class="chip" data-copy="Agora que acalmou, acho que a gente consegue entender melhor o que aconteceu." data-tag="dp1">
-            Abertura segura
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+          <div class="tile" data-kind="script" data-tag="dp1" data-script="Agora que acalmou, acho que a gente consegue entender melhor o que aconteceu.">
+            <div class="ico">🧩</div>
+            <div class="txt">
+              <div class="t">Abertura segura</div>
+              <div class="d">Começa sem acusação.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
           </div>
-          <div class="chip" data-copy="Eu reconheço que doeu. Eu não quero te atacar." data-tag="dp2">
-            Reconhecer dor (sem acusar)
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+
+          <div class="tile" data-kind="script" data-tag="dp2" data-script="Eu reconheço que doeu. Eu não quero te atacar.">
+            <div class="ico">🫀</div>
+            <div class="txt">
+              <div class="t">Reconhecer dor</div>
+              <div class="d">Sem entrar em defesa.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
           </div>
-          <div class="chip" data-copy="O que piorou foi X. Da próxima vez, vamos fazer Y." data-tag="dp3">
-            Ajuste prático (X → Y)
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+
+          <div class="tile" data-kind="script" data-tag="dp3" data-script="O que piorou foi X. Da próxima vez, vamos fazer Y.">
+            <div class="ico">🧭</div>
+            <div class="txt">
+              <div class="t">Ajuste prático (X → Y)</div>
+              <div class="d">Curto e executável.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="card warn">
         <h3>Limite sem abandono</h3>
-        <p class="hint">Limite firme + vínculo explícito. Sem silêncio punitivo.</p>
         <div class="chips">
-          <div class="chip" data-copy="Eu me importo com você. E eu preciso que a gente faça isso sem agressão." data-tag="lim1">
-            Limite + vínculo
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+          <div class="tile" data-kind="script" data-tag="lim1" data-script="Eu me importo com você. E eu preciso que a gente faça isso sem agressão.">
+            <div class="ico">🧱</div>
+            <div class="txt">
+              <div class="t">Limite + vínculo</div>
+              <div class="d">Firme sem humilhar.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
           </div>
-          <div class="chip" data-copy="Eu não vou te abandonar. Mas eu também não vou aceitar grito/ameaça." data-tag="lim2">
-            Firme e claro
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
-          </div>
-        </div>
-      </div>
 
-      <div class="card">
-        <h3>Mini-roteiro de 3 passos</h3>
-        <p class="hint">Use como “checklist” para não cair em debate infinito.</p>
-        <div class="chips">
-          <div class="chip" data-copy="1) Eu entendo que doeu. 2) O que aconteceu foi X. 3) Próxima vez: Y." data-tag="rt1">
-            Script 3 passos
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
-          </div>
-          <div class="chip" data-copy="Eu não quero ganhar discussão. Eu quero reduzir dano e proteger a relação." data-tag="rt2">
-            Meta correta
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+          <div class="tile" data-kind="script" data-tag="lim2" data-script="Eu não vou te abandonar. Mas eu também não vou aceitar grito/ameaça.">
+            <div class="ico">🛡️</div>
+            <div class="txt">
+              <div class="t">Firme e claro</div>
+              <div class="d">Protege a relação.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="card full">
-        <h3>Nota rápida (para lembrar depois)</h3>
-        <p class="hint">Registre em 1 linha o que disparou e o que ajudou (isso vira prevenção).</p>
+        <h3>Registro rápido (vira prevenção)</h3>
+        <p class="hint">1 linha: gatilho + o que ajudou.</p>
         <div class="bar">
-          <input id="notaDepois" type="search" placeholder="Ex.: 'gatilho: atraso; ajudou: reduzir estímulo + frase X'">
-          <button class="btn primary" id="btnSalvarNota">Salvar nota</button>
+          <input id="notaDepois" type="search" placeholder="Ex.: gatilho: atraso; ajudou: reduzir estímulo + frase X">
+          <button class="btn primary" id="btnSalvarNota">Salvar</button>
         </div>
         <div class="mini" id="notaOk"></div>
       </div>
@@ -331,70 +450,87 @@
 
       <div class="card full good">
         <h3>Prevenção (regras do dia a dia)</h3>
-        <p class="hint">Ambiente previsível + comunicação clara = menos ativação.</p>
         <div class="chips">
-          <div class="chip" data-copy="Comunicação clara. Sem indireta. Sem sarcasmo." data-tag="pv1">
-            Regra 1
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+          <div class="tile" data-kind="action" data-tag="pv1" data-use="Comunicação clara. Sem indireta. Sem sarcasmo.">
+            <div class="ico">🧠</div>
+            <div class="txt">
+              <div class="t">Regra 1</div>
+              <div class="d">Clareza reduz insegurança.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
           </div>
-          <div class="chip" data-copy="Vou avisar mudanças com antecedência sempre que possível." data-tag="pv2">
-            Regra 2
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
-          </div>
-          <div class="chip" data-copy="Eu valido o sentimento antes de discordar." data-tag="pv3">
-            Regra 3
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
-          </div>
-        </div>
-      </div>
 
-      <div class="card warn">
-        <h3>Autoproteção de quem convive</h3>
-        <p class="hint">Ajudar não é se anular. Você precisa de chão.</p>
-        <div class="chips">
-          <div class="chip" data-copy="Ajudar não significa me anular. Estar disponível não é tolerar qualquer coisa." data-tag="ap1">
-            Lembrete
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+          <div class="tile" data-kind="action" data-tag="pv2" data-use="Avisar mudanças com antecedência reduz ativação.">
+            <div class="ico">📅</div>
+            <div class="txt">
+              <div class="t">Regra 2</div>
+              <div class="d">Previsibilidade = menos crise.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
           </div>
-          <div class="chip" data-copy="Eu vou buscar apoio antes de esgotar." data-tag="ap2">
-            Proteção
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
-          </div>
-        </div>
-      </div>
 
-      <div class="card bad">
-        <h3>Quando buscar ajuda</h3>
-        <p class="hint">Crise frequente/intensa, risco, agressividade, exaustão do cuidador, ciclo repetido.</p>
-        <div class="chips">
-          <div class="chip" data-copy="Se as crises estão aumentando ou há risco, a gente precisa de ajuda profissional." data-tag="aj1">
-            Frase prática
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
-          </div>
-          <div class="chip" data-copy="Pedir ajuda a tempo evita danos maiores depois." data-tag="aj2">
-            Fechamento
-            <small>copiar</small>
-            <span class="star" data-star="1">★</span>
+          <div class="tile" data-kind="action" data-tag="pv3" data-use="Validar o sentimento antes de discordar protege o vínculo.">
+            <div class="ico">🫀</div>
+            <div class="txt">
+              <div class="t">Regra 3</div>
+              <div class="d">Validação vem antes do limite.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act" data-usebtn="1">▶︎</button>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="card full">
-        <h3>Pequenos acordos (anote e revise)</h3>
-        <p class="hint">Acordo bom é curto e executável.</p>
+        <h3>Acordos (curtos e executáveis)</h3>
+        <p class="hint">Adicione e revise. Isso vira “regras do jogo”.</p>
         <div class="bar">
-          <input id="acordoTxt" type="search" placeholder="Ex.: 'Se subir o tom → pausa de 10 min; depois 1 frase de validação'">
+          <input id="acordoTxt" type="search" placeholder="Ex.: Se subir o tom → pausa de 10 min; depois 1 frase de validação">
           <button class="btn primary" id="btnAddAcordo">Adicionar</button>
         </div>
+
         <div class="list" id="acordosList" style="margin-top:10px"></div>
+
         <div class="row">
           <button class="btn" id="btnLimparAcordos">Limpar acordos</button>
+        </div>
+      </div>
+
+      <div class="card bad full">
+        <h3>Quando buscar ajuda</h3>
+        <p class="hint">Crise frequente/intensa, risco, agressividade, exaustão do cuidador, ciclo repetido.</p>
+        <div class="chips">
+          <div class="tile" data-kind="script" data-tag="aj1" data-script="Se as crises estão aumentando ou há risco, a gente precisa de ajuda profissional.">
+            <div class="ico">📞</div>
+            <div class="txt">
+              <div class="t">Frase prática</div>
+              <div class="d">Sem atacar, só encaminhar.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
+
+          <div class="tile" data-kind="script" data-tag="aj2" data-script="Pedir ajuda a tempo evita danos maiores depois.">
+            <div class="ico">🧯</div>
+            <div class="txt">
+              <div class="t">Fechamento</div>
+              <div class="d">Curto e direto.</div>
+            </div>
+            <div class="actions">
+              <button class="act star" data-star="1">★</button>
+              <button class="act copy" data-copybtn="1">📋</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -402,11 +538,11 @@
   </section>
 </div>
 
-<div class="toast" id="toast">Copiado ✓</div>
+<div class="toast" id="toast">OK</div>
 
 <!-- MODAIS -->
 <div class="modalBack" id="modalBack">
-  <div class="modal" id="modal">
+  <div class="modal">
     <h2 id="modalTitle">Histórico</h2>
     <p id="modalDesc"></p>
     <div class="hr"></div>
@@ -419,22 +555,39 @@
 </div>
 
 <script>
-/* ====== storage keys ====== */
+/* ===== storage ===== */
 const K = {
-  hist: "gm_hist_v1",
-  fav: "gm_fav_v1",
-  stats:"gm_stats_v1",
-  acordos:"gm_acordos_v1",
+  hist: "gm_hist_v2",
+  fav:  "gm_fav_v2",
+  stats:"gm_stats_v2",
+  acordos:"gm_acordos_v2",
 };
 
-/* ====== helpers ====== */
-const $ = (s)=>document.querySelector(s);
+const $  = (s)=>document.querySelector(s);
 const $$ = (s)=>Array.from(document.querySelectorAll(s));
-const now = ()=>new Date().toISOString();
-const read = (k, fallback)=>{ try{ return JSON.parse(localStorage.getItem(k)) ?? fallback; }catch(e){ return fallback; } };
-const write = (k, v)=>localStorage.setItem(k, JSON.stringify(v));
+
+function read(k, fallback){
+  try{ return JSON.parse(localStorage.getItem(k)) ?? fallback; }
+  catch(e){ return fallback; }
+}
+function write(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+
+function pad(n){ return String(n).padStart(2,"0"); }
+function fmtDT(ts){
+  const d = new Date(ts);
+  return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+function todayKey(ts){
+  const d=new Date(ts);
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+}
+function escapeHtml(s){
+  return (s||"").replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[m]));
+}
+
+/* ===== toast ===== */
 const toast = $("#toast");
-function showToast(msg="Copiado ✓"){
+function showToast(msg){
   toast.textContent = msg;
   toast.classList.add("show");
   clearTimeout(showToast.t);
@@ -448,7 +601,44 @@ async function copyToClipboard(text){
   }
 }
 
-/* ====== tabs ====== */
+/* ===== stats ===== */
+function bumpStat(key){
+  const st = read(K.stats, {opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0});
+  st[key] = (st[key]||0)+1;
+  write(K.stats, st);
+}
+(function initOpen(){
+  const st = read(K.stats, {opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0});
+  st.opens = (st.opens||0)+1;
+  write(K.stats, st);
+})();
+
+/* ===== history (HUMANO, COM DATA/HORA/EVENTO) ===== */
+function pushHist(type, title, detail){
+  const hist = read(K.hist, []);
+  const ev = { ts: Date.now(), type, title, detail: detail || "" };
+  hist.unshift(ev);
+  if(hist.length>200) hist.pop();
+  write(K.hist, hist);
+}
+
+/* ===== favorites ===== */
+function isFav(tag){ return read(K.fav, []).includes(tag); }
+function toggleFav(tag){
+  const fav = read(K.fav, []);
+  const i=fav.indexOf(tag);
+  if(i>=0) fav.splice(i,1); else fav.push(tag);
+  write(K.fav, fav);
+}
+function applyFavUI(){
+  $$("[data-tag]").forEach(el=>{
+    const tag=el.dataset.tag;
+    if(isFav(tag)) el.classList.add("fav"); else el.classList.remove("fav");
+  });
+}
+applyFavUI();
+
+/* ===== tabs ===== */
 $$(".tab").forEach(btn=>{
   btn.addEventListener("click", ()=>{
     $$(".tab").forEach(t=>t.classList.remove("active"));
@@ -456,84 +646,60 @@ $$(".tab").forEach(btn=>{
     const id = btn.dataset.tab;
     $$(".panel").forEach(p=>p.style.display = (p.id===id) ? "block" : "none");
     window.scrollTo({top:0, behavior:"smooth"});
+    pushHist("navegação", "Aba aberta", id.toUpperCase());
   });
 });
 
-/* ====== stats ====== */
-function bumpStat(key){
-  const st = read(K.stats, {opens:0,copies:0,timer:0,plans:0,notes:0,acordos:0});
-  st[key] = (st[key]||0)+1;
-  write(K.stats, st);
-}
-(function initOpen(){
-  const st = read(K.stats, {opens:0,copies:0,timer:0,plans:0,notes:0,acordos:0});
-  st.opens = (st.opens||0)+1;
-  write(K.stats, st);
-})();
-
-/* ====== favorites ====== */
-function isFav(tag){
-  const fav = read(K.fav, []);
-  return fav.includes(tag);
-}
-function toggleFav(tag){
-  const fav = read(K.fav, []);
-  const i = fav.indexOf(tag);
-  if(i>=0) fav.splice(i,1); else fav.push(tag);
-  write(K.fav, fav);
-}
-function applyFavUI(){
-  $$("[data-tag]").forEach(el=>{
-    const tag = el.dataset.tag;
-    if(isFav(tag)) el.classList.add("fav"); else el.classList.remove("fav");
-  });
-}
-applyFavUI();
-
-/* ====== history ====== */
-function pushHist(type, text){
-  const hist = read(K.hist, []);
-  hist.unshift({t: now(), type, text});
-  if(hist.length>120) hist.pop();
-  write(K.hist, hist);
-}
-
-/* ====== click chips ====== */
-$$("[data-copy]").forEach(el=>{
-  el.addEventListener("click", async (e)=>{
-    // se clicou na estrela, não copia (deixa pro handler da estrela)
-    if(e.target && e.target.dataset && e.target.dataset.star) return;
-    const txt = el.getAttribute("data-copy");
-    await copyToClipboard(txt);
-    bumpStat("copies");
-    pushHist("copiado", txt);
-    showToast("Copiado ✓");
-  });
-});
-
-/* ====== star buttons ====== */
-$$(".star").forEach(st=>{
-  st.addEventListener("click", (e)=>{
-    e.stopPropagation();
-    const parent = st.closest("[data-tag]");
-    if(!parent) return;
-    const tag = parent.dataset.tag;
-    toggleFav(tag);
-    applyFavUI();
-    showToast(isFav(tag) ? "Favoritado ★" : "Removido ★");
-  });
-});
-
-/* ====== search filter ====== */
+/* ===== search filter ===== */
 $("#busca").addEventListener("input", ()=>{
   const q = $("#busca").value.trim().toLowerCase();
   $$("[data-tag]").forEach(el=>{
-    const txt = (el.innerText + " " + (el.getAttribute("data-copy")||"")).toLowerCase();
-    el.style.display = (!q || txt.includes(q)) ? "" : "none";
+    const payload = (el.innerText + " " + (el.dataset.script||"") + " " + (el.dataset.use||"")).toLowerCase();
+    el.style.display = (!q || payload.includes(q)) ? "" : "none";
   });
 });
 
-/* ====== intensity plan ====== */
+/* ===== actions: star / copy / use ===== */
+$$("[data-star]").forEach(btn=>{
+  btn.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    const tile = btn.closest("[data-tag]");
+    const tag  = tile?.dataset?.tag;
+    if(!tag) return;
+    toggleFav(tag);
+    applyFavUI();
+    showToast(isFav(tag) ? "★ Favoritado" : "★ Removido");
+    pushHist("favorito", isFav(tag) ? "Adicionado" : "Removido", tag);
+  });
+});
+
+$$("[data-copybtn]").forEach(btn=>{
+  btn.addEventListener("click", async (e)=>{
+    e.stopPropagation();
+    const tile = btn.closest("[data-tag]");
+    const text = tile?.dataset?.script || "";
+    if(!text) return;
+    await copyToClipboard(text);
+    bumpStat("copies");
+    showToast("📋 Copiado");
+    pushHist("copiado", "Script copiado", text);
+  });
+});
+
+$$("[data-usebtn]").forEach(btn=>{
+  btn.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    const tile = btn.closest("[data-tag]");
+    const text = tile?.dataset?.use || "";
+    const title = tile?.querySelector(".t")?.innerText || "Ação";
+    if(!text) return;
+    bumpStat("uses");
+    showToast("✅ Usado");
+    pushHist("ação", title, text);
+  });
+});
+
+/* ===== intensity plan ===== */
 const planoMap = {
   "1": [
     "Tom baixo. Uma frase por vez.",
@@ -554,65 +720,68 @@ const planoMap = {
 
 $("#btnPlano").addEventListener("click", async ()=>{
   const v = $("#intensidade").value;
-  bumpStat("plans");
   if(v==="0"){ showToast("Selecione intensidade"); return; }
+  bumpStat("plans");
+
   const steps = planoMap[v] || [];
   const txt = "Plano agora:\n- " + steps.join("\n- ");
-  await copyToClipboard(txt);
-  pushHist("plano", txt);
-  showToast("Plano copiado ✓");
+
+  await copyToClipboard(txt); // aqui faz sentido copiar, porque é um “resumo operável”
+  showToast("▶︎ Plano copiado");
+  pushHist("plano", `Plano gerado (intensidade ${v})`, steps.join(" | "));
 });
 
-/* ====== timer 60s ====== */
+/* ===== timer ===== */
 let timerOn=false, tLeft=60, tInt=null;
-function setTimerLabel(){
-  $("#timerTxt").textContent = timerOn ? `Timer: ${tLeft}s` : "Timer: parado";
-}
+function setTimerLabel(){ $("#timerTxt").textContent = timerOn ? `Timer: ${tLeft}s` : "Timer: parado"; }
+
 $("#btnTimer").addEventListener("click", ()=>{
   bumpStat("timer");
+
   if(!timerOn){
     timerOn=true; tLeft=60; setTimerLabel();
-    $("#btnTimer").textContent="Parar Timer";
+    $("#btnTimer").textContent="⏹️ Parar";
+    pushHist("timer", "Timer iniciado", "60s");
+
     tInt=setInterval(()=>{
       tLeft--;
       setTimerLabel();
       if(tLeft<=0){
         clearInterval(tInt); timerOn=false;
-        $("#btnTimer").textContent="Iniciar Timer 60s";
+        $("#btnTimer").textContent="⏱️ Timer 60s";
         setTimerLabel();
-        showToast("60s ✓ repita 1 frase");
+        showToast("⏱️ 60s: repita 1 frase");
+        pushHist("timer", "Timer finalizado", "Repetir 1 frase curta");
       }
     },1000);
   }else{
     clearInterval(tInt); timerOn=false;
-    $("#btnTimer").textContent="Iniciar Timer 60s";
+    $("#btnTimer").textContent="⏱️ Timer 60s";
     setTimerLabel();
     showToast("Timer parado");
+    pushHist("timer", "Timer interrompido", `${tLeft}s restantes`);
   }
 });
 
-/* ====== notes (depois) ====== */
+/* ===== notes ===== */
 $("#btnSalvarNota").addEventListener("click", ()=>{
   const v = $("#notaDepois").value.trim();
   if(!v){ showToast("Escreva a nota"); return; }
   bumpStat("notes");
-  pushHist("nota", v);
+  pushHist("nota", "Registro pós-crise", v);
   $("#notaDepois").value="";
   $("#notaOk").textContent="Nota salva no Histórico.";
   setTimeout(()=>$("#notaOk").textContent="",1200);
-  showToast("Nota salva ✓");
+  showToast("📝 Nota salva");
 });
 
-/* ====== acordos ====== */
+/* ===== acordos ===== */
 function renderAcordos(){
   const arr = read(K.acordos, []);
   const box = $("#acordosList");
   box.innerHTML = arr.length
     ? arr.map((a,i)=>`<div class="item"><div class="t">Acordo ${i+1}</div><div class="m">${escapeHtml(a)}</div></div>`).join("")
     : `<div class="item"><div class="m">Sem acordos ainda.</div></div>`;
-}
-function escapeHtml(s){
-  return s.replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[m]));
 }
 renderAcordos();
 
@@ -621,48 +790,71 @@ $("#btnAddAcordo").addEventListener("click", ()=>{
   if(!v){ showToast("Escreva o acordo"); return; }
   const arr = read(K.acordos, []);
   arr.unshift(v);
-  if(arr.length>30) arr.pop();
+  if(arr.length>40) arr.pop();
   write(K.acordos, arr);
   $("#acordoTxt").value="";
   bumpStat("acordos");
-  pushHist("acordo", v);
+  pushHist("acordo", "Acordo adicionado", v);
   renderAcordos();
-  showToast("Acordo adicionado ✓");
+  showToast("➕ Acordo");
 });
+
 $("#btnLimparAcordos").addEventListener("click", ()=>{
   write(K.acordos, []);
+  pushHist("acordo", "Acordos limpos", "");
   renderAcordos();
   showToast("Acordos limpos");
 });
 
-/* ====== modal system ====== */
+/* ===== modal ===== */
 const modalBack = $("#modalBack");
 const modalTitle = $("#modalTitle");
-const modalDesc = $("#modalDesc");
-const modalList = $("#modalList");
+const modalDesc  = $("#modalDesc");
+const modalList  = $("#modalList");
 const modalClose = $("#modalClose");
 const modalClear = $("#modalClear");
-let modalMode = "hist";
+let modalMode="hist";
 
 function openModal(mode){
-  modalMode = mode;
+  modalMode=mode;
   modalBack.style.display="flex";
   renderModal();
 }
 function closeModal(){ modalBack.style.display="none"; }
 modalClose.addEventListener("click", closeModal);
-modalBack.addEventListener("click", (e)=>{ if(e.target===modalBack) closeModal(); });
+modalBack.addEventListener("click",(e)=>{ if(e.target===modalBack) closeModal(); });
 
 function renderModal(){
   if(modalMode==="hist"){
     modalTitle.textContent="Histórico";
-    modalDesc.textContent="Últimas ações (copiou, plano, nota, acordo).";
+    modalDesc.textContent="Log com data, hora e evento (copiar, ação, plano, timer, nota, acordo).";
     const hist = read(K.hist, []);
-    modalList.innerHTML = hist.length ? hist.map(h=>{
-      const d = new Date(h.t);
-      const when = d.toLocaleString();
-      return `<div class="item"><div class="t">${escapeHtml(h.type)} • ${escapeHtml(when)}</div><div class="m">${escapeHtml(h.text)}</div></div>`;
-    }).join("") : `<div class="item"><div class="m">Sem histórico ainda.</div></div>`;
+
+    if(!hist.length){
+      modalList.innerHTML = `<div class="item"><div class="m">Sem histórico ainda.</div></div>`;
+    }else{
+      // agrupa por dia
+      const groups = {};
+      hist.forEach(h=>{
+        const key = todayKey(h.ts);
+        (groups[key] ||= []).push(h);
+      });
+      const keys = Object.keys(groups).sort((a,b)=>b.localeCompare(a));
+
+      let html="";
+      keys.forEach(k=>{
+        const [Y,M,D]=k.split("-");
+        html += `<div class="item"><div class="t">${D}/${M}/${Y}</div><div class="m">—</div></div>`;
+        groups[k].forEach(h=>{
+          html += `<div class="item">
+            <div class="t">${escapeHtml(fmtDT(h.ts))} • ${escapeHtml(h.type)} • ${escapeHtml(h.title)}</div>
+            <div class="m">${escapeHtml(h.detail)}</div>
+          </div>`;
+        });
+      });
+      modalList.innerHTML = html;
+    }
+
     modalClear.style.display="";
     modalClear.textContent="Limpar histórico";
   }
@@ -674,11 +866,12 @@ function renderModal(){
     if(!fav.length){
       modalList.innerHTML = `<div class="item"><div class="m">Sem favoritos ainda.</div></div>`;
     }else{
-      const items = $$("[data-tag]").filter(el=>fav.includes(el.dataset.tag)).map(el=>{
-        const txt = el.getAttribute("data-copy")||el.innerText.trim();
-        return `<div class="item"><div class="t">★ ${escapeHtml(el.dataset.tag)}</div><div class="m">${escapeHtml(txt)}</div></div>`;
-      });
-      modalList.innerHTML = items.join("") || `<div class="item"><div class="m">Favoritos não encontrados na tela.</div></div>`;
+      const tiles = $$("[data-tag]").filter(el=>fav.includes(el.dataset.tag));
+      modalList.innerHTML = tiles.length ? tiles.map(el=>{
+        const title = el.querySelector(".t")?.innerText || el.dataset.tag;
+        const txt = el.dataset.script || el.dataset.use || "";
+        return `<div class="item"><div class="t">★ ${escapeHtml(title)}</div><div class="m">${escapeHtml(txt)}</div></div>`;
+      }).join("") : `<div class="item"><div class="m">Favoritos não encontrados na tela.</div></div>`;
     }
     modalClear.style.display="";
     modalClear.textContent="Limpar favoritos";
@@ -686,18 +879,19 @@ function renderModal(){
 
   if(modalMode==="stats"){
     modalTitle.textContent="Uso";
-    modalDesc.textContent="Métricas simples (não envia dados pra lugar nenhum).";
-    const st = read(K.stats, {opens:0,copies:0,timer:0,plans:0,notes:0,acordos:0});
+    modalDesc.textContent="Métricas locais (não envia dados).";
+    const st = read(K.stats, {opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0});
     modalList.innerHTML = `
       <div class="kpi">
         <div class="box"><div class="n">${st.opens||0}</div><div class="l">aberturas</div></div>
         <div class="box"><div class="n">${st.copies||0}</div><div class="l">cópias</div></div>
+        <div class="box"><div class="n">${st.uses||0}</div><div class="l">ações usadas</div></div>
         <div class="box"><div class="n">${st.timer||0}</div><div class="l">timers</div></div>
         <div class="box"><div class="n">${st.plans||0}</div><div class="l">planos</div></div>
         <div class="box"><div class="n">${st.notes||0}</div><div class="l">notas</div></div>
         <div class="box"><div class="n">${st.acordos||0}</div><div class="l">acordos</div></div>
       </div>
-      <div class="item"><div class="m">Dica: as métricas ajudam você a ver se a família usa “no momento certo” ou só lê.</div></div>
+      <div class="item"><div class="m">Se “ações usadas” for baixo, a família está lendo e não aplicando na hora H.</div></div>
     `;
     modalClear.style.display="";
     modalClear.textContent="Zerar métricas";
@@ -707,39 +901,67 @@ function renderModal(){
 modalClear.addEventListener("click", ()=>{
   if(modalMode==="hist"){ write(K.hist, []); showToast("Histórico limpo"); }
   if(modalMode==="fav"){ write(K.fav, []); applyFavUI(); showToast("Favoritos limpos"); }
-  if(modalMode==="stats"){ write(K.stats, {opens:0,copies:0,timer:0,plans:0,notes:0,acordos:0}); showToast("Métricas zeradas"); }
+  if(modalMode==="stats"){ write(K.stats, {opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0}); showToast("Métricas zeradas"); }
   renderModal();
 });
 
-/* ====== header buttons ====== */
 $("#btnHistorico").addEventListener("click", ()=>openModal("hist"));
 $("#btnFavoritos").addEventListener("click", ()=>openModal("fav"));
 $("#btnStats").addEventListener("click", ()=>openModal("stats"));
 
-/* ====== export ====== */
+/* ===== export (SEM JSON, COM DATA/HORA/EVENTO) ===== */
 $("#btnExportar").addEventListener("click", ()=>{
   const hist = read(K.hist, []);
   const acordos = read(K.acordos, []);
   const fav = read(K.fav, []);
-  const st = read(K.stats, {});
+  const st = read(K.stats, {opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0});
 
-  const lines = [];
-  lines.push("Guia de Manejo (Família) — Export");
-  lines.push("Data: " + new Date().toLocaleString());
+  const lines=[];
+  lines.push("Guia de Manejo (Família) — Exportação");
+  lines.push("Gerado em: " + fmtDT(Date.now()));
   lines.push("");
-  lines.push("=== Métricas ===");
-  lines.push(JSON.stringify(st, null, 2));
+  lines.push("=== Resumo de uso ===");
+  lines.push(`Aberturas: ${st.opens||0}`);
+  lines.push(`Cópias: ${st.copies||0}`);
+  lines.push(`Ações usadas: ${st.uses||0}`);
+  lines.push(`Timers: ${st.timer||0}`);
+  lines.push(`Planos: ${st.plans||0}`);
+  lines.push(`Notas: ${st.notes||0}`);
+  lines.push(`Acordos criados: ${st.acordos||0}`);
   lines.push("");
+
   lines.push("=== Favoritos (tags) ===");
-  lines.push(fav.join(", ") || "(vazio)");
+  lines.push(fav.length ? fav.join(", ") : "(sem favoritos)");
   lines.push("");
+
   lines.push("=== Acordos ===");
-  (acordos.length ? acordos : ["(vazio)"]).forEach((a,i)=>lines.push(`${i+1}. ${a}`));
+  if(acordos.length){
+    acordos.forEach((a,i)=>lines.push(`${i+1}. ${a}`));
+  }else{
+    lines.push("(sem acordos)");
+  }
   lines.push("");
-  lines.push("=== Histórico ===");
-  (hist.length ? hist : [{t:now(),type:"(vazio)",text:""}]).forEach(h=>{
-    lines.push(`[${new Date(h.t).toLocaleString()}] ${h.type}: ${h.text}`);
-  });
+
+  lines.push("=== Histórico (data/hora • tipo • título → detalhe) ===");
+  if(hist.length){
+    // agrupa por dia
+    const groups={};
+    hist.forEach(h=>{
+      const key=todayKey(h.ts);
+      (groups[key] ||= []).push(h);
+    });
+    const keys=Object.keys(groups).sort((a,b)=>b.localeCompare(a));
+    keys.forEach(k=>{
+      const [Y,M,D]=k.split("-");
+      lines.push(`-- ${D}/${M}/${Y} --`);
+      groups[k].forEach(h=>{
+        lines.push(`${fmtDT(h.ts)} • ${h.type} • ${h.title} → ${h.detail}`.trim());
+      });
+      lines.push("");
+    });
+  }else{
+    lines.push("(sem histórico)");
+  }
 
   const blob = new Blob([lines.join("\n")], {type:"text/plain;charset=utf-8"});
   const url = URL.createObjectURL(blob);
@@ -750,22 +972,22 @@ $("#btnExportar").addEventListener("click", ()=>{
   a.click();
   a.remove();
   URL.revokeObjectURL(url);
-  showToast("Exportado ✓");
+  showToast("⬇︎ Exportado");
+  pushHist("export", "Exportação gerada", "TXT");
 });
 
-/* ====== emergency fullscreen ====== */
+/* ===== emergency ===== */
 $("#btnEmergencia").addEventListener("click", ()=>{
   const tab = document.querySelector('.tab[data-tab="crise"]');
   tab.click();
-  // tenta fullscreen (quando disponível)
   const el = document.documentElement;
   if(el.requestFullscreen) el.requestFullscreen().catch(()=>{});
-  // scroll topo e destaca timer
   window.scrollTo({top:0, behavior:"smooth"});
-  showToast("Modo crise ✓");
+  showToast("⚠️ Modo crise");
+  pushHist("modo", "Modo crise ativado", "");
 });
 
-/* ====== PWA service worker ====== */
+/* ===== PWA SW ===== */
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./guia-sw.js");
