@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Guia de Manejo (Família)</title>
+<title>Guia de Manejo em Crise</title>
 
 <link rel="manifest" href="guia-manifest.json">
 <meta name="theme-color" content="#0b0b0f">
@@ -14,18 +14,23 @@
 <style>
   :root{
     --bg:#0b0b0f; --text:#f4f4f5; --muted:#9aa0a6; --line:rgba(255,255,255,.10);
-    --panel:#14141c; --chip:#1b1b24; --chip2:#232334;
+    --panel:#14141c; --chip:#1b1b24;
     --good:rgba(120,255,180,.10); --warn:rgba(255,180,80,.10); --bad:rgba(255,90,90,.10);
     --r:16px;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif}
-  .wrap{max-width:980px;margin:0 auto;padding:18px 14px 64px}
-  header{padding:6px 4px 14px;border-bottom:1px solid var(--line);margin-bottom:12px}
-  h1{margin:0 0 6px;font-size:22px;letter-spacing:.2px}
-  .sub{margin:0;color:var(--muted);font-size:13.5px;line-height:1.45}
-  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .wrap{max-width:980px;margin:0 auto;padding:16px 14px 64px}
 
+  /* HERO FAIXA */
+  .hero-faixa{width:100%;overflow:hidden;border-radius:14px;margin:6px 0 14px}
+  .hero-faixa img{width:100%;height:110px;object-fit:cover;display:block}
+
+  header{padding:6px 4px 14px;border-bottom:1px solid var(--line);margin-bottom:12px}
+  h1{margin:0 0 6px;font-size:20px;letter-spacing:.2px}
+  .sub{margin:0;color:var(--muted);font-size:13.5px;line-height:1.45}
+
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
   .btn{
     border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--text);
     padding:10px 12px; border-radius:999px; font-weight:900; font-size:12.5px; cursor:pointer;
@@ -73,7 +78,7 @@
   }
   .mini{color:var(--muted);font-size:12px}
 
-  /* Item interativo */
+  /* Tiles (inteligentes) */
   .chips{display:flex;flex-wrap:wrap;gap:8px}
   .tile{
     flex:1 1 240px;
@@ -94,7 +99,6 @@
     border:1px solid rgba(255,255,255,.12);
     flex:0 0 32px;
     font-size:16px;
-    line-height:1;
     user-select:none;
   }
   .tile .txt{flex:1}
@@ -114,8 +118,6 @@
   }
   .act:active{transform:scale(.99)}
   .act.copy{background:rgba(255,255,255,.10)}
-  .act.star{padding:7px 10px}
-
   .tile.fav{border-color:rgba(255,255,255,.35)}
 
   .toast{
@@ -125,6 +127,14 @@
     font-size:13px; opacity:0; pointer-events:none; transition:.18s;
   }
   .toast.show{opacity:1}
+
+  .footer{
+    margin-top:18px;
+    font-size:12px;
+    color:var(--muted);
+    border-top:1px solid rgba(255,255,255,.08);
+    padding-top:10px;
+  }
 
   /* Modal */
   .modalBack{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:999}
@@ -146,8 +156,13 @@
 
 <body>
 <div class="wrap">
+
+  <div class="hero-faixa">
+    <img src="hero22.png" alt="Guia de Manejo em Crise">
+  </div>
+
   <header>
-    <h1>Guia de Manejo (Família)</h1>
+    <h1>Guia de Manejo em Crise</h1>
     <p class="sub">Primeiro regula. Depois conversa. O foco inicial é reduzir escalada e preservar vínculo.</p>
 
     <div class="row">
@@ -190,15 +205,15 @@
         <div class="hr"></div>
 
         <div class="chips">
-          <!-- AÇÕES (não são scripts, então não têm “copiar” como foco) -->
+          <!-- AÇÕES -->
           <div class="tile" data-kind="action" data-tag="check" data-use="Tom baixo. Frases curtas. Uma ideia por frase. Sem ironia.">
             <div class="ico">✅</div>
             <div class="txt">
               <div class="t">Checklist (voz e forma)</div>
-              <div class="d">Use agora. Não precisa copiar.</div>
+              <div class="d">Use agora. Não é texto pra mandar.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1" title="Favoritar">★</button>
+              <button class="act" data-star="1" title="Favoritar">★</button>
               <button class="act" data-usebtn="1" title="Marcar como usado">▶︎</button>
             </div>
           </div>
@@ -207,10 +222,10 @@
             <div class="ico">🧠</div>
             <div class="txt">
               <div class="t">Mantra (sequência correta)</div>
-              <div class="d">Repita 1 frase, sem explicar.</div>
+              <div class="d">Repita 1 frase. Sem explicar.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act" data-usebtn="1">▶︎</button>
             </div>
           </div>
@@ -222,7 +237,7 @@
               <div class="d">Ajuste o cenário antes de falar.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act" data-usebtn="1">▶︎</button>
             </div>
           </div>
@@ -230,8 +245,8 @@
       </div>
 
       <div class="card">
-        <h3>Scripts (aqui sim faz sentido copiar)</h3>
-        <p class="hint">Escolha 1. Copie se quiser mandar por mensagem. Se estiver presente, só leia e fale.</p>
+        <h3>Scripts (aqui faz sentido copiar)</h3>
+        <p class="hint">Use 1 só. Copie se for mandar por mensagem. Se estiver presente, leia e fale.</p>
 
         <div class="chips">
           <div class="tile" data-kind="script" data-tag="presenca" data-script="Eu tô aqui. Vamos respirar um pouco.">
@@ -241,7 +256,7 @@
               <div class="d">Presença sem pressão.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1" title="Copiar">📋</button>
             </div>
           </div>
@@ -253,7 +268,7 @@
               <div class="d">Valida sentimento sem validar comportamento.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
@@ -265,7 +280,7 @@
               <div class="d">Organiza a sequência sem brigar.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
@@ -284,7 +299,7 @@
               <div class="d">Se você tá irritado, fale menos.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act" data-usebtn="1">▶︎</button>
             </div>
           </div>
@@ -296,7 +311,7 @@
               <div class="d">Convencer agora piora. Regular melhora.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act" data-usebtn="1">▶︎</button>
             </div>
           </div>
@@ -315,7 +330,7 @@
               <div class="d">Espaço com comunicação mínima.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
@@ -327,7 +342,7 @@
               <div class="d">Dá espaço sem abandono.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
@@ -339,7 +354,7 @@
               <div class="d">Lembrete mental pra não escalar.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act" data-usebtn="1">▶︎</button>
             </div>
           </div>
@@ -348,7 +363,7 @@
 
       <div class="card full">
         <h3>Busca rápida</h3>
-        <p class="hint">Digite “grito”, “afastar”, “validar”, “limite” etc. Filtra os cards.</p>
+        <p class="hint">Digite “grito”, “afastar”, “validar”, “limite” etc.</p>
         <input id="busca" type="search" placeholder="Buscar...">
       </div>
 
@@ -371,7 +386,7 @@
               <div class="d">Começa sem acusação.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
@@ -383,7 +398,7 @@
               <div class="d">Sem entrar em defesa.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
@@ -395,7 +410,7 @@
               <div class="d">Curto e executável.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
@@ -412,7 +427,7 @@
               <div class="d">Firme sem humilhar.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
@@ -424,7 +439,7 @@
               <div class="d">Protege a relação.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
@@ -458,7 +473,7 @@
               <div class="d">Clareza reduz insegurança.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act" data-usebtn="1">▶︎</button>
             </div>
           </div>
@@ -470,7 +485,7 @@
               <div class="d">Previsibilidade = menos crise.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act" data-usebtn="1">▶︎</button>
             </div>
           </div>
@@ -482,7 +497,7 @@
               <div class="d">Validação vem antes do limite.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act" data-usebtn="1">▶︎</button>
             </div>
           </div>
@@ -515,7 +530,7 @@
               <div class="d">Sem atacar, só encaminhar.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
@@ -527,15 +542,20 @@
               <div class="d">Curto e direto.</div>
             </div>
             <div class="actions">
-              <button class="act star" data-star="1">★</button>
+              <button class="act" data-star="1">★</button>
               <button class="act copy" data-copybtn="1">📋</button>
             </div>
           </div>
+        </div>
+
+        <div class="footer">
+          Se houver risco imediato, priorize segurança e suporte local.
         </div>
       </div>
 
     </div>
   </section>
+
 </div>
 
 <div class="toast" id="toast">OK</div>
@@ -613,7 +633,7 @@ function bumpStat(key){
   write(K.stats, st);
 })();
 
-/* ===== history (HUMANO, COM DATA/HORA/EVENTO) ===== */
+/* ===== history humano ===== */
 function pushHist(type, title, detail){
   const hist = read(K.hist, []);
   const ev = { ts: Date.now(), type, title, detail: detail || "" };
@@ -650,7 +670,7 @@ $$(".tab").forEach(btn=>{
   });
 });
 
-/* ===== search filter ===== */
+/* ===== busca ===== */
 $("#busca").addEventListener("input", ()=>{
   const q = $("#busca").value.trim().toLowerCase();
   $$("[data-tag]").forEach(el=>{
@@ -659,7 +679,7 @@ $("#busca").addEventListener("input", ()=>{
   });
 });
 
-/* ===== actions: star / copy / use ===== */
+/* ===== estrelas ===== */
 $$("[data-star]").forEach(btn=>{
   btn.addEventListener("click",(e)=>{
     e.stopPropagation();
@@ -673,6 +693,7 @@ $$("[data-star]").forEach(btn=>{
   });
 });
 
+/* ===== copiar scripts ===== */
 $$("[data-copybtn]").forEach(btn=>{
   btn.addEventListener("click", async (e)=>{
     e.stopPropagation();
@@ -686,6 +707,7 @@ $$("[data-copybtn]").forEach(btn=>{
   });
 });
 
+/* ===== marcar ações como usadas ===== */
 $$("[data-usebtn]").forEach(btn=>{
   btn.addEventListener("click",(e)=>{
     e.stopPropagation();
@@ -699,7 +721,7 @@ $$("[data-usebtn]").forEach(btn=>{
   });
 });
 
-/* ===== intensity plan ===== */
+/* ===== plano por intensidade ===== */
 const planoMap = {
   "1": [
     "Tom baixo. Uma frase por vez.",
@@ -726,7 +748,7 @@ $("#btnPlano").addEventListener("click", async ()=>{
   const steps = planoMap[v] || [];
   const txt = "Plano agora:\n- " + steps.join("\n- ");
 
-  await copyToClipboard(txt); // aqui faz sentido copiar, porque é um “resumo operável”
+  await copyToClipboard(txt);
   showToast("▶︎ Plano copiado");
   pushHist("plano", `Plano gerado (intensidade ${v})`, steps.join(" | "));
 });
@@ -763,7 +785,7 @@ $("#btnTimer").addEventListener("click", ()=>{
   }
 });
 
-/* ===== notes ===== */
+/* ===== notas pós-crise ===== */
 $("#btnSalvarNota").addEventListener("click", ()=>{
   const v = $("#notaDepois").value.trim();
   if(!v){ showToast("Escreva a nota"); return; }
@@ -827,13 +849,12 @@ modalBack.addEventListener("click",(e)=>{ if(e.target===modalBack) closeModal();
 function renderModal(){
   if(modalMode==="hist"){
     modalTitle.textContent="Histórico";
-    modalDesc.textContent="Log com data, hora e evento (copiar, ação, plano, timer, nota, acordo).";
+    modalDesc.textContent="Log com data, hora e evento.";
     const hist = read(K.hist, []);
 
     if(!hist.length){
       modalList.innerHTML = `<div class="item"><div class="m">Sem histórico ainda.</div></div>`;
     }else{
-      // agrupa por dia
       const groups = {};
       hist.forEach(h=>{
         const key = todayKey(h.ts);
@@ -871,7 +892,7 @@ function renderModal(){
         const title = el.querySelector(".t")?.innerText || el.dataset.tag;
         const txt = el.dataset.script || el.dataset.use || "";
         return `<div class="item"><div class="t">★ ${escapeHtml(title)}</div><div class="m">${escapeHtml(txt)}</div></div>`;
-      }).join("") : `<div class="item"><div class="m">Favoritos não encontrados na tela.</div></div>`;
+      }).join("") : `<div class="item"><div class="m">Favoritos não encontrados.</div></div>`;
     }
     modalClear.style.display="";
     modalClear.textContent="Limpar favoritos";
@@ -891,7 +912,7 @@ function renderModal(){
         <div class="box"><div class="n">${st.notes||0}</div><div class="l">notas</div></div>
         <div class="box"><div class="n">${st.acordos||0}</div><div class="l">acordos</div></div>
       </div>
-      <div class="item"><div class="m">Se “ações usadas” for baixo, a família está lendo e não aplicando na hora H.</div></div>
+      <div class="item"><div class="m">Se “ações usadas” for baixo, estão lendo e não aplicando na hora H.</div></div>
     `;
     modalClear.style.display="";
     modalClear.textContent="Zerar métricas";
@@ -909,7 +930,7 @@ $("#btnHistorico").addEventListener("click", ()=>openModal("hist"));
 $("#btnFavoritos").addEventListener("click", ()=>openModal("fav"));
 $("#btnStats").addEventListener("click", ()=>openModal("stats"));
 
-/* ===== export (SEM JSON, COM DATA/HORA/EVENTO) ===== */
+/* ===== export TXT humano ===== */
 $("#btnExportar").addEventListener("click", ()=>{
   const hist = read(K.hist, []);
   const acordos = read(K.acordos, []);
@@ -917,7 +938,7 @@ $("#btnExportar").addEventListener("click", ()=>{
   const st = read(K.stats, {opens:0,copies:0,uses:0,timer:0,plans:0,notes:0,acordos:0});
 
   const lines=[];
-  lines.push("Guia de Manejo (Família) — Exportação");
+  lines.push("Guia de Manejo em Crise — Exportação");
   lines.push("Gerado em: " + fmtDT(Date.now()));
   lines.push("");
   lines.push("=== Resumo de uso ===");
@@ -944,7 +965,6 @@ $("#btnExportar").addEventListener("click", ()=>{
 
   lines.push("=== Histórico (data/hora • tipo • título → detalhe) ===");
   if(hist.length){
-    // agrupa por dia
     const groups={};
     hist.forEach(h=>{
       const key=todayKey(h.ts);
@@ -976,7 +996,7 @@ $("#btnExportar").addEventListener("click", ()=>{
   pushHist("export", "Exportação gerada", "TXT");
 });
 
-/* ===== emergency ===== */
+/* ===== modo crise ===== */
 $("#btnEmergencia").addEventListener("click", ()=>{
   const tab = document.querySelector('.tab[data-tab="crise"]');
   tab.click();
