@@ -1,153 +1,346 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow,noarchive" />
-  <title>Ferramenta Interativa — Manejo de Crise</title>
-
+  <meta charset="UTF-8">
+  <title>Como lidar com borderline sem piorar as crises – Versão Interativa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mini manual interativo para lidar com crises de borderline sem piorar a situação. Estratégias práticas, passo a passo e registro para levar ao profissional.">
   <style>
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;
-      background:#0b0c10;
-      color:#ffffff;
-      line-height:1.45;
+    :root {
+      --bg: #fff9f4;
+      --card: #ffe9dd;
+      --accent: #f2735b;
+      --accent-soft: #ffb9a1;
+      --text-main: #3c2c29;
+      --text-soft: #7d625a;
+      --radius-lg: 22px;
+      --radius-md: 14px;
+      --shadow-soft: 0 14px 30px rgba(0,0,0,0.08);
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
     }
-    .wrap{
-      max-width:920px;
-      margin:0 auto;
-      padding:44px 18px 64px;
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #fff3ea 0, #fbe7da 40%, #f7dfd2 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      padding: 24px 14px 40px;
     }
-    .card{
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:16px;
-      padding:28px 22px;
-      box-shadow:0 14px 40px rgba(0,0,0,.45);
+
+    .page {
+      max-width: 540px;
+      margin: 0 auto;
     }
-    .badges{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      font-size:12px; letter-spacing:.08em; text-transform:uppercase;
-      padding:8px 10px; border-radius:999px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
-      color:rgba(255,255,255,.92);
+
+    header {
+      margin-bottom: 20px;
+      text-align: left;
     }
-    h1{
-      margin:12px 0 10px;
-      font-size:30px;
-      letter-spacing:-.02em;
+
+    .tagline {
+      letter-spacing: 0.16em;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--accent);
     }
-    p{
-      margin:0 0 14px;
-      color:rgba(255,255,255,.86);
-      font-size:16px;
+
+    h1 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin: 6px 0 10px;
     }
-    .box{
-      margin-top:16px;
-      padding:16px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.4;
     }
-    .box strong{ color:#fff; }
-    ul{ margin:10px 0 0 18px; padding:0; color:rgba(255,255,255,.86); }
-    li{ margin:7px 0; }
-    .cta{
-      margin-top:18px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
+
+    .badge-doctor {
+      margin-top: 18px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      background: #fbe1d0;
+      border-radius: 18px;
+      padding: 10px 14px;
+      box-shadow: var(--shadow-soft);
     }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:14px 18px;
-      border-radius:12px;
-      text-decoration:none;
-      font-weight:800;
-      background:#2f6bff;
-      color:#ffffff;
-      border:1px solid rgba(255,255,255,.14);
-      min-width:260px;
-      transition:transform .08s ease, opacity .12s ease;
+
+    .badge-doctor-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
     }
-    .btn:hover{ opacity:.95; transform:translateY(-1px); }
-    .btn:active{ transform:translateY(0); }
-    .muted{
-      font-size:13px;
-      color:rgba(255,255,255,.68);
-      max-width:520px;
+
+    .badge-doctor-sub {
+      font-size: 11px;
+      color: var(--text-soft);
     }
-    .fine{
-      margin-top:18px;
-      padding-top:14px;
-      border-top:1px solid rgba(255,255,255,.10);
-      font-size:13px;
-      color:rgba(255,255,255,.72);
+
+    main {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
-    .footer{
-      margin-top:14px;
-      font-size:12px;
-      color:rgba(255,255,255,.55);
+
+    .card {
+      background: rgba(255,255,255,0.9);
+      border-radius: var(--radius-lg);
+      padding: 18px 16px;
+      box-shadow: var(--shadow-soft);
     }
-    a { color:#9ec0ff; }
+
+    .card-soft {
+      background: rgba(255, 244, 237, 0.95);
+    }
+
+    .card-header {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .card-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    ul {
+      margin-top: 10px;
+      list-style: none;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    ul li::before {
+      content: "•";
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    .levels {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .level {
+      border-radius: var(--radius-md);
+      padding: 10px 11px;
+      background: #fff;
+      border: 1px solid #ffe0cf;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .level-main {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .level-tag {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #ffece3;
+      color: var(--accent);
+    }
+
+    .bubble {
+      margin-top: 10px;
+      font-size: 12px;
+      padding: 10px 12px;
+      background: #ffe4d5;
+      border-radius: 12px;
+      color: var(--text-main);
+    }
+
+    .steps {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 10px;
+    }
+
+    .steps span {
+      display: block;
+      margin-top: 4px;
+    }
+
+    .cta-section {
+      margin-top: 6px;
+      text-align: center;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 320px;
+      border-radius: 999px;
+      border: none;
+      padding: 14px 22px;
+      background: linear-gradient(135deg, #ff7a5c, #f25b4b);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 12px 26px rgba(242, 91, 75, 0.45);
+      cursor: pointer;
+      margin-top: 6px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+    }
+
+    .cta-button span {
+      margin-left: 6px;
+      font-size: 18px;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 18px 35px rgba(242, 91, 75, 0.55);
+    }
+
+    .cta-note {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .disclaimer {
+      margin-top: 18px;
+      font-size: 11px;
+      color: var(--text-soft);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    @media (min-width: 720px) {
+      body {
+        padding: 40px 0 60px;
+      }
+      header {
+        text-align: center;
+      }
+      .badge-doctor {
+        margin-top: 22px;
+      }
+      main {
+        margin-top: 20px;
+      }
+    }
   </style>
 </head>
-
 <body>
-  <main class="wrap">
-    <section class="card">
-      <div class="badges">
-        <div class="badge">🔒 uso individual</div>
-        <div class="badge">🛠 ferramenta prática</div>
-        <div class="badge">⚡ durante a crise</div>
-      </div>
-
-      <h1>Como Lidar com Crises — Versão Interativa</h1>
-      <p>
-        Durante uma crise, o pior é improvisar. Esta página existe para você acessar a ferramenta interativa
-        e ter um passo a passo simples para reduzir escalada e evitar piorar a situação.
+  <div class="page">
+    <header>
+      <div class="tagline">Mini manual interativo</div>
+      <h1>Como lidar com borderline sem piorar as crises</h1>
+      <p class="subtitle">
+        Um guia prático, em formato de “mini‑app”, que mostra o que fazer em cada nível de crise emocional – sem discussões inúteis e sem aumentar o caos.
       </p>
 
-      <div class="box">
-        <strong>O que você recebe:</strong>
+      <div class="badge-doctor">
+        <div class="badge-doctor-title">Dr. Fabio Schmidt</div>
+        <div class="badge-doctor-sub">Médico Psiquiatra • CRM/SP 183549</div>
+        <div class="badge-doctor-sub">Conteúdo educativo baseado em evidências</div>
+      </div>
+    </header>
+
+    <main>
+      <section class="card card-soft">
+        <div class="card-header">Por que esta versão interativa é diferente?</div>
+        <div class="card-title">Direção clara na hora da crise</div>
+        <p class="card-text">
+          Em vez de ficar tentando adivinhar “o que é certo fazer”, você escolhe a intensidade da crise e recebe instruções objetivas: o que falar, o que evitar e como reduzir danos agora.
+        </p>
         <ul>
-          <li>Fluxo guiado passo a passo</li>
-          <li>Orientações conforme intensidade (leve / moderada / intensa)</li>
-          <li>O que falar e o que evitar na hora H</li>
-          <li>Estrutura prática para agir com firmeza e calma</li>
+          <li>Mostra frases e estratégias para cada intensidade, em linguagem simples.</li>
+          <li>Ajuda a diminuir a emoção antes de discutir o conteúdo da briga.</li>
+          <li>Foca em segurança, redução de culpa e menos arrependimento depois.</li>
         </ul>
-      </div>
+      </section>
 
-      <div class="cta">
-        <a class="btn" href="https://pay.hotmart.com/D104339177M" target="_blank" rel="noopener noreferrer">
-          Comprar e acessar agora
-        </a>
-        <div class="muted">
-          Acesso imediato após a compra. Material educacional. Em risco iminente, procure atendimento de urgência.
+      <section class="card">
+        <div class="card-header">Como funciona na prática</div>
+        <div class="card-title">Um passo a passo na tela</div>
+        <p class="card-text">
+          Você abre o manual interativo, escolhe o nível da crise e segue o roteiro minuto a minuto, com respiração guiada, validação emocional e limites claros – sem precisar pensar em tudo sozinho.
+        </p>
+
+        <div class="levels">
+          <div class="level">
+            <div class="level-main">Leve</div>
+            <div class="level-tag">Desconforto controlável</div>
+          </div>
+          <div class="level">
+            <div class="level-main">Moderada</div>
+            <div class="level-tag">Emoção muito alta</div>
+          </div>
+          <div class="level">
+            <div class="level-main">Grave</div>
+            <div class="level-tag">Risco à segurança</div>
+          </div>
         </div>
-      </div>
 
-      <div class="fine">
-        <strong>Direitos autorais.</strong> É proibida a reprodução, distribuição, revenda, compartilhamento de link/arquivos
-        ou disponibilização pública, total ou parcial, sem autorização.
-      </div>
+        <div class="bubble">
+          Em cada nível, você vê o que fazer passo a passo, quanto tempo pausar, que tipo de frase ajuda e o que atrapalha naquele momento.
+        </div>
+      </section>
 
-      <div class="footer">
-        © <span id="y"></span> Dr. Fabio Henrique de Lima Schmidt — CRM/SP 183549
-      </div>
-    </section>
-  </main>
+      <section class="card card-soft">
+        <div class="card-header">Registro privado das crises</div>
+        <div class="card-title">Lembre do que aconteceu (sem depender da memória).</div>
+        <p class="card-text">
+          Ao final de cada episódio, você pode registrar gatilhos, intensidade e ações que ajudaram, tudo de forma privada no seu dispositivo.
+        </p>
+        <ul>
+          <li>Organiza um histórico para enxergar padrões e evolução.</li>
+          <li>Gera um texto pronto para levar ao seu profissional de referência.</li>
+          <li>Facilita conversas de acompanhamento sem julgamento, com fatos concretos.</li>
+        </ul>
+      </section>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+      <section class="card">
+        <div class="card-header">Para quem é</div>
+        <div class="card-title">Família, parceiros(as) e pessoas com borderline</div>
+        <p class="card-text">
+          O manual foi criado para quem vive crises recorrentes, sente que anda pisando em ovos o tempo todo e quer uma referência prática na hora em que tudo parece sair do controle.
+        </p>
+        <div class="steps">
+          <span>• Se você tem borderline, usa o guia como rota de emergência pessoal.</span>
+          <span>• Se você convive com alguém com borderline, usa como mapa para não piorar a situação.</span>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <a class="cta-button" href="https://go.hotmart.com/D104339177M" target="_blank" rel="noopener noreferrer">
+          Garantir acesso agora <span>→</span>
+        </a>
+        <div class="cta-note">
+          Acesso imediato à versão interativa após a confirmação da compra.
+        </div>
+      </section>
+
+      <p class="disclaimer">
+        Este material é educativo, não substitui acompanhamento profissional individual e não deve ser usado em situações de risco iminente de vida. Em emergências, procure ajuda médica imediatamente.
+      </p>
+    </main>
+  </div>
 </body>
 </html>
