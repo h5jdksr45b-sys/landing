@@ -1,1 +1,2154 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Guia Interativo – Família e Borderline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-main: #f5f1ea;
+      --bg-card: #ffffff;
+      --accent: #d77b5b;
+      --accent-soft: #f3c2a8;
+      --accent-deep: #b35a3a;
+      --text-main: #2f2f2f;
+      --text-soft: #555555;
+      --border-soft: #e3d6c8;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.08);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.22s ease;
+      --font-title: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      --font-body: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+
+      --crisis-bg: #fff2e8;
+      --crisis-card: #fff8f3;
+      --crisis-accent: #e06a4a;
+      --crisis-soft: #f7c3aa;
+      --danger: #c0392b;
+      --success: #2e7d32;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #fefaf5 0, #f5f1ea 55%, #efe7dd 100%);
+      font-family: var(--font-body);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 980px;
+      background: rgba(255,255,255,0.94);
+      border-radius: 32px;
+      box-shadow: var(--shadow-soft);
+      padding: 18px 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+
+    @media (min-width: 768px) {
+      .app-container {
+        padding: 22px 26px 26px;
+      }
+    }
+
+    header.app-header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .app-eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .app-title {
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 1.38rem;
+      line-height: 1.25;
+      margin: 0;
+      color: #1f1f1f;
+    }
+
+    @media (min-width: 768px) {
+      .app-title {
+        font-size: 1.6rem;
+      }
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin: 0;
+    }
+
+    .doctor-badge {
+      padding: 9px 12px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #f3e0d4, #fdf6ef);
+      font-size: 0.78rem;
+      color: #4b3426;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 170px;
+    }
+
+    .doctor-name {
+      font-weight: 600;
+    }
+
+    .tagline {
+      font-size: 0.75rem;
+      color: #6b5a4c;
+    }
+
+    .pill-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(215, 123, 91, 0.08);
+      font-size: 0.74rem;
+      color: #7a462d;
+      font-weight: 500;
+      margin-top: 4px;
+      align-self: flex-start;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .top-banner {
+      border-radius: 22px;
+      padding: 9px 12px 10px;
+      background: linear-gradient(135deg, #fdf4ea, #f1e0d2);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-banner::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(215,123,91,0.12) 0, transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(174,117,86,0.12) 0, transparent 50%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .top-banner-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .top-banner-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .label-chip {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.06);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #7a5535;
+      background: rgba(255,255,255,0.7);
+    }
+
+    .top-banner-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text-soft);
+    }
+
+    .top-banner-list li {
+      margin-bottom: 2px;
+    }
+
+    .legal-note {
+      font-size: 0.72rem;
+      color: #856b57;
+      margin-top: 2px;
+    }
+
+    .tabs {
+      display: inline-flex;
+      align-items: center;
+      border-radius: var(--radius-pill);
+      padding: 3px;
+      background: rgba(0,0,0,0.03);
+      margin-top: 6px;
+      gap: 3px;
+      align-self: flex-start;
+    }
+
+    .tab-btn {
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 6px 13px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      background: transparent;
+      color: #6b5a4c;
+      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab-btn span.icon {
+      font-size: 0.9rem;
+    }
+
+    .tab-btn.active {
+      background: #ffffff;
+      color: #4b3426;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      transform: translateY(-1px);
+    }
+
+    .tab-btn.crisis.active {
+      background: #ffe2ce;
+      color: #7a3623;
+    }
+
+    .app-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    .layout-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    @media (min-width: 900px) {
+      .layout-main {
+        grid-template-columns: minmax(0, 2.2fr) minmax(260px, 1.4fr);
+      }
+    }
+
+    .section-shell {
+      background: var(--bg-card);
+      border-radius: 24px;
+      border: 1px solid var(--border-soft);
+      padding: 16px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .section-kicker {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1f1f1f;
+      margin: 0;
+    }
+
+    .section-subtitle {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      margin: 0;
+    }
+
+    .badge-compact {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.03);
+      color: #6b5a4c;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .section-content {
+      font-size: 0.86rem;
+      color: var(--text-main);
+      line-height: 1.55;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    ul.bullet-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    ul.bullet-list li {
+      margin-bottom: 4px;
+    }
+
+    .info-card,
+    .warning-card,
+    .success-card {
+      border-radius: 16px;
+      padding: 10px 12px;
+      font-size: 0.82rem;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .info-card {
+      background: #f4f6fb;
+      border: 1px solid #d0d7f0;
+      color: #2f3c63;
+    }
+
+    .warning-card {
+      background: #fff7f5;
+      border: 1px solid #f3c0b6;
+      color: #7a3527;
+    }
+
+    .success-card {
+      background: #f1f8f3;
+      border: 1px solid #c5e3cf;
+      color: #235532;
+    }
+
+    .icon-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .icon-info {
+      background: #e0e6fa;
+      color: #2f3c63;
+    }
+
+    .icon-warning {
+      background: #fbe2db;
+      color: #a53c2d;
+    }
+
+    .icon-success {
+      background: #d7ecd9;
+      color: #235532;
+    }
+
+    .mini-heading {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .quote-block {
+      border-left: 3px solid var(--accent-soft);
+      padding-left: 10px;
+      margin: 4px 0;
+      font-size: 0.84rem;
+      color: var(--text-soft);
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.03);
+      color: #5b4a3b;
+    }
+
+    .section-page {
+      display: none;
+    }
+
+    .section-page.active {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pill-section-nav {
+      border-radius: 18px;
+      background: rgba(0,0,0,0.02);
+      padding: 10px 10px 8px;
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .pill-section-nav-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #4b3426;
+      margin-bottom: 4px;
+    }
+
+    .pill-section-nav-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .nav-chip {
+      font-size: 0.75rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: #ffffff;
+      color: #5b4a3b;
+      cursor: pointer;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .nav-chip.active {
+      background: #fbe8dd;
+      border-color: var(--accent-soft);
+      color: #7a462d;
+      font-weight: 500;
+      transform: translateY(-1px);
+    }
+
+    .cta-card {
+      border-radius: 20px;
+      padding: 12px 12px 13px;
+      background: radial-gradient(circle at top left, #f8e0cf 0, #fdf5ee 36%, #ffffff 100%);
+      border: 1px solid rgba(215,123,91,0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: #4f3624;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-tag {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(0,0,0,0.04);
+      align-self: flex-start;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #7a462d;
+      font-weight: 600;
+    }
+
+    .cta-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .cta-note {
+      font-size: 0.72rem;
+      color: #6b5a4c;
+    }
+
+    .ref-card {
+      border-radius: 18px;
+      background: #faf7f2;
+      border: 1px solid #e2d4c4;
+      padding: 10px 12px;
+      font-size: 0.78rem;
+      color: #5b4a3b;
+    }
+
+    .ref-card ul {
+      margin: 4px 0 0;
+      padding-left: 18px;
+    }
+
+    .ref-card li {
+      margin-bottom: 2px;
+    }
+
+    .progress-bar-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .progress-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.74rem;
+      color: var(--text-soft);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #f3a274);
+      transition: width var(--transition-fast);
+    }
+
+    .nav-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      gap: 6px;
+    }
+
+    .stepper-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .step-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.15);
+    }
+
+    .step-dot.active {
+      background: var(--accent);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    button.nav-btn {
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 8px 14px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f0e4d9;
+      color: #5b4a3b;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    button.nav-btn.primary {
+      background: linear-gradient(135deg, var(--accent), #f3a274);
+      color: #fffaf7;
+      box-shadow: 0 10px 24px rgba(121,68,45,0.3);
+    }
+
+    button.nav-btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+      box-shadow: none;
+      transform: none;
+    }
+
+    button.nav-btn:not(:disabled):active {
+      transform: translateY(1px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .nav-caption {
+      font-size: 0.74rem;
+      color: var(--text-soft);
+    }
+
+    /* MODO CRISE */
+
+    .crisis-wrapper {
+      background: var(--crisis-bg);
+      border-radius: 24px;
+      padding: 14px 12px 16px;
+      border: 1px solid #f6d1b9;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .crisis-wrapper {
+        padding: 16px 18px 20px;
+      }
+    }
+
+    .crisis-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .crisis-kicker {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--crisis-accent);
+      font-weight: 600;
+    }
+
+    .crisis-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0;
+      color: #5d2f1f;
+    }
+
+    .crisis-subtitle {
+      font-size: 0.86rem;
+      margin: 0;
+      color: #7c4a32;
+    }
+
+    .crisis-intensity-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 700px) {
+      .crisis-intensity-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .crisis-intensity-card {
+      border-radius: 14px;
+      padding: 10px 10px;
+      background: var(--crisis-card);
+      border: 1px solid rgba(0,0,0,0.04);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.82rem;
+      color: #5d2f1f;
+      transition: border var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), background var(--transition-fast);
+    }
+
+    .crisis-intensity-card:hover {
+      box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+      transform: translateY(-1px);
+    }
+
+    .crisis-intensity-card.active {
+      border-color: var(--crisis-accent);
+      background: #ffe7d8;
+    }
+
+    .crisis-intensity-label {
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .crisis-chip {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.04);
+    }
+
+    .crisis-intensity-desc {
+      font-size: 0.78rem;
+      color: #8b5a3b;
+    }
+
+    .crisis-panel {
+      border-radius: 18px;
+      background: #fff9f5;
+      border: 1px solid #f1c4aa;
+      padding: 10px 12px;
+      margin-top: 6px;
+      font-size: 0.84rem;
+      color: #5d2f1f;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .crisis-panel-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .crisis-mode-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--crisis-accent);
+    }
+
+    .breathing-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .breathing-circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.06);
+      background: radial-gradient(circle at 30% 20%, #ffe4d6, #ffccae);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5d2f1f;
+      font-weight: 600;
+      font-size: 0.9rem;
+      animation: breathing 8s ease-in-out infinite;
+    }
+
+    @keyframes breathing {
+      0%   { transform: scale(0.9); opacity: 0.9; }
+      50%  { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.9; }
+    }
+
+    .breathing-caption {
+      font-size: 0.78rem;
+      color: #7c4a32;
+      text-align: center;
+    }
+
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 0.82rem;
+    }
+
+    .checklist-item input {
+      margin-top: 2px;
+    }
+
+    .emergency-box {
+      border-radius: 14px;
+      padding: 10px 10px;
+      background: #fff5f4;
+      border: 1px solid #f3b6b0;
+      font-size: 0.82rem;
+      color: #7a2924;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .emergency-title {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .emergency-badge {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #fce3e0;
+      color: #7a2924;
+    }
+
+    .crisis-form {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.8rem;
+    }
+
+    .crisis-form label {
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+
+    .crisis-form textarea,
+    .crisis-form select,
+    .crisis-form input[type="text"] {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.12);
+      padding: 6px 8px;
+      font-size: 0.8rem;
+      font-family: var(--font-body);
+      resize: vertical;
+      min-height: 44px;
+    }
+
+    .crisis-form textarea {
+      min-height: 70px;
+    }
+
+    .crisis-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-small {
+      border-radius: 999px;
+      border: none;
+      padding: 7px 12px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f2dfd0;
+      color: #5d2f1f;
+      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-small.primary {
+      background: #e06a4a;
+      color: #fff8f3;
+      box-shadow: 0 8px 18px rgba(115,50,29,0.25);
+    }
+
+    .btn-small:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+    }
+
+    .crisis-note {
+      font-size: 0.75rem;
+      color: #8b5a3b;
+      margin-top: 2px;
+    }
+
+    .history-box {
+      border-radius: 16px;
+      background: #fff9f5;
+      border: 1px solid #f2d0b8;
+      padding: 8px 10px;
+      font-size: 0.78rem;
+      color: #5d2f1f;
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .history-list {
+      max-height: 150px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .history-entry {
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 4px 0;
+    }
+
+    .history-entry:last-child {
+      border-bottom: none;
+    }
+
+    .history-entry-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 0.76rem;
+    }
+
+    .history-entry-level {
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .badge-level-leve {
+      color: #2e7d32;
+    }
+
+    .badge-level-moderada {
+      color: #d68910;
+    }
+
+    .badge-level-grave {
+      color: #c0392b;
+    }
+
+    .history-entry-body {
+      font-size: 0.75rem;
+      color: #7c4a32;
+    }
+
+    .report-output {
+      width: 100%;
+      min-height: 60px;
+      border-radius: 10px;
+      border: 1px dashed rgba(0,0,0,0.15);
+      padding: 6px 8px;
+      font-size: 0.76rem;
+      font-family: var(--font-body);
+      background: #fffdf9;
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 600px) {
+      .app-container {
+        border-radius: 24px;
+      }
+      .section-title {
+        font-size: 0.94rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <main class="app-container" role="main">
+    <header class="app-header">
+      <div class="header-row">
+        <div class="title-block">
+          <div class="app-eyebrow">Mini Manual Interativo</div>
+          <h1 class="app-title">
+            Como lidar com borderline<br />
+            sem piorar as crises
+          </h1>
+          <p class="subtitle">
+            O que fazer, o que evitar e o que dizer quando tudo sai do controle. [file:1]
+          </p>
+        </div>
+        <aside class="doctor-badge">
+          <div class="doctor-name">Dr. Fabio Schmidt</div>
+          <div class="tagline">Psiquiatra • CRM/SP 183549</div>
+          <div class="pill-highlight">
+            <span class="status-dot"></span>
+            <span>Material educativo baseado em evidências</span> [file:1]
+          </div>
+        </aside>
+      </div>
+
+      <section class="top-banner" aria-label="Aviso importante">
+        <div class="top-banner-content">
+          <div class="top-banner-title">
+            <span>AVISO IMPORTANTE</span>
+            <span class="label-chip">Uso educativo</span>
+          </div>
+          <ul class="top-banner-list">
+            <li>Material educativo baseado em evidências científicas.</li>
+            <li>Não substitui acompanhamento profissional.</li>
+            <li>Reproduções não autorizadas são proibidas.</li> [file:1]
+          </ul>
+          <p class="legal-note">
+            Este mini app é para orientação e redução de danos, não para diagnóstico ou tratamento individual. [file:1]
+          </p>
+
+          <div class="tabs" role="tablist">
+            <button class="tab-btn active" data-view="guide" role="tab">
+              <span class="icon">📖</span>
+              <span>Guia</span>
+            </button>
+            <button class="tab-btn crisis" data-view="crisis" role="tab">
+              <span class="icon">🔥</span>
+              <span>Crise agora</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <section class="app-body">
+      <!-- VIEW: GUIA -->
+      <section class="view active" id="view-guide" aria-label="Guia para familiares">
+        <div class="layout-main">
+          <section class="section-shell">
+            <article class="section-page active" data-section="1">
+              <header class="section-header">
+                <div>
+                  <div class="section-kicker">Boas-vindas</div>
+                  <h2 class="section-title">Para quem é este guia</h2>
+                  <p class="section-subtitle">
+                    Se você convive com alguém com borderline e sente que tudo vira uma crise, este espaço foi feito para você. [file:1]
+                  </p>
+                </div>
+                <div class="badge-compact">Passo 1 de 8</div>
+              </header>
+
+              <div class="section-content">
+                <p>
+                  Este guia é para familiares, parceiros, amigos e pessoas próximas que convivem com alguém com Transtorno de Personalidade Borderline (TPL) e se sentem exaustos, confusos ou culpados por não saber como ajudar. [file:1]
+                </p>
+
+                <ul class="bullet-list">
+                  <li>Para quem convive com alguém com borderline.</li>
+                  <li>Para quem já tentou ajudar e só piorou.</li>
+                  <li>Para quem vive em alerta emocional.</li>
+                  <li>Para quem sente culpa, exaustão e confusão. [file:1]</li>
+                </ul>
+
+                <div class="info-card">
+                  <span class="icon-circle icon-info">i</span>
+                  <div>
+                    <div class="mini-heading">Você não está errando por mal.</div>
+                    <p>
+                      Muitas respostas são bem-intencionadas, mas acabam intensificando a crise sem que você perceba. Este guia existe para reduzir esse dano e oferecer um caminho mais claro. [file:1]
+                    </p>
+                  </div>
+                </div>
+
+                <div class="pill-list">
+                  <span class="pill">Entender o que acontece na crise</span>
+                  <span class="pill">Saber o que dizer e o que evitar</span>
+                  <span class="pill">Proteger sua saúde emocional</span> [file:1]
+                </div>
+              </div>
+            </article>
+
+            <article class="section-page" data-section="2">
+              <header class="section-header">
+                <div>
+                  <div class="section-kicker">Compreendendo a crise</div>
+                  <h2 class="section-title">Por que tudo parece começar “do nada”?</h2>
+                  <p class="section-subtitle">
+                    Pequenos gatilhos podem ativar reações emocionais muito intensas — e isso não é drama nem falta de caráter. [file:1]
+                  </p>
+                </div>
+                <div class="badge-compact">Passo 2 de 8</div>
+              </header>
+
+              <div class="section-content">
+                <div class="warning-card">
+                  <span class="icon-circle icon-warning">!</span>
+                  <div>
+                    <div class="mini-heading">Não é drama, nem manipulação.</div>
+                    <p>
+                      Trata-se de um cérebro reagindo antes de conseguir pensar, com o sistema emocional em modo de ameaça. [file:1]
+                    </p>
+                  </div>
+                </div>
+
+                <p>
+                  Quando uma crise acontece, a sensação de quem está de fora é que tudo começou “do nada”: uma frase simples, um silêncio curto ou um atraso pequeno parecem disparar uma reação desproporcional. [file:1]
+                </p>
+
+                <p>
+                  Na crise, a pessoa com borderline não reage apenas ao fato em si, mas ao significado emocional que o cérebro atribuiu àquele momento. A emoção vem primeiro, a interpretação vem depois e a lógica chega atrasada. [file:1]
+                </p>
+
+                <p class="quote-block">
+                  Quando a emoção está alta, tentar argumentar, explicar ou corrigir quase sempre piora a situação — não porque você falou errado, mas porque o cérebro do outro ainda não consegue ouvir. [file:1]
+                </p>
+              </div>
+            </article>
+
+            <article class="section-page" data-section="3">
+              <header class="section-header">
+                <div>
+                  <div class="section-kicker">O que piora</div>
+                  <h2 class="section-title">Respostas automáticas que inflam o conflito</h2>
+                  <p class="section-subtitle">
+                    Estratégias que fazem sentido racionalmente podem ser sentidas como ataque, rejeição ou frieza. [file:1]
+                  </p>
+                </div>
+                <div class="badge-compact">Passo 3 de 8</div>
+              </header>
+
+              <div class="section-content">
+                <p>
+                  Quando a crise começa, a reação automática é tentar corrigir a situação imediatamente, como se fosse possível “explicar” a pessoa para fora da emoção. [file:1]
+                </p>
+
+                <ul class="bullet-list">
+                  <li>Explicar o que “realmente aconteceu”.</li>
+                  <li>Pedir calma ou controle (“se acalma”).</li>
+                  <li>Minimizar a dor (“não é para tanto”).</li>
+                  <li>Confrontar a reação.</li>
+                  <li>Ironizar ou usar lógica fria.</li>
+                  <li>Exigir coerência no meio da emoção. [file:1]</li>
+                </ul>
+
+                <p>
+                  Nesse momento, o cérebro está em modo de ameaça, não de diálogo. Explicação vira ataque, correção vira rejeição, lógica vira frieza. [file:1]
+                </p>
+
+                <p class="quote-block">
+                  Quando a emoção está alta, tentar consertar o conteúdo só aumenta a sensação de abandono. [file:1]
+                </p>
+              </div>
+            </article>
+
+            <article class="section-page" data-section="4">
+              <header class="section-header">
+                <div>
+                  <div class="section-kicker">Reconhecendo o início</div>
+                  <h2 class="section-title">Sinais de que a crise já começou</h2>
+                  <p class="section-subtitle">
+                    O corpo costuma avisar antes da explosão completa. Perceber cedo permite intervir com menos dano. [file:1]
+                  </p>
+                </div>
+                <div class="badge-compact">Passo 4 de 8</div>
+              </header>
+
+              <div class="section-content">
+                <p>
+                  Antes da explosão, o corpo e o comportamento dão sinais claros de que a emoção está assumindo o controle e que ainda há tempo de evitar a escalada. [file:1]
+                </p>
+
+                <ul class="bullet-list">
+                  <li>Mudança súbita de humor.</li>
+                  <li>Irritação sem motivo claro.</li>
+                  <li>Olhar fixo.</li>
+                  <li>Silêncio tenso.</li>
+                  <li>Choro repentino.</li>
+                  <li>Impulsividade. [file:1]</li>
+                </ul>
+
+                <p class="quote-block">
+                  Reconhecer esse momento muda a forma de intervir: você deixa de reagir apenas ao incêndio e passa a notar as primeiras faíscas. [file:1]
+                </p>
+              </div>
+            </article>
+
+            <article class="section-page" data-section="5">
+              <header class="section-header">
+                <div>
+                  <div class="section-kicker">Durante a crise</div>
+                  <h2 class="section-title">Foco em regular a emoção</h2>
+                  <p class="section-subtitle">
+                    Na hora da tempestade, o objetivo não é explicar, mas reduzir a ativação emocional para depois conversar. [file:1]
+                  </p>
+                </div>
+                <div class="badge-compact">Passo 5 de 8</div>
+              </header>
+
+              <div class="section-content">
+                <p>
+                  Durante a crise, não discuta o fato. O foco não é entender o que aconteceu, mas reduzir a ativação emocional. [file:1]
+                </p>
+
+                <p><strong>O que ajuda nesse momento:</strong> [file:1]</p>
+                <ul class="bullet-list">
+                  <li>Tom de voz baixo e firme.</li>
+                  <li>Frases curtas e claras.</li>
+                  <li>Presença sem pressão.</li>
+                  <li>Zero ironia, zero ambiguidade. [file:1]</li>
+                </ul>
+
+                <p><strong>Pequenas atitudes que fazem diferença:</strong> [file:1]</p>
+                <ul class="bullet-list">
+                  <li>Falar devagar.</li>
+                  <li>Reduzir estímulos.</li>
+                  <li>Evitar múltiplas explicações.</li>
+                  <li>Mostrar disponibilidade sem exigir resposta imediata. [file:1]</li>
+                </ul>
+
+                <p class="quote-block">
+                  Regular a emoção não é concordar com tudo, é criar as condições mínimas para que a conversa seja possível depois. [file:1]
+                </p>
+              </div>
+            </article>
+
+            <article class="section-page" data-section="6">
+              <header class="section-header">
+                <div>
+                  <div class="section-kicker">O que dizer</div>
+                  <h2 class="section-title">Frases que organizam (e frases que desorganizam)</h2>
+                  <p class="section-subtitle">
+                    Pequenas mudanças na forma de falar podem organizar ou intensificar a crise. [file:1]
+                  </p>
+                </div>
+                <div class="badge-compact">Passo 6 de 8</div>
+              </header>
+
+              <div class="section-content">
+                <p>
+                  Durante a crise, não é a intenção que importa, mas o efeito que a fala tem no estado emocional do outro. Algumas frases organizam a emoção; outras, mesmo bem-intencionadas, intensificam. [file:1]
+                </p>
+
+                <div style="overflow-x:auto;">
+                  <table style="width:100%; border-collapse:collapse; font-size:0.82rem; margin-top:6px;">
+                    <thead>
+                    <tr style="background:#f6eee5;">
+                      <th style="padding:8px; border-bottom:1px solid #e0d4c4; text-align:left;">Fala que desorganiza</th>
+                      <th style="padding:8px; border-bottom:1px solid #e0d4c4; text-align:left;">Fala que organiza</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td style="padding:8px; border-bottom:1px solid #f0e6d6;">“Você tá exagerando.”</td>
+                      <td style="padding:8px; border-bottom:1px solid #f0e6d6;">“Eu entendo que tá pesado pra você.”</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px; border-bottom:1px solid #f0e6d6;">“De novo isso?”</td>
+                      <td style="padding:8px; border-bottom:1px solid #f0e6d6;">“Vamos entender o que te disparou agora.”</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px; border-bottom:1px solid #f0e6d6;">“Você precisa se acalmar.”</td>
+                      <td style="padding:8px; border-bottom:1px solid #f0e6d6;">“Tô aqui, respira comigo.”</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px; border-bottom:1px solid #f0e6d6;">“Você complica tudo.”</td>
+                      <td style="padding:8px; border-bottom:1px solid #f0e6d6;">“Vamos simplificar juntos.”</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px;">“Isso é drama.”</td>
+                      <td style="padding:8px;">“Isso é sinal de sofrimento.”</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="success-card">
+                  <span class="icon-circle icon-success">✓</span>
+                  <div>
+                    <div class="mini-heading">Se a pessoa se afastar</div>
+                    <p>
+                      Em algumas crises, a pessoa pode querer se afastar, silenciar ou sair do ambiente. Isso muitas vezes é tentativa de reduzir a sobrecarga emocional, não desprezo. [file:1]
+                    </p>
+                    <p class="quote-block">
+                      Uma frase possível: “Você pode ir. Só me avisa quando chegar.” Afastamento não é abandono quando há comunicação mínima. [file:1]
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="section-page" data-section="7">
+              <header class="section-header">
+                <div>
+                  <div class="section-kicker">Depois da crise</div>
+                  <h2 class="section-title">Reconectar, revisar e colocar limites</h2>
+                  <p class="section-subtitle">
+                    Quando a poeira baixa, é hora de reconstruir a relação com limites claros. [file:1]
+                  </p>
+                </div>
+                <div class="badge-compact">Passo 7 de 8</div>
+              </header>
+
+              <div class="section-content">
+                <h3 style="font-size:0.9rem; margin:0;">Quando tudo acalma</h3>
+                <p>
+                  Depois que a intensidade emocional diminui, surge a vontade de revisar tudo o que foi dito ou feito, mas esse é um ponto delicado e onde muitas relações se desorganizam novamente. [file:1]
+                </p>
+
+                <p><strong>Não é o momento de:</strong> [file:1]</p>
+                <ul class="bullet-list">
+                  <li>Repassar cada detalhe da crise.</li>
+                  <li>Cobrar coerência emocional.</li>
+                  <li>Exigir explicações completas.</li>
+                  <li>Reabrir feridas antigas. [file:1]</li>
+                </ul>
+
+                <p><strong>O que ajuda nesse momento:</strong> [file:1]</p>
+                <ul class="bullet-list">
+                  <li>Nomear o que aconteceu, sem acusação.</li>
+                  <li>Reconhecer o sofrimento envolvido.</li>
+                  <li>Validar antes de alinhar qualquer limite.</li>
+                  <li>Manter a conversa curta e objetiva. [file:1]</li>
+                </ul>
+
+                <p class="quote-block">
+                  Exemplo: “Agora que tudo acalmou, acho que a gente consegue entender melhor o que aconteceu.” [file:1]
+                </p>
+
+                <h3 style="font-size:0.9rem; margin:4px 0 0;">Limites sem abandono</h3>
+                <p>
+                  Colocar limites não significa rejeitar, punir ou ameaçar abandono. Limites existem para proteger a relação, não para romper. [file:1]
+                </p>
+
+                <ul class="bullet-list">
+                  <li>Um limite regulador é claro, firme e dito com tom calmo. [file:1]</li>
+                </ul>
+
+                <p><strong>Exemplos de limites que protegem:</strong> [file:1]</p>
+                <ul class="bullet-list">
+                  <li>“Eu fico com você, mas não consigo continuar se houver gritos.”</li>
+                  <li>“A gente conversa sobre isso, mas preciso que seja sem ataque.”</li>
+                  <li>“Eu te escuto, mas preciso de respeito para continuar aqui.”</li>
+                </ul>
+
+                <p class="quote-block">
+                  Limite não é abandono, é previsibilidade emocional: a pessoa sabe o que esperar de você, mesmo em momentos difíceis. [file:1]
+                </p>
+              </div>
+            </article>
+
+            <article class="section-page" data-section="8">
+              <header class="section-header">
+                <div>
+                  <div class="section-kicker">Prevenção e ajuda</div>
+                  <h2 class="section-title">Prevenção diária, buscar ajuda e mensagem final</h2>
+                  <p class="section-subtitle">
+                    Pequenos ajustes diários, cuidado com quem cuida e suporte profissional fazem diferença real. [file:1]
+                  </p>
+                </div>
+                <div class="badge-compact">Passo 8 de 8</div>
+              </header>
+
+              <div class="section-content">
+                <h3 style="font-size:0.9rem; margin:0;">Prevenção no dia a dia</h3>
+                <p>
+                  As crises se acumulam quando o ambiente se torna imprevisível, ambíguo ou emocionalmente inseguro. [file:1]
+                </p>
+
+                <p><strong>O que ajuda de forma consistente:</strong> [file:1]</p>
+                <ul class="bullet-list">
+                  <li>Comunicação clara, sem indiretas ou sarcasmo.</li>
+                  <li>Avisar mudanças com antecedência sempre que possível.</li>
+                  <li>Manter acordos simples e previsíveis.</li>
+                  <li>Validar sentimentos antes de discordar.</li>
+                  <li>Evitar ameaças de abandono, mesmo em conflitos. [file:1]</li>
+                </ul>
+
+                <p class="quote-block">
+                  Ambiente previsível não é perfeito, mas é um espaço em que a pessoa sabe o que esperar emocionalmente. [file:1]
+                </p>
+
+                <h3 style="font-size:0.9rem; margin:4px 0 0;">Cuidar de quem cuida</h3>
+                <p>
+                  Conviver com alguém em sofrimento emocional intenso desgasta, e sem cuidado quem está ao redor também adoece. [file:1]
+                </p>
+
+                <p><strong>É importante lembrar:</strong> [file:1]</p>
+                <ul class="bullet-list">
+                  <li>Você não é terapeuta.</li>
+                  <li>Você não controla as reações do outro.</li>
+                  <li>Você não é responsável por regular tudo sozinho. [file:1]</li>
+                </ul>
+
+                <p><strong>Sinais de alerta em quem convive:</strong> [file:1]</p>
+                <ul class="bullet-list">
+                  <li>Exaustão constante.</li>
+                  <li>Medo excessivo de falar.</li>
+                  <li>Culpa crônica.</li>
+                  <li>Isolamento.</li>
+                  <li>Sensação de estar “pisando em ovos” o tempo todo. [file:1]</li>
+                </ul>
+
+                <p class="quote-block">
+                  Cuidar de si não é egoísmo: é condição básica para continuar presente de forma saudável. [file:1]
+                </p>
+
+                <h3 style="font-size:0.9rem; margin:4px 0 0;">Quando buscar ajuda profissional</h3>
+                <p>
+                  Existem situações em que o manejo familiar, por mais cuidadoso que seja, não é suficiente, e buscar ajuda é sinal de responsabilidade, não de fracasso. [file:1]
+                </p>
+
+                <p><strong>Considere procurar apoio profissional quando houver:</strong> [file:1]</p>
+                <ul class="bullet-list">
+                  <li>Crises muito frequentes ou cada vez mais intensas.</li>
+                  <li>Risco de autoagressão ou comportamentos impulsivos graves.</li>
+                  <li>Ameaças recorrentes de abandono ou ruptura.</li>
+                  <li>Exaustão emocional de quem convive.</li>
+                  <li>Sensação de que a relação gira sempre no mesmo ciclo. [file:1]</li>
+                </ul>
+
+                <p>
+                  Acompanhamento psicológico e psiquiátrico pode reduzir a intensidade das crises, desenvolver habilidades de regulação emocional, melhorar a comunicação e proteger a saúde mental de todos os envolvidos. [file:1]
+                </p>
+
+                <p class="quote-block">
+                  Em alguns casos, orientação familiar ou terapia de casal também são indicadas. Pedir ajuda a tempo evita danos maiores depois. [file:1]
+                </p>
+
+                <h3 style="font-size:0.9rem; margin:4px 0 0;">Por que isso funciona</h3>
+                <p>
+                  Durante uma crise emocional intensa, o cérebro entra em modo de ameaça e áreas responsáveis por reflexão, empatia e diálogo ficam menos acessíveis. [file:1]
+                </p>
+
+                <p>
+                  Quando o ambiente oferece validação, previsibilidade e comunicação clara, a ativação emocional diminui e a capacidade de pensar, ouvir e conversar retorna gradualmente. [file:1]
+                </p>
+
+                <ul class="bullet-list">
+                  <li>Emoção regulada → diálogo possível.</li>
+                  <li>Validação reduz a sensação de ameaça.</li>
+                  <li>Previsibilidade aumenta segurança emocional.</li>
+                  <li>Tom calmo facilita retomada do raciocínio. [file:1]</li>
+                </ul>
+
+                <p class="quote-block">
+                  Não é sobre ceder, mas sobre escolher o momento certo para cada coisa, reduzindo danos e preservando o vínculo. [file:1]
+                </p>
+
+                <h3 style="font-size:0.9rem; margin:4px 0 0;">Mensagem final</h3>
+                <p>
+                  Conviver com alguém com borderline é desafiador, não porque falte amor, mas porque o sofrimento emocional pode distorcer reações, palavras e intenções. [file:1]
+                </p>
+
+                <p>
+                  Este guia não promete acabar com todas as crises, mas oferece ferramentas para reduzir danos, evitar escaladas desnecessárias e trazer mais clareza quando tudo parece confuso. [file:1]
+                </p>
+
+                <p class="quote-block">
+                  Você não precisa acertar sempre: precisa entender quando agir, quando pausar e quando buscar ajuda. [file:1]
+                </p>
+              </div>
+            </article>
+          </section>
+
+          <aside class="side-panel">
+            <section class="pill-section-nav">
+              <div class="pill-section-nav-title">Navegue pelo conteúdo</div>
+              <div class="pill-section-nav-items">
+                <button class="nav-chip active" data-go="1">Boas-vindas</button>
+                <button class="nav-chip" data-go="2">Por que começa “do nada”</button>
+                <button class="nav-chip" data-go="3">O que piora</button>
+                <button class="nav-chip" data-go="4">Sinais da crise</button>
+                <button class="nav-chip" data-go="5">Durante a crise</button>
+                <button class="nav-chip" data-go="6">O que dizer</button>
+                <button class="nav-chip" data-go="7">Depois da crise</button>
+                <button class="nav-chip" data-go="8">Prevenção e ajuda</button>
+              </div>
+            </section>
+
+            <section class="cta-card">
+              <div class="cta-tag">Como usar</div>
+              <div class="cta-title">Use este guia como mapa, não como regra rígida</div>
+              <p>
+                Leia com calma, volte aos trechos que fizerem sentido e combine este material com o suporte do seu profissional de confiança. [file:1]
+              </p>
+              <p class="cta-note">
+                Você pode usar a aba “Crise agora” para registrar crises ao longo do tempo e levar o histórico ao acompanhamento terapêutico. [file:1]
+              </p>
+            </section>
+
+            <section class="ref-card">
+              <div class="mini-heading">Referências principais (seleção)</div>
+              <ul>
+                <li>American Psychiatric Association. DSM‑5. 2013.</li>
+                <li>Linehan MM. DBT Skills Training Manual. 2014.</li>
+                <li>Bateman A, Fonagy P. Mentalization‑Based Treatment for BPD. 2016.</li>
+                <li>Schmahl C et al. Mechanisms of emotion dysregulation in BPD. 2020. [file:1]</li>
+              </ul>
+            </section>
+
+            <section class="progress-bar-wrapper">
+              <div class="progress-label-row">
+                <span>Progresso no guia</span>
+                <span id="progress-text">1 de 8</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="progress-bar"></div>
+              </div>
+            </section>
+          </aside>
+        </div>
+
+        <footer class="nav-controls" aria-label="Controles de navegação">
+          <div class="stepper-indicator" aria-hidden="true">
+            <span class="step-dot active"></span>
+            <span class="step-dot"></span>
+            <span class="step-dot"></span>
+            <span class="step-dot"></span>
+            <span class="step-dot"></span>
+            <span class="step-dot"></span>
+            <span class="step-dot"></span>
+            <span class="step-dot"></span>
+          </div>
+          <div class="nav-buttons">
+            <button class="nav-btn" id="prev-btn" disabled>← Voltar</button>
+            <button class="nav-btn primary" id="next-btn">Próximo passo →</button>
+          </div>
+          <div class="nav-caption">
+            Use os botões ou os chips laterais para navegar.
+          </div>
+        </footer>
+      </section>
+
+      <!-- VIEW: CRISE -->
+      <section class="view" id="view-crisis" aria-label="Modo crise">
+        <section class="crisis-wrapper">
+          <header class="crisis-header">
+            <div class="crisis-kicker">Crise agora</div>
+            <h2 class="crisis-title">Escolha a intensidade e siga o passo a passo</h2>
+            <p class="crisis-subtitle">
+              Não é sobre julgar a crise, mas sobre entender o nível de risco para escolher a melhor conduta possível agora. [file:1]
+            </p>
+          </header>
+
+          <section>
+            <div class="crisis-intensity-grid" id="crisis-levels">
+              <!-- preenchido via JS a partir do appConfig -->
+            </div>
+
+            <div class="crisis-panel" id="crisis-panel">
+              <div class="crisis-panel-title">
+                <span id="crisis-panel-title-text">Comece escolhendo a intensidade da crise.</span>
+              </div>
+              <p class="crisis-note">
+                Ao escolher o nível, você verá orientações adequadas e terá a opção de registrar a crise para acompanhar sua evolução ao longo do tempo. [file:1]
+              </p>
+            </div>
+          </section>
+
+          <section class="history-box" aria-label="Histórico de crises">
+            <div class="history-header" style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="mini-heading">Histórico recente de crises</span>
+              <button class="btn-small" id="clear-history-btn" type="button">Limpar histórico</button>
+            </div>
+            <div class="history-list" id="history-list">
+              <div class="history-entry-body">
+                Nenhuma crise registrada ainda. Quando você registrar, elas aparecerão aqui de forma privada neste navegador. [file:1]
+              </div>
+            </div>
+          </section>
+
+          <section class="history-box" aria-label="Relatório para terapia">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:6px;">
+              <span class="mini-heading">Relatório para levar ao seu profissional</span>
+              <button class="btn-small" id="generate-report-btn" type="button">Gerar relatório</button>
+            </div>
+            <p class="crisis-note">
+              O texto abaixo é um resumo das crises registradas neste dispositivo. Você pode copiar e colar para compartilhar com seu terapeuta ou psiquiatra. [file:1]
+            </p>
+            <div class="report-output" id="report-output"></div>
+          </section>
+        </section>
+      </section>
+    </section>
+  </main>
+</div>
+
+<script>
+  const appConfig = {
+    history: {
+      storageKey: "borderline_crisis_history_v1",
+      maxEntries: 150
+    },
+    crisisLevels: [
+      {
+        id: "leve",
+        label: "Leve",
+        chip: "Desconforto controlável",
+        description: "Ansiedade, irritação ou tristeza, mas ainda é possível pensar e se organizar minimamente.",
+        mode: "breathing"
+      },
+      {
+        id: "moderada",
+        label: "Moderada",
+        chip: "Emoção muito alta",
+        description: "Vontade de discutir, sensação de perda de controle, choro ou impulsividade, mas sem risco imediato à vida.",
+        mode: "checklist"
+      },
+      {
+        id: "grave",
+        label: "Grave",
+        chip: "Risco à segurança",
+        description: "Autoagressão, ideação suicida ativa ou risco imediato à integridade física.",
+        mode: "emergency"
+      }
+    ]
+  };
+
+  // Navegação aba Guia
+  (function() {
+    const totalSections = 8;
+    let current = 1;
+
+    const pages = document.querySelectorAll('.section-page');
+    const chips = document.querySelectorAll('.nav-chip');
+    const dots = document.querySelectorAll('.step-dot');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    function updateGuideView(target) {
+      current = target;
+
+      pages.forEach(page => {
+        const sec = Number(page.getAttribute('data-section'));
+        page.classList.toggle('active', sec === current);
+      });
+
+      chips.forEach(chip => {
+        const sec = Number(chip.getAttribute('data-go'));
+        chip.classList.toggle('active', sec === current);
+      });
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index + 1 === current);
+      });
+
+      const pct = (current / totalSections) * 100;
+      progressBar.style.width = pct + '%';
+      progressText.textContent = current + ' de ' + totalSections;
+
+      prevBtn.disabled = current === 1;
+      nextBtn.disabled = current === totalSections;
+      nextBtn.textContent = current === totalSections ? 'Concluído' : 'Próximo passo →';
+
+      // salvar progresso no localStorage
+      try {
+        localStorage.setItem('borderline_guide_last_section', String(current));
+      } catch(e) {}
+    }
+
+    prevBtn.addEventListener('click', function() {
+      if (current > 1) updateGuideView(current - 1);
+    });
+
+    nextBtn.addEventListener('click', function() {
+      if (current < totalSections) updateGuideView(current + 1);
+    });
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', function() {
+        const sec = Number(chip.getAttribute('data-go'));
+        updateGuideView(sec);
+      });
+    });
+
+    // Restaurar última seção lida, se existir
+    try {
+      const saved = localStorage.getItem('borderline_guide_last_section');
+      if (saved) {
+        const sec = Number(saved);
+        if (sec >= 1 && sec <= totalSections) {
+          updateGuideView(sec);
+        } else {
+          updateGuideView(1);
+        }
+      } else {
+        updateGuideView(1);
+      }
+    } catch(e) {
+      updateGuideView(1);
+    }
+  })();
+
+  // Tabs Guia / Crise
+  (function() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const viewGuide = document.getElementById('view-guide');
+    const viewCrisis = document.getElementById('view-crisis');
+
+    function setView(view) {
+      if (view === 'guide') {
+        viewGuide.classList.add('active');
+        viewCrisis.classList.remove('active');
+      } else {
+        viewGuide.classList.remove('active');
+        viewCrisis.classList.add('active');
+      }
+      tabButtons.forEach(btn => {
+        const target = btn.getAttribute('data-view');
+        btn.classList.toggle('active', target === view);
+      });
+    }
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const view = btn.getAttribute('data-view');
+        setView(view);
+      });
+    });
+
+    setView('guide');
+  })();
+
+  // Histórico: utilidades
+  function loadHistory() {
+    try {
+      const raw = localStorage.getItem(appConfig.history.storageKey);
+      if (!raw) return [];
+      return JSON.parse(raw);
+    } catch(e) {
+      return [];
+    }
+  }
+
+  function saveHistory(entries) {
+    const trimmed = entries.slice(-appConfig.history.maxEntries);
+    try {
+      localStorage.setItem(appConfig.history.storageKey, JSON.stringify(trimmed));
+    } catch(e) {}
+    return trimmed;
+  }
+
+  function addCrisisEntry(entry) {
+    const history = loadHistory();
+    history.push(entry);
+    saveHistory(history);
+    renderHistory();
+  }
+
+  function formatDateTime(iso) {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso;
+    return d.toLocaleString('pt-BR', {
+      day: '2-digit', month: '2-digit', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+  }
+
+  function generateReportText() {
+    const history = loadHistory();
+    if (!history.length) {
+      return 'Nenhuma crise registrada até o momento neste dispositivo.';
+    }
+    const lines = history.map(h => {
+      const dt = formatDateTime(h.timestamp);
+      const level = h.level || 'não informado';
+      const trigger = h.perceivedTrigger || 'não informado';
+      const actions = (h.actionsTaken && h.actionsTaken.length)
+        ? h.actionsTaken.join(', ')
+        : 'não informado';
+      const emergency = h.calledEmergency ? 'SIM' : 'NÃO';
+      const notes = h.notes || 'sem observações';
+      return `Data/Hora: ${dt}\nIntensidade: ${level}\nGatilho percebido: ${trigger}\nAções realizadas: ${actions}\nBuscou serviço de urgência: ${emergency}\nObservações: ${notes}\n---`;
+    });
+    return lines.join('\n');
+  }
+
+  function renderHistory() {
+    const list = document.getElementById('history-list');
+    const history = loadHistory();
+    list.innerHTML = '';
+    if (!history.length) {
+      const div = document.createElement('div');
+      div.className = 'history-entry-body';
+      div.textContent = 'Nenhuma crise registrada ainda. Quando você registrar, elas aparecerão aqui de forma privada neste navegador.';
+      list.appendChild(div);
+      return;
+    }
+    history.slice().reverse().forEach(h => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'history-entry';
+
+      const header = document.createElement('div');
+      header.className = 'history-entry-header';
+
+      const levelSpan = document.createElement('span');
+      levelSpan.className = 'history-entry-level badge-level-' + h.level;
+      levelSpan.textContent = (h.level || '').charAt(0).toUpperCase() + (h.level || '').slice(1);
+
+      const timeSpan = document.createElement('span');
+      timeSpan.textContent = formatDateTime(h.timestamp);
+
+      header.appendChild(levelSpan);
+      header.appendChild(timeSpan);
+
+      const body = document.createElement('div');
+      body.className = 'history-entry-body';
+      body.textContent = h.perceivedTrigger
+        ? 'Gatilho: ' + h.perceivedTrigger
+        : 'Gatilho não informado.';
+
+      wrapper.appendChild(header);
+      wrapper.appendChild(body);
+      list.appendChild(wrapper);
+    });
+  }
+
+  // Construção do Modo Crise
+  (function() {
+    const levelsContainer = document.getElementById('crisis-levels');
+    const panel = document.getElementById('crisis-panel');
+    const panelTitleText = document.getElementById('crisis-panel-title-text');
+    let currentMode = null;
+
+    function renderLevels() {
+      appConfig.crisisLevels.forEach(level => {
+        const card = document.createElement('div');
+        card.className = 'crisis-intensity-card';
+        card.dataset.levelId = level.id;
+
+        const labelRow = document.createElement('div');
+        labelRow.className = 'crisis-intensity-label';
+
+        const labelSpan = document.createElement('span');
+        labelSpan.textContent = level.label;
+
+        const chip = document.createElement('span');
+        chip.className = 'crisis-chip';
+        chip.textContent = level.chip;
+
+        labelRow.appendChild(labelSpan);
+        labelRow.appendChild(chip);
+
+        const desc = document.createElement('div');
+        desc.className = 'crisis-intensity-desc';
+        desc.textContent = level.description;
+
+        card.appendChild(labelRow);
+        card.appendChild(desc);
+
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.crisis-intensity-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          showMode(level);
+        });
+
+        levelsContainer.appendChild(card);
+      });
+    }
+
+    function showMode(level) {
+      currentMode = level;
+      panel.innerHTML = '';
+
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'crisis-panel-title';
+
+      const modeLabel = document.createElement('span');
+      modeLabel.className = 'crisis-mode-label';
+      modeLabel.textContent = 'Intensidade: ' + level.label;
+
+      const mainText = document.createElement('span');
+      mainText.textContent = level.chip;
+
+      titleDiv.appendChild(mainText);
+      titleDiv.appendChild(modeLabel);
+      panel.appendChild(titleDiv);
+
+      if (level.mode === 'breathing') {
+        renderBreathingMode(panel, level);
+      } else if (level.mode === 'checklist') {
+        renderChecklistMode(panel, level);
+      } else if (level.mode === 'emergency') {
+        renderEmergencyMode(panel, level);
+      }
+    }
+
+    function renderBreathingMode(container, level) {
+      const p = document.createElement('p');
+      p.textContent = 'Use esta prática curta de respiração e atenção ao corpo para ajudar a emoção a descer alguns graus antes de tomar decisões.'; // [file:1]
+      container.appendChild(p);
+
+      const breathingContainer = document.createElement('div');
+      breathingContainer.className = 'breathing-container';
+
+      const circle = document.createElement('div');
+      circle.className = 'breathing-circle';
+      const circleText = document.createElement('span');
+      circleText.textContent = 'Inspire...';
+      circle.appendChild(circleText);
+
+      let phase = 'in';
+
+      setInterval(() => {
+        if (!document.body.contains(circle)) return;
+        phase = phase === 'in' ? 'out' : 'in';
+        circleText.textContent = phase === 'in' ? 'Inspire...' : 'Expire...';
+      }, 4000);
+
+      const caption = document.createElement('div');
+      caption.className = 'breathing-caption';
+      caption.textContent = 'Acompanhe o movimento: inspire enquanto o círculo cresce, expire enquanto ele diminui. Faça de 1 a 3 minutos, se possível.'; // [file:1]
+
+      breathingContainer.appendChild(circle);
+      breathingContainer.appendChild(caption);
+      container.appendChild(breathingContainer);
+
+      const mindP = document.createElement('p');
+      mindP.innerHTML = '<strong>Exercício rápido de atenção plena:</strong> nomeie 3 coisas que você vê, 2 que você ouve e 1 sensação no seu corpo agora.';
+      container.appendChild(mindP);
+
+      renderCrisisForm(container, level);
+    }
+
+    function renderChecklistMode(container, level) {
+      const intro = document.createElement('p');
+      intro.textContent = 'Aqui a emoção está alta, mas ainda há espaço para organizar a situação com pequenos passos concretos.'; // [file:1]
+      container.appendChild(intro);
+
+      const checklist = document.createElement('div');
+      checklist.className = 'checklist';
+
+      const items = [
+        'Parei de discutir o conteúdo da briga neste momento.',
+        'Reduzi estímulos (barulho, telas, pessoas).',
+        'Usei pelo menos uma frase de validação.',
+        'Evitei ameaçar abandono ou rompimento.',
+        'Combinei de retomar a conversa em outro momento.' // [file:1]
+      ];
+
+      items.forEach(text => {
+        const row = document.createElement('label');
+        row.className = 'checklist-item';
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        const span = document.createElement('span');
+        span.textContent = text;
+        row.appendChild(input);
+        row.appendChild(span);
+        checklist.appendChild(row);
+      });
+
+      container.appendChild(checklist);
+
+      const tip = document.createElement('p');
+      tip.className = 'crisis-note';
+      tip.textContent = 'Marque os itens que você conseguiu fazer. O objetivo não é perfeição, é reduzir a escalada e preservar o vínculo.'; // [file:1]
+      container.appendChild(tip);
+
+      renderCrisisForm(container, level);
+    }
+
+    function renderEmergencyMode(container, level) {
+      const box = document.createElement('div');
+      box.className = 'emergency-box';
+
+      const titleRow = document.createElement('div');
+      titleRow.className = 'emergency-title';
+
+      const alertIcon = document.createElement('span');
+      alertIcon.textContent = '⚠️';
+
+      const titleText = document.createElement('span');
+      titleText.textContent = 'Situação de risco à segurança';
+
+      const badge = document.createElement('span');
+      badge.className = 'emergency-badge';
+      badge.textContent = 'Prioridade: proteger a vida';
+
+      titleRow.appendChild(alertIcon);
+      titleRow.appendChild(titleText);
+      titleRow.appendChild(badge);
+
+      const list = document.createElement('ul');
+      list.className = 'bullet-list';
+      list.style.marginTop = '4px';
+
+      [
+        'Se houver risco imediato de autoagressão ou agressão, priorize a segurança física.',
+        'Considere acionar serviços de urgência da sua região (SAMU 192, pronto-socorro, polícia) conforme a necessidade.',
+        'Evite discutir conteúdo da briga: foque em afastar objetos de risco, não deixar a pessoa sozinha e buscar ajuda profissional.' // [file:1]
+      ].forEach(text => {
+        const li = document.createElement('li');
+        li.textContent = text;
+        list.appendChild(li);
+      });
+
+      const note = document.createElement('p');
+      note.className = 'crisis-note';
+      note.textContent = 'Em situações graves, a responsabilidade principal é proteger a vida, mesmo que a pessoa fique irritada no momento. Você pode retomar a conversa depois, com apoio profissional.'; // [file:1]
+
+      box.appendChild(titleRow);
+      box.appendChild(list);
+      box.appendChild(note);
+      container.appendChild(box);
+
+      renderCrisisForm(container, level, true);
+    }
+
+    function renderCrisisForm(container, level, showEmergencyFlag) {
+      const form = document.createElement('div');
+      form.className = 'crisis-form';
+
+      const formTitle = document.createElement('div');
+      formTitle.className = 'mini-heading';
+      formTitle.textContent = 'Registrar esta crise (opcional)';
+      form.appendChild(formTitle);
+
+      const p = document.createElement('p');
+      p.className = 'crisis-note';
+      p.textContent = 'Este registro fica salvo apenas neste dispositivo e pode ajudar você e seu terapeuta a enxergarem padrões ao longo do tempo.'; // [file:1]
+      form.appendChild(p);
+
+      const labelTrigger = document.createElement('label');
+      labelTrigger.textContent = 'Gatilho percebido (por exemplo: discussão, atraso, mensagem, sensação interna):';
+      const inputTrigger = document.createElement('input');
+      inputTrigger.type = 'text';
+      inputTrigger.placeholder = 'Descreva em poucas palavras';
+      form.appendChild(labelTrigger);
+      form.appendChild(inputTrigger);
+
+      const labelActions = document.createElement('label');
+      labelActions.textContent = 'O que você fez ou tentou fazer para lidar com a crise?';
+      const textareaActions = document.createElement('textarea');
+      textareaActions.placeholder = 'Ex.: respiração, sair do ambiente, ligar para alguém, usar frase de validação...';
+      form.appendChild(labelActions);
+      form.appendChild(textareaActions);
+
+      let emergencySelect = null;
+      if (showEmergencyFlag) {
+        const labelEmergency = document.createElement('label');
+        labelEmergency.textContent = 'Você buscou serviço de urgência (SAMU, pronto-socorro, polícia)?';
+        emergencySelect = document.createElement('select');
+        ['Não', 'Sim'].forEach(opt => {
+          const o = document.createElement('option');
+          o.value = opt.toLowerCase();
+          o.textContent = opt;
+          emergencySelect.appendChild(o);
+        });
+        form.appendChild(labelEmergency);
+        form.appendChild(emergencySelect);
+      }
+
+      const labelNotes = document.createElement('label');
+      labelNotes.textContent = 'Observações que você gostaria de lembrar para conversar com o seu profissional:';
+      const textareaNotes = document.createElement('textarea');
+      textareaNotes.placeholder = 'Ex.: o que funcionou melhor, o que você não quer repetir, sentimentos depois da crise...';
+      form.appendChild(labelNotes);
+      form.appendChild(textareaNotes);
+
+      const actionsRow = document.createElement('div');
+      actionsRow.className = 'crisis-actions-row';
+
+      const leftActions = document.createElement('div');
+      const saveBtn = document.createElement('button');
+      saveBtn.type = 'button';
+      saveBtn.className = 'btn-small primary';
+      saveBtn.textContent = 'Registrar crise';
+
+      const rightNote = document.createElement('div');
+      rightNote.className = 'crisis-note';
+      rightNote.textContent = 'Você pode registrar crises de qualquer intensidade e revisitar o histórico depois.';
+
+      leftActions.appendChild(saveBtn);
+      actionsRow.appendChild(leftActions);
+      actionsRow.appendChild(rightNote);
+
+      form.appendChild(actionsRow);
+
+      saveBtn.addEventListener('click', () => {
+        const entry = {
+          id: 'crisis-' + Date.now(),
+          level: level.id,
+          timestamp: new Date().toISOString(),
+          perceivedTrigger: inputTrigger.value.trim() || null,
+          actionsTaken: textareaActions.value.trim()
+            ? textareaActions.value.trim().split(/[,;/]/).map(s => s.trim()).filter(Boolean)
+            : [],
+          calledEmergency: emergencySelect ? emergencySelect.value === 'sim' : false,
+          notes: textareaNotes.value.trim() || null
+        };
+        addCrisisEntry(entry);
+        inputTrigger.value = '';
+        textareaActions.value = '';
+        if (emergencySelect) emergencySelect.value = 'não';
+        textareaNotes.value = '';
+        alert('Crise registrada neste dispositivo.');
+      });
+
+      container.appendChild(form);
+    }
+
+    renderLevels();
+    renderHistory();
+
+    const clearBtn = document.getElementById('clear-history-btn');
+    clearBtn.addEventListener('click', () => {
+      if (!confirm('Tem certeza de que deseja apagar todo o histórico de crises deste dispositivo?')) return;
+      saveHistory([]);
+      renderHistory();
+    });
+
+    const reportBtn = document.getElementById('generate-report-btn');
+    const reportOutput = document.getElementById('report-output');
+    reportBtn.addEventListener('click', () => {
+      const text = generateReportText();
+      reportOutput.textContent = text;
+    });
+  })();
+</script>
+</body>
+</html>
