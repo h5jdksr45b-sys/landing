@@ -1,590 +1,525 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Protocolo 7 Dias — Família de TPB | Dr. Fabio Schmidt</title>
-  <meta name="description" content="Aulas gravadas + scripts prontos para familiares lidarem melhor com crises emocionais. Método objetivo, aplicável e ético. Acesso imediato." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Protocolo 7 Dias — Pare de Alimentar a Crise</title>
+  <meta name="description" content="Aulas gravadas + PDF extra com scripts prontos para pais/familiares lidarem melhor com crises no contexto de TPB, com técnica e clareza." />
+  <meta name="theme-color" content="#0b0b0d" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Protocolo 7 Dias — Pare de Alimentar a Crise" />
+  <meta property="og:description" content="Aulas gravadas + PDF extra com scripts prontos. Página oficial de acesso." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="007.png" />
 
   <style>
     :root{
-      --bg:#0b0d10;
-      --panel:#11151b;
-      --panel2:#0f1217;
-      --text:#e9edf5;
-      --muted:#aeb7c6;
-      --line:#242b3a;
-
-      --gold:#e0a52b;
-      --cta:#e63946;
-      --cta2:#d62839;
-      --ok:#39d98a;
-
+      --bg:#0b0b0d;
+      --card:#121218;
+      --muted:#a8adbd;
+      --text:#f5f7ff;
+      --line:rgba(255,255,255,.10);
+      --blue:#1677ff;
+      --blue2:#2a8cff;
+      --ok:#28d17c;
+      --warn:#ffcc66;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius:18px;
-      --shadow: 0 16px 60px rgba(0,0,0,.45);
-      --shadow2: 0 12px 30px rgba(0,0,0,.28);
+      --max: 1080px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
-
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family:var(--font);
       background:
-        radial-gradient(1100px 520px at 50% -10%, rgba(224,165,43,.14), transparent 62%),
-        radial-gradient(860px 420px at 10% 18%, rgba(230,57,70,.10), transparent 58%),
-        radial-gradient(860px 420px at 90% 26%, rgba(57,217,138,.06), transparent 58%),
+        radial-gradient(900px 500px at 15% 10%, rgba(22,119,255,.20), transparent 50%),
+        radial-gradient(700px 500px at 80% 20%, rgba(40,209,124,.10), transparent 55%),
+        radial-gradient(900px 600px at 40% 110%, rgba(22,119,255,.12), transparent 55%),
         var(--bg);
       color:var(--text);
-      line-height:1.6;
+      line-height:1.35;
     }
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1100px;margin:0 auto;padding:0 18px}
-
-    /* progress bar */
-    .progress{
-      position:fixed;left:0;top:0;z-index:60;height:3px;width:0%;
-      background: linear-gradient(90deg, rgba(224,165,43,.95), rgba(230,57,70,.85));
-      box-shadow: 0 6px 20px rgba(224,165,43,.18);
-    }
-
-    /* topbar */
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
     .topbar{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(11,13,16,.72);
-      border-bottom:1px solid rgba(36,43,58,.7);
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(11,11,13,.62);
+      border-bottom:1px solid var(--line);
     }
-    .topbar-inner{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:12px;padding:12px 0;
+    .topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 24px}
+    .brand{display:flex; align-items:center; gap:10px; min-width: 220px;}
+    .logoMark{
+      width:34px; height:34px; border-radius:50%;
+      display:grid; place-items:center;
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+      border:1px solid var(--line);
     }
-    .brand{display:flex;flex-direction:column;gap:2px}
-    .brand strong{font-weight:900;letter-spacing:-.2px}
-    .brand span{color:var(--muted);font-size:12.5px}
-
-    .nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:flex-end}
+    .brand strong{font-size:14px; letter-spacing:.2px}
+    .brand span{display:block; font-size:12px; color:var(--muted)}
+    .top-cta{display:flex; align-items:center; gap:10px}
     .pill{
-      font-size:13px;color:rgba(174,183,198,.95);
-      padding:8px 10px;border-radius:999px;
-      border:1px solid rgba(36,43,58,.85);
-      background: rgba(17,21,27,.55);
-      transition:.15s ease;
-    }
-    .pill:hover{border-color:rgba(224,165,43,.6);color:var(--text);transform:translateY(-1px)}
-
-    /* buttons */
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      font-weight:900;
-      padding:12px 16px;border-radius:14px;
-      border:1px solid rgba(230,57,70,.35);
-      background: linear-gradient(180deg, rgba(230,57,70,.95), rgba(214,40,57,.95));
-      color:#fff;
-      box-shadow: 0 14px 36px rgba(230,57,70,.18);
-      transition: transform .15s ease, filter .15s ease;
+      font-size:12px; color:var(--muted);
+      padding:8px 10px; border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
       white-space:nowrap;
     }
-    .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(180deg, rgba(22,119,255,1), rgba(42,140,255,1));
+      box-shadow:0 14px 40px rgba(22,119,255,.25);
+      color:white;
+      font-weight:800;
+      text-decoration:none;
+      letter-spacing:.2px;
+      transition: transform .12s ease, filter .12s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); filter: brightness(1.03)}
+    .btn:active{transform: translateY(0px); filter: brightness(.98)}
     .btn.secondary{
-      background: rgba(17,21,27,.75);
-      border:1px solid rgba(224,165,43,.35);
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
       box-shadow:none;
       color:var(--text);
+      font-weight:700;
     }
-    .btn.secondary:hover{border-color:rgba(224,165,43,.65)}
+    .btn.small{padding:11px 12px; border-radius:12px; font-weight:800; font-size:14px}
+    .hero{
+      padding:26px 0 8px;
+    }
+    .grid{
+      display:grid; gap:22px;
+      grid-template-columns: 1.05fr .95fr;
+      align-items:center;
+    }
+    @media (max-width: 960px){
+      .grid{grid-template-columns:1fr}
+      .brand{min-width:auto}
+      .pill{display:none}
+    }
 
-    /* card */
-    .card{
-      background: linear-gradient(180deg, rgba(17,21,27,.92), rgba(15,18,23,.85));
-      border:1px solid rgba(36,43,58,.85);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-    }
-
-    /* hero */
-    .hero{padding:18px 0 6px}
-    .hero-banner{
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid rgba(36,43,58,.85);
-      background:#000;
-      box-shadow: var(--shadow);
-      margin-bottom:16px;
-    }
-    .hero-banner img{width:100%;display:block;height:auto}
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.06fr .94fr;
-      gap:16px;
-      align-items:start;
-    }
-    .hero-copy{padding:20px}
     .kicker{
-      display:inline-flex;gap:8px;align-items:center;
-      font-size:12px;color:rgba(233,237,245,.9);
-      padding:6px 10px;border-radius:999px;
-      border:1px solid rgba(224,165,43,.32);
-      background: rgba(224,165,43,.10);
-      margin-bottom:10px;
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:12px;
     }
+    .kdot{width:8px; height:8px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 6px rgba(40,209,124,.12)}
     h1{
-      margin:0 0 10px;
-      font-size:34px;
-      line-height:1.12;
-      letter-spacing:-.9px;
+      margin:14px 0 10px;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-.8px;
     }
-    .gold{color:var(--gold)}
-    .lead{
-      margin:0 0 12px;
-      color:rgba(174,183,198,.98);
-      font-size:15.5px;
+    @media (max-width: 520px){
+      h1{font-size:34px}
     }
-
-    .bullet{
-      display:flex;gap:10px;align-items:flex-start;
-      padding:10px 12px;border-radius:14px;
-      background: rgba(17,21,27,.65);
-      border:1px solid rgba(36,43,58,.75);
-      margin:10px 0;
+    .sub{
+      color:var(--muted);
+      font-size:16px;
+      margin:0 0 16px;
+      max-width: 54ch;
     }
-    .dot{
-      width:18px;height:18px;border-radius:7px;margin-top:2px;
-      display:grid;place-items:center;
-      background: rgba(57,217,138,.10);
-      border:1px solid rgba(57,217,138,.30);
-      color:var(--ok);font-weight:900;font-size:12px;
+    .list{
+      display:grid; gap:10px;
+      margin:14px 0 22px;
+      padding:0;
+      list-style:none;
+    }
+    .li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .check{
       flex:0 0 auto;
-    }
-    .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .micro{
-      color:rgba(174,183,198,.9);
-      font-size:12.5px;
-      margin-top:12px;
-      border-top:1px solid rgba(36,43,58,.55);
-      padding-top:10px;
-    }
-
-    /* video */
-    .video-card{padding:14px}
-    .video-wrap{
-      position:relative;width:100%;
-      padding-top:56.25%;
-      border-radius:16px;
-      overflow:hidden;
-      border:1px solid rgba(36,43,58,.85);
-      background:#000;
-    }
-    .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-    .video-meta{
-      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
-      margin-top:10px;color:var(--muted);font-size:12.5px;
-    }
-
-    /* sections */
-    .section{padding:18px 0}
-    .title-row{
-      display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;
-      margin:0 0 12px;
-    }
-    .h2{margin:0;font-size:20px;letter-spacing:-.4px}
-    .sub{margin:0;color:var(--muted);font-size:13.5px}
-
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .mini{padding:16px}
-    .mini h3{margin:0 0 6px;font-size:15.5px}
-    .mini p{margin:0;color:var(--muted);font-size:13.5px}
-    .icon{
-      width:34px;height:34px;border-radius:12px;
-      border:1px solid rgba(224,165,43,.35);
-      background: rgba(224,165,43,.10);
-      display:grid;place-items:center;
-      margin-bottom:10px;
-      color:rgba(224,165,43,.95);
+      width:22px; height:22px; border-radius:8px;
+      display:grid; place-items:center;
+      background:rgba(40,209,124,.12);
+      border:1px solid rgba(40,209,124,.25);
+      color:var(--ok);
+      margin-top:1px;
       font-weight:900;
     }
-
-    .split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .box{padding:18px}
-    .box p{margin:0 0 10px;color:var(--muted);font-size:14px}
-    .list{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-    .list li{
-      display:flex;gap:10px;align-items:flex-start;
-      padding:10px 12px;border-radius:14px;
-      border:1px solid rgba(36,43,58,.75);
-      background: rgba(17,21,27,.62);
-      font-size:14px;
-      color:rgba(233,237,245,.92);
-    }
-    .x{
-      background: rgba(230,57,70,.08);
-      border-color: rgba(230,57,70,.20);
-    }
-    .x .dot{
-      background: rgba(230,57,70,.10);
-      border-color: rgba(230,57,70,.28);
-      color: var(--cta);
+    .li b{display:block; font-size:14px; margin-bottom:3px}
+    .li span{display:block; color:var(--muted); font-size:13px}
+    .ctaRow{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+    .micro{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:10px;
     }
 
-    /* tabs */
-    .tabs{padding:18px}
-    .tabbar{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
-    .tabbtn{
-      cursor:pointer;font-weight:900;font-size:13px;
-      padding:10px 12px;border-radius:999px;
-      border:1px solid rgba(36,43,58,.85);
-      background: rgba(17,21,27,.62);
-      color:rgba(233,237,245,.86);
-      user-select:none;
-      transition:.15s ease;
+    .mock{
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      padding:16px;
     }
-    .tabbtn:hover{transform:translateY(-1px)}
-    .tabbtn.active{
-      border-color: rgba(224,165,43,.60);
-      background: rgba(224,165,43,.10);
-      color: var(--text);
+    .mock img{
+      width:100%;
+      display:block;
+      border-radius:14px;
+      background:#fff;
     }
-    .tabpanel{display:none}
-    .tabpanel.active{display:block}
-    .tabpanel h3{margin:8px 0 6px;font-size:15.5px}
-    .paneltext{margin:0 0 10px;color:var(--muted);font-size:13.8px}
-
-    /* trust */
-    .trust{padding:18px;display:grid;gap:10px}
-    .note{
-      padding:12px 14px;border-radius:16px;
-      background: rgba(15,18,23,.70);
-      border:1px solid rgba(36,43,58,.85);
-      font-size:13.5px;
-      color:rgba(233,237,245,.90);
+    .badges{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:12px;
     }
-    .note b{color:var(--text)}
-    .note .small{display:block;color:var(--muted);font-size:12.5px;margin-top:6px}
-
-    /* faq */
-    details{
-      border:1px solid rgba(36,43,58,.85);
-      border-radius:16px;
-      padding:12px 14px;
-      background: rgba(17,21,27,.62);
-      margin:10px 0;
-    }
-    summary{
-      cursor:pointer;font-weight:900;list-style:none;
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-    }
-    summary::-webkit-details-marker{display:none}
-    .chev{opacity:.65;transition:transform .15s ease}
-    details[open] .chev{transform:rotate(180deg)}
-    details p{margin:10px 0 0;color:var(--muted);font-size:14px}
-
-    /* final */
-    .final{padding:22px;text-align:center}
-    .final h2{margin:0 0 10px;font-size:24px;letter-spacing:-.3px}
-    .final p{margin:0 0 14px;color:var(--muted);font-size:14px}
-
-    /* footer */
-    .footer{padding:22px 0 80px;color:rgba(174,183,198,.85);font-size:12.5px}
-    .footer .row{
-      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
-      border-top:1px solid rgba(36,43,58,.60);
-      padding-top:14px;
-    }
-
-    /* floating */
-    .floating{
-      position:fixed;left:0;right:0;bottom:0;z-index:55;
-      background: rgba(11,13,16,.82);
-      border-top:1px solid rgba(36,43,58,.70);
-      backdrop-filter: blur(10px);
+    .badge{
+      display:flex; align-items:center; gap:8px;
       padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:12px;
     }
-    .floating-inner{
-      max-width:1100px;margin:0 auto;
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-    }
-    .miniTxt{display:flex;flex-direction:column;gap:2px;font-size:12.5px}
-    .miniTxt strong{font-weight:900}
-    .miniTxt span{color:var(--muted);font-size:12px}
+    .badge svg{opacity:.95}
 
-    @media (max-width: 960px){
-      .hero-grid{grid-template-columns:1fr}
-      h1{font-size:30px}
-      .grid-3{grid-template-columns:1fr}
-      .split{grid-template-columns:1fr}
-      .nav{justify-content:flex-start}
+    section{padding:26px 0}
+    .sectionTitle{
+      font-size:22px; margin:0 0 10px; letter-spacing:-.3px
+    }
+    .sectionSub{
+      margin:0 0 16px; color:var(--muted); max-width: 70ch
+    }
+    .cards{
+      display:grid; gap:14px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 920px){
+      .cards{grid-template-columns:1fr}
+    }
+    .card{
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:16px;
+    }
+    .card h3{margin:0 0 8px; font-size:14px}
+    .card p{margin:0; color:var(--muted); font-size:13px}
+    .split{
+      display:grid; gap:14px;
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 920px){ .split{grid-template-columns:1fr} }
+
+    .quote{
+      border-left: 3px solid rgba(22,119,255,.55);
+      padding: 12px 14px;
+      background: rgba(22,119,255,.06);
+      border-radius: 14px;
+      border:1px solid rgba(22,119,255,.18);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .faq details{
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:14px 16px;
+      margin-bottom:12px;
+    }
+    .faq summary{
+      cursor:pointer;
+      font-weight:800;
+      font-size:14px;
+      list-style:none;
+    }
+    .faq summary::-webkit-details-marker{display:none}
+    .faq p{margin:10px 0 0; color:var(--muted); font-size:13px}
+
+    footer{
+      padding:26px 0 90px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    /* sticky bottom cta */
+    .sticky{
+      position:fixed; left:0; right:0; bottom:0; z-index:30;
+      background:rgba(11,11,13,.75);
+      backdrop-filter:saturate(140%) blur(10px);
+      border-top:1px solid var(--line);
+    }
+    .sticky .wrap{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px 24px;
+    }
+    .sticky .left{
+      display:flex; flex-direction:column; gap:2px;
+      min-width:0;
+    }
+    .sticky .left b{font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    .sticky .left span{font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    @media (max-width: 600px){
+      .sticky .left span{display:none}
+      .sticky .wrap{padding:10px 14px}
     }
   </style>
 </head>
 
 <body>
-  <div class="progress" id="progress"></div>
-
+  <!-- TOPBAR -->
   <div class="topbar">
-    <div class="container">
-      <div class="topbar-inner">
-        <div class="brand">
-          <strong>Dr. Fabio Schmidt</strong>
-          <span>Médico | CRM-SP 183549 • Mogi das Cruzes – SP</span>
+    <div class="wrap">
+      <div class="brand" aria-label="Marca">
+        <div class="logoMark" aria-hidden="true">
+          <!-- 7 icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M20 6H7.8L7 9h8.9L10 21h4l6-15Z" fill="white" opacity=".9"/>
+          </svg>
         </div>
-        <div class="nav">
-          <a class="pill" href="#video">Vídeo</a>
-          <a class="pill" href="#mudancas">Em 7 dias</a>
-          <a class="pill" href="#conteudo">Conteúdo</a>
-          <a class="pill" href="#duvidas">Dúvidas</a>
-          <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Comprar agora</a>
+        <div>
+          <strong>Protocolo 7 Dias</strong>
+          <span>Pare de alimentar a crise</span>
         </div>
+      </div>
+
+      <div class="top-cta">
+        <div class="pill">Aulas gravadas + PDF com scripts</div>
+        <a class="btn small" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener noreferrer">
+          Quero acessar agora
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M13 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 12H4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </a>
       </div>
     </div>
   </div>
 
-  <div class="hero">
-    <div class="container">
-      <div class="hero-banner">
-        <img src="ggg.png" alt="Crise não espera. Protocolo 7 Dias. Baseado em anos de prática clínica." />
-      </div>
-
-      <div class="hero-grid">
-        <div class="card hero-copy">
-          <div class="kicker">Curso gravado • acesso imediato • scripts prontos</div>
-
-          <h1><span class="gold">Protocolo 7 Dias</span><br>para família de TPB</h1>
-
-          <p class="lead">
-            Para quem convive com crises e quer uma coisa só:
-            <b>parar de piorar sem querer</b> — e começar a agir com método.
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <div class="kicker"><span class="kdot"></span> Para pais e familiares que precisam de técnica no meio do caos</div>
+          <h1>7 dias para parar de alimentar a crise — com método.</h1>
+          <p class="sub">
+            Sem palestra motivacional. Sem “frase bonitinha”.
+            A ideia é simples: reduzir escalada, cortar gatilhos de briga e colocar scripts prontos na sua boca quando a emoção tomar a casa.
           </p>
 
-          <div class="bullet"><span class="dot">✓</span><div><b>Aulas gravadas</b> para assistir quando quiser.</div></div>
-          <div class="bullet"><span class="dot">✓</span><div><b>Scripts prontos</b> (“diga / não diga”) para desescalar na hora.</div></div>
-          <div class="bullet"><span class="dot">✓</span><div><b>Plano verde/amarelo/vermelho</b> para saber quando segurar e quando buscar ajuda.</div></div>
+          <ul class="list">
+            <li class="li">
+              <div class="check">✓</div>
+              <div>
+                <b>Aulas curtas e diretas</b>
+                <span>Você entende o mecanismo e já aplica no mesmo dia.</span>
+              </div>
+            </li>
+            <li class="li">
+              <div class="check">✓</div>
+              <div>
+                <b>PDF extra + scripts prontos</b>
+                <span>Frases para desarmar a escalada sem “passar pano” e sem entrar na guerra.</span>
+              </div>
+            </li>
+            <li class="li">
+              <div class="check">✓</div>
+              <div>
+                <b>Foco em crise real (vida real)</b>
+                <span>Quando o volume sobe, você precisa de roteiro, não de teoria.</span>
+              </div>
+            </li>
+          </ul>
 
-          <div class="cta-row">
-            <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Quero acesso imediato</a>
-            <a class="btn secondary" href="#conteudo">Ver tudo que tem</a>
+          <div class="ctaRow">
+            <a class="btn" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener noreferrer">
+              Quero acessar agora
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M13 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20 12H4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </a>
+            <a class="btn secondary" href="#faq">Tirar dúvidas</a>
           </div>
 
           <div class="micro">
-            Conteúdo educativo para familiares. Não substitui avaliação individual.
-            Em risco imediato, procure serviços locais de emergência.
+            Acesso via Hotmart. Clique no botão e finalize por lá.
           </div>
         </div>
 
-        <div id="video" class="card video-card">
-          <div class="video-wrap">
-            <iframe
-              src="https://player.vimeo.com/video/1161630681?title=0&byline=0&portrait=0"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowfullscreen></iframe>
-          </div>
-          <div class="video-meta">
-            <span>▶ Assista antes de comprar</span>
-            <span>Vídeo curto • direto • letra grande</span>
+        <div class="mock">
+          <!-- Coloque o arquivo 007.png na mesma pasta deste index.html -->
+          <img src="007.png" alt="Protocolo 7 Dias — Pare de Alimentar a Crise" loading="eager" />
+          <div class="badges">
+            <div class="badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 5h16v12H4z" stroke="white" opacity=".8"/>
+                <path d="M8 21h8" stroke="white" opacity=".8"/>
+                <path d="M10 17h4" stroke="white" opacity=".8"/>
+              </svg>
+              Aulas gravadas
+            </div>
+            <div class="badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="white" opacity=".8"/>
+                <path d="M14 2v6h6" stroke="white" opacity=".8"/>
+                <path d="M8 13h8M8 17h8" stroke="white" opacity=".8"/>
+              </svg>
+              PDF extra + scripts
+            </div>
+            <div class="badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V6l-8-4-8 4v6c0 6 8 10 8 10z" stroke="white" opacity=".8"/>
+                <path d="M9 12l2 2 4-5" stroke="white" opacity=".8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Conteúdo prático
+            </div>
           </div>
         </div>
+
       </div>
-
-      <!-- WHAT CHANGES IN 7 DAYS (NEW) -->
-      <div id="mudancas" class="section">
-        <div class="title-row">
-          <h2 class="h2">O que muda em 7 dias</h2>
-          <p class="sub">Sem prometer milagre: prometer método.</p>
-        </div>
-
-        <div class="grid-3">
-          <div class="card mini">
-            <div class="icon">D1</div>
-            <h3>Você para de improvisar</h3>
-            <p>Você ganha sequência e frases. A crise deixa de ser “terreno desconhecido”.</p>
-          </div>
-          <div class="card mini">
-            <div class="icon">D4</div>
-            <h3>Você reduz a escalada</h3>
-            <p>Menos combustível: tom, timing e validação do jeito certo.</p>
-          </div>
-          <div class="card mini">
-            <div class="icon">D7</div>
-            <h3>Você cria previsibilidade</h3>
-            <p>Limite claro + plano de crise: você sabe o que fazer em cada nível.</p>
-          </div>
-        </div>
-
-        <div class="cta-row" style="margin-top:14px;">
-          <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Comprar agora</a>
-          <a class="btn secondary" href="#duvidas">Ver dúvidas</a>
-        </div>
-      </div>
-
-      <div id="conteudo" class="section">
-        <div class="card tabs">
-          <div class="title-row">
-            <h2 class="h2">Conteúdo (organizado para executar)</h2>
-            <p class="sub">Entregáveis concretos. Sem teoria longa.</p>
-          </div>
-
-          <div class="tabbar" role="tablist" aria-label="Conteúdo do curso">
-            <div class="tabbtn active" data-tab="t1" role="tab" aria-selected="true">Checklist</div>
-            <div class="tabbtn" data-tab="t2" role="tab" aria-selected="false">Scripts</div>
-            <div class="tabbtn" data-tab="t3" role="tab" aria-selected="false">Plano</div>
-          </div>
-
-          <div id="t1" class="tabpanel active" role="tabpanel">
-            <h3>Checklist de crise</h3>
-            <p class="paneltext">O que fazer nos primeiros minutos (ordem e prioridade).</p>
-            <ul class="list">
-              <li><span class="dot">✓</span>Primeiros 60 segundos: reduzir escalada.</li>
-              <li><span class="dot">✓</span>O que falar (e o que não falar) no pico.</li>
-              <li><span class="dot">✓</span>Como encerrar sem abandono.</li>
-            </ul>
-          </div>
-
-          <div id="t2" class="tabpanel" role="tabpanel">
-            <h3>Scripts “Diga / Não diga”</h3>
-            <p class="paneltext">Frases prontas para situações comuns.</p>
-            <ul class="list">
-              <li><span class="dot">✓</span>Acusação (“você não liga”).</li>
-              <li><span class="dot">✓</span>Ameaça de ruptura.</li>
-              <li><span class="dot">✓</span>Silêncio e sumiço.</li>
-            </ul>
-          </div>
-
-          <div id="t3" class="tabpanel" role="tabpanel">
-            <h3>Plano verde/amarelo/vermelho</h3>
-            <p class="paneltext">Sinais claros + ação correspondente.</p>
-            <ul class="list">
-              <li><span class="dot">✓</span>Quando acolher e esperar passar.</li>
-              <li><span class="dot">✓</span>Quando colocar limite e pausar.</li>
-              <li><span class="dot">✓</span>Quando buscar ajuda de fora.</li>
-            </ul>
-          </div>
-
-          <div class="cta-row">
-            <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Quero acesso imediato</a>
-            <a class="btn secondary" href="#duvidas">Dúvidas rápidas</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="card trust">
-          <div class="note">
-            <b>Objetivo real:</b> reduzir frequência e duração das crises e parar de “alimentar” o ciclo sem querer.
-            <span class="small">Sem promessa milagrosa. Com método, previsibilidade e comunicação operacional.</span>
-          </div>
-          <div class="note">
-            <b>Ética e segurança:</b> conteúdo educativo para familiares. Não substitui atendimento individual.
-            <span class="small">Em risco iminente, procure ajuda presencial e serviços locais.</span>
-          </div>
-          <div class="note">
-            <b>Autoridade com sobriedade:</b> Dr. Fabio Schmidt • Médico • CRM-SP 183549.
-            <span class="small">Foco em manejo de crise em casa, limites e comunicação.</span>
-          </div>
-        </div>
-      </div>
-
-      <div id="duvidas" class="section">
-        <div class="card box">
-          <div class="title-row" style="margin-bottom:8px;">
-            <h2 class="h2">Dúvidas que travam compra</h2>
-            <p class="sub">Resposta curta e direta.</p>
-          </div>
-
-          <details>
-            <summary>É pra familiares mesmo? <span class="chev">▾</span></summary>
-            <p>Sim. Pai/mãe, cônjuge, namorado(a), irmãos. Linguagem simples e foco em manejo de crise.</p>
-          </details>
-
-          <details>
-            <summary>Não tenho certeza se é TPB confirmado. Serve? <span class="chev">▾</span></summary>
-            <p>Serve quando há desregulação emocional + conflito relacional. O objetivo é organizar a resposta e reduzir escalada.</p>
-          </details>
-
-          <details>
-            <summary>Isso substitui terapia? <span class="chev">▾</span></summary>
-            <p>Não. É educação + ferramentas práticas. Em risco, procure avaliação presencial.</p>
-          </details>
-
-          <details>
-            <summary>Dá pra assistir no celular? <span class="chev">▾</span></summary>
-            <p>Sim. Foi pensado para celular e aplicação imediata.</p>
-          </details>
-
-          <div class="cta-row">
-            <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Comprar agora</a>
-            <a class="btn secondary" href="#video">Voltar ao vídeo</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="card final">
-          <h2>Crise não espera.<br>Você também não precisa esperar.</h2>
-          <p>Acesso imediato. Aulas gravadas. Material complementar. Tudo organizado para executar.</p>
-          <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Comprar Protocolo 7 Dias</a>
-        </div>
-      </div>
-
-      <div class="footer">
-        <div class="row">
-          <div>Dr. Fabio Schmidt — Médico | CRM-SP 183549</div>
-          <div>Conteúdo educativo. Não substitui avaliação individual.</div>
-        </div>
-      </div>
-
     </div>
-  </div>
+  </header>
 
-  <div class="floating">
-    <div class="floating-inner">
-      <div class="miniTxt">
-        <strong>Protocolo 7 Dias</strong>
-        <span>Aulas gravadas + scripts prontos • acesso imediato</span>
+  <!-- FOR WHO -->
+  <section>
+    <div class="wrap">
+      <h2 class="sectionTitle">Para quem é (e para quem não é)</h2>
+      <p class="sectionSub">
+        Se você quer “paz instantânea”, não existe. Se você quer <b>manejo</b> — isto é, reduzir dano, reduzir escalada e aumentar previsibilidade — aí sim.
+      </p>
+
+      <div class="split">
+        <div class="card">
+          <h3>É para você se…</h3>
+          <p>Você vive episódios de grito, ameaça, ruptura, acusações, silêncio punitivo, impulsos, e percebe que qualquer frase errada vira gasolina.</p>
+          <div style="height:10px"></div>
+          <p>Você quer <b>parar de piorar sem querer</b> — e precisa de frases prontas e lógica simples para agir com critério, mesmo sob pressão.</p>
+        </div>
+
+        <div class="card">
+          <h3>Não é para você se…</h3>
+          <p>Você procura “manual para controlar a pessoa” ou “ganhar discussão”. Isso volta como bumerangue e piora vínculo.</p>
+          <div style="height:10px"></div>
+          <p>Você não pretende aplicar nada. Aqui o foco é prática: comportamento + consistência.</p>
+        </div>
       </div>
-      <a class="btn" href="https://pay.hotmart.com/S104212285E?bid=1770259751305">Comprar agora</a>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section>
+    <div class="wrap">
+      <h2 class="sectionTitle">O que você recebe</h2>
+      <p class="sectionSub">Objetivo: você ter um jeito claro de agir quando seu cérebro também entrar em modo “alarme”.</p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>1) Aulas gravadas (passo a passo)</h3>
+          <p>Estrutura de manejo, erros que alimentam crise, e o que fazer nos momentos críticos — com linguagem prática.</p>
+        </div>
+        <div class="card">
+          <h3>2) PDF extra + scripts prontos</h3>
+          <p>Frases para reduzir escalada, limites sem humilhar, validação sem “passar pano”, e como encerrar conversa sem explodir.</p>
+        </div>
+        <div class="card">
+          <h3>3) 7 dias, 1 foco por dia</h3>
+          <p>Formato enxuto para virar rotina. O que muda resultado é repetição — não “insight”.</p>
+        </div>
+      </div>
+
+      <div style="height:14px"></div>
+      <div class="quote">
+        “Crise não se vence no grito. Se vence com técnica e previsibilidade.”
+      </div>
+
+      <div style="height:16px"></div>
+      <div class="ctaRow">
+        <a class="btn" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener noreferrer">Quero acessar agora</a>
+        <a class="btn secondary" href="#faq">Ver perguntas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <h2 class="sectionTitle">Perguntas rápidas</h2>
+      <p class="sectionSub">Sem enrolação. Se ficar alguma dúvida, a resposta está aqui.</p>
+
+      <div class="faq">
+        <details>
+          <summary>Isso serve só para pais?</summary>
+          <p>O foco é pais/familiares. Mas qualquer pessoa que convive de perto (cônjuge, irmão, cuidador) tende a se beneficiar das técnicas e dos scripts.</p>
+        </details>
+
+        <details>
+          <summary>É terapia? Substitui acompanhamento?</summary>
+          <p>Não. É material educativo e prático para manejo familiar. Em casos complexos, acompanhamento profissional continua sendo importante.</p>
+        </details>
+
+        <details>
+          <summary>Tem “passo a passo” do que falar na hora?</summary>
+          <p>Sim — o PDF extra tem scripts prontos para situações comuns: escalada, acusações, ameaça de ruptura, limite, e encerramento de conversa com menos dano.</p>
+        </details>
+
+        <details>
+          <summary>Como eu acesso depois que eu pagar?</summary>
+          <p>Você finaliza o pagamento na Hotmart e recebe acesso pela plataforma. O botão desta página te leva direto para o checkout.</p>
+        </details>
+      </div>
+
+      <div style="height:14px"></div>
+      <div class="ctaRow">
+        <a class="btn" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener noreferrer">Acessar pela Hotmart</a>
+        <a class="btn secondary" href="#top">Voltar ao topo</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" id="top">
+      <div style="display:flex; gap:14px; flex-wrap:wrap; align-items:flex-start; justify-content:space-between">
+        <div style="max-width:70ch">
+          <b style="color:var(--text)">Protocolo 7 Dias — Pare de Alimentar a Crise</b><br/>
+          Página de apresentação e acesso. Conteúdo educativo para manejo familiar.
+        </div>
+        <div style="max-width:58ch">
+          <span style="color:var(--muted)">
+            Importante: em risco imediato (ameaça de autoagressão, agressão, ou perigo), procure ajuda local de emergência/serviços de saúde.
+          </span>
+        </div>
+      </div>
+      <div style="height:10px"></div>
+      <div>© <span id="y"></span> — Todos os direitos reservados.</div>
+    </div>
+  </footer>
+
+  <!-- STICKY CTA -->
+  <div class="sticky" role="region" aria-label="Acesso rápido">
+    <div class="wrap">
+      <div class="left">
+        <b>Protocolo 7 Dias</b>
+        <span>Aulas gravadas + PDF extra com scripts prontos</span>
+      </div>
+      <a class="btn small" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener noreferrer">
+        Quero acessar agora
+      </a>
     </div>
   </div>
 
   <script>
-    // Tabs
-    const btns = document.querySelectorAll('.tabbtn');
-    const panels = document.querySelectorAll('.tabpanel');
-    btns.forEach(b=>{
-      b.addEventListener('click', ()=>{
-        btns.forEach(x=>x.classList.remove('active'));
-        panels.forEach(p=>p.classList.remove('active'));
-        b.classList.add('active');
-        const id = b.getAttribute('data-tab');
-        const panel = document.getElementById(id);
-        if(panel) panel.classList.add('active');
-      });
-    });
-
-    // Close other details when one opens
-    const dts = document.querySelectorAll('details');
-    dts.forEach(d=>{
-      d.addEventListener('toggle', ()=>{
-        if(d.open){
-          dts.forEach(o=>{ if(o !== d) o.open = false; });
-        }
-      });
-    });
-
-    // Progress bar
-    const progress = document.getElementById('progress');
-    const onScroll = () => {
-      const doc = document.documentElement;
-      const scrollTop = doc.scrollTop || document.body.scrollTop;
-      const height = doc.scrollHeight - doc.clientHeight;
-      const pct = height ? (scrollTop / height) * 100 : 0;
-      progress.style.width = pct + '%';
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
