@@ -52,7 +52,6 @@
       }
     }
 
-    /* Layout base das seções */
     section {
       margin-bottom: 32px;
     }
@@ -71,7 +70,6 @@
       }
     }
 
-    /* Tipografia */
     .eyebrow {
       font-size: 0.75rem;
       text-transform: uppercase;
@@ -120,14 +118,12 @@
       max-width: 640px;
     }
 
-    /* Linhas e separadores discretos */
     .divider {
       height: 1px;
       background: linear-gradient(to right, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0));
       margin: 20px 0 18px;
     }
 
-    /* Listas editoriais */
     ul {
       list-style: none;
       margin-top: 10px;
@@ -152,7 +148,6 @@
       color: #999999;
     }
 
-    /* Layout em colunas suaves */
     .columns {
       display: grid;
       grid-template-columns: 1.15fr 1fr;
@@ -167,7 +162,6 @@
       }
     }
 
-    /* Hero específico (Tela 1) */
     .hero-label {
       display: inline-flex;
       align-items: center;
@@ -207,7 +201,6 @@
       color: #777777;
     }
 
-    /* Cartão tipo ficha à direita do hero */
     .hero-side-card {
       border-radius: 16px;
       border: 1px solid var(--border-soft);
@@ -228,7 +221,6 @@
       color: var(--text-muted);
     }
 
-    /* Blocos de texto em colunas menores */
     .grid-two {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -248,7 +240,6 @@
       margin-top: 6px;
     }
 
-    /* Listas em coluna única mais estreita */
     .list-block {
       margin-top: 10px;
     }
@@ -261,7 +252,6 @@
       margin-bottom: 6px;
     }
 
-    /* Seções que parecem “slides” */
     .slide-title {
       font-size: 0.9rem;
       text-transform: uppercase;
@@ -282,7 +272,6 @@
       color: var(--text-muted);
     }
 
-    /* Lista progressão clínica (Timeline simples) */
     .progress-list {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -314,7 +303,6 @@
       background-color: #111111;
     }
 
-    /* Seção final com CTA */
     .cta-section {
       text-align: left;
     }
@@ -374,7 +362,7 @@
       font-size: 0.7rem;
     }
 
-    /* Animações suaves no scroll */
+    /* Fade-in no scroll */
     .reveal {
       opacity: 0;
       transform: translateY(18px);
@@ -387,12 +375,10 @@
       transform: translateY(0);
     }
 
-    /* Pequenas variações de profundidade */
     .section-inner.soft-depth {
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.07);
     }
 
-    /* Rodapé mínimo */
     footer {
       margin-top: 24px;
       font-size: 0.78rem;
@@ -403,7 +389,7 @@
 </head>
 <body>
 <main>
-  <!-- TELA 1 — IMPACTO INICIAL / Hero -->
+  <!-- TELA 1 — IMPACTO INICIAL -->
   <section class="reveal">
     <div class="section-inner soft-depth">
       <div class="columns">
@@ -431,7 +417,7 @@
     </div>
   </section>
 
-  <!-- TELA 2 — QUEBRA DE EXPECTATIVA -->
+  <!-- TELA 2 -->
   <section class="reveal">
     <div class="section-inner">
       <div class="slide-title">Quebra de expectativa</div>
@@ -460,7 +446,7 @@
     </div>
   </section>
 
-  <!-- TELA 3 — CONSEQUÊNCIA DIRETA -->
+  <!-- TELA 3 -->
   <section class="reveal">
     <div class="section-inner">
       <div class="slide-title">Consequência direta</div>
@@ -486,7 +472,7 @@
     </div>
   </section>
 
-  <!-- TELA 4 — REPOSICIONAMENTO -->
+  <!-- TELA 4 -->
   <section class="reveal">
     <div class="section-inner">
       <div class="slide-title">Reposicionamento clínico</div>
@@ -498,7 +484,7 @@
     </div>
   </section>
 
-  <!-- TELA 5 — TRANSIÇÃO -->
+  <!-- TELA 5 -->
   <section class="reveal">
     <div class="section-inner">
       <div class="slide-title">Transição para o núcleo clínico</div>
@@ -510,7 +496,7 @@
     </div>
   </section>
 
-  <!-- TELA 6 — O QUE SERÁ DESENVOLVIDO -->
+  <!-- TELA 6 -->
   <section class="reveal">
     <div class="section-inner">
       <div class="eyebrow">Capacidades clínicas centrais</div>
@@ -525,7 +511,7 @@
     </div>
   </section>
 
-  <!-- TELA 7 — DIFERENCIAL CENTRAL -->
+  <!-- TELA 7 -->
   <section class="reveal">
     <div class="section-inner">
       <div class="slide-title">Diferencial central</div>
@@ -537,7 +523,7 @@
     </div>
   </section>
 
-  <!-- TELA 8 — ESTRUTURA -->
+  <!-- TELA 8 -->
   <section class="reveal">
     <div class="section-inner">
       <div class="eyebrow">Estrutura do núcleo</div>
@@ -545,13 +531,16 @@
       <ul class="list-block">
         <li>8 encontros semanais ao vivo</li>
         <li>duração de 1h30 a 2h por encontro</li>
-        <li>grupo pequeno e fechado</li>
+        <li>grupo pequeno e fechado, com no máximo 3 médicos por turma</li>
         <li>discussão de casos clínicos reais</li>
       </ul>
+      <p class="quiet" style="margin-top:10px;">
+        O formato em grupos ultra enxutos favorece discussão profunda, acompanhamento próximo e espaço seguro para decisões clínicas de alta complexidade. [web:48][web:52][web:55]
+      </p>
     </div>
   </section>
 
-  <!-- TELA 9 — PROGRESSÃO CLÍNICA -->
+  <!-- TELA 9 -->
   <section class="reveal">
     <div class="section-inner">
       <div class="eyebrow">Percurso clínico</div>
@@ -569,7 +558,7 @@
     </div>
   </section>
 
-  <!-- TELA 10 — RESULTADO FINAL -->
+  <!-- TELA 10 -->
   <section class="reveal">
     <div class="section-inner">
       <div class="slide-title">Resultado esperado</div>
@@ -585,7 +574,7 @@
     </div>
   </section>
 
-  <!-- TELA 11 — POSICIONAMENTO PREMIUM -->
+  <!-- TELA 11 -->
   <section class="reveal">
     <div class="section-inner">
       <div class="slide-title">Posicionamento</div>
@@ -594,10 +583,27 @@
       <p class="slide-text tight">
         O grupo é pequeno. Se não houver alinhamento técnico adequado, o núcleo não acontece. A proposta é preservar um espaço clínico consistente, aprofundado e protegido.
       </p>
+      <p class="quiet" style="margin-top:8px;">
+        Se você está recebendo este convite, é porque foi selecionado(a) de forma intencional como alguém em quem vejo empatia, maturidade clínica e disposição para incorporar esse tipo de raciocínio no manejo do borderline.
+      </p>
     </div>
   </section>
 
-  <!-- TELA 12 — CHAMADA FINAL / CTA -->
+  <!-- BLOCO EXTRA — QUEM SOU EU -->
+  <section class="reveal">
+    <div class="section-inner">
+      <div class="eyebrow">Coordenação clínica</div>
+      <h2>Dr. Fábio Schmidt</h2>
+      <p class="muted tight">
+        Médico com atuação clínica voltada ao transtorno de personalidade borderline, com experiência em ambulatório e saúde pública. Seu trabalho concentra-se na organização do raciocínio clínico, manejo de risco e condução de quadros marcados por instabilidade emocional e alta complexidade decisória.
+      </p>
+      <p class="quiet" style="margin-top:8px;">
+        Núcleo conduzido em grupos de, no máximo, 3 médicos, para garantir discussão cuidadosa de cada caso e espaço real para supervisão clínica aplicada. [web:48][web:52]
+      </p>
+    </div>
+  </section>
+
+  <!-- TELA 12 / CTA -->
   <section class="reveal">
     <div class="section-inner cta-section soft-depth">
       <div class="eyebrow">Chamada final</div>
@@ -619,12 +625,12 @@
   </section>
 
   <footer>
-    Núcleo Clínico — Clínica Real do Borderline · Conteúdo destinado exclusivamente a médicos e profissionais de saúde mental.
+    Núcleo Clínico — Clínica Real do Borderline · Coordenação: Dr. Fábio Schmidt · Conteúdo destinado exclusivamente a médicos e profissionais de saúde mental.
   </footer>
 </main>
 
 <script>
-  // Animação suave no scroll usando IntersectionObserver
+  // Animação suave de fade-in no scroll com IntersectionObserver
   (function() {
     const elements = document.querySelectorAll('.reveal');
 
