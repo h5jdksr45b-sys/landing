@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Núcleo Clínico — Clínica Real do Borderline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Núcleo clínico fechado para médicos focado no manejo real do transtorno de personalidade borderline, com foco em raciocínio clínico aplicado.">
+  <style>
+    :root {
+      --bg: #F2F2F2;
+      --bg-card: #FFFFFF;
+      --text-main: #111111;
+      --text-muted: #555555;
+      --border-soft: #E0E0E0;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.06);
+      --radius-card: 18px;
+      --radius-pill: 999px;
+      --max-width: 980px;
+      --transition-base: 280ms ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.7;
+      display: flex;
+      justify-content: center;
+    }
+
+    main {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 40px 20px 80px;
+    }
+
+    @media (min-width: 900px) {
+      main {
+        padding: 64px 0 96px;
+      }
+    }
+
+    /* Layout base das seções */
+    section {
+      margin-bottom: 32px;
+    }
+
+    .section-inner {
+      background-color: var(--bg-card);
+      border-radius: var(--radius-card);
+      padding: 28px 22px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(0, 0, 0, 0.02);
+    }
+
+    @media (min-width: 900px) {
+      .section-inner {
+        padding: 40px 36px;
+      }
+    }
+
+    /* Tipografia */
+    .eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    h1, h2, h3 {
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: clamp(1.4rem, 2.2vw, 1.7rem);
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .quiet {
+      color: #777777;
+      font-size: 0.85rem;
+    }
+
+    .tight {
+      max-width: 640px;
+    }
+
+    /* Linhas e separadores discretos */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0));
+      margin: 20px 0 18px;
+    }
+
+    /* Listas editoriais */
+    ul {
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    li {
+      position: relative;
+      padding-left: 16px;
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    li::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      color: #999999;
+    }
+
+    /* Layout em colunas suaves */
+    .columns {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 768px) {
+      .columns {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    /* Hero específico (Tela 1) */
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #666666;
+      margin-bottom: 18px;
+    }
+
+    .hero-label-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #111111;
+    }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 18px;
+    }
+
+    .hero-footer {
+      margin-top: 28px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      font-size: 0.86rem;
+      color: #777777;
+    }
+
+    /* Cartão tipo ficha à direita do hero */
+    .hero-side-card {
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      padding: 18px 18px 16px;
+      background: linear-gradient(to bottom right, #FCFCFC, #F5F5F5);
+    }
+
+    .hero-side-card h3 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #666666;
+      margin-bottom: 10px;
+    }
+
+    .hero-side-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    /* Blocos de texto em colunas menores */
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .grid-two {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tagline {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Listas em coluna única mais estreita */
+    .list-block {
+      margin-top: 10px;
+    }
+
+    .list-title {
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #777777;
+      margin-bottom: 6px;
+    }
+
+    /* Seções que parecem “slides” */
+    .slide-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #888888;
+      margin-bottom: 6px;
+    }
+
+    .slide-headline {
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+
+    .slide-text {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+    }
+
+    /* Lista progressão clínica (Timeline simples) */
+    .progress-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 28px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 720px) {
+      .progress-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .progress-item {
+      position: relative;
+      padding-left: 18px;
+      font-size: 0.94rem;
+      color: var(--text-main);
+    }
+
+    .progress-item::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 0.45rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #111111;
+    }
+
+    /* Seção final com CTA */
+    .cta-section {
+      text-align: left;
+    }
+
+    .cta-button-wrapper {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 11px 22px;
+      border-radius: var(--radius-pill);
+      background-color: #111111;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+      border: 1px solid #111111;
+      text-decoration: none;
+      transition: background-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+      box-shadow: 0 13px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .btn-primary span {
+      font-size: 0.9rem;
+    }
+
+    .btn-primary:hover {
+      background-color: #222222;
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.17);
+    }
+
+    .btn-subtext {
+      font-size: 0.8rem;
+      color: #777777;
+    }
+
+    .btn-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+    }
+
+    /* Animações suaves no scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 520ms ease-out, transform 520ms ease-out;
+      will-change: opacity, transform;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Pequenas variações de profundidade */
+    .section-inner.soft-depth {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.07);
+    }
+
+    /* Rodapé mínimo */
+    footer {
+      margin-top: 24px;
+      font-size: 0.78rem;
+      color: #999999;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <!-- TELA 1 — IMPACTO INICIAL / Hero -->
+  <section class="reveal">
+    <div class="section-inner soft-depth">
+      <div class="columns">
+        <div>
+          <div class="hero-label">
+            <span class="hero-label-dot"></span>
+            <span>Núcleo Clínico · Borderline</span>
+          </div>
+          <h1>Você já atende pacientes com transtorno borderline.<br>Mesmo sem saber.</h1>
+          <p class="hero-sub">
+            Entre 10% e 28% dos pacientes em serviços de saúde mental apresentam esse padrão de funcionamento.
+          </p>
+          <div class="hero-footer">
+            E ainda assim, continua sendo um dos quadros mais mal reconhecidos e mais mal manejados na prática clínica.
+          </div>
+        </div>
+
+        <aside class="hero-side-card">
+          <h3>Enquadramento epidemiológico</h3>
+          <p>
+            1,5–2% da população geral, com concentração relevante em ambulatórios psiquiátricos e serviços de emergência, especialmente em contextos de tentativa de suicídio.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- TELA 2 — QUEBRA DE EXPECTATIVA -->
+  <section class="reveal">
+    <div class="section-inner">
+      <div class="slide-title">Quebra de expectativa</div>
+      <div class="divider"></div>
+      <h2 class="slide-headline">O problema não é a falta de tratamento.<br>É o modelo clínico utilizado.</h2>
+      <p class="slide-text tight">
+        O borderline raramente se apresenta como borderline. Ele se apresenta como quadro que, à primeira vista, parece caber em categorias habituais de depressão, ansiedade ou impulsividade isolada.
+      </p>
+      <div class="grid-two">
+        <div>
+          <div class="list-title">Como costuma aparecer</div>
+          <ul class="list-block">
+            <li>depressão resistente</li>
+            <li>ansiedade persistente</li>
+            <li>impulsividade inexplicável</li>
+            <li>instabilidade relacional</li>
+            <li>falha terapêutica recorrente</li>
+          </ul>
+        </div>
+        <div>
+          <p class="tagline">
+            O padrão é tratado como episódio. Mas o episódio é apenas a superfície de um modo de funcionamento que se mantém ao longo do tempo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TELA 3 — CONSEQUÊNCIA DIRETA -->
+  <section class="reveal">
+    <div class="section-inner">
+      <div class="slide-title">Consequência direta</div>
+      <div class="divider"></div>
+      <h2 class="slide-headline">O resultado é previsível.</h2>
+      <div class="grid-two">
+        <div>
+          <div class="list-title">Efeitos clínicos mais frequentes</div>
+          <ul class="list-block">
+            <li>polifarmácia progressiva</li>
+            <li>falta de resposta terapêutica</li>
+            <li>rupturas de vínculo</li>
+            <li>escala de crise</li>
+            <li>desgaste clínico progressivo</li>
+          </ul>
+        </div>
+        <div>
+          <p class="slide-text">
+            Não por falha do profissional. Mas por falha do modelo com que o caso é lido, formulado e conduzido ao longo do tempo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TELA 4 — REPOSICIONAMENTO -->
+  <section class="reveal">
+    <div class="section-inner">
+      <div class="slide-title">Reposicionamento clínico</div>
+      <div class="divider"></div>
+      <h2 class="slide-headline">O transtorno borderline não é um episódio.<br>É um modo de funcionamento.</h2>
+      <p class="slide-text tight">
+        Quando o padrão é reconhecido de forma dimensional, o manejo deixa de ser reativo à crise imediata e passa a ser estratégico, estruturado e previsível ao longo do acompanhamento.
+      </p>
+    </div>
+  </section>
+
+  <!-- TELA 5 — TRANSIÇÃO -->
+  <section class="reveal">
+    <div class="section-inner">
+      <div class="slide-title">Transição para o núcleo clínico</div>
+      <div class="divider"></div>
+      <h2 class="slide-headline">Foi para resolver esse problema que este núcleo clínico foi criado.</h2>
+      <p class="slide-text tight">
+        Não é curso tradicional. Não é conteúdo teórico isolado. É raciocínio clínico aplicado, orientado por casos reais e decisões que o médico precisa tomar no consultório, no ambulatório e na emergência.
+      </p>
+    </div>
+  </section>
+
+  <!-- TELA 6 — O QUE SERÁ DESENVOLVIDO -->
+  <section class="reveal">
+    <div class="section-inner">
+      <div class="eyebrow">Capacidades clínicas centrais</div>
+      <h2>Ao longo de 8 semanas, o foco é desenvolver cinco capacidades clínicas centrais:</h2>
+      <ul class="list-block">
+        <li>reconhecimento precoce de padrões borderline</li>
+        <li>organização do raciocínio clínico em tempo real</li>
+        <li>formação de vínculo terapêutico estruturado</li>
+        <li>uso criterioso de farmacoterapia sintoma-alvo</li>
+        <li>manejo de crise com segurança e previsibilidade</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TELA 7 — DIFERENCIAL CENTRAL -->
+  <section class="reveal">
+    <div class="section-inner">
+      <div class="slide-title">Diferencial central</div>
+      <div class="divider"></div>
+      <h2 class="slide-headline">O ponto mais crítico não é a medicação.<br>É o vínculo.</h2>
+      <p class="slide-text tight">
+        Saber quando sustentar. Saber quando ceder. Saber quando impor limite. O timing define o desfecho, tanto quanto o esquema medicamentoso escolhido.
+      </p>
+    </div>
+  </section>
+
+  <!-- TELA 8 — ESTRUTURA -->
+  <section class="reveal">
+    <div class="section-inner">
+      <div class="eyebrow">Estrutura do núcleo</div>
+      <h2>Formato</h2>
+      <ul class="list-block">
+        <li>8 encontros semanais ao vivo</li>
+        <li>duração de 1h30 a 2h por encontro</li>
+        <li>grupo pequeno e fechado</li>
+        <li>discussão de casos clínicos reais</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TELA 9 — PROGRESSÃO CLÍNICA -->
+  <section class="reveal">
+    <div class="section-inner">
+      <div class="eyebrow">Percurso clínico</div>
+      <h2>Progressão do núcleo clínico</h2>
+      <div class="progress-list">
+        <div class="progress-item">Fundamentos dimensionais</div>
+        <div class="progress-item">Reconhecimento precoce</div>
+        <div class="progress-item">Neurobiologia aplicada</div>
+        <div class="progress-item">Farmacoterapia estratégica</div>
+        <div class="progress-item">Formação do vínculo</div>
+        <div class="progress-item">Limites estruturais</div>
+        <div class="progress-item">Manejo de crise</div>
+        <div class="progress-item">Consolidação do modelo clínico</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TELA 10 — RESULTADO FINAL -->
+  <section class="reveal">
+    <div class="section-inner">
+      <div class="slide-title">Resultado esperado</div>
+      <div class="divider"></div>
+      <h2 class="slide-headline">Ao final, o médico passa a ter:</h2>
+      <ul class="list-block">
+        <li>maior previsibilidade clínica</li>
+        <li>menor desgaste profissional</li>
+        <li>maior clareza diagnóstica</li>
+        <li>redução de iatrogenia</li>
+        <li>maior segurança decisória</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TELA 11 — POSICIONAMENTO PREMIUM -->
+  <section class="reveal">
+    <div class="section-inner">
+      <div class="slide-title">Posicionamento</div>
+      <div class="divider"></div>
+      <h2 class="slide-headline">Este não é um programa aberto.</h2>
+      <p class="slide-text tight">
+        O grupo é pequeno. Se não houver alinhamento técnico adequado, o núcleo não acontece. A proposta é preservar um espaço clínico consistente, aprofundado e protegido.
+      </p>
+    </div>
+  </section>
+
+  <!-- TELA 12 — CHAMADA FINAL / CTA -->
+  <section class="reveal">
+    <div class="section-inner cta-section soft-depth">
+      <div class="eyebrow">Chamada final</div>
+      <h2>Se fizer sentido participar, envie uma mensagem.</h2>
+      <p class="muted tight">
+        As informações completas serão enviadas individualmente, a partir da sua realidade clínica e do contexto em que você atua.
+      </p>
+      <div class="cta-button-wrapper">
+        <a
+          href="https://wa.me/5511975074399?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20N%C3%BAcleo%20Cl%C3%ADnico%20do%20Borderline."
+          class="btn-primary"
+        >
+          <span>Solicitar informações</span>
+          <span class="btn-icon">↗</span>
+        </a>
+        <span class="btn-subtext">Contato direto via WhatsApp profissional.</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Núcleo Clínico — Clínica Real do Borderline · Conteúdo destinado exclusivamente a médicos e profissionais de saúde mental.
+  </footer>
+</main>
+
+<script>
+  // Animação suave no scroll usando IntersectionObserver
+  (function() {
+    const elements = document.querySelectorAll('.reveal');
+
+    if (!('IntersectionObserver' in window)) {
+      elements.forEach(function(el) {
+        el.classList.add('visible');
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    elements.forEach(function(el) {
+      observer.observe(el);
+    });
+  })();
+</script>
+</body>
+</html>
