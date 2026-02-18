@@ -1,402 +1,186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Clínica Real Borderline — Supervisão 1:1 (Seleção)</title>
-  <meta name="description" content="Supervisão clínica individual (1:1) para médicos no manejo de TPB: modelo dimensional, decisão em tempo real, vínculo, crise e farmacoterapia sintoma-alvo. Acesso por seleção." />
-  <style>
-    :root{
-      --bg:#f5f6f7;
-      --card:#ffffff;
-      --text:#0b0d12;
-      --muted:#6b7280;
-      --soft:#e5e7eb;
-      --soft2:#f3f4f6;
-      --shadow: 0 18px 50px rgba(0,0,0,.08);
-      --radius: 18px;
-      --radius2: 14px;
-      --max: 820px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supervisão Clínica Estendida | Dr Fabio Schmidt</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #0d0d0d;
+    color: #ffffff;
+    line-height: 1.6;
+}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.55;
-    }
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
 
-    a{color:inherit}
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+}
 
-    .wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 28px 16px 44px;
-    }
+.hero img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
 
-    .card{
-      background: var(--card);
-      border: 1px solid rgba(229,231,235,.9);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-      padding: 22px 18px;
-    }
+h1 {
+    font-size: 38px;
+    margin-top: 30px;
+}
 
-    .pill{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(229,231,235,.9);
-      background: rgba(243,244,246,.65);
-      font-size: 12px;
-      letter-spacing:.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
+h2 {
+    font-size: 28px;
+    margin-top: 60px;
+    color: #ffcc00;
+}
 
-    h1{
-      font-size: clamp(28px, 4.4vw, 44px);
-      margin: 8px 0 10px;
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-    }
+p {
+    font-size: 18px;
+    margin-top: 15px;
+}
 
-    .lead{
-      font-size: 15.5px;
-      color: #374151;
-      margin: 0 0 10px;
-    }
+.highlight {
+    color: #ffcc00;
+    font-weight: bold;
+}
 
-    .divider{
-      height:1px;
-      background: rgba(229,231,235,.9);
-      margin: 18px 0;
-      border-radius: 999px;
-    }
+.section {
+    margin-top: 50px;
+}
 
-    .section{
-      margin-top: 18px;
-      padding: 18px 18px;
-      border-radius: var(--radius2);
-      border: 1px solid rgba(229,231,235,.9);
-      background: #fff;
-    }
+.box {
+    background-color: #1a1a1a;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
 
-    .kicker{
-      font-size: 12px;
-      letter-spacing:.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 0 10px;
-    }
+ul {
+    margin-top: 15px;
+}
 
-    h2{
-      font-size: 20px;
-      margin: 0 0 8px;
-      letter-spacing:-.01em;
-      line-height:1.25;
-    }
+li {
+    margin-bottom: 10px;
+    font-size: 17px;
+}
 
-    p{margin: 0 0 10px; color:#374151}
-    .muted{color: var(--muted)}
+.cta {
+    text-align: center;
+    margin: 70px 0;
+}
 
-    ul{
-      margin: 10px 0 0;
-      padding: 0 0 0 18px;
-      color:#374151;
-    }
-    li{margin: 6px 0}
+.button {
+    display: inline-block;
+    background-color: #25D366;
+    color: #000;
+    font-size: 20px;
+    padding: 18px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
 
-    .grid{
-      display:grid;
-      gap: 12px;
-    }
-    @media(min-width: 760px){
-      .grid{grid-template-columns: 1fr 1fr}
-    }
+.button:hover {
+    background-color: #1ebe5d;
+}
 
-    .box{
-      background: rgba(243,244,246,.6);
-      border: 1px solid rgba(229,231,235,.9);
-      border-radius: 14px;
-      padding: 14px 14px;
-    }
-    .box h3{
-      margin:0 0 6px;
-      font-size: 12px;
-      letter-spacing:.18em;
-      text-transform: uppercase;
-      color:#111827;
-    }
-    .box p{margin:0; color:#374151; font-size: 14px}
+.price {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 20px;
+}
 
-    .callout{
-      background: rgba(243,244,246,.75);
-      border: 1px solid rgba(229,231,235,.9);
-      border-radius: 14px;
-      padding: 14px 14px;
-    }
-
-    .tagrow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top: 10px;
-    }
-    .tag{
-      font-size: 12px;
-      color:#374151;
-      border: 1px solid rgba(229,231,235,.95);
-      background: rgba(243,244,246,.65);
-      padding: 7px 10px;
-      border-radius: 999px;
-    }
-
-    .small{
-      font-size: 13.5px;
-      color:#4b5563;
-    }
-
-    /* CTA fixa, único botão */
-    .cta{
-      position: sticky;
-      bottom: 12px;
-      margin-top: 18px;
-      display:flex;
-      gap: 10px;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.92);
-      border: 1px solid rgba(229,231,235,.95);
-      box-shadow: 0 10px 30px rgba(0,0,0,.10);
-      backdrop-filter: blur(10px);
-    }
-    .cta .left{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      padding-left: 6px;
-    }
-    .cta .left strong{font-size: 13.5px}
-    .cta .left span{font-size: 12.5px; color: var(--muted)}
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      padding: 12px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(17,24,39,.12);
-      background: #0b0d12;
-      color: #fff;
-      text-decoration:none;
-      font-weight: 700;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-
-    .footer{
-      margin-top: 18px;
-      text-align:center;
-      font-size: 12.5px;
-      color: var(--muted);
-    }
-
-    .anchor{scroll-margin-top: 90px;}
-  </style>
+.footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 14px;
+    color: #999;
+}
+</style>
 </head>
 
 <body>
-  <main class="wrap">
-    <section class="card">
-      <div class="pill">NÚCLEO CLÍNICO · BORDERLINE</div>
 
-      <h1>Você já atende pacientes com transtorno borderline.<br/>Mesmo sem saber.</h1>
+<div class="container">
 
-      <p class="lead">
-        O borderline raramente “aparece como borderline”. Ele costuma chegar como depressão resistente, ansiedade persistente,
-        impulsividade, instabilidade relacional ou falhas terapêuticas recorrentes.
-      </p>
+    <div class="hero">
+        <img src="colegas111.png" alt="Supervisão Clínica">
+        <h1>Supervisão Clínica Estendida<br>para Casos Complexos (TPB)</h1>
+        <p>Programa exclusivo para médicos que atendem transtorno de personalidade borderline.</p>
+    </div>
 
-      <div class="divider"></div>
-
-      <div class="section">
-        <div class="kicker">Quebra de expectativa</div>
-        <h2>O problema não é falta de tratamento.<br/>É o modelo clínico utilizado.</h2>
-        <p class="muted">
-          Quando o caso é lido como episódio isolado, o manejo vira reativo: escalada medicamentosa, polifarmácia,
-          mais crise, mais ruptura e mais desgaste para o profissional.
-        </p>
-
-        <div class="grid" style="margin-top:12px;">
-          <div class="box">
-            <h3>Como costuma aparecer</h3>
-            <p>
-              depressão resistente · ansiedade persistente · impulsividade “inexplicável” · instabilidade relacional ·
-              falha terapêutica recorrente
-            </p>
-          </div>
-          <div class="box">
-            <h3>Consequência direta</h3>
-            <p>
-              polifarmácia progressiva · baixa previsibilidade · ruptura de vínculo · escalada de crise · desgaste clínico
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="kicker">Reposicionamento clínico</div>
-        <h2>Borderline não é um episódio.<br/>É um modo de funcionamento.</h2>
+    <div class="section">
+        <h2>O que é esta supervisão?</h2>
         <p>
-          Quando o padrão é reconhecido de forma dimensional, o manejo deixa de ser reativo e passa a ser estratégico,
-          estruturado e previsível ao longo do acompanhamento.
+        Esta não é uma aula gravada.  
+        Não é um curso teórico.
         </p>
-      </div>
 
-      <div class="section anchor" id="selecao">
-        <div class="kicker">Acesso</div>
-        <h2>Supervisão individual (1:1), por indicação e seleção.</h2>
+        <p class="highlight">
+        É supervisão prática, estratégica e aplicada a casos reais.
+        </p>
+
+        <div class="box">
+            ✔ 2 encontros estratégicos ao vivo (2h30 cada)<br>
+            ✔ Discussão aprofundada de casos reais dos participantes<br>
+            ✔ Material estruturado para aplicação clínica imediata<br>
+            ✔ Grupo fechado ativo por 3 meses<br>
+            ✔ Respostas técnicas em áudio (prazo definido)<br>
+            ✔ Vagas limitadas para manter qualidade técnica
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Como funciona o grupo</h2>
+        <div class="box">
+            • Grupo fechado com número reduzido de participantes<br>
+            • Envio estruturado de casos para análise<br>
+            • Diretrizes claras de funcionamento<br>
+            • Participação ativa obrigatória<br>
+            • Ambiente técnico, objetivo e protegido
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Diferencial Técnico</h2>
         <p>
-          Este não é um programa aberto. É um formato reservado para médicos que desejam organizar raciocínio clínico,
-          reduzir iatrogenia e sustentar vínculo com mais previsibilidade — no consultório, ambulatório, CAPS e urgência.
+        Supervisão focada exclusivamente em transtorno de personalidade borderline,
+        com abordagem prática para:
         </p>
 
-        <div class="callout" style="margin-top:12px;">
-          <p class="small" style="margin:0;">
-            <strong>Como funciona:</strong> após indicação (ou solicitação), você recebe um formulário breve.
-            Se houver alinhamento técnico e de contexto, eu libero o agendamento.
-            Se não houver, não acontece.
-          </p>
+        <div class="box">
+            • Manejo de crises<br>
+            • Limites terapêuticos<br>
+            • Estruturação de plano de tratamento<br>
+            • Gestão de risco<br>
+            • Manejo de rupturas e contratransferência
         </div>
 
-        <div class="tagrow">
-          <span class="tag">1 médico por vez</span>
-          <span class="tag">profundidade clínica</span>
-          <span class="tag">modelo replicável</span>
-          <span class="tag">decisão em tempo real</span>
-        </div>
-      </div>
+        <img src="colegas222.png" alt="Conteúdo do Programa" style="margin-top:40px; max-width:100%; border-radius:10px;">
+    </div>
 
-      <div class="section anchor" id="formato">
-        <div class="kicker">Formato</div>
-        <h2>Imersão clínica individual — 2 encontros.</h2>
-
-        <div class="grid" style="margin-top:12px;">
-          <div class="box">
-            <h3>Duração</h3>
-            <p>2 encontros online de <strong>2h30</strong> cada (total 5 horas).</p>
-          </div>
-          <div class="box">
-            <h3>Intervalo</h3>
-            <p><strong>7 a 10 dias</strong> entre os encontros (para aplicar e voltar com dúvidas reais).</p>
-          </div>
-          <div class="box">
-            <h3>Materiais</h3>
-            <p>Livro + apostila + checklists (uso clínico).</p>
-          </div>
-          <div class="box">
-            <h3>Aplicação</h3>
-            <p>Discussão de caso do supervisionado + casos-modelo (sem improviso).</p>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <h2 style="font-size:18px; margin-top:0;">Progressão da imersão</h2>
-        <ul>
-          <li><strong>Encontro 1:</strong> leitura dimensional + mapa integrativo + reconhecimento precoce + neurobiologia aplicada + decisão sintoma-alvo.</li>
-          <li><strong>Encontro 2:</strong> protocolos e algoritmos práticos + anti-polifarmácia + manejo de crise + contrato terapêutico + limites sem ruptura.</li>
-        </ul>
-
-        <p class="small" style="margin-top:10px;">
-          Objetivo: sair do improviso e aumentar previsibilidade clínica — sem medicalização excessiva e sem negligência.
-        </p>
-      </div>
-
-      <div class="section anchor" id="apoio">
-        <div class="kicker">Opcional (12 meses)</div>
-        <h2>Apoio em grupo privado por 1 ano — com regras claras.</h2>
-        <p>
-          Para quem deseja continuidade, existe a opção de participar de um grupo fechado de discussão técnica por 12 meses,
-          exclusivo para médicos que já passaram pela imersão.
-        </p>
-
-        <div class="grid" style="margin-top:12px;">
-          <div class="box">
-            <h3>O que é</h3>
-            <p>discussão pontual de casos, raciocínio clínico, vínculo, iatrogenia e decisões difíceis.</p>
-          </div>
-          <div class="box">
-            <h3>O que não é</h3>
-            <p>plantão, urgência, atendimento de emergência ou substituição de serviço assistencial.</p>
-          </div>
-          <div class="box">
-            <h3>Prazo de resposta</h3>
-            <p>interações assíncronas com retorno em até <strong>48h</strong> úteis (sem promessa de imediatismo).</p>
-          </div>
-          <div class="box">
-            <h3>Nível</h3>
-            <p>grupo pequeno, técnico, com foco em consistência de modelo e redução de iatrogenia.</p>
-          </div>
-        </div>
-
-        <div class="callout" style="margin-top:12px;">
-          <p class="small" style="margin:0;">
-            <strong>Observação:</strong> casos com risco iminente devem seguir fluxo de emergência e rede local.
-            O grupo existe para tomada de decisão clínica estruturada e prevenção de repetição de erros.
-          </p>
-        </div>
-      </div>
-
-      <div class="section anchor" id="coordenacao">
-        <div class="kicker">Coordenação clínica</div>
-        <h2>Dr. Fabio Schmidt</h2>
-        <p class="muted">
-          Atuação clínica voltada ao transtorno de personalidade borderline e a quadros de alta complexidade emocional,
-          com foco em manejo de risco, redução de iatrogenias e decisão clínica em contextos de instabilidade afetiva e crises recorrentes.
-        </p>
-      </div>
-
-      <div class="section anchor" id="chamada">
-        <div class="kicker">Chamada final</div>
-        <h2>Se fizer sentido, solicite o formulário de inscrição.</h2>
-        <p class="muted">
-          As informações completas são enviadas individualmente, a partir do seu contexto de atuação e realidade clínica.
-        </p>
-      </div>
-
-      <!-- CTA única -->
-      <div class="cta">
-        <div class="left">
-          <strong>Solicitar formulário de inscrição</strong>
-          <span>Contato direto via WhatsApp profissional</span>
-        </div>
-
-        <a class="btn"
-           href="https://wa.me/5511975074399?text=Ol%C3%A1%2C%20Dr.%20Fabio.%20Sou%20m%C3%A9dico(a)%20e%20gostaria%20de%20solicitar%20o%20formul%C3%A1rio%20de%20inscri%C3%A7%C3%A3o%20para%20a%20Supervis%C3%A3o%201%3A1%20Cl%C3%ADnica%20Real%20Borderline.%20Pode%20me%20enviar%3F"
-           target="_blank" rel="noopener">
-          WhatsApp
+    <div class="cta">
+        <p class="price">Investimento: R$ 4.997</p>
+        <p>Vagas limitadas para manter a profundidade da supervisão.</p>
+        <a class="button" href="https://wa.me/5511975074399" target="_blank">
+            Solicitar participação pelo WhatsApp
         </a>
-      </div>
+    </div>
 
-      <div class="footer">
-        Núcleo Clínico — Clínica Real Borderline · © <span id="year"></span>
-      </div>
-    </section>
-  </main>
+</div>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+<div class="footer">
+Dr Fabio Schmidt | CRM/SP 183549<br>
+Programa exclusivo para profissionais médicos.
+</div>
+
 </body>
 </html>
