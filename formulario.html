@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Formulário de Seleção — Clínica Real Borderline</title>
+
+<style>
+:root{
+--bg:#f5f6f7;
+--card:#ffffff;
+--text:#0b0d12;
+--muted:#6b7280;
+--soft:#e5e7eb;
+--shadow:0 18px 50px rgba(0,0,0,.08);
+--radius:18px;
+--max:820px;
+}
+
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+background:var(--bg);
+color:var(--text);
+line-height:1.5;
+}
+
+.wrap{
+max-width:var(--max);
+margin:0 auto;
+padding:28px 16px 44px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--soft);
+box-shadow:var(--shadow);
+border-radius:var(--radius);
+padding:22px 18px;
+}
+
+.pill{
+display:inline-block;
+padding:6px 12px;
+border-radius:999px;
+border:1px solid var(--soft);
+background:#f3f4f6;
+font-size:12px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:var(--muted);
+margin-bottom:12px;
+}
+
+h1{
+font-size:28px;
+margin:6px 0 18px;
+}
+
+.section{
+margin-top:20px;
+}
+
+h2{
+font-size:15px;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:var(--muted);
+margin-bottom:8px;
+}
+
+.group{
+background:#f9fafb;
+border:1px solid var(--soft);
+border-radius:12px;
+padding:12px;
+margin-bottom:12px;
+}
+
+label{
+display:block;
+margin:6px 0;
+font-size:14px;
+cursor:pointer;
+}
+
+input[type="text"], select{
+width:100%;
+padding:10px;
+border-radius:8px;
+border:1px solid var(--soft);
+margin-bottom:10px;
+font-size:14px;
+}
+
+button{
+margin-top:16px;
+width:100%;
+padding:14px;
+border-radius:999px;
+border:none;
+background:#0b0d12;
+color:white;
+font-weight:600;
+font-size:15px;
+cursor:pointer;
+}
+
+.small{
+font-size:12px;
+color:var(--muted);
+margin-top:6px;
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+<div class="card">
+
+<div class="pill">NÚCLEO CLÍNICO · SELEÇÃO</div>
+<h1>Formulário de Seleção<br>Supervisão Clínica 1:1</h1>
+
+<form id="form">
+
+<div class="section">
+<h2>Identificação</h2>
+
+<input type="text" id="nome" placeholder="Nome completo" required />
+
+<select id="registroTipo" required>
+<option value="">Registro profissional</option>
+<option value="CRM">CRM</option>
+<option value="CRP">CRP</option>
+<option value="Outro registro">Outro registro</option>
+<option value="Sem registro">Não possuo registro (em formação)</option>
+</select>
+
+<input type="text" id="registroNumero" placeholder="Número do registro (opcional)" />
+
+<select id="profissao" required>
+<option value="">Profissão</option>
+<option value="Psiquiatra">Psiquiatra</option>
+<option value="Médico generalista">Médico generalista</option>
+<option value="Residente">Residente</option>
+<option value="Psicólogo(a)">Psicólogo(a)</option>
+<option value="Outro profissional de saúde">Outro profissional de saúde</option>
+</select>
+
+</div>
+
+<div class="section">
+<h2>Contexto de atuação</h2>
+<div class="group">
+<label><input type="checkbox" value="Consultório"> Consultório</label>
+<label><input type="checkbox" value="Ambulatório"> Ambulatório</label>
+<label><input type="checkbox" value="CAPS"> CAPS</label>
+<label><input type="checkbox" value="Pronto-socorro"> Pronto-socorro</label>
+<label><input type="checkbox" value="Hospital"> Hospital</label>
+</div>
+</div>
+
+<div class="section">
+<h2>Experiência com TPB</h2>
+
+<div class="group">
+<label><input type="radio" name="volume" value="0-2 casos/mês" required> 0–2 casos/mês</label>
+<label><input type="radio" name="volume" value="3-5 casos/mês"> 3–5 casos/mês</label>
+<label><input type="radio" name="volume" value="6-10 casos/mês"> 6–10 casos/mês</label>
+<label><input type="radio" name="volume" value="10+ casos/mês"> 10+ casos/mês</label>
+</div>
+
+</div>
+
+<div class="section">
+<h2>Principal dificuldade</h2>
+
+<div class="group">
+<label><input type="radio" name="dificuldade" value="Diagnóstico diferencial" required> Diagnóstico diferencial</label>
+<label><input type="radio" name="dificuldade" value="Crise e autoagressão"> Crise e autoagressão</label>
+<label><input type="radio" name="dificuldade" value="Vínculo e limites"> Vínculo e limites</label>
+<label><input type="radio" name="dificuldade" value="Polifarmácia"> Polifarmácia / iatrogenia</label>
+<label><input type="radio" name="dificuldade" value="Adesão irregular"> Adesão irregular</label>
+</div>
+
+</div>
+
+<div class="section">
+<h2>Grupo privado 12 meses</h2>
+
+<div class="group">
+<label><input type="radio" name="grupo" value="Sim"> Tenho interesse</label>
+<label><input type="radio" name="grupo" value="Não" required> Não tenho interesse</label>
+</div>
+
+</div>
+
+<div class="section">
+<label>
+<input type="checkbox" id="termos" required>
+Compreendo que não se trata de plantão ou substituição de emergência.
+</label>
+</div>
+
+<button type="submit">Enviar pelo WhatsApp</button>
+<p class="small">Contato direto com Dr. Fabio.</p>
+
+</form>
+
+</div>
+</div>
+
+<script>
+document.getElementById("form").addEventListener("submit", function(e){
+e.preventDefault();
+
+const nome = document.getElementById("nome").value;
+const registroTipo = document.getElementById("registroTipo").value;
+const registroNumero = document.getElementById("registroNumero").value;
+const profissao = document.getElementById("profissao").value;
+const volume = document.querySelector('input[name="volume"]:checked').value;
+const dificuldade = document.querySelector('input[name="dificuldade"]:checked').value;
+const grupo = document.querySelector('input[name="grupo"]:checked').value;
+
+const contextos = [...document.querySelectorAll('input[type="checkbox"]:checked')]
+.map(el => el.value).join(", ");
+
+const mensagem =
+`Solicitação de Supervisão 1:1\n\nNome: ${nome}\nProfissão: ${profissao}\nRegistro: ${registroTipo} ${registroNumero}\nContexto: ${contextos}\nVolume TPB: ${volume}\nPrincipal dificuldade: ${dificuldade}\nGrupo 12 meses: ${grupo}`;
+
+const url = `https://wa.me/5511975074399?text=${encodeURIComponent(mensagem)}`;
+
+window.open(url, '_blank');
+});
+</script>
+
+</body>
+</html>
