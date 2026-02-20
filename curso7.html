@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Protocolo 7 Dias</title>
 
-  <!-- Tipografia mais "artística" e premium (sem parecer amador) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -14,11 +13,9 @@
     :root{
       --bg0:#06070c;
       --bg1:#0b0f18;
-      --card:rgba(255,255,255,.055);
       --line:rgba(255,255,255,.10);
       --text:#e9edf5;
       --muted:rgba(233,237,245,.76);
-      --soft:rgba(233,237,245,.10);
       --accent:#ff3f6c;
       --accent2:#ffb703;
       --ok:#22c55e;
@@ -102,7 +99,7 @@
       background: rgba(255,255,255,.04);
     }
 
-    /* Layout blocks */
+    /* Panels */
     .panel{
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
       border:1px solid var(--line);
@@ -111,6 +108,9 @@
       overflow:hidden;
     }
     .inner{ padding: 26px; }
+    @media (max-width: 960px){
+      .inner{ padding: 22px; }
+    }
 
     /* Hero */
     .hero{ padding: 40px 0 14px; }
@@ -122,7 +122,6 @@
     }
     @media (max-width: 960px){
       .hero-grid{ grid-template-columns: 1fr; }
-      .inner{ padding: 22px; }
     }
 
     .kicker{
@@ -195,7 +194,7 @@
       line-height: 1.45;
     }
 
-    /* Authority (smaller photos) */
+    /* Authority carousel (smaller) */
     .auth-head{
       display:flex; align-items:flex-start; justify-content:space-between;
       gap:14px; margin-bottom: 10px;
@@ -203,7 +202,7 @@
     .auth-head h2{
       margin:0;
       font-family: var(--title);
-      font-weight: 600;
+      font-weight: 650;
       font-size: 18px;
       letter-spacing: -0.2px;
     }
@@ -220,10 +219,10 @@
       overflow:hidden;
       border: 1px solid var(--line);
       background: rgba(0,0,0,.18);
-      height: 220px; /* fotos menores (não dominam a página) */
+      height: 200px;
     }
     @media (max-width: 960px){
-      .mini-carousel{ height: 200px; }
+      .mini-carousel{ height: 190px; }
     }
     .mini-carousel img{
       position:absolute; inset:0;
@@ -253,7 +252,7 @@
       box-shadow: 0 0 18px rgba(255,63,108,.28);
     }
 
-    /* Video block (above the fold) */
+    /* Video */
     .video-section{ padding: 14px 0 10px; }
     .video-grid{
       display:grid;
@@ -404,7 +403,7 @@
       font-size: 16px;
     }
 
-    /* Sticky CTA (mobile) */
+    /* Sticky CTA */
     .sticky{
       position:fixed;
       left:0; right:0; bottom:0;
@@ -441,7 +440,6 @@
 </head>
 
 <body>
-  <!-- Topbar -->
   <div class="topbar">
     <div class="wrap">
       <div class="brand">
@@ -455,11 +453,9 @@
     </div>
   </div>
 
-  <!-- Hero -->
   <div class="hero">
     <div class="wrap hero-grid">
 
-      <!-- Left: Promise + CTA -->
       <div class="panel">
         <div class="inner">
           <div class="kicker"><span class="spark"></span> método prático para crise em casa</div>
@@ -473,7 +469,7 @@
 
           <ul class="bullets">
             <li><span class="check">✓</span> O que dizer e o que evitar nos momentos críticos</li>
-            <li><span class="check">✓</span> Como interromper a escalada sem aumentar tensão</li>
+            <li><span class="check">✓</span> Como interromper a escalada sem “piorar tudo”</li>
             <li><span class="check">✓</span> Como criar previsibilidade dentro de casa</li>
             <li><span class="check">✓</span> Como reduzir riscos reais com estratégia</li>
           </ul>
@@ -483,23 +479,22 @@
               Quero acessar agora
             </a>
             <a class="btn btn-ghost" href="#faq">
-              Ver dúvidas
+              Tirar dúvidas
             </a>
           </div>
 
           <div class="fine">
-            Compra segura pela Hotmart. Curso online com aulas gravadas — você começa hoje e segue no seu ritmo.
+            Curso online com aulas gravadas. Você pode começar hoje e seguir no seu ritmo.
           </div>
         </div>
       </div>
 
-      <!-- Right: Authority (smaller photos) -->
       <div class="panel">
         <div class="inner">
           <div class="auth-head">
             <div>
-              <h2>Autoridade e experiência</h2>
-              <p>Use as imagens de participações/entrevistas para reforçar confiança sem precisar de depoimentos.</p>
+              <h2>Autoridade (sem enrolação)</h2>
+              <p>Participações e experiências profissionais.</p>
             </div>
           </div>
 
@@ -512,27 +507,21 @@
             <button class="active" type="button" aria-label="Slide 1"></button>
             <button type="button" aria-label="Slide 2"></button>
           </div>
-
-          <div class="fine">
-            Dica: imagens menores aqui ajudam a manter foco na promessa e no vídeo (que converte mais).
-          </div>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- Video (best place: right after hero) -->
   <div class="video-section">
     <div class="wrap video-grid">
 
       <div class="panel">
         <div class="inner">
           <div class="tag">▶ Assista 1 minuto</div>
-          <h2 class="video-title">Veja o que muda quando você para de improvisar na crise.</h2>
+          <h2 class="video-title">Veja por que algumas atitudes pioram a escalada — e o que fazer no lugar.</h2>
           <p class="video-sub">
-            Um trecho curto e direto: por que algumas atitudes pioram a escalada — e qual é a alternativa prática para
-            trazer previsibilidade e segurança dentro de casa.
+            Um trecho curto e direto sobre como trazer previsibilidade e segurança dentro de casa.
           </p>
 
           <div class="vimeo">
@@ -560,20 +549,19 @@
         <div class="card">
           <div class="tag">📌 Resultado prático</div>
           <p class="mini">
-            <b>Ambiente mais tranquilo</b> começa quando você sabe <b>o que dizer</b> e <b>o que evitar</b> nos 30–60s
-            mais críticos da escalada.
+            Mais clareza no momento crítico: o que dizer, o que evitar e como reduzir tensão na escalada.
           </p>
         </div>
         <div class="card">
           <div class="tag">🧠 Estrutura</div>
           <p class="mini">
-            Você não precisa “adivinhar”. Você aplica um passo a passo que aumenta previsibilidade e ajuda a amenizar riscos.
+            Você aplica um passo a passo simples para aumentar previsibilidade e retomar controle.
           </p>
         </div>
         <div class="card">
           <div class="tag">🛡️ Segurança</div>
           <p class="mini">
-            Em crise, <b>o timing</b> e <b>as palavras</b> mudam tudo. O curso te dá um mapa simples para conduzir melhor.
+            Estratégias para amenizar riscos reais e conduzir melhor situações difíceis.
           </p>
         </div>
       </div>
@@ -581,15 +569,14 @@
     </div>
   </div>
 
-  <!-- Content blocks -->
   <div class="section" id="conteudo">
     <div class="wrap">
-      <h3>O que você vai conseguir aplicar</h3>
+      <h3>O que muda em 7 dias</h3>
       <div class="grid-3">
         <div class="feature">
           <div class="icon">🏠</div>
-          <b>Tranquilidade em casa</b>
-          <p>Reduzir tensão diária com ajustes pequenos, repetíveis e consistentes.</p>
+          <b>Ambiente mais tranquilo</b>
+          <p>Menos tensão diária com ajustes consistentes que reduzem reatividade.</p>
         </div>
         <div class="feature">
           <div class="icon">🧭</div>
@@ -612,23 +599,22 @@
         <div class="feature">
           <div class="icon">👨‍👩‍👧</div>
           <b>Pais e familiares</b>
-          <p>Que vivem no susto, tentando “acertar no improviso”, e querem um caminho claro.</p>
+          <p>Que vivem no susto e querem um caminho claro para agir melhor na crise.</p>
         </div>
         <div class="feature">
           <div class="icon">💬</div>
           <b>Pacientes</b>
-          <p>Que desejam que os pais entendam melhor e lidem com menos conflito e mais clareza.</p>
+          <p>Que desejam que os pais entendam melhor e lidem com menos conflito.</p>
         </div>
         <div class="feature">
           <div class="icon">📌</div>
           <b>Quem quer método</b>
-          <p>Sem frases genéricas. Sem “dicas soltas”. Um protocolo direto e aplicável.</p>
+          <p>Sem frases genéricas. Um protocolo direto e aplicável.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FAQ -->
   <div class="section" id="faq">
     <div class="wrap">
       <h3>Dúvidas rápidas</h3>
@@ -655,7 +641,6 @@
     </div>
   </div>
 
-  <!-- Final CTA -->
   <div class="final">
     <div class="wrap">
       <h3>Comece hoje.</h3>
@@ -671,7 +656,6 @@
     Protocolo 7 Dias • Todos os direitos reservados
   </footer>
 
-  <!-- Mobile sticky CTA -->
   <div class="sticky" role="navigation" aria-label="CTA fixo">
     <div class="wrap">
       <div class="txt">
@@ -686,7 +670,6 @@
   </div>
 
   <script>
-    // Carrossel de autoridade (fotos pequenas) + dots
     const slides = document.querySelectorAll('.mini-carousel img');
     const dots = document.querySelectorAll('.dots button');
     let idx = 0;
@@ -698,13 +681,8 @@
       slides[idx].classList.add('active');
       dots[idx].classList.add('active');
     }
-
     dots.forEach((btn, i) => btn.addEventListener('click', () => setSlide(i)));
-
-    setInterval(() => {
-      const next = (idx + 1) % slides.length;
-      setSlide(next);
-    }, 3500);
+    setInterval(() => setSlide((idx + 1) % slides.length), 3500);
   </script>
 </body>
 </html>
