@@ -187,7 +187,7 @@
       line-height: 1.45;
     }
 
-    /* PHOTO CAROUSEL — ABSOLUTELY NO TEXT OVERLAY */
+    /* PHOTO CAROUSEL — NO TEXT. ALSO FIX HEAD CUT: object-position */
     .photo-panel{ padding:0; }
     .photo-carousel{
       position:relative;
@@ -195,15 +195,17 @@
       border-radius: var(--radius);
       border: 1px solid var(--line);
       background: rgba(0,0,0,.18);
-      height: 220px;
+      height: 230px;
     }
     @media (max-width: 960px){
-      .photo-carousel{ height: 210px; }
+      .photo-carousel{ height: 240px; }
     }
     .photo-carousel img{
       position:absolute; inset:0;
       width:100%; height:100%;
       object-fit: cover;
+      /* Push crop DOWN so heads show: */
+      object-position: 50% 22%;
       opacity:0;
       transition: opacity .75s ease;
       filter: saturate(1.02) contrast(1.02);
@@ -453,10 +455,10 @@
 
           <div class="cta-row">
             <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
-              Quero acessar agora
+              Acessar agora
             </a>
             <a class="btn btn-ghost" href="#faq">
-              Tirar dúvidas
+              Dúvidas
             </a>
           </div>
 
@@ -466,7 +468,7 @@
         </div>
       </div>
 
-      <!-- PHOTOS ONLY. NO TEXT. -->
+      <!-- PHOTOS ONLY. NO TITLE ABOVE. NO TEXT. -->
       <div class="panel photo-panel" aria-label="Fotos">
         <div class="photo-carousel" aria-label="Carrossel de fotos">
           <img src="foto1.png" class="active" alt="">
@@ -504,7 +506,7 @@
 
           <div class="cta-row" style="margin-top:14px;">
             <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
-              Acessar o método completo
+              Acessar agora
             </a>
             <a class="btn btn-ghost" href="#conteudo">
               Ver o que tem dentro
@@ -516,21 +518,15 @@
       <div class="side">
         <div class="card">
           <div class="tag">📌 Resultado prático</div>
-          <p class="mini">
-            Mais clareza no momento crítico: o que dizer, o que evitar e como reduzir tensão na escalada.
-          </p>
+          <p class="mini">O que dizer e o que evitar na crise.</p>
         </div>
         <div class="card">
           <div class="tag">🧠 Estrutura</div>
-          <p class="mini">
-            Você aplica um passo a passo simples para aumentar previsibilidade e retomar controle.
-          </p>
+          <p class="mini">Passo a passo simples para previsibilidade.</p>
         </div>
         <div class="card">
           <div class="tag">🛡️ Segurança</div>
-          <p class="mini">
-            Estratégias para amenizar riscos reais e conduzir melhor situações difíceis.
-          </p>
+          <p class="mini">Estratégias para reduzir risco e conduzir melhor.</p>
         </div>
       </div>
 
@@ -554,7 +550,7 @@
         <div class="feature">
           <div class="icon">🛡️</div>
           <b>Amenizar riscos</b>
-          <p>Mapa de ação em momentos críticos para reduzir escalada e impulsividade.</p>
+          <p>Estratégias para conduzir melhor momentos críticos com mais segurança.</p>
         </div>
       </div>
     </div>
@@ -591,7 +587,7 @@
       <h3>Comece hoje.</h3>
       <p>Estrutura traz previsibilidade. Previsibilidade traz segurança.<br/>Você não precisa continuar no improviso.</p>
       <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
-        Garantir meu acesso agora
+        Acessar agora
       </a>
       <div class="fine">Ao clicar, você será direcionado para o checkout seguro da Hotmart.</div>
     </div>
