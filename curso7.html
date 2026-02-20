@@ -1,143 +1,574 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Protocolo 7 Dias</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-body{
-    margin:0;
-    font-family:'Inter',sans-serif;
-    background:#f7f7f7;
-    color:#1a1a1a;
-}
-.container{
-    width:90%;
-    max-width:900px;
-    margin:auto;
-    padding:40px 0;
-}
-h1{
-    font-size:32px;
-    font-weight:800;
-    line-height:1.2;
-}
-h2{
-    font-size:24px;
-    font-weight:700;
-}
-p{
-    font-size:18px;
-    line-height:1.6;
-}
-.cta{
-    display:inline-block;
-    background:#e63946;
-    color:white;
-    padding:16px 28px;
-    text-decoration:none;
-    font-weight:700;
-    border-radius:8px;
-    margin-top:20px;
-}
-.cta:hover{
-    background:#c92c38;
-}
-.hero{
-    text-align:center;
-    padding:60px 0;
-}
-.section{
-    margin-top:60px;
-}
-.box{
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.05);
-    margin-top:20px;
-}
-.authority-carousel{
-    position:relative;
-    width:100%;
-    overflow:hidden;
-    border-radius:12px;
-}
-.authority-carousel img{
-    width:100%;
-    display:none;
-    border-radius:12px;
-}
-.authority-carousel img.active{
-    display:block;
-}
-footer{
-    text-align:center;
-    padding:40px 0;
-    font-size:14px;
-    color:#777;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Protocolo 7 Dias</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#05070c;
+      --bg2:#0b0f17;
+      --card:#0f172a;
+      --line:rgba(255,255,255,.09);
+      --text:#e5e7eb;
+      --muted:rgba(229,231,235,.75);
+      --accent:#ff4d5a;
+      --accent2:#ffb703;
+      --ok:#22c55e;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 980px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(255,77,90,.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 18%, rgba(255,183,3,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 55%, #070a12 100%);
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ width:min(var(--max), 92%); margin:0 auto; }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(8,11,18,.62);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:11px; height:11px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 22px rgba(255,77,90,.45);
+      flex:0 0 auto;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .badge b{ color:#fff; font-weight:700; }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:14px 18px;
+      border-radius:12px;
+      font-weight:800;
+      letter-spacing:.2px;
+      border:1px solid rgba(255,255,255,.10);
+      transition: transform .08s ease, filter .12s ease, background .12s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); filter:brightness(1.03); }
+    .btn-primary{
+      background: linear-gradient(135deg, var(--accent), #ff2f66);
+      box-shadow: 0 14px 40px rgba(255,77,90,.25);
+    }
+    .btn-ghost{
+      background: rgba(255,255,255,.04);
+    }
+    .btn small{ font-weight:700; opacity:.9; }
+
+    /* Hero */
+    .hero{
+      padding:42px 0 28px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero-grid{ grid-template-columns: 1fr; }
+    }
+
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panel-inner{ padding:26px; }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+      letter-spacing:.25px;
+      text-transform:uppercase;
+    }
+    .kicker .spark{
+      width:10px; height:10px; border-radius:999px;
+      background: rgba(34,197,94,.95);
+      box-shadow: 0 0 18px rgba(34,197,94,.38);
+    }
+
+    h1{
+      margin:14px 0 10px;
+      font-size: 40px;
+      line-height:1.12;
+      letter-spacing:-.7px;
+    }
+    @media (max-width: 520px){
+      h1{ font-size: 34px; }
+    }
+    .sub{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height:1.55;
+    }
+
+    .bullets{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin: 14px 0 18px;
+      padding:0;
+      list-style:none;
+    }
+    .bullets li{
+      display:flex; gap:10px; align-items:flex-start;
+      color:rgba(229,231,235,.92);
+      line-height:1.45;
+    }
+    .check{
+      width:20px; height:20px; border-radius:6px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background: rgba(34,197,94,.14);
+      border: 1px solid rgba(34,197,94,.22);
+      color: rgba(34,197,94,.95);
+      flex:0 0 auto;
+      margin-top:2px;
+      font-weight:900;
+      font-size:14px;
+    }
+
+    .cta-row{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top: 8px;
+    }
+    .fine{
+      margin-top: 12px;
+      font-size: 13px;
+      color: rgba(229,231,235,.62);
+      line-height:1.45;
+    }
+
+    /* Authority carousel */
+    .carousel-wrap{
+      position:relative;
+      height: 100%;
+      display:flex;
+      flex-direction:column;
+    }
+    .carousel-title{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom: 10px;
+    }
+    .carousel-title h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+    .carousel-title p{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height:1.45;
+    }
+
+    .carousel{
+      position:relative;
+      border-radius: 16px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      aspect-ratio: 4 / 3;
+    }
+    .carousel img{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit: cover;
+      opacity:0;
+      transform: scale(1.01);
+      transition: opacity .7s ease;
+    }
+    .carousel img.active{ opacity:1; }
+
+    .dots{
+      display:flex; gap:8px;
+      margin-top: 12px;
+      justify-content:center;
+    }
+    .dots button{
+      width:9px; height:9px; border-radius:99px;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      cursor:pointer;
+      padding:0;
+    }
+    .dots button.active{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-color: rgba(255,255,255,.0);
+      box-shadow: 0 0 18px rgba(255,77,90,.32);
+    }
+
+    /* Sections */
+    .section{ padding: 18px 0 10px; }
+    .section h3{
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing:-.3px;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 920px){
+      .grid-3{ grid-template-columns: 1fr; }
+    }
+    .card{
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .card .icon{
+      width:38px; height:38px; border-radius: 12px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      margin-bottom: 10px;
+      font-weight:900;
+    }
+    .card b{ display:block; margin-bottom: 6px; }
+    .card p{ margin:0; color:var(--muted); line-height:1.55; font-size:15px; }
+
+    /* FAQ */
+    details{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+    details + details{ margin-top:10px; }
+    summary{
+      cursor:pointer;
+      font-weight:800;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details p{
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height:1.55;
+      font-size: 15px;
+    }
+
+    /* Bottom CTA */
+    .final-cta{
+      text-align:center;
+      padding: 26px 0 44px;
+    }
+    .final-cta h3{
+      font-size: 26px;
+      margin: 0 0 8px;
+    }
+    .final-cta p{
+      margin:0 0 16px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height:1.55;
+    }
+
+    /* Mobile sticky CTA */
+    .sticky{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      z-index:60;
+      padding:10px;
+      background: rgba(8,11,18,.70);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      display:none;
+    }
+    .sticky .wrap{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .sticky .txt{
+      font-size: 13px;
+      color: rgba(229,231,235,.80);
+      line-height:1.25;
+    }
+    .sticky .txt b{ color:#fff; }
+    @media (max-width: 820px){
+      .sticky{ display:block; }
+      body{ padding-bottom: 74px; }
+    }
+
+    footer{
+      padding: 24px 0 30px;
+      border-top: 1px solid var(--line);
+      color: rgba(229,231,235,.55);
+      font-size: 13px;
+      text-align:center;
+    }
+  </style>
 </head>
 
 <body>
-
-<div class="container hero">
-    <h1>Sua casa não precisa continuar imprevisível.</h1>
-    <p>Um método direto para tornar o ambiente mais tranquilo, recuperar o controle e reduzir crises emocionais em apenas 7 dias.</p>
-    <a class="cta" href="https://pay.hotmart.com/S104212285E" target="_blank">Quero acessar o Protocolo 7 Dias</a>
-</div>
-
-<div class="container section">
-    <h2>O que você vai aprender</h2>
-    <div class="box">
-        <p>✔ Como interromper a escalada da crise</p>
-        <p>✔ O que dizer e o que evitar nos momentos críticos</p>
-        <p>✔ Como tornar as reações mais previsíveis</p>
-        <p>✔ Como reduzir riscos reais dentro de casa</p>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Protocolo 7 Dias</span>
+      </div>
+      <div class="badge">
+        <span>📌</span>
+        <span><b>Aulas gravadas</b> • acesso imediato</span>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="container section">
-    <h2>Autoridade e experiência</h2>
-    <p>Participações em programas, entrevistas e projetos voltados à saúde mental e orientação familiar.</p>
+  <!-- Hero -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <!-- Left -->
+      <div class="panel">
+        <div class="panel-inner">
+          <div class="kicker">
+            <span class="spark"></span>
+            <span>Método prático para reduzir escalada de crises</span>
+          </div>
 
-    <div class="authority-carousel">
-        <img src="foto1.png" class="active">
-        <img src="foto2.png">
+          <h1>Sua casa não precisa continuar imprevisível.</h1>
+          <p class="sub">
+            Um plano direto para <b>tornar o ambiente mais tranquilo</b>, recuperar controle nas situações difíceis,
+            deixar as reações mais previsíveis e <b>amenizar riscos</b> — sem improviso.
+          </p>
+
+          <ul class="bullets">
+            <li><span class="check">✓</span> O que dizer e o que evitar nos momentos críticos</li>
+            <li><span class="check">✓</span> Como interromper a escalada sem “piorar tudo”</li>
+            <li><span class="check">✓</span> Como criar previsibilidade dentro de casa</li>
+            <li><span class="check">✓</span> Como reduzir riscos reais com estratégia</li>
+          </ul>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
+              Quero acessar agora
+            </a>
+            <a class="btn btn-ghost" href="#faq">
+              Tirar dúvidas
+            </a>
+          </div>
+
+          <div class="fine">
+            Curso online com aulas gravadas. Você pode começar hoje e seguir no seu ritmo.
+          </div>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="panel">
+        <div class="panel-inner carousel-wrap">
+          <div class="carousel-title">
+            <div>
+              <h2>Autoridade (sem enrolação)</h2>
+              <p>Você pode inserir aqui suas participações em programas, entrevistas e conteúdos profissionais.</p>
+            </div>
+          </div>
+
+          <div class="carousel" aria-label="Carrossel de autoridade">
+            <img src="foto1.png" class="active" alt="Participação/Autoridade 1">
+            <img src="foto2.png" alt="Participação/Autoridade 2">
+          </div>
+
+          <div class="dots" aria-label="Indicadores do carrossel">
+            <button class="active" type="button" aria-label="Slide 1"></button>
+            <button type="button" aria-label="Slide 2"></button>
+          </div>
+
+          <div class="fine" style="margin-top:14px;">
+            Dica: imagens nítidas e com contexto real aumentam confiança e reduzem fricção no clique.
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="container section">
-    <h2>Para quem é este curso</h2>
-    <div class="box">
-        <p>✔ Pais que vivem no susto e querem previsibilidade</p>
-        <p>✔ Famílias que desejam reduzir tensão e conflitos</p>
-        <p>✔ Quem busca método prático, sem improviso</p>
+  <!-- Section: what you get -->
+  <div class="section">
+    <div class="wrap">
+      <h3>O que muda em 7 dias</h3>
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">🏠</div>
+          <b>Ambiente mais tranquilo</b>
+          <p>Você aprende a reduzir tensão e reatividade no dia a dia — com postura e frases que não escalam a crise.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧠</div>
+          <b>Controle e previsibilidade</b>
+          <p>Estrutura simples para saber o que fazer (e o que evitar) quando a emoção sobe e tudo parece virar caos.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🛡️</div>
+          <b>Amenizar riscos</b>
+          <p>Orientação prática para reduzir comportamentos de risco e conduzir momentos críticos com mais segurança.</p>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="container section" style="text-align:center;">
-    <h2>Comece hoje.</h2>
-    <p>Estrutura traz previsibilidade. Previsibilidade traz segurança.</p>
-    <a class="cta" href="https://pay.hotmart.com/S104212285E" target="_blank">Garantir meu acesso agora</a>
-</div>
+  <!-- Section: for who -->
+  <div class="section">
+    <div class="wrap">
+      <h3>Para quem é</h3>
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">👨‍👩‍👧</div>
+          <b>Pais e familiares</b>
+          <p>Que vivem no susto, tentando “acertar no improviso”, e querem um caminho claro.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💬</div>
+          <b>Pacientes que querem ser compreendidos</b>
+          <p>Para quem deseja que os pais entendam melhor o que está acontecendo e lidem com menos conflito.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📌</div>
+          <b>Quem quer método</b>
+          <p>Sem frases genéricas. Sem “dicas soltas”. Um protocolo direto e aplicável.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<footer>
-Protocolo 7 Dias • Todos os direitos reservados
-</footer>
+  <!-- FAQ -->
+  <div class="section" id="faq">
+    <div class="wrap">
+      <h3>Dúvidas rápidas</h3>
 
-<script>
-let slides = document.querySelectorAll('.authority-carousel img');
-let index = 0;
+      <details>
+        <summary>As aulas são ao vivo?</summary>
+        <p>Não. São <b>aulas gravadas</b> para você começar quando quiser e rever sempre que precisar.</p>
+      </details>
 
-setInterval(() => {
-    slides[index].classList.remove('active');
-    index = (index + 1) % slides.length;
-    slides[index].classList.add('active');
-}, 3000);
-</script>
+      <details>
+        <summary>Isso serve mesmo para crises em casa?</summary>
+        <p>O foco é prático: o que dizer, o que evitar e como conduzir momentos críticos para reduzir escalada e trazer previsibilidade.</p>
+      </details>
 
+      <details>
+        <summary>Preciso “entender muito” de psicologia?</summary>
+        <p>Não. A linguagem é direta e aplicada ao cotidiano, sem jargão desnecessário.</p>
+      </details>
+
+      <details>
+        <summary>Como acesso após a compra?</summary>
+        <p>Você compra pela Hotmart e recebe acesso conforme o fluxo padrão da plataforma.</p>
+      </details>
+    </div>
+  </div>
+
+  <!-- Final CTA -->
+  <div class="final-cta">
+    <div class="wrap">
+      <h3>Comece hoje.</h3>
+      <p>Estrutura traz previsibilidade. Previsibilidade traz segurança.<br/>Você não precisa continuar no improviso.</p>
+      <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
+        Garantir meu acesso agora
+      </a>
+      <div class="fine">
+        Ao clicar, você será direcionado para o checkout seguro da Hotmart.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Protocolo 7 Dias • Todos os direitos reservados
+  </footer>
+
+  <!-- Sticky mobile CTA -->
+  <div class="sticky" role="navigation" aria-label="CTA fixo">
+    <div class="wrap">
+      <div class="txt">
+        <b>Protocolo 7 Dias</b><br>
+        Acesso imediato • aulas gravadas
+      </div>
+      <a class="btn btn-primary" style="padding:12px 14px; border-radius:12px;"
+         href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
+        Acessar
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Carousel autoplay with dots
+    const slides = document.querySelectorAll('.carousel img');
+    const dots = document.querySelectorAll('.dots button');
+    let idx = 0;
+
+    function setSlide(i){
+      slides[idx].classList.remove('active');
+      dots[idx].classList.remove('active');
+
+      idx = i;
+
+      slides[idx].classList.add('active');
+      dots[idx].classList.add('active');
+    }
+
+    dots.forEach((btn, i) => {
+      btn.addEventListener('click', () => setSlide(i));
+    });
+
+    setInterval(() => {
+      const next = (idx + 1) % slides.length;
+      setSlide(next);
+    }, 3500);
+  </script>
 </body>
 </html>
