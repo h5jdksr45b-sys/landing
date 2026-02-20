@@ -11,15 +11,18 @@
 
   <style>
     :root{
-      --bg0:#06070c;
-      --bg1:#0b0f18;
-      --line:rgba(255,255,255,.10);
-      --text:#e9edf5;
-      --muted:rgba(233,237,245,.76);
-      --accent:#ff3f6c;
+      --bg:#070912;
+      --card1: rgba(255,255,255,.07);
+      --card2: rgba(255,255,255,.04);
+      --line: rgba(255,255,255,.10);
+
+      --text: #eef2ff;
+      --muted: rgba(238,242,255,.74);
+
+      --accent: #ff3f6c;
       --accent2:#ffb703;
 
-      --radius:18px;
+      --radius: 18px;
       --shadow: 0 18px 70px rgba(0,0,0,.55);
       --max: 1040px;
 
@@ -32,12 +35,22 @@
     body{
       margin:0;
       font-family: var(--body);
-      color:var(--text);
+      color: var(--text);
       background:
-        radial-gradient(1200px 800px at 12% 8%, rgba(255,63,108,.18), transparent 60%),
-        radial-gradient(900px 650px at 86% 18%, rgba(255,183,3,.10), transparent 55%),
-        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 55%, #070a12 100%);
-      letter-spacing: .1px;
+        radial-gradient(900px 540px at 20% 10%, rgba(255,63,108,.20), transparent 60%),
+        radial-gradient(860px 520px at 78% 18%, rgba(255,183,3,.12), transparent 62%),
+        radial-gradient(1200px 900px at 50% 110%, rgba(255,255,255,.06), transparent 58%),
+        linear-gradient(180deg, #050712 0%, #070a14 45%, #050712 100%);
+    }
+
+    /* subtle “film grain” overlay to unify the page */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity:.10;
     }
 
     a{ color:inherit; text-decoration:none; }
@@ -47,7 +60,7 @@
     .topbar{
       position: sticky; top:0; z-index:60;
       backdrop-filter: blur(12px);
-      background: rgba(8,11,18,.62);
+      background: rgba(6,9,18,.70);
       border-bottom: 1px solid var(--line);
     }
     .topbar .wrap{
@@ -75,6 +88,7 @@
       color:var(--muted);
       font-size:13px;
       white-space:nowrap;
+      background: rgba(255,255,255,.03);
     }
     .pill b{ color:#fff; font-weight:800; }
 
@@ -92,13 +106,13 @@
     .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
     .btn-primary{
       background: linear-gradient(135deg, var(--accent), #ff2a63);
-      box-shadow: 0 14px 44px rgba(255,63,108,.22);
+      box-shadow: 0 16px 52px rgba(255,63,108,.22);
     }
     .btn-ghost{ background: rgba(255,255,255,.04); }
 
     /* Panels */
     .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
+      background: linear-gradient(180deg, var(--card1), var(--card2));
       border:1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -159,7 +173,7 @@
     }
     .bullets li{
       display:flex; gap:10px; align-items:flex-start;
-      color: rgba(233,237,245,.92);
+      color: rgba(238,242,255,.92);
       line-height:1.45;
       font-size: 15.5px;
     }
@@ -182,35 +196,54 @@
 
     .fine{
       margin-top: 12px;
-      color: rgba(233,237,245,.62);
+      color: rgba(238,242,255,.62);
       font-size: 13px;
       line-height: 1.45;
     }
 
-    /* PHOTO CAROUSEL — NO TEXT. ALSO FIX HEAD CUT: object-position */
+    /* PHOTO CAROUSEL — ZERO CROPPING (contain) + blurred backdrop */
     .photo-panel{ padding:0; }
     .photo-carousel{
       position:relative;
-      overflow:hidden;
       border-radius: var(--radius);
       border: 1px solid var(--line);
       background: rgba(0,0,0,.18);
-      height: 230px;
+      overflow:hidden;
+      height: 290px;
     }
     @media (max-width: 960px){
-      .photo-carousel{ height: 240px; }
+      .photo-carousel{ height: 320px; }
     }
-    .photo-carousel img{
+
+    .slide{
+      position:absolute; inset:0;
+      opacity:0;
+      transition: opacity .7s ease;
+    }
+    .slide.active{ opacity:1; }
+
+    .slide .bg{
+      position:absolute; inset:-12px;
+      width:calc(100% + 24px); height:calc(100% + 24px);
+      object-fit: cover;
+      filter: blur(18px) saturate(1.02) contrast(1.02);
+      opacity:.55;
+      transform: scale(1.04);
+    }
+    .slide:after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(800px 380px at 50% 45%, rgba(0,0,0,.00), rgba(0,0,0,.45));
+    }
+    .slide .fg{
       position:absolute; inset:0;
       width:100%; height:100%;
-      object-fit: cover;
-      /* Push crop DOWN so heads show: */
-      object-position: 50% 22%;
-      opacity:0;
-      transition: opacity .75s ease;
+      object-fit: contain;        /* <- no cut */
+      object-position: 50% 60%;   /* <- a tiny push down */
+      padding: 22px 16px;         /* <- breathing room so heads never touch the top */
       filter: saturate(1.02) contrast(1.02);
     }
-    .photo-carousel img.active{ opacity:1; }
+
     .dots{
       display:flex; gap:8px;
       justify-content:center;
@@ -257,6 +290,21 @@
       font-size: 16px;
     }
 
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: rgba(238,242,255,.80);
+      font-size: 12.5px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
     .vimeo{
       position:relative;
       width:100%;
@@ -275,6 +323,7 @@
 
     .side{
       display:flex; flex-direction:column; height:100%;
+      gap:12px;
     }
     .side .card{
       background: rgba(255,255,255,.04);
@@ -282,26 +331,11 @@
       border-radius: 16px;
       padding: 16px;
     }
-    .side .card + .card{ margin-top: 12px; }
     .mini{
-      color: rgba(233,237,245,.72);
+      color: rgba(238,242,255,.72);
       font-size: 14px;
       line-height: 1.55;
       margin: 0;
-    }
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color: rgba(233,237,245,.80);
-      font-size: 12.5px;
-      font-weight: 800;
-      margin-bottom: 10px;
-      width: fit-content;
     }
 
     /* Sections */
@@ -388,7 +422,7 @@
       left:0; right:0; bottom:0;
       z-index:80;
       padding:10px;
-      background: rgba(8,11,18,.70);
+      background: rgba(6,9,18,.74);
       border-top: 1px solid var(--line);
       backdrop-filter: blur(12px);
       display:none;
@@ -399,7 +433,7 @@
     }
     .sticky .txt{
       font-size: 13px;
-      color: rgba(233,237,245,.80);
+      color: rgba(238,242,255,.80);
       line-height: 1.2;
     }
     .sticky .txt b{ color:#fff; font-weight: 900; }
@@ -411,7 +445,7 @@
     footer{
       padding: 24px 0 30px;
       border-top: 1px solid var(--line);
-      color: rgba(233,237,245,.55);
+      color: rgba(238,242,255,.55);
       font-size: 13px;
       text-align:center;
     }
@@ -468,11 +502,17 @@
         </div>
       </div>
 
-      <!-- PHOTOS ONLY. NO TITLE ABOVE. NO TEXT. -->
+      <!-- PHOTOS ONLY. NO TITLE. NO TEXT. NO CROPPING (contain). -->
       <div class="panel photo-panel" aria-label="Fotos">
         <div class="photo-carousel" aria-label="Carrossel de fotos">
-          <img src="foto1.png" class="active" alt="">
-          <img src="foto2.png" alt="">
+          <div class="slide active">
+            <img class="bg" src="foto1.png" alt="">
+            <img class="fg" src="foto1.png" alt="">
+          </div>
+          <div class="slide">
+            <img class="bg" src="foto2.png" alt="">
+            <img class="fg" src="foto2.png" alt="">
+          </div>
         </div>
         <div class="dots" aria-label="Indicadores">
           <button class="active" type="button" aria-label="Foto 1"></button>
@@ -611,7 +651,7 @@
   </div>
 
   <script>
-    const slides = document.querySelectorAll('.photo-carousel img');
+    const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dots button');
     let idx = 0;
 
@@ -623,7 +663,7 @@
       dots[idx].classList.add('active');
     }
     dots.forEach((btn, i) => btn.addEventListener('click', () => setSlide(i)));
-    setInterval(() => setSlide((idx + 1) % slides.length), 3500);
+    setInterval(() => setSlide((idx + 1) % slides.length), 3600);
   </script>
 </body>
 </html>
