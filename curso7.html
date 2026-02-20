@@ -1,525 +1,143 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Protocolo 7 Dias — Pare de Alimentar a Crise</title>
-  <meta name="description" content="Aulas gravadas + PDF extra com scripts prontos para pais/familiares lidarem melhor com crises no contexto de TPB, com técnica e clareza." />
-  <meta name="theme-color" content="#0b0b0d" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Protocolo 7 Dias — Pare de Alimentar a Crise" />
-  <meta property="og:description" content="Aulas gravadas + PDF extra com scripts prontos. Página oficial de acesso." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="007.png" />
-
-  <style>
-    :root{
-      --bg:#0b0b0d;
-      --card:#121218;
-      --muted:#a8adbd;
-      --text:#f5f7ff;
-      --line:rgba(255,255,255,.10);
-      --blue:#1677ff;
-      --blue2:#2a8cff;
-      --ok:#28d17c;
-      --warn:#ffcc66;
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
-      --radius:18px;
-      --max: 1080px;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:var(--font);
-      background:
-        radial-gradient(900px 500px at 15% 10%, rgba(22,119,255,.20), transparent 50%),
-        radial-gradient(700px 500px at 80% 20%, rgba(40,209,124,.10), transparent 55%),
-        radial-gradient(900px 600px at 40% 110%, rgba(22,119,255,.12), transparent 55%),
-        var(--bg);
-      color:var(--text);
-      line-height:1.35;
-    }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
-    .topbar{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter:saturate(140%) blur(10px);
-      background:rgba(11,11,13,.62);
-      border-bottom:1px solid var(--line);
-    }
-    .topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 24px}
-    .brand{display:flex; align-items:center; gap:10px; min-width: 220px;}
-    .logoMark{
-      width:34px; height:34px; border-radius:50%;
-      display:grid; place-items:center;
-      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
-      border:1px solid var(--line);
-    }
-    .brand strong{font-size:14px; letter-spacing:.2px}
-    .brand span{display:block; font-size:12px; color:var(--muted)}
-    .top-cta{display:flex; align-items:center; gap:10px}
-    .pill{
-      font-size:12px; color:var(--muted);
-      padding:8px 10px; border:1px solid var(--line);
-      border-radius:999px;
-      background:rgba(255,255,255,.04);
-      white-space:nowrap;
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding:14px 16px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background:linear-gradient(180deg, rgba(22,119,255,1), rgba(42,140,255,1));
-      box-shadow:0 14px 40px rgba(22,119,255,.25);
-      color:white;
-      font-weight:800;
-      text-decoration:none;
-      letter-spacing:.2px;
-      transition: transform .12s ease, filter .12s ease;
-      white-space:nowrap;
-    }
-    .btn:hover{transform: translateY(-1px); filter: brightness(1.03)}
-    .btn:active{transform: translateY(0px); filter: brightness(.98)}
-    .btn.secondary{
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--line);
-      box-shadow:none;
-      color:var(--text);
-      font-weight:700;
-    }
-    .btn.small{padding:11px 12px; border-radius:12px; font-weight:800; font-size:14px}
-    .hero{
-      padding:26px 0 8px;
-    }
-    .grid{
-      display:grid; gap:22px;
-      grid-template-columns: 1.05fr .95fr;
-      align-items:center;
-    }
-    @media (max-width: 960px){
-      .grid{grid-template-columns:1fr}
-      .brand{min-width:auto}
-      .pill{display:none}
-    }
-
-    .kicker{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:var(--muted);
-      font-size:12px;
-    }
-    .kdot{width:8px; height:8px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 6px rgba(40,209,124,.12)}
-    h1{
-      margin:14px 0 10px;
-      font-size:44px;
-      line-height:1.05;
-      letter-spacing:-.8px;
-    }
-    @media (max-width: 520px){
-      h1{font-size:34px}
-    }
-    .sub{
-      color:var(--muted);
-      font-size:16px;
-      margin:0 0 16px;
-      max-width: 54ch;
-    }
-    .list{
-      display:grid; gap:10px;
-      margin:14px 0 22px;
-      padding:0;
-      list-style:none;
-    }
-    .li{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-    }
-    .check{
-      flex:0 0 auto;
-      width:22px; height:22px; border-radius:8px;
-      display:grid; place-items:center;
-      background:rgba(40,209,124,.12);
-      border:1px solid rgba(40,209,124,.25);
-      color:var(--ok);
-      margin-top:1px;
-      font-weight:900;
-    }
-    .li b{display:block; font-size:14px; margin-bottom:3px}
-    .li span{display:block; color:var(--muted); font-size:13px}
-    .ctaRow{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
-    .micro{
-      color:var(--muted);
-      font-size:12px;
-      margin-top:10px;
-    }
-
-    .mock{
-      border-radius:var(--radius);
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow: var(--shadow);
-      padding:16px;
-    }
-    .mock img{
-      width:100%;
-      display:block;
-      border-radius:14px;
-      background:#fff;
-    }
-    .badges{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:12px;
-    }
-    .badge{
-      display:flex; align-items:center; gap:8px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--muted);
-      font-size:12px;
-    }
-    .badge svg{opacity:.95}
-
-    section{padding:26px 0}
-    .sectionTitle{
-      font-size:22px; margin:0 0 10px; letter-spacing:-.3px
-    }
-    .sectionSub{
-      margin:0 0 16px; color:var(--muted); max-width: 70ch
-    }
-    .cards{
-      display:grid; gap:14px;
-      grid-template-columns: repeat(3, 1fr);
-    }
-    @media (max-width: 920px){
-      .cards{grid-template-columns:1fr}
-    }
-    .card{
-      border-radius:var(--radius);
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      padding:16px;
-    }
-    .card h3{margin:0 0 8px; font-size:14px}
-    .card p{margin:0; color:var(--muted); font-size:13px}
-    .split{
-      display:grid; gap:14px;
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 920px){ .split{grid-template-columns:1fr} }
-
-    .quote{
-      border-left: 3px solid rgba(22,119,255,.55);
-      padding: 12px 14px;
-      background: rgba(22,119,255,.06);
-      border-radius: 14px;
-      border:1px solid rgba(22,119,255,.18);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .faq details{
-      border-radius:var(--radius);
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      padding:14px 16px;
-      margin-bottom:12px;
-    }
-    .faq summary{
-      cursor:pointer;
-      font-weight:800;
-      font-size:14px;
-      list-style:none;
-    }
-    .faq summary::-webkit-details-marker{display:none}
-    .faq p{margin:10px 0 0; color:var(--muted); font-size:13px}
-
-    footer{
-      padding:26px 0 90px;
-      border-top:1px solid var(--line);
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    /* sticky bottom cta */
-    .sticky{
-      position:fixed; left:0; right:0; bottom:0; z-index:30;
-      background:rgba(11,11,13,.75);
-      backdrop-filter:saturate(140%) blur(10px);
-      border-top:1px solid var(--line);
-    }
-    .sticky .wrap{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:12px 24px;
-    }
-    .sticky .left{
-      display:flex; flex-direction:column; gap:2px;
-      min-width:0;
-    }
-    .sticky .left b{font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-    .sticky .left span{font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-    @media (max-width: 600px){
-      .sticky .left span{display:none}
-      .sticky .wrap{padding:10px 14px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocolo 7 Dias</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:#f7f7f7;
+    color:#1a1a1a;
+}
+.container{
+    width:90%;
+    max-width:900px;
+    margin:auto;
+    padding:40px 0;
+}
+h1{
+    font-size:32px;
+    font-weight:800;
+    line-height:1.2;
+}
+h2{
+    font-size:24px;
+    font-weight:700;
+}
+p{
+    font-size:18px;
+    line-height:1.6;
+}
+.cta{
+    display:inline-block;
+    background:#e63946;
+    color:white;
+    padding:16px 28px;
+    text-decoration:none;
+    font-weight:700;
+    border-radius:8px;
+    margin-top:20px;
+}
+.cta:hover{
+    background:#c92c38;
+}
+.hero{
+    text-align:center;
+    padding:60px 0;
+}
+.section{
+    margin-top:60px;
+}
+.box{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    margin-top:20px;
+}
+.authority-carousel{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+    border-radius:12px;
+}
+.authority-carousel img{
+    width:100%;
+    display:none;
+    border-radius:12px;
+}
+.authority-carousel img.active{
+    display:block;
+}
+footer{
+    text-align:center;
+    padding:40px 0;
+    font-size:14px;
+    color:#777;
+}
+</style>
 </head>
 
 <body>
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="wrap">
-      <div class="brand" aria-label="Marca">
-        <div class="logoMark" aria-hidden="true">
-          <!-- 7 icon -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M20 6H7.8L7 9h8.9L10 21h4l6-15Z" fill="white" opacity=".9"/>
-          </svg>
-        </div>
-        <div>
-          <strong>Protocolo 7 Dias</strong>
-          <span>Pare de alimentar a crise</span>
-        </div>
-      </div>
 
-      <div class="top-cta">
-        <div class="pill">Aulas gravadas + PDF com scripts</div>
-        <a class="btn small" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener noreferrer">
-          Quero acessar agora
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M13 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M20 12H4" stroke="white" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </a>
-      </div>
+<div class="container hero">
+    <h1>Sua casa não precisa continuar imprevisível.</h1>
+    <p>Um método direto para tornar o ambiente mais tranquilo, recuperar o controle e reduzir crises emocionais em apenas 7 dias.</p>
+    <a class="cta" href="https://pay.hotmart.com/S104212285E" target="_blank">Quero acessar o Protocolo 7 Dias</a>
+</div>
+
+<div class="container section">
+    <h2>O que você vai aprender</h2>
+    <div class="box">
+        <p>✔ Como interromper a escalada da crise</p>
+        <p>✔ O que dizer e o que evitar nos momentos críticos</p>
+        <p>✔ Como tornar as reações mais previsíveis</p>
+        <p>✔ Como reduzir riscos reais dentro de casa</p>
     </div>
-  </div>
+</div>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="wrap">
-      <div class="grid">
-        <div>
-          <div class="kicker"><span class="kdot"></span> Para pais e familiares que precisam de técnica no meio do caos</div>
-          <h1>7 dias para parar de alimentar a crise — com método.</h1>
-          <p class="sub">
-            Sem palestra motivacional. Sem “frase bonitinha”.
-            A ideia é simples: reduzir escalada, cortar gatilhos de briga e colocar scripts prontos na sua boca quando a emoção tomar a casa.
-          </p>
+<div class="container section">
+    <h2>Autoridade e experiência</h2>
+    <p>Participações em programas, entrevistas e projetos voltados à saúde mental e orientação familiar.</p>
 
-          <ul class="list">
-            <li class="li">
-              <div class="check">✓</div>
-              <div>
-                <b>Aulas curtas e diretas</b>
-                <span>Você entende o mecanismo e já aplica no mesmo dia.</span>
-              </div>
-            </li>
-            <li class="li">
-              <div class="check">✓</div>
-              <div>
-                <b>PDF extra + scripts prontos</b>
-                <span>Frases para desarmar a escalada sem “passar pano” e sem entrar na guerra.</span>
-              </div>
-            </li>
-            <li class="li">
-              <div class="check">✓</div>
-              <div>
-                <b>Foco em crise real (vida real)</b>
-                <span>Quando o volume sobe, você precisa de roteiro, não de teoria.</span>
-              </div>
-            </li>
-          </ul>
-
-          <div class="ctaRow">
-            <a class="btn" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener noreferrer">
-              Quero acessar agora
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M13 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M20 12H4" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </a>
-            <a class="btn secondary" href="#faq">Tirar dúvidas</a>
-          </div>
-
-          <div class="micro">
-            Acesso via Hotmart. Clique no botão e finalize por lá.
-          </div>
-        </div>
-
-        <div class="mock">
-          <!-- Coloque o arquivo 007.png na mesma pasta deste index.html -->
-          <img src="007.png" alt="Protocolo 7 Dias — Pare de Alimentar a Crise" loading="eager" />
-          <div class="badges">
-            <div class="badge">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M4 5h16v12H4z" stroke="white" opacity=".8"/>
-                <path d="M8 21h8" stroke="white" opacity=".8"/>
-                <path d="M10 17h4" stroke="white" opacity=".8"/>
-              </svg>
-              Aulas gravadas
-            </div>
-            <div class="badge">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="white" opacity=".8"/>
-                <path d="M14 2v6h6" stroke="white" opacity=".8"/>
-                <path d="M8 13h8M8 17h8" stroke="white" opacity=".8"/>
-              </svg>
-              PDF extra + scripts
-            </div>
-            <div class="badge">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 22s8-4 8-10V6l-8-4-8 4v6c0 6 8 10 8 10z" stroke="white" opacity=".8"/>
-                <path d="M9 12l2 2 4-5" stroke="white" opacity=".8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              Conteúdo prático
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <div class="authority-carousel">
+        <img src="foto1.png" class="active">
+        <img src="foto2.png">
     </div>
-  </header>
+</div>
 
-  <!-- FOR WHO -->
-  <section>
-    <div class="wrap">
-      <h2 class="sectionTitle">Para quem é (e para quem não é)</h2>
-      <p class="sectionSub">
-        Se você quer “paz instantânea”, não existe. Se você quer <b>manejo</b> — isto é, reduzir dano, reduzir escalada e aumentar previsibilidade — aí sim.
-      </p>
-
-      <div class="split">
-        <div class="card">
-          <h3>É para você se…</h3>
-          <p>Você vive episódios de grito, ameaça, ruptura, acusações, silêncio punitivo, impulsos, e percebe que qualquer frase errada vira gasolina.</p>
-          <div style="height:10px"></div>
-          <p>Você quer <b>parar de piorar sem querer</b> — e precisa de frases prontas e lógica simples para agir com critério, mesmo sob pressão.</p>
-        </div>
-
-        <div class="card">
-          <h3>Não é para você se…</h3>
-          <p>Você procura “manual para controlar a pessoa” ou “ganhar discussão”. Isso volta como bumerangue e piora vínculo.</p>
-          <div style="height:10px"></div>
-          <p>Você não pretende aplicar nada. Aqui o foco é prática: comportamento + consistência.</p>
-        </div>
-      </div>
+<div class="container section">
+    <h2>Para quem é este curso</h2>
+    <div class="box">
+        <p>✔ Pais que vivem no susto e querem previsibilidade</p>
+        <p>✔ Famílias que desejam reduzir tensão e conflitos</p>
+        <p>✔ Quem busca método prático, sem improviso</p>
     </div>
-  </section>
+</div>
 
-  <!-- WHAT YOU GET -->
-  <section>
-    <div class="wrap">
-      <h2 class="sectionTitle">O que você recebe</h2>
-      <p class="sectionSub">Objetivo: você ter um jeito claro de agir quando seu cérebro também entrar em modo “alarme”.</p>
+<div class="container section" style="text-align:center;">
+    <h2>Comece hoje.</h2>
+    <p>Estrutura traz previsibilidade. Previsibilidade traz segurança.</p>
+    <a class="cta" href="https://pay.hotmart.com/S104212285E" target="_blank">Garantir meu acesso agora</a>
+</div>
 
-      <div class="cards">
-        <div class="card">
-          <h3>1) Aulas gravadas (passo a passo)</h3>
-          <p>Estrutura de manejo, erros que alimentam crise, e o que fazer nos momentos críticos — com linguagem prática.</p>
-        </div>
-        <div class="card">
-          <h3>2) PDF extra + scripts prontos</h3>
-          <p>Frases para reduzir escalada, limites sem humilhar, validação sem “passar pano”, e como encerrar conversa sem explodir.</p>
-        </div>
-        <div class="card">
-          <h3>3) 7 dias, 1 foco por dia</h3>
-          <p>Formato enxuto para virar rotina. O que muda resultado é repetição — não “insight”.</p>
-        </div>
-      </div>
+<footer>
+Protocolo 7 Dias • Todos os direitos reservados
+</footer>
 
-      <div style="height:14px"></div>
-      <div class="quote">
-        “Crise não se vence no grito. Se vence com técnica e previsibilidade.”
-      </div>
+<script>
+let slides = document.querySelectorAll('.authority-carousel img');
+let index = 0;
 
-      <div style="height:16px"></div>
-      <div class="ctaRow">
-        <a class="btn" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener noreferrer">Quero acessar agora</a>
-        <a class="btn secondary" href="#faq">Ver perguntas</a>
-      </div>
-    </div>
-  </section>
+setInterval(() => {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+}, 3000);
+</script>
 
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="wrap">
-      <h2 class="sectionTitle">Perguntas rápidas</h2>
-      <p class="sectionSub">Sem enrolação. Se ficar alguma dúvida, a resposta está aqui.</p>
-
-      <div class="faq">
-        <details>
-          <summary>Isso serve só para pais?</summary>
-          <p>O foco é pais/familiares. Mas qualquer pessoa que convive de perto (cônjuge, irmão, cuidador) tende a se beneficiar das técnicas e dos scripts.</p>
-        </details>
-
-        <details>
-          <summary>É terapia? Substitui acompanhamento?</summary>
-          <p>Não. É material educativo e prático para manejo familiar. Em casos complexos, acompanhamento profissional continua sendo importante.</p>
-        </details>
-
-        <details>
-          <summary>Tem “passo a passo” do que falar na hora?</summary>
-          <p>Sim — o PDF extra tem scripts prontos para situações comuns: escalada, acusações, ameaça de ruptura, limite, e encerramento de conversa com menos dano.</p>
-        </details>
-
-        <details>
-          <summary>Como eu acesso depois que eu pagar?</summary>
-          <p>Você finaliza o pagamento na Hotmart e recebe acesso pela plataforma. O botão desta página te leva direto para o checkout.</p>
-        </details>
-      </div>
-
-      <div style="height:14px"></div>
-      <div class="ctaRow">
-        <a class="btn" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener noreferrer">Acessar pela Hotmart</a>
-        <a class="btn secondary" href="#top">Voltar ao topo</a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="wrap" id="top">
-      <div style="display:flex; gap:14px; flex-wrap:wrap; align-items:flex-start; justify-content:space-between">
-        <div style="max-width:70ch">
-          <b style="color:var(--text)">Protocolo 7 Dias — Pare de Alimentar a Crise</b><br/>
-          Página de apresentação e acesso. Conteúdo educativo para manejo familiar.
-        </div>
-        <div style="max-width:58ch">
-          <span style="color:var(--muted)">
-            Importante: em risco imediato (ameaça de autoagressão, agressão, ou perigo), procure ajuda local de emergência/serviços de saúde.
-          </span>
-        </div>
-      </div>
-      <div style="height:10px"></div>
-      <div>© <span id="y"></span> — Todos os direitos reservados.</div>
-    </div>
-  </footer>
-
-  <!-- STICKY CTA -->
-  <div class="sticky" role="region" aria-label="Acesso rápido">
-    <div class="wrap">
-      <div class="left">
-        <b>Protocolo 7 Dias</b>
-        <span>Aulas gravadas + PDF extra com scripts prontos</span>
-      </div>
-      <a class="btn small" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener noreferrer">
-        Quero acessar agora
-      </a>
-    </div>
-  </div>
-
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
