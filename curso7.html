@@ -5,36 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Protocolo 7 Dias</title>
 
+  <!-- Tipografia mais "artística" e premium (sem parecer amador) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg1:#05070c;
-      --bg2:#0b0f17;
-      --card:#0f172a;
-      --line:rgba(255,255,255,.09);
-      --text:#e5e7eb;
-      --muted:rgba(229,231,235,.75);
-      --accent:#ff4d5a;
+      --bg0:#06070c;
+      --bg1:#0b0f18;
+      --card:rgba(255,255,255,.055);
+      --line:rgba(255,255,255,.10);
+      --text:#e9edf5;
+      --muted:rgba(233,237,245,.76);
+      --soft:rgba(233,237,245,.10);
+      --accent:#ff3f6c;
       --accent2:#ffb703;
       --ok:#22c55e;
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
-      --radius: 18px;
-      --max: 980px;
+
+      --radius:18px;
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --max: 1040px;
+
+      --title: "Fraunces", ui-serif, Georgia, serif;
+      --body: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
       margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: var(--body);
       color:var(--text);
       background:
-        radial-gradient(1200px 700px at 15% 10%, rgba(255,77,90,.18), transparent 60%),
-        radial-gradient(900px 600px at 85% 18%, rgba(255,183,3,.12), transparent 55%),
-        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 55%, #070a12 100%);
+        radial-gradient(1200px 800px at 12% 8%, rgba(255,63,108,.18), transparent 60%),
+        radial-gradient(900px 650px at 86% 18%, rgba(255,183,3,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 55%, #070a12 100%);
+      letter-spacing: .1px;
     }
 
     a{ color:inherit; text-decoration:none; }
@@ -42,15 +49,13 @@
 
     /* Topbar */
     .topbar{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
+      position: sticky; top:0; z-index:60;
+      backdrop-filter: blur(12px);
       background: rgba(8,11,18,.62);
       border-bottom: 1px solid var(--line);
     }
     .topbar .wrap{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+      display:flex; align-items:center; justify-content:space-between;
       padding:14px 0;
       gap:14px;
     }
@@ -63,10 +68,10 @@
     .dot{
       width:11px; height:11px; border-radius:999px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 22px rgba(255,77,90,.45);
+      box-shadow: 0 0 22px rgba(255,63,108,.45);
       flex:0 0 auto;
     }
-    .badge{
+    .pill{
       display:inline-flex; align-items:center; gap:8px;
       padding:8px 12px;
       border:1px solid var(--line);
@@ -75,97 +80,99 @@
       font-size:13px;
       white-space:nowrap;
     }
-    .badge b{ color:#fff; font-weight:700; }
+    .pill b{ color:#fff; font-weight:800; }
 
     /* Buttons */
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       padding:14px 18px;
-      border-radius:12px;
-      font-weight:800;
+      border-radius: 12px;
+      font-weight: 800;
       letter-spacing:.2px;
-      border:1px solid rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.12);
       transition: transform .08s ease, filter .12s ease, background .12s ease;
       user-select:none;
     }
-    .btn:hover{ transform: translateY(-1px); filter:brightness(1.03); }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
     .btn-primary{
-      background: linear-gradient(135deg, var(--accent), #ff2f66);
-      box-shadow: 0 14px 40px rgba(255,77,90,.25);
+      background: linear-gradient(135deg, var(--accent), #ff2a63);
+      box-shadow: 0 14px 44px rgba(255,63,108,.22);
     }
     .btn-ghost{
       background: rgba(255,255,255,.04);
     }
-    .btn small{ font-weight:700; opacity:.9; }
 
-    /* Hero */
-    .hero{
-      padding:42px 0 28px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.08fr .92fr;
-      gap:22px;
-      align-items:stretch;
-    }
-    @media (max-width: 920px){
-      .hero-grid{ grid-template-columns: 1fr; }
-    }
-
+    /* Layout blocks */
     .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
       border:1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
-    .panel-inner{ padding:26px; }
+    .inner{ padding: 26px; }
+
+    /* Hero */
+    .hero{ padding: 40px 0 14px; }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 18px;
+      align-items:stretch;
+    }
+    @media (max-width: 960px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .inner{ padding: 22px; }
+    }
 
     .kicker{
       display:inline-flex; align-items:center; gap:10px;
       color:var(--muted);
-      font-weight:700;
       font-size:13px;
-      letter-spacing:.25px;
+      font-weight:800;
+      letter-spacing:.22px;
       text-transform:uppercase;
     }
-    .kicker .spark{
+    .spark{
       width:10px; height:10px; border-radius:999px;
       background: rgba(34,197,94,.95);
       box-shadow: 0 0 18px rgba(34,197,94,.38);
     }
 
     h1{
-      margin:14px 0 10px;
-      font-size: 40px;
-      line-height:1.12;
-      letter-spacing:-.7px;
+      margin: 14px 0 10px;
+      font-family: var(--title);
+      font-weight: 700;
+      font-size: 42px;
+      line-height: 1.08;
+      letter-spacing: -0.7px;
     }
     @media (max-width: 520px){
-      h1{ font-size: 34px; }
+      h1{ font-size: 36px; }
     }
+
     .sub{
-      margin: 0 0 18px;
+      margin: 0 0 16px;
       color: var(--muted);
       font-size: 18px;
-      line-height:1.55;
+      line-height: 1.55;
     }
 
     .bullets{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:10px;
-      margin: 14px 0 18px;
+      margin: 14px 0 16px;
       padding:0;
       list-style:none;
+      display:grid;
+      gap:10px;
     }
     .bullets li{
       display:flex; gap:10px; align-items:flex-start;
-      color:rgba(229,231,235,.92);
+      color: rgba(233,237,245,.92);
       line-height:1.45;
+      font-size: 15.5px;
     }
     .check{
-      width:20px; height:20px; border-radius:6px;
+      width:20px; height:20px; border-radius:7px;
       display:inline-flex; align-items:center; justify-content:center;
       background: rgba(34,197,94,.14);
       border: 1px solid rgba(34,197,94,.22);
@@ -180,56 +187,53 @@
       display:flex; gap:12px; flex-wrap:wrap;
       margin-top: 8px;
     }
+
     .fine{
       margin-top: 12px;
+      color: rgba(233,237,245,.62);
       font-size: 13px;
-      color: rgba(229,231,235,.62);
-      line-height:1.45;
+      line-height: 1.45;
     }
 
-    /* Authority carousel */
-    .carousel-wrap{
-      position:relative;
-      height: 100%;
-      display:flex;
-      flex-direction:column;
+    /* Authority (smaller photos) */
+    .auth-head{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:14px; margin-bottom: 10px;
     }
-    .carousel-title{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:14px;
-      margin-bottom: 10px;
-    }
-    .carousel-title h2{
+    .auth-head h2{
       margin:0;
-      font-size:18px;
-      letter-spacing:-.2px;
+      font-family: var(--title);
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: -0.2px;
     }
-    .carousel-title p{
+    .auth-head p{
       margin: 6px 0 0;
       color: var(--muted);
       font-size: 14px;
-      line-height:1.45;
+      line-height: 1.45;
     }
 
-    .carousel{
+    .mini-carousel{
       position:relative;
-      border-radius: 16px;
+      border-radius: 14px;
       overflow:hidden;
-      border:1px solid var(--line);
-      background: rgba(0,0,0,.22);
-      aspect-ratio: 4 / 3;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      height: 220px; /* fotos menores (não dominam a página) */
     }
-    .carousel img{
+    @media (max-width: 960px){
+      .mini-carousel{ height: 200px; }
+    }
+    .mini-carousel img{
       position:absolute; inset:0;
       width:100%; height:100%;
       object-fit: cover;
       opacity:0;
-      transform: scale(1.01);
-      transition: opacity .7s ease;
+      transition: opacity .75s ease;
+      filter: saturate(1.02) contrast(1.02);
     }
-    .carousel img.active{ opacity:1; }
+    .mini-carousel img.active{ opacity:1; }
 
     .dots{
       display:flex; gap:8px;
@@ -246,102 +250,182 @@
     .dots button.active{
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       border-color: rgba(255,255,255,.0);
-      box-shadow: 0 0 18px rgba(255,77,90,.32);
+      box-shadow: 0 0 18px rgba(255,63,108,.28);
+    }
+
+    /* Video block (above the fold) */
+    .video-section{ padding: 14px 0 10px; }
+    .video-grid{
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap: 18px;
+      align-items:stretch;
+    }
+    @media (max-width: 960px){
+      .video-grid{ grid-template-columns: 1fr; }
+    }
+
+    .video-title{
+      margin:0 0 8px;
+      font-family: var(--title);
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: -0.3px;
+    }
+    .video-sub{
+      margin:0 0 14px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 16px;
+    }
+
+    .vimeo{
+      position:relative;
+      width:100%;
+      padding-top:56.25%;
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.25);
+      box-shadow: 0 14px 50px rgba(0,0,0,.35);
+    }
+    .vimeo iframe{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:0;
+    }
+
+    .side{
+      display:flex; flex-direction:column; height:100%;
+    }
+    .side .card{
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .side .card + .card{ margin-top: 12px; }
+    .mini{
+      color: rgba(233,237,245,.72);
+      font-size: 14px;
+      line-height: 1.55;
+      margin: 0;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: rgba(233,237,245,.80);
+      font-size: 12.5px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      width: fit-content;
     }
 
     /* Sections */
-    .section{ padding: 18px 0 10px; }
+    .section{ padding: 20px 0 10px; }
     .section h3{
       margin: 0 0 10px;
-      font-size: 22px;
+      font-family: var(--title);
+      font-weight: 700;
+      font-size: 26px;
       letter-spacing:-.3px;
     }
+
     .grid-3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap:14px;
+      gap: 14px;
     }
-    @media (max-width: 920px){
+    @media (max-width: 960px){
       .grid-3{ grid-template-columns: 1fr; }
     }
-    .card{
+
+    .feature{
       background: rgba(255,255,255,.04);
       border: 1px solid var(--line);
       border-radius: 16px;
       padding: 18px;
     }
-    .card .icon{
-      width:38px; height:38px; border-radius: 12px;
+    .feature .icon{
+      width:40px; height:40px;
+      border-radius: 13px;
       display:flex; align-items:center; justify-content:center;
       background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.12);
       margin-bottom: 10px;
-      font-weight:900;
+      font-weight: 900;
+      font-size: 18px;
     }
-    .card b{ display:block; margin-bottom: 6px; }
-    .card p{ margin:0; color:var(--muted); line-height:1.55; font-size:15px; }
+    .feature b{ display:block; margin-bottom: 6px; font-weight: 900; }
+    .feature p{ margin:0; color: var(--muted); font-size: 15px; line-height: 1.55; }
 
     /* FAQ */
     details{
       background: rgba(255,255,255,.04);
-      border:1px solid var(--line);
+      border: 1px solid var(--line);
       border-radius: 14px;
       padding: 14px 16px;
     }
     details + details{ margin-top:10px; }
     summary{
       cursor:pointer;
-      font-weight:800;
+      font-weight: 900;
       list-style:none;
     }
     summary::-webkit-details-marker{ display:none; }
     details p{
       margin: 10px 0 0;
       color: var(--muted);
-      line-height:1.55;
+      line-height: 1.55;
       font-size: 15px;
     }
 
-    /* Bottom CTA */
-    .final-cta{
+    /* Final CTA */
+    .final{
+      padding: 22px 0 44px;
       text-align:center;
-      padding: 26px 0 44px;
     }
-    .final-cta h3{
-      font-size: 26px;
-      margin: 0 0 8px;
+    .final h3{
+      margin:0 0 8px;
+      font-family: var(--title);
+      font-weight: 700;
+      font-size: 30px;
+      letter-spacing: -.35px;
     }
-    .final-cta p{
+    .final p{
       margin:0 0 16px;
       color: var(--muted);
+      line-height: 1.55;
       font-size: 16px;
-      line-height:1.55;
     }
 
-    /* Mobile sticky CTA */
+    /* Sticky CTA (mobile) */
     .sticky{
       position:fixed;
       left:0; right:0; bottom:0;
-      z-index:60;
+      z-index:80;
       padding:10px;
       background: rgba(8,11,18,.70);
       border-top: 1px solid var(--line);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       display:none;
     }
     .sticky .wrap{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
+      display:flex; gap:10px;
+      align-items:center; justify-content:space-between;
     }
     .sticky .txt{
       font-size: 13px;
-      color: rgba(229,231,235,.80);
-      line-height:1.25;
+      color: rgba(233,237,245,.80);
+      line-height: 1.2;
     }
-    .sticky .txt b{ color:#fff; }
-    @media (max-width: 820px){
+    .sticky .txt b{ color:#fff; font-weight: 900; }
+    @media (max-width: 860px){
       .sticky{ display:block; }
       body{ padding-bottom: 74px; }
     }
@@ -349,7 +433,7 @@
     footer{
       padding: 24px 0 30px;
       border-top: 1px solid var(--line);
-      color: rgba(229,231,235,.55);
+      color: rgba(233,237,245,.55);
       font-size: 13px;
       text-align:center;
     }
@@ -364,7 +448,7 @@
         <span class="dot"></span>
         <span>Protocolo 7 Dias</span>
       </div>
-      <div class="badge">
+      <div class="pill">
         <span>📌</span>
         <span><b>Aulas gravadas</b> • acesso imediato</span>
       </div>
@@ -374,15 +458,14 @@
   <!-- Hero -->
   <div class="hero">
     <div class="wrap hero-grid">
-      <!-- Left -->
+
+      <!-- Left: Promise + CTA -->
       <div class="panel">
-        <div class="panel-inner">
-          <div class="kicker">
-            <span class="spark"></span>
-            <span>Método prático para reduzir escalada de crises</span>
-          </div>
+        <div class="inner">
+          <div class="kicker"><span class="spark"></span> método prático para crise em casa</div>
 
           <h1>Sua casa não precisa continuar imprevisível.</h1>
+
           <p class="sub">
             Um plano direto para <b>tornar o ambiente mais tranquilo</b>, recuperar controle nas situações difíceis,
             deixar as reações mais previsíveis e <b>amenizar riscos</b> — sem improviso.
@@ -390,7 +473,7 @@
 
           <ul class="bullets">
             <li><span class="check">✓</span> O que dizer e o que evitar nos momentos críticos</li>
-            <li><span class="check">✓</span> Como interromper a escalada sem “piorar tudo”</li>
+            <li><span class="check">✓</span> Como interromper a escalada sem aumentar tensão</li>
             <li><span class="check">✓</span> Como criar previsibilidade dentro de casa</li>
             <li><span class="check">✓</span> Como reduzir riscos reais com estratégia</li>
           </ul>
@@ -400,29 +483,29 @@
               Quero acessar agora
             </a>
             <a class="btn btn-ghost" href="#faq">
-              Tirar dúvidas
+              Ver dúvidas
             </a>
           </div>
 
           <div class="fine">
-            Curso online com aulas gravadas. Você pode começar hoje e seguir no seu ritmo.
+            Compra segura pela Hotmart. Curso online com aulas gravadas — você começa hoje e segue no seu ritmo.
           </div>
         </div>
       </div>
 
-      <!-- Right -->
+      <!-- Right: Authority (smaller photos) -->
       <div class="panel">
-        <div class="panel-inner carousel-wrap">
-          <div class="carousel-title">
+        <div class="inner">
+          <div class="auth-head">
             <div>
-              <h2>Autoridade (sem enrolação)</h2>
-              <p>Você pode inserir aqui suas participações em programas, entrevistas e conteúdos profissionais.</p>
+              <h2>Autoridade e experiência</h2>
+              <p>Use as imagens de participações/entrevistas para reforçar confiança sem precisar de depoimentos.</p>
             </div>
           </div>
 
-          <div class="carousel" aria-label="Carrossel de autoridade">
-            <img src="foto1.png" class="active" alt="Participação/Autoridade 1">
-            <img src="foto2.png" alt="Participação/Autoridade 2">
+          <div class="mini-carousel" aria-label="Carrossel de autoridade">
+            <img src="foto1.png" class="active" alt="Autoridade 1">
+            <img src="foto2.png" alt="Autoridade 2">
           </div>
 
           <div class="dots" aria-label="Indicadores do carrossel">
@@ -430,54 +513,113 @@
             <button type="button" aria-label="Slide 2"></button>
           </div>
 
-          <div class="fine" style="margin-top:14px;">
-            Dica: imagens nítidas e com contexto real aumentam confiança e reduzem fricção no clique.
+          <div class="fine">
+            Dica: imagens menores aqui ajudam a manter foco na promessa e no vídeo (que converte mais).
           </div>
         </div>
       </div>
+
     </div>
   </div>
 
-  <!-- Section: what you get -->
-  <div class="section">
+  <!-- Video (best place: right after hero) -->
+  <div class="video-section">
+    <div class="wrap video-grid">
+
+      <div class="panel">
+        <div class="inner">
+          <div class="tag">▶ Assista 1 minuto</div>
+          <h2 class="video-title">Veja o que muda quando você para de improvisar na crise.</h2>
+          <p class="video-sub">
+            Um trecho curto e direto: por que algumas atitudes pioram a escalada — e qual é a alternativa prática para
+            trazer previsibilidade e segurança dentro de casa.
+          </p>
+
+          <div class="vimeo">
+            <iframe
+              src="https://player.vimeo.com/video/1163488735?h=0&title=0&byline=0&portrait=0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
+          </div>
+
+          <div class="cta-row" style="margin-top:14px;">
+            <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
+              Acessar o método completo
+            </a>
+            <a class="btn btn-ghost" href="#conteudo">
+              Ver o que tem dentro
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="side">
+        <div class="card">
+          <div class="tag">📌 Resultado prático</div>
+          <p class="mini">
+            <b>Ambiente mais tranquilo</b> começa quando você sabe <b>o que dizer</b> e <b>o que evitar</b> nos 30–60s
+            mais críticos da escalada.
+          </p>
+        </div>
+        <div class="card">
+          <div class="tag">🧠 Estrutura</div>
+          <p class="mini">
+            Você não precisa “adivinhar”. Você aplica um passo a passo que aumenta previsibilidade e ajuda a amenizar riscos.
+          </p>
+        </div>
+        <div class="card">
+          <div class="tag">🛡️ Segurança</div>
+          <p class="mini">
+            Em crise, <b>o timing</b> e <b>as palavras</b> mudam tudo. O curso te dá um mapa simples para conduzir melhor.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Content blocks -->
+  <div class="section" id="conteudo">
     <div class="wrap">
-      <h3>O que muda em 7 dias</h3>
+      <h3>O que você vai conseguir aplicar</h3>
       <div class="grid-3">
-        <div class="card">
+        <div class="feature">
           <div class="icon">🏠</div>
-          <b>Ambiente mais tranquilo</b>
-          <p>Você aprende a reduzir tensão e reatividade no dia a dia — com postura e frases que não escalam a crise.</p>
+          <b>Tranquilidade em casa</b>
+          <p>Reduzir tensão diária com ajustes pequenos, repetíveis e consistentes.</p>
         </div>
-        <div class="card">
-          <div class="icon">🧠</div>
+        <div class="feature">
+          <div class="icon">🧭</div>
           <b>Controle e previsibilidade</b>
-          <p>Estrutura simples para saber o que fazer (e o que evitar) quando a emoção sobe e tudo parece virar caos.</p>
+          <p>Estratégia para conduzir conversa e comportamento quando a emoção sobe.</p>
         </div>
-        <div class="card">
+        <div class="feature">
           <div class="icon">🛡️</div>
           <b>Amenizar riscos</b>
-          <p>Orientação prática para reduzir comportamentos de risco e conduzir momentos críticos com mais segurança.</p>
+          <p>Mapa de ação em momentos críticos para reduzir escalada e impulsividade.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Section: for who -->
   <div class="section">
     <div class="wrap">
       <h3>Para quem é</h3>
       <div class="grid-3">
-        <div class="card">
+        <div class="feature">
           <div class="icon">👨‍👩‍👧</div>
           <b>Pais e familiares</b>
           <p>Que vivem no susto, tentando “acertar no improviso”, e querem um caminho claro.</p>
         </div>
-        <div class="card">
+        <div class="feature">
           <div class="icon">💬</div>
-          <b>Pacientes que querem ser compreendidos</b>
-          <p>Para quem deseja que os pais entendam melhor o que está acontecendo e lidem com menos conflito.</p>
+          <b>Pacientes</b>
+          <p>Que desejam que os pais entendam melhor e lidem com menos conflito e mais clareza.</p>
         </div>
-        <div class="card">
+        <div class="feature">
           <div class="icon">📌</div>
           <b>Quem quer método</b>
           <p>Sem frases genéricas. Sem “dicas soltas”. Um protocolo direto e aplicável.</p>
@@ -493,37 +635,35 @@
 
       <details>
         <summary>As aulas são ao vivo?</summary>
-        <p>Não. São <b>aulas gravadas</b> para você começar quando quiser e rever sempre que precisar.</p>
+        <p>Não. São <b>aulas gravadas</b> com acesso imediato, para você começar quando quiser e rever sempre que precisar.</p>
       </details>
 
       <details>
-        <summary>Isso serve mesmo para crises em casa?</summary>
-        <p>O foco é prático: o que dizer, o que evitar e como conduzir momentos críticos para reduzir escalada e trazer previsibilidade.</p>
+        <summary>Preciso entender de psicologia?</summary>
+        <p>Não. A linguagem é direta e aplicada ao cotidiano, com foco no que funciona na prática durante a crise.</p>
       </details>
 
       <details>
-        <summary>Preciso “entender muito” de psicologia?</summary>
-        <p>Não. A linguagem é direta e aplicada ao cotidiano, sem jargão desnecessário.</p>
+        <summary>Serve para pais e para pacientes?</summary>
+        <p>Sim. O foco é orientar a dinâmica dentro de casa. Pacientes também podem usar para que os pais compreendam melhor.</p>
       </details>
 
       <details>
         <summary>Como acesso após a compra?</summary>
-        <p>Você compra pela Hotmart e recebe acesso conforme o fluxo padrão da plataforma.</p>
+        <p>Você finaliza no checkout da Hotmart e recebe o acesso no fluxo padrão da plataforma.</p>
       </details>
     </div>
   </div>
 
   <!-- Final CTA -->
-  <div class="final-cta">
+  <div class="final">
     <div class="wrap">
       <h3>Comece hoje.</h3>
       <p>Estrutura traz previsibilidade. Previsibilidade traz segurança.<br/>Você não precisa continuar no improviso.</p>
       <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
         Garantir meu acesso agora
       </a>
-      <div class="fine">
-        Ao clicar, você será direcionado para o checkout seguro da Hotmart.
-      </div>
+      <div class="fine">Ao clicar, você será direcionado para o checkout seguro da Hotmart.</div>
     </div>
   </div>
 
@@ -531,12 +671,12 @@
     Protocolo 7 Dias • Todos os direitos reservados
   </footer>
 
-  <!-- Sticky mobile CTA -->
+  <!-- Mobile sticky CTA -->
   <div class="sticky" role="navigation" aria-label="CTA fixo">
     <div class="wrap">
       <div class="txt">
         <b>Protocolo 7 Dias</b><br>
-        Acesso imediato • aulas gravadas
+        Aulas gravadas • acesso imediato
       </div>
       <a class="btn btn-primary" style="padding:12px 14px; border-radius:12px;"
          href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
@@ -546,24 +686,20 @@
   </div>
 
   <script>
-    // Carousel autoplay with dots
-    const slides = document.querySelectorAll('.carousel img');
+    // Carrossel de autoridade (fotos pequenas) + dots
+    const slides = document.querySelectorAll('.mini-carousel img');
     const dots = document.querySelectorAll('.dots button');
     let idx = 0;
 
     function setSlide(i){
       slides[idx].classList.remove('active');
       dots[idx].classList.remove('active');
-
       idx = i;
-
       slides[idx].classList.add('active');
       dots[idx].classList.add('active');
     }
 
-    dots.forEach((btn, i) => {
-      btn.addEventListener('click', () => setSlide(i));
-    });
+    dots.forEach((btn, i) => btn.addEventListener('click', () => setSlide(i)));
 
     setInterval(() => {
       const next = (idx + 1) % slides.length;
