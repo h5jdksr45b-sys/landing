@@ -1,497 +1,343 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Clínica Real Borderline — Imersão Clínica Intensiva 1:1</title>
-  <meta name="description" content="Imersão Clínica Intensiva 1:1 (um dia completo) + grupo técnico por 3 meses. Oferta para poucos e selecionados. Solicite o formulário por WhatsApp." />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clínica Real Borderline — Imersão Clínica Intensiva 1:1</title>
+<meta name="description" content="Imersão Clínica Intensiva 1:1 para casos difíceis (TPB). Oferta para poucos e selecionados.">
 
-  <style>
-    :root{
-      --bg:#f5f6f7;
-      --card:#ffffff;
-      --text:#0b0d12;
-      --muted:#6b7280;
-      --soft:#e5e7eb;
-      --soft2:#f3f4f6;
-      --shadow: 0 18px 50px rgba(0,0,0,.08);
-      --radius: 20px;
-      --radius2: 14px;
-      --max: 920px;
-    }
+<style>
+:root{
+--bg:#f5f6f7;
+--card:#ffffff;
+--text:#0b0d12;
+--muted:#6b7280;
+--soft:#e5e7eb;
+--shadow:0 20px 60px rgba(0,0,0,.08);
+--radius:22px;
+--radius2:16px;
+--max:1100px;
+}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.55;
-    }
-    a{color:inherit}
+*{
+box-sizing:border-box;
+}
 
-    .wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 22px 16px 54px;
-    }
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+background:var(--bg);
+color:var(--text);
+line-height:1.65;
+}
 
-    .card{
-      background: var(--card);
-      border: 1px solid rgba(229,231,235,.9);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
+.wrap{
+max-width:var(--max);
+margin:0 auto;
+padding:30px 20px 80px;
+}
 
-    /* HERO */
-    .hero{
-      position: relative;
-      background: #0b0d12;
-      padding: 18px;
-    }
-    .hero-img{
-      width: 100%;
-      display:block;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.08);
-      background: #111;
-      /* mantém a imagem inteira (não corta) */
-      object-fit: contain;
-      max-height: 520px;
-    }
-    .hero-overlay{
-      position: absolute;
-      inset: 18px;
-      border-radius: 16px;
-      pointer-events: none;
-      background: radial-gradient(1200px 420px at 20% 20%, rgba(255,255,255,.08), transparent 55%),
-                  radial-gradient(900px 380px at 80% 30%, rgba(255,255,255,.06), transparent 60%);
-      mix-blend-mode: screen;
-      opacity: .85;
-    }
+.card{
+background:var(--card);
+border:1px solid var(--soft);
+border-radius:var(--radius);
+box-shadow:var(--shadow);
+overflow:hidden;
+}
 
-    .content{
-      padding: 18px 18px 8px;
-    }
+/* HERO */
 
-    .pill{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(229,231,235,.9);
-      background: rgba(243,244,246,.65);
-      font-size: 12px;
-      letter-spacing:.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 6px 0 14px;
-    }
+.hero{
+background:#0b0d12;
+padding:30px;
+}
 
-    h1{
-      font-size: clamp(26px, 4.0vw, 40px);
-      margin: 6px 0 10px;
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-    }
+.hero img{
+width:100%;
+height:auto;
+display:block;
+border-radius:18px;
+object-fit:contain;
+}
 
-    .lead{
-      font-size: 15.5px;
-      color: #374151;
-      margin: 0 0 14px;
-      max-width: 68ch;
-    }
+/* CONTENT */
 
-    .divider{
-      height:1px;
-      background: rgba(229,231,235,.9);
-      margin: 16px 0;
-      border-radius: 999px;
-    }
+.content{
+padding:40px 50px;
+}
 
-    .section{
-      margin-top: 14px;
-      padding: 16px 16px;
-      border-radius: var(--radius2);
-      border: 1px solid rgba(229,231,235,.9);
-      background: #fff;
-    }
+.pill{
+display:inline-block;
+padding:8px 16px;
+border-radius:999px;
+background:#f3f4f6;
+border:1px solid var(--soft);
+font-size:12px;
+letter-spacing:.14em;
+text-transform:uppercase;
+color:var(--muted);
+margin-bottom:20px;
+}
 
-    .kicker{
-      font-size: 12px;
-      letter-spacing:.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 0 10px;
-    }
+h1{
+font-size:44px;
+line-height:1.15;
+margin:0 0 18px;
+}
 
-    h2{
-      font-size: 20px;
-      margin: 0 0 8px;
-      letter-spacing:-.01em;
-      line-height:1.25;
-    }
+.lead{
+font-size:18px;
+color:#374151;
+margin-bottom:30px;
+max-width:800px;
+}
 
-    p{margin: 0 0 10px; color:#374151}
-    .muted{color: var(--muted)}
+.section{
+margin-top:40px;
+padding:30px;
+border:1px solid var(--soft);
+border-radius:var(--radius2);
+background:#fff;
+}
 
-    .grid{
-      display:grid;
-      gap: 12px;
-    }
-    @media(min-width: 860px){
-      .grid{grid-template-columns: 1fr 1fr}
-    }
+.section h2{
+font-size:26px;
+margin:0 0 14px;
+}
 
-    .box{
-      background: rgba(243,244,246,.6);
-      border: 1px solid rgba(229,231,235,.9);
-      border-radius: 14px;
-      padding: 14px 14px;
-    }
-    .box h3{
-      margin:0 0 6px;
-      font-size: 12px;
-      letter-spacing:.18em;
-      text-transform: uppercase;
-      color:#111827;
-    }
-    .box p{margin:0; color:#374151; font-size: 14px}
+.section p{
+font-size:16px;
+color:#374151;
+}
 
-    ul{
-      margin: 10px 0 0;
-      padding: 0 0 0 18px;
-      color:#374151;
-    }
-    li{margin: 6px 0}
+.section ul{
+margin-top:12px;
+padding-left:20px;
+}
 
-    .tagrow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top: 10px;
-    }
-    .tag{
-      font-size: 12px;
-      color:#374151;
-      border: 1px solid rgba(229,231,235,.95);
-      background: rgba(243,244,246,.65);
-      padding: 7px 10px;
-      border-radius: 999px;
-    }
+.section li{
+margin:8px 0;
+}
 
-    /* CAROUSEL (images inteiro, tamanho contido) */
-    .carousel{
-      border:1px solid rgba(229,231,235,.9);
-      border-radius: 14px;
-      background: #fff;
-      overflow:hidden;
-    }
-    .carousel-viewport{
-      padding: 14px 14px 8px;
-    }
-    .carousel-track{
-      display:flex;
-      transition: transform 260ms ease;
-      will-change: transform;
-    }
-    .slide{
-      flex: 0 0 100%;
-      padding: 4px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
-    .slide img{
-      width:100%;
-      max-width: 640px;
-      max-height: 420px;
-      height: auto;
-      object-fit: contain; /* mostra inteiro */
-      display:block;
-      border-radius: 12px;
-      border: 1px solid rgba(229,231,235,.85);
-      background: #fff;
-    }
-    .carousel-controls{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
-      gap:10px;
-      padding: 10px 14px 14px;
-      border-top: 1px solid rgba(229,231,235,.9);
-    }
-    .iconbtn{
-      border:1px solid rgba(229,231,235,.95);
-      background: rgba(243,244,246,.6);
-      border-radius: 12px;
-      padding: 10px 12px;
-      cursor:pointer;
-      font-weight:700;
-    }
-    .dots{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      justify-content:center;
-      flex:1;
-    }
-    .dot{
-      width:8px; height:8px;
-      border-radius:999px;
-      border:1px solid rgba(229,231,235,.95);
-      background: rgba(243,244,246,.8);
-      cursor:pointer;
-    }
-    .dot.active{
-      background:#0b0d12;
-      border-color:#0b0d12;
-    }
+.muted{
+color:var(--muted);
+font-size:14px;
+margin-top:6px;
+}
 
-    /* CTA único (sticky) */
-    .cta{
-      position: sticky;
-      bottom: 12px;
-      margin: 16px 18px 18px;
-      display:flex;
-      gap: 10px;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.92);
-      border: 1px solid rgba(229,231,235,.95);
-      box-shadow: 0 10px 30px rgba(0,0,0,.10);
-      backdrop-filter: blur(10px);
-    }
-    .cta .left{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      padding-left: 6px;
-      min-width: 0;
-    }
-    .cta .left strong{font-size: 13.5px; white-space:nowrap; overflow:hidden; text-overflow: ellipsis;}
-    .cta .left span{font-size: 12.5px; color: var(--muted); white-space:nowrap; overflow:hidden; text-overflow: ellipsis;}
+/* CAROUSEL */
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      padding: 12px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(17,24,39,.12);
-      background: #0b0d12;
-      color: #fff;
-      text-decoration:none;
-      font-weight: 800;
-      font-size: 14px;
-      white-space: nowrap;
-    }
+.carousel{
+margin-top:20px;
+border:1px solid var(--soft);
+border-radius:var(--radius2);
+overflow:hidden;
+}
 
-    .footer{
-      padding: 0 18px 18px;
-      text-align:center;
-      font-size: 12.5px;
-      color: var(--muted);
-    }
+.carousel-track{
+display:flex;
+transition:transform .4s ease;
+}
 
-    .anchor{scroll-margin-top: 90px;}
-  </style>
+.slide{
+flex:0 0 100%;
+padding:30px;
+display:flex;
+justify-content:center;
+}
+
+.slide img{
+width:100%;
+max-width:900px;
+height:auto;
+object-fit:contain;
+border-radius:16px;
+border:1px solid var(--soft);
+}
+
+.controls{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+border-top:1px solid var(--soft);
+}
+
+.nav{
+padding:10px 16px;
+border-radius:10px;
+border:1px solid var(--soft);
+background:#f3f4f6;
+cursor:pointer;
+font-size:18px;
+}
+
+.dots{
+display:flex;
+gap:8px;
+}
+
+.dot{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#d1d5db;
+cursor:pointer;
+}
+
+.dot.active{
+background:#0b0d12;
+}
+
+/* CTA */
+
+.cta{
+position:sticky;
+bottom:20px;
+margin:40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#ffffff;
+padding:20px 30px;
+border-radius:999px;
+border:1px solid var(--soft);
+box-shadow:0 10px 40px rgba(0,0,0,.1);
+}
+
+.cta-text{
+font-size:16px;
+}
+
+.cta-text strong{
+display:block;
+font-size:18px;
+}
+
+.cta a{
+background:#0b0d12;
+color:#fff;
+padding:16px 26px;
+border-radius:999px;
+text-decoration:none;
+font-weight:700;
+font-size:16px;
+}
+
+.footer{
+text-align:center;
+padding:30px;
+font-size:14px;
+color:var(--muted);
+}
+</style>
 </head>
 
 <body>
-  <main class="wrap">
-    <section class="card">
 
-      <!-- HERO com a sua imagem -->
-      <header class="hero">
-        <img class="hero-img" src="hhhero.png" alt="Supervisão clínica para casos difíceis (TPB) — Dr Fabio Schmidt" />
-        <div class="hero-overlay" aria-hidden="true"></div>
-      </header>
+<div class="wrap">
+<div class="card">
 
-      <div class="content">
-        <div class="pill">IMERSÃO CLÍNICA · 1:1 · SELEÇÃO</div>
+<div class="hero">
+<img src="hhhero.PNG" alt="Supervisão clínica para casos difíceis (TPB)">
+</div>
 
-        <h1>Imersão Clínica Intensiva 1:1<br/>para casos difíceis (TPB)</h1>
+<div class="content">
 
-        <p class="lead">
-          Um dia inteiro dedicado exclusivamente ao seu contexto clínico, com aplicações práticas e estruturação do manejo.
-          <strong>Oferta para poucos e selecionados</strong> — 1 profissional por dia.
-        </p>
+<div class="pill">IMERSÃO CLÍNICA · 1:1 · SELEÇÃO</div>
 
-        <div class="divider"></div>
+<h1>Imersão Clínica Intensiva 1:1<br>para casos difíceis (TPB)</h1>
 
-        <section class="section anchor" id="paraquem">
-          <div class="kicker">Para quem é</div>
-          <h2>Profissionais da saúde (médicos e psicólogos)</h2>
-          <p>
-            Para quem já atende pacientes com instabilidade emocional complexa e quer aumentar previsibilidade clínica,
-            reduzir iatrogenia e sustentar vínculo com mais segurança — no consultório, ambulatório, CAPS ou urgência.
-          </p>
+<p class="lead">
+Um dia completo dedicado exclusivamente ao seu contexto clínico, com aplicação prática estruturada.
+Oferta para <strong>poucos e selecionados</strong> — 1 profissional por dia.
+</p>
 
-          <div class="tagrow">
-            <span class="tag">1:1</span>
-            <span class="tag">aplicação prática</span>
-            <span class="tag">decisão clínica</span>
-            <span class="tag">vínculo e limites</span>
-            <span class="tag">crise e risco</span>
-          </div>
-        </section>
+<div class="section">
+<h2>Formato</h2>
+<ul>
+<li>Manhã: formulação dimensional e diagnóstico diferencial aplicado</li>
+<li>Tarde: manejo de vínculo, farmacoterapia sintoma-alvo e crise</li>
+<li>Aplicação prática em caso real do participante</li>
+<li>Materiais estruturados e checklists</li>
+<li>Grupo técnico fechado por 3 meses</li>
+</ul>
+</div>
 
-        <section class="section anchor" id="formato">
-          <div class="kicker">Formato</div>
-          <h2>Um dia completo, manhã e tarde</h2>
+<div class="section">
+<h2>Mapas da Imersão</h2>
+<p class="muted">Visualização do modelo clínico e percurso estruturado.</p>
 
-          <div class="grid" style="margin-top:12px;">
-            <div class="box">
-              <h3>Manhã</h3>
-              <p>Leitura dimensional + formulação + diagnóstico diferencial aplicado + tomada de decisão.</p>
-            </div>
-            <div class="box">
-              <h3>Tarde</h3>
-              <p>Manejo de vínculo e limites + farmacoterapia sintoma-alvo + crise/risco + plano longitudinal.</p>
-            </div>
-            <div class="box">
-              <h3>Aplicação prática</h3>
-              <p>Trabalho em caso real do participante com estrutura e checklists (sem improviso solto).</p>
-            </div>
-            <div class="box">
-              <h3>Continuidade</h3>
-              <p>Grupo técnico fechado por <strong>3 meses</strong> para discutir casos pontuais (sem plantão).</p>
-            </div>
-          </div>
-        </section>
+<div class="carousel">
+<div class="carousel-track" id="track">
+<div class="slide"><img src="Imer.PNG" alt="Mapa 1"></div>
+<div class="slide"><img src="Imer2.PNG" alt="Mapa 2"></div>
+<div class="slide"><img src="Imer3.PNG" alt="Mapa 3"></div>
+</div>
 
-        <section class="section anchor" id="mapas">
-          <div class="kicker">Mapas da imersão</div>
-          <h2>Visão do modelo e do percurso</h2>
-          <p class="muted">Arraste ou use as setas para ver os 3 mapas. (Imagens inteiras, sem corte.)</p>
+<div class="controls">
+<button class="nav" onclick="prev()">‹</button>
+<div class="dots">
+<div class="dot active" onclick="go(0)"></div>
+<div class="dot" onclick="go(1)"></div>
+<div class="dot" onclick="go(2)"></div>
+</div>
+<button class="nav" onclick="next()">›</button>
+</div>
+</div>
+</div>
 
-          <div class="carousel" aria-label="Carrossel de mapas da imersão">
-            <div class="carousel-viewport">
-              <div class="carousel-track" id="track">
-                <div class="slide"><img src="Imer.png" alt="Mapa da imersão 1" /></div>
-                <div class="slide"><img src="Imer2.png" alt="Mapa da imersão 2" /></div>
-                <div class="slide"><img src="Imer3.png" alt="Mapa da imersão 3" /></div>
-              </div>
-            </div>
+<div class="section">
+<h2>Investimento</h2>
+<p><strong>R$ 3.500</strong> — à vista ou em até 10x no cartão.</p>
+<p class="muted">Vagas limitadas. Seleção individual.</p>
+</div>
 
-            <div class="carousel-controls">
-              <button class="iconbtn" type="button" id="prev" aria-label="Anterior">‹</button>
-              <div class="dots" aria-label="Paginação">
-                <button class="dot active" type="button" data-i="0" aria-label="Ir para 1"></button>
-                <button class="dot" type="button" data-i="1" aria-label="Ir para 2"></button>
-                <button class="dot" type="button" data-i="2" aria-label="Ir para 3"></button>
-              </div>
-              <button class="iconbtn" type="button" id="next" aria-label="Próximo">›</button>
-            </div>
-          </div>
-        </section>
+</div>
 
-        <section class="section anchor" id="conteudo">
-          <div class="kicker">O que será trabalhado</div>
-          <h2>Conteúdo aplicado e estruturado</h2>
-          <ul>
-            <li>Reconhecimento dimensional e padrões de funcionamento</li>
-            <li>Diagnóstico diferencial aplicado (ex.: bipolaridade, TDAH, depressão resistente)</li>
-            <li>Organização do raciocínio clínico em tempo real</li>
-            <li>Farmacoterapia por sintoma-alvo e redução de polifarmácia</li>
-            <li>Manejo de crise, risco e previsibilidade</li>
-            <li>Vínculo terapêutico + limites sem ruptura</li>
-            <li>Materiais extras e checklists para uso clínico</li>
-          </ul>
-        </section>
+<div class="cta">
+<div class="cta-text">
+<strong>Solicitar formulário de seleção</strong>
+Profissionais da saúde
+</div>
+<a href="https://wa.me/5511975074399?text=Olá%2C%20Dr.%20Fabio.%20Gostaria%20de%20solicitar%20o%20formulário%20para%20a%20Imersão%20Clínica%20Intensiva%201%3A1." target="_blank">
+WhatsApp
+</a>
+</div>
 
-        <section class="section anchor" id="investimento">
-          <div class="kicker">Investimento</div>
-          <h2>R$ 3.500</h2>
-          <p class="muted">À vista ou em até 10x no cartão. Vagas limitadas (1 profissional por dia).</p>
-        </section>
+<div class="footer">
+Clínica Real Borderline · Dr. Fabio Schmidt
+</div>
 
-        <section class="section anchor" id="acesso">
-          <div class="kicker">Acesso por seleção</div>
-          <h2>Para poucos e selecionados</h2>
-          <p>
-            Para preservar profundidade, consistência técnica e espaço real de decisão clínica,
-            a imersão é oferecida para um número limitado de profissionais.
-          </p>
-          <p class="muted" style="margin-bottom:0;">
-            Solicite o formulário pelo WhatsApp. Se houver alinhamento, a secretaria envia as próximas datas disponíveis.
-          </p>
-        </section>
-      </div>
+</div>
+</div>
 
-      <!-- CTA único -->
-      <div class="cta">
-        <div class="left">
-          <strong>Solicitar formulário de seleção</strong>
-          <span>WhatsApp profissional · resposta por ordem de chegada</span>
-        </div>
-        <a class="btn" target="_blank" rel="noopener"
-           href="https://wa.me/5511975074399?text=Ol%C3%A1%2C%20Dr.%20Fabio.%20Sou%20profissional%20da%20sa%C3%BAde%20e%20gostaria%20de%20solicitar%20o%20formul%C3%A1rio%20de%20sele%C3%A7%C3%A3o%20para%20a%20Imers%C3%A3o%20Cl%C3%ADnica%20Intensiva%201%3A1%20(TPB)%20de%20R%24%203.500%20(10x).%20Pode%20me%20enviar%3F">
-          WhatsApp
-        </a>
-      </div>
+<script>
+let index = 0;
+const track = document.getElementById("track");
+const dots = document.querySelectorAll(".dot");
 
-      <div class="footer">
-        Clínica Real Borderline · Dr. Fabio Schmidt
-      </div>
-    </section>
-  </main>
+function update(){
+track.style.transform = "translateX(" + (-index * 100) + "%)";
+dots.forEach(d=>d.classList.remove("active"));
+dots[index].classList.add("active");
+}
 
-  <script>
-    // Carousel logic (3 slides)
-    const track = document.getElementById('track');
-    const prev = document.getElementById('prev');
-    const next = document.getElementById('next');
-    const dots = Array.from(document.querySelectorAll('.dot'));
-    let index = 0;
+function next(){
+index = (index + 1) % 3;
+update();
+}
 
-    function render(){
-      track.style.transform = `translateX(${-index * 100}%)`;
-      dots.forEach(d => d.classList.remove('active'));
-      dots[index].classList.add('active');
-    }
+function prev(){
+index = (index + 2) % 3;
+update();
+}
 
-    prev.addEventListener('click', () => {
-      index = (index + 2) % 3; // wrap
-      render();
-    });
+function go(i){
+index = i;
+update();
+}
+</script>
 
-    next.addEventListener('click', () => {
-      index = (index + 1) % 3;
-      render();
-    });
-
-    dots.forEach(d => {
-      d.addEventListener('click', () => {
-        index = Number(d.dataset.i);
-        render();
-      });
-    });
-
-    // Swipe support
-    let startX = null;
-    track.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    }, {passive:true});
-
-    track.addEventListener('touchend', (e) => {
-      if(startX === null) return;
-      const endX = e.changedTouches[0].clientX;
-      const dx = endX - startX;
-      if(Math.abs(dx) > 40){
-        if(dx < 0) index = (index + 1) % 3;
-        else index = (index + 2) % 3;
-        render();
-      }
-      startX = null;
-    }, {passive:true});
-  </script>
 </body>
 </html>
