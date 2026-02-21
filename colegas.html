@@ -1,343 +1,480 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clínica Real Borderline — Imersão Clínica Intensiva 1:1</title>
-<meta name="description" content="Imersão Clínica Intensiva 1:1 para casos difíceis (TPB). Oferta para poucos e selecionados.">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clínica Real Borderline — Supervisão Clínica (TPB)</title>
+<meta name="description" content="Supervisão clínica para casos difíceis (TPB). Imersão 1:1 em um dia completo + grupo técnico por 3 meses. Oferta para poucos e selecionados." />
 
 <style>
-:root{
---bg:#f5f6f7;
---card:#ffffff;
---text:#0b0d12;
---muted:#6b7280;
---soft:#e5e7eb;
---shadow:0 20px 60px rgba(0,0,0,.08);
---radius:22px;
---radius2:16px;
---max:1100px;
-}
+  :root{
+    --bg:#07090d;
+    --panel:#0b0d12;
+    --card:#ffffff;
+    --text:#0b0d12;
+    --muted:#6b7280;
+    --soft:#e5e7eb;
+    --soft2:#f3f4f6;
+    --ring:rgba(255,255,255,.08);
+    --shadow: 0 22px 70px rgba(0,0,0,.45);
+    --shadow2: 0 10px 30px rgba(0,0,0,.18);
+    --radius: 22px;
+    --radius2: 16px;
+    --max: 980px;
+  }
 
-*{
-box-sizing:border-box;
-}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    background: radial-gradient(900px 500px at 20% 15%, rgba(255,255,255,.06), transparent 60%),
+                radial-gradient(1000px 600px at 85% 18%, rgba(255,255,255,.05), transparent 62%),
+                var(--bg);
+    color: #e8eaee;
+    line-height: 1.55;
+  }
 
-body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-background:var(--bg);
-color:var(--text);
-line-height:1.65;
-}
+  a{color:inherit}
 
-.wrap{
-max-width:var(--max);
-margin:0 auto;
-padding:30px 20px 80px;
-}
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 18px 14px 60px;
+  }
 
-.card{
-background:var(--card);
-border:1px solid var(--soft);
-border-radius:var(--radius);
-box-shadow:var(--shadow);
-overflow:hidden;
-}
+  .shell{
+    background: rgba(11,13,18,.75);
+    border: 1px solid var(--ring);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
 
-/* HERO */
+  /* HERO */
+  .hero{
+    padding: 18px;
+    background: linear-gradient(180deg, rgba(255,255,255,.04), transparent 55%);
+  }
+  .hero img{
+    width: 100%;
+    height: auto;
+    display:block;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: #0b0d12;
+  }
 
-.hero{
-background:#0b0d12;
-padding:30px;
-}
+  /* CONTENT */
+  .content{
+    padding: 18px 18px 10px;
+  }
 
-.hero img{
-width:100%;
-height:auto;
-display:block;
-border-radius:18px;
-object-fit:contain;
-}
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.06);
+    font-size: 12px;
+    letter-spacing:.14em;
+    text-transform: uppercase;
+    color: rgba(232,234,238,.85);
+    margin: 2px 0 14px;
+  }
 
-/* CONTENT */
+  .headline{
+    margin: 0 0 10px;
+    font-size: clamp(18px, 2.4vw, 22px);
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    color: rgba(232,234,238,.92);
+    max-width: 70ch;
+  }
 
-.content{
-padding:40px 50px;
-}
+  .subhead{
+    margin: 0 0 16px;
+    font-size: 15.5px;
+    color: rgba(232,234,238,.78);
+    max-width: 76ch;
+  }
 
-.pill{
-display:inline-block;
-padding:8px 16px;
-border-radius:999px;
-background:#f3f4f6;
-border:1px solid var(--soft);
-font-size:12px;
-letter-spacing:.14em;
-text-transform:uppercase;
-color:var(--muted);
-margin-bottom:20px;
-}
+  .emph{
+    color: rgba(232,234,238,.96);
+    font-weight: 750;
+  }
 
-h1{
-font-size:44px;
-line-height:1.15;
-margin:0 0 18px;
-}
+  /* CARDS (light for readability) */
+  .cards{
+    display:grid;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  @media(min-width: 860px){
+    .cards{grid-template-columns: 1fr 1fr}
+  }
 
-.lead{
-font-size:18px;
-color:#374151;
-margin-bottom:30px;
-max-width:800px;
-}
+  .card{
+    background: rgba(255,255,255,.98);
+    color: var(--text);
+    border-radius: var(--radius2);
+    border: 1px solid rgba(229,231,235,.92);
+    box-shadow: var(--shadow2);
+    padding: 16px 16px;
+  }
 
-.section{
-margin-top:40px;
-padding:30px;
-border:1px solid var(--soft);
-border-radius:var(--radius2);
-background:#fff;
-}
+  .kicker{
+    font-size: 12px;
+    letter-spacing:.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
 
-.section h2{
-font-size:26px;
-margin:0 0 14px;
-}
+  h2{
+    margin: 0 0 10px;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
 
-.section p{
-font-size:16px;
-color:#374151;
-}
+  p{
+    margin: 0 0 10px;
+    color: #374151;
+  }
 
-.section ul{
-margin-top:12px;
-padding-left:20px;
-}
+  ul{
+    margin: 10px 0 0;
+    padding: 0 0 0 18px;
+    color:#374151;
+  }
+  li{margin: 7px 0}
 
-.section li{
-margin:8px 0;
-}
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top: 10px;
+  }
+  .tag{
+    font-size: 12px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(229,231,235,.95);
+    background: rgba(243,244,246,.75);
+    color:#374151;
+    white-space: nowrap;
+  }
 
-.muted{
-color:var(--muted);
-font-size:14px;
-margin-top:6px;
-}
+  /* Carousel (maps) */
+  .carousel-wrap{
+    margin-top: 12px;
+    background: rgba(255,255,255,.98);
+    color: var(--text);
+    border-radius: var(--radius2);
+    border: 1px solid rgba(229,231,235,.92);
+    box-shadow: var(--shadow2);
+    overflow:hidden;
+  }
 
-/* CAROUSEL */
+  .carousel-top{
+    padding: 16px 16px 10px;
+  }
 
-.carousel{
-margin-top:20px;
-border:1px solid var(--soft);
-border-radius:var(--radius2);
-overflow:hidden;
-}
+  .carousel{
+    width:100%;
+    overflow:hidden;
+  }
 
-.carousel-track{
-display:flex;
-transition:transform .4s ease;
-}
+  .track{
+    display:flex;
+    transition: transform 280ms ease;
+    will-change: transform;
+  }
 
-.slide{
-flex:0 0 100%;
-padding:30px;
-display:flex;
-justify-content:center;
-}
+  .slide{
+    flex: 0 0 100%;
+    padding: 14px 16px 18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
 
-.slide img{
-width:100%;
-max-width:900px;
-height:auto;
-object-fit:contain;
-border-radius:16px;
-border:1px solid var(--soft);
-}
+  .slide img{
+    width:100%;
+    max-width: 920px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 14px;
+    border: 1px solid rgba(229,231,235,.92);
+    background:#fff;
+    display:block;
+  }
 
-.controls{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-border-top:1px solid var(--soft);
-}
+  .carousel-controls{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    border-top: 1px solid rgba(229,231,235,.92);
+    background: rgba(243,244,246,.55);
+  }
 
-.nav{
-padding:10px 16px;
-border-radius:10px;
-border:1px solid var(--soft);
-background:#f3f4f6;
-cursor:pointer;
-font-size:18px;
-}
+  .iconbtn{
+    border: 1px solid rgba(229,231,235,.95);
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px 14px;
+    cursor:pointer;
+    font-weight: 800;
+    color:#0b0d12;
+  }
 
-.dots{
-display:flex;
-gap:8px;
-}
+  .dots{
+    display:flex;
+    gap: 8px;
+    align-items:center;
+    justify-content:center;
+    flex:1;
+  }
 
-.dot{
-width:10px;
-height:10px;
-border-radius:50%;
-background:#d1d5db;
-cursor:pointer;
-}
+  .dot{
+    width:9px; height:9px;
+    border-radius:999px;
+    background: #d1d5db;
+    border: 1px solid rgba(209,213,219,.9);
+    cursor:pointer;
+  }
+  .dot.active{
+    background:#0b0d12;
+    border-color:#0b0d12;
+  }
 
-.dot.active{
-background:#0b0d12;
-}
+  /* CTA sticky */
+  .cta{
+    position: sticky;
+    bottom: 12px;
+    margin: 16px 18px 18px;
+    display:flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.92);
+    border: 1px solid rgba(229,231,235,.95);
+    box-shadow: 0 12px 40px rgba(0,0,0,.25);
+    backdrop-filter: blur(10px);
+  }
 
-/* CTA */
+  .cta .left{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    padding-left: 6px;
+    min-width:0;
+    color:#0b0d12;
+  }
+  .cta .left strong{
+    font-size: 13.5px;
+    font-weight: 850;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+  .cta .left span{
+    font-size: 12.5px;
+    color: #6b7280;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
 
-.cta{
-position:sticky;
-bottom:20px;
-margin:40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#ffffff;
-padding:20px 30px;
-border-radius:999px;
-border:1px solid var(--soft);
-box-shadow:0 10px 40px rgba(0,0,0,.1);
-}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(17,24,39,.12);
+    background: #0b0d12;
+    color: #fff;
+    text-decoration:none;
+    font-weight: 900;
+    font-size: 14px;
+    white-space: nowrap;
+  }
 
-.cta-text{
-font-size:16px;
-}
-
-.cta-text strong{
-display:block;
-font-size:18px;
-}
-
-.cta a{
-background:#0b0d12;
-color:#fff;
-padding:16px 26px;
-border-radius:999px;
-text-decoration:none;
-font-weight:700;
-font-size:16px;
-}
-
-.footer{
-text-align:center;
-padding:30px;
-font-size:14px;
-color:var(--muted);
-}
+  .footer{
+    padding: 0 18px 18px;
+    text-align:center;
+    font-size: 12.5px;
+    color: rgba(232,234,238,.70);
+  }
 </style>
 </head>
 
 <body>
+<main class="wrap">
+  <section class="shell">
 
-<div class="wrap">
-<div class="card">
+    <header class="hero">
+      <img src="hhhero.PNG" alt="Supervisão clínica para casos difíceis (TPB) — Dr Fabio Schmidt">
+    </header>
 
-<div class="hero">
-<img src="hhhero.PNG" alt="Supervisão clínica para casos difíceis (TPB)">
-</div>
+    <div class="content">
+      <div class="pill">IMERSÃO CLÍNICA · 1:1 · SELEÇÃO</div>
 
-<div class="content">
+      <p class="headline">
+        Um dia inteiro dedicado à reorganização do seu raciocínio clínico — com aplicação prática no seu contexto.
+      </p>
 
-<div class="pill">IMERSÃO CLÍNICA · 1:1 · SELEÇÃO</div>
+      <p class="subhead">
+        Oferta para <span class="emph">poucos e selecionados</span> para preservar profundidade e consistência técnica.
+        <span class="emph">1 profissional por dia.</span>
+      </p>
 
-<h1>Imersão Clínica Intensiva 1:1<br>para casos difíceis (TPB)</h1>
+      <div class="cards">
+        <section class="card">
+          <div class="kicker">Formato</div>
+          <h2>Manhã + tarde, com aplicação real</h2>
+          <ul>
+            <li><strong>Manhã:</strong> formulação dimensional + diagnóstico diferencial aplicado</li>
+            <li><strong>Tarde:</strong> vínculo e limites + farmacoterapia sintoma-alvo + crise/risco</li>
+            <li><strong>Aplicação:</strong> caso real do participante, com estrutura e checklists</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">1:1</span>
+            <span class="tag">aplicação prática</span>
+            <span class="tag">decisão clínica</span>
+            <span class="tag">vínculo e limites</span>
+          </div>
+        </section>
 
-<p class="lead">
-Um dia completo dedicado exclusivamente ao seu contexto clínico, com aplicação prática estruturada.
-Oferta para <strong>poucos e selecionados</strong> — 1 profissional por dia.
-</p>
+        <section class="card">
+          <div class="kicker">Continuidade</div>
+          <h2>Grupo técnico por 3 meses</h2>
+          <p>
+            Espaço fechado para discussão pontual de casos e tomada de decisão clínica estruturada.
+          </p>
+          <ul>
+            <li>Discussão objetiva (sem virar plantão)</li>
+            <li>Foco em previsibilidade e redução de iatrogenia</li>
+            <li>Não substitui fluxo de emergência</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">3 meses</span>
+            <span class="tag">grupo fechado</span>
+            <span class="tag">sem plantão</span>
+          </div>
+        </section>
+      </div>
 
-<div class="section">
-<h2>Formato</h2>
-<ul>
-<li>Manhã: formulação dimensional e diagnóstico diferencial aplicado</li>
-<li>Tarde: manejo de vínculo, farmacoterapia sintoma-alvo e crise</li>
-<li>Aplicação prática em caso real do participante</li>
-<li>Materiais estruturados e checklists</li>
-<li>Grupo técnico fechado por 3 meses</li>
-</ul>
-</div>
+      <section class="carousel-wrap" aria-label="Mapas da imersão">
+        <div class="carousel-top">
+          <div class="kicker">Mapas da imersão</div>
+          <h2>Visão do modelo e percurso</h2>
+          <p class="muted">Arraste ou use as setas. Imagens inteiras (sem corte).</p>
+        </div>
 
-<div class="section">
-<h2>Mapas da Imersão</h2>
-<p class="muted">Visualização do modelo clínico e percurso estruturado.</p>
+        <div class="carousel">
+          <div class="track" id="track">
+            <div class="slide"><img src="Imer.PNG" alt="Mapa da imersão 1"></div>
+            <div class="slide"><img src="Imer2.PNG" alt="Mapa da imersão 2"></div>
+            <div class="slide"><img src="Imer3.PNG" alt="Mapa da imersão 3"></div>
+          </div>
+        </div>
 
-<div class="carousel">
-<div class="carousel-track" id="track">
-<div class="slide"><img src="Imer.PNG" alt="Mapa 1"></div>
-<div class="slide"><img src="Imer2.PNG" alt="Mapa 2"></div>
-<div class="slide"><img src="Imer3.PNG" alt="Mapa 3"></div>
-</div>
+        <div class="carousel-controls">
+          <button class="iconbtn" type="button" id="prev" aria-label="Anterior">‹</button>
+          <div class="dots" aria-label="Paginação">
+            <button class="dot active" type="button" data-i="0" aria-label="Ir para 1"></button>
+            <button class="dot" type="button" data-i="1" aria-label="Ir para 2"></button>
+            <button class="dot" type="button" data-i="2" aria-label="Ir para 3"></button>
+          </div>
+          <button class="iconbtn" type="button" id="next" aria-label="Próximo">›</button>
+        </div>
+      </section>
 
-<div class="controls">
-<button class="nav" onclick="prev()">‹</button>
-<div class="dots">
-<div class="dot active" onclick="go(0)"></div>
-<div class="dot" onclick="go(1)"></div>
-<div class="dot" onclick="go(2)"></div>
-</div>
-<button class="nav" onclick="next()">›</button>
-</div>
-</div>
-</div>
+      <section class="card" style="margin-top:12px;">
+        <div class="kicker">Investimento</div>
+        <h2>R$ 3.500</h2>
+        <p>À vista ou em até 10x no cartão.</p>
+        <p class="muted" style="margin-bottom:0;">Seleção individual. Vagas limitadas pela agenda (1 profissional por dia).</p>
+      </section>
 
-<div class="section">
-<h2>Investimento</h2>
-<p><strong>R$ 3.500</strong> — à vista ou em até 10x no cartão.</p>
-<p class="muted">Vagas limitadas. Seleção individual.</p>
-</div>
+    </div>
 
-</div>
+    <div class="cta">
+      <div class="left">
+        <strong>Solicitar formulário de seleção</strong>
+        <span>WhatsApp profissional — envio por ordem de chegada</span>
+      </div>
+      <a class="btn" target="_blank" rel="noopener"
+         href="https://wa.me/5511975074399?text=Ol%C3%A1%2C%20Dr.%20Fabio.%20Sou%20profissional%20da%20sa%C3%BAde%20e%20gostaria%20de%20solicitar%20o%20formul%C3%A1rio%20de%20sele%C3%A7%C3%A3o%20para%20a%20Imers%C3%A3o%201%3A1%20(TPB)%20de%20R%24%203.500%20(10x).%20Pode%20me%20enviar%3F">
+        WhatsApp
+      </a>
+    </div>
 
-<div class="cta">
-<div class="cta-text">
-<strong>Solicitar formulário de seleção</strong>
-Profissionais da saúde
-</div>
-<a href="https://wa.me/5511975074399?text=Olá%2C%20Dr.%20Fabio.%20Gostaria%20de%20solicitar%20o%20formulário%20para%20a%20Imersão%20Clínica%20Intensiva%201%3A1." target="_blank">
-WhatsApp
-</a>
-</div>
+    <div class="footer">
+      Clínica Real Borderline · Dr. Fabio Schmidt
+    </div>
 
-<div class="footer">
-Clínica Real Borderline · Dr. Fabio Schmidt
-</div>
-
-</div>
-</div>
+  </section>
+</main>
 
 <script>
-let index = 0;
-const track = document.getElementById("track");
-const dots = document.querySelectorAll(".dot");
+  // Carousel (3 slides)
+  const track = document.getElementById('track');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const dots = Array.from(document.querySelectorAll('.dot'));
+  let index = 0;
 
-function update(){
-track.style.transform = "translateX(" + (-index * 100) + "%)";
-dots.forEach(d=>d.classList.remove("active"));
-dots[index].classList.add("active");
-}
+  function render(){
+    track.style.transform = `translateX(${-index * 100}%)`;
+    dots.forEach(d => d.classList.remove('active'));
+    dots[index].classList.add('active');
+  }
 
-function next(){
-index = (index + 1) % 3;
-update();
-}
+  prev.addEventListener('click', () => {
+    index = (index + 2) % 3;
+    render();
+  });
 
-function prev(){
-index = (index + 2) % 3;
-update();
-}
+  next.addEventListener('click', () => {
+    index = (index + 1) % 3;
+    render();
+  });
 
-function go(i){
-index = i;
-update();
-}
+  dots.forEach(d => {
+    d.addEventListener('click', () => {
+      index = Number(d.dataset.i);
+      render();
+    });
+  });
+
+  // Swipe
+  let startX = null;
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  }, {passive:true});
+
+  track.addEventListener('touchend', (e) => {
+    if(startX === null) return;
+    const endX = e.changedTouches[0].clientX;
+    const dx = endX - startX;
+    if(Math.abs(dx) > 40){
+      if(dx < 0) index = (index + 1) % 3;
+      else index = (index + 2) % 3;
+      render();
+    }
+    startX = null;
+  }, {passive:true});
 </script>
-
 </body>
 </html>
