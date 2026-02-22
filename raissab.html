@@ -1,0 +1,1521 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Raissa Barbosa — Kit de Crise & Checklist</title>
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --panel:#0f1624;
+      --panel2:#0c1320;
+      --text:#eaf0ff;
+      --muted:#a9b4cc;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 18px 45px rgba(0,0,0,.45);
+      --good:#3ddc97;
+      --warn:#ffcc66;
+      --bad:#ff5c7a;
+      --accent:#6aa6ff;
+      --accent2:#b38cff;
+      --ring: rgba(106,166,255,.35);
+      --radius:16px;
+      --radius2:22px;
+      --font: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f7fb;
+        --panel:#ffffff;
+        --panel2:#fbfcff;
+        --text:#0b1220;
+        --muted:#4f5b73;
+        --line:rgba(10,15,25,.10);
+        --shadow: 0 18px 45px rgba(20,35,60,.12);
+        --ring: rgba(106,166,255,.22);
+      }
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:var(--font);
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(106,166,255,.22), transparent 55%),
+        radial-gradient(900px 600px at 90% 0%, rgba(179,140,255,.18), transparent 60%),
+        radial-gradient(700px 500px at 50% 110%, rgba(61,220,151,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    a{ color:inherit; }
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 18px 46px;
+    }
+
+    header{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .avatar{
+      width:46px;height:46px;border-radius:14px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.35), transparent 35%),
+        linear-gradient(135deg, rgba(106,166,255,.9), rgba(179,140,255,.85));
+      box-shadow: 0 14px 32px rgba(106,166,255,.22);
+      border:1px solid rgba(255,255,255,.18);
+    }
+    .title h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .title p{
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      max-width:62ch;
+    }
+
+    .pillbar{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+      font-size:12px;
+      color:var(--muted);
+      user-select:none;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--good);
+      box-shadow: 0 0 0 6px rgba(61,220,151,.18);
+    }
+
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:14px 0 18px;
+    }
+    .tabbtn{
+      appearance:none;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:650;
+      font-size:13px;
+      letter-spacing:.2px;
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+    }
+    .tabbtn:hover{ transform: translateY(-1px); }
+    .tabbtn[aria-selected="true"]{
+      background: linear-gradient(135deg, rgba(106,166,255,.24), rgba(179,140,255,.18));
+      border-color: rgba(106,166,255,.35);
+      box-shadow: 0 0 0 4px var(--ring);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:14px;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      background: rgba(0,0,0,.10);
+    }
+    @media (prefers-color-scheme: light){
+      .card .hd{ background: rgba(10,15,25,.02); }
+    }
+    .hd h2{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .hd p{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:12px;
+      max-width:70ch;
+    }
+    .card .bd{ padding:14px 16px 16px; }
+
+    .row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight:650;
+      font-size:13px;
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn:active{ transform: translateY(0px); }
+    .btn.primary{
+      border-color: rgba(106,166,255,.35);
+      background: linear-gradient(135deg, rgba(106,166,255,.22), rgba(179,140,255,.14));
+      box-shadow: 0 0 0 4px var(--ring);
+    }
+    .btn.danger{
+      border-color: rgba(255,92,122,.35);
+      background: linear-gradient(135deg, rgba(255,92,122,.18), rgba(255,204,102,.08));
+    }
+    .btn.ghost{
+      background: transparent;
+      border-color: var(--line);
+      color: var(--muted);
+    }
+
+    .note{
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px dashed var(--line);
+      background: rgba(0,0,0,.08);
+      color: var(--muted);
+      font-size:12px;
+    }
+    @media (prefers-color-scheme: light){
+      .note{ background: rgba(10,15,25,.02); }
+    }
+
+    .intensity{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:10px;
+      align-items:center;
+      margin-top:10px;
+    }
+    .meter{
+      width:100%;
+      height:10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      overflow:hidden;
+    }
+    .meter > div{
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      background: linear-gradient(90deg, var(--good), var(--warn), var(--bad));
+      transition: width .25s ease;
+    }
+    input[type="range"]{
+      width:100%;
+      accent-color: var(--accent);
+    }
+    .badge{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      font-size:12px;
+      color: var(--muted);
+      min-width: 118px;
+      text-align:center;
+    }
+
+    .tech{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+    details{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: 14px;
+      overflow:hidden;
+    }
+    summary{
+      cursor:pointer;
+      padding:12px 12px;
+      font-weight:750;
+      font-size:13px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .tag{
+      font-size:11px;
+      color: var(--muted);
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.08);
+      padding:4px 8px;
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+    details .inner{
+      padding: 0 12px 12px;
+      color: var(--muted);
+      font-size:13px;
+    }
+    .steps{
+      margin:10px 0 0;
+      padding-left: 18px;
+    }
+    .steps li{ margin:6px 0; }
+
+    .breathBox{
+      display:grid;
+      gap:12px;
+    }
+    .breathStage{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .breathLabel{
+      font-weight:800;
+      letter-spacing:.2px;
+      font-size:13px;
+    }
+    .breathHint{
+      color:var(--muted);
+      font-size:12px;
+      max-width:70ch;
+    }
+    .breathViz{
+      width:100%;
+      min-height: 220px;
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background:
+        radial-gradient(500px 260px at 30% 30%, rgba(106,166,255,.18), transparent 55%),
+        radial-gradient(520px 280px at 80% 70%, rgba(179,140,255,.16), transparent 60%),
+        rgba(255,255,255,.03);
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .orb{
+      width:120px; height:120px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.20);
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.30), transparent 45%),
+        radial-gradient(circle at 70% 75%, rgba(0,0,0,.20), transparent 55%),
+        linear-gradient(135deg, rgba(106,166,255,.65), rgba(179,140,255,.55));
+      box-shadow: 0 20px 55px rgba(106,166,255,.18);
+      transform: scale(1);
+      filter: saturate(1.02);
+    }
+    .rings{
+      position:absolute;
+      inset:-40px;
+      display:grid;
+      place-items:center;
+      pointer-events:none;
+      opacity:.9;
+    }
+    .ring{
+      position:absolute;
+      width: 180px; height:180px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 0 0 10px rgba(106,166,255,.06);
+      opacity:.9;
+      transform: scale(1);
+    }
+    .ring.r2{
+      width:240px;height:240px;
+      border-color: rgba(255,255,255,.10);
+      box-shadow: 0 0 0 12px rgba(179,140,255,.05);
+      opacity:.7;
+    }
+    .ring.r3{
+      width: 310px;height:310px;
+      border-color: rgba(255,255,255,.08);
+      box-shadow: 0 0 0 14px rgba(61,220,151,.04);
+      opacity:.5;
+    }
+
+    .breathText{
+      position:absolute;
+      bottom:14px;
+      left:14px;
+      right:14px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:10px;
+      color: var(--muted);
+      font-size:12px;
+    }
+    .phase{
+      font-weight:900;
+      color: var(--text);
+      font-size:13px;
+    }
+
+    /* Breathing animations (will be toggled by JS using data-mode) */
+    .breathViz[data-mode="box"] .orb{ animation: orbBox 16s infinite ease-in-out; }
+    .breathViz[data-mode="box"] .ring{ animation: ringBox 16s infinite ease-in-out; }
+    .breathViz[data-mode="47_8"] .orb{ animation: orb478 19s infinite ease-in-out; }
+    .breathViz[data-mode="47_8"] .ring{ animation: ring478 19s infinite ease-in-out; }
+    .breathViz[data-mode="pacada"] .orb{ animation: orbPaced 10s infinite ease-in-out; }
+    .breathViz[data-mode="pacada"] .ring{ animation: ringPaced 10s infinite ease-in-out; }
+    .breathViz[data-mode="pause"] .orb,
+    .breathViz[data-mode="pause"] .ring{ animation: none; }
+
+    @keyframes orbBox{
+      0%{ transform: scale(1.00); }
+      25%{ transform: scale(1.28); }  /* inspirar 4 */
+      50%{ transform: scale(1.28); }  /* segurar 4 */
+      75%{ transform: scale(1.00); }  /* expirar 4 */
+      100%{ transform: scale(1.00); } /* segurar 4 */
+    }
+    @keyframes ringBox{
+      0%{ transform: scale(1.00); opacity:.85; }
+      25%{ transform: scale(1.18); opacity:.95; }
+      50%{ transform: scale(1.18); opacity:.80; }
+      75%{ transform: scale(1.00); opacity:.70; }
+      100%{ transform: scale(1.00); opacity:.85; }
+    }
+
+    @keyframes orb478{
+      0%{ transform: scale(1.00); }   /* começo */
+      21%{ transform: scale(1.30); }  /* inspirar 4 */
+      58%{ transform: scale(1.30); }  /* segurar 7 */
+      100%{ transform: scale(1.00); } /* expirar 8 */
+    }
+    @keyframes ring478{
+      0%{ transform: scale(1.00); opacity:.85; }
+      21%{ transform: scale(1.18); opacity:.95; }
+      58%{ transform: scale(1.18); opacity:.75; }
+      100%{ transform: scale(1.00); opacity:.72; }
+    }
+
+    @keyframes orbPaced{
+      0%{ transform: scale(1.00); }
+      40%{ transform: scale(1.28); } /* inspirar 4 */
+      100%{ transform: scale(1.00); }/* expirar 6 */
+    }
+    @keyframes ringPaced{
+      0%{ transform: scale(1.00); opacity:.85; }
+      40%{ transform: scale(1.18); opacity:.95; }
+      100%{ transform: scale(1.00); opacity:.72; }
+    }
+
+    .small{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    textarea, input[type="text"]{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      outline:none;
+      box-shadow: 0 0 0 0 rgba(0,0,0,0);
+    }
+    textarea:focus, input[type="text"]:focus{
+      border-color: rgba(106,166,255,.35);
+      box-shadow: 0 0 0 4px var(--ring);
+    }
+    textarea{ min-height: 160px; resize: vertical; }
+
+    .checklist{
+      display:grid;
+      gap:10px;
+    }
+    .item{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px 12px;
+      border:1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+    }
+    .item input[type="checkbox"]{
+      margin-top:3px;
+      width:18px;height:18px;
+      accent-color: var(--accent);
+    }
+    .item .itxt{
+      flex:1;
+      color: var(--text);
+      font-weight:650;
+      font-size:13px;
+    }
+    .item .idesc{
+      margin-top:4px;
+      color: var(--muted);
+      font-size:12px;
+      font-weight:500;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 820px){
+      .split{ grid-template-columns: 1fr; }
+    }
+
+    .footer{
+      margin-top:14px;
+      color: var(--muted);
+      font-size:12px;
+      text-align:center;
+      opacity:.95;
+    }
+
+    .hidden{ display:none !important; }
+    .kpi{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .kpi .chip{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      font-size:12px;
+      color: var(--muted);
+    }
+    .hr{
+      height:1px;
+      background: var(--line);
+      margin:14px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="avatar" aria-hidden="true"></div>
+        <div class="title">
+          <h1>Raissa Barbosa — Kit de Crise & Checklist</h1>
+          <p>Uma página para usar em momentos difíceis e no dia a dia. Tudo fica salvo neste aparelho (offline) e você pode voltar aqui sempre que precisar.</p>
+        </div>
+      </div>
+
+      <div class="pillbar">
+        <div class="pill" title="Status atual">
+          <span class="dot" id="statusDot" aria-hidden="true"></span>
+          <span id="statusText">Pronta para cuidar de você</span>
+        </div>
+        <button class="btn ghost" id="btnPrint" type="button" title="Imprimir ou salvar como PDF">Imprimir / PDF</button>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Abas principais">
+      <button class="tabbtn" role="tab" aria-selected="true" aria-controls="tab-crise" id="tabbtn-crise" type="button">Crises</button>
+      <button class="tabbtn" role="tab" aria-selected="false" aria-controls="tab-notas" id="tabbtn-notas" type="button">Notas & Checklist</button>
+    </nav>
+
+    <!-- ===================== TAB 1: CRISES ===================== -->
+    <section id="tab-crise" role="tabpanel" aria-labelledby="tabbtn-crise">
+      <div class="grid">
+        <!-- Left: intensity + plan -->
+        <div class="card">
+          <div class="hd">
+            <div>
+              <h2>1) Se você está em crise, comece aqui</h2>
+              <p>Escolha a intensidade e siga o passo a passo sugerido. O objetivo é reduzir a ativação do corpo primeiro, depois organizar a mente.</p>
+            </div>
+            <div class="kpi">
+              <span class="chip" id="intChip">Intensidade: 0/10</span>
+              <span class="chip" id="timeChip">⏱️ 00:00</span>
+            </div>
+          </div>
+          <div class="bd">
+            <div class="note">
+              <strong>Importante:</strong> isto é um material de apoio e não substitui atendimento.  
+              Se houver risco de se machucar ou você sentir que não consegue se manter segura, busque ajuda imediata:
+              <strong>Emergência 192 (SAMU)</strong> • <strong>190 (Polícia)</strong> • <strong>CVV 188</strong>.
+            </div>
+
+            <div class="intensity">
+              <div>
+                <label class="small" for="intensityRange"><strong>Intensidade agora (0–10)</strong></label>
+                <input id="intensityRange" type="range" min="0" max="10" step="1" value="0" />
+                <div class="meter" aria-hidden="true"><div id="meterFill"></div></div>
+              </div>
+              <div class="badge" id="zoneBadge">Zona: Verde</div>
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="row">
+              <button class="btn primary" id="btnStart" type="button">Iniciar protocolo (5–10 min)</button>
+              <button class="btn" id="btnResetTimer" type="button">Zerar timer</button>
+              <button class="btn danger" id="btnSafety" type="button">Se estou em risco agora</button>
+            </div>
+
+            <div class="hr"></div>
+
+            <div id="protocol" class="tech" aria-live="polite">
+              <!-- Filled by JS based on intensity -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: breathing visual -->
+        <div class="card">
+          <div class="hd">
+            <div>
+              <h2>2) Respiração guiada (visual)</h2>
+              <p>Se a emoção estiver alta, use o visual por 2–4 ciclos antes de tentar “pensar”. Corpo primeiro.</p>
+            </div>
+            <div class="kpi">
+              <span class="chip" id="breathModeChip">Modo: Caixa 4–4–4–4</span>
+            </div>
+          </div>
+
+          <div class="bd breathBox">
+            <div class="breathStage">
+              <div>
+                <div class="breathLabel" id="breathTitle">Respiração Caixa (4–4–4–4)</div>
+                <div class="breathHint" id="breathHint">
+                  Inspire 4 • Segure 4 • Expire 4 • Segure 4. Ideal para reduzir picos de ansiedade.
+                </div>
+              </div>
+              <div class="row">
+                <button class="btn" id="breathBox" type="button">Caixa 4–4–4–4</button>
+                <button class="btn" id="breath478" type="button">4–7–8</button>
+                <button class="btn" id="breathPaced" type="button">4–6 (calma)</button>
+                <button class="btn ghost" id="breathPause" type="button">Pausar</button>
+              </div>
+            </div>
+
+            <div class="breathViz" id="breathViz" data-mode="box" aria-label="Animação de respiração">
+              <div class="rings" aria-hidden="true">
+                <div class="ring r3"></div>
+                <div class="ring r2"></div>
+                <div class="ring r1"></div>
+              </div>
+              <div class="orb" aria-hidden="true"></div>
+
+              <div class="breathText">
+                <div>
+                  <div class="phase" id="phaseText">Inspire</div>
+                  <div id="phaseSub">4 segundos</div>
+                </div>
+                <div id="cycleText">Ciclo: 1</div>
+              </div>
+            </div>
+
+            <div class="note">
+              <strong>Dica rápida:</strong> faça a expiração um pouco mais longa que a inspiração.  
+              Se der tontura, diminua a profundidade do ar (respiração mais “curta e suave”).
+            </div>
+          </div>
+        </div>
+
+        <!-- Left bottom: techniques library -->
+        <div class="card">
+          <div class="hd">
+            <div>
+              <h2>3) Técnicas (DBT e regulação)</h2>
+              <p>Abra e use conforme a necessidade. As melhores em pico de crise são as de “corpo”: TIPP e respiração.</p>
+            </div>
+          </div>
+          <div class="bd">
+            <div class="tech">
+              <details>
+                <summary>STOP (pare e retome o controle) <span class="tag">2 min</span></summary>
+                <div class="inner">
+                  Quando você percebe que vai reagir no automático:
+                  <ol class="steps">
+                    <li><strong>S</strong> — <strong>Stop:</strong> pare. Não aja ainda.</li>
+                    <li><strong>T</strong> — <strong>Tome distância:</strong> respire e desacelere o corpo.</li>
+                    <li><strong>O</strong> — <strong>Observe:</strong> o que estou sentindo? o que está acontecendo? quais pensamentos vieram?</li>
+                    <li><strong>P</strong> — <strong>Prossiga com intenção:</strong> qual é o próximo passo mais seguro e útil agora?</li>
+                  </ol>
+                  <div class="note">Meta: ganhar 20–60 segundos para não piorar a situação.</div>
+                </div>
+              </details>
+
+              <details>
+                <summary>TIPP (pico de emoção: corpo primeiro) <span class="tag">5–10 min</span></summary>
+                <div class="inner">
+                  Conjunto para reduzir rapidamente a ativação do sistema de ameaça.
+                  <ol class="steps">
+                    <li><strong>T — Temperatura:</strong> água fria no rosto 20–30s, ou segurar um pack gelado na bochecha/olhos. (Se puder, mergulhar o rosto em água fria por alguns segundos.)</li>
+                    <li><strong>I — Intensidade:</strong> 30–90s de movimento intenso (polichinelo, corrida parada, agachamento) até “quebrar” o pico.</li>
+                    <li><strong>P — Respiração ritmada:</strong> use 4–6 (inspire 4, expire 6) por 2–3 min.</li>
+                    <li><strong>P — Relaxamento muscular:</strong> tensione e solte grupos musculares (mãos, ombros, mandíbula) 2–3 ciclos.</li>
+                  </ol>
+                  <div class="note">Se a crise está 8–10/10, comece por <strong>Temperatura</strong> + <strong>Respiração</strong>.</div>
+                </div>
+              </details>
+
+              <details>
+                <summary>Aterramento 5–4–3–2–1 <span class="tag">3–5 min</span></summary>
+                <div class="inner">
+                  Para voltar ao presente quando a mente “sai do corpo”.
+                  <ol class="steps">
+                    <li><strong>5</strong> coisas que você vê</li>
+                    <li><strong>4</strong> coisas que você toca (sinta a textura)</li>
+                    <li><strong>3</strong> sons que você ouve</li>
+                    <li><strong>2</strong> cheiros</li>
+                    <li><strong>1</strong> gosto (ou um gole de água)</li>
+                  </ol>
+                  <div class="note">Faça devagar. O objetivo é “ancorar” atenção nos sentidos.</div>
+                </div>
+              </details>
+
+              <details>
+                <summary>Surf da Urgência (impulso passa) <span class="tag">5–15 min</span></summary>
+                <div class="inner">
+                  A urgência parece eterna, mas sobe, estabiliza e desce como uma onda.
+                  <ol class="steps">
+                    <li>Nomeie: “<em>Estou com urgência de ____</em>”.</li>
+                    <li>Localize no corpo: onde ela aparece? peito? garganta? mãos?</li>
+                    <li>Respire e observe sem lutar: descreva como se fosse cientista.</li>
+                    <li>Marque 5 minutos: “Vou só atravessar essa onda”.</li>
+                    <li>Quando cair 20%, escolha uma ação segura (banho, água, caminhar, mensagem).</li>
+                  </ol>
+                </div>
+              </details>
+
+              <details>
+                <summary>Autoacolhimento (reduzir vergonha e culpa) <span class="tag">2–4 min</span></summary>
+                <div class="inner">
+                  Frases curtas para baixar autocrítica:
+                  <ul class="steps">
+                    <li>“Isso é difícil mesmo. Meu corpo está em alerta.”</li>
+                    <li>“Eu não preciso resolver tudo agora — só atravessar os próximos minutos.”</li>
+                    <li>“Eu posso escolher o próximo passo mais seguro.”</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details>
+                <summary>Kit sensorial rápido <span class="tag">1–5 min</span></summary>
+                <div class="inner">
+                  Escolha 1–2 itens:
+                  <ul class="steps">
+                    <li>Gelo na mão / bochecha</li>
+                    <li>Água gelada (gole lento)</li>
+                    <li>Cheiro marcante (menta, café)</li>
+                    <li>Música neutra (sem gatilho) + fone</li>
+                    <li>Pressão profunda: abraço apertado em travesseiro</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right bottom: Safety plan -->
+        <div class="card">
+          <div class="hd">
+            <div>
+              <h2>Plano de segurança (rápido)</h2>
+              <p>Use se a crise estiver muito alta ou se houver risco. Não precisa “pensar bonito”; só siga os passos.</p>
+            </div>
+          </div>
+          <div class="bd">
+            <div class="tech">
+              <details open>
+                <summary>Se estou em risco agora <span class="tag">agora</span></summary>
+                <div class="inner">
+                  <ol class="steps">
+                    <li><strong>Me afasto do que aumenta risco</strong> (lugar, objeto, pessoa, redes).</li>
+                    <li><strong>Vou para um ambiente mais seguro</strong> (sala, lugar com gente, porta aberta, luz acesa).</li>
+                    <li><strong>Peço ajuda</strong>: mando mensagem/ligo para alguém de confiança <em>agora</em>.</li>
+                    <li><strong>Se eu não consigo me manter segura</strong>: busco ajuda imediata (192 / 190 / 188).</li>
+                  </ol>
+                  <div class="note">
+                    <strong>Modelos de mensagem (copiar e colar):</strong><br>
+                    1) “Oi. Eu não estou bem agora. Preciso de companhia/ajuda por alguns minutos. Você pode falar comigo?”<br>
+                    2) “Estou em crise. Preciso que você fique comigo (por ligação) até eu estabilizar.”
+                  </div>
+                </div>
+              </details>
+
+              <details>
+                <summary>Coisas que pioram (evitar em crise) <span class="tag">check</span></summary>
+                <div class="inner">
+                  <ul class="steps">
+                    <li>Discutir / tentar “resolver tudo” no auge</li>
+                    <li>Mensagens longas para pessoas difíceis</li>
+                    <li>Redes sociais que disparam comparação</li>
+                    <li>Cafeína / álcool (aumenta instabilidade)</li>
+                    <li>Ficar em jejum (piora irritabilidade)</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details>
+                <summary>Coisas que ajudam (pequenas, mas reais) <span class="tag">lista</span></summary>
+                <div class="inner">
+                  <ul class="steps">
+                    <li>Água + algo leve para comer</li>
+                    <li>Banho morno / água no rosto</li>
+                    <li>Ar fresco por 2 minutos</li>
+                    <li>Movimento por 60–90 segundos</li>
+                    <li>Respiração guiada 2–4 ciclos</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TAB 2: NOTAS & CHECKLIST ===================== -->
+    <section id="tab-notas" role="tabpanel" aria-labelledby="tabbtn-notas" class="hidden">
+      <div class="grid">
+        <!-- Checklist -->
+        <div class="card">
+          <div class="hd">
+            <div>
+              <h2>Checklist do dia (o básico que estabiliza)</h2>
+              <p>Marcar o básico não é “pouco” — é regulação. Em dias ruins, foque no mínimo viável.</p>
+            </div>
+            <div class="row">
+              <button class="btn" id="btnResetChecklist" type="button">Desmarcar tudo</button>
+              <button class="btn primary" id="btnMarkMinimum" type="button">Marcar “mínimo viável”</button>
+            </div>
+          </div>
+          <div class="bd">
+            <div class="checklist" id="checklist">
+              <!-- Filled by JS -->
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="note">
+              <strong>Mínimo viável (quando tudo pesa):</strong> água • comida simples • banho • 5 min de ar • 1 tarefa pequena • dormir no horário possível.
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes + triggers -->
+        <div class="card">
+          <div class="hd">
+            <div>
+              <h2>Notas rápidas</h2>
+              <p>Anote sem julgamento. Isso ajuda a identificar padrão e diminuir confusão na próxima crise.</p>
+            </div>
+            <div class="row">
+              <button class="btn" id="btnSaveNotes" type="button">Salvar</button>
+              <button class="btn ghost" id="btnClearNotes" type="button">Limpar</button>
+            </div>
+          </div>
+          <div class="bd">
+            <div class="split">
+              <div>
+                <label class="small" for="notesNow"><strong>O que estou sentindo agora?</strong></label>
+                <textarea id="notesNow" placeholder="Ex.: raiva 7/10, tristeza 5/10, medo 6/10..."></textarea>
+              </div>
+              <div>
+                <label class="small" for="notesNeed"><strong>Do que eu preciso (agora)?</strong></label>
+                <textarea id="notesNeed" placeholder="Ex.: descanso, comer, companhia, limites, silêncio, validação..."></textarea>
+              </div>
+            </div>
+
+            <div class="hr"></div>
+
+            <label class="small" for="notesPlan"><strong>Plano de 1 passo (próximos 10 minutos)</strong></label>
+            <textarea id="notesPlan" placeholder="Ex.: água + respiração 4–6 por 2 min + banho + mensagem curta para alguém."></textarea>
+
+            <div class="hr"></div>
+
+            <div class="row">
+              <div class="note" style="flex:1">
+                <strong>Modelo “pensamento alternativo” (sem brigar com a mente):</strong><br>
+                “Pode ser que meu cérebro esteja lendo ameaça porque estou ativada. Eu posso checar depois. Agora eu só preciso estabilizar meu corpo.”
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick cards: coping menus -->
+        <div class="card">
+          <div class="hd">
+            <div>
+              <h2>Menu de coping (escolher 1, não 10)</h2>
+              <p>Em crise, escolha <strong>uma</strong> ação por vez. Quando estabilizar 20%, escolha a próxima.</p>
+            </div>
+          </div>
+          <div class="bd">
+            <div class="tech">
+              <details open>
+                <summary>Quando a mente está acelerada <span class="tag">calmar</span></summary>
+                <div class="inner">
+                  <ul class="steps">
+                    <li>Respiração 4–6 por 2 minutos</li>
+                    <li>Escrever “3 fatos do agora” (sem interpretação)</li>
+                    <li>Aterramento 5–4–3–2–1</li>
+                    <li>Banho morno / luz baixa</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details>
+                <summary>Quando a emoção vira impulso <span class="tag">segurar</span></summary>
+                <div class="inner">
+                  <ul class="steps">
+                    <li>TIPP (temperatura + movimento)</li>
+                    <li>Surf da urgência (5 minutos)</li>
+                    <li>Mensagem curta pedindo ajuda</li>
+                    <li>Trocar de ambiente (porta aberta, sala, rua segura)</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details>
+                <summary>Quando aparece autocrítica pesada <span class="tag">acolher</span></summary>
+                <div class="inner">
+                  <ul class="steps">
+                    <li>“Isso é difícil e eu estou fazendo o que posso.”</li>
+                    <li>“Eu não preciso me punir para melhorar.”</li>
+                    <li>Escolher um cuidado pequeno (água, comida, descanso)</li>
+                  </ul>
+                </div>
+              </details>
+
+              <details>
+                <summary>Depois que passar (prevenção) <span class="tag">manutenção</span></summary>
+                <div class="inner">
+                  <ul class="steps">
+                    <li>Comer algo (mesmo simples) e hidratar</li>
+                    <li>2–10 min de caminhada leve</li>
+                    <li>Escrever: “o que disparou?” + “o que ajudou?”</li>
+                    <li>Dormir e rotina mínima no dia seguinte</li>
+                  </ul>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right bottom: export / backup -->
+        <div class="card">
+          <div class="hd">
+            <div>
+              <h2>Backup rápido</h2>
+              <p>Se quiser guardar suas notas fora do celular, copie e cole em um lugar seguro. (Este app salva localmente neste dispositivo.)</p>
+            </div>
+          </div>
+          <div class="bd">
+            <div class="row">
+              <button class="btn" id="btnExport" type="button">Exportar (texto)</button>
+              <button class="btn ghost" id="btnImport" type="button">Importar (colar texto)</button>
+            </div>
+            <div class="hr"></div>
+            <textarea id="exportBox" class="hidden" placeholder="Aqui vai aparecer o texto exportado..."></textarea>
+            <div class="note">
+              <strong>Dica:</strong> você pode adicionar esta página na tela inicial do iPhone/Android como atalho (abre como “app”).
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      Feito para <strong>Raissa Barbosa</strong>. Se você estiver em perigo imediato, procure ajuda: <strong>192</strong> • <strong>190</strong> • <strong>CVV 188</strong>.
+    </div>
+  </div>
+
+  <script>
+    // ========= Helpers / Storage =========
+    const store = {
+      get(key, fallback){
+        try{
+          const v = localStorage.getItem(key);
+          return v === null ? fallback : JSON.parse(v);
+        }catch(e){ return fallback; }
+      },
+      set(key, value){
+        try{ localStorage.setItem(key, JSON.stringify(value)); }catch(e){}
+      }
+    };
+
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+    // ========= Tabs =========
+    const tabButtons = [
+      {btn: $("#tabbtn-crise"), panel: $("#tab-crise")},
+      {btn: $("#tabbtn-notas"), panel: $("#tab-notas")},
+    ];
+
+    function setTab(id){
+      tabButtons.forEach(({btn,panel})=>{
+        const on = (btn.id === id);
+        btn.setAttribute("aria-selected", on ? "true" : "false");
+        panel.classList.toggle("hidden", !on);
+      });
+      store.set("activeTab", id);
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    tabButtons.forEach(({btn})=>{
+      btn.addEventListener("click", ()=> setTab(btn.id));
+    });
+
+    // ========= Intensity / Protocol =========
+    const intensityRange = $("#intensityRange");
+    const meterFill = $("#meterFill");
+    const zoneBadge = $("#zoneBadge");
+    const intChip = $("#intChip");
+    const statusDot = $("#statusDot");
+    const statusText = $("#statusText");
+    const protocol = $("#protocol");
+
+    function zoneFor(n){
+      if(n <= 3) return {name:"Verde", color:"var(--good)", hint:"Baixa ativação"};
+      if(n <= 6) return {name:"Amarela", color:"var(--warn)", hint:"Atenção / instável"};
+      return {name:"Vermelha", color:"var(--bad)", hint:"Pico de crise"};
+    }
+
+    function buildProtocol(n){
+      const z = zoneFor(n);
+
+      // Suggested sequence depends on intensity:
+      // Green: prevent & organize
+      // Yellow: stabilize + skills
+      // Red: TIPP + safety + short steps
+
+      const blocks = [];
+
+      if(n >= 8){
+        blocks.push({
+          title:"Agora (primeiros 2 minutos): corpo primeiro",
+          tag:"prioridade",
+          html: `
+            <ol class="steps">
+              <li><strong>Temperatura (TIPP):</strong> água fria no rosto por 20–30s ou gelo na bochecha.</li>
+              <li><strong>Respiração 4–6:</strong> 6 expirações longas (sem forçar).</li>
+              <li><strong>Movimento intenso:</strong> 60–90s (agachamento / corrida parada).</li>
+            </ol>
+            <div class="note">Meta: reduzir 1 ponto de intensidade, não “resolver a vida”.</div>
+          `
+        });
+        blocks.push({
+          title:"Depois (3–8 minutos): reduzir impulsos",
+          tag:"segurar",
+          html: `
+            <ol class="steps">
+              <li><strong>STOP</strong>: pare, respire, observe, prossiga com intenção.</li>
+              <li><strong>Surf da urgência</strong> por 5 minutos (a onda desce).</li>
+              <li><strong>Aterramento 5–4–3–2–1</strong> para voltar ao presente.</li>
+            </ol>
+          `
+        });
+        blocks.push({
+          title:"Se ainda estiver alto: plano de segurança",
+          tag:"se preciso",
+          html: `
+            <ul class="steps">
+              <li>Vá para um lugar mais seguro e peça companhia (mensagem curta).</li>
+              <li>Se você não consegue se manter segura: <strong>192</strong> / <strong>190</strong> / <strong>188</strong>.</li>
+              <li>Adie decisões importantes para depois da crise.</li>
+            </ul>
+          `
+        });
+      } else if(n >= 4){
+        blocks.push({
+          title:"Agora (2–5 minutos): baixar ativação",
+          tag:"estabilizar",
+          html: `
+            <ol class="steps">
+              <li><strong>Respiração 4–6</strong> por 2 minutos (expire mais longo).</li>
+              <li><strong>Temperatura (TIPP):</strong> água fria no rosto / gelo 20–30s.</li>
+              <li><strong>Relaxamento rápido:</strong> tensione mãos/ombros por 5s e solte (3 vezes).</li>
+            </ol>
+          `
+        });
+        blocks.push({
+          title:"Depois (3–7 minutos): organizar mente",
+          tag:"clarear",
+          html: `
+            <ol class="steps">
+              <li><strong>STOP</strong> antes de responder/mensagem/decidir.</li>
+              <li><strong>3 fatos do agora</strong> (sem interpretação).</li>
+              <li><strong>1 passo útil</strong> para os próximos 10 minutos (água, banho, caminhar, comer).</li>
+            </ol>
+          `
+        });
+        blocks.push({
+          title:"Se houver urgência/impulso",
+          tag:"impulso",
+          html: `
+            <ul class="steps">
+              <li><strong>Surf da urgência</strong> por 5 minutos + respiração.</li>
+              <li>Troque de ambiente (sala, ar fresco, luz acesa).</li>
+              <li>Mensagem curta pedindo companhia.</li>
+            </ul>
+          `
+        });
+      } else {
+        blocks.push({
+          title:"Prevenção leve (2–5 minutos)",
+          tag:"verde",
+          html: `
+            <ol class="steps">
+              <li><strong>Respiração Caixa 4–4–4–4</strong> por 2 ciclos.</li>
+              <li><strong>Checagem HALT:</strong> estou com fome, raiva, solidão ou cansaço?</li>
+              <li><strong>1 cuidado básico</strong> (água + comida simples + banho + pausa).</li>
+            </ol>
+          `
+        });
+        blocks.push({
+          title:"Organização rápida",
+          tag:"clareza",
+          html: `
+            <ol class="steps">
+              <li>Escreva em 1 frase: “O que aconteceu?”</li>
+              <li>Escreva em 1 frase: “O que eu preciso agora?”</li>
+              <li>Escolha <strong>um</strong> passo pequeno (10 min).</li>
+            </ol>
+          `
+        });
+      }
+
+      // Always show a small "do not do" reminder
+      blocks.push({
+        title:"Evitar no auge (para não piorar)",
+        tag:"importante",
+        html: `
+          <ul class="steps">
+            <li>Discussões longas e mensagens enormes</li>
+            <li>Tomar decisões grandes no pico</li>
+            <li>Ficar sem comer/hidratar</li>
+            <li>Se punir para “aprender” (isso só aumenta a crise)</li>
+          </ul>
+        `
+      });
+
+      protocol.innerHTML = blocks.map(b=>`
+        <details ${n>=8 && b.tag==="prioridade" ? "open" : ""}>
+          <summary>${b.title} <span class="tag">${b.tag}</span></summary>
+          <div class="inner">${b.html}</div>
+        </details>
+      `).join("");
+    }
+
+    function setIntensity(n){
+      const pct = Math.round((n/10)*100);
+      meterFill.style.width = pct + "%";
+
+      const z = zoneFor(n);
+      zoneBadge.textContent = "Zona: " + z.name;
+      zoneBadge.style.borderColor = "rgba(255,255,255,.16)";
+      zoneBadge.style.boxShadow = "0 0 0 0 rgba(0,0,0,0)";
+      zoneBadge.style.background = "rgba(255,255,255,.05)";
+
+      intChip.textContent = `Intensidade: ${n}/10`;
+
+      // status indicator
+      if(n <= 3){
+        statusDot.style.background = "var(--good)";
+        statusDot.style.boxShadow = "0 0 0 6px rgba(61,220,151,.18)";
+        statusText.textContent = "Você está no controle suficiente para cuidar do básico";
+      }else if(n <= 6){
+        statusDot.style.background = "var(--warn)";
+        statusDot.style.boxShadow = "0 0 0 6px rgba(255,204,102,.16)";
+        statusText.textContent = "Atenção: estabilizar corpo antes de agir";
+      }else{
+        statusDot.style.background = "var(--bad)";
+        statusDot.style.boxShadow = "0 0 0 6px rgba(255,92,122,.16)";
+        statusText.textContent = "Pico: passos curtos, segurança e técnicas de corpo";
+      }
+
+      buildProtocol(n);
+      store.set("intensity", n);
+    }
+
+    intensityRange.addEventListener("input", (e)=>{
+      setIntensity(parseInt(e.target.value,10));
+    });
+
+    // ========= Timer =========
+    let t0 = null;
+    let timerInterval = null;
+    const timeChip = $("#timeChip");
+
+    function fmtTime(ms){
+      const s = Math.max(0, Math.floor(ms/1000));
+      const m = Math.floor(s/60);
+      const r = s%60;
+      return String(m).padStart(2,"0") + ":" + String(r).padStart(2,"0");
+    }
+
+    function startTimer(){
+      if(!t0) t0 = Date.now();
+      if(timerInterval) return;
+      timerInterval = setInterval(()=>{
+        timeChip.textContent = "⏱️ " + fmtTime(Date.now()-t0);
+      }, 250);
+      store.set("timerStart", t0);
+    }
+
+    function resetTimer(){
+      t0 = Date.now();
+      timeChip.textContent = "⏱️ 00:00";
+      store.set("timerStart", t0);
+    }
+
+    $("#btnStart").addEventListener("click", ()=>{
+      startTimer();
+      // gentle nudge: open the first protocol block
+      const first = protocol.querySelector("details");
+      if(first) first.open = true;
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+
+    $("#btnResetTimer").addEventListener("click", resetTimer);
+
+    // Safety button: show a simple alert
+    $("#btnSafety").addEventListener("click", ()=>{
+      alert(
+        "Se você está em risco agora:\n\n" +
+        "1) Vá para um lugar mais seguro e se afaste do que aumenta risco.\n" +
+        "2) Peça ajuda (mensagem curta / ligação).\n" +
+        "3) Se não conseguir se manter segura: 192 (SAMU) / 190 (Polícia) / 188 (CVV).\n\n" +
+        "Você não precisa resolver tudo agora — só atravessar os próximos minutos."
+      );
+    });
+
+    // ========= Breathing visual =========
+    const breathViz = $("#breathViz");
+    const breathTitle = $("#breathTitle");
+    const breathHint = $("#breathHint");
+    const phaseText = $("#phaseText");
+    const phaseSub = $("#phaseSub");
+    const cycleText = $("#cycleText");
+    const breathModeChip = $("#breathModeChip");
+
+    let breathMode = store.get("breathMode", "box");
+    let breathTick = null;
+    let breathStart = Date.now();
+    let cycle = 1;
+
+    const modes = {
+      "box": {
+        name:"Caixa 4–4–4–4",
+        title:"Respiração Caixa (4–4–4–4)",
+        hint:"Inspire 4 • Segure 4 • Expire 4 • Segure 4. Ideal para reduzir picos.",
+        timeline:[
+          {t:0,   label:"Inspire", sub:"4 segundos"},
+          {t:4,   label:"Segure",  sub:"4 segundos"},
+          {t:8,   label:"Expire",  sub:"4 segundos"},
+          {t:12,  label:"Segure",  sub:"4 segundos"}
+        ],
+        length:16
+      },
+      "47_8": {
+        name:"4–7–8",
+        title:"Respiração 4–7–8",
+        hint:"Inspire 4 • Segure 7 • Expire 8. Boa para desacelerar e induzir calma.",
+        timeline:[
+          {t:0,  label:"Inspire", sub:"4 segundos"},
+          {t:4,  label:"Segure", sub:"7 segundos"},
+          {t:11, label:"Expire", sub:"8 segundos"}
+        ],
+        length:19
+      },
+      "pacada": {
+        name:"4–6 (calma)",
+        title:"Respiração Ritmada (4–6)",
+        hint:"Inspire 4 • Expire 6. Expiração mais longa ajuda a regular o corpo.",
+        timeline:[
+          {t:0, label:"Inspire", sub:"4 segundos"},
+          {t:4, label:"Expire", sub:"6 segundos"}
+        ],
+        length:10
+      },
+      "pause":{
+        name:"Pausado",
+        title:"Respiração (pausada)",
+        hint:"A animação está pausada. Você pode retomar em qualquer modo.",
+        timeline:[{t:0, label:"Pausado", sub:""}],
+        length:9999
+      }
+    };
+
+    function setBreathMode(mode){
+      breathMode = mode;
+      store.set("breathMode", mode);
+      breathViz.dataset.mode = mode;
+      breathTitle.textContent = modes[mode].title;
+      breathHint.textContent = modes[mode].hint;
+      breathModeChip.textContent = "Modo: " + modes[mode].name;
+
+      breathStart = Date.now();
+      cycle = 1;
+      cycleText.textContent = "Ciclo: 1";
+      updateBreathPhase();
+
+      if(breathTick) clearInterval(breathTick);
+      breathTick = setInterval(updateBreathPhase, 150);
+
+      if(mode === "pause"){
+        clearInterval(breathTick);
+        breathTick = null;
+        phaseText.textContent = "Pausado";
+        phaseSub.textContent = "";
+      }
+    }
+
+    function updateBreathPhase(){
+      const m = modes[breathMode];
+      if(!m) return;
+
+      const elapsed = (Date.now() - breathStart) / 1000;
+      const t = m.length === 9999 ? 0 : (elapsed % m.length);
+
+      // cycle count
+      if(m.length !== 9999){
+        const newCycle = Math.floor(elapsed / m.length) + 1;
+        if(newCycle !== cycle){
+          cycle = newCycle;
+          cycleText.textContent = "Ciclo: " + cycle;
+        }
+      }
+
+      // phase
+      let current = m.timeline[0];
+      for(const step of m.timeline){
+        if(t >= step.t) current = step;
+      }
+      phaseText.textContent = current.label;
+      phaseSub.textContent = current.sub;
+    }
+
+    $("#breathBox").addEventListener("click", ()=> setBreathMode("box"));
+    $("#breath478").addEventListener("click", ()=> setBreathMode("47_8"));
+    $("#breathPaced").addEventListener("click", ()=> setBreathMode("pacada"));
+    $("#breathPause").addEventListener("click", ()=> setBreathMode("pause"));
+
+    // ========= Checklist =========
+    const checklistEl = $("#checklist");
+    const checklistKey = "raissa_checklist_v1";
+
+    const checklistTemplate = [
+      {id:"agua",  title:"Beber água", desc:"Um copo agora. Pequeno, mas ajuda o corpo."},
+      {id:"comer", title:"Comer algo simples", desc:"Mesmo que leve: fruta, pão, iogurte, arroz/ovo."},
+      {id:"banho", title:"Banho / higiene básica", desc:"Muda estado interno mais do que parece."},
+      {id:"ar",    title:"2–10 min de ar fresco", desc:"Varanda, portão, janela. Respirar e ver o céu."},
+      {id:"mov",   title:"Movimento leve", desc:"Caminhar 5–10 min ou alongar 2 min."},
+      {id:"sono",  title:"Preparar o sono", desc:"Luz baixa, tela menor, um ritual curto."},
+      {id:"limite",title:"1 limite saudável", desc:"Dizer não / adiar conversa / reduzir estímulo."},
+      {id:"tarefa",title:"1 tarefa pequena", desc:"Algo de 5–15 minutos. Só uma."},
+      {id:"apoio", title:"Contato seguro", desc:"Mandar mensagem curta pedindo presença/apoio."}
+    ];
+
+    function loadChecklist(){
+      return store.get(checklistKey, checklistTemplate.map(x=>({id:x.id, done:false})));
+    }
+
+    function saveChecklist(state){
+      store.set(checklistKey, state);
+    }
+
+    function renderChecklist(){
+      const state = loadChecklist();
+      const map = new Map(state.map(x=>[x.id, x.done]));
+      checklistEl.innerHTML = checklistTemplate.map(item=>{
+        const done = !!map.get(item.id);
+        return `
+          <label class="item" for="chk_${item.id}">
+            <input id="chk_${item.id}" type="checkbox" ${done ? "checked":""} data-id="${item.id}">
+            <div>
+              <div class="itxt">${item.title}</div>
+              <div class="idesc">${item.desc}</div>
+            </div>
+          </label>
+        `;
+      }).join("");
+
+      checklistEl.querySelectorAll('input[type="checkbox"]').forEach(chk=>{
+        chk.addEventListener("change", ()=>{
+          const id = chk.dataset.id;
+          const st = loadChecklist();
+          const next = st.map(x => x.id === id ? ({...x, done: chk.checked}) : x);
+          saveChecklist(next);
+        });
+      });
+    }
+
+    $("#btnResetChecklist").addEventListener("click", ()=>{
+      saveChecklist(checklistTemplate.map(x=>({id:x.id, done:false})));
+      renderChecklist();
+    });
+
+    $("#btnMarkMinimum").addEventListener("click", ()=>{
+      const minimum = new Set(["agua","comer","banho","ar","sono"]);
+      saveChecklist(checklistTemplate.map(x=>({id:x.id, done: minimum.has(x.id)})));
+      renderChecklist();
+    });
+
+    // ========= Notes =========
+    const notesKey = "raissa_notes_v1";
+    const nNow = $("#notesNow");
+    const nNeed = $("#notesNeed");
+    const nPlan = $("#notesPlan");
+
+    function loadNotes(){
+      return store.get(notesKey, {now:"", need:"", plan:""});
+    }
+    function saveNotes(obj){
+      store.set(notesKey, obj);
+    }
+
+    $("#btnSaveNotes").addEventListener("click", ()=>{
+      saveNotes({now:nNow.value, need:nNeed.value, plan:nPlan.value});
+      alert("Notas salvas neste aparelho ✅");
+    });
+    $("#btnClearNotes").addEventListener("click", ()=>{
+      nNow.value = ""; nNeed.value = ""; nPlan.value = "";
+      saveNotes({now:"", need:"", plan:""});
+    });
+
+    // ========= Export / Import =========
+    const exportBox = $("#exportBox");
+
+    $("#btnExport").addEventListener("click", ()=>{
+      const payload = {
+        intensity: parseInt(intensityRange.value,10),
+        checklist: loadChecklist(),
+        notes: loadNotes(),
+        exportedAt: new Date().toISOString()
+      };
+      exportBox.classList.remove("hidden");
+      exportBox.value = JSON.stringify(payload, null, 2);
+      exportBox.focus();
+      exportBox.select();
+    });
+
+    $("#btnImport").addEventListener("click", ()=>{
+      exportBox.classList.remove("hidden");
+      exportBox.focus();
+      const txt = prompt("Cole aqui o texto exportado (JSON).");
+      if(!txt) return;
+      try{
+        const payload = JSON.parse(txt);
+        if(payload.checklist) saveChecklist(payload.checklist);
+        if(payload.notes) saveNotes(payload.notes);
+        if(typeof payload.intensity === "number"){
+          intensityRange.value = String(payload.intensity);
+          setIntensity(payload.intensity);
+        }
+        renderChecklist();
+        const nn = loadNotes();
+        nNow.value = nn.now || "";
+        nNeed.value = nn.need || "";
+        nPlan.value = nn.plan || "";
+        alert("Importado ✅");
+      }catch(e){
+        alert("Não consegui importar. Verifique se você colou o texto completo.");
+      }
+    });
+
+    // ========= Print =========
+    $("#btnPrint").addEventListener("click", ()=> window.print());
+
+    // ========= Init =========
+    (function init(){
+      // Restore active tab
+      const activeTab = store.get("activeTab", "tabbtn-crise");
+      if(activeTab === "tabbtn-notas") setTab("tabbtn-notas");
+      else setTab("tabbtn-crise");
+
+      // Restore intensity
+      const savedIntensity = store.get("intensity", 0);
+      intensityRange.value = String(savedIntensity);
+      setIntensity(savedIntensity);
+
+      // Restore timer if running
+      const savedT0 = store.get("timerStart", null);
+      if(savedT0){
+        t0 = savedT0;
+        startTimer();
+      }else{
+        timeChip.textContent = "⏱️ 00:00";
+      }
+
+      // Restore breathing mode
+      setBreathMode(breathMode);
+
+      // Render checklist
+      renderChecklist();
+
+      // Restore notes
+      const notes = loadNotes();
+      nNow.value = notes.now || "";
+      nNeed.value = notes.need || "";
+      nPlan.value = notes.plan || "";
+    })();
+  </script>
+</body>
+</html>
