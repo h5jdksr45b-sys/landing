@@ -122,18 +122,16 @@
     .hero-media{
       position:relative;
       width:100%;
-      aspect-ratio: 21 / 9;
       background: #0b0d10;
     }
     .hero-media img{
-      width:100%; height:100%;
+      width:100%;
+      height:auto;           /* <-- IMPORTANTE: não força proporção */
+      display:block;
       object-fit: cover;
       object-position: left center;
-      display:block;
       filter: saturate(.92) contrast(1.02);
-      transform: scale(1.01);
     }
-    /* overlay suave para legibilidade (texto já está na imagem, mas ajuda no resto) */
     .hero-media:after{
       content:"";
       position:absolute; inset:0;
@@ -375,9 +373,7 @@
       <div class="wrap">
         <div class="hero-card">
           <div class="hero-media">
-            <!-- SALVE A IMAGEM COM ESSE NOME NA MESMA PASTA DO HTML:
-                 maepensatiba.PNG -->
-            <img src="maepensatiba.PNG" alt="Hero Protocolo 7 Dias" loading="eager" decoding="async" />
+            <img src="maepensatiba.png" alt="Protocolo 7 Dias — Hero" loading="eager" decoding="async" />
           </div>
 
           <div class="hero-under">
@@ -397,12 +393,12 @@
       </div>
     </div>
 
-    <!-- VÍDEO (vale a pena colocar: aumenta confiança e reduz fricção) -->
+    <!-- VÍDEO -->
     <section id="video">
       <div class="wrap">
         <div class="section-title">
           <h2>Assista antes de decidir</h2>
-          <p>Se o tráfego é emocional, um vídeo curto e direto aqui costuma aumentar conversão porque reduz dúvida e “risco percebido”.</p>
+          <p>Vídeo curto para reduzir dúvida e risco percebido. Se fizer sentido, finalize no checkout.</p>
         </div>
 
         <div class="video-wrap">
@@ -436,7 +432,7 @@
             <p>Identificar gatilhos reais e as dinâmicas que, sem querer, alimentam a escalada emocional dentro de casa.</p>
           </div>
           <div class="card">
-            <h3>Conduzir momentos de tensão com menos atrito</h3>
+            <h3>Agir com clareza na hora da tensão</h3>
             <p>O que falar, o que evitar e como agir para não piorar a situação quando a conversa começa a “subir”.</p>
           </div>
           <div class="card">
