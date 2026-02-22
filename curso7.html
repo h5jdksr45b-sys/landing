@@ -1,675 +1,671 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Protocolo 7 Dias</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Protocolo 7 Dias — treinamento prático para familiares. Acesso imediato. Garantia de 7 dias. Checkout Hotmart." />
+  <meta name="theme-color" content="#0c0f12" />
+  <title>Protocolo 7 Dias — Treinamento prático para familiares</title>
 
   <style>
     :root{
-      --bg:#070912;
-      --card1: rgba(255,255,255,.08);
-      --card2: rgba(255,255,255,.045);
-      --line: rgba(255,255,255,.10);
+      --bg:#0c0f12;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(0,0,0,.22);
+      --line:rgba(255,255,255,.10);
+      --text:#eaf1fb;
+      --muted:#a8b5c8;
+      --accent:#7aa7ff;
+      --accent2:#7bffcf;
+      --ok:#44d07a;
 
-      --text: #eef2ff;
-      --muted: rgba(238,242,255,.74);
-
-      --accent: #ff3f6c;
-      --accent2:#ffb703;
-
-      --radius: 18px;
-      --shadow: 0 18px 70px rgba(0,0,0,.55);
-      --max: 1040px;
-
-      --title: "Fraunces", ui-serif, Georgia, serif;
-      --body: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --radius:18px;
+      --shadow: 0 16px 60px rgba(0,0,0,.45);
+      --maxw: 1120px;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: var(--body);
-      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       background:
-        radial-gradient(1200px 900px at 50% 120%, rgba(255,255,255,.06), transparent 60%),
-        linear-gradient(180deg, #050712 0%, #070a14 45%, #050712 100%);
-      background-attachment: fixed;
-      overflow-x:hidden;
+        radial-gradient(1100px 780px at 20% -10%, rgba(122,167,255,.14), transparent 58%),
+        radial-gradient(1000px 700px at 90% 8%, rgba(123,255,207,.10), transparent 55%),
+        linear-gradient(180deg, #090b0e, var(--bg) 28%, #090b0e);
+      color:var(--text);
+      line-height:1.5;
     }
 
-    /* Grain MUITO leve e sem "banding" */
-    body:before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-      opacity:.08;
-    }
+    a{color:inherit}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 18px;}
 
-    a{ color:inherit; text-decoration:none; }
-    .wrap{ width:min(var(--max), 92%); margin:0 auto; }
-
+    /* Topbar */
     .topbar{
-      position: sticky; top:0; z-index:60;
-      backdrop-filter: blur(12px);
-      background: rgba(6,9,18,.78);
+      position:sticky; top:0; z-index:50;
+      background: rgba(12,15,18,.74);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
-    .topbar .wrap{
+    .topbar-inner{
       display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:14px;
+      gap:14px; padding:12px 0;
     }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:800;
-      letter-spacing:.2px;
-      white-space:nowrap;
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; min-width:240px;}
+    .logo{
+      width:38px;height:38px;border-radius:12px; position:relative; flex:0 0 auto;
+      background: linear-gradient(135deg, rgba(122,167,255,.95), rgba(123,255,207,.85));
+      box-shadow: 0 12px 40px rgba(122,167,255,.14);
     }
-    .dot{
-      width:11px; height:11px; border-radius:999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 22px rgba(255,63,108,.45);
-      flex:0 0 auto;
+    .logo:after{
+      content:""; position:absolute; inset:10px; border-radius:10px; background: rgba(12,15,18,.55);
     }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      color:var(--muted);
-      font-size:13px;
-      white-space:nowrap;
-      background: rgba(255,255,255,.03);
-    }
-    .pill b{ color:#fff; font-weight:800; }
+    .brand-txt{display:flex; flex-direction:column; gap:2px}
+    .brand-txt strong{font-size:14px; letter-spacing:.2px}
+    .brand-txt span{font-size:12px; color:var(--muted)}
 
+    nav{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+    nav a{
+      font-size:13px; color:var(--muted); text-decoration:none;
+      padding:8px 10px; border-radius:999px; border:1px solid transparent;
+    }
+    nav a:hover{border-color:var(--line); color:var(--text)}
+    @media (max-width: 900px){
+      nav{display:none}
+      .brand{min-width:auto}
+    }
+
+    /* Buttons */
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:14px 18px;
-      border-radius: 12px;
-      font-weight: 800;
-      letter-spacing:.2px;
-      border: 1px solid rgba(255,255,255,.12);
-      transition: transform .08s ease, filter .12s ease, background .12s ease;
-      user-select:none;
-    }
-    .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
-    .btn-primary{
-      background: linear-gradient(135deg, var(--accent), #ff2a63);
-      box-shadow: 0 16px 52px rgba(255,63,108,.22);
-    }
-    .btn-ghost{ background: rgba(255,255,255,.04); }
-
-    /* Cards com glow CONTROLADO (não vaza no fundo) */
-    .panel{
-      position:relative;
-      background: linear-gradient(180deg, var(--card1), var(--card2));
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      isolation:isolate; /* <- impede mistura com fundo */
-    }
-    .panel:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(520px 280px at 20% 10%, rgba(255,63,108,.14), transparent 60%),
-        radial-gradient(520px 280px at 80% 20%, rgba(255,183,3,.10), transparent 62%);
-      opacity:.8;
-      z-index:0;
-      pointer-events:none;
-      filter:saturate(1.02);
-    }
-    .panel > *{ position:relative; z-index:1; }
-
-    .inner{ padding: 26px; }
-    @media (max-width: 960px){ .inner{ padding: 22px; } }
-
-    .hero{ padding: 40px 0 14px; }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.12fr .88fr;
-      gap: 18px;
-      align-items:stretch;
-    }
-    @media (max-width: 960px){
-      .hero-grid{ grid-template-columns: 1fr; }
-    }
-
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      color:var(--muted);
-      font-size:13px;
-      font-weight:800;
-      letter-spacing:.22px;
-      text-transform:uppercase;
-    }
-    .spark{
-      width:10px; height:10px; border-radius:999px;
-      background: rgba(34,197,94,.95);
-      box-shadow: 0 0 18px rgba(34,197,94,.38);
-    }
-
-    h1{
-      margin: 14px 0 10px;
-      font-family: var(--title);
-      font-weight: 700;
-      font-size: 42px;
-      line-height: 1.08;
-      letter-spacing: -0.7px;
-    }
-    @media (max-width: 520px){ h1{ font-size: 36px; } }
-
-    .sub{
-      margin: 0 0 16px;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.55;
-    }
-
-    .bullets{
-      margin: 14px 0 16px;
-      padding:0;
-      list-style:none;
-      display:grid;
       gap:10px;
-    }
-    .bullets li{
-      display:flex; gap:10px; align-items:flex-start;
-      color: rgba(238,242,255,.92);
-      line-height:1.45;
-      font-size: 15.5px;
-    }
-    .check{
-      width:20px; height:20px; border-radius:7px;
-      display:inline-flex; align-items:center; justify-content:center;
-      background: rgba(34,197,94,.14);
-      border: 1px solid rgba(34,197,94,.22);
-      color: rgba(34,197,94,.95);
-      flex:0 0 auto;
-      margin-top:2px;
-      font-weight:900;
-      font-size:14px;
-    }
-
-    .cta-row{
-      display:flex; gap:12px; flex-wrap:wrap;
-      margin-top: 8px;
-    }
-
-    .fine{
-      margin-top: 12px;
-      color: rgba(238,242,255,.62);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    /* CARROSSEL - sem corte e com "push down" pra cabeça não encostar */
-    .photo-panel{ padding:0; }
-    .photo-carousel{
-      position:relative;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.18);
-      overflow:hidden;
-      height: 300px;
-    }
-    @media (max-width: 960px){
-      .photo-carousel{ height: 340px; }
-    }
-
-    .slide{
-      position:absolute; inset:0;
-      opacity:0;
-      transition: opacity .7s ease;
-    }
-    .slide.active{ opacity:1; }
-
-    .slide .bg{
-      position:absolute; inset:-12px;
-      width:calc(100% + 24px); height:calc(100% + 24px);
-      object-fit: cover;
-      filter: blur(18px) saturate(1.02) contrast(1.02);
-      opacity:.55;
-      transform: scale(1.04);
-    }
-    .slide:after{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(800px 380px at 50% 45%, rgba(0,0,0,.00), rgba(0,0,0,.45));
-    }
-    .slide .fg{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      object-fit: contain;
-      object-position: 50% 65%;
-      padding: 26px 16px 18px;
-      filter: saturate(1.02) contrast(1.02);
-    }
-
-    .dots{
-      display:flex; gap:8px;
-      justify-content:center;
-      padding: 12px 0 14px;
-      background: rgba(255,255,255,.02);
-      border-top: 1px solid rgba(255,255,255,.06);
-    }
-    .dots button{
-      width:9px; height:9px; border-radius:99px;
-      border:1px solid rgba(255,255,255,.22);
-      background: rgba(255,255,255,.10);
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:.15px;
       cursor:pointer;
-      padding:0;
+      user-select:none;
+      transition: transform .08s ease, background .18s ease, border-color .18s ease;
+      white-space:nowrap;
     }
-    .dots button.active{
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-color: rgba(255,255,255,.0);
-      box-shadow: 0 0 18px rgba(255,63,108,.28);
+    .btn:hover{background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22)}
+    .btn:active{transform: translateY(1px)}
+    .btn-primary{
+      border-color: rgba(122,167,255,.35);
+      background: linear-gradient(135deg, rgba(122,167,255,.22), rgba(123,255,207,.12));
+      box-shadow: 0 18px 58px rgba(122,167,255,.12);
     }
+    .btn-primary:hover{
+      border-color: rgba(122,167,255,.55);
+      background: linear-gradient(135deg, rgba(122,167,255,.28), rgba(123,255,207,.16));
+    }
+    .btn-ghost{background: transparent; border-color: rgba(255,255,255,.12)}
+    .btn-small{padding:10px 14px; font-weight:800}
 
-    .video-section{ padding: 14px 0 10px; }
-    .video-grid{
-      display:grid;
-      grid-template-columns: 1fr 380px;
-      gap: 18px;
-      align-items:stretch;
+    /* HERO */
+    .hero{
+      position:relative;
+      padding: 26px 0 18px;
     }
-    @media (max-width: 960px){
-      .video-grid{ grid-template-columns: 1fr; }
+    .hero-card{
+      position:relative;
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
     }
-
-    .video-title{
-      margin:0 0 8px;
-      font-family: var(--title);
-      font-weight: 700;
-      font-size: 24px;
-      letter-spacing: -0.3px;
-    }
-    .video-sub{
-      margin:0 0 14px;
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 16px;
-    }
-
-    .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color: rgba(238,242,255,.80);
-      font-size: 12.5px;
-      font-weight: 800;
-      margin-bottom: 10px;
-      width: fit-content;
-    }
-
-    .vimeo{
+    .hero-media{
       position:relative;
       width:100%;
-      padding-top:56.25%;
-      border-radius: 16px;
-      overflow:hidden;
-      border: 1px solid var(--line);
-      background: rgba(0,0,0,.25);
-      box-shadow: 0 14px 50px rgba(0,0,0,.35);
+      aspect-ratio: 21 / 9;
+      background: #0b0d10;
     }
-    .vimeo iframe{
-      position:absolute; inset:0;
+    .hero-media img{
       width:100%; height:100%;
-      border:0;
+      object-fit: cover;
+      object-position: left center;
+      display:block;
+      filter: saturate(.92) contrast(1.02);
+      transform: scale(1.01);
+    }
+    /* overlay suave para legibilidade (texto já está na imagem, mas ajuda no resto) */
+    .hero-media:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(0,0,0,.22) 0%, rgba(0,0,0,.12) 45%, rgba(0,0,0,.08) 100%);
+      pointer-events:none;
     }
 
-    .side{
-      display:flex; flex-direction:column; height:100%;
-      gap:12px;
+    .hero-under{
+      display:flex; gap:12px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+      padding: 14px 16px;
+      background: rgba(0,0,0,.18);
+      border-top: 1px solid rgba(255,255,255,.08);
     }
-    .side .card{
+    .hero-kicker{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      color:var(--muted);
+      font-size:12.8px;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px;
+      color: var(--muted);
     }
-    .mini{
-      color: rgba(238,242,255,.72);
-      font-size: 14px;
-      line-height: 1.55;
-      margin: 0;
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(122,167,255,.10);
     }
 
-    .section{ padding: 20px 0 10px; }
-    .section h3{
-      margin: 0 0 10px;
-      font-family: var(--title);
-      font-weight: 700;
-      font-size: 26px;
-      letter-spacing:-.3px;
+    /* Sections */
+    section{padding: 18px 0;}
+    .section-title{
+      display:flex; align-items:baseline; justify-content:space-between; gap:14px;
+      flex-wrap:wrap; margin: 6px 0 12px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: clamp(20px, 2.5vw, 30px);
+      letter-spacing:-.4px;
+    }
+    .section-title p{
+      margin:0;
+      color:var(--muted);
+      font-size:13.5px;
+      max-width: 70ch;
     }
 
     .grid-3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      gap:12px;
     }
-    @media (max-width: 960px){
-      .grid-3{ grid-template-columns: 1fr; }
+    @media (max-width: 920px){
+      .grid-3{grid-template-columns:1fr}
     }
 
-    .feature{
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--line);
-      border-radius: 16px;
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: var(--panel2);
       padding: 18px;
     }
-    .feature .icon{
-      width:40px; height:40px;
-      border-radius: 13px;
-      display:flex; align-items:center; justify-content:center;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      margin-bottom: 10px;
-      font-weight: 900;
-      font-size: 18px;
+    .card h3{margin:0 0 8px; font-size:14.5px; letter-spacing:.1px}
+    .card p{margin:0; color:var(--muted); font-size:13.6px}
+
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      align-items:stretch;
     }
-    .feature b{ display:block; margin-bottom: 6px; font-weight: 900; }
-    .feature p{ margin:0; color: var(--muted); font-size: 15px; line-height: 1.55; }
+    @media (max-width: 920px){
+      .split{grid-template-columns:1fr}
+    }
+
+    .list{margin:0; padding-left:18px; color:var(--muted); font-size:13.6px}
+    .list li{margin:8px 0}
+
+    .hr{height:1px; background: var(--line); margin: 16px 0;}
+
+    /* Video */
+    .video-wrap{
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.25);
+      box-shadow: var(--shadow);
+    }
+    .video{
+      position:relative;
+      width:100%;
+      aspect-ratio: 16 / 9;
+      background:#0b0d10;
+    }
+    .video iframe{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      border:0;
+    }
+    .video-caption{
+      padding: 12px 14px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+      font-size: 13px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      background: rgba(0,0,0,.18);
+    }
+
+    /* Price */
+    .price{
+      border-radius: 22px;
+      border: 1px solid rgba(122,167,255,.28);
+      background: linear-gradient(180deg, rgba(122,167,255,.10), rgba(0,0,0,.22));
+      box-shadow: 0 22px 70px rgba(122,167,255,.10);
+      padding: 20px;
+    }
+    .price-top{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+      flex-wrap:wrap;
+    }
+    .price-top h3{margin:0; font-size:16px}
+    .price-val{
+      margin: 10px 0 2px;
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing:-.8px;
+    }
+    .price-val small{font-size:14px; color:var(--muted); font-weight:700}
+    .fine{margin: 8px 0 0; color:var(--muted); font-size:12.8px}
+
+    .guarantee{
+      display:flex; gap:10px; align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(68,208,122,.22);
+      background: rgba(68,208,122,.08);
+      margin-top: 12px;
+    }
+    .guarantee p{margin:0; color:var(--muted); font-size:13.2px}
+    .guarantee b{color:var(--text)}
 
     details{
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      border-radius: 16px;
+      padding: 12px 14px;
     }
-    details + details{ margin-top:10px; }
+    details + details{margin-top:10px}
     summary{
       cursor:pointer;
-      font-weight: 900;
+      font-weight:850;
       list-style:none;
+      outline:none;
     }
-    summary::-webkit-details-marker{ display:none; }
-    details p{
-      margin: 10px 0 0;
+    summary::-webkit-details-marker{display:none}
+    details p{margin:10px 0 0; color:var(--muted); font-size:13.6px}
+
+    /* Footer */
+    footer{
+      margin-top: 18px;
+      padding: 22px 0 42px;
+      border-top: 1px solid var(--line);
       color: var(--muted);
-      line-height: 1.55;
-      font-size: 15px;
+      font-size: 12.5px;
     }
 
-    .final{
-      padding: 22px 0 44px;
-      text-align:center;
-    }
-    .final h3{
-      margin:0 0 8px;
-      font-family: var(--title);
-      font-weight: 700;
-      font-size: 30px;
-      letter-spacing: -.35px;
-    }
-    .final p{
-      margin:0 0 16px;
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 16px;
-    }
-
+    /* Sticky CTA mobile */
     .sticky{
       position:fixed;
       left:0; right:0; bottom:0;
-      z-index:80;
-      padding:10px;
-      background: rgba(6,9,18,.78);
+      background: rgba(12,15,18,.78);
+      backdrop-filter: blur(10px);
       border-top: 1px solid var(--line);
-      backdrop-filter: blur(12px);
+      padding: 10px 0;
+      z-index: 60;
       display:none;
     }
-    .sticky .wrap{
-      display:flex; gap:10px;
-      align-items:center; justify-content:space-between;
+    @media (max-width: 900px){
+      .sticky{display:block}
+      footer{padding-bottom: 92px;}
     }
-    .sticky .txt{
-      font-size: 13px;
-      color: rgba(238,242,255,.80);
-      line-height: 1.2;
+    .sticky-inner{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
-    .sticky .txt b{ color:#fff; font-weight: 900; }
-    @media (max-width: 860px){
-      .sticky{ display:block; }
-      body{ padding-bottom: 74px; }
+    .sticky-left{
+      display:flex; flex-direction:column; gap:2px; min-width:0;
     }
+    .sticky-left b{color:var(--text); font-size:13px}
+    .sticky-left span{color:var(--muted); font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:58vw}
 
-    footer{
-      padding: 24px 0 30px;
-      border-top: 1px solid var(--line);
-      color: rgba(238,242,255,.55);
-      font-size: 13px;
-      text-align:center;
+    /* Focus */
+    :focus-visible{
+      outline: 2px solid rgba(122,167,255,.65);
+      outline-offset: 2px;
+      border-radius: 10px;
     }
   </style>
 </head>
 
 <body>
+  <!-- LINKS FIXOS -->
+  <script>
+    window.CHECKOUT_URL = "https://pay.hotmart.com/S104212285E";
+  </script>
+
   <div class="topbar">
     <div class="wrap">
-      <div class="brand">
-        <span class="dot"></span>
-        <span>Protocolo 7 Dias</span>
-      </div>
-      <div class="pill">
-        <span>📌</span>
-        <span><b>Aulas gravadas</b> • acesso imediato</span>
+      <div class="topbar-inner">
+        <a class="brand" href="#top" aria-label="Voltar ao topo">
+          <div class="logo" aria-hidden="true"></div>
+          <div class="brand-txt">
+            <strong>Protocolo 7 Dias</strong>
+            <span>Treinamento prático para familiares</span>
+          </div>
+        </a>
+
+        <nav aria-label="Navegação">
+          <a href="#video">Vídeo</a>
+          <a href="#conteudo">Conteúdo</a>
+          <a href="#praquem">Para quem é</a>
+          <a href="#inscricao">Inscrição</a>
+          <a class="btn btn-primary btn-small" href="#" data-checkout>Quero acesso imediato</a>
+        </nav>
       </div>
     </div>
   </div>
 
-  <div class="hero">
-    <div class="wrap hero-grid">
-
-      <div class="panel">
-        <div class="inner">
-          <div class="kicker"><span class="spark"></span> método prático para crise em casa</div>
-
-          <h1>Sua casa não precisa continuar imprevisível.</h1>
-
-          <p class="sub">
-            Um plano direto para <b>tornar o ambiente mais tranquilo</b>, recuperar controle nas situações difíceis,
-            deixar as reações mais previsíveis e <b>amenizar riscos</b> — sem improviso.
-          </p>
-
-          <ul class="bullets">
-            <li><span class="check">✓</span> O que dizer e o que evitar nos momentos críticos</li>
-            <li><span class="check">✓</span> Como interromper a escalada sem “piorar tudo”</li>
-            <li><span class="check">✓</span> Como criar previsibilidade dentro de casa</li>
-            <li><span class="check">✓</span> Como reduzir riscos reais com estratégia</li>
-          </ul>
-
-          <div class="cta-row">
-            <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
-              Acessar agora
-            </a>
-            <a class="btn btn-ghost" href="#faq">
-              Dúvidas
-            </a>
+  <main id="top">
+    <!-- HERO (imagem já vem com texto embutido) -->
+    <div class="hero">
+      <div class="wrap">
+        <div class="hero-card">
+          <div class="hero-media">
+            <!-- SALVE A IMAGEM COM ESSE NOME NA MESMA PASTA DO HTML:
+                 maepensatiba.PNG -->
+            <img src="maepensatiba.PNG" alt="Hero Protocolo 7 Dias" loading="eager" decoding="async" />
           </div>
 
-          <div class="fine">
-            Curso online com aulas gravadas. Você pode começar hoje e seguir no seu ritmo.
+          <div class="hero-under">
+            <div class="hero-kicker">
+              <span class="tag"><span class="dot" aria-hidden="true"></span> Acesso imediato</span>
+              <span class="tag">Aulas gravadas</span>
+              <span class="tag">Garantia de 7 dias</span>
+              <span class="tag">Sem exposição</span>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+              <a class="btn btn-primary" href="#" data-checkout>Quero acesso imediato</a>
+              <a class="btn btn-ghost" href="#conteudo">Ver o conteúdo</a>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="panel photo-panel" aria-label="Fotos">
-        <div class="photo-carousel" aria-label="Carrossel de fotos">
-          <div class="slide active">
-            <img class="bg" src="foto1.png" alt="">
-            <img class="fg" src="foto1.png" alt="">
-          </div>
-          <div class="slide">
-            <img class="bg" src="foto2.png" alt="">
-            <img class="fg" src="foto2.png" alt="">
-          </div>
-        </div>
-        <div class="dots" aria-label="Indicadores">
-          <button class="active" type="button" aria-label="Foto 1"></button>
-          <button type="button" aria-label="Foto 2"></button>
-        </div>
-      </div>
-
     </div>
-  </div>
 
-  <div class="video-section">
-    <div class="wrap video-grid">
+    <!-- VÍDEO (vale a pena colocar: aumenta confiança e reduz fricção) -->
+    <section id="video">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Assista antes de decidir</h2>
+          <p>Se o tráfego é emocional, um vídeo curto e direto aqui costuma aumentar conversão porque reduz dúvida e “risco percebido”.</p>
+        </div>
 
-      <div class="panel">
-        <div class="inner">
-          <div class="tag">▶ Assista 1 minuto</div>
-          <h2 class="video-title">Veja por que algumas atitudes pioram a escalada — e o que fazer no lugar.</h2>
-          <p class="video-sub">
-            Um trecho curto e direto sobre como trazer previsibilidade e segurança dentro de casa.
-          </p>
-
-          <div class="vimeo">
+        <div class="video-wrap">
+          <div class="video">
             <iframe
               src="https://player.vimeo.com/video/1163488735?h=0&title=0&byline=0&portrait=0"
               allow="autoplay; fullscreen; picture-in-picture"
               allowfullscreen
               loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin">
+              title="Vídeo — Protocolo 7 Dias">
             </iframe>
           </div>
-
-          <div class="cta-row" style="margin-top:14px;">
-            <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
-              Acessar agora
-            </a>
-            <a class="btn btn-ghost" href="#conteudo">
-              Ver o que tem dentro
-            </a>
+          <div class="video-caption">
+            <span>▶︎ Se fez sentido, clique e finalize no checkout.</span>
+            <a class="btn btn-primary btn-small" href="#" data-checkout>Quero acesso imediato</a>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="side">
-        <div class="card">
-          <div class="tag">📌 Resultado prático</div>
-          <p class="mini">O que dizer e o que evitar na crise.</p>
+    <section id="conteudo">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>O que você aprende aqui</h2>
+          <p>Sem promessas irreais. Direto ao que trava o dia a dia da família: clareza, firmeza e menos escaladas.</p>
         </div>
-        <div class="card">
-          <div class="tag">🧠 Estrutura</div>
-          <p class="mini">Passo a passo simples para previsibilidade.</p>
-        </div>
-        <div class="card">
-          <div class="tag">🛡️ Segurança</div>
-          <p class="mini">Estratégias para reduzir risco e conduzir melhor.</p>
-        </div>
-      </div>
 
-    </div>
-  </div>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Entender o padrão por trás da crise</h3>
+            <p>Identificar gatilhos reais e as dinâmicas que, sem querer, alimentam a escalada emocional dentro de casa.</p>
+          </div>
+          <div class="card">
+            <h3>Conduzir momentos de tensão com menos atrito</h3>
+            <p>O que falar, o que evitar e como agir para não piorar a situação quando a conversa começa a “subir”.</p>
+          </div>
+          <div class="card">
+            <h3>Limites sem guerra</h3>
+            <p>Como colocar firmeza e consistência sem virar confronto eterno — reduzindo culpa e exaustão do familiar.</p>
+          </div>
+        </div>
 
-  <div class="section" id="conteudo">
-    <div class="wrap">
-      <h3>O que muda em 7 dias</h3>
-      <div class="grid-3">
-        <div class="feature">
-          <div class="icon">🏠</div>
-          <b>Ambiente mais tranquilo</b>
-          <p>Menos tensão diária com ajustes consistentes que reduzem reatividade.</p>
-        </div>
-        <div class="feature">
-          <div class="icon">🧭</div>
-          <b>Controle e previsibilidade</b>
-          <p>Estratégia para conduzir conversa e comportamento quando a emoção sobe.</p>
-        </div>
-        <div class="feature">
-          <div class="icon">🛡️</div>
-          <b>Amenizar riscos</b>
-          <p>Estratégias para conduzir melhor momentos críticos com mais segurança.</p>
+        <div class="hr"></div>
+
+        <div class="split">
+          <div class="card">
+            <h3>Mais previsibilidade</h3>
+            <p>O foco é reduzir o “modo sobrevivência” e criar uma rotina emocional mais estável, com passos práticos.</p>
+          </div>
+          <div class="card">
+            <h3>Sem exposição, sem espetáculo</h3>
+            <p>Treinamento pensado para família: útil, direto e respeitoso — sem colocar ninguém em vitrine.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="section" id="faq">
-    <div class="wrap">
-      <h3>Dúvidas rápidas</h3>
+    <section id="praquem">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Para quem é (e para quem não é)</h2>
+          <p>Isso filtra clique curioso e aumenta compra qualificada.</p>
+        </div>
 
-      <details>
-        <summary>As aulas são ao vivo?</summary>
-        <p>Não. São <b>aulas gravadas</b> com acesso imediato, para você começar quando quiser e rever sempre que precisar.</p>
-      </details>
+        <div class="split">
+          <div class="card">
+            <h3>É para você se…</h3>
+            <ul class="list">
+              <li>você vive “pisando em ovos” e sente exaustão constante</li>
+              <li>tem medo de piorar tudo com uma frase mal colocada</li>
+              <li>quer agir com mais clareza, menos briga e menos culpa</li>
+              <li>precisa de um caminho prático para reduzir conflito</li>
+            </ul>
+          </div>
 
-      <details>
-        <summary>Preciso entender de psicologia?</summary>
-        <p>Não. A linguagem é direta e aplicada ao cotidiano, com foco no que funciona na prática durante a crise.</p>
-      </details>
+          <div class="card">
+            <h3>Não é para você se…</h3>
+            <ul class="list">
+              <li>você procura diagnóstico, debate teórico ou “rótulos”</li>
+              <li>você quer promessa milagrosa ou solução instantânea</li>
+              <li>você quer substituir terapia/urgência médica</li>
+              <li>o objetivo é vencer discussões, não estabilizar convivência</li>
+            </ul>
+          </div>
+        </div>
 
-      <details>
-        <summary>Serve para pais e para pacientes?</summary>
-        <p>Sim. O foco é orientar a dinâmica dentro de casa. Pacientes também podem usar para que os pais compreendam melhor.</p>
-      </details>
+        <div class="hr"></div>
 
-      <details>
-        <summary>Como acesso após a compra?</summary>
-        <p>Você finaliza no checkout da Hotmart e recebe o acesso no fluxo padrão da plataforma.</p>
-      </details>
-    </div>
-  </div>
-
-  <div class="final">
-    <div class="wrap">
-      <h3>Comece hoje.</h3>
-      <p>Estrutura traz previsibilidade. Previsibilidade traz segurança.<br/>Você não precisa continuar no improviso.</p>
-      <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
-        Acessar agora
-      </a>
-      <div class="fine">Ao clicar, você será direcionado para o checkout seguro da Hotmart.</div>
-    </div>
-  </div>
-
-  <footer>
-    Protocolo 7 Dias • Todos os direitos reservados
-  </footer>
-
-  <div class="sticky" role="navigation" aria-label="CTA fixo">
-    <div class="wrap">
-      <div class="txt">
-        <b>Protocolo 7 Dias</b><br>
-        Aulas gravadas • acesso imediato
+        <div class="card">
+          <h3>Nota importante</h3>
+          <p>
+            Conteúdo educativo. Não substitui acompanhamento profissional.
+            Em situações de risco iminente (autoagressão/violência), procure ajuda imediata na sua região.
+          </p>
+        </div>
       </div>
-      <a class="btn btn-primary" style="padding:12px 14px; border-radius:12px;"
-         href="https://pay.hotmart.com/S104212285E" target="_blank" rel="noopener">
-        Acessar
-      </a>
+    </section>
+
+    <section id="inscricao">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Inscrição</h2>
+          <p>Acesso imediato após pagamento. Checkout oficial Hotmart.</p>
+        </div>
+
+        <div class="price">
+          <div class="price-top">
+            <div>
+              <h3>Protocolo 7 Dias</h3>
+              <p style="margin:8px 0 0; color:var(--muted); font-size:13.6px;">
+                Treinamento prático • Aulas gravadas • Direto ao ponto
+              </p>
+            </div>
+
+            <div style="text-align:right">
+              <div class="price-val">R$ 169 <small>à vista</small></div>
+              <div style="color:var(--muted); font-size:13.2px;">ou conforme opções no checkout</div>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="grid-3">
+            <div class="card">
+              <h3>Você recebe</h3>
+              <p>Aulas gravadas, acesso imediato e conteúdo aplicável na convivência familiar.</p>
+            </div>
+            <div class="card">
+              <h3>Objetivo</h3>
+              <p>Reduzir escaladas, aumentar clareza e construir previsibilidade dentro de casa.</p>
+            </div>
+            <div class="card">
+              <h3>Formato</h3>
+              <p>100% online. Assista no seu ritmo.</p>
+            </div>
+          </div>
+
+          <div class="guarantee">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-top:2px;">
+              <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4Z" stroke="var(--ok)" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M9 12l2 2 4-5" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p><b>Garantia de 7 dias.</b> Se você perceber que não é para você, pode solicitar reembolso dentro do prazo.</p>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:14px;">
+            <a class="btn btn-primary" href="#" data-checkout>Quero acesso imediato</a>
+            <a class="btn btn-ghost" href="#faq">Tirar dúvidas</a>
+          </div>
+
+          <p class="fine">Ao clicar no botão, você será direcionado ao checkout oficial da Hotmart.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Dúvidas rápidas</h2>
+          <p>Sem enrolação. A garantia existe justamente pra reduzir o “medo de errar”.</p>
+        </div>
+
+        <details>
+          <summary>Isso é terapia?</summary>
+          <p>Não. É um treinamento educativo, com foco prático na convivência familiar. Não substitui acompanhamento profissional.</p>
+        </details>
+
+        <details>
+          <summary>Eu vou ter acesso na hora?</summary>
+          <p>Sim. Após a confirmação do pagamento, o acesso é liberado pela Hotmart.</p>
+        </details>
+
+        <details>
+          <summary>Tem garantia?</summary>
+          <p>Sim. Você tem 7 dias de garantia. Se não fizer sentido, pode solicitar reembolso dentro do prazo.</p>
+        </details>
+
+        <details>
+          <summary>Por que não tem depoimentos?</summary>
+          <p>Por respeito à privacidade e para evitar exposição. A proposta é ser útil e direto, sem colocar ninguém em vitrine.</p>
+        </details>
+
+        <div class="hr"></div>
+
+        <div class="split">
+          <div class="card">
+            <h3>Se você está travado agora…</h3>
+            <p>
+              Travar é normal quando o tema é pesado. O que destrava é reduzir o risco:
+              você pode entrar, assistir e decidir com a garantia.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Último passo</h3>
+            <p>Finalize no checkout Hotmart e receba acesso imediato.</p>
+            <div style="margin-top:12px;">
+              <a class="btn btn-primary" href="#" data-checkout>Quero acesso imediato</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-start; justify-content:space-between;">
+          <div>
+            <b style="color:var(--text)">Protocolo 7 Dias</b><br/>
+            <span>Treinamento prático para familiares — online e gravado.</span>
+          </div>
+          <div style="max-width: 78ch;">
+            <span>
+              Aviso: Conteúdo educativo. Não substitui atendimento médico/psicológico, nem serviços de emergência.
+              Em situações de risco iminente, procure ajuda imediata na sua região.
+            </span>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:space-between;">
+          <span>© <span id="year"></span> • Todos os direitos reservados.</span>
+          <span style="opacity:.9">Checkout via Hotmart.</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <div class="sticky" role="region" aria-label="Chamada para ação fixa">
+    <div class="wrap">
+      <div class="sticky-inner">
+        <div class="sticky-left">
+          <b>Protocolo 7 Dias</b>
+          <span>Acesso imediato • Garantia de 7 dias</span>
+        </div>
+        <a class="btn btn-primary btn-small" href="#" data-checkout>Quero acesso</a>
+      </div>
     </div>
   </div>
 
   <script>
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dots button');
-    let idx = 0;
+    // Ano
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    function setSlide(i){
-      slides[idx].classList.remove('active');
-      dots[idx].classList.remove('active');
-      idx = i;
-      slides[idx].classList.add('active');
-      dots[idx].classList.add('active');
-    }
-    dots.forEach((btn, i) => btn.addEventListener('click', () => setSlide(i)));
-    setInterval(() => setSlide((idx + 1) % slides.length), 3600);
+    // Aplicar checkout em todos os botões
+    const checkoutUrl = window.CHECKOUT_URL;
+    document.querySelectorAll("[data-checkout]").forEach(el=>{
+      el.setAttribute("href", checkoutUrl);
+      el.setAttribute("target", "_blank");
+      el.setAttribute("rel", "noopener");
+    });
+
+    // Scroll suave (âncoras internas)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener("click", (e)=>{
+        const href = a.getAttribute("href");
+        if(!href || href === "#") return;
+        const target = document.querySelector(href);
+        if(!target) return;
+        e.preventDefault();
+        target.scrollIntoView({behavior:"smooth", block:"start"});
+      });
+    });
   </script>
 </body>
 </html>
