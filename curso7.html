@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Protocolo 7 Dias — Dr. Fabio Schmidt</title>
-  <meta name="description" content="Protocolo clínico estruturado para familiares lidarem com crises emocionais intensas sem escalar conflitos — com segurança, clareza e limites." />
+  <meta name="description" content="Um protocolo clínico estruturado para familiares lidarem com crises emocionais intensas sem escalar o conflito — com clareza, limites e segurança." />
 
   <style>
     :root{
@@ -12,14 +12,13 @@
       --text:#eaf0ff;
       --muted: rgba(234,240,255,.72);
       --muted2: rgba(234,240,255,.55);
+
       --accent:#2dd4bf;
       --accent2:#60a5fa;
-      --ok:#34d399;
 
       --stroke: rgba(255,255,255,.10);
-      --stroke2: rgba(255,255,255,.14);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
 
-      --shadow: 0 20px 70px rgba(0,0,0,.55);
       --radius: 18px;
       --radius2: 26px;
       --max: 1120px;
@@ -30,22 +29,24 @@
       --warnBg: rgba(251,113,133,.10);
       --warnStroke: rgba(251,113,133,.24);
 
+      --ok:#34d399;
+
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
 
-    /* FUNDO ESTÁVEL (sem quebra): sólido + camada fixa separada */
     body{
       margin:0;
       font-family:var(--font);
       color:var(--text);
       line-height:1.45;
       background: var(--bg);
-      position:relative;
       overflow-x:hidden;
     }
+
+    /* Fundo estável */
     .bg{
       position:fixed;
       inset:0;
@@ -70,20 +71,29 @@
       border-bottom:1px solid rgba(255,255,255,.06);
     }
     .topbar .inner{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 0; gap:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 0;
+      gap:12px;
     }
     .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:900; letter-spacing:.2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:950;
+      letter-spacing:.2px;
     }
     .brand .dot{
       width:10px; height:10px; border-radius:999px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       box-shadow:0 0 0 6px rgba(45,212,191,.10);
     }
+
     .pill{
-      display:inline-flex; align-items:center; gap:8px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
       padding:8px 12px;
       border:1px solid rgba(255,255,255,.12);
       border-radius:999px;
@@ -93,17 +103,19 @@
       white-space:nowrap;
     }
     .ctaSmall{
-      display:inline-flex; align-items:center; justify-content:center;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       padding:10px 14px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.06);
-      font-weight:900;
+      font-weight:950;
       font-size:13px;
     }
     .ctaSmall:hover{background: rgba(255,255,255,.09)}
 
-    /* Cards / Panels */
+    /* Card/Panel */
     .card{
       border:1px solid var(--stroke);
       background: var(--cardBg);
@@ -111,8 +123,16 @@
       box-shadow: var(--shadow);
       overflow:hidden;
     }
+    .panel{
+      border:1px solid var(--stroke);
+      background: var(--panelBg);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 40px rgba(0,0,0,.22);
+      padding:18px;
+    }
 
-    header.hero{ padding:32px 0 16px; }
+    /* HERO */
+    header.hero{padding:30px 0 16px;}
     .heroGrid{
       display:grid;
       grid-template-columns: 420px 1fr;
@@ -134,53 +154,88 @@
     }
     .photo::after{
       content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(to top, rgba(7,10,18,.76), rgba(7,10,18,.12) 55%, rgba(7,10,18,0));
+      position:absolute;
+      inset:0;
+      background: linear-gradient(to top, rgba(7,10,18,.78), rgba(7,10,18,.12) 55%, rgba(7,10,18,0));
       pointer-events:none;
     }
     .photoBadge{
-      position:absolute; left:16px; bottom:16px;
-      display:flex; flex-direction:column; gap:2px;
+      position:absolute;
+      left:16px;
+      bottom:16px;
       padding:12px 14px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(7,10,18,.55);
       backdrop-filter: blur(10px);
       max-width:92%;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
     }
-    .photoBadge .name{font-weight:950; letter-spacing:.2px}
+    .photoBadge .name{font-weight:1000; letter-spacing:.2px}
     .photoBadge .meta{color:var(--muted); font-size:13px}
 
-    .heroCopy{ padding:22px; }
-    .kickerRow{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px; }
+    .heroCopy{padding:22px;}
+
+    .kickerRow{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+      margin-bottom:12px;
+    }
     .kicker{
       display:inline-flex; gap:8px; align-items:center;
       padding:8px 12px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
+      color: var(--muted);
       font-size:13px;
-      color:var(--muted);
     }
     .kicker b{color:var(--text)}
 
+    .eyebrow{
+      margin: 10px 0 8px;
+      color: rgba(234,240,255,.88);
+      font-weight:900;
+      letter-spacing:.15px;
+      font-size: 14px;
+    }
+
     h1{
-      margin:10px 0 10px;
-      font-size: clamp(26px, 3.2vw, 44px);
-      line-height:1.1;
-      letter-spacing:-.6px;
+      margin:8px 0 10px;
+      font-size: clamp(28px, 3.5vw, 48px);
+      line-height:1.05;
+      letter-spacing:-.8px;
     }
     .sub{
-      margin:0 0 16px;
+      margin:0 0 14px;
       color: var(--muted);
       font-size: clamp(15px, 1.2vw, 18px);
     }
 
+    .painList{
+      margin:14px 0 16px;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .painList li{
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: rgba(234,240,255,.86);
+      font-size:14px;
+    }
+    .painList strong{color:var(--text)}
+
     .bullets{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap:10px 12px;
-      margin:18px 0;
+      margin: 16px 0 18px;
       padding:0;
       list-style:none;
     }
@@ -194,13 +249,21 @@
     }
     .bullets li strong{color:var(--text)}
 
-    .ctaRow{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:10px; }
+    .ctaRow{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top: 10px;
+    }
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       padding:14px 18px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      font-weight:950;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      font-weight:1000;
       letter-spacing:.2px;
       transition: transform .08s ease, background .15s ease;
       user-select:none;
@@ -209,41 +272,41 @@
       background: linear-gradient(135deg, rgba(45,212,191,.95), rgba(96,165,250,.92));
       color:#041016;
       border-color: rgba(255,255,255,0);
-      min-width:260px;
+      min-width: 280px;
     }
     .btnPrimary:hover{transform: translateY(-1px)}
-    .btnGhost{ background: rgba(255,255,255,.05); }
-    .btnGhost:hover{ background: rgba(255,255,255,.08); }
+    .btnGhost{
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+    }
+    .btnGhost:hover{background: rgba(255,255,255,.08)}
 
     .micro{
       margin-top:10px;
       color: var(--muted2);
-      font-size:13px;
-      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+      font-size: 13px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
     }
     .micro span{
-      display:inline-flex; align-items:center; gap:8px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
       padding:7px 10px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
     }
 
-    section{ padding:16px 0; }
+    /* Seções */
+    section{padding:16px 0;}
     .grid2{
       display:grid;
       grid-template-columns: 1.05fr .95fr;
       gap:18px;
     }
-    .panel{
-      padding:18px;
-      border-radius: var(--radius);
-      border:1px solid var(--stroke);
-      background: var(--panelBg);
-      box-shadow: 0 10px 40px rgba(0,0,0,.22);
-    }
-    .panel h2{ margin:0 0 8px; font-size:22px; letter-spacing:-.3px; }
-    .panel p{ margin:0; color:var(--muted); }
 
     .checklist{
       margin:12px 0 0;
@@ -254,7 +317,9 @@
       gap:10px;
     }
     .checklist li{
-      display:flex; gap:10px; align-items:flex-start;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
       color: var(--muted);
       padding:12px;
       border-radius:14px;
@@ -281,6 +346,7 @@
       margin-top:12px;
     }
 
+    /* Oferta */
     .offer{
       display:grid;
       grid-template-columns: 1fr 420px;
@@ -295,13 +361,13 @@
       box-shadow: var(--shadow);
     }
     .price{
-      font-size:44px;
+      font-size:46px;
       font-weight:1000;
-      letter-spacing:-.8px;
+      letter-spacing:-.9px;
       margin:8px 0 2px;
     }
-    .priceSmall{ color:var(--muted); margin:0 0 10px; font-size:14px; }
-    .divider{ height:1px; background: rgba(255,255,255,.10); margin:14px 0; }
+    .priceSmall{color:var(--muted); margin:0 0 10px; font-size:14px;}
+    .divider{height:1px; background: rgba(255,255,255,.10); margin:14px 0;}
 
     .miniGrid{
       display:grid;
@@ -314,26 +380,64 @@
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
     }
-    .mini .label{ color: var(--muted2); font-size:12px; }
-    .mini .value{ font-weight:950; margin-top:2px; }
+    .mini .label{color:var(--muted2); font-size:12px;}
+    .mini .value{font-weight:1000; margin-top:2px;}
 
-    .faq{ display:flex; flex-direction:column; gap:10px; }
+    /* FAQ */
+    .faq{display:flex; flex-direction:column; gap:10px;}
     details{
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
       border-radius:14px;
       padding:12px;
     }
-    summary{ cursor:pointer; font-weight:950; list-style:none; }
+    summary{cursor:pointer; font-weight:1000; list-style:none;}
     summary::-webkit-details-marker{display:none}
-    details p{ margin:10px 0 0; color: var(--muted); }
+    details p{margin:10px 0 0; color: var(--muted);}
 
     footer{
       padding:24px 0 36px;
       color: var(--muted2);
-      font-size:12.5px;
+      font-size: 12.5px;
     }
-    footer a{ color: var(--muted); text-decoration:underline; }
+    footer a{color:var(--muted); text-decoration:underline;}
+
+    /* Sticky CTA Mobile (conversão) */
+    .stickyBuy{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      z-index:60;
+      background: rgba(7,10,18,.88);
+      border-top:1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+      padding:10px 12px;
+      display:none;
+    }
+    .stickyBuy .inner{
+      max-width: var(--max);
+      margin:0 auto;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 6px;
+    }
+    .stickyBuy .txt{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width: 0;
+    }
+    .stickyBuy .txt .t1{font-weight:1000; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .stickyBuy .txt .t2{color:var(--muted); font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .stickyBuy a{
+      flex:0 0 auto;
+      padding:12px 14px;
+      border-radius: 14px;
+      font-weight:1000;
+      background: linear-gradient(135deg, rgba(45,212,191,.95), rgba(96,165,250,.92));
+      color:#041016;
+    }
 
     @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr;}
@@ -342,6 +446,8 @@
       .grid2{grid-template-columns:1fr;}
       .offer{grid-template-columns:1fr;}
       .btnPrimary{min-width:100%;}
+      .stickyBuy{display:block;}
+      body{padding-bottom:76px;} /* espaço para sticky */
     }
   </style>
 </head>
@@ -381,30 +487,42 @@
             <span class="kicker">5 anos em CAPS · foco em desregulação emocional</span>
           </div>
 
+          <div class="eyebrow">Se você vive pisando em ovos dentro da própria casa, isso aqui é pra você.</div>
+
           <h1>
-            Como lidar com um filho/adolescente com explosões, ameaças e crises emocionais intensas
-            <span style="color:rgba(234,240,255,.84)">sem escalar o conflito</span> — mesmo quando você já tentou conversar, impor limites e buscar ajuda.
+            Você não precisa adivinhar o que fazer na crise.
+            Você precisa de um <span style="color:rgba(234,240,255,.86)">protocolo</span>.
           </h1>
 
           <p class="sub">
-            Um <b>protocolo clínico estruturado</b> (objetivo e aplicável) para você saber o que fazer <b>na hora da crise</b>,
-            o que evitar e como sustentar limites com firmeza — sem virar refém do ambiente.
+            Quando qualquer conversa vira explosão, quando surgem ameaças, chantagens ou crises intensas,
+            agir no impulso costuma piorar. Aqui você aprende <b>como lidar com ele</b> sem escalar o conflito — com clareza, limites e segurança.
+          </p>
+
+          <ul class="painList">
+            <li><strong>“Qualquer ruído</strong> me coloca em alerta.”</li>
+            <li><strong>“Eu tenho medo</strong> do que pode acontecer.”</li>
+            <li><strong>“Se eu imponho limite</strong>, vira guerra. Se eu cedo, piora.”</li>
+            <li><strong>“Eu estou exausta”</strong> e me sinto refém dentro da minha própria casa.</li>
+          </ul>
+
+          <p class="sub" style="margin-top:0;">
+            O <b>Protocolo 7 Dias</b> é um treinamento prático (aulas gravadas) para familiares,
+            baseado em prática clínica e literatura médica — para você saber o que fazer <b>na hora H</b> e no <b>depois</b>.
           </p>
 
           <ul class="bullets">
-            <li><strong>O que fazer</strong> quando qualquer conversa vira explosão.</li>
-            <li><strong>Como agir</strong> quando surgem ameaças/chantagens e você trava.</li>
-            <li><strong>Como impor limites</strong> sem transformar tudo em guerra.</li>
-            <li><strong>Como reduzir</strong> a tensão da casa nos próximos 7 dias.</li>
+            <li><strong>O que dizer</strong> quando vem acusação, chantagem ou ameaça.</li>
+            <li><strong>O que NÃO fazer</strong> (erros comuns que aumentam a crise).</li>
+            <li><strong>Como impor limites</strong> sem transformar tudo em disputa.</li>
+            <li><strong>Plano de 7 dias</strong> para reduzir tensão e retomar rotina.</li>
           </ul>
 
           <div class="ctaRow">
             <a class="btn btnPrimary" href="https://pay.hotmart.com/S104212285E?bid=1771854323602" target="_blank" rel="noopener noreferrer">
               Quero meu acesso agora
             </a>
-            <a class="btn btnGhost" href="#conteudo">
-              Ver o que tem dentro
-            </a>
+            <a class="btn btnGhost" href="#conteudo">Ver o que tem dentro</a>
           </div>
 
           <div class="micro">
@@ -420,11 +538,11 @@
   <section>
     <div class="wrap grid2">
       <div class="panel">
-        <h2>Por que “boa intenção” às vezes piora a crise?</h2>
+        <h2>Por que “boa intenção” pode piorar a crise?</h2>
         <p>
-          Em casa, é comum alternar entre <b>confrontar</b>, <b>ceder</b>, <b>ameaçar</b> ou <b>ignorar</b>.
-          O problema é que, em quadros de desregulação emocional, essas respostas podem aumentar a intensidade do conflito.
-          Aqui você aprende um caminho mais <b>estruturado</b>: reconhecer o ponto de virada, agir com segurança e sustentar limites com calma.
+          Na hora do desespero, a família costuma alternar entre <b>confrontar</b>, <b>ceder</b>, <b>ameaçar</b> ou <b>ignorar</b>.
+          Em quadros de desregulação emocional, isso pode aumentar a intensidade do conflito.
+          O objetivo aqui é te dar uma resposta mais <b>estruturada</b>: reconhecer o ponto de virada, agir com segurança e sustentar limites.
         </p>
 
         <div class="warn">
@@ -436,8 +554,8 @@
       <div class="panel">
         <h2>Para quem é</h2>
         <p>
-          Para mães e responsáveis que convivem com crises frequentes em casa (especialmente em adolescentes e adultos jovens)
-          e querem uma forma prática de agir com clareza, sem gritar, sem ceder por exaustão e sem culpa.
+          Para mães e responsáveis que convivem com crises frequentes em casa (especialmente com adolescentes e adultos jovens)
+          e querem saber <b>como lidar com ele</b> sem gritar, sem se perder e sem ceder por exaustão.
         </p>
 
         <ul class="checklist">
@@ -451,13 +569,13 @@
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
             </span>
-            <div><b>Quando você vive em alerta</b><br><span style="color:var(--muted)">medo constante de ameaças, impulsos e “algo acontecer”.</span></div>
+            <div><b>Quando você vive em alerta</b><br><span style="color:var(--muted)">medo de ameaças, impulsos e “algo acontecer”.</span></div>
           </li>
           <li>
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
             </span>
-            <div><b>Quando o limite vira guerra</b><br><span style="color:var(--muted)">e você quer firmeza sem aumentar a explosão.</span></div>
+            <div><b>Quando o limite vira guerra</b><br><span style="color:var(--muted)">e você precisa de firmeza sem escalada.</span></div>
           </li>
         </ul>
       </div>
@@ -481,7 +599,7 @@
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
             </span>
-            <div><b>Postura e presença</b><br><span style="color:var(--muted)">como sustentar limite com calma (sem virar disputa de poder).</span></div>
+            <div><b>O que dizer (scripts)</b><br><span style="color:var(--muted)">frases prontas para acusação, chantagem, ameaça e sumiço.</span></div>
           </li>
           <li>
             <span class="icon" aria-hidden="true">
@@ -493,7 +611,7 @@
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
             </span>
-            <div><b>Frases prontas</b><br><span style="color:var(--muted)">scripts para momentos típicos (acusação, chantagem, ameaça, sumiço).</span></div>
+            <div><b>Limites sem guerra</b><br><span style="color:var(--muted)">como sustentar firmeza sem disputa de poder.</span></div>
           </li>
           <li>
             <span class="icon" aria-hidden="true">
@@ -505,7 +623,7 @@
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
             </span>
-            <div><b>Estratégia de 7 dias</b><br><span style="color:var(--muted)">organização prática para reduzir desgaste e recuperar rotina.</span></div>
+            <div><b>Plano de 7 dias</b><br><span style="color:var(--muted)">organização prática para reduzir desgaste e recuperar rotina.</span></div>
           </li>
         </ul>
       </div>
@@ -534,12 +652,12 @@
 
         <div class="divider"></div>
 
-        <p><b>Brinde:</b> <span style="color:var(--muted)">“Quando escolher não é possível” — material complementar para fortalecer clareza, limites e decisão em situações emocionalmente difíceis.</span></p>
+        <p><b>Brinde:</b> <span style="color:var(--muted)">“Quando escolher não é possível” — material para fortalecer clareza, limites e decisão em situações emocionalmente difíceis.</span></p>
 
         <div class="divider"></div>
 
         <p class="sub" style="margin:0;">
-          Você também terá um espaço de perguntas dentro da plataforma (Hotmart), para organizar dúvidas frequentes.
+          Você também terá um espaço de perguntas dentro da plataforma (Hotmart) para organizar dúvidas recorrentes.
         </p>
       </div>
     </div>
@@ -548,32 +666,16 @@
   <section id="inscricao">
     <div class="wrap offer">
       <div class="panel">
-        <h2>O que muda quando você tem um protocolo</h2>
+        <h2>Antes do preço: a âncora</h2>
         <p>
-          Em vez de agir no impulso (e depois se culpar), você passa a ter um <b>passo a passo</b> para:
-          estabilizar o momento crítico, proteger a comunicação, sustentar limites e reduzir o desgaste da casa.
+          Uma consulta particular pode custar muito mais do que isso.
+          Mas o que mais pesa não é dinheiro: é o custo emocional de viver em alerta, com medo e sem saber como agir.
+          O objetivo aqui é te dar <b>clareza e estrutura</b> para reduzir escaladas e recuperar rotina.
         </p>
 
-        <ul class="checklist">
-          <li>
-            <span class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-            </span>
-            <div><b>Mais clareza na hora H</b><br><span style="color:var(--muted)">você sabe o que fazer e o que evitar.</span></div>
-          </li>
-          <li>
-            <span class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-            </span>
-            <div><b>Menos escalada</b><br><span style="color:var(--muted)">reduz atrito sem ceder por exaustão.</span></div>
-          </li>
-          <li>
-            <span class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-            </span>
-            <div><b>Limites com firmeza</b><br><span style="color:var(--muted)">sem transformar tudo em disputa de poder.</span></div>
-          </li>
-        </ul>
+        <div class="warn" style="margin-top:12px;">
+          <b>Garantia:</b> você tem 7 dias para acessar e decidir com tranquilidade. Se não fizer sentido, você pode solicitar reembolso conforme a plataforma.
+        </div>
       </div>
 
       <aside class="offerBox" aria-label="Inscrição">
@@ -598,7 +700,7 @@
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
             </span>
-            <div><b>Aplicação prática</b><br><span style="color:var(--muted)">para crises, limites e rotina.</span></div>
+            <div><b>Aplicação prática</b><br><span style="color:var(--muted)">crises, limites, comunicação e rotina.</span></div>
           </li>
           <li>
             <span class="icon" aria-hidden="true">
@@ -635,7 +737,7 @@
         <p>
           Médico desde 2016, com pós-graduação em Psiquiatria (2021), atuação em CAPS há cerca de 5 anos,
           com acompanhamento de casos graves de desregulação emocional em adolescentes e adultos jovens e suporte a familiares.
-          O conteúdo é baseado em prática clínica e literatura médica, adaptado para aplicação no ambiente familiar.
+          Conteúdo baseado em prática clínica e literatura médica, adaptado para aplicação no ambiente familiar.
         </p>
       </div>
 
@@ -650,11 +752,6 @@
           <details>
             <summary>Tem garantia?</summary>
             <p>Sim. Você tem 7 dias de garantia conforme regras da plataforma (Hotmart).</p>
-          </details>
-
-          <details>
-            <summary>Para quais situações serve?</summary>
-            <p>Para crises emocionais intensas no ambiente familiar (ex.: escaladas de conflito, ameaças, chantagens, rupturas de comunicação). O objetivo é oferecer um protocolo de ação e limites com clareza.</p>
           </details>
 
           <details>
@@ -687,6 +784,16 @@
       </p>
     </div>
   </footer>
+
+  <div class="stickyBuy" aria-label="Comprar agora">
+    <div class="inner">
+      <div class="txt">
+        <div class="t1">Protocolo 7 Dias</div>
+        <div class="t2">Acesso imediato · Garantia 7 dias</div>
+      </div>
+      <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" target="_blank" rel="noopener noreferrer">Comprar</a>
+    </div>
+  </div>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
