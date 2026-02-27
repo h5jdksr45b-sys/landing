@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Transtorno de Personalidade Borderline - Apostila</title>
+<style>
+@page {
+  size: A4;
+  margin: 2.2cm;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 11pt;
+  line-height: 1.45;
+  color: #111111;
+}
+.page {
+  position: relative;
+  page-break-after: always;
+}
+h1, h2, h3, h4 {
+  font-weight: 600;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+h1 {
+  font-size: 20pt;
+  text-align: center;
+}
+h2 {
+  font-size: 15pt;
+  margin-top: 0.8em;
+}
+h3 {
+  font-size: 13pt;
+  margin-top: 0.7em;
+}
+h4 {
+  font-size: 11.5pt;
+  margin-top: 0.6em;
+}
+p {
+  margin: 0 0 0.35em 0;
+  text-align: justify;
+}
+ul, ol {
+  margin-top: 0.1em;
+  margin-bottom: 0.4em;
+  padding-left: 1.1em;
+}
+li {
+  margin-bottom: 0.15em;
+}
+.box {
+  border: 0.5pt solid #555555;
+  padding: 0.5em 0.7em;
+  margin: 0.5em 0;
+  font-size: 10.5pt;
+  background-color: #f7f7f7;
+}
+.box h4 {
+  margin-top: 0;
+}
+.footer {
+  position: fixed;
+  bottom: 1.1cm;
+  left: 0;
+  right: 0;
+  font-size: 9pt;
+  color: #555555;
+  text-align: center;
+}
+.page-number {
+  font-style: italic;
+}
+.page-content {
+  position: relative;
+}
+.pagebreak {
+  page-break-before: always;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.4em 0;
+  font-size: 10.5pt;
+}
+th, td {
+  border: 0.5pt solid #444444;
+  padding: 0.25em 0.35em;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  background-color: #eeeeee;
+}
+.small {
+  font-size: 9.5pt;
+}
+</style>
+</head>
+<body>
+
+<!-- P1 Capa -->
+<div class="page" id="p1">
+  <div class="page-content">
+    <h1>Transtorno de Personalidade Borderline</h1>
+    <h2 style="text-align:center; font-weight:400; margin-top:1.5em;">Regulação Emocional, Vínculo, Identidade e Impulsividade</h2>
+    <p style="text-align:center; margin-top:4em;">Apostila teórico-clínica para alunos de graduação e pós-graduação em saúde mental</p>
+    <p style="text-align:center; margin-top:3em;">Autor: Dr. Fabio Schmidt</p>
+    <p style="text-align:center;">Psquiatra • CRM-SP 183549</p>
+    <p style="text-align:center; margin-top:4em;" class="small">Uso educacional. Não substitui supervisão clínica especializada nem diretrizes oficiais.</p>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 1</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P2 Apresentação, objetivos, como usar -->
+<div class="page" id="p2">
+  <div class="page-content">
+    <h2>Apresentação</h2>
+    <p>O transtorno de personalidade borderline (TPB) permanece como um dos diagnósticos mais desafiadores na prática clínica, tanto pela complexidade do quadro quanto pela carga histórica de estigma associada ao termo. Esta apostila foi concebida para oferecer uma leitura densa, operacional e atualizada, integrando fenomenologia, neurociência aplicada, estatística e manejo clínico, com foco em uma compreensão dimensional do TPB, sem reduzi-lo a rótulos simplistas ou moralizantes.[web:1][web:4][web:10][web:13]</p>
+
+    <h3>Ponto de partida: qual é a sua imagem de “borderline”?</h3>
+    <p>Antes de entrar em definições formais, é útil notar que alunos e profissionais frequentemente carregam imagens prévias sobre “borderline”: paciente difícil, manipulação, instabilidade, perigo, entre outras. Ao iniciar o estudo, convém perguntar a si mesmo: “Qual palavra me vem à mente quando escuto borderline?”. Não há resposta certa ou errada; o objetivo é tornar explícitos os filtros pelos quais você lê o conceito, para poder refiná-los criticamente ao longo da leitura.</p>
+
+    <h3>Objetivos de aprendizagem</h3>
+    <ul>
+      <li>Compreender o TPB como um padrão de desregulação emocional, relacional e identitária, articulado a traços de impulsividade, e não como “frieza calculada” ou tendência inata à criminalidade.[web:1][web:4][web:13]</li>
+      <li>Diferenciar de forma prática TPB de transtorno bipolar e transtorno de personalidade antissocial, com ênfase em padrão temporal, motivação das condutas e tipo de agressão (reativa vs proativa).[web:1][web:7][web:13]</li>
+      <li>Reconhecer núcleos clínicos de vínculo/apejo, identidade/vazio, regulação emocional e impulsividade, conectando-os a modelos neurobiológicos contemporâneos.[web:1][web:10][web:13]</li>
+      <li>Interpretar criticamente estatísticas de prevalência em população geral e contexto prisional, identificando vieses de seleção e confundidores que inflacionam associações indevidas entre TPB e criminalidade.[web:6][web:9][web:12][web:15]</li>
+      <li>Conhecer, em nível introdutório, os principais modelos psicoterápicos baseados em evidência para TPB e o papel limitado da farmacoterapia como intervenção em sintomas-alvo.[web:1][web:14]</li>
+      <li>Discutir manejo clínico, risco, comunicação com equipe e familiares, bem como estratégias de linguagem para reduzir estigma em contextos assistenciais e de ensino.[web:1][web:4][web:15]</li>
+    </ul>
+
+    <h3>Como usar esta apostila</h3>
+    <p>O material está organizado em módulos temáticos que podem ser lidos em sequência ou consultados conforme a necessidade. Recomenda-se, entretanto, uma leitura linear na primeira vez, pois os capítulos iniciais introduzem conceitos dimensionais de personalidade e noções de neurociência que serão retomados mais adiante. Use os boxes para revisar pontos-chave, armadilhas diagnósticas e algoritmos de raciocínio clínico.</p>
+    <p>Ao longo do texto, procure manter duas perguntas em mente: “O que está em jogo para este paciente, naquele momento?” e “Qual função este comportamento cumpre naquela relação específica?”. Esta atitude ajuda a deslocar o foco de “comportamento problema” para processos de regulação e de vínculo, sem perder a clareza quanto a riscos e responsabilidades.</p>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 2</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P3 Sumário -->
+<div class="page" id="p3">
+  <div class="page-content">
+    <h2>Sumário</h2>
+    <ol>
+      <li>Capa</li>
+      <li>Apresentação, objetivos de aprendizagem e uso da apostila</li>
+      <li>Sumário</li>
+      <li>Conceituação moderna do TPB: eixo central</li>
+      <li>Fenomenologia clínica: como aparece na prática</li>
+      <li>Critérios diagnósticos (DSM-5-TR) e comentários clínicos</li>
+      <li>Diagnóstico diferencial I: TPB vs transtorno bipolar</li>
+      <li>Diagnóstico diferencial II: TPB vs transtorno de personalidade antissocial</li>
+      <li>Núcleo vínculo/apejo</li>
+      <li>Núcleo identidade/vazio</li>
+      <li>Núcleo regulação emocional</li>
+      <li>Núcleo impulsividade</li>
+      <li>Neurobiologia I: amígdala e saliência emocional</li>
+      <li>Neurobiologia II: córtex pré-frontal, controle inibitório e “falha do freio”</li>
+      <li>Agressão reativa vs proativa</li>
+      <li>Estatísticas, vieses e interpretação</li>
+      <li>Comorbidades e sobreposições</li>
+      <li>Tratamento baseado em evidência</li>
+      <li>Manejo clínico e risco</li>
+      <li>Estigma, comunicação e perguntas para discussão</li>
+    </ol>
+
+    <h3>Visão dimensional de personalidade: ponto de partida</h3>
+    <p>Os modelos dimensionais de personalidade consideram traços distribuídos em contínuos na população, como afetividade negativa, desinibição, antagonismo e psicoticismo, em vez de categorias rígidas. O TPB pode ser entendido como a convergência de níveis elevados de afetividade negativa (instabilidade emocional, ansiedade, insegurança de separação), desinibição (impulsividade, comportamentos de risco) e traços interpessoais específicos, em particular sensibilidade à rejeição e padrões de apego inseguros.[web:1][web:13]</p>
+    <p>Em linguagem clínica, isso significa que a pergunta central deixa de ser “o paciente tem ou não TPB?” e passa a incluir “quais dimensões de funcionamento estão alteradas, em qual grau e em quais contextos?”. Essa perspectiva é essencial para reduzir dicotomias (“é” ou “não é borderline”) e para organizar planos terapêuticos que acompanhem mudanças graduais, em vez de esperar transformações súbitas no padrão de funcionamento.[web:1][web:13]</p>
+
+    <div class="box">
+      <h4>Box 1 – Checklist dimensional inicial</h4>
+      <p>Ao avaliar um paciente com suspeita de TPB, considere, em escala de 0 a 4, a presença de:</p>
+      <ul>
+        <li>Instabilidade afetiva (oscilação rápida de humor em resposta a eventos interpessoais).</li>
+        <li>Medo intenso de abandono e hipervigilância em relação a sinais de afastamento.</li>
+        <li>Sensação crônica de vazio e instabilidade de autoimagem.</li>
+        <li>Impulsividade em domínios potencialmente autolesivos (substâncias, sexo, direção, gastos).[web:1][web:8][web:11]</li>
+        <li>Histórico de autolesão não suicida e/ou comportamento suicida recorrente.</li>
+      </ul>
+      <p>Esse checklist não substitui critérios diagnósticos formais, mas ajuda a organizar a impressão clínica dimensional e a monitorar mudanças ao longo do tempo.[web:1][web:8][web:11]</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 3</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P4 Conceituação moderna -->
+<div class="page" id="p4">
+  <div class="page-content">
+    <h2>Conceituação moderna do TPB: eixo central</h2>
+    <p>O TPB é descrito nos sistemas classificatórios como um padrão persistente de instabilidade nas relações interpessoais, na autoimagem e nos afetos, acompanhado de impulsividade marcada, que começa no início da vida adulta e se manifesta em diversos contextos.[web:1][web:4][web:8][web:11] Modelos contemporâneos tendem a organizar esse quadro em torno de quatro eixos centrais: regulação emocional, vínculo/apejo, identidade/vazio e impulsividade.</p>
+
+    <h3>Eixo regulação emocional</h3>
+    <p>A regulação emocional refere-se à capacidade de detectar, modular e recuperar-se de estados afetivos intensos, preservando o funcionamento adaptativo. Em indivíduos com TPB, observa-se maior sensibilidade a estímulos emocionais, respostas mais intensas e prolongadas e maior dificuldade de retorno ao estado basal após estresse, o que leva a ciclos de escalada, ruminação e comportamentos impulsivos de alívio.[web:1][web:10][web:13]</p>
+
+    <h3>Eixo vínculo/apejo</h3>
+    <p>No eixo do vínculo, destaca-se a combinação de medo intenso de abandono, hipervigilância a sinais de rejeição e padrões de aproximação-afastamento marcados por protestos de apego. Pequenos atrasos, silêncios ou mudanças no tom de voz podem ser interpretados como sinais de desinteresse ou rejeição, disparando reações emocionais e comportamentais desproporcionais ao evento objetivo.[web:1][web:4]</p>
+
+    <h3>Eixo identidade/vazio</h3>
+    <p>A instabilidade de identidade e o sentimento crônico de vazio formam outro núcleo. As pessoas podem relatar sensação de não saber quem são, mudanças rápidas em valores, objetivos e projetos, e uma experiência de “viver por meio do outro” ou de personagens que variam conforme o contexto. Esse vazio frequentemente se associa a vergonha intensa e autoimagem negativa, que tendem a piorar sob estresse interpessoal.[web:1][web:8][web:11]</p>
+
+    <h3>Eixo impulsividade</h3>
+    <p>A impulsividade, no TPB, não é mera busca de prazer, mas costuma estar fortemente ligada ao alívio de estados internos intoleráveis. Comportamentos como autolesão, abuso de substâncias, sexo de risco ou gastos compulsivos surgem frequentemente após eventos de rejeição percebida, vergonha ou raiva, tendo função imediata de redução de tensão, ainda que à custa de consequências negativas em médio prazo.[web:1][web:14]</p>
+
+    <div class="box">
+      <h4>Box 2 – Metáfora do “passo atrás”</h4>
+      <p>Uma metáfora clínica útil é imaginar uma câmera que, em vez de focar apenas no humor momentâneo (“estou péssimo”, “estou com raiva”), recua alguns metros e passa a enquadrar também o contexto: o que antecedeu essa mudança de humor? Houve mensagem não respondida, crítica, sensação de injustiça ou vergonha? Ao “dar um passo atrás” e incluir antecedentes, respostas e consequências, o clínico e o paciente deixam de olhar apenas o pico de emoção e passam a enxergar o padrão de disparo do sistema de ameaça e as estratégias de alívio usadas, o que é fundamental para qualquer intervenção que vise regulação emocional e mudança de comportamento.[web:1][web:13][web:14]</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 4</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P5 Fenomenologia clínica -->
+<div class="page" id="p5">
+  <div class="page-content">
+    <h2>Fenomenologia clínica: como aparece na prática</h2>
+    <p>Na prática, o TPB tende a chegar ao consultório ou serviço de urgência muito mais pela forma como a pessoa reage sob estresse do que pela queixa de “transtorno de personalidade”. Crises repetidas após conflitos interpessoais, tentativas de suicídio, automutilações, uso episódico de substâncias, internações breves e rupturas abruptas de vínculos terapêuticos são formas frequentes de apresentação.[web:1][web:9][web:14]</p>
+
+    <h3>Pontos de vista do paciente com TPB</h3>
+    <p>Do ponto de vista do paciente, muitas condutas frequentemente rotuladas como “manipuladoras” são vividas como tentativas desesperadas de manter um vínculo, reduzir dor ou escapar de um estado interno que parece insuportável. Não é incomum ouvir relatos como: “Quando ele não respondeu, senti como se tivesse sido apagada do mundo” ou “Se eu não fizer nada, essa angústia me destrói”. Nessa perspectiva, o eixo nuclear não é frieza calculada, mas uma combinação de hipersensibilidade a sinais interpessoais e ferramentas precárias de regulação emocional.[web:1][web:4][web:13]</p>
+
+    <h3>Reações ao estresse e clusters de personalidade</h3>
+    <p>Em situações de estresse, pessoas com traços de personalidade vulneráveis podem manifestar respostas que lembram sintomas de diferentes clusters de transtornos de personalidade. No cluster A, predominam experiências de desconfiança e distanciamento; no cluster B, respostas mais dramáticas, emocionais ou impulsivas; e, no cluster C, comportamentos de evitação e dependência. O TPB situa-se formalmente no cluster B, mas frequentemente apresenta sobreposição de elementos ansiosos, evitativos e obsessivos, o que reforça a necessidade de uma leitura dimensional.[web:1][web:13]</p>
+
+    <h3>Exemplo clínico breve (fenomenologia)</h3>
+    <p>Imagine uma paciente que, após uma discussão breve com o parceiro por um atraso de 20 minutos, passa da irritação à desesperança em poucas horas, começa a enviar dezenas de mensagens, alternando acusações e pedidos de desculpa, e, ao perceber que o parceiro não responde, corta o próprio braço. No dia seguinte, sente vergonha intensa, minimiza o episódio e afirma que “foi exagero”, sem conseguir articular claramente o encadeamento entre o atraso, o medo de abandono, o pico de raiva, a sensação de vazio e o gesto de autolesão. Este tipo de sequência ilustra a combinação de reatividade afetiva, hipersensibilidade ao vínculo e impulsividade sob estresse, típica do TPB.</p>
+
+    <div class="box">
+      <h4>Box 3 – Armadilhas fenomenológicas</h4>
+      <ul>
+        <li>Confundir intensidade emocional com “teatralidade” ou falsidade, desconsiderando o sofrimento real do paciente.</li>
+        <li>Rotular como “manipulação” qualquer comportamento que envolva terceiros, sem investigar a função de regulação emocional ou protesto de apego.</li>
+        <li>Supor automaticamente que histórico de comportamento agressivo implica frieza ou cálculo, quando muitas vezes se trata de agressão reativa impulsiva.[web:1][web:7][web:13]</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 5</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P6 Critérios DSM-5-TR -->
+<div class="page" id="p6">
+  <div class="page-content">
+    <h2>Critérios diagnósticos (DSM-5-TR) e comentários clínicos</h2>
+    <p>O DSM-5-TR descreve o TPB como um padrão de instabilidade nas relações interpessoais, autoimagem e afetos, com impulsividade acentuada, que se inicia no começo da vida adulta e está presente em vários contextos. O diagnóstico exige a presença de pelo menos cinco de nove critérios.[web:1][web:5][web:8][web:11]</p>
+
+    <h3>Resumo dos nove critérios</h3>
+    <ol>
+      <li>Esforços frenéticos para evitar abandono real ou imaginado.[web:5][web:8][web:11]</li>
+      <li>Padrão de relacionamentos interpessoais instáveis e intensos, alternando entre idealização e desvalorização.[web:5][web:8][web:11]</li>
+      <li>Perturbação de identidade: autoimagem ou senso de self instável e persistentemente alterado.[web:5][web:8][web:11]</li>
+      <li>Impulsividade em pelo menos duas áreas potencialmente autolesivas (gastos, sexo, abuso de substâncias, direção imprudente, compulsão alimentar).[web:5][web:8][web:11]</li>
+      <li>Recorrência de comportamentos, gestos ou ameaças suicidas, ou automutilação.[web:5][web:8][web:11]</li>
+      <li>Instabilidade afetiva devido a marcada reatividade de humor.[web:5][web:8][web:11]</li>
+      <li>Sentimentos crônicos de vazio.[web:5][web:8][web:11]</li>
+      <li>Raiva intensa e inadequada ou dificuldade em controlar a raiva.[web:5][web:8][web:11]</li>
+      <li>Ideação paranoide transitória relacionada ao estresse ou sintomas dissociativos graves.[web:5][web:8][web:11]</li>
+    </ol>
+
+    <h3>Comentários clínicos por critério</h3>
+    <p><strong>Abandono</strong>: o critério não se limita a abandonos reais; pequenas variações de disponibilidade do outro podem ser interpretadas como ameaça de desaparecimento do vínculo. O clínico deve diferenciar medo intenso de abandono de estratégias ativas de controle do outro por ganho instrumental, o que é mais típico de traços antissociais.[web:1][web:5][web:8]</p>
+    <p><strong>Relacionamentos instáveis</strong>: a alternância idealização–desvalorização costuma ocorrer em resposta a microeventos de desapontamento, crítica ou frustração, e é vivida pelo paciente como oscilações autênticas de percepção, e não como jogo calculado. A sequência “é a melhor pessoa do mundo” – “sempre me destruiu” pode ocorrer em poucas horas.[web:1][web:4][web:8]</p>
+    <p><strong>Identidade</strong>: a instabilidade de self pode se manifestar como mudanças frequentes de curso profissional, projetos de vida ou valores centrais, com sensação de “não saber quem sou de verdade”. Em momentos de estresse, o paciente pode adotar papéis específicos (por exemplo, o paciente “sempre abandonado” ou “sempre culpado”) que organizam sua experiência, mas reforçam padrões disfuncionais.[web:1][web:8][web:11]</p>
+    <p><strong>Impulsividade</strong>: é importante identificar em quais contextos os atos impulsivos ocorrem e qual função emocional cumprem. Não se trata de qualquer comportamento de risco pontual, mas de um padrão repetitivo, ligado à dificuldade em tolerar estados internos como vergonha, raiva ou vazio.[web:1][web:13][web:14]</p>
+    <p><strong>Autolesão e comportamento suicida</strong>: a automutilação não suicida é frequente e costuma ter função de alívio imediato da tensão ou de tornar a dor “visível” para si e para o outro. Já as tentativas de suicídio podem variar desde gestos de baixa letalidade, vinculados a protestos de apego, até atos de alto risco, em que há genuíno desejo de morte.[web:1][web:9][web:14]</p>
+    <p><strong>Instabilidade afetiva</strong>: oscilações de humor no TPB tendem a ser rápidas (horas) e fortemente reativas a eventos interpessoais, em contraste com episódios depressivos ou maníacos clássicos, que têm duração mínima de dias ou semanas e podem ocorrer sem gatilhos identificáveis.[web:1][web:14]</p>
+    <p><strong>Vazio crônico</strong>: o sentimento de vazio pode ser descrito como “desligamento por dentro”, “não sentir nada” ou “não ter nada que me preencha”, e frequentemente é confundido com depressão. Diferentemente de tristeza, pode haver certo tédio, anedonia e flutuações rápidas quando há estímulos interpessoais intensos.[web:1][web:8][web:11]</p>
+    <p><strong>Raiva</strong>: a raiva no TPB é tipicamente reativa, súbita, desencadeada por percepções de injustiça, rejeição ou humilhação. Em muitos casos, o paciente relata arrependimento intenso após o episódio, com vergonha e medo de perda do vínculo, o que reforça ciclos de autocensura e escalada emocional.[web:1][web:7][web:13]</p>
+    <p><strong>Paranoia transitória e dissociação</strong>: sob estresse intenso, podem surgir distorções paranoides breves (“tenho certeza que estão todos contra mim”) ou episódios dissociativos (sensação de estar fora do corpo, de que o ambiente não é real). Esses fenômenos tendem a ser flutuantes e fortemente contextuais, o que os diferencia de quadros psicóticos primários.[web:1][web:10]</p>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 6</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P7 Diagnóstico diferencial Bipolar -->
+<div class="page" id="p7">
+  <div class="page-content">
+    <h2>Diagnóstico diferencial I: TPB vs transtorno bipolar</h2>
+    <p>TPB e transtorno bipolar compartilham a presença de instabilidade de humor, o que frequentemente leva a diagnósticos equivocados ou a um uso excessivo de estabilizadores de humor em quadros eminentemente de personalidade. Distinguir reatividade afetiva de episódios afetivos é central para um manejo adequado.[web:1][web:14]</p>
+
+    <h3>Padrão temporal e gatilho</h3>
+    <ul>
+      <li>No transtorno bipolar, episódios depressivos, hipomaníacos ou maníacos possuem duração mínima e curso relativamente contínuo, podendo ocorrer sem gatilhos externos claros.[web:1][web:14]</li>
+      <li>No TPB, as oscilações de humor costumam ser rápidas (horas a poucos dias), fortemente associadas a eventos interpessoais específicos e com retorno parcial ao baseline quando o contexto se reorganiza.[web:1][web:14]</li>
+    </ul>
+
+    <h3>Reatividade vs episódio</h3>
+    <p>Enquanto o episódio bipolar representa uma alteração global e sustentada do humor, energia e atividade, a instabilidade afetiva do TPB está mais ligada à resposta a sinais de ameaça, rejeição ou abandono. A mesma pessoa pode descrever “viradas” abruptas de humor ao receber uma mensagem, interpretar um olhar ou antecipar uma perda, o que contrasta com a tonalidade mais autonômica e biologicamente ritmada dos episódios bipolares clássicos.[web:1][web:14]</p>
+
+    <h3>Marcadores práticos</h3>
+    <table>
+      <tr>
+        <th>Aspecto</th>
+        <th>TPB</th>
+        <th>Transtorno bipolar</th>
+      </tr>
+      <tr>
+        <td>Duração das mudanças de humor</td>
+        <td>Horas a poucos dias, flutuante ao longo do dia.[web:1][web:14]</td>
+        <td>Dias a semanas, episódios mais contínuos.[web:1][web:14]</td>
+      </tr>
+      <tr>
+        <td>Gatilho típico</td>
+        <td>Eventos interpessoais, rejeição percebida, críticas.[web:1][web:4]</td>
+        <td>Pode ocorrer sem gatilho claro; ritmos biológicos e ciclos sazonais também influem.[web:1][web:14]</td>
+      </tr>
+      <tr>
+        <td>Identidade e vazio</td>
+        <td>Instabilidade de self e vazio crônico proeminentes.[web:1][web:8][web:11]</td>
+        <td>Podem ocorrer sintomas depressivos, mas sem padrão identitário cronicamente instável.[web:1][web:14]</td>
+      </tr>
+      <tr>
+        <td>Impulsividade</td>
+        <td>Relacional, reativa, ligada a protestos de apego e alívio de tensão.[web:1][web:13]</td>
+        <td>Pode ocorrer em mania/hipomania, com grandiosidade e redução de crítica.[web:1][web:14]</td>
+      </tr>
+    </table>
+
+    <div class="box">
+      <h4>Box 4 – Armadilhas diagnósticas TPB vs bipolar</h4>
+      <ul>
+        <li>Rotular como “bipolar” qualquer história de oscilação rápida de humor, ignorando a dimensão relacional e identitária.</li>
+        <li>Negligenciar o papel de traços de personalidade em recaídas, mesmo quando há diagnóstico comórbido de transtorno bipolar.</li>
+        <li>Usar estabilizadores de humor como única estratégia, sem abordar padrões interpessoais e de apego.[web:1][web:14]</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 7</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P8 TPB vs antissocial -->
+<div class="page" id="p8">
+  <div class="page-content">
+    <h2>Diagnóstico diferencial II: TPB vs transtorno de personalidade antissocial</h2>
+    <p>A confusão entre TPB e transtorno de personalidade antissocial é particularmente relevante em contextos forenses e de alta complexidade clínica. Ambos podem envolver comportamentos agressivos, infrações legais e impulsividade, mas a motivação, a qualidade da empatia e o tipo de agressão tendem a ser distintos.[web:1][web:7][web:13][web:15]</p>
+
+    <h3>Motivação e empatia</h3>
+    <p>No TPB, comportamentos agressivos e autolesivos são tipicamente reativos e ligados a estados intensos de medo, vergonha ou raiva; frequentemente, a pessoa apresenta culpa, arrependimento e sofrimento após o episódio. Em traços antissociais/psicopáticos, predomina uma agressão mais instrumental, voltada a ganho pessoal ou domínio, com menor responsividade emocional ao sofrimento alheio.[web:7][web:13]</p>
+
+    <h3>Agressão reativa vs proativa</h3>
+    <ul>
+      <li><strong>Agressão reativa</strong>: surge em resposta a ameaça percebida, frustração ou humilhação, é impulsiva, explosiva, acompanhada de ativação autonômica intensa (taquicardia, sudorese) e muitas vezes seguida de arrependimento.[web:7][web:13]</li>
+      <li><strong>Agressão proativa</strong>: é planejada, instrumental, com baixa ativação autonômica, orientada a objetivos (ganhos materiais, status, intimidação) e pouco modulada por empatia.[web:7]</li>
+    </ul>
+    <p>O TPB se associa predominantemente a agressão reativa impulsiva, enquanto a psicopatia e formas graves de personalidade antissocial se relacionam a um padrão de agressão mais proativa/instrumental.[web:7][web:13]</p>
+
+    <h3>Comportamento problema vs intenção</h3>
+    <p>É fundamental distinguir entre “comportamento problema” – ações que geram dano a si ou ao outro – e intenção de causar dano. Pessoas com TPB podem praticar atos que objetivamente violam regras ou ferem terceiros, mas seu foco interno está frequentemente em aliviar dor ou evitar abandono. Isso não elimina responsabilidade, mas orienta intervenções prioritárias para regulação emocional e reorganização do vínculo, em vez de assumir dolo intrínseco.[web:1][web:7][web:13]</p>
+
+    <h3>Criminalidade e violência</h3>
+    <p>Criminalidade não implica automaticamente violência física; há infrações sem vítima direta (fraudes, delitos patrimoniais sem contato, descumprimento de normas) e condutas de baixa letalidade. Em amostras prisionais, observa-se prevalência elevada de TPB, mas isso ocorre em contexto de múltiplos fatores de risco sobrepostos, como uso de substâncias, exclusão social, trauma e traços antissociais, e não autoriza a conclusão de que “TPB = criminoso”.[web:6][web:9][web:12][web:15]</p>
+
+    <div class="box">
+      <h4>Box 5 – Comparativo TPB vs antissocial</h4>
+      <table>
+        <tr>
+          <th>Dimensão</th>
+          <th>TPB</th>
+          <th>Transtorno antissocial / psicopatia</th>
+        </tr>
+        <tr>
+          <td>Tipo de agressão predominante</td>
+          <td>Reativa, impulsiva, em contexto de ameaça ou abandono percebido.[web:7][web:13]</td>
+          <td>Mais frequentemente proativa/instrumental, voltada a ganhos ou domínio.[web:7]</td>
+        </tr>
+        <tr>
+          <td>Resposta emocional após o ato</td>
+          <td>Arrependimento, vergonha, medo de perda do vínculo.[web:1][web:13]</td>
+          <td>Baixa culpa, racionalizações, foco em consequências práticas.[web:7]</td>
+        </tr>
+        <tr>
+          <td>Empatia</td>
+          <td>Empatia frequentemente preservada, mas desorganizada sob estresse.[web:1][web:13]</td>
+          <td>Redução consistente de responsividade emocional ao sofrimento alheio.[web:7]</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 8</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P9 Núcleo vínculo/apejo -->
+<div class="page" id="p9">
+  <div class="page-content">
+    <h2>Núcleo vínculo/apejo</h2>
+    <p>O eixo do apego é um dos mais centrais na compreensão do TPB. Padrões de apego inseguros, frequentemente associados a histórias de instabilidade relacional, trauma e invalidação emocional, favorecem a emergência de um sistema interpessoal hiperreativo, que enxerga ameaça em sinais sutis de distância. O resultado é um padrão de aproximação intensa, protestos de apego e afastamento abrupto.[web:1][web:4]</p>
+
+    <h3>Medo de abandono e hipervigilância</h3>
+    <p>O medo de abandono no TPB envolve tanto experiências de perda reais quanto ameaças subjetivas. O sistema de detecção de ameaça interpessoal opera como um “alarme sensível demais”, que responde a atrasos, mudanças de agenda, variações de tom de voz ou simplesmente à ideia de que o outro possa preferir alguém. Essa hipervigilância, por sua vez, leva a comportamentos que, paradoxalmente, podem pressionar o vínculo até o ponto de ruptura.[web:1][web:4]</p>
+
+    <h3>Protesto de apejo e dinâmica aproximação-afastamento</h3>
+    <p>Em termos clínicos, o protesto de apejo inclui gestos de aproximação intensa (mensagens, pedidos de confirmação, promessas) e, quando o vínculo é percebido como ameaçado, explosões de raiva, acusações ou testes de lealdade. Quando esses protestos fracassam, o paciente pode se afastar de forma abrupta, bloqueando contatos, interrompendo tratamento ou assumindo postura de indiferença defensiva, que encobre dor intensa. O ciclo aproximação–protesto–afastamento tende a se repetir em diversos contextos.[web:1][web:4]</p>
+
+    <h3>Leitura clínica sem estigma</h3>
+    <p>Uma leitura clínica não estigmatizante do apego no TPB exige deslocar a linguagem de “manipulação” para “estratégias de apego subótimas”, sem excluir responsabilidade, mas reconhecendo que o sistema interpessoal aprendeu, em contextos anteriores, que é preciso gritar para ser ouvido ou ameaçar ir embora para testar a permanência do outro. A tarefa terapêutica inclui oferecer experiência repetida de vínculo consistente, com limites claros, em que nem abandono abrupto nem fusão total sejam a única resposta possível.[web:1][web:4]</p>
+
+    <div class="box">
+      <h4>Box 6 – Perguntas úteis sobre apego</h4>
+      <ul>
+        <li>“O que exatamente você teme que aconteça quando alguém se afasta um pouco?”</li>
+        <li>“Quando você percebe sinais de abandono, o que costuma fazer primeiro? E depois?”</li>
+        <li>“Há momentos em que você se afasta antes que o outro possa abandoná-lo?”</li>
+        <li>Essas perguntas ajudam a transformar episódios isolados em padrões observáveis, facilitando intervenções psicoterápicas.[web:1][web:4]</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 9</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P10 Identidade/vazio -->
+<div class="page" id="p10">
+  <div class="page-content">
+    <h2>Núcleo identidade/vazio</h2>
+    <p>A instabilidade de identidade é descrita no TPB como um padrão persistente de autoimagem ou senso de self marcadamente instável. Em vez de uma narrativa interna coerente que integra passado, presente e futuro, o indivíduo experimenta uma colagem de papéis, emoções e relações, com sensação de que “não há um eu sólido por trás”.[web:1][web:8][web:11]</p>
+
+    <h3>Narrativa pessoal e sentido de continuidade</h3>
+    <p>Pessoas com TPB frequentemente têm dificuldade em contar sua história de forma linear, oscilando entre extremos valorativos ("sempre fui um desastre", "depois que conheci X minha vida teve sentido") e omitindo períodos significativos. Essa fragmentação narrativa está associada a experiências precoces de invalidação, traumas e contextos caóticos, nos quais não se consolidou uma sensação de continuidade do self.[web:1][web:10]</p>
+
+    <h3>Vazio, vergonha e autoimagem</h3>
+    <p>O sentimento crônico de vazio é diferente de tristeza comum; muitos descrevem como anestesia emocional, tédio extremo ou sensação de “não existir de verdade”. Em várias situações, a vergonha de não corresponder a expectativas internas ou externas leva o paciente a buscar identificação intensa com figuras significativas, grupos ou ideologias, numa tentativa de preencher o vazio com identidade “emprestada”.[web:1][web:8][web:11]</p>
+
+    <h3>Dissociação sob estresse</h3>
+    <p>Em situações de estresse intenso, especialmente quando ativam memórias traumáticas ou medos de abandono, podem ocorrer episódios dissociativos: sensação de estar observando a própria vida de fora, entorpecimento emocional, lapsos de memória circunscritos. Essas experiências funcionam como uma espécie de “desconectar o disjuntor” emocional para evitar sobrecarga, mas podem piorar a sensação de alienação em relação a si mesmo.[web:1][web:10]</p>
+
+    <div class="box">
+      <h4>Box 7 – Intervenções focadas em identidade</h4>
+      <ul>
+        <li>Explorar histórias de vida com ênfase em continuidade e capacidades, não apenas em danos.</li>
+        <li>Mapear papéis recorrentes assumidos em diferentes relações e investigar de que modo ajudam ou prejudicam o paciente.</li>
+        <li>Trabalhar sentimentos de vergonha associados à ideia de “ser defeituoso”, distinguindo traços de personalidade de valor pessoal.[web:1][web:14]</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 10</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P11 Regulação emocional -->
+<div class="page" id="p11">
+  <div class="page-content">
+    <h2>Núcleo regulação emocional</h2>
+    <p>Do ponto de vista neuropsicológico, a regulação emocional envolve a capacidade de perceber emoções, nomeá-las, tolerar sua presença, modulá-las e utilizá-las de forma adaptativa. No TPB, há, em geral, limiar mais baixo para ativação emocional, respostas mais intensas e duradouras e menor eficácia de mecanismos de modulação, o que predispõe à escalada de crises.[web:1][web:10][web:13]</p>
+
+    <h3>Intensidade, duração e retorno ao baseline</h3>
+    <p>Três parâmetros ajudam a descrever a desregulação: intensidade (quão forte é a emoção), duração (quanto tempo se mantém) e retorno ao baseline (quão rapidamente o sistema volta a um estado mais neutro). Pacientes com TPB relatam, com frequência, emoções “de zero a cem” em segundos, que demoram horas para se dissipar, principalmente em respostas a estímulos interpessoais.[web:1][web:13]</p>
+
+    <h3>Ruminação, raiva, ansiedade e vergonha</h3>
+    <p>A ruminação – repetição mental de eventos dolorosos, falas e gestos – é um fator de manutenção importante, prolongando estados emocionais negativos muito além do evento desencadeante. Raiva, ansiedade e vergonha aparecem como emoções centrais: a raiva ligada à percepção de injustiça ou rejeição, a ansiedade ao medo de perda de controle e a vergonha a uma narrativa interna de inadequação e defeito.[web:1][web:13]</p>
+
+    <h3>Estratégias desadaptativas</h3>
+    <p>Frente a emoções avassaladoras, indivíduos com TPB frequentemente recorrem a estratégias de regulação de curto prazo: autolesão, uso de substâncias, compulsão alimentar, sexo de risco, entre outras. Essas condutas reduzem temporariamente a tensão ou mudam o foco atencional, mas mantêm o ciclo ao introduzir novas fontes de vergonha, conflito interpessoal e consequências negativas.[web:1][web:14]</p>
+
+    <div class="box">
+      <h4>Box 8 – Perguntas para mapear regulação</h4>
+      <ul>
+        <li>“O que você normalmente faz quando essa sensação aparece?”</li>
+        <li>“Funciona no curto prazo? E no dia seguinte?”</li>
+        <li>“Já houve momento em que tentou lidar de maneira diferente? O que ajudou, mesmo que pouco?”</li>
+        <li>Essas perguntas ajudam a identificar pontos de entrada para intervenções como DBT e MBT.[web:1][web:14]</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 11</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P12 Impulsividade -->
+<div class="page" id="p12">
+  <div class="page-content">
+    <h2>Núcleo impulsividade</h2>
+    <p>A impulsividade no TPB diz respeito à tendência a agir rapidamente, com pouca consideração pelas consequências, sobretudo sob estados emocionais intensos. Trata-se menos de busca planejada de benefício e mais de alívio imediato de desconforto interno, o que coloca a função do comportamento no centro da avaliação.[web:1][web:13]</p>
+
+    <h3>Função do comportamento e alívio</h3>
+    <p>Em análise funcional, pergunta-se: “O que este comportamento faz pela pessoa naquele momento?”. Em muitos casos, a autolesão reduz rapidamente a sensação de tensão difusa ou dissociação; o uso de substâncias atenua ansiedade ou vergonha; gastos e sexo de risco oferecem, por instantes, uma sensação de excitação e valor que contrapõe o vazio. O problema é que o alívio é curto e seguido por culpa, conflitos e riscos adicionais.[web:1][web:13][web:14]</p>
+
+    <h3>Modelo funcional ABC (antecedente–resposta–consequência)</h3>
+    <p>Uma forma simples de organizar a impulsividade é o modelo ABC: Antecedente (o que aconteceu antes), Resposta (o que foi feito), Consequência (o que mudou depois). Por exemplo: antecedente: mensagem lida e não respondida; resposta: envio de dezenas de mensagens, consumo de álcool, autolesão; consequência imediata: alívio da tensão, foco no corpo ou na interação; consequência tardia: vergonha, discussões, risco aumentado.[web:1][web:13][web:14]</p>
+
+    <h3>Tomada de decisão sob ameaça</h3>
+    <p>Sob percepção de ameaça, o sistema nervoso tende a priorizar respostas rápidas em detrimento de análise detalhada de opções, favorecendo a impulsividade. Em indivíduos com TPB, essa priorização é amplificada por circuitos de ameaça hiperreativos e menor engajamento de redes frontais de controle inibitório, o que será detalhado na seção de neurobiologia.[web:10][web:13]</p>
+
+    <div class="box">
+      <h4>Box 9 – Diferenciando impulsividade e cálculo</h4>
+      <ul>
+        <li>Investigar a sequência temporal entre emoção e ato: houve planejamento prolongado ou explosão súbita?</li>
+        <li>Explorar lembranças fisiológicas (taquicardia, tremores) que sugerem ativação intensa de ameaça.</li>
+        <li>Mapear arrependimento, vergonha e medo após o episódio, indicadores de impulsividade reativa e não de frieza calculada.[web:1][web:7][web:13]</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 12</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P13 Neurobiologia I -->
+<div class="page" id="p13">
+  <div class="page-content">
+    <h2>Neurobiologia I: amígdala, saliência emocional e ameaça social</h2>
+    <p>Estudos de neuroimagem sugerem que pessoas com TPB apresentam alterações em circuitos que integram detecção de ameaça, emoção e regulação cognitiva, em particular na amígdala, córtex pré-frontal e regiões do cíngulo.[web:10][web:13] A amígdala é uma estrutura subcortical envolvida na detecção rápida de estímulos relevantes para sobrevivência, especialmente ameaças sociais.</p>
+
+    <h3>Hiperreatividade da amígdala</h3>
+    <p>Em paradigmas de neuroimagem que usam faces emocionais ou estímulos aversivos, indivíduos com TPB frequentemente mostram respostas amigdalares mais intensas e prolongadas do que controles, indicando um sistema de saliência emocional mais sensível.[web:10][web:13] Isso é coerente com a clínica de hipersensibilidade a rejeição e humilhação interpessoal.</p>
+
+    <h3>Ameaça social e memória emocional</h3>
+    <p>A amígdala interage com o hipocampo e o córtex pré-frontal para consolidar memórias emocionais, de modo que experiências de rejeição, crítica ou violência podem deixar traços que facilitam reativação futura. Em contextos de TPB, múltiplas experiências de invalidação e trauma podem “ajustar o volume” desse sistema para níveis mais elevados, de modo que sinais neutros ou ambíguos sejam interpretados como ameaça.[web:10][web:13]</p>
+
+    <h3>Metáfora do detector de fumaça</h3>
+    <p>Uma metáfora útil é a do detector de fumaça: em pessoas com TPB, o detector pode disparar não só com incêndios grandes (ameaças objetivas), mas também com vapor do chuveiro (eventos menores). Clinicamente, isso se traduz em respostas emocionais muito intensas a pequenas alterações no comportamento do outro, exigindo intervenções que ajudem a distinguir “fumaça real” de “falso alarme”.[web:10][web:13]</p>
+
+    <div class="box">
+      <h4>Box 10 – Núcleo neurobiológico da agressão reativa</h4>
+      <p>Modelos de agressão reativa implicam um sistema de ameaça (amígdala, hipotálamo, substância cinzenta periaquedutal) hiperresponsivo e, ao mesmo tempo, controle frontal menos eficiente.[web:7][web:13] Isso favorece respostas impulsivas sob frustração, típicas do TPB, em contraste com padrões hiporresponsivos e mais instrumentais associados à psicopatia.[web:7]</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 13</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P14 Neurobiologia II -->
+<div class="page" id="p14">
+  <div class="page-content">
+    <h2>Neurobiologia II: córtex pré-frontal, cíngulo, accumbens e “falha do freio”</h2>
+    <p>O córtex pré-frontal (CPF) – em especial regiões dorsolaterais, ventromediais e orbitofrontais – participa de processos de controle inibitório, tomada de decisão, planejamento e regulação top-down das respostas emocionais.[web:7][web:10][web:13] Regiões do córtex cingulado anterior (CCA) e estruturas como o núcleo accumbens integram informação de recompensa, custo, erro e motivação.</p>
+
+    <h3>Metáfora do freio e do motor</h3>
+    <p>Numa metáfora simplificada, a amígdala e estruturas subcorticais funcionam como um “motor emocional” rápido, enquanto CPF e CCA atuam como “freios” e “direção”. Em condições ideais, o motor detecta ameaça e o freio/direção modulam a resposta, ajustando intensidade e forma (negociação, retirada, pedido de ajuda). No TPB, dados sugerem hiperativação do motor (amígdala) combinada com alterações de conectividade e ativação reduzida em áreas de controle, sobretudo sob estresse.[web:7][web:10][web:13]</p>
+
+    <h3>Córtex cingulado, accumbens e recompensa</h3>
+    <p>O córtex cingulado anterior monitora conflito e erro, ajudando a ajustar comportamentos, enquanto o núcleo accumbens integra sinal de recompensa e motivação. Em quadros com impulsividade e agressão, alterações na comunicação entre essas regiões podem levar a subavaliação de consequências negativas e supervalorização de alívio ou gratificação imediata, contribuindo para padrões de autolesão e uso de substâncias no TPB.[web:13]</p>
+
+    <h3>Por que o “freio” falha sob estresse?</h3>
+    <p>Em situações de ameaça intensa, mesmo em indivíduos sem TPB, o sistema tende a priorizar respostas rápidas, com menor envolvimento do CPF. Em pessoas com TPB, essa priorização parece ocorrer mais cedo e de forma mais extrema, de modo que o “freio” frontal perde eficácia logo nos primeiros segundos de escalada emocional.[web:10][web:13] Isso explica por que, muitas vezes, a pessoa afirma depois: “Eu sabia que não deveria fazer, mas na hora parecia impossível parar”.</p>
+
+    <div class="box">
+      <h4>Box 11 – Integração neurobiológica simplificada</h4>
+      <ul>
+        <li>Amígdala: detector rápido de ameaça, especialmente social.[web:10][web:13]</li>
+        <li>Córtex pré-frontal: planejamento, inibição e regulação top-down.[web:10][web:13]</li>
+        <li>Córtex cingulado: monitoramento de conflito, erro, dor social.[web:13]</li>
+        <li>Núcleo accumbens: recompensa, motivação, reforço de padrões de alívio e prazer.[web:13]</li>
+        <li>No TPB, a combinação de motor hiperreativo e freio vulnerável sob estresse favorece impulsividade reativa e dificuldade em interromper espirais emocionais.[web:10][web:13]</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 14</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P15 Agressão reativa vs proativa -->
+<div class="page" id="p15">
+  <div class="page-content">
+    <h2>Agressão reativa vs proativa</h2>
+    <p>A distinção entre agressão reativa e proativa é fundamental em contextos clínicos e jurídico-clínicos. Agressão reativa é aquela que emerge em resposta a ameaça ou frustração percebida, com alta carga afetiva, enquanto agressão proativa é planejada, instrumental, com baixa ativação emocional.[web:7][web:13]</p>
+
+    <h3>Definições e marcadores clínicos</h3>
+    <ul>
+      <li><strong>Agressão reativa</strong>: início abrupto após provocação, humilhação ou rejeição; relato de sensação de “explosão”; sinais autonômicos intensos; arrependimento subsequente.[web:7][web:13]</li>
+      <li><strong>Agressão proativa</strong>: antecedida por planejamento, escolha de momento, cálculo de riscos; baixa reatividade emocional aparente; foco em ganhos objetivos.[web:7]</li>
+    </ul>
+
+    <h3>Implicações jurídico-clínicas</h3>
+    <p>Do ponto de vista jurídico, a presença de agressão reativa não elimina responsabilidade, mas pode influenciar a análise de dolo, imputabilidade e necessidade de intervenções de saúde mental. Em TPB, a agressão, quando presente, é predominantemente reativa, associada à desregulação emocional e não à intenção fria de causar dano. Já em psicopatia e personalidade antissocial grave, a agressão proativa instrumenta o outro como meio para fins próprios.[web:7][web:13]</p>
+
+    <h3>Exemplos clínicos breves</h3>
+    <p>Exemplo de agressão reativa: após ser chamado de “egoísta” pelo parceiro, um paciente joga objetos no chão, grita e empurra a pessoa; minutos depois, chora, pede desculpas e relata vergonha intensa e medo de ser abandonado. Exemplo de agressão proativa: um indivíduo planeja enganar um conhecido para obter benefício financeiro, escolhe um momento de vulnerabilidade do outro, mente repetidamente e minimiza o impacto de suas ações, sem demonstrar sofrimento significativo pelo dano causado.[web:7][web:13]</p>
+
+    <div class="box">
+      <h4>Box 12 – Diferenciando intenção, dolo e desregulação</h4>
+      <p>Ao avaliar comportamentos agressivos em TPB, é importante investigar: (1) o contexto imediato (ameaça, humilhação, abandono percebido), (2) o grau de planejamento prévio, (3) a experiência subjetiva durante o ato (explosão vs cálculo) e (4) o impacto emocional após o episódio.[web:7][web:13] Na maioria dos casos de TPB, encontra-se combinação de desregulação emocional intensa e baixa capacidade de inibição, mais do que um padrão de dolo frio e instrumental.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 15</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P16 Estatísticas e vieses -->
+<div class="page" id="p16">
+  <div class="page-content">
+    <h2>Estatísticas, vieses e interpretação</h2>
+    <p>Estudos de prevalência estimam que o TPB afete em torno de 1,8% a 2,7% da população geral, com variações de aproximadamente 0,7% a 5,9% dependendo de critérios, instrumentos e amostras avaliadas.[web:1][web:6][web:12][web:15] Em contextos prisionais, revisões sugerem prevalências significativamente maiores, chegando a 18–30% em alguns estudos e, em sínteses mais amplas, a faixas de 25–50%.[web:6][web:9][web:12][web:15]</p>
+
+    <h3>Amostras enviesadas e analogia da UTI</h3>
+    <p>Quando se observa uma prevalência elevada de TPB em prisões, corre-se o risco de concluir que o transtorno leva necessariamente à criminalidade. No entanto, trata-se de amostras enviesadas, análogas a uma UTI: encontrar muitos casos de insuficiência respiratória na UTI não implica que “toda” ou “a maioria” das pessoas adoecerá daquela forma; indica apenas que, naquela unidade, concentram-se casos mais graves.[web:6][web:9][web:12][web:15]</p>
+
+    <h3>Viés de seleção e confundidores</h3>
+    <p>Em amostras prisionais, há viés de seleção porque indivíduos que chegam ao sistema penal constituem um subgrupo exposto a múltiplos fatores de risco: pobreza, exclusão social, acesso limitado a tratamento, maior taxa de exposição a violência, uso problemático de substâncias e traços antissociais. Esses fatores funcionam como confundidores, inflando a associação entre TPB e criminalidade, já que muitos comportamentos de risco decorrem de interações entre traços de personalidade, contexto social e comorbidades.[web:6][web:9][web:12][web:15]</p>
+
+    <h3>Psicopatia na população geral e em TPB</h3>
+    <p>Estimativas de traços psicopáticos na população geral variam em torno de 1–2%, com alguns autores propondo faixas de até 4–6% dependendo dos critérios.[web:7] Esses valores podem estar subestimados, pois indivíduos com maior capacidade de camuflar comportamentos antissociais tendem a ficar fora de amostras clínicas e forenses. Afirmar que “15–20%” das pessoas com TPB têm “traços perversos” baseando-se apenas em estudos prisionais é metodologicamente inadequado, pois essas amostras concentram casos mais graves, com sobreposição de antissocialidade, substâncias e contexto criminal.[web:6][web:9][web:12][web:15]</p>
+
+    <h3>Fatores sobrepostos que inflam números</h3>
+    <ul>
+      <li>Uso de substâncias psicoativas (álcool, estimulantes), associado a impulsividade, violência reativa e envolvimento em delitos.[web:1][web:6][web:14]</li>
+      <li>Histórico de trauma e violência, que aumenta o risco de tanto TPB quanto comportamentos agressivos ou criminosos.[web:1][web:10][web:13]</li>
+      <li>Exclusão social e pobreza, ligadas à maior vigilância penal e menor acesso a recursos terapêuticos.[web:6][web:9][web:12]</li>
+      <li>Traços antissociais e psicopáticos, que, quando presentes, podem coexistir com traços borderline, mas têm implicações distintas em termos de intencionalidade e padrão de agressão.[web:7][web:13][web:15]</li>
+      <li>Comorbidades psiquiátricas (transtornos de uso de substâncias, transtornos de humor, TEPT), que aumentam vulnerabilidade a crises e conflitos com a lei.[web:1][web:14]</li>
+    </ul>
+
+    <h3>Conclusão técnica</h3>
+    <p>Prevalência elevada de TPB em recortes de alto risco, como prisões, não implica causalidade direta entre TPB e criminalidade. Em termos dimensionais, a maioria das pessoas com TPB não se engaja em delitos graves, e muitas nunca chegam ao sistema penal. Quando há infrações, frequentemente estão vinculadas a impulsividade reativa, uso de substâncias e contextos de vulnerabilidade. A leitura adequada desses dados deve evitar transformar estatísticas em sentenças morais ou previsões deterministas de conduta.[web:6][web:9][web:12][web:15]</p>
+
+    <div class="box">
+      <h4>Box 13 – Pontos-chave em estatística e viés</h4>
+      <ul>
+        <li>Amostra prisionais são populações selecionadas e não representam a distribuição de traços de personalidade na comunidade.[web:6][web:9][web:12][web:15]</li>
+        <li>Associações entre TPB e criminalidade são mediadas por fatores como substâncias, trauma, exclusão social e traços antissociais.</li>
+        <li>TPB ≠ criminoso por natureza; trata-se sobretudo de um transtorno de desregulação emocional e relacional que requer suporte, estrutura e tratamento especializado.[web:1][web:6][web:9][web:12][web:15]</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 16</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P17 Comorbidades -->
+<div class="page" id="p17">
+  <div class="page-content">
+    <h2>Comorbidades e sobreposições</h2>
+    <p>O TPB raramente se apresenta de forma “pura”. Comorbidades com transtornos depressivos, transtornos de ansiedade, transtorno de estresse pós-traumático (TEPT), transtorno por uso de substâncias e transtornos alimentares são altamente prevalentes e influenciam tanto o curso quanto o prognóstico.[web:1][web:14]</p>
+
+    <h3>Depressão e ansiedade</h3>
+    <p>Episódios depressivos são frequentes em pessoas com TPB, mas devem ser diferenciados de estados disforicamente reativos a eventos interpessoais. Transtornos de ansiedade, incluindo transtorno de pânico e fobias sociais, podem coexistir, exacerbando o medo de rejeição e abandono. A combinação de afetividade negativa elevada e instabilidade relacional aumenta o risco de tentativas de suicídio e internações.[web:1][web:14]</p>
+
+    <h3>TEPT e trauma complexo</h3>
+    <p>Muitos pacientes com TPB apresentam histórico de traumas repetidos na infância, incluindo abuso físico, sexual, emocional e negligência, o que se aproxima do conceito de trauma complexo. A sobreposição entre TPB e TEPT complexo dificulta a distinção de limites nosográficos, mas, clinicamente, indica necessidade de intervenções sensíveis a trauma, que contemplem tanto a desregulação emocional atual quanto a reprocessamento de experiências traumáticas.[web:1][web:10][web:13]</p>
+
+    <h3>Substâncias e transtornos alimentares</h3>
+    <p>Transtornos por uso de substâncias são frequentes e funcionam muitas vezes como estratégia de automedicação de estados internos intoleráveis. Transtornos alimentares, especialmente bulimia e padrões de compulsão alimentar, também são comuns, compondo um perfil de impulsividade e uso do corpo como palco de regulação emocional.[web:1][web:14]</p>
+
+    <div class="box">
+      <h4>Box 14 – Implicações para manejo e prognóstico</h4>
+      <ul>
+        <li>A presença de múltiplas comorbidades aumenta a gravidade clínica e o risco de desfechos negativos, mas também oferece mais pontos de intervenção (por exemplo, redução de substâncias, tratamento de TEPT, psicoterapia de base).[web:1][web:14]</li>
+        <li>Prognosticamente, estudos mostram que muitos pacientes com TPB apresentam melhora significativa de sintomas ao longo dos anos, sobretudo quando recebem tratamento estruturado; o estigma de “irrecuperável” não se sustenta em seguimentos de longo prazo.[web:1][web:14]</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 17</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P18 Tratamento -->
+<div class="page" id="p18">
+  <div class="page-content">
+    <h2>Tratamento baseado em evidência</h2>
+    <p>O tratamento do TPB é predominantemente psicoterápico, com diversas abordagens baseadas em evidência mostrando eficácia na redução de autolesão, internações, impulsividade e instabilidade relacional.[web:1][web:14] A farmacoterapia cumpre papel adjuvante, focado em sintomas-alvo específicos.</p>
+
+    <h3>DBT (Terapia Comportamental Dialética)</h3>
+    <p>A DBT combina estratégias comportamentais, técnicas de mindfulness e uma postura dialética que integra aceitação e mudança. Os módulos centrais são: habilidades de mindfulness, regulação emocional, tolerância a estresse e efetividade interpessoal. Ensaios clínicos mostram redução de episódios de autolesão, tentativas de suicídio e hospitalizações em pacientes com TPB tratados com DBT estruturada.[web:1][web:14]</p>
+
+    <h3>MBT (Terapia Baseada em Mentalização)</h3>
+    <p>A MBT foca na capacidade de mentalizar – isto é, compreender comportamento próprio e alheio em termos de estados mentais. Em TPB, a mentalização tende a colapsar sob estresse, dando lugar a interpretações rígidas e personalizadas. A terapia enfatiza curiosidade em relação aos estados mentais, diferenciação entre fato e suposição e reconstrução de perspectivas, o que contribui para reduzir reatividade e rupturas relacionais.[web:1][web:14]</p>
+
+    <h3>Terapia do Esquema</h3>
+    <p>A Terapia do Esquema integra elementos cognitivo-comportamentais, psicodinâmicos e de apego, trabalhando com esquemas desadaptativos precoces e modos de funcionamento (criança vulnerável, pai punitivo, protetor desligado, entre outros). No TPB, busca-se fortalecer modos saudáveis e oferecer, dentro de limites éticos, experiências corretivas de “reparenting limitado”, em que o terapeuta modela uma relação estável e responsiva.[web:1][web:14]</p>
+
+    <h3>Papel e limites da medicação</h3>
+    <p>Não há medicação específica para TPB; recomendações enfatizam uso de fármacos para sintomas-alvo como depressão, ansiedade, impulsividade e sintomas psicóticos transitórios.[web:1][web:14] Antidepressivos, estabilizadores de humor e antipsicóticos atípicos podem ser úteis em casos selecionados, mas o foco deve permanecer na psicoterapia estruturada, evitando polifarmácia e expectativas irreais de “cura medicamentosa” de traços de personalidade.</p>
+
+    <div class="box">
+      <h4>Box 15 – Princípios gerais de tratamento</h4>
+      <ul>
+        <li>Contratos terapêuticos claros, com definição de objetivos, limites e manejo de crises.[web:1][web:14]</li>
+        <li>Estrutura e consistência ao longo do tempo, em vez de intervenções fragmentadas reativas apenas a crises.</li>
+        <li>Integração entre psicoterapia, manejo de comorbidades e suporte social.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 18</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P19 Manejo clínico e risco -->
+<div class="page" id="p19">
+  <div class="page-content">
+    <h2>Manejo clínico e risco</h2>
+    <p>Manejar risco em TPB significa equilibrar validação do sofrimento, limites claros e planos de ação pré-acordados para situações de crise. A ausência de estrutura favorece escaladas e rupturas, enquanto limites rígidos e punitivos reforçam experiências de abandono e humilhação.[web:1][web:14]</p>
+
+    <h3>Contrato, limites e plano de crise</h3>
+    <p>É recomendável estabelecer, desde o início, um contrato que inclua frequência de sessões, formas de contato fora do horário, manejo de faltas e parâmetros para encaminhamento a serviços de urgência. Planos de crise podem especificar passos graduais (uso de habilidades, contato com rede de apoio, contato com serviço de referência, ida a pronto-atendimento) e critérios para hospitalização.[web:1][web:14]</p>
+
+    <h3>Erros comuns da equipe</h3>
+    <ul>
+      <li>Reagir às crises com intervenções extremas (internações repetidas, afastamento súbito) sem articulação com plano longitudinal.</li>
+      <li>Entrar em escaladas emocionais com o paciente, respondendo com raiva ou ironia.</li>
+      <li>Dividir-se em “time que gosta” e “time que rejeita” o paciente, alimentando dinâmicas de splitting institucional.[web:1][web:14]</li>
+    </ul>
+
+    <h3>Comunicação com familiares</h3>
+    <p>A família frequentemente oscila entre superproteção e exaustão. Orientar familiares a reconhecer sinais de escalada, validar o sofrimento sem reforçar comportamentos de risco e manter limites consistentes pode reduzir crises e hospitalizações. É importante diferenciar a pessoa do comportamento: criticar ações específicas sem reduzir o indivíduo a um rótulo.[web:1][web:14]</p>
+
+    <h3>Sinais de escalada e intervenção</h3>
+    <p>Sinais de escalada incluem aumento de ruminação, intensificação de contato com o terapeuta ou familiares em tom urgente, mudanças abruptas de relato (do ideal positivo para depreciação extrema), intensificação de uso de substâncias e retomada de padrões autolesivos. Intervenções precoces, focadas em validação, uso de habilidades e revisão do plano de crise, podem prevenir evolução para gestos mais graves.[web:1][web:14]</p>
+
+    <div class="box">
+      <h4>Box 16 – Checklist rápido de manejo de risco</h4>
+      <ul>
+        <li>Há plano de crise previamente discutido e acessível ao paciente?</li>
+        <li>Existem mudanças recentes em suporte social, uso de substâncias ou contexto jurídico?</li>
+        <li>O comportamento atual é consistente com padrões prévios ou representa escalada qualitativa?</li>
+        <li>Há necessidade de ajustar o setting (sessões adicionais temporárias, envolvimento de rede de apoio, avaliação de internação)?[web:1][web:14]</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 19</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+<div class="pagebreak"></div>
+
+<!-- P20 Estigma, comunicação, discussão -->
+<div class="page" id="p20">
+  <div class="page-content">
+    <h2>Estigma, comunicação e discussão</h2>
+    <p>O TPB é um diagnóstico frequentemente associado a preconceitos, tanto em serviços de saúde quanto no senso comum. Expressões como “paciente manipulador” ou “caso perdido” refletem mais a frustração das equipes do que a realidade dos desfechos a longo prazo, que podem ser significativamente positivos com tratamento adequado.[web:1][web:4][web:14][web:15]</p>
+
+    <h3>Como falar de TPB sem estigmatizar</h3>
+    <ul>
+      <li>Descrever o TPB como um transtorno de desregulação emocional e relacional, e não como traço moral ou falha de caráter.[web:1][web:4]</li>
+      <li>Evitar associar automaticamente TPB a violência ou criminalidade; lembrar que a maioria dos indivíduos com TPB não comete delitos graves.[web:6][web:9][web:12][web:15]</li>
+      <li>Destacar evidências de melhora ao longo do tempo com intervenções estruturadas, combatendo a ideia de “condenação vitalícia”.[web:1][web:14]</li>
+    </ul>
+
+    <h3>Evitando uso moral de estatísticas</h3>
+    <p>Estatísticas sobre prevalência em prisões e taxas de comportamentos de risco não devem ser usadas como sentença moral ou predição automática de periculosidade. A análise técnica precisa enfatizar vieses de seleção, confundidores e contextos, deixando claro que números elevados em recortes específicos não definem o valor ou o destino de indivíduos com TPB.[web:6][web:9][web:12][web:15]</p>
+
+    <h3>Orientação de linguagem para equipe e alunos</h3>
+    <ul>
+      <li>Substituir rótulos como “manipulador” por descrições funcionais: “utiliza ameaças de autolesão como estratégia, ainda que desadaptativa, para manter vínculo ou expressar sofrimento intenso”.[web:1][web:14]</li>
+      <li>Distinguir comportamento de intenção: reconhecer que comportamentos prejudiciais podem ser expressão de desregulação e não necessariamente de dolo frio.</li>
+      <li>Reforçar que TPB ≠ “perversidade” ou “periculosidade inata”; trata-se de um padrão de vulnerabilidade que requer abordagem técnica, suporte e estrutura adequada.[web:1][web:7][web:13][web:15]</li>
+    </ul>
+
+    <h3>Perguntas para discussão</h3>
+    <ol>
+      <li>Como sua própria reação emocional diante de pacientes com TPB influencia o manejo e as decisões clínicas?</li>
+      <li>Que estratégias podem ser adotadas em equipes para reduzir splitting e promover postura mais uniforme frente a crises?</li>
+      <li>De que modo o conhecimento de neurobiologia (amígdala, CPF, cíngulo, accumbens) ajuda a reconfigurar explicações morais em explicações de vulnerabilidade e regulação?[web:7][web:10][web:13]</li>
+      <li>Quais são os riscos e benefícios de se utilizar o diagnóstico de TPB em contextos jurídico-penais?</li>
+    </ol>
+
+    <h3>Checklist final</h3>
+    <ul>
+      <li>Você consegue diferenciar, na prática, instabilidade afetiva reativa (TPB) de episódios afetivos (bipolaridade)?[web:1][web:14]</li>
+      <li>Consegue distinguir agressão reativa impulsiva (TPB) de agressão proativa/instrumental (traços psicopáticos)?[web:7][web:13]</li>
+      <li>Está atento a vieses de seleção e confundidores ao interpretar dados sobre TPB e criminalidade?[web:6][web:9][web:12][web:15]</li>
+      <li>Considera o TPB como um transtorno tratável, com foco em regulação emocional, apego e identidade, e não como rótulo definitivo?</li>
+      <li>Consegue formular planos de manejo que integrem psicoterapia baseada em evidência, manejo de risco e trabalho com rede de apoio?[web:1][web:14]</li>
+    </ul>
+
+    <p style="margin-top:1em;">A leitura crítica desta apostila deve ser acompanhada de reflexão contínua sobre a própria prática e participação em supervisão clínica, de modo que o conhecimento teórico se traduza em intervenções mais eficazes e menos estigmatizantes.</p>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="page-number">Página 20</span> • Dr. Fabio Schmidt • drfabioschmidt.com
+</div>
+
+</body>
+</html>
