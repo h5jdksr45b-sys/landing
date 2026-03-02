@@ -1,761 +1,282 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#0b0f14" />
-  <title>Protocolo 7 Dias</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#0b0f14" />
+<title>Protocolo 7 Dias</title>
 
-  <!-- Fonts (opcional; pode remover se preferir 100% system) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --bg:#0b0f14;          /* FUNDO SÓLIDO (não quebra cor no scroll) */
-      --surface:#0f1620;
-      --surface2:#101a25;
-      --card:#111b26;
-      --card2:#0f1823;
-      --text:#e9eef5;
-      --muted:#a9b6c7;
-      --muted2:#7f8ea3;
-      --line:rgba(255,255,255,.08);
-      --accent:#24c1d3;
-      --accent2:#1aa9ba;
-      --good:#3ddc97;
-      --warn:#f5c451;
-      --danger:#ff6b6b;
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --radius:18px;
-      --radius2:14px;
-      --max: 980px;
-    }
+<style>
+:root{
+  --bg:#0b0f14;
+  --surface:#0f1620;
+  --surface2:#111b26;
+  --card:#131f2c;
+  --text:#e9eef5;
+  --muted:#a9b6c7;
+  --muted2:#7f8ea3;
+  --line:rgba(255,255,255,.08);
+  --accent:#24c1d3;
+  --accent2:#1aa9ba;
+  --good:#3ddc97;
+  --warn:#f5c451;
+  --danger:#ff6b6b;
+  --shadow:0 18px 60px rgba(0,0,0,.55);
+  --radius:18px;
+  --radius2:14px;
+  --max:1000px;
+}
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background: var(--bg); /* sólido */
-      color: var(--text);
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility;
-      overflow-x:hidden;
-    }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
 
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:22px 18px 120px;}
-    .topbar{
-      position:sticky;top:0;z-index:50;
-      background: rgba(11,15,20,.92);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .topbar-inner{
-      max-width:var(--max);margin:0 auto;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 18px;
-      gap:12px;
-    }
-    .brand{
-      display:flex;align-items:flex-start;gap:10px;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(36,193,211,.12);
-      margin-top:6px;
-      flex:0 0 auto;
-    }
-    .brand strong{display:block;font-weight:700}
-    .brand small{display:block;color:var(--muted2);margin-top:2px}
+.wrap{max-width:var(--max);margin:auto;padding:22px 18px 120px;}
 
-    .pill{
-      border:1px solid var(--line);
-      color:var(--muted);
-      padding:9px 12px;
-      border-radius:999px;
-      font-size:13px;
-      white-space:nowrap;
-      background: rgba(255,255,255,.02);
-    }
+a{text-decoration:none;color:inherit}
 
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      gap:10px;
-      border-radius:14px;
-      padding:14px 16px;
-      font-weight:700;
-      border:1px solid transparent;
-      transition:.18s ease;
-      cursor:pointer;
-      user-select:none;
-    }
-    .btn-primary{
-      background: linear-gradient(180deg, var(--accent), var(--accent2));
-      color:#071217;
-      box-shadow: 0 14px 40px rgba(36,193,211,.18);
-    }
-    .btn-primary:hover{filter:brightness(1.03);transform:translateY(-1px)}
-    .btn-secondary{
-      background: rgba(255,255,255,.03);
-      border-color: var(--line);
-      color: var(--text);
-    }
-    .btn-secondary:hover{background: rgba(255,255,255,.05)}
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(11,15,20,.95);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(10px);
+}
+.topbar-inner{
+  max-width:var(--max);
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 18px;
+}
 
-    .hero{
-      margin-top:20px;
-      background: radial-gradient(1200px 600px at 10% 0%, rgba(36,193,211,.10), transparent 55%),
-                  radial-gradient(900px 500px at 90% 15%, rgba(90,180,255,.08), transparent 55%),
-                  var(--surface);
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .hero-inner{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:18px;
-      padding:22px;
-      align-items:center;
-    }
-    @media (max-width: 860px){
-      .hero-inner{grid-template-columns:1fr; padding:18px}
-    }
+.brand strong{display:block}
+.brand small{color:var(--muted2)}
 
-    .badge{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      color: var(--muted);
-      font-size:13px;
-      margin-bottom:14px;
-      width:fit-content;
-    }
-    .badge .spark{
-      width:10px;height:10px;border-radius:50%;
-      background: rgba(36,193,211,.95);
-      box-shadow: 0 0 0 4px rgba(36,193,211,.10);
-    }
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 18px;
+  border-radius:14px;
+  font-weight:700;
+  cursor:pointer;
+}
 
-    h1{
-      font-family: "Playfair Display", Inter, system-ui, sans-serif;
-      font-weight:700;
-      letter-spacing:-.02em;
-      line-height:1.05;
-      margin:0 0 10px;
-      font-size: clamp(32px, 4.2vw, 46px);
-    }
-    .sub{
-      font-size: clamp(16px, 2.1vw, 18px);
-      color: var(--muted);
-      line-height:1.55;
-      margin:0 0 14px;
-    }
-    .em{
-      color: var(--text);
-      font-weight:700;
-    }
-    .hero-ctas{
-      display:flex;flex-wrap:wrap;gap:10px;
-      margin-top:14px;
-    }
+.btn-primary{
+  background:linear-gradient(180deg,var(--accent),var(--accent2));
+  color:#071217;
+  box-shadow:0 14px 40px rgba(36,193,211,.2);
+}
 
-    .trust{
-      display:flex;flex-wrap:wrap;gap:10px;
-      margin-top:14px;
-      color: var(--muted2);
-      font-size:13px;
-    }
-    .trust .titem{
-      display:flex;align-items:center;gap:8px;
-      padding:10px 12px;
-      border:1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255,255,255,.02);
-    }
-    .icon{
-      width:16px;height:16px;display:inline-block;
-    }
+.hero{
+  margin-top:20px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
 
-    .hero-media{
-      position:relative;
-      border-radius: 16px;
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
-      overflow:hidden;
-      min-height: 260px;
-    }
-    .hero-media img{
-      width:100%;
-      height:100%;
-      object-fit: cover;
-      display:block;
-      opacity:.95;
-    }
-    .overlay-card{
-      position:absolute;
-      left:14px; right:14px; bottom:14px;
-      padding:14px 14px;
-      border-radius: 16px;
-      background: rgba(11,15,20,.78);
-      border:1px solid rgba(255,255,255,.10);
-      backdrop-filter: blur(10px);
-    }
-    .overlay-card strong{display:block}
-    .overlay-card small{display:block;color:var(--muted2);margin-top:4px;line-height:1.35}
+.hero-inner{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:20px;
+  padding:22px;
+}
 
-    section{
-      margin-top:18px;
-      background: var(--surface2);
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.35);
-    }
-    .sec-title{
-      font-size:26px;
-      margin:0 0 8px;
-      letter-spacing:-.01em;
-    }
-    .sec-sub{
-      margin:0 0 14px;
-      color:var(--muted);
-      line-height:1.6;
-    }
+@media(max-width:860px){
+  .hero-inner{grid-template-columns:1fr}
+}
 
-    .list{
-      display:grid;
-      gap:12px;
-    }
-    .item{
-      background: rgba(255,255,255,.02);
-      border:1px solid var(--line);
-      border-radius: var(--radius2);
-      padding:14px 14px;
-    }
-    .item .label{
-      display:flex;align-items:center;gap:10px;
-      color: rgba(36,193,211,.95);
-      font-weight:800;
-      font-size:14px;
-      margin-bottom:6px;
-    }
-    .item p{margin:0;color:var(--muted);line-height:1.55}
+h1{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(30px,4vw,46px);
+  margin:0 0 10px;
+}
 
-    .grid-2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-    @media (max-width: 720px){ .grid-2{grid-template-columns:1fr} }
+.sub{
+  color:var(--muted);
+  line-height:1.6;
+}
 
-    .check{
-      display:flex;gap:12px;align-items:flex-start;
-      padding:14px 14px;
-      border:1px solid var(--line);
-      border-radius: var(--radius2);
-      background: rgba(255,255,255,.02);
-    }
-    .check .mark{
-      width:18px;height:18px;border-radius:6px;
-      background: rgba(61,220,151,.18);
-      border:1px solid rgba(61,220,151,.35);
-      display:flex;align-items:center;justify-content:center;
-      flex:0 0 auto;
-      margin-top:2px;
-    }
-    .check strong{display:block}
-    .check span{display:block;color:var(--muted);margin-top:4px;line-height:1.5}
+.hero-media{
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  position:relative;
+}
 
-    .callout{
-      border-radius: var(--radius);
-      border:1px solid rgba(245,196,81,.28);
-      background: rgba(245,196,81,.08);
-      padding:14px 14px;
-      color:#f7e2a8;
-      line-height:1.55;
-    }
+.hero-media img{
+  width:100%;
+  display:block;
+}
 
-    .note{
-      border-radius: var(--radius);
-      border:1px solid rgba(255,107,107,.22);
-      background: rgba(255,107,107,.08);
-      padding:14px 14px;
-      color:#ffd0d0;
-      line-height:1.55;
-    }
+.overlay{
+  position:absolute;
+  bottom:14px;
+  left:14px;
+  right:14px;
+  background:rgba(0,0,0,.65);
+  padding:14px;
+  border-radius:14px;
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);
+}
 
-    .pricing{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-      align-items:stretch;
-    }
-    @media (max-width: 860px){ .pricing{grid-template-columns:1fr} }
+section{
+  margin-top:18px;
+  background:var(--surface2);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:18px;
+}
 
-    .price-card{
-      background: rgba(255,255,255,.02);
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      padding:18px;
-    }
-    .price-tag{
-      font-size:54px;
-      letter-spacing:-.02em;
-      margin:10px 0 6px;
-      font-weight:900;
-    }
-    .price-sub{color:var(--muted);margin:0 0 14px}
+.sec-title{
+  font-size:26px;
+  margin-bottom:10px;
+}
 
-    .mini{
-      margin-top:10px;
-      display:grid;
-      gap:10px;
-    }
+.item{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius2);
+  padding:14px;
+  margin-bottom:10px;
+  color:var(--muted);
+  line-height:1.6;
+}
 
-    .about{
-      background: rgba(255,255,255,.02);
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      padding:18px;
-      line-height:1.65;
-      color: var(--muted);
-    }
-    .about strong{color:var(--text)}
+.price-tag{
+  font-size:52px;
+  font-weight:900;
+  margin:10px 0;
+}
 
-    .faq{
-      display:grid;
-      gap:10px;
-    }
-    details{
-      background: rgba(255,255,255,.02);
-      border:1px solid var(--line);
-      border-radius: var(--radius2);
-      padding:12px 14px;
-    }
-    summary{
-      cursor:pointer;
-      font-weight:800;
-      color: var(--text);
-      list-style:none;
-      outline:none;
-    }
-    summary::-webkit-details-marker{display:none}
-    details p{margin:10px 0 0;color:var(--muted);line-height:1.6}
-
-    /* Sticky bottom bar (mobile) */
-    .bottom{
-      position:fixed;
-      left:0; right:0; bottom:0;
-      background: rgba(11,15,20,.92);
-      border-top:1px solid var(--line);
-      backdrop-filter: blur(10px);
-      z-index:60;
-      padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
-    }
-    .bottom-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .bottom .meta{
-      display:flex;flex-direction:column;
-      gap:2px;
-    }
-    .bottom .meta strong{font-size:14px}
-    .bottom .meta small{color:var(--muted2);font-size:12px}
-
-    .bottom .btn{padding:12px 14px;border-radius:14px}
-    .hide-desktop{display:none}
-    @media (max-width: 720px){
-      .hide-desktop{display:inline-flex}
-      .topbar-inner{padding:12px 14px}
-      .wrap{padding-bottom:140px}
-    }
-
-    /* Anchor offset for sticky header */
-    .anchor{scroll-margin-top:86px}
-  </style>
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:rgba(11,15,20,.95);
+  border-top:1px solid var(--line);
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:60;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="topbar-inner">
-      <div class="brand" aria-label="Protocolo 7 Dias">
-        <div class="dot" aria-hidden="true"></div>
-        <div>
-          <strong>Protocolo 7 Dias</strong>
-          <small>Acesso vitalício • Garantia 7 dias</small>
-        </div>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div class="pill">Para mães e responsáveis</div>
-        <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E?bid=1771854323602" rel="noopener">
-          Ver inscrição
-        </a>
-      </div>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <strong>Protocolo 7 Dias</strong>
+      <small>Acesso vitalício • Garantia 7 dias</small>
     </div>
+    <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E?bid=1771854323602">
+      Comprar
+    </a>
   </div>
+</div>
 
-  <main class="wrap">
+<main class="wrap">
 
-    <!-- HERO -->
-    <div class="hero">
-      <div class="hero-inner">
-        <div>
-          <div class="badge">
-            <span class="spark" aria-hidden="true"></span>
-            Treinamento prático para a vida real
-          </div>
+<div class="hero">
+  <div class="hero-inner">
 
-          <h1>Vive em alerta dentro da própria casa?</h1>
-
-          <p class="sub">
-            Isso não é “falta de amor”. <span class="em">É falta de estratégia emocional e previsibilidade.</span><br/>
-            Quando impor limite vira confronto e ceder piora tudo, improvisar só aumenta a escalada.
-            <span class="em">Você precisa saber exatamente o que fazer na hora H — e no depois.</span>
-          </p>
-
-          <div class="hero-ctas">
-            <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E?bid=1771854323602" rel="noopener">
-              Quero saber o que fazer na crise
-            </a>
-            <a class="btn btn-secondary" href="#conteudo">
-              Ver o que tem dentro
-            </a>
-            <a class="btn btn-secondary" href="#faq">
-              Assistir vídeo (opcional)
-            </a>
-          </div>
-
-          <div class="trust" aria-label="Selos de confiança">
-            <div class="titem">
-              <span class="icon" aria-hidden="true">🔒</span> Compra segura
-            </div>
-            <div class="titem">
-              <span class="icon" aria-hidden="true">⚡</span> Acesso imediato
-            </div>
-            <div class="titem">
-              <span class="icon" aria-hidden="true">✅</span> Garantia 7 dias
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-media" aria-label="Imagem do autor e contexto">
-          <!-- coloque novahero.png na mesma pasta do HTML -->
-          <img src="novahero.png" alt="Dr. Fabio Schmidt" />
-          <div class="overlay-card">
-            <strong>Dr. Fabio Schmidt</strong>
-            <small>Médico • Pós-graduação em Psiquiatria • <b>CRM/SP 183549</b><br/>Foco em desregulação emocional e suporte a familiares</small>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MECANISMO -->
-    <section class="anchor" id="mecanismo">
-      <h2 class="sec-title">Por que improvisar piora tudo?</h2>
-      <p class="sec-sub">
-        Crises não escalam por “maldade”. Elas escalam por padrão.
-        Quando você explica demais, tenta convencer na lógica, discute no pico da emoção ou cede por exaustão,
-        sem perceber você reforça o ciclo.
-      </p>
-      <div class="callout">
-        O Protocolo 7 Dias substitui improviso por previsibilidade — e previsibilidade reduz escalada.
-      </div>
-    </section>
-
-    <!-- CICLO -->
-    <section class="anchor" id="ciclo">
-      <h2 class="sec-title">O ciclo que esgota a família</h2>
-      <p class="sec-sub">Sem roteiro, a casa vira um campo minado: você tenta acertar — e só piora.</p>
-
-      <div class="list">
-        <div class="item">
-          <div class="label"><span aria-hidden="true">●</span> Gatilho pequeno, crise grande</div>
-          <p>Qualquer conversa simples pode escalar rápido — e você passa a viver antecipando o pior.</p>
-        </div>
-
-        <div class="item">
-          <div class="label"><span aria-hidden="true">●</span> Limite vira guerra</div>
-          <p>Quando você impõe limite, vem acusação, ameaça, chantagem ou explosão — e você recua por exaustão.</p>
-        </div>
-
-        <div class="item">
-          <div class="label"><span aria-hidden="true">●</span> Depois vem o “pedágio”</div>
-          <p>Mesmo quando a crise passa, fica culpa, medo e desgaste — e a rotina não volta.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- O QUE MUDA -->
-    <section class="anchor" id="mudanca">
-      <h2 class="sec-title">O que muda quando você aplica</h2>
-      <p class="sec-sub">Não é milagre. É estrutura aplicada com consistência.</p>
-
-      <div class="grid-2">
-        <div class="check">
-          <div class="mark" aria-hidden="true">✓</div>
-          <div>
-            <strong>Crises mais previsíveis</strong>
-            <span>Você enxerga o ponto de virada antes de virar “guerra”.</span>
-          </div>
-        </div>
-
-        <div class="check">
-          <div class="mark" aria-hidden="true">✓</div>
-          <div>
-            <strong>Menos impulso na resposta</strong>
-            <span>Você reage com menos reatividade e mais direção.</span>
-          </div>
-        </div>
-
-        <div class="check">
-          <div class="mark" aria-hidden="true">✓</div>
-          <div>
-            <strong>Limite sem disputa de poder</strong>
-            <span>Firmeza sem humilhar, sem ceder, sem virar refém.</span>
-          </div>
-        </div>
-
-        <div class="check">
-          <div class="mark" aria-hidden="true">✓</div>
-          <div>
-            <strong>Menos “pedágio emocional”</strong>
-            <span>Depois da crise, você sabe reconstruir e reduzir repetição do padrão.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTEÚDO -->
-    <section class="anchor" id="conteudo">
-      <h2 class="sec-title">O que tem dentro</h2>
-      <p class="sec-sub">Direto ao ponto. Para usar no mesmo dia.</p>
-
-      <div class="list">
-        <div class="check">
-          <div class="mark" aria-hidden="true">✓</div>
-          <div>
-            <strong>Mapa da crise (ponto de virada)</strong>
-            <span>Como reconhecer quando está prestes a escalar — e o que fazer antes.</span>
-          </div>
-        </div>
-
-        <div class="check">
-          <div class="mark" aria-hidden="true">✓</div>
-          <div>
-            <strong>Scripts prontos (o que dizer)</strong>
-            <span>Frases para acusação, chantagem, ameaça e “sumir” — sem jogar gasolina.</span>
-          </div>
-        </div>
-
-        <div class="check">
-          <div class="mark" aria-hidden="true">✓</div>
-          <div>
-            <strong>O que NÃO fazer</strong>
-            <span>Erros que aumentam intensidade sem você perceber (mesmo com boa intenção).</span>
-          </div>
-        </div>
-
-        <div class="check">
-          <div class="mark" aria-hidden="true">✓</div>
-          <div>
-            <strong>Limites sem disputa de poder</strong>
-            <span>Firmeza sem humilhar, sem ceder, sem “guerra” — e sem virar refém.</span>
-          </div>
-        </div>
-
-        <div class="check">
-          <div class="mark" aria-hidden="true">✓</div>
-          <div>
-            <strong>Depois da crise</strong>
-            <span>Como reconstruir e reduzir repetição do padrão (sem pagar pedágio emocional).</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PLANO 7 DIAS -->
-    <section class="anchor" id="plano">
-      <h2 class="sec-title">Plano de 7 dias (organização prática)</h2>
-      <p class="sec-sub">
-        Não é “melhorar em 7 dias”.
-        É uma sequência objetiva para você sair do improviso e montar rotina, acordos e respostas consistentes.
+    <div>
+      <h1>Vive em alerta dentro da própria casa?</h1>
+      <p class="sub">
+        Isso não é falta de amor. É falta de estratégia emocional.
+        Quando você tenta impor limite e tudo vira confronto,
+        o problema não é você — é o improviso.
       </p>
 
-      <div class="grid-2">
-        <div class="item">
-          <div class="label" style="color:rgba(61,220,151,.95)"><span aria-hidden="true">●</span> Para quem é</div>
-          <p>
-            Para <b>mães e responsáveis</b> que convivem com crises frequentes em casa (especialmente com adolescentes e adultos jovens)
-            e querem lidar com firmeza <b>sem gritar, sem se perder e sem ceder por exaustão</b>.
-          </p>
-        </div>
-
-        <div class="note">
-          <b>Importante</b><br/>
-          Este treinamento é <b>educativo</b> e não substitui acompanhamento médico/psicológico.
-          Em risco iminente, procure emergência (SAMU 192) e serviços locais.
-        </div>
-      </div>
-    </section>
-
-    <!-- INSCRIÇÃO + PREÇO -->
-    <section class="anchor" id="inscricao">
-      <h2 class="sec-title">Inscrição</h2>
-      <p class="sec-sub">Acesso imediato • Aulas gravadas • Vitalício</p>
-
-      <div class="pricing">
-        <div class="price-card">
-          <div class="grid-2" style="gap:10px">
-            <div class="item" style="margin:0">
-              <div class="label"><span aria-hidden="true">●</span> Acesso</div>
-              <p><b>Imediato</b><br/><span style="color:var(--muted2)">Assista no seu tempo.</span></p>
-            </div>
-            <div class="item" style="margin:0">
-              <div class="label"><span aria-hidden="true">●</span> Formato</div>
-              <p><b>Aulas gravadas</b><br/><span style="color:var(--muted2)">Aplicável, sem enrolação.</span></p>
-            </div>
-            <div class="item" style="margin:0">
-              <div class="label"><span aria-hidden="true">●</span> Prazo</div>
-              <p><b>Vitalício</b><br/><span style="color:var(--muted2)">Volte quando precisar.</span></p>
-            </div>
-            <div class="item" style="margin:0">
-              <div class="label"><span aria-hidden="true">●</span> Suporte</div>
-              <p><b>Dúvidas na plataforma</b><br/><span style="color:var(--muted2)">Espaço para perguntas recorrentes.</span></p>
-            </div>
-          </div>
-
-          <div style="height:12px"></div>
-
-          <div class="callout">
-            <b>Garantia de 7 dias:</b> você acessa e decide com tranquilidade.
-            Se não fizer sentido, pode solicitar reembolso conforme a plataforma.
-          </div>
-        </div>
-
-        <div class="price-card">
-          <div class="label" style="color:var(--muted)"><span aria-hidden="true">●</span> Valor</div>
-          <div class="price-tag">R$ 219</div>
-          <p class="price-sub">à vista (ou parcelado no checkout)</p>
-
-          <a class="btn btn-primary" style="width:100%;margin:10px 0 12px;"
-             href="https://pay.hotmart.com/S104212285E?bid=1771854323602" rel="noopener">
-            Comprar agora
-          </a>
-
-          <div class="mini">
-            <div class="item" style="margin:0">
-              <div class="label" style="color:rgba(61,220,151,.95)"><span aria-hidden="true">✓</span> Treinamento completo</div>
-              <p>Crises, limites, comunicação e rotina.</p>
-            </div>
-            <div class="item" style="margin:0">
-              <div class="label" style="color:rgba(255,255,255,.85)"><span aria-hidden="true">🔒</span> Compra segura</div>
-              <p>Checkout Hotmart + acesso imediato.</p>
-            </div>
-            <div class="item" style="margin:0">
-              <div class="label" style="color:rgba(61,220,151,.95)"><span aria-hidden="true">✓</span> Aplicação prática</div>
-              <p>Scripts e estrutura para a hora H e o depois.</p>
-            </div>
-          </div>
-
-          <p style="margin:12px 0 0;color:var(--muted2);font-size:13px;line-height:1.5">
-            Ao clicar em “Comprar agora”, você será direcionado(a) para o checkout da Hotmart.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOBRE -->
-    <section class="anchor" id="sobre">
-      <h2 class="sec-title">Sobre o Dr. Fabio Schmidt</h2>
-      <p class="sec-sub">Conteúdo baseado em prática clínica e literatura médica, adaptado para o ambiente familiar.</p>
-
-      <div class="about">
-        <strong>Médico desde 2016</strong>, com pós-graduação em Psiquiatria (2021), atuação em CAPS com foco em desregulação emocional,
-        acompanhamento de casos graves em adolescentes e adultos jovens e suporte a familiares.<br/><br/>
-        <strong>CRM/SP 183549</strong>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="anchor" id="faq">
-      <h2 class="sec-title">Perguntas frequentes</h2>
-      <p class="sec-sub">Curto e honesto, sem enrolação.</p>
-
-      <div class="faq">
-        <details>
-          <summary>O conteúdo é ao vivo?</summary>
-          <p>Não. São aulas gravadas para você assistir no seu tempo, com acesso imediato após a compra.</p>
-        </details>
-        <details>
-          <summary>Isso substitui acompanhamento médico/psicológico?</summary>
-          <p>Não. Este treinamento é educativo e não substitui consulta, diagnóstico ou tratamento. Em risco iminente, procure emergência (SAMU 192) e serviços locais.</p>
-        </details>
-        <details>
-          <summary>Tem garantia?</summary>
-          <p>Sim. Garantia de 7 dias: você acessa e decide com tranquilidade. Se não fizer sentido, pode solicitar reembolso conforme a plataforma.</p>
-        </details>
-        <details>
-          <summary>Como acesso após a compra?</summary>
-          <p>Após a confirmação no checkout, você recebe o acesso pela Hotmart (e-mail e/ou área do usuário). O acesso é imediato.</p>
-        </details>
-      </div>
-
-      <div style="height:14px"></div>
-
-      <p style="margin:0;color:var(--muted2);font-size:13px;line-height:1.6">
-        Aviso: este site oferece conteúdo educacional. Não constitui consulta, diagnóstico ou tratamento.
-        Em situação de emergência ou risco de autoagressão, acione o SAMU (192) e serviços locais.
-      </p>
-
-      <p style="margin:14px 0 0;color:var(--muted2);font-size:12px">
-        © 2026 Protocolo 7 Dias • Dr. Fabio Schmidt • CRM/SP 183549
-      </p>
-    </section>
-
-  </main>
-
-  <!-- STICKY BOTTOM BAR -->
-  <div class="bottom" role="navigation" aria-label="Barra fixa de compra">
-    <div class="bottom-inner">
-      <div class="meta">
-        <strong>Protocolo 7 Dias</strong>
-        <small>Acesso imediato • Garantia 7 dias</small>
-      </div>
-
-      <a class="btn btn-primary" href="https://pay.hotmart.com/S104212285E?bid=1771854323602" rel="noopener">
-        Comprar
+      <a class="btn btn-primary"
+         href="https://pay.hotmart.com/S104212285E?bid=1771854323602"
+         style="margin-top:15px;">
+        Quero saber o que fazer na crise
       </a>
     </div>
-  </div>
 
-  <script>
-    // smooth scroll for internal anchors
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        const id = a.getAttribute('href');
-        if(!id || id === '#') return;
-        const el = document.querySelector(id);
-        if(!el) return;
-        e.preventDefault();
-        el.scrollIntoView({behavior:'smooth', block:'start'});
-      });
-    });
-  </script>
+    <div class="hero-media">
+      <!-- CORRIGIDO PARA novahero.PNG -->
+      <img src="./novahero.PNG" alt="Dr. Fabio Schmidt">
+      <div class="overlay">
+        <strong>Dr. Fabio Schmidt</strong><br>
+        Médico • Pós-graduação em Psiquiatria<br>
+        CRM/SP 183549
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<section>
+  <h2 class="sec-title">Por que improvisar piora tudo?</h2>
+  <div class="item">
+    Crises escalam por padrão, não por maldade.
+    Explicar demais, discutir no pico da emoção
+    ou ceder por exaustão reforça o ciclo.
+  </div>
+</section>
+
+<section>
+  <h2 class="sec-title">O que tem dentro</h2>
+
+  <div class="item"><strong>Mapa da crise</strong> — reconhecer o ponto de virada.</div>
+  <div class="item"><strong>Scripts prontos</strong> — o que dizer na acusação ou ameaça.</div>
+  <div class="item"><strong>O que NÃO fazer</strong> — erros que intensificam tudo.</div>
+  <div class="item"><strong>Limites estruturados</strong> — firmeza sem virar guerra.</div>
+
+</section>
+
+<section>
+  <h2 class="sec-title">Inscrição</h2>
+
+  <div class="price-tag">R$ 219</div>
+  <p style="color:var(--muted);">Acesso imediato • Vitalício • Garantia 7 dias</p>
+
+  <a class="btn btn-primary"
+     href="https://pay.hotmart.com/S104212285E?bid=1771854323602"
+     style="width:100%;margin-top:10px;">
+     Comprar agora
+  </a>
+</section>
+
+<section>
+  <h2 class="sec-title">Importante</h2>
+  <div class="item">
+    Este conteúdo é educativo e não substitui acompanhamento médico ou psicológico.
+    Em situação de emergência, procure serviços locais.
+  </div>
+</section>
+
+</main>
+
+<div class="bottom">
+  <div>
+    <strong>Protocolo 7 Dias</strong><br>
+    <small style="color:var(--muted2)">Acesso imediato</small>
+  </div>
+  <a class="btn btn-primary"
+     href="https://pay.hotmart.com/S104212285E?bid=1771854323602">
+     Comprar
+  </a>
+</div>
+
 </body>
 </html>
