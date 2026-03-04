@@ -1,34 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Radar de Crise — SOS</title>
+<title>Radar de Crise</title>
 
 <style>
-
-:root{
---bg:#0f1115;
---text:#e9edf6;
---muted:#aab3c5;
---line:rgba(255,255,255,.08);
---accent:#64d6a0;
---danger:#ff6b6b;
---radius:18px;
---sans:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial;
---max:900px;
-}
-
-/* FUNDO AJUSTADO */
 
 body{
 
 margin:0;
-font-family:var(--sans);
-color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto;
+color:#fff;
+
 background-color:#0f1115;
 
 background-image:
@@ -36,117 +23,71 @@ radial-gradient(900px 500px at 15% -5%, rgba(100,214,160,.12), transparent 60%),
 radial-gradient(700px 400px at 85% -5%, rgba(242,182,108,.10), transparent 65%),
 radial-gradient(900px 700px at 50% 120%, rgba(100,214,160,.08), transparent 70%);
 
-background-repeat:no-repeat;
-background-attachment:fixed;
-
-padding-bottom:90px;
-
 }
 
-/* CONTAINER */
+.container{
 
-.wrap{
-
-max-width:var(--max);
+max-width:720px;
 margin:auto;
-padding:20px;
+padding:24px;
+padding-bottom:120px;
 
-background:linear-gradient(
-180deg,
-rgba(15,17,21,0.92),
-rgba(15,17,21,0.96)
-);
-
-border-radius:28px;
+background:rgba(15,17,21,.94);
+border-radius:26px;
 
 }
 
-/* HEADER */
+h1{
 
-header{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:20px;
-
-}
-
-.title{
-
-font-weight:800;
-font-size:18px;
+margin:0;
+font-size:24px;
 
 }
 
 .subtitle{
 
-color:var(--muted);
-font-size:12px;
+color:#aab3c5;
+font-size:13px;
+margin-bottom:24px;
 
 }
 
-/* BOTÕES */
+.section{
 
-button{
-
-border:1px solid var(--line);
-background:#1a2132;
-color:white;
-
-padding:12px 14px;
-
-border-radius:12px;
-
-font-weight:600;
-
-cursor:pointer;
+margin-top:26px;
 
 }
-
-/* CHIPS */
 
 .chips{
 
 display:flex;
 flex-wrap:wrap;
-gap:8px;
+gap:10px;
 
 }
 
 .chip{
 
-border:1px solid var(--line);
-padding:10px;
+padding:12px 14px;
 border-radius:999px;
+border:1px solid rgba(255,255,255,.08);
 cursor:pointer;
-font-size:13px;
 
 }
 
 .chip.active{
 
 background:#64d6a020;
-
 border-color:#64d6a0;
-
-}
-
-/* INTENSIDADE */
-
-.levels{
-
-display:grid;
-gap:10px;
-margin-top:10px;
 
 }
 
 .level{
 
-border:1px solid var(--line);
-padding:15px;
+border:1px solid rgba(255,255,255,.08);
+padding:14px;
 border-radius:14px;
+margin-top:10px;
 cursor:pointer;
 
 }
@@ -158,53 +99,58 @@ background:#64d6a015;
 
 }
 
-/* BOX */
-
 .box{
 
-border:1px solid var(--line);
 border-radius:14px;
-padding:16px;
-margin-top:10px;
+padding:18px;
+margin-top:14px;
 
-background:#0f1115cc;
-
-backdrop-filter:blur(6px);
+border:1px solid rgba(255,255,255,.08);
 
 }
-
-.label{
-
-font-size:11px;
-letter-spacing:.1em;
-color:var(--muted);
-
-}
-
-.txt{
-
-font-weight:700;
-margin-top:6px;
-
-}
-
-/* CORES */
 
 .bad{
 
 border-color:#ff6b6b;
-background:#ff6b6b15;
+background:#ff6b6b12;
 
 }
 
 .good{
 
 border-color:#64d6a0;
-background:#64d6a015;
+background:#64d6a012;
 
 }
 
-/* BOTTOM BAR */
+.info{
+
+border-color:#6ea8ff;
+background:#6ea8ff12;
+
+}
+
+button{
+
+margin-top:16px;
+padding:14px;
+border-radius:12px;
+border:none;
+
+background:#64d6a0;
+color:#000;
+
+font-weight:600;
+cursor:pointer;
+
+}
+
+.secondary{
+
+background:#222;
+color:#fff;
+
+}
 
 .bottom{
 
@@ -213,19 +159,41 @@ bottom:0;
 left:0;
 right:0;
 
-background:#0f1115ee;
+background:#0f1115;
+border-top:1px solid rgba(255,255,255,.08);
 
+display:flex;
+justify-content:space-around;
 padding:12px;
-
-border-top:1px solid var(--line);
 
 }
 
-.bottom button{
+.nav{
 
-background:#64d6a0;
-color:black;
-width:100%;
+color:#aaa;
+cursor:pointer;
+
+}
+
+.nav.active{
+
+color:#64d6a0;
+
+}
+
+.lock{
+
+margin-top:20px;
+color:#999;
+font-size:14px;
+
+}
+
+.history{
+
+margin-top:20px;
+font-size:13px;
+color:#bbb;
 
 }
 
@@ -235,164 +203,285 @@ width:100%;
 
 <body>
 
-<div class="wrap">
-
-<header>
-
-<div>
-
-<div class="title">RADAR DE CRISE</div>
-
-<div class="subtitle">Dr Fabio Schmidt • CRM-SP 183549</div>
-
-</div>
-
-<button onclick="risk()">🚨 risco</button>
-
-</header>
-
-<h3>1) O que está acontecendo?</h3>
-
-<div class="chips" id="scenarios"></div>
-
-<h3>2) Intensidade da crise</h3>
-
-<div class="levels" id="levels"></div>
-
-<div id="result"></div>
-
-<button onclick="copy()" id="copy" disabled>Copiar resposta</button>
-
-</div>
+<div class="container" id="app"></div>
 
 <div class="bottom">
 
-<button onclick="panic()">🔥 Crise agora</button>
+<div class="nav active" onclick="openTab('crise')">🚨</div>
+
+<div class="nav" onclick="openTab('biblioteca')">📚</div>
+
+<div class="nav" onclick="openTab('padroes')">📊</div>
+
+<div class="nav" onclick="openTab('guia')">⚙️</div>
 
 </div>
 
 <script>
 
-const scenarios=[
-
-["Medo de abandono",
-"Você tá paranoico de novo. Para de drama.",
-"Entendo que isso te deixou inseguro. Deixa eu esclarecer minha intenção."
-],
-
-["Raiva explosiva",
-"Você está exagerando.",
-"Eu vejo que a raiva está forte agora. Vamos pausar."
-
-],
-
-["Culpa extrema",
-"Para de se culpar.",
-"Teve impacto sim, mas você não é definido por esse momento."
-
-],
-
-["Queda após melhora",
-"Então por que você voltou a ficar assim?",
-"Isso é um episódio, não uma recaída."
-
-],
-
-["Saídas / separações",
-"Você vai ficar bem.",
-"Vou sair por X tempo e volto depois."
-
-],
-
-]
+let tab="crise"
 
 let selectedScenario=0
 let selectedLevel=0
 
-function render(){
+const scenarios=[
 
-const s=document.getElementById("scenarios")
-s.innerHTML=""
+{
+title:"Medo de abandono",
+piora:"Você está paranoico.",
+porq:"Invalida a experiência emocional.",
+resposta:"Entendo que isso te deixou inseguro. Vamos conversar com calma."
+},
 
-scenarios.forEach((c,i)=>{
+{
+title:"Raiva explosiva",
+piora:"Você está exagerando.",
+porq:"Minimiza emoção intensa.",
+resposta:"Eu vejo que a raiva está forte agora."
+},
 
-let d=document.createElement("div")
+{
+title:"Acusação injusta",
+piora:"Isso é coisa da sua cabeça.",
+porq:"Parece gaslighting para quem está em crise.",
+resposta:"Eu vejo que isso te feriu."
+},
 
-d.className="chip"+(i==selectedScenario?" active":"")
+{
+title:"Culpa extrema",
+piora:"Para de se culpar.",
+porq:"Ignora o peso emocional.",
+resposta:"Teve impacto, mas isso não define quem você é."
+},
 
-d.innerText=c[0]
-
-d.onclick=()=>{
-
-selectedScenario=i
-render()
+{
+title:"Crise após melhora",
+piora:"Mas você estava bem ontem.",
+porq:"Aumenta frustração.",
+resposta:"Isso é um episódio, não uma recaída."
 }
 
-s.appendChild(d)
+]
+
+function openTab(t){
+
+tab=t
+
+render()
+
+}
+
+function render(){
+
+let html=""
+
+if(tab=="crise"){
+
+html+=`
+<h1>RADAR DE CRISE</h1>
+
+<div class="subtitle">
+Dr Fabio Schmidt • CRM-SP 183549
+</div>
+
+<div class="section">
+
+<b>1 — O que está acontecendo?</b>
+
+<div class="chips">
+`
+
+scenarios.forEach((s,i)=>{
+
+html+=`
+<div class="chip ${i==selectedScenario?"active":""}"
+onclick="selectScenario(${i})">
+
+${s.title}
+
+</div>
+`
 
 })
+
+html+=`
+</div>
+</div>
+
+<div class="section">
+
+<b>2 — Intensidade da crise</b>
+
+`
 
 const levels=["Leve","Moderada","Grave"]
 
-const l=document.getElementById("levels")
+levels.forEach((l,i)=>{
 
-l.innerHTML=""
+html+=`
+<div class="level ${i==selectedLevel?"active":""}"
+onclick="selectLevel(${i})">
 
-levels.forEach((t,i)=>{
+${l}
 
-let d=document.createElement("div")
-
-d.className="level"+(i==selectedLevel?" active":"")
-
-d.innerHTML="<b>"+t+"</b>"
-
-d.onclick=()=>{
-
-selectedLevel=i
-render()
-show()
-
-}
-
-l.appendChild(d)
+</div>
+`
 
 })
 
+html+=`</div>`
+
+if(selectedLevel!=null){
+
+let s=scenarios[selectedScenario]
+
+html+=`
+
+<div class="box bad">
+
+<b>Frase que piora</b><br>
+${s.piora}
+
+</div>
+
+<div class="box info">
+
+<b>Por que piora</b><br>
+${s.porq}
+
+</div>
+
+<div class="box good">
+
+<b>Substitua por</b><br>
+${s.resposta}
+
+</div>
+
+<button onclick="copy()">Copiar resposta</button>
+
+<button class="secondary" onclick="save()">Registrar crise</button>
+
+`
+
 }
 
-function show(){
+}
 
-const r=document.getElementById("result")
+if(tab=="biblioteca"){
 
-let c=scenarios[selectedScenario]
+html+=`
 
-r.innerHTML=
+<h1>Biblioteca</h1>
 
-"<div class='box bad'><div class='label'>FRASE QUE PIORA</div><div class='txt'>"+c[1]+"</div></div>"+
+<div class="subtitle">
+Cenários disponíveis no Radar FREE
+</div>
 
-"<div class='box good'><div class='label'>SUBSTITUA POR</div><div class='txt'>"+c[2]+"</div></div>"
+`
 
-document.getElementById("copy").disabled=false
+scenarios.forEach(s=>{
+
+html+=`<div class="box">${s.title}</div>`
+
+})
+
+html+=`
+
+<div class="lock">
+
+Mais cenários disponíveis no Radar completo.
+
+</div>
+
+`
+
+}
+
+if(tab=="padroes"){
+
+html+=`
+
+<h1>Padrões</h1>
+
+<div class="lock">
+
+Disponível na versão completa do Radar.
+
+</div>
+
+`
+
+}
+
+if(tab=="guia"){
+
+html+=`
+
+<h1>Guia rápido</h1>
+
+<div class="box">
+
+<b>Regra 1</b><br>
+Validar emoção antes de explicar.
+
+</div>
+
+<div class="box">
+
+<b>Regra 2</b><br>
+Evitar frases que minimizam sentimento.
+
+</div>
+
+<div class="box">
+
+<b>Regra 3</b><br>
+Se a emoção subir, pausar conversa.
+
+</div>
+
+`
+
+}
+
+document.getElementById("app").innerHTML=html
+
+}
+
+function selectScenario(i){
+
+selectedScenario=i
+render()
+
+}
+
+function selectLevel(i){
+
+selectedLevel=i
+render()
 
 }
 
 function copy(){
 
-navigator.clipboard.writeText(scenarios[selectedScenario][2])
+navigator.clipboard.writeText(
+scenarios[selectedScenario].resposta
+)
 
-alert("copiado")
-
-}
-
-function panic(){
-
-alert("Eu vejo que isso te deixou muito ferido. Vamos pausar e conversar quando estivermos mais calmos.")
+alert("Resposta copiada")
 
 }
 
-function risk(){
+function save(){
 
-alert("Se houver risco imediato procure emergência ou ligue CVV 188")
+let h=localStorage.getItem("crises") || ""
+
+h+=scenarios[selectedScenario].title+" | "
+
+localStorage.setItem("crises",h)
+
+alert("Crise registrada")
 
 }
 
