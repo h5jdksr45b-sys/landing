@@ -1,614 +1,756 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>RADAR DE CRISE TPB</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <style>
+    :root{
+      --bg:#0c0f15;
+      --panel: rgba(15,17,24,.72);
+      --panel2: rgba(255,255,255,.04);
+      --text:#eef2ff;
+      --muted:#a7b0c6;
+      --line: rgba(255,255,255,.10);
+      --accent:#66e0a6;
+      --accent2:#f1b46b;
+      --danger:#ff6b6b;
+      --info:#7aa7ff;
+      --shadow: 0 18px 60px rgba(0,0,0,.42);
+      --radius:18px;
+      --radius2:14px;
+      --max: 820px;
+      --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial;
+    }
 
-<title>RADAR DE CRISE TPB</title>
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(900px 520px at 18% -8%, rgba(102,224,166,.14), transparent 62%),
+        radial-gradient(820px 420px at 86% -8%, rgba(241,180,107,.12), transparent 66%),
+        radial-gradient(900px 760px at 50% 120%, rgba(102,224,166,.10), transparent 72%),
+        var(--bg);
+      background-attachment: fixed;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      padding-bottom: 92px; /* espaço para bottom bar */
+    }
 
-<style>
-:root{
-  --bg:#0f1115;
-  --text:#ffffff;
-  --muted:#aab3c5;
-  --line:rgba(255,255,255,.10);
-  --accent:#64d6a0;
-  --danger:#ff6b6b;
-  --info:#6ea8ff;
-}
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 14px 28px;
+    }
 
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial;
-  color:var(--text);
-  background-color:var(--bg);
-  background-image:
-    radial-gradient(900px 520px at 15% -6%, rgba(100,214,160,.12), transparent 60%),
-    radial-gradient(760px 420px at 85% -6%, rgba(242,182,108,.10), transparent 65%),
-    radial-gradient(920px 760px at 50% 120%, rgba(100,214,160,.08), transparent 70%);
-  background-repeat:no-repeat;
-  background-attachment:fixed;
-}
+    /* App shell */
+    .shell{
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(15,17,24,.76), rgba(15,17,24,.88));
+      box-shadow: var(--shadow);
+      border-radius: 26px;
+      overflow:hidden;
+    }
 
-.container{
-  max-width:720px;
-  margin:auto;
-  padding:22px 18px 130px;
-  background:linear-gradient(180deg, rgba(15,17,21,.92), rgba(15,17,21,.96));
-  border-radius:26px;
-}
+    .top{
+      padding: 16px 16px 14px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), transparent);
+    }
 
-.header{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:14px;
-}
+    .brandRow{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+    }
 
-.logo{
-  width:44px;
-  height:44px;
-  border-radius:12px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.03);
-  object-fit:cover;
-  flex:0 0 auto;
-}
+    .brandLeft{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
 
-.hgroup{
-  min-width:0;
-}
+    .logo{
+      width:44px;
+      height:44px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      object-fit: cover;
+      flex: 0 0 auto;
+    }
 
-.title{
-  font-size:30px;
-  font-weight:900;
-  letter-spacing:.2px;
-  line-height:1.05;
-  margin:0;
-}
+    .titles{
+      min-width:0;
+    }
 
-.subtitle{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:6px;
-  line-height:1.35;
-}
+    .title{
+      font-size: 30px;
+      font-weight: 950;
+      letter-spacing: .2px;
+      line-height: 1.05;
+      margin:0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-.section{
-  margin-top:22px;
-}
+    .subtitle{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
 
-.section b{
-  display:block;
-  margin-bottom:10px;
-  font-size:14px;
-  letter-spacing:.2px;
-}
+    .chipBtn{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-weight: 900;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+    }
 
-.chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
+    .chipBtn:active{ transform: translateY(1px); }
 
-.chip{
-  padding:12px 14px;
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.02);
-  cursor:pointer;
-  user-select:none;
-  font-weight:700;
-  font-size:13px;
-}
+    .content{
+      padding: 16px;
+    }
 
-.chip.active{
-  border-color:rgba(100,214,160,.65);
-  background:rgba(100,214,160,.12);
-}
+    /* sections */
+    .section{
+      margin-top: 16px;
+    }
 
-.levels{
-  display:grid;
-  gap:10px;
-}
+    .sectionTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 10px;
+    }
 
-.level{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.02);
-  padding:14px;
-  border-radius:14px;
-  cursor:pointer;
-  user-select:none;
-}
+    .sectionTitle .h{
+      font-weight: 950;
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
 
-.level .k{
-  font-weight:900;
-  margin-bottom:4px;
-}
+    .hint{
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.35;
+    }
 
-.level .d{
-  color:var(--muted);
-  font-size:12.5px;
-  line-height:1.35;
-}
+    /* scenario grid */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 520px){
+      .grid{ grid-template-columns: 1fr; }
+      .title{ font-size: 28px; }
+    }
 
-.level.active{
-  border-color:rgba(100,214,160,.65);
-  background:rgba(100,214,160,.10);
-}
+    .scenario{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding: 12px 12px;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .08s ease;
+    }
+    .scenario:active{ transform: translateY(1px); }
+    .scenario.active{
+      border-color: rgba(102,224,166,.55);
+      background: linear-gradient(180deg, rgba(102,224,166,.14), rgba(255,255,255,.02));
+    }
+    .scenario .k{
+      font-weight: 950;
+      font-size: 13.5px;
+      line-height: 1.2;
+    }
+    .scenario .d{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.35;
+    }
 
-.box{
-  border-radius:14px;
-  padding:16px;
-  margin-top:12px;
-  border:1px solid var(--line);
-  background:rgba(0,0,0,.18);
-  backdrop-filter:blur(6px);
-}
+    /* intensity segmented */
+    .seg{
+      display:flex;
+      gap:8px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      padding: 8px;
+      border-radius: 16px;
+    }
+    .segBtn{
+      flex:1;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 12px;
+      padding: 12px 10px;
+      font-weight: 950;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .segBtn.active{
+      color: var(--text);
+      border-color: rgba(102,224,166,.55);
+      background: rgba(102,224,166,.12);
+    }
 
-.bad{ border-color:rgba(255,107,107,.60); background:rgba(255,107,107,.10); }
-.good{ border-color:rgba(100,214,160,.60); background:rgba(100,214,160,.10); }
-.info{ border-color:rgba(110,168,255,.60); background:rgba(110,168,255,.10); }
+    /* cards */
+    .card{
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.16);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-top: 10px;
+      backdrop-filter: blur(8px);
+    }
 
-.box .lab{
-  color:var(--muted);
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  font-weight:900;
-}
+    .label{
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 950;
+    }
+    .card .txt{
+      margin-top: 8px;
+      font-size: 15px;
+      line-height: 1.45;
+      font-weight: 900;
+    }
+    .card .why{
+      margin-top: 8px;
+      color: rgba(238,242,255,.80);
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
 
-.box .txt{
-  margin-top:8px;
-  font-size:15px;
-  line-height:1.45;
-  font-weight:800;
-}
+    .card.bad{ border-color: rgba(255,107,107,.55); background: rgba(255,107,107,.10); }
+    .card.info{ border-color: rgba(122,167,255,.55); background: rgba(122,167,255,.10); }
+    .card.good{ border-color: rgba(102,224,166,.55); background: rgba(102,224,166,.10); }
 
-.actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:14px;
-}
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
 
-button{
-  border:none;
-  border-radius:12px;
-  padding:14px 14px;
-  cursor:pointer;
-  font-weight:900;
-  font-size:14px;
-  user-select:none;
-}
+    .btn{
+      border:none;
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-weight: 950;
+      font-size: 14px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:active{ transform: translateY(1px); }
 
-.btnPrimary{
-  background:var(--accent);
-  color:#08120d;
-}
+    .btn.primary{
+      background: var(--accent);
+      color: #06110c;
+    }
+    .btn.secondary{
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
 
-.btnSecondary{
-  background:#222734;
-  color:#fff;
-  border:1px solid var(--line);
-}
+    .note{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.35;
+    }
 
-button:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
+    /* lists */
+    .listItem{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-top: 10px;
+    }
+    .lock{
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
 
-.note{
-  margin-top:12px;
-  color:var(--muted);
-  font-size:12.5px;
-  line-height:1.35;
-}
+    /* bottom nav */
+    .bottom{
+      position: fixed;
+      left:0; right:0; bottom:0;
+      background: rgba(12,15,21,.88);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      z-index: 50;
+    }
+    .bottomInner{
+      max-width: var(--max);
+      margin: 0 auto;
+      display:flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .nav{
+      flex:1;
+      text-align:center;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      padding: 10px 8px;
+      color: var(--muted);
+      cursor:pointer;
+      user-select:none;
+      font-weight: 950;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    .nav .ico{ font-size: 16px; display:block; margin-bottom: 4px; }
+    .nav.active{
+      color: var(--accent);
+      border-color: rgba(102,224,166,.35);
+      background: rgba(102,224,166,.08);
+    }
 
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:86px;
-  transform:translateX(-50%);
-  background:rgba(15,17,21,.92);
-  border:1px solid var(--line);
-  color:var(--text);
-  padding:10px 12px;
-  border-radius:12px;
-  font-weight:900;
-  font-size:13px;
-  display:none;
-  z-index:99;
-}
-
-.bottom{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:rgba(15,17,21,.92);
-  border-top:1px solid var(--line);
-  padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-  backdrop-filter:blur(10px);
-}
-
-.bottomInner{
-  max-width:720px;
-  margin:auto;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  gap:10px;
-}
-
-.nav{
-  color:#9aa4bb;
-  cursor:pointer;
-  font-size:14px;
-  font-weight:900;
-  user-select:none;
-  padding:10px 10px;
-  border-radius:12px;
-  border:1px solid transparent;
-}
-
-.nav.active{
-  color:var(--accent);
-  border-color:rgba(100,214,160,.35);
-  background:rgba(100,214,160,.08);
-}
-
-.listItem{
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.02);
-  border-radius:14px;
-  padding:14px;
-  margin-top:10px;
-}
-
-.lock{
-  margin-top:14px;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.4;
-}
-
-.smallBtn{
-  padding:10px 12px;
-  font-size:13px;
-}
-</style>
-
+    /* toast */
+    .toast{
+      position: fixed;
+      left:50%;
+      bottom: 96px;
+      transform: translateX(-50%);
+      background: rgba(12,15,21,.92);
+      border: 1px solid var(--line);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-weight: 950;
+      font-size: 13px;
+      display:none;
+      z-index: 60;
+      box-shadow: var(--shadow);
+    }
+  </style>
 </head>
+
 <body>
-
-<div class="container" id="app"></div>
-
-<div class="bottom">
-  <div class="bottomInner">
-    <div class="nav active" id="nav-crise" onclick="openTab('crise')">🚨 Crise</div>
-    <div class="nav" id="nav-biblioteca" onclick="openTab('biblioteca')">📚 Biblioteca</div>
-    <div class="nav" id="nav-padroes" onclick="openTab('padroes')">📊 Padrões</div>
-    <div class="nav" id="nav-guia" onclick="openTab('guia')">⚙️ Guia</div>
+  <div class="wrap">
+    <div class="shell">
+      <div class="top" id="top"></div>
+      <div class="content" id="app"></div>
+    </div>
   </div>
-</div>
 
-<div class="toast" id="toast">Copiado.</div>
+  <div class="bottom">
+    <div class="bottomInner">
+      <div class="nav active" id="nav-crise" onclick="openTab('crise')"><span class="ico">🚨</span>Crise</div>
+      <div class="nav" id="nav-biblioteca" onclick="openTab('biblioteca')"><span class="ico">📚</span>Biblioteca</div>
+      <div class="nav" id="nav-padroes" onclick="openTab('padroes')"><span class="ico">📊</span>Padrões</div>
+      <div class="nav" id="nav-guia" onclick="openTab('guia')"><span class="ico">⚙️</span>Guia</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copiado.</div>
 
 <script>
-let tab = "crise";
-let selectedScenario = 0;
-let selectedLevel = 0;
+  const LOGO_FILE = "701EA1DC-33CE-40FC-BA04-F655886CBA94.png";
+  const STORAGE_KEY = "radarCriseTPBFreeHistoryV2";
 
-const LOGO_FILE = "701EA1DC-33CE-40FC-BA04-F655886CBA94.png";
-const STORAGE_KEY = "radar_tpb_free_history_v1";
+  let tab = "crise";
+  let selectedScenario = 0;
+  let selectedLevel = 0;
 
-const levels = [
-  { title: "Leve", desc: "Ainda dá para conversar com alguma organização." },
-  { title: "Moderada", desc: "Emoção alta. Foque em reduzir a escalada." },
-  { title: "Grave", desc: "Prioridade é segurança e pausa imediata." }
-];
+  const levels = [
+    { title: "Leve", desc: "Ainda dá para conversar com alguma organização." },
+    { title: "Moderada", desc: "Emoção alta. Foque em reduzir escalada." },
+    { title: "Grave", desc: "Segurança e pausa. Sem debate agora." }
+  ];
 
-// FREE: 5 cenários essenciais
-// intensidade muda a resposta (resposta[0]=leve, [1]=moderada, [2]=grave)
-const scenarios = [
-  {
-    title: "Medo de abandono",
-    piora: "Você está paranoico.",
-    porq: "Invalida o medo e aumenta vergonha e urgência.",
-    resposta: [
-      "Entendo que isso te deixou inseguro. Minha intenção não foi te afastar.",
-      "Eu vejo que esse medo apareceu forte agora. Vamos desacelerar e falar com calma.",
-      "Eu entendo que isso ficou intenso. Vamos pausar um pouco e depois retomamos."
-    ]
-  },
-  {
-    title: "Raiva explosiva",
-    piora: "Você está exagerando.",
-    porq: "Minimiza a emoção e aumenta a escalada.",
-    resposta: [
-      "Eu vejo que isso te irritou. Quero entender sem briga.",
-      "A raiva está forte agora. Vamos diminuir o ritmo da conversa para não piorar.",
-      "Agora está muito intenso. Pausa. A gente retoma quando baixar."
-    ]
-  },
-  {
-    title: "Acusação injusta",
-    piora: "Isso é coisa da sua cabeça.",
-    porq: "Parece gaslighting durante crise e aumenta desconfiança.",
-    resposta: [
-      "Eu entendo que isso te feriu. Vamos olhar com calma.",
-      "Eu vejo que isso mexeu muito com você. Vamos desacelerar e falar sem ataque.",
-      "Eu entendo que está doendo. Pausa agora. Depois voltamos com calma."
-    ]
-  },
-  {
-    title: "Você não me ama",
-    piora: "Já falei mil vezes.",
-    porq: "Transforma insegurança em ‘erro’, piorando a busca por certeza.",
-    resposta: [
-      "Eu te amo. E eu vejo que agora você está inseguro.",
-      "Eu te amo. Vamos cuidar desse medo agora, sem discussão.",
-      "Eu te amo. Pausa. Vou ficar por perto e a gente conversa quando baixar."
-    ]
-  },
-  {
-    title: "Culpa extrema",
-    piora: "Para de se culpar.",
-    porq: "Invalida o peso emocional e dá sensação de ‘não sou entendido’.",
-    resposta: [
-      "Eu vejo que você está se sentindo muito culpado. Vamos separar fatos e passos.",
-      "Isso parece estar pesando muito agora. Vamos reduzir a pressão e organizar o próximo passo.",
-      "Vamos focar em acalmar primeiro. Depois a gente pensa em reparação e solução."
-    ]
+  // FREE — 5 cenários essenciais (intensidade muda resposta)
+  const scenarios = [
+    {
+      title: "Medo de abandono",
+      desc: "rejeição real ou percebida",
+      piora: "Você está paranoico.",
+      porq: "Invalida o medo e aumenta vergonha e urgência.",
+      resposta: [
+        "Entendo que isso te deixou inseguro. Minha intenção não foi te afastar.",
+        "Eu vejo que esse medo apareceu forte agora. Vamos desacelerar e falar com calma.",
+        "Eu entendo que isso ficou intenso. Pausa. Eu volto e a gente conversa quando baixar."
+      ]
+    },
+    {
+      title: "Raiva explosiva",
+      desc: "grito e ataque verbal",
+      piora: "Você está exagerando.",
+      porq: "Minimiza a emoção e aumenta a escalada.",
+      resposta: [
+        "Eu vejo que isso te irritou. Quero entender sem briga.",
+        "A raiva está forte agora. Vamos diminuir o ritmo da conversa para não piorar.",
+        "Está muito intenso. Pausa agora. Eu volto em alguns minutos."
+      ]
+    },
+    {
+      title: "Acusação injusta",
+      desc: "interpretação vira certeza",
+      piora: "Isso é coisa da sua cabeça.",
+      porq: "Parece gaslighting durante crise e aumenta desconfiança.",
+      resposta: [
+        "Eu entendo que isso te feriu. Vamos olhar com calma.",
+        "Eu vejo que isso mexeu muito com você. Vamos desacelerar e falar sem ataque.",
+        "Eu entendo que está doendo. Pausa agora e voltamos com calma."
+      ]
+    },
+    {
+      title: "Você não me ama",
+      desc: "pedido de certeza repetido",
+      piora: "Já falei mil vezes.",
+      porq: "Transforma insegurança em ‘erro’, piorando a busca por certeza.",
+      resposta: [
+        "Eu te amo. E eu vejo que agora você está inseguro.",
+        "Eu te amo. Vamos cuidar desse medo agora, sem discussão.",
+        "Eu te amo. Pausa. Eu fico por perto e a gente conversa quando baixar."
+      ]
+    },
+    {
+      title: "Culpa extrema",
+      desc: "autopunição e vergonha",
+      piora: "Para de se culpar.",
+      porq: "Invalida o peso emocional e dá sensação de ‘não sou entendido’.",
+      resposta: [
+        "Eu vejo que você está se sentindo muito culpado. Vamos separar fatos e próximos passos.",
+        "Isso parece estar pesando muito agora. Vamos reduzir pressão e organizar um passo pequeno.",
+        "Vamos acalmar primeiro. Depois a gente pensa em reparação e solução."
+      ]
+    }
+  ];
+
+  function toast(msg){
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.style.display = "block";
+    clearTimeout(window.__toast);
+    window.__toast = setTimeout(()=> t.style.display="none", 1300);
   }
-];
 
-function openTab(t){
-  tab = t;
-  render();
-}
-
-function setNavActive(){
-  ["crise","biblioteca","padroes","guia"].forEach(id=>{
-    const el = document.getElementById("nav-"+id);
-    if(el) el.classList.toggle("active", tab===id);
-  });
-}
-
-function toast(msg){
-  const t = document.getElementById("toast");
-  t.textContent = msg;
-  t.style.display = "block";
-  clearTimeout(window.__toast);
-  window.__toast = setTimeout(()=> t.style.display="none", 1400);
-}
-
-async function copyText(text){
-  try{
-    await navigator.clipboard.writeText(text);
-    toast("Copiado.");
-  }catch(e){
-    const ta = document.createElement("textarea");
-    ta.value = text;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    ta.remove();
-    toast("Copiado.");
+  async function copyText(text){
+    try{
+      await navigator.clipboard.writeText(text);
+      toast("Copiado.");
+    }catch(e){
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+      toast("Copiado.");
+    }
   }
-}
 
-function saveCrisis(){
-  const s = scenarios[selectedScenario];
-  const entry = {
-    ts: new Date().toISOString(),
-    scenario: s.title,
-    level: levels[selectedLevel].title,
-    reply: s.resposta[selectedLevel]
-  };
-  const arr = getHistory();
-  arr.unshift(entry);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-  toast("Crise registrada.");
-}
+  function getHistory(){
+    try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
+    catch(e){ return []; }
+  }
 
-function getHistory(){
-  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
-  catch(e){ return []; }
-}
+  function setHistory(arr){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+  }
 
-function clearHistory(){
-  if(!confirm("Limpar todo o histórico deste aparelho?")) return;
-  localStorage.setItem(STORAGE_KEY, "[]");
-  render();
-  toast("Histórico limpo.");
-}
+  function saveCrisis(){
+    const s = scenarios[selectedScenario];
+    const entry = {
+      ts: new Date().toISOString(),
+      scenario: s.title,
+      level: levels[selectedLevel].title,
+      reply: s.resposta[selectedLevel]
+    };
+    const h = getHistory();
+    h.unshift(entry);
+    setHistory(h);
+    toast("Registrado.");
+  }
 
-function buildHeader(){
-  return `
-    <div class="header">
-      <img class="logo" src="${LOGO_FILE}" alt="Logo">
-      <div class="hgroup">
-        <h1 class="title">RADAR DE CRISE TPB</h1>
-        <div class="subtitle">Dr Fabio Schmidt • Médico • CRM SP 183549</div>
-      </div>
-    </div>
-  `;
-}
+  function clearHistory(){
+    setHistory([]);
+    render();
+    toast("Limpo.");
+  }
 
-function renderCrise(){
-  const s = scenarios[selectedScenario];
-  const level = levels[selectedLevel];
+  function openTab(t){
+    tab = t;
+    render();
+  }
 
-  let chips = `<div class="chips">`;
-  scenarios.forEach((x,i)=>{
-    chips += `<div class="chip ${i===selectedScenario?'active':''}" onclick="selectScenario(${i})">${x.title}</div>`;
-  });
-  chips += `</div>`;
+  function setNavActive(){
+    ["crise","biblioteca","padroes","guia"].forEach(id=>{
+      const el = document.getElementById("nav-"+id);
+      if(el) el.classList.toggle("active", tab===id);
+    });
+  }
 
-  let lvl = `<div class="levels">`;
-  levels.forEach((x,i)=>{
-    lvl += `
-      <div class="level ${i===selectedLevel?'active':''}" onclick="selectLevel(${i})">
-        <div class="k">${x.title}</div>
-        <div class="d">${x.desc}</div>
+  function renderTop(){
+    document.getElementById("top").innerHTML = `
+      <div class="brandRow">
+        <div class="brandLeft">
+          <img class="logo" src="${LOGO_FILE}" alt="Logo">
+          <div class="titles">
+            <h1 class="title">RADAR DE CRISE TPB</h1>
+            <div class="subtitle">Dr Fabio Schmidt • Médico • CRM SP 183549</div>
+          </div>
+        </div>
+        <button class="chipBtn" onclick="panic()">Não sei o que dizer</button>
       </div>
     `;
-  });
-  lvl += `</div>`;
-
-  const reply = s.resposta[selectedLevel];
-
-  return `
-    ${buildHeader()}
-
-    <div class="section">
-      <b>1 O que está acontecendo</b>
-      ${chips}
-    </div>
-
-    <div class="section">
-      <b>2 Intensidade da crise</b>
-      ${lvl}
-    </div>
-
-    <div class="section">
-      <div class="box bad">
-        <div class="lab">Frase que piora</div>
-        <div class="txt">${s.piora}</div>
-      </div>
-
-      <div class="box info">
-        <div class="lab">Por que piora</div>
-        <div class="txt">${s.porq}</div>
-      </div>
-
-      <div class="box good">
-        <div class="lab">Substitua por</div>
-        <div class="txt">${reply}</div>
-      </div>
-
-      <div class="actions">
-        <button class="btnPrimary" onclick="copyCurrent()">Copiar resposta</button>
-        <button class="btnSecondary" onclick="saveCrisis()">Registrar crise</button>
-        <button class="btnSecondary smallBtn" onclick="panic()">Não sei o que dizer</button>
-      </div>
-
-      <div class="note">
-        Dica: envie a frase <b>sem explicar demais</b>. Em crise, clareza e previsibilidade regulam.
-      </div>
-    </div>
-  `;
-}
-
-function renderBiblioteca(){
-  let html = `
-    ${buildHeader()}
-    <div class="section">
-      <b>Biblioteca FREE</b>
-      ${scenarios.map(s=>`<div class="listItem"><b>${s.title}</b></div>`).join("")}
-      <div class="lock">Mais cenários e funções avançadas ficam disponíveis na versão completa.</div>
-    </div>
-  `;
-  return html;
-}
-
-function renderPadroes(){
-  const h = getHistory();
-  let items = "";
-  if(h.length===0){
-    items = `<div class="listItem">Sem registros ainda.</div>`;
-  } else {
-    items = h.slice(0,12).map(e=>{
-      const dt = new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
-      return `<div class="listItem">
-        <div style="font-weight:900">${e.scenario} · ${e.level}</div>
-        <div style="color:var(--muted); font-size:12.5px; margin-top:6px">${dt}</div>
-        <div style="margin-top:10px; line-height:1.45">${e.reply}</div>
-      </div>`;
-    }).join("");
   }
 
-  return `
-    ${buildHeader()}
-    <div class="section">
-      <b>Padrões e histórico</b>
-      ${items}
-      <div class="actions">
-        <button class="btnSecondary" onclick="clearHistory()">Limpar histórico</button>
+  function scenarioGrid(){
+    let html = `<div class="grid">`;
+    scenarios.forEach((s,i)=>{
+      html += `
+        <div class="scenario ${i===selectedScenario ? "active":""}" onclick="selectScenario(${i})">
+          <div class="k">${s.title}</div>
+          <div class="d">${s.desc}</div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+    return html;
+  }
+
+  function intensitySeg(){
+    let html = `<div class="seg">`;
+    levels.forEach((lv,i)=>{
+      html += `
+        <button class="segBtn ${i===selectedLevel ? "active":""}" onclick="selectLevel(${i})">
+          ${lv.title}
+        </button>
+      `;
+    });
+    html += `</div>`;
+    html += `<div class="hint" style="margin-top:10px">${levels[selectedLevel].desc}</div>`;
+    return html;
+  }
+
+  function renderCrise(){
+    const s = scenarios[selectedScenario];
+    const reply = s.resposta[selectedLevel];
+
+    return `
+      <div class="section">
+        <div class="sectionTitle">
+          <div class="h">1 O que está acontecendo</div>
+          <div class="hint">Escolha o cenário</div>
+        </div>
+        ${scenarioGrid()}
       </div>
-      <div class="lock">No Radar completo, esta área vira análise de padrão (horário, gatilhos, frequência e escalada).</div>
-    </div>
-  `;
-}
 
-function renderGuia(){
-  return `
-    ${buildHeader()}
-    <div class="section">
-      <b>Guia rápido</b>
-
-      <div class="box">
-        <div class="lab">Regra 1</div>
-        <div class="txt">Validar emoção antes de explicar fatos.</div>
+      <div class="section">
+        <div class="sectionTitle">
+          <div class="h">2 Intensidade da crise</div>
+          <div class="hint">Isso muda a resposta</div>
+        </div>
+        ${intensitySeg()}
       </div>
 
-      <div class="box">
-        <div class="lab">Regra 2</div>
-        <div class="txt">Se a emoção subir, reduza estímulo e faça pausa curta com retorno.</div>
+      <div class="section">
+        <div class="card bad">
+          <div class="label">Frase que piora</div>
+          <div class="txt">${s.piora}</div>
+        </div>
+
+        <div class="card info">
+          <div class="label">Por que piora</div>
+          <div class="txt">${s.porq}</div>
+        </div>
+
+        <div class="card good">
+          <div class="label">Substitua por</div>
+          <div class="txt">${reply}</div>
+          <div class="why"><b>Regra:</b> valide, reduza estímulo, e só depois fale de “fatos”.</div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" onclick="copyCurrent()">Copiar resposta</button>
+          <button class="btn secondary" onclick="saveCrisis()">Registrar crise</button>
+        </div>
+
+        <div class="note">Dica: copie e envie <b>sem explicar demais</b>. Em crise, a frase curta regula melhor.</div>
       </div>
+    `;
+  }
 
-      <div class="box">
-        <div class="lab">Regra 3</div>
-        <div class="txt">Tom crítico transforma frase neutra em gasolina.</div>
+  function renderBiblioteca(){
+    const items = scenarios.map(s=>`
+      <div class="listItem">
+        <div style="font-weight:950; font-size:14px">${s.title}</div>
+        <div style="color:var(--muted); font-size:12.5px; margin-top:6px">${s.desc}</div>
       </div>
+    `).join("");
 
-      <div class="box">
-        <div class="lab">Emergência</div>
-        <div class="txt">Em risco imediato: procure emergência/UPA/PS. Brasil: CVV 188.</div>
+    return `
+      <div class="section">
+        <div class="sectionTitle">
+          <div class="h">Biblioteca</div>
+          <div class="hint">FREE</div>
+        </div>
+
+        ${items}
+
+        <div class="lock">Mais cenários e módulos avançados ficam disponíveis na versão completa.</div>
       </div>
-    </div>
-  `;
-}
+    `;
+  }
 
-function render(){
-  setNavActive();
-  const app = document.getElementById("app");
-  if(tab==="crise") app.innerHTML = renderCrise();
-  if(tab==="biblioteca") app.innerHTML = renderBiblioteca();
-  if(tab==="padroes") app.innerHTML = renderPadroes();
-  if(tab==="guia") app.innerHTML = renderGuia();
-}
+  function renderPadroes(){
+    const h = getHistory();
+    let html = `
+      <div class="section">
+        <div class="sectionTitle">
+          <div class="h">Padrões</div>
+          <div class="hint">histórico local</div>
+        </div>
+    `;
 
-function selectScenario(i){
-  selectedScenario = i;
+    if(h.length===0){
+      html += `<div class="listItem">Sem registros ainda. Use “Registrar crise” após copiar a resposta.</div>`;
+    } else {
+      html += h.slice(0,12).map(e=>{
+        const dt = new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
+        return `
+          <div class="listItem">
+            <div style="font-weight:950">${e.scenario} <span style="color:var(--muted)">· ${e.level}</span></div>
+            <div style="color:var(--muted); font-size:12.5px; margin-top:6px">${dt}</div>
+            <div style="margin-top:10px; line-height:1.45; font-weight:800">${e.reply}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    html += `
+        <div class="actions">
+          <button class="btn secondary" onclick="clearHistory()">Limpar histórico</button>
+          <button class="btn secondary" onclick="copyHistory()">Copiar resumo</button>
+        </div>
+
+        <div class="lock">No completo, esta área vira análise de padrão (horários, gatilhos, frequência e escalada).</div>
+      </div>
+    `;
+    return html;
+  }
+
+  function renderGuia(){
+    return `
+      <div class="section">
+        <div class="sectionTitle">
+          <div class="h">Guia rápido</div>
+          <div class="hint">curto e usável</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Regra 1</div>
+          <div class="txt">Validação vem antes de explicação.</div>
+          <div class="why">Se você tentar “corrigir o conteúdo” com emoção alta, vira gasolina.</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Regra 2</div>
+          <div class="txt">Pausa curta com retorno reduz abandono.</div>
+          <div class="why">Exemplo: “Pausa 10 minutos. Eu volto. Eu não vou sumir.”</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Regra 3</div>
+          <div class="txt">Tom crítico quebra qualquer frase.</div>
+          <div class="why">Curto + neutro + previsível.</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Emergência</div>
+          <div class="txt">Em risco imediato: emergência UPA PS • Brasil CVV 188</div>
+          <div class="why">Este app é educativo.</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function render(){
+    renderTop();
+    setNavActive();
+    const app = document.getElementById("app");
+    if(tab==="crise") app.innerHTML = renderCrise();
+    if(tab==="biblioteca") app.innerHTML = renderBiblioteca();
+    if(tab==="padroes") app.innerHTML = renderPadroes();
+    if(tab==="guia") app.innerHTML = renderGuia();
+  }
+
+  function selectScenario(i){
+    selectedScenario = i;
+    render();
+  }
+
+  function selectLevel(i){
+    selectedLevel = i;
+    render();
+  }
+
+  function copyCurrent(){
+    const s = scenarios[selectedScenario];
+    copyText(s.resposta[selectedLevel]);
+  }
+
+  function panic(){
+    const universal = [
+      "Eu vejo que isso te deixou muito ferido. Vamos pausar e conversar quando estivermos mais calmos.",
+      "Eu tô aqui. Eu não vou te abandonar, mas eu não consigo discutir desse jeito. Pausa e volto.",
+      "Eu entendo que isso parece urgente. Vamos desacelerar para não piorar.",
+      "Eu ouvi você. Agora vamos respirar e organizar um próximo passo.",
+      "Eu me importo com você. Vamos cuidar do momento primeiro."
+    ].join("\n");
+    copyText(universal);
+  }
+
+  function copyHistory(){
+    const h = getHistory();
+    if(!h.length){ toast("Sem histórico."); return; }
+    const lines = [];
+    lines.push("RADAR DE CRISE TPB — RESUMO");
+    lines.push("Dr Fabio Schmidt • CRM SP 183549");
+    lines.push("");
+    h.slice(0,12).forEach((e,idx)=>{
+      const dt = new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
+      lines.push(`#${idx+1} ${dt} — ${e.scenario} (${e.level})`);
+      lines.push(`Resposta: ${e.reply}`);
+      lines.push("");
+    });
+    copyText(lines.join("\n"));
+  }
+
   render();
-}
-
-function selectLevel(i){
-  selectedLevel = i;
-  render();
-}
-
-function copyCurrent(){
-  const s = scenarios[selectedScenario];
-  copyText(s.resposta[selectedLevel]);
-}
-
-function panic(){
-  const universal = [
-    "Eu vejo que isso te deixou muito ferido. Vamos pausar e conversar quando estivermos mais calmos.",
-    "Eu tô aqui. Eu não vou te abandonar, mas eu não consigo discutir desse jeito. Pausa e volto.",
-    "Eu entendo que isso parece urgente. Vamos desacelerar para não piorar.",
-    "Eu ouvi você. Agora vamos respirar e organizar um próximo passo.",
-    "Eu me importo com você. Vamos cuidar do momento primeiro."
-  ].join("\n");
-  copyText(universal);
-}
-
-render();
 </script>
 
 </body>
