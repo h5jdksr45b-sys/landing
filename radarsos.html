@@ -8,18 +8,14 @@
   <style>
     :root{
       --bg:#0c0f15;
-      --panel: rgba(15,17,24,.72);
-      --panel2: rgba(255,255,255,.04);
       --text:#eef2ff;
       --muted:#a7b0c6;
       --line: rgba(255,255,255,.10);
       --accent:#66e0a6;
-      --accent2:#f1b46b;
       --danger:#ff6b6b;
       --info:#7aa7ff;
       --shadow: 0 18px 60px rgba(0,0,0,.42);
       --radius:18px;
-      --radius2:14px;
       --max: 820px;
       --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial;
     }
@@ -38,7 +34,7 @@
       background-attachment: fixed;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      padding-bottom: 92px; /* espaço para bottom bar */
+      padding-bottom: 92px;
     }
 
     .wrap{
@@ -47,7 +43,6 @@
       padding: 14px 14px 28px;
     }
 
-    /* App shell */
     .shell{
       border: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(15,17,24,.76), rgba(15,17,24,.88));
@@ -120,17 +115,9 @@
       user-select:none;
     }
 
-    .chipBtn:active{ transform: translateY(1px); }
+    .content{ padding: 16px; }
 
-    .content{
-      padding: 16px;
-    }
-
-    /* sections */
-    .section{
-      margin-top: 16px;
-    }
-
+    .section{ margin-top: 16px; }
     .sectionTitle{
       display:flex;
       align-items:center;
@@ -138,20 +125,17 @@
       gap:10px;
       margin-bottom: 10px;
     }
-
     .sectionTitle .h{
       font-weight: 950;
       font-size: 14px;
       letter-spacing: .2px;
     }
-
     .hint{
       color: var(--muted);
       font-size: 12.5px;
       line-height: 1.35;
     }
 
-    /* scenario grid */
     .grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -188,7 +172,6 @@
       line-height: 1.35;
     }
 
-    /* intensity segmented */
     .seg{
       display:flex;
       gap:8px;
@@ -215,7 +198,6 @@
       background: rgba(102,224,166,.12);
     }
 
-    /* cards */
     .card{
       border: 1px solid var(--line);
       background: rgba(0,0,0,.16);
@@ -224,7 +206,6 @@
       margin-top: 10px;
       backdrop-filter: blur(8px);
     }
-
     .label{
       font-size: 11px;
       letter-spacing: .12em;
@@ -238,13 +219,6 @@
       line-height: 1.45;
       font-weight: 900;
     }
-    .card .why{
-      margin-top: 8px;
-      color: rgba(238,242,255,.80);
-      font-size: 13px;
-      line-height: 1.45;
-      font-weight: 650;
-    }
 
     .card.bad{ border-color: rgba(255,107,107,.55); background: rgba(255,107,107,.10); }
     .card.info{ border-color: rgba(122,167,255,.55); background: rgba(122,167,255,.10); }
@@ -256,7 +230,6 @@
       flex-wrap:wrap;
       margin-top: 12px;
     }
-
     .btn{
       border:none;
       border-radius: 14px;
@@ -267,16 +240,8 @@
       user-select:none;
     }
     .btn:active{ transform: translateY(1px); }
-
-    .btn.primary{
-      background: var(--accent);
-      color: #06110c;
-    }
-    .btn.secondary{
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      border: 1px solid var(--line);
-    }
+    .btn.primary{ background: var(--accent); color:#06110c; }
+    .btn.secondary{ background: rgba(255,255,255,.04); color: var(--text); border: 1px solid var(--line); }
 
     .note{
       margin-top: 10px;
@@ -285,14 +250,17 @@
       line-height: 1.35;
     }
 
-    /* lists */
     .listItem{
       border: 1px solid var(--line);
       background: rgba(255,255,255,.03);
       border-radius: var(--radius);
       padding: 14px;
       margin-top: 10px;
+      cursor:pointer;
+      user-select:none;
     }
+    .listItem:active{ transform: translateY(1px); }
+
     .lock{
       margin-top: 14px;
       color: var(--muted);
@@ -300,7 +268,6 @@
       line-height: 1.4;
     }
 
-    /* bottom nav */
     .bottom{
       position: fixed;
       left:0; right:0; bottom:0;
@@ -337,7 +304,6 @@
       background: rgba(102,224,166,.08);
     }
 
-    /* toast */
     .toast{
       position: fixed;
       left:50%;
@@ -353,6 +319,59 @@
       display:none;
       z-index: 60;
       box-shadow: var(--shadow);
+    }
+
+    /* Modal */
+    .modalBackdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+      display:none;
+      align-items:flex-end;
+      justify-content:center;
+      z-index: 80;
+      padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+    }
+    .modal{
+      width: min(820px, 100%);
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(15,17,24,.92), rgba(15,17,24,.98));
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .modalTop{
+      padding: 14px 14px 12px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .modalTitle{
+      font-weight:950;
+      font-size:16px;
+      line-height:1.2;
+    }
+    .modalSub{
+      color: var(--muted);
+      font-size:12.5px;
+      margin-top:6px;
+      line-height:1.35;
+    }
+    .xbtn{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 10px;
+      font-weight: 950;
+      cursor:pointer;
+      user-select:none;
+    }
+    .modalBody{
+      padding: 14px;
     }
   </style>
 </head>
@@ -376,6 +395,20 @@
 
   <div class="toast" id="toast">Copiado.</div>
 
+  <!-- Modal Biblioteca -->
+  <div class="modalBackdrop" id="modalBackdrop" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modalTop">
+        <div>
+          <div class="modalTitle" id="modalTitle">Título</div>
+          <div class="modalSub" id="modalSub">Sub</div>
+        </div>
+        <button class="xbtn" onclick="hideModal()">Fechar</button>
+      </div>
+      <div class="modalBody" id="modalBody"></div>
+    </div>
+  </div>
+
 <script>
   const LOGO_FILE = "701EA1DC-33CE-40FC-BA04-F655886CBA94.png";
   const STORAGE_KEY = "radarCriseTPBFreeHistoryV2";
@@ -390,7 +423,6 @@
     { title: "Grave", desc: "Segurança e pausa. Sem debate agora." }
   ];
 
-  // FREE — 5 cenários essenciais (intensidade muda resposta)
   const scenarios = [
     {
       title: "Medo de abandono",
@@ -591,7 +623,6 @@
         <div class="card good">
           <div class="label">Substitua por</div>
           <div class="txt">${reply}</div>
-          <div class="why"><b>Regra:</b> valide, reduza estímulo, e só depois fale de “fatos”.</div>
         </div>
 
         <div class="actions">
@@ -599,14 +630,14 @@
           <button class="btn secondary" onclick="saveCrisis()">Registrar crise</button>
         </div>
 
-        <div class="note">Dica: copie e envie <b>sem explicar demais</b>. Em crise, a frase curta regula melhor.</div>
+        <div class="note">Dica: copie e envie <b>sem explicar demais</b>. Em crise, frase curta regula melhor.</div>
       </div>
     `;
   }
 
   function renderBiblioteca(){
-    const items = scenarios.map(s=>`
-      <div class="listItem">
+    const items = scenarios.map((s,idx)=>`
+      <div class="listItem" onclick="openScenarioModal(${idx})">
         <div style="font-weight:950; font-size:14px">${s.title}</div>
         <div style="color:var(--muted); font-size:12.5px; margin-top:6px">${s.desc}</div>
       </div>
@@ -617,6 +648,10 @@
         <div class="sectionTitle">
           <div class="h">Biblioteca</div>
           <div class="hint">FREE</div>
+        </div>
+
+        <div class="hint" style="margin-bottom:10px">
+          Toque em um cenário para ver o resumo e copiar a resposta.
         </div>
 
         ${items}
@@ -637,12 +672,12 @@
     `;
 
     if(h.length===0){
-      html += `<div class="listItem">Sem registros ainda. Use “Registrar crise” após copiar a resposta.</div>`;
+      html += `<div class="listItem" style="cursor:default">Sem registros ainda. Use “Registrar crise” após copiar a resposta.</div>`;
     } else {
       html += h.slice(0,12).map(e=>{
         const dt = new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
         return `
-          <div class="listItem">
+          <div class="listItem" style="cursor:default">
             <div style="font-weight:950">${e.scenario} <span style="color:var(--muted)">· ${e.level}</span></div>
             <div style="color:var(--muted); font-size:12.5px; margin-top:6px">${dt}</div>
             <div style="margin-top:10px; line-height:1.45; font-weight:800">${e.reply}</div>
@@ -654,10 +689,9 @@
     html += `
         <div class="actions">
           <button class="btn secondary" onclick="clearHistory()">Limpar histórico</button>
-          <button class="btn secondary" onclick="copyHistory()">Copiar resumo</button>
         </div>
 
-        <div class="lock">No completo, esta área vira análise de padrão (horários, gatilhos, frequência e escalada).</div>
+        <div class="lock">No completo, esta área vira análise (horários, gatilhos, frequência e escalada).</div>
       </div>
     `;
     return html;
@@ -674,25 +708,16 @@
         <div class="card">
           <div class="label">Regra 1</div>
           <div class="txt">Validação vem antes de explicação.</div>
-          <div class="why">Se você tentar “corrigir o conteúdo” com emoção alta, vira gasolina.</div>
         </div>
 
         <div class="card">
           <div class="label">Regra 2</div>
           <div class="txt">Pausa curta com retorno reduz abandono.</div>
-          <div class="why">Exemplo: “Pausa 10 minutos. Eu volto. Eu não vou sumir.”</div>
-        </div>
-
-        <div class="card">
-          <div class="label">Regra 3</div>
-          <div class="txt">Tom crítico quebra qualquer frase.</div>
-          <div class="why">Curto + neutro + previsível.</div>
         </div>
 
         <div class="card">
           <div class="label">Emergência</div>
-          <div class="txt">Em risco imediato: emergência UPA PS • Brasil CVV 188</div>
-          <div class="why">Este app é educativo.</div>
+          <div class="txt">Em risco imediato: UPA PS • Brasil: CVV 188</div>
         </div>
       </div>
     `;
@@ -708,15 +733,8 @@
     if(tab==="guia") app.innerHTML = renderGuia();
   }
 
-  function selectScenario(i){
-    selectedScenario = i;
-    render();
-  }
-
-  function selectLevel(i){
-    selectedLevel = i;
-    render();
-  }
+  function selectScenario(i){ selectedScenario = i; render(); }
+  function selectLevel(i){ selectedLevel = i; render(); }
 
   function copyCurrent(){
     const s = scenarios[selectedScenario];
@@ -724,30 +742,50 @@
   }
 
   function panic(){
-    const universal = [
-      "Eu vejo que isso te deixou muito ferido. Vamos pausar e conversar quando estivermos mais calmos.",
-      "Eu tô aqui. Eu não vou te abandonar, mas eu não consigo discutir desse jeito. Pausa e volto.",
-      "Eu entendo que isso parece urgente. Vamos desacelerar para não piorar.",
-      "Eu ouvi você. Agora vamos respirar e organizar um próximo passo.",
-      "Eu me importo com você. Vamos cuidar do momento primeiro."
-    ].join("\n");
-    copyText(universal);
+    // agora copia UMA frase (a melhor geral), não 5
+    copyText("Eu vejo que isso te deixou muito ferido. Vamos pausar e conversar quando estivermos mais calmos.");
   }
 
-  function copyHistory(){
-    const h = getHistory();
-    if(!h.length){ toast("Sem histórico."); return; }
-    const lines = [];
-    lines.push("RADAR DE CRISE TPB — RESUMO");
-    lines.push("Dr Fabio Schmidt • CRM SP 183549");
-    lines.push("");
-    h.slice(0,12).forEach((e,idx)=>{
-      const dt = new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
-      lines.push(`#${idx+1} ${dt} — ${e.scenario} (${e.level})`);
-      lines.push(`Resposta: ${e.reply}`);
-      lines.push("");
-    });
-    copyText(lines.join("\n"));
+  // Modal Biblioteca
+  function openScenarioModal(idx){
+    const s = scenarios[idx];
+    document.getElementById("modalTitle").textContent = s.title;
+    document.getElementById("modalSub").textContent = "Resumo rápido + resposta (usa a intensidade atual)";
+    document.getElementById("modalBody").innerHTML = `
+      <div class="card bad">
+        <div class="label">Frase que piora</div>
+        <div class="txt">${s.piora}</div>
+      </div>
+
+      <div class="card good">
+        <div class="label">Substitua por</div>
+        <div class="txt">${s.resposta[selectedLevel]}</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" onclick="copyText(scenarios[${idx}].resposta[selectedLevel])">Copiar resposta</button>
+        <button class="btn secondary" onclick="goToCrise(${idx})">Ir para Crise</button>
+      </div>
+    `;
+    showModal();
+  }
+
+  function goToCrise(idx){
+    selectedScenario = idx;
+    hideModal();
+    openTab("crise");
+  }
+
+  function showModal(){
+    document.getElementById("modalBackdrop").style.display = "flex";
+  }
+
+  function hideModal(){
+    document.getElementById("modalBackdrop").style.display = "none";
+  }
+
+  function closeModal(e){
+    if(e.target.id === "modalBackdrop") hideModal();
   }
 
   render();
