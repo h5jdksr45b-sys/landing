@@ -1,0 +1,1148 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1115" />
+  <title>RADAR DE CRISE — o seu SOS</title>
+  <meta name="description" content="Escolha cenário + intensidade e receba o passo a passo + scripts prontos para copiar. Dr. Fabio Schmidt — CRM-SP 183549. Uso educativo." />
+
+  <style>
+    :root{
+      --bg:#0f1115;
+      --panel:#141824;
+      --panel2:#10131b;
+      --text:#e9edf6;
+      --muted:#aab3c5;
+      --line:rgba(255,255,255,.08);
+      --accent:#64d6a0;
+      --accent2:#f2b66c;
+      --danger:#ff6b6b;
+      --ok:#7ee7b8;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:12px;
+      --pad:16px;
+      --max:980px;
+      --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 10% -10%, rgba(100,214,160,.18), transparent 60%),
+        radial-gradient(800px 500px at 95% 0%, rgba(242,182,108,.14), transparent 60%),
+        radial-gradient(700px 600px at 50% 110%, rgba(100,214,160,.10), transparent 60%),
+        var(--bg);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      padding-bottom:92px;
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px 14px 36px}
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:10px 6px 16px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:0}
+    .logo{
+      width:46px; height:46px; border-radius:14px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      display:grid; place-items:center;
+      overflow:hidden;
+    }
+    .brand .t{min-width:0}
+    .brand .t .h{
+      font-weight:900; letter-spacing:.3px; line-height:1.12; font-size:15px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand .t .s{font-size:12px; color:var(--muted); margin-top:2px}
+    .top-actions{display:flex; gap:8px; align-items:center}
+    .btn{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:13px;
+      display:inline-flex; gap:8px; align-items:center; justify-content:center;
+      user-select:none;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{
+      border:1px solid rgba(100,214,160,.35);
+      background:linear-gradient(180deg, rgba(100,214,160,.22), rgba(100,214,160,.10));
+    }
+    .btn.warn{
+      border:1px solid rgba(255,107,107,.35);
+      background:linear-gradient(180deg, rgba(255,107,107,.18), rgba(255,107,107,.08));
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap:14px;
+    }
+    @media (max-width: 920px){ .grid{grid-template-columns: 1fr; } }
+
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:14px 14px 12px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), transparent);
+    }
+    .card .hd .title{font-size:14px; font-weight:900; letter-spacing:.2px}
+    .card .hd .sub{margin-top:6px; font-size:12px; color:var(--muted); line-height:1.35}
+    .card .bd{padding:14px}
+
+    .notice{
+      border:1px solid rgba(242,182,108,.25);
+      background:linear-gradient(180deg, rgba(242,182,108,.12), rgba(242,182,108,.05));
+      border-radius:14px;
+      padding:12px 12px;
+      color:rgba(233,237,246,.92);
+      line-height:1.35;
+      font-size:12.5px;
+    }
+    .notice b{color:#fff}
+    .notice .muted{color:rgba(233,237,246,.72)}
+
+    .tabs{
+      display:flex; gap:8px; flex-wrap:wrap;
+      padding:10px 10px 0;
+    }
+    .tab{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-weight:900;
+      font-size:13px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .tab.active{
+      color:var(--text);
+      border-color:rgba(100,214,160,.35);
+      background:linear-gradient(180deg, rgba(100,214,160,.18), rgba(255,255,255,.02));
+    }
+
+    .chips{display:flex; gap:8px; flex-wrap:wrap}
+    .chip{
+      padding:9px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      font-weight:900;
+      font-size:12.5px;
+      cursor:pointer;
+      user-select:none;
+      display:inline-flex; gap:8px; align-items:center;
+    }
+    .chip small{color:var(--muted); font-weight:900}
+    .chip.active{
+      border-color:rgba(100,214,160,.35);
+      background:linear-gradient(180deg, rgba(100,214,160,.16), rgba(255,255,255,.02));
+    }
+
+    .levels{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px}
+    @media(max-width:640px){ .levels{grid-template-columns:1fr} }
+    .level{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      padding:12px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .level .k{font-weight:900; letter-spacing:.2px}
+    .level .d{margin-top:6px; color:var(--muted); font-size:12px; line-height:1.35}
+    .level.active{border-color:rgba(100,214,160,.35); background:linear-gradient(180deg, rgba(100,214,160,.14), rgba(255,255,255,.02))}
+
+    .result{display:grid; gap:10px}
+    .box{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      background:rgba(0,0,0,.12);
+    }
+    .box .label{font-size:11px; color:var(--muted); font-weight:900; letter-spacing:.12em; text-transform:uppercase}
+    .box .txt{margin-top:8px; font-size:14px; line-height:1.45; font-weight:900}
+    .box .why{margin-top:8px; font-size:12.5px; color:rgba(233,237,246,.82); line-height:1.45}
+
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .mini{font-size:12px; color:var(--muted); line-height:1.35}
+    .divider{height:1px; background:var(--line); margin:12px 0}
+
+    textarea{
+      width:100%;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 10px;
+      font-family:var(--sans);
+      font-size:13px;
+      outline:none;
+      min-height:92px; resize:vertical;
+    }
+
+    .list{display:grid; gap:10px}
+    .item{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:12px;
+      display:grid; gap:8px;
+    }
+    .item .top{display:flex; justify-content:space-between; gap:10px; align-items:flex-start}
+    .item .top .a{font-weight:900; font-size:13px}
+    .item .top .b{color:var(--muted); font-size:12px; white-space:nowrap}
+    .item .meta{color:rgba(233,237,246,.78); font-size:12.5px; line-height:1.4}
+    .item .ops{display:flex; gap:8px; flex-wrap:wrap}
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:86px;
+      transform:translateX(-50%);
+      background:rgba(15,17,21,.92);
+      border:1px solid var(--line);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      font-weight:900;
+      font-size:13px;
+      display:none;
+      z-index:60;
+    }
+
+    .bottomBar{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      background:rgba(10,12,16,.78);
+      backdrop-filter: blur(10px);
+      border-top:1px solid var(--line);
+      padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+      z-index:50;
+    }
+    .bottomBar .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:900;
+    }
+    .tagDanger{border-color:rgba(255,107,107,.35); color:#ffd2d2; background:rgba(255,107,107,.10)}
+    .tagOk{border-color:rgba(100,214,160,.35); color:#d7ffee; background:rgba(100,214,160,.10)}
+
+    details{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:10px 12px;
+    }
+    details summary{
+      cursor:pointer;
+      font-weight:900;
+      list-style:none;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    details summary::-webkit-details-marker{display:none}
+    details .p{margin-top:8px; color:rgba(233,237,246,.82); font-size:12.5px; line-height:1.45}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-label="Logo">
+          <!-- Logo embutido (não depende de arquivo) -->
+          <svg width="36" height="36" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="g" x1="8" y1="0" x2="56" y2="64">
+                <stop stop-color="#64d6a0" stop-opacity="0.95"/>
+                <stop offset="1" stop-color="#f2b66c" stop-opacity="0.95"/>
+              </linearGradient>
+            </defs>
+            <path d="M14 14h24v10H26v10h12v16H14V14Z" stroke="url(#g)" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M36 34c8-8 18-6 18 3 0 10-12 16-18 20" stroke="url(#g)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="52" cy="18" r="6" stroke="url(#g)" stroke-width="5"/>
+          </svg>
+        </div>
+        <div class="t">
+          <div class="h">RADAR DE CRISE — o seu SOS</div>
+          <div class="s">Dr Fabio Schmidt • Médico • CRM-SP 183549</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn warn" id="btnRisk">🚨 Estou em risco</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="tabs">
+          <div class="tab active" data-tab="crise">🔥 Crise agora</div>
+          <div class="tab" data-tab="guia">📘 Guia</div>
+          <div class="tab" data-tab="historico">📊 Histórico</div>
+        </div>
+
+        <!-- CRISE -->
+        <div class="bd" id="tab-crise">
+          <div class="notice">
+            <b>Modo crise:</b> escolha <b>o que está acontecendo</b> + <b>intensidade</b> e use a resposta pronta.
+            <div class="muted" style="margin-top:6px">
+              Não é sobre “ganhar”. É sobre <b>reduzir escalada</b>, aumentar <b>segurança</b> e criar <b>previsibilidade</b>.
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="ctaRow">
+            <button class="btn primary" id="btnPanic">🧯 NÃO SEI O QUE DIZER</button>
+            <span class="pill">Dica: copie e envie <b>sem explicar demais</b>.</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div style="display:grid; gap:10px">
+            <div style="font-weight:900">1) O que está acontecendo agora?</div>
+            <div class="chips" id="scenarioChips"></div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div style="display:grid; gap:10px">
+            <div style="font-weight:900">2) Intensidade da crise</div>
+            <div class="levels" id="levelCards"></div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div style="display:grid; gap:10px">
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
+              <span class="badge tagOk">✅ Resposta que regula</span>
+              <span class="badge">⚠ Evite “conteúdo” agora</span>
+              <span class="badge">🎯 Tom neutro</span>
+            </div>
+
+            <div class="result" id="resultArea">
+              <div class="box">
+                <div class="label">Como usar</div>
+                <div class="txt">Selecione um cenário + intensidade para ver o que evitar e o que dizer.</div>
+                <div class="why">Se estiver em dúvida, use <b>NÃO SEI O QUE DIZER</b> (frases universais).</div>
+              </div>
+            </div>
+
+            <div class="ctaRow">
+              <button class="btn primary" id="btnCopy" disabled>📋 Copiar resposta</button>
+              <button class="btn" id="btnSave" disabled>💾 Registrar crise</button>
+            </div>
+
+            <div class="mini">O registro é <b>privado neste aparelho</b> (não envia nada para servidor).</div>
+
+            <div style="display:grid; gap:10px; margin-top:8px">
+              <label style="font-weight:900; font-size:13px">Notas (opcional)</label>
+              <textarea id="notes" placeholder="Ex.: gatilho, horário, o que aconteceu antes, o que ajudou..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- GUIA -->
+        <div class="bd" id="tab-guia" style="display:none;">
+          <div class="notice">
+            <b>Uso educativo.</b> Não substitui acompanhamento profissional individual.
+            Em risco imediato, procure emergência/UPA/PS. Brasil: <b>CVV 188</b>.
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="box">
+            <div class="label">3 regras de ouro</div>
+            <div class="txt">1) Validação precede qualquer coisa.</div>
+            <div class="txt">2) Primeiro sentimento, depois comportamento.</div>
+            <div class="txt">3) Tom crítico transforma frase neutra em “gasolina”.</div>
+            <div class="why">Em crise, o cérebro busca: <b>segurança</b>, <b>previsibilidade</b>, <b>clareza</b>.</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <details open>
+            <summary>🧭 Script Mestre (quando você não sabe o que dizer)</summary>
+            <div class="p">
+              “Eu tô aqui. E eu não vou discutir com grito. Eu volto já.”<br/>
+              “Vamos pausar 10 minutos e eu volto. Eu não vou sumir.”<br/>
+              “Eu vejo que isso te deixou muito [assustado/ferido/sem chão].”<br/>
+              “Isso não define você. Isso é um momento de desregulação.”
+            </div>
+          </details>
+
+          <div class="divider"></div>
+
+          <details>
+            <summary>🧯 10 frases universais</summary>
+            <div class="p" id="universalList"></div>
+          </details>
+
+          <div class="divider"></div>
+
+          <details>
+            <summary>🧩 Checklist rápido antes de falar</summary>
+            <div class="p">
+              • Estou validando a emoção (não só o comportamento)?<br/>
+              • Meu tom está neutro/caloroso (sem ironia)?<br/>
+              • Estou oferecendo estrutura (tempo/retorno/limite) e não julgamento?<br/>
+              • Estou separando episódio de identidade?<br/>
+              • Meu limite é presença (não abandono)?<br/>
+              • Isso reduz escalada ou aumenta?
+            </div>
+          </details>
+        </div>
+
+        <!-- HISTÓRICO -->
+        <div class="bd" id="tab-historico" style="display:none;">
+          <div class="notice">
+            <b>Histórico privado neste navegador.</b> Use para entender padrões e levar um resumo ao seu profissional (se quiser).
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="ctaRow">
+            <button class="btn" id="btnClear">🧹 Limpar histórico</button>
+            <button class="btn primary" id="btnReport">🧾 Gerar relatório</button>
+            <button class="btn" id="btnCopyReport" disabled>📋 Copiar relatório</button>
+          </div>
+
+          <div style="margin-top:12px">
+            <label style="font-weight:900; font-size:13px">Relatório</label>
+            <textarea id="report" placeholder="Clique em 'Gerar relatório'..."></textarea>
+          </div>
+
+          <div class="divider"></div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap">
+            <div style="font-weight:900">Crises registradas</div>
+            <div class="pill"><span id="count">0</span> registros</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="list" id="historyList"></div>
+        </div>
+      </section>
+
+      <!-- LATERAL -->
+      <aside class="card">
+        <div class="hd">
+          <div class="title">O que este app faz</div>
+          <div class="sub">
+            Você escolhe <b>cenário</b> + <b>intensidade</b> e recebe: <b>o que evitar</b> + <b>o que dizer</b> + <b>estrutura</b>.
+          </div>
+        </div>
+        <div class="bd">
+          <div class="box">
+            <div class="label">Objetivo</div>
+            <div class="txt">Controle em crise.</div>
+            <div class="why">Não é “melhorar tudo”. É <b>parar de piorar</b> quando a emoção sobe.</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="box">
+            <div class="label">Quando usar</div>
+            <div class="why">
+              • quando a crise começa<br/>
+              • quando você não sabe o que responder<br/>
+              • quando qualquer frase parece piorar<br/>
+              • quando o foco virou “disputa”
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="box">
+            <div class="label">Regra prática</div>
+            <div class="txt">Se você discutir “conteúdo” durante desregulação, você perde.</div>
+            <div class="why">Primeiro segurança. Depois conversa.</div>
+          </div>
+
+          <div class="divider"></div>
+
+          <details>
+            <summary>⚖️ Aviso importante</summary>
+            <div class="p">
+              Material educativo baseado em evidências. Não substitui psicoterapia, intervenção psiquiátrica ou manejo de risco imediato.
+              Em risco imediato: procure emergência/UPA/PS. Brasil: CVV 188.
+            </div>
+          </details>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copiado.</div>
+
+  <div class="bottomBar">
+    <div class="inner">
+      <div style="display:flex; gap:10px; align-items:center; min-width:0">
+        <span class="badge">🆘</span>
+        <div style="min-width:0">
+          <div style="font-weight:900; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">RADAR DE CRISE</div>
+          <div style="color:var(--muted); font-size:12px; margin-top:2px;">Cenário + intensidade → copiar resposta.</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center">
+        <button class="btn primary" id="btnGoCrise">🔥 Crise agora</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== DADOS =====
+    const APP = { storageKey: "radar_crise_history_v1" };
+
+    const LEVELS = [
+      { id: "leve", title: "Leve", desc: "Desconforto controlável: irritação, tristeza, ansiedade; ainda dá para organizar o mínimo." },
+      { id: "moderada", title: "Moderada", desc: "Emoção muito alta: choro, impulsividade, vontade de discutir; sem risco imediato à segurança." },
+      { id: "grave", title: "Grave", desc: "Risco à segurança: sinais importantes; prioridade é segurança e ajuda imediata." }
+    ];
+
+    const UNIVERSAL = [
+      "“Eu vejo que você está em sofrimento. Estou aqui.”",
+      "“Seu medo/raiva/dor é real. Isso não define você.”",
+      "“Você já saiu dessa antes. Você consegue sair de novo.”",
+      "“Meu limite não é rejeição. É cuidado.”",
+      "“Eu fico aqui enquanto você sente isso.”",
+      "“Eu não entendo tudo, mas eu ouço que é muito.”",
+      "“Seu comportamento teve impacto. Você ainda merece crescimento.”",
+      "“Isso ficou intenso. Vamos pausar e voltar.”",
+      "“Você está seguro? O que você precisa agora?”",
+      "“Isso é episódio, não recaída. Episódios passam.”"
+    ];
+
+    // Cenários + intensidades: Frase que piora / Por que piora / Substitua por / Estrutura
+    const SCENARIOS = [
+      {
+        id:"abandono",
+        title:"Medo de abandono",
+        hint:"rejeição real ou percebida",
+        data:{
+          leve:{
+            piora:"“Você tá paranoico de novo. Para de drama.”",
+            porQue:"Invalida a experiência e patologiza o medo; aumenta vergonha e escala.",
+            substitua:"“Entendo que isso te deixou inseguro. Deixa eu esclarecer minha intenção.”",
+            estrutura:"Valide o medo → esclareça intenção → dê previsibilidade (tempo/retorno)."
+          },
+          moderada:{
+            piora:"“Se você me amasse, não teria dúvidas sobre mim.”",
+            porQue:"Coloca amor como prova de cognição perfeita em crise (impossível).",
+            substitua:"“Sua dúvida não muda o que eu sinto. Vamos lidar com o medo, não com você.”",
+            estrutura:"Validação + presença + pausa curta com retorno combinado."
+          },
+          grave:{
+            piora:"Sumir / discutir se “foi rejeição de verdade” / prometer o impossível.",
+            porQue:"Aumenta pânico e imprevisibilidade; pode escalar para risco.",
+            substitua:"“Vou tratar isso como risco real. Você está seguro(a)? Vou buscar ajuda.”",
+            estrutura:"Segurança primeiro. Se houver risco, acione suporte/ajuda imediata."
+          }
+        }
+      },
+      {
+        id:"feedback",
+        title:"Crítica / limite",
+        hint:"feedback ativa vergonha/raiva",
+        data:{
+          leve:{
+            piora:"“Você é muito sensível. Precisa endurecer.”",
+            porQue:"Invalida e patologiza sensibilidade; aumenta vergonha e defensividade.",
+            substitua:"“Seu sistema é mais reativo. Não é fraqueza. Vamos usar isso com habilidade.”",
+            estrutura:"Nomeie emoção → reduza julgamento → proponha alternativa."
+          },
+          moderada:{
+            piora:"“O que você fez foi errado. E você sabe disso.”",
+            porQue:"Vem como julgamento sem validação; ativa vergonha tóxica.",
+            substitua:"“Essa ação não funcionou. Vou explicar por quê e pensar alternativas com você.”",
+            estrutura:"Sentimento → comportamento → próximo passo (claro e curto)."
+          },
+          grave:{
+            piora:"Revide / disputa moral / sermão / “sempre/nunca” / histórico.",
+            porQue:"Aumenta ameaça e humilhação; vira briga de poder.",
+            substitua:"“Eu não sou seu juiz. Eu quero que você tenha sucesso. Vamos pausar e retomar com calma.”",
+            estrutura:"Limite com presença: pausa + retorno + tom neutro."
+          }
+        }
+      },
+      {
+        id:"autolesao",
+        title:"Autolesão / risco",
+        hint:"impulsividade / substâncias",
+        data:{
+          leve:{
+            piora:"“Para de pensar nisso. Pensa em coisa boa que passa.”",
+            porQue:"Estratégia impossível com alta ativação; passa sensação de abandono.",
+            substitua:"“O impulso está aí. Vamos interferir no caminho. O que você precisa agora?”",
+            estrutura:"Avalie segurança → reduza acesso a meios → acione suporte."
+          },
+          moderada:{
+            piora:"“Você faz isso pra manipular / chamar atenção.”",
+            porQue:"Quebra aliança e aumenta risco ao reduzir sofrimento a intenção.",
+            substitua:"“Em crise, seu cérebro busca alívio rápido. Vamos achar outra saída agora.”",
+            estrutura:"Tratar como risco real + plano de segurança + ajuda."
+          },
+          grave:{
+            piora:"Culpa / ameaça de abandono / deixar sozinho(a) / debate moral.",
+            porQue:"Aumenta desespero e risco imediato.",
+            substitua:"“Vou tratar como risco real. Você está seguro(a)? Vou buscar ajuda agora.”",
+            estrutura:"Acione emergência/UPA/PS. Se risco, não deixe a pessoa sozinha."
+          }
+        }
+      },
+      {
+        id:"raiva",
+        title:"Raiva explosiva",
+        hint:"medo por baixo",
+        data:{
+          leve:{
+            piora:"“Você tá sendo irracional. Não tem motivo pra isso.”",
+            porQue:"Lógica não regula amígdala; nega realidade experiencial.",
+            substitua:"“A dor é real, mesmo que eu não veja tudo agora. Vamos pausar.”",
+            estrutura:"Validação mínima + pausa curta + retorno combinado."
+          },
+          moderada:{
+            piora:"“Para de falar assim ou eu vou embora.”",
+            porQue:"Ameaça abandono durante escalada; aumenta raiva e pânico.",
+            substitua:"“Eu vejo raiva forte. Vou me afastar por segurança, não como punição.”",
+            estrutura:"Limite com presença: segurança + retorno + tom neutro."
+          },
+          grave:{
+            piora:"Competir gritando / ficar no ambiente sem controle.",
+            porQue:"Aumenta risco físico e escalada.",
+            substitua:"“Vou priorizar segurança agora. Pausa. Vou acionar ajuda/suporte se necessário.”",
+            estrutura:"Se risco, saia para segurança e acione suporte/ajuda."
+          }
+        }
+      },
+      {
+        id:"reasseguracao",
+        title:"“Você me ama?” repetido",
+        hint:"busca de certeza sem fim",
+        data:{
+          leve:{
+            piora:"“Já respondi mil vezes. Você nunca acredita.”",
+            porQue:"Trata como falha moral; aumenta vergonha e insistência.",
+            substitua:"“Sua dúvida acalma por um tempo e volta. Vamos construir certeza interna.”",
+            estrutura:"Reconheça ciclo → ofereça ferramenta → não entre em debate infinito."
+          },
+          moderada:{
+            piora:"Sarcasmo / silêncio punitivo / “não vou responder mais”.",
+            porQue:"Aumenta ameaça e reforça insegurança.",
+            substitua:"“Estamos em ciclo. Você quer que eu repita ou quer tentar outra ferramenta agora?”",
+            estrutura:"Ofereça escolha + previsibilidade + pausa se escalar."
+          },
+          grave:{
+            piora:"Forçar independência como prova / cortar vínculo no impulso.",
+            porQue:"Escala pânico e pode aumentar risco.",
+            substitua:"“Vou manter presença e limite. Pausa agora e voltamos em X minutos.”",
+            estrutura:"Pausa com retorno + se risco, acionar suporte."
+          }
+        }
+      },
+      {
+        id:"culpa",
+        title:"Culpa extrema",
+        hint:"autopunição",
+        data:{
+          leve:{
+            piora:"“Para de se culpar. Você não fez nada errado.”",
+            porQue:"Nega percepção e invalida; não sai do ciclo.",
+            substitua:"“Teve impacto sim. E teve coisas fora do seu controle. Vamos separar.”",
+            estrutura:"Separar fatos → reparação possível → interromper autojulgamento."
+          },
+          moderada:{
+            piora:"“Você deveria sofrer. É o que merece.”",
+            porQue:"Reforça punição interna e ciclo autodestrutivo.",
+            substitua:"“Reconhecer dano não exige sofrimento eterno. Exige reparação e aprendizado.”",
+            estrutura:"Saída: reparo + limite para humilhação."
+          },
+          grave:{
+            piora:"Humilhação / chantagem moral / “punição como educação”.",
+            porQue:"Aumenta risco e desespero.",
+            substitua:"“Vamos focar em segurança e reparação possível. Pausa agora.”",
+            estrutura:"Se houver risco, tratar como risco real e acionar suporte."
+          }
+        }
+      },
+      {
+        id:"queda",
+        title:"Queda após melhora",
+        hint:"“ontem você estava bem”",
+        data:{
+          leve:{
+            piora:"“Então por que você voltou a ficar assim?”",
+            porQue:"Sugere progresso linear e culpa por recair; aumenta desesperança.",
+            substitua:"“Seu progresso não desapareceu. Isso é um episódio, não uma recaída.”",
+            estrutura:"Normalizar episódio + ferramenta + passo pequeno agora."
+          },
+          moderada:{
+            piora:"“Você tava indo tão bem… por que você se sabotaria?”",
+            porQue:"Atribui intencionalidade; piora vergonha.",
+            substitua:"“Não é sabotagem. É um padrão com gatilhos. Vamos identificar.”",
+            estrutura:"Sem crítica agora; foco em ferramenta e previsibilidade."
+          },
+          grave:{
+            piora:"Usar progresso como arma (“tá vendo?”).",
+            porQue:"Humilha, aumenta raiva e risco.",
+            substitua:"“Crítica agora piora. Vamos focar em segurança e ferramenta.”",
+            estrutura:"Pausa + retorno + acionar suporte se risco."
+          }
+        }
+      },
+      {
+        id:"transicoes",
+        title:"Saídas / separações",
+        hint:"pequenas transições",
+        data:{
+          leve:{
+            piora:"“Eu tenho que sair. Você vai ficar bem. Para com isso.”",
+            porQue:"Nega medo real e aumenta pânico.",
+            substitua:"“Vou sair por X tempo. Entendo que isso ativa medo. Volto às HH:MM.”",
+            estrutura:"Plano claro + horário + aviso. Previsibilidade reduz escalada."
+          },
+          moderada:{
+            piora:"“Se você me amasse, entenderia que eu preciso de tempo longe.”",
+            porQue:"Soa como ameaça e coloca amor como prova.",
+            substitua:"“Minha necessidade de espaço é real. Seu medo também. Eu vou e volto como combinado.”",
+            estrutura:"Limite com presença + manter plano sem culpa."
+          },
+          grave:{
+            piora:"Sair bravo / sumir / mudar horário no impulso.",
+            porQue:"Aumenta pânico e risco.",
+            substitua:"“Vou manter o plano e volto no horário. Se não der, acionamos suporte.”",
+            estrutura:"Se risco, acionar ajuda/suporte."
+          }
+        }
+      },
+      {
+        id:"desesperanca",
+        title:"Desesperança / risco de vida",
+        hint:"“queria sumir”",
+        data:{
+          leve:{
+            piora:"“Pensa na sua família. Você é egoísta.”",
+            porQue:"Culpabiliza sofrimento e aumenta vergonha.",
+            substitua:"“Seu sofrimento é real. Vamos focar em segurança e ajuda agora.”",
+            estrutura:"Pergunte sobre segurança e plano. Acione suporte."
+          },
+          moderada:{
+            piora:"“Você sempre fala isso. Você não vai fazer nada.”",
+            porQue:"Invalida risco e cria falsa segurança.",
+            substitua:"“Vou tratar isso como risco real. Você está seguro(a)? Qual é seu plano agora?”",
+            estrutura:"Avaliar risco + acionar ajuda profissional."
+          },
+          grave:{
+            piora:"Deixar sozinho(a) / negociar na marra / debate moral.",
+            porQue:"Aumenta risco imediato.",
+            substitua:"“Vou buscar ajuda profissional agora. Você não precisa lidar sozinho(a).”",
+            estrutura:"Emergência/UPA/PS. Brasil: CVV 188."
+          }
+        }
+      }
+    ];
+
+    // ===== HELPERS =====
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+    function toast(msg){
+      const t = $("#toast");
+      t.textContent = msg;
+      t.style.display = "block";
+      clearTimeout(window.__toast);
+      window.__toast = setTimeout(()=> t.style.display="none", 1400);
+    }
+
+    function nowISO(){ return new Date().toISOString(); }
+    function fmtDate(iso){
+      try{
+        const d = new Date(iso);
+        return d.toLocaleString("pt-BR", { day:"2-digit", month:"2-digit", year:"2-digit", hour:"2-digit", minute:"2-digit" });
+      }catch(e){ return iso; }
+    }
+
+    // ===== STATE =====
+    const state = {
+      tab: "crise",
+      scenarioId: SCENARIOS[0].id,
+      levelId: "leve",
+      current: null,
+    };
+
+    // ===== TABS =====
+    function setTab(name){
+      state.tab = name;
+      $$(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === name));
+      $("#tab-crise").style.display = (name==="crise") ? "" : "none";
+      $("#tab-guia").style.display = (name==="guia") ? "" : "none";
+      $("#tab-historico").style.display = (name==="historico") ? "" : "none";
+      if(name==="historico") renderHistory();
+    }
+
+    // ===== RENDER =====
+    function renderScenarios(){
+      const wrap = $("#scenarioChips");
+      wrap.innerHTML = "";
+      for(const s of SCENARIOS){
+        const el = document.createElement("div");
+        el.className = "chip" + (s.id===state.scenarioId ? " active" : "");
+        el.innerHTML = `<span>${s.title}</span> <small>· ${s.hint}</small>`;
+        el.onclick = () => { state.scenarioId = s.id; renderScenarios(); computeAndRender(); };
+        wrap.appendChild(el);
+      }
+    }
+
+    function renderLevels(){
+      const wrap = $("#levelCards");
+      wrap.innerHTML = "";
+      for(const lv of LEVELS){
+        const el = document.createElement("div");
+        el.className = "level" + (lv.id===state.levelId ? " active" : "");
+        el.innerHTML = `<div class="k">${lv.title}</div><div class="d">${lv.desc}</div>`;
+        el.onclick = () => { state.levelId = lv.id; renderLevels(); computeAndRender(); };
+        wrap.appendChild(el);
+      }
+    }
+
+    function computeCurrent(){
+      const s = SCENARIOS.find(x=>x.id===state.scenarioId);
+      const d = s?.data?.[state.levelId];
+      if(!s || !d) return null;
+
+      let extra = "";
+      if(state.levelId === "grave"){
+        extra = "Se houver risco imediato, priorize segurança e ajuda. Brasil: CVV 188 / emergência/UPA/PS.";
+      } else if(state.levelId === "moderada"){
+        extra = "Evite debate e explicação longa. Use validação + pausa com retorno (tempo/retorno/limite).";
+      } else {
+        extra = "Mantenha tom neutro e curto. Valide emoção e dê previsibilidade.";
+      }
+
+      return {
+        scenario: s.title,
+        hint: s.hint,
+        level: state.levelId,
+        piora: d.piora,
+        porQue: d.porQue,
+        substitua: d.substitua,
+        estrutura: d.estrutura,
+        extra,
+        isPanic: false
+      };
+    }
+
+    function computeAndRender(){
+      state.current = computeCurrent();
+      const r = $("#resultArea");
+      const c = state.current;
+      if(!c){
+        r.innerHTML = `<div class="box"><div class="label">Erro</div><div class="txt">Não foi possível carregar este cenário.</div></div>`;
+        $("#btnCopy").disabled = true;
+        $("#btnSave").disabled = true;
+        return;
+      }
+
+      r.innerHTML = `
+        <div class="box">
+          <div class="label">Cenário</div>
+          <div class="txt">${c.scenario} <span style="color:var(--muted); font-weight:900">· ${c.hint}</span></div>
+          <div class="why">${c.extra}</div>
+        </div>
+
+        <div class="box" style="border-color: rgba(255,107,107,.28); background: rgba(255,107,107,.08);">
+          <div class="label">Frase que piora</div>
+          <div class="txt">${c.piora}</div>
+          <div class="why"><b>Por que piora:</b> ${c.porQue}</div>
+        </div>
+
+        <div class="box" style="border-color: rgba(100,214,160,.28); background: rgba(100,214,160,.08);">
+          <div class="label">Substitua por</div>
+          <div class="txt">${c.substitua}</div>
+          <div class="why"><b>Estrutura:</b> ${c.estrutura}</div>
+        </div>
+      `;
+
+      $("#btnCopy").disabled = false;
+      $("#btnSave").disabled = false;
+    }
+
+    // ===== PANIC =====
+    function openPanic(){
+      const list = UNIVERSAL.map((x,i)=>`<div class="txt" style="margin:0; font-size:13.5px">${i+1}. ${x}</div>`).join("");
+      $("#resultArea").innerHTML = `
+        <div class="box" style="border-color: rgba(242,182,108,.30); background: rgba(242,182,108,.08);">
+          <div class="label">NÃO SEI O QUE DIZER</div>
+          <div class="txt">Escolha 1 frase universal e faça pausa curta com retorno.</div>
+          <div class="why">Copie e envie. Depois retome quando baixar.</div>
+        </div>
+        <div class="box">${list}</div>
+      `;
+      state.current = {
+        scenario: "NÃO SEI O QUE DIZER",
+        hint: "frases universais",
+        level: state.levelId,
+        piora: "—",
+        porQue: "—",
+        substitua: UNIVERSAL[0],
+        estrutura: "Validação → presença → pausa com retorno (tempo/retorno/limite).",
+        extra: "Se risco imediato, acione ajuda (CVV 188 / emergência).",
+        isPanic: true
+      };
+      $("#btnCopy").disabled = false;
+      $("#btnSave").disabled = false;
+      toast("Modo emergência aberto.");
+    }
+
+    // ===== CLIPBOARD =====
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        toast("Copiado.");
+      }catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        toast("Copiado.");
+      }
+    }
+
+    // ===== STORAGE =====
+    function getHistory(){
+      try{ return JSON.parse(localStorage.getItem(APP.storageKey) || "[]"); }
+      catch(e){ return []; }
+    }
+    function setHistory(arr){
+      localStorage.setItem(APP.storageKey, JSON.stringify(arr));
+    }
+
+    function saveCrisis(){
+      const c = state.current;
+      if(!c) return;
+
+      const notes = ($("#notes").value || "").trim();
+      const entry = {
+        id: (crypto?.randomUUID ? crypto.randomUUID() : (Math.random().toString(16).slice(2) + Date.now())),
+        ts: nowISO(),
+        scenario: c.scenario,
+        hint: c.hint,
+        level: state.levelId,
+        suggested: c.isPanic ? "Frases universais (ver no app)" : c.substitua,
+        avoided: c.isPanic ? "—" : c.piora,
+        why: c.isPanic ? "—" : c.porQue,
+        structure: c.estrutura,
+        notes
+      };
+      const h = getHistory();
+      h.unshift(entry);
+      setHistory(h);
+      $("#notes").value = "";
+      toast("Registrado.");
+    }
+
+    function buildCopyPayload(e){
+      return [
+        `RADAR DE CRISE — registro`,
+        `Data: ${fmtDate(e.ts)}`,
+        `Cenário: ${e.scenario} (${e.level})`,
+        `Sugestão: ${e.suggested}`,
+        (e.avoided && e.avoided !== "—") ? `Evitar: ${e.avoided}` : null,
+        e.notes ? `Notas: ${e.notes}` : null
+      ].filter(Boolean).join("\n");
+    }
+
+    function renderHistory(){
+      const h = getHistory();
+      $("#count").textContent = String(h.length);
+
+      const wrap = $("#historyList");
+      wrap.innerHTML = "";
+      if(h.length === 0){
+        wrap.innerHTML = `<div class="box"><div class="label">Sem registros</div><div class="txt">Nenhuma crise registrada ainda.</div><div class="why">Registre para identificar padrões e levar um resumo ao profissional (se quiser).</div></div>`;
+        return;
+      }
+
+      for(const e of h){
+        const el = document.createElement("div");
+        el.className = "item";
+        el.innerHTML = `
+          <div class="top">
+            <div class="a">${escapeHTML(e.scenario)} <span style="color:var(--muted); font-weight:900">· ${escapeHTML(e.level.toUpperCase())}</span></div>
+            <div class="b">${fmtDate(e.ts)}</div>
+          </div>
+          <div class="meta">
+            <b>✅ Sugestão:</b> ${escapeHTML(e.suggested)}<br/>
+            <b>⚠ Evitado:</b> ${escapeHTML(e.avoided)}<br/>
+            ${e.notes ? `<b>📝 Notas:</b> ${escapeHTML(e.notes)}` : ``}
+          </div>
+          <div class="ops">
+            <button class="btn" data-copy="${encodeURIComponent(buildCopyPayload(e))}">📋 Copiar resumo</button>
+            <button class="btn warn" data-del="${e.id}">🗑️ Excluir</button>
+          </div>
+        `;
+        wrap.appendChild(el);
+      }
+
+      wrap.querySelectorAll("[data-copy]").forEach(b=>{
+        b.onclick = ()=> copyText(decodeURIComponent(b.dataset.copy));
+      });
+      wrap.querySelectorAll("[data-del]").forEach(b=>{
+        b.onclick = ()=> {
+          const id = b.dataset.del;
+          const nh = getHistory().filter(x=>x.id!==id);
+          setHistory(nh);
+          renderHistory();
+          toast("Excluído.");
+        };
+      });
+    }
+
+    function buildReport(){
+      const h = getHistory();
+      if(h.length===0) return "Sem registros ainda.";
+      const lines = [];
+      lines.push("RELATÓRIO — RADAR DE CRISE (uso educativo)");
+      lines.push("Dr Fabio Schmidt — CRM-SP 183549");
+      lines.push(`Gerado em: ${new Date().toLocaleString("pt-BR")}`);
+      lines.push("");
+      const max = Math.min(30, h.length);
+      lines.push(`Últimos ${max} registros:`);
+      for(let i=0;i<max;i++){
+        const e = h[i];
+        lines.push("");
+        lines.push(`#${i+1} — ${fmtDate(e.ts)} — ${e.scenario} (${e.level})`);
+        lines.push(`Sugestão: ${e.suggested}`);
+        if(e.avoided && e.avoided!=="—") lines.push(`Evitar: ${e.avoided}`);
+        if(e.notes) lines.push(`Notas: ${e.notes}`);
+      }
+      lines.push("");
+      lines.push("Aviso: material educativo; não substitui acompanhamento profissional. Em risco imediato: emergência/UPA/PS. Brasil: CVV 188.");
+      return lines.join("\n");
+    }
+
+    function clearHistory(){
+      if(!confirm("Limpar todo o histórico deste aparelho?")) return;
+      setHistory([]);
+      renderHistory();
+      $("#report").value = "";
+      $("#btnCopyReport").disabled = true;
+      toast("Histórico limpo.");
+    }
+
+    function escapeHTML(s){
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function showRisk(){
+      alert(
+        "Se há risco imediato (ideação, plano, meios, intoxicação, violência):\n" +
+        "1) Priorize segurança e ambiente seguro.\n" +
+        "2) Procure ajuda imediata (emergência/UPA/PS).\n" +
+        "3) Brasil: CVV 188 (24h).\n\n" +
+        "Este app é educativo e não substitui cuidado profissional."
+      );
+    }
+
+    // ===== EVENTS =====
+    $$(".tab").forEach(t => t.addEventListener("click", ()=> setTab(t.dataset.tab)));
+    $("#btnGoCrise").addEventListener("click", ()=> setTab("crise"));
+
+    $("#btnPanic").addEventListener("click", openPanic);
+    $("#btnRisk").addEventListener("click", showRisk);
+
+    $("#btnCopy").addEventListener("click", ()=>{
+      const c = state.current;
+      if(!c) return;
+
+      let text = "";
+      if(c.isPanic){
+        text = UNIVERSAL.join("\n");
+      } else {
+        text = `${c.substitua}\n\n(Pausa/estrutura: ${c.estrutura})`;
+      }
+      copyText(text);
+    });
+
+    $("#btnSave").addEventListener("click", saveCrisis);
+
+    $("#btnClear").addEventListener("click", clearHistory);
+
+    $("#btnReport").addEventListener("click", ()=>{
+      const r = buildReport();
+      $("#report").value = r;
+      $("#btnCopyReport").disabled = false;
+      toast("Relatório gerado.");
+    });
+
+    $("#btnCopyReport").addEventListener("click", ()=>{
+      const t = $("#report").value.trim();
+      if(!t) return;
+      copyText(t);
+    });
+
+    // ===== INIT =====
+    $("#universalList").innerHTML = UNIVERSAL.map((x,i)=>`${i+1}. ${x}`).join("<br/>");
+
+    renderScenarios();
+    renderLevels();
+    computeAndRender();
+  </script>
+</body>
+</html>
