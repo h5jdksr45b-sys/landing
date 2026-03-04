@@ -81,9 +81,7 @@
       flex: 0 0 auto;
     }
 
-    .titles{
-      min-width:0;
-    }
+    .titles{ min-width:0; }
 
     .title{
       font-size: 30px;
@@ -114,10 +112,12 @@
       cursor:pointer;
       user-select:none;
     }
+    .chipBtn:active{ transform: translateY(1px); }
 
     .content{ padding: 16px; }
 
     .section{ margin-top: 16px; }
+
     .sectionTitle{
       display:flex;
       align-items:center;
@@ -197,6 +197,28 @@
       border-color: rgba(102,224,166,.55);
       background: rgba(102,224,166,.12);
     }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 950;
+      font-size: 12.5px;
+      color: var(--text);
+    }
+    .dot{
+      width:9px;
+      height:9px;
+      border-radius: 99px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(102,224,166,.10);
+    }
+    .dot.mod{ background: #f1b46b; box-shadow: 0 0 0 4px rgba(241,180,107,.10); }
+    .dot.grv{ background: var(--danger); box-shadow: 0 0 0 4px rgba(255,107,107,.10); }
 
     .card{
       border: 1px solid var(--line);
@@ -321,7 +343,6 @@
       box-shadow: var(--shadow);
     }
 
-    /* Modal */
     .modalBackdrop{
       position:fixed;
       inset:0;
@@ -370,9 +391,7 @@
       cursor:pointer;
       user-select:none;
     }
-    .modalBody{
-      padding: 14px;
-    }
+    .modalBody{ padding: 14px; }
   </style>
 </head>
 
@@ -395,7 +414,6 @@
 
   <div class="toast" id="toast">Copiado.</div>
 
-  <!-- Modal Biblioteca -->
   <div class="modalBackdrop" id="modalBackdrop" onclick="closeModal(event)">
     <div class="modal" onclick="event.stopPropagation()">
       <div class="modalTop">
@@ -411,7 +429,7 @@
 
 <script>
   const LOGO_FILE = "701EA1DC-33CE-40FC-BA04-F655886CBA94.png";
-  const STORAGE_KEY = "radarCriseTPBFreeHistoryV2";
+  const STORAGE_KEY = "radarCriseTPBFreeHistoryV3";
 
   let tab = "crise";
   let selectedScenario = 0;
@@ -419,10 +437,11 @@
 
   const levels = [
     { title: "Leve", desc: "Ainda dá para conversar com alguma organização." },
-    { title: "Moderada", desc: "Emoção alta. Foque em reduzir escalada." },
-    { title: "Grave", desc: "Segurança e pausa. Sem debate agora." }
+    { title: "Moderada", desc: "Emoção alta. Reduzir estímulo e debate." },
+    { title: "Grave", desc: "Segurança e pausa. Sem discussão agora." }
   ];
 
+  // IMPORTANTE: todas as frases moderadas são DIFERENTES das leves e graves
   const scenarios = [
     {
       title: "Medo de abandono",
@@ -430,9 +449,9 @@
       piora: "Você está paranoico.",
       porq: "Invalida o medo e aumenta vergonha e urgência.",
       resposta: [
-        "Entendo que isso te deixou inseguro. Minha intenção não foi te afastar.",
-        "Eu vejo que esse medo apareceu forte agora. Vamos desacelerar e falar com calma.",
-        "Eu entendo que isso ficou intenso. Pausa. Eu volto e a gente conversa quando baixar."
+        "Entendo que isso te deixou inseguro. Eu estou aqui e quero conversar.",
+        "Eu vejo que o medo subiu muito. Vamos desacelerar e eu vou ser bem claro com você.",
+        "Agora ficou intenso. Pausa. Eu volto em 10 minutos. Eu não vou sumir."
       ]
     },
     {
@@ -441,9 +460,9 @@
       piora: "Você está exagerando.",
       porq: "Minimiza a emoção e aumenta a escalada.",
       resposta: [
-        "Eu vejo que isso te irritou. Quero entender sem briga.",
-        "A raiva está forte agora. Vamos diminuir o ritmo da conversa para não piorar.",
-        "Está muito intenso. Pausa agora. Eu volto em alguns minutos."
+        "Eu vejo que você ficou muito irritado. Eu quero entender sem briga.",
+        "A emoção está alta. Eu vou falar pouco e com calma para não piorar.",
+        "Está escalando. Pausa agora. Eu volto em 10 minutos para retomar."
       ]
     },
     {
@@ -452,9 +471,9 @@
       piora: "Isso é coisa da sua cabeça.",
       porq: "Parece gaslighting durante crise e aumenta desconfiança.",
       resposta: [
-        "Eu entendo que isso te feriu. Vamos olhar com calma.",
-        "Eu vejo que isso mexeu muito com você. Vamos desacelerar e falar sem ataque.",
-        "Eu entendo que está doendo. Pausa agora e voltamos com calma."
+        "Eu entendo que isso te feriu. Quero esclarecer com calma.",
+        "Eu vejo que isso virou certeza pra você. Vamos desacelerar e eu te explico minha intenção.",
+        "Agora está muito intenso. Pausa. Eu volto e a gente conversa com calma."
       ]
     },
     {
@@ -463,9 +482,9 @@
       piora: "Já falei mil vezes.",
       porq: "Transforma insegurança em ‘erro’, piorando a busca por certeza.",
       resposta: [
-        "Eu te amo. E eu vejo que agora você está inseguro.",
-        "Eu te amo. Vamos cuidar desse medo agora, sem discussão.",
-        "Eu te amo. Pausa. Eu fico por perto e a gente conversa quando baixar."
+        "Eu te amo. E eu vejo que você ficou inseguro agora.",
+        "Eu te amo. Agora eu vou ser previsível: eu fico aqui e a gente fala com calma.",
+        "Eu te amo. Pausa. Eu volto em 10 minutos e continuo com você."
       ]
     },
     {
@@ -474,9 +493,9 @@
       piora: "Para de se culpar.",
       porq: "Invalida o peso emocional e dá sensação de ‘não sou entendido’.",
       resposta: [
-        "Eu vejo que você está se sentindo muito culpado. Vamos separar fatos e próximos passos.",
-        "Isso parece estar pesando muito agora. Vamos reduzir pressão e organizar um passo pequeno.",
-        "Vamos acalmar primeiro. Depois a gente pensa em reparação e solução."
+        "Eu vejo que você está se sentindo muito culpado. Vamos dar um passo pequeno agora.",
+        "Isso está pesando muito. Vamos reduzir a pressão e organizar uma coisa de cada vez.",
+        "Primeiro vamos acalmar. Depois a gente pensa em reparação e solução."
       ]
     }
   ];
@@ -508,10 +527,7 @@
     try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
     catch(e){ return []; }
   }
-
-  function setHistory(arr){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-  }
+  function setHistory(arr){ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
 
   function saveCrisis(){
     const s = scenarios[selectedScenario];
@@ -533,16 +549,19 @@
     toast("Limpo.");
   }
 
-  function openTab(t){
-    tab = t;
-    render();
-  }
+  function openTab(t){ tab = t; render(); }
 
   function setNavActive(){
     ["crise","biblioteca","padroes","guia"].forEach(id=>{
       const el = document.getElementById("nav-"+id);
       if(el) el.classList.toggle("active", tab===id);
     });
+  }
+
+  function levelDotClass(){
+    if(selectedLevel===1) return "mod";
+    if(selectedLevel===2) return "grv";
+    return "";
   }
 
   function renderTop(){
@@ -592,6 +611,13 @@
     const s = scenarios[selectedScenario];
     const reply = s.resposta[selectedLevel];
 
+    const pill = `
+      <div class="pill">
+        <span class="dot ${levelDotClass()}"></span>
+        Intensidade ativa: ${levels[selectedLevel].title}
+      </div>
+    `;
+
     return `
       <div class="section">
         <div class="sectionTitle">
@@ -610,6 +636,8 @@
       </div>
 
       <div class="section">
+        ${pill}
+
         <div class="card bad">
           <div class="label">Frase que piora</div>
           <div class="txt">${s.piora}</div>
@@ -742,16 +770,21 @@
   }
 
   function panic(){
-    // agora copia UMA frase (a melhor geral), não 5
-    copyText("Eu vejo que isso te deixou muito ferido. Vamos pausar e conversar quando estivermos mais calmos.");
+    // 1 frase universal (não 5)
+    copyText("Eu vejo que isso te deixou muito ferido. Pausa agora. Eu volto em 10 minutos e a gente conversa com calma.");
   }
 
   // Modal Biblioteca
   function openScenarioModal(idx){
     const s = scenarios[idx];
     document.getElementById("modalTitle").textContent = s.title;
-    document.getElementById("modalSub").textContent = "Resumo rápido + resposta (usa a intensidade atual)";
+    document.getElementById("modalSub").textContent = "Resumo rápido e resposta usando a intensidade ativa";
     document.getElementById("modalBody").innerHTML = `
+      <div class="pill" style="margin-bottom:10px">
+        <span class="dot ${levelDotClass()}"></span>
+        Intensidade ativa: ${levels[selectedLevel].title}
+      </div>
+
       <div class="card bad">
         <div class="label">Frase que piora</div>
         <div class="txt">${s.piora}</div>
@@ -779,11 +812,9 @@
   function showModal(){
     document.getElementById("modalBackdrop").style.display = "flex";
   }
-
   function hideModal(){
     document.getElementById("modalBackdrop").style.display = "none";
   }
-
   function closeModal(e){
     if(e.target.id === "modalBackdrop") hideModal();
   }
