@@ -7,16 +7,20 @@
 
   <style>
     :root{
-      --bg:#0c0f15;
+      --bg:#0b0f16;
+      --surface: rgba(16,20,28,.74);
+      --surface2: rgba(255,255,255,.045);
       --text:#eef2ff;
-      --muted:#a7b0c6;
+      --muted:#a7b2cc;
       --line: rgba(255,255,255,.10);
       --accent:#66e0a6;
+      --warn:#f1b46b;
       --danger:#ff6b6b;
       --info:#7aa7ff;
-      --shadow: 0 18px 60px rgba(0,0,0,.42);
+      --shadow: 0 22px 70px rgba(0,0,0,.52);
       --radius:18px;
-      --max: 820px;
+      --radius2:14px;
+      --max: 880px;
       --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial;
     }
 
@@ -27,9 +31,9 @@
       font-family: var(--sans);
       color: var(--text);
       background:
-        radial-gradient(900px 520px at 18% -8%, rgba(102,224,166,.14), transparent 62%),
-        radial-gradient(820px 420px at 86% -8%, rgba(241,180,107,.12), transparent 66%),
-        radial-gradient(900px 760px at 50% 120%, rgba(102,224,166,.10), transparent 72%),
+        radial-gradient(920px 540px at 18% -8%, rgba(102,224,166,.15), transparent 62%),
+        radial-gradient(860px 460px at 86% -8%, rgba(241,180,107,.13), transparent 66%),
+        radial-gradient(980px 820px at 50% 120%, rgba(102,224,166,.11), transparent 72%),
         var(--bg);
       background-attachment: fixed;
       -webkit-font-smoothing: antialiased;
@@ -45,7 +49,7 @@
 
     .shell{
       border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(15,17,24,.76), rgba(15,17,24,.88));
+      background: linear-gradient(180deg, rgba(16,20,28,.72), rgba(16,20,28,.86));
       box-shadow: var(--shadow);
       border-radius: 26px;
       overflow:hidden;
@@ -54,7 +58,7 @@
     .top{
       padding: 16px 16px 14px;
       border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.04), transparent);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), transparent);
     }
 
     .brandRow{
@@ -103,7 +107,7 @@
 
     .chipBtn{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.05);
       color: var(--text);
       border-radius: 999px;
       padding: 10px 12px;
@@ -111,13 +115,13 @@
       font-size: 13px;
       cursor:pointer;
       user-select:none;
+      white-space: nowrap;
     }
     .chipBtn:active{ transform: translateY(1px); }
 
     .content{ padding: 16px; }
 
     .section{ margin-top: 16px; }
-
     .sectionTitle{
       display:flex;
       align-items:center;
@@ -136,6 +140,65 @@
       line-height: 1.35;
     }
 
+    .hero{
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(102,224,166,.14), rgba(255,255,255,.02));
+      border-radius: 22px;
+      padding: 14px;
+    }
+    .heroTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom: 10px;
+    }
+    .heroTitle{
+      font-weight: 950;
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
+    .heroSub{
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.35;
+      margin-top: 6px;
+    }
+
+    .bigCTA{
+      width:100%;
+      border:none;
+      border-radius: 18px;
+      padding: 16px 14px;
+      font-weight: 950;
+      font-size: 15px;
+      cursor:pointer;
+      user-select:none;
+      background: var(--accent);
+      color:#06110c;
+    }
+    .bigCTA:active{ transform: translateY(1px); }
+
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .ctaMini{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 12px 12px;
+      font-weight: 900;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+      flex: 1 1 180px;
+    }
+    .ctaMini:active{ transform: translateY(1px); }
+
     .grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -146,7 +209,7 @@
       .title{ font-size: 28px; }
     }
 
-    .scenario{
+    .tile{
       border: 1px solid var(--line);
       background: rgba(255,255,255,.03);
       border-radius: var(--radius);
@@ -154,22 +217,37 @@
       cursor:pointer;
       user-select:none;
       transition: transform .08s ease;
+      position: relative;
+      overflow:hidden;
     }
-    .scenario:active{ transform: translateY(1px); }
-    .scenario.active{
+    .tile:active{ transform: translateY(1px); }
+    .tile.active{
       border-color: rgba(102,224,166,.55);
       background: linear-gradient(180deg, rgba(102,224,166,.14), rgba(255,255,255,.02));
     }
-    .scenario .k{
+    .tile .k{
       font-weight: 950;
       font-size: 13.5px;
       line-height: 1.2;
     }
-    .scenario .d{
+    .tile .d{
       margin-top: 6px;
       color: var(--muted);
       font-size: 12.5px;
       line-height: 1.35;
+    }
+    .badge{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.20);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-weight: 950;
+      font-size: 11px;
+      color: var(--muted);
+      backdrop-filter: blur(8px);
     }
 
     .seg{
@@ -191,6 +269,7 @@
       font-size: 13px;
       cursor:pointer;
       user-select:none;
+      text-align:center;
     }
     .segBtn.active{
       color: var(--text);
@@ -209,6 +288,7 @@
       font-weight: 950;
       font-size: 12.5px;
       color: var(--text);
+      margin-top: 2px;
     }
     .dot{
       width:9px;
@@ -217,7 +297,7 @@
       background: var(--accent);
       box-shadow: 0 0 0 4px rgba(102,224,166,.10);
     }
-    .dot.mod{ background: #f1b46b; box-shadow: 0 0 0 4px rgba(241,180,107,.10); }
+    .dot.mod{ background: var(--warn); box-shadow: 0 0 0 4px rgba(241,180,107,.10); }
     .dot.grv{ background: var(--danger); box-shadow: 0 0 0 4px rgba(255,107,107,.10); }
 
     .card{
@@ -235,11 +315,18 @@
       color: var(--muted);
       font-weight: 950;
     }
-    .card .txt{
+    .txt{
       margin-top: 8px;
       font-size: 15px;
       line-height: 1.45;
       font-weight: 900;
+    }
+    .subtxt{
+      margin-top: 8px;
+      color: rgba(238,242,255,.84);
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 650;
     }
 
     .card.bad{ border-color: rgba(255,107,107,.55); background: rgba(255,107,107,.10); }
@@ -260,10 +347,12 @@
       font-size: 14px;
       cursor:pointer;
       user-select:none;
+      flex: 1 1 160px;
     }
     .btn:active{ transform: translateY(1px); }
     .btn.primary{ background: var(--accent); color:#06110c; }
-    .btn.secondary{ background: rgba(255,255,255,.04); color: var(--text); border: 1px solid var(--line); }
+    .btn.secondary{ background: rgba(255,255,255,.05); color: var(--text); border: 1px solid var(--line); }
+    .btn.ghost{ background: transparent; color: var(--muted); border: 1px dashed rgba(255,255,255,.16); }
 
     .note{
       margin-top: 10px;
@@ -280,6 +369,8 @@
       margin-top: 10px;
       cursor:pointer;
       user-select:none;
+      position: relative;
+      overflow:hidden;
     }
     .listItem:active{ transform: translateY(1px); }
 
@@ -290,10 +381,42 @@
       line-height: 1.4;
     }
 
+    .teaser{
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(241,180,107,.12), rgba(255,255,255,.02));
+      border-radius: 18px;
+      padding: 14px;
+      margin-top: 14px;
+      position: relative;
+      overflow:hidden;
+    }
+    .teaserTitle{
+      font-weight: 950;
+      font-size: 13.5px;
+      margin-bottom: 6px;
+    }
+    .teaserSub{
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.35;
+    }
+    .blurRow{
+      margin-top: 12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      border-radius: 14px;
+      padding: 12px;
+      filter: blur(1.7px);
+      opacity: .62;
+      user-select:none;
+    }
+    .blurRow b{ font-size: 12.5px; }
+    .blurRow div{ color: var(--muted); margin-top: 6px; font-size: 12.5px; }
+
     .bottom{
       position: fixed;
       left:0; right:0; bottom:0;
-      background: rgba(12,15,21,.88);
+      background: rgba(11,15,22,.88);
       border-top: 1px solid var(--line);
       backdrop-filter: blur(12px);
       padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
@@ -331,7 +454,7 @@
       left:50%;
       bottom: 96px;
       transform: translateX(-50%);
-      background: rgba(12,15,21,.92);
+      background: rgba(11,15,22,.92);
       border: 1px solid var(--line);
       color: var(--text);
       border-radius: 14px;
@@ -343,10 +466,11 @@
       box-shadow: var(--shadow);
     }
 
+    /* Modal */
     .modalBackdrop{
       position:fixed;
       inset:0;
-      background: rgba(0,0,0,.55);
+      background: rgba(0,0,0,.56);
       backdrop-filter: blur(6px);
       display:none;
       align-items:flex-end;
@@ -355,9 +479,9 @@
       padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
     }
     .modal{
-      width: min(820px, 100%);
+      width: min(880px, 100%);
       border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(15,17,24,.92), rgba(15,17,24,.98));
+      background: linear-gradient(180deg, rgba(16,20,28,.92), rgba(16,20,28,.98));
       border-radius: 22px;
       box-shadow: var(--shadow);
       overflow:hidden;
@@ -383,15 +507,28 @@
     }
     .xbtn{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.05);
       color: var(--text);
       border-radius: 12px;
       padding: 10px 10px;
       font-weight: 950;
       cursor:pointer;
       user-select:none;
+      white-space: nowrap;
     }
     .modalBody{ padding: 14px; }
+
+    .kbd{
+      display:inline-flex;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.22);
+      border-radius: 10px;
+      padding: 6px 9px;
+      font-weight: 950;
+      font-size: 12px;
+      color: var(--muted);
+      margin-left: 6px;
+    }
   </style>
 </head>
 
@@ -406,7 +543,7 @@
   <div class="bottom">
     <div class="bottomInner">
       <div class="nav active" id="nav-crise" onclick="openTab('crise')"><span class="ico">🚨</span>Crise</div>
-      <div class="nav" id="nav-biblioteca" onclick="openTab('biblioteca')"><span class="ico">📚</span>Biblioteca</div>
+      <div class="nav" id="nav-situacoes" onclick="openTab('situacoes')"><span class="ico">🧭</span>Situações</div>
       <div class="nav" id="nav-padroes" onclick="openTab('padroes')"><span class="ico">📊</span>Padrões</div>
       <div class="nav" id="nav-guia" onclick="openTab('guia')"><span class="ico">⚙️</span>Guia</div>
     </div>
@@ -429,75 +566,123 @@
 
 <script>
   const LOGO_FILE = "701EA1DC-33CE-40FC-BA04-F655886CBA94.png";
-  const STORAGE_KEY = "radarCriseTPBFreeHistoryV3";
+
+  const STORAGE_KEY_HISTORY = "radar_tpb_free_history_v1";
+  const STORAGE_KEY_LAST = "radar_tpb_free_last_v1";
 
   let tab = "crise";
-  let selectedScenario = 0;
-  let selectedLevel = 0;
+  let selectedScenario = 0; // index em scenariosFree
+  let selectedLevel = 1;    // default: moderada (mais comum em crise)
+  let quickMode = true;     // abre com CRISE AGORA por padrão
 
   const levels = [
-    { title: "Leve", desc: "Ainda dá para conversar com alguma organização." },
-    { title: "Moderada", desc: "Emoção alta. Reduzir estímulo e debate." },
-    { title: "Grave", desc: "Segurança e pausa. Sem discussão agora." }
+    { title: "Leve", desc: "Dá para conversar. Valide e organize o básico.", dot:"" },
+    { title: "Moderada", desc: "Emoção alta. Reduza estímulo e debate.", dot:"mod" },
+    { title: "Grave", desc: "Risco de escalada. Pausa + previsibilidade.", dot:"grv" }
   ];
 
-  // IMPORTANTE: todas as frases moderadas são DIFERENTES das leves e graves
-  const scenarios = [
+  // FREE: 5 situações (com linguagem real)
+  // Estrutura: cada uma tem gatilhos (frases comuns), erro, e respostas por intensidade
+  const scenariosFree = [
     {
-      title: "Medo de abandono",
-      desc: "rejeição real ou percebida",
-      piora: "Você está paranoico.",
-      porq: "Invalida o medo e aumenta vergonha e urgência.",
+      id: "abandono",
+      title: "Ela disse que você vai abandonar",
+      short: "“Você vai sumir” • “Você não liga”",
+      triggers: [
+        "“Você vai me deixar igual todo mundo.”",
+        "“Você vai sumir.”",
+        "“Você não me ama de verdade.”"
+      ],
+      piora: "Para com isso. Você está exagerando.",
+      porq: "Minimiza o medo e vira prova de abandono. A crise escala mais rápido.",
+      estrutura: "Validar o medo → declarar intenção → dar previsibilidade (tempo/retorno).",
       resposta: [
-        "Entendo que isso te deixou inseguro. Eu estou aqui e quero conversar.",
-        "Eu vejo que o medo subiu muito. Vamos desacelerar e eu vou ser bem claro com você.",
-        "Agora ficou intenso. Pausa. Eu volto em 10 minutos. Eu não vou sumir."
+        "Eu entendo que isso te deu medo. Minha intenção não é te abandonar. Vamos conversar com calma.",
+        "Eu vejo que esse medo subiu agora. Eu estou aqui. Vamos desacelerar e eu vou ser bem claro com você.",
+        "Agora ficou intenso. Pausa. Eu volto em 10 minutos. Eu não vou sumir. A gente retoma com calma."
       ]
     },
     {
-      title: "Raiva explosiva",
-      desc: "grito e ataque verbal",
-      piora: "Você está exagerando.",
-      porq: "Minimiza a emoção e aumenta a escalada.",
+      id: "raiva",
+      title: "Ela está gritando e atacando",
+      short: "raiva explosiva • ataque verbal",
+      triggers: [
+        "Gritos, acusações e insultos.",
+        "“Você é horrível.”",
+        "“Eu te odeio.”"
+      ],
+      piora: "Baixa o tom. Você está ridículo.",
+      porq: "Humilha e aumenta vergonha. Vergonha vira raiva e a escalada acelera.",
+      estrutura: "Validar a emoção → reduzir estímulo → limite curto (pausa) → retorno.",
       resposta: [
-        "Eu vejo que você ficou muito irritado. Eu quero entender sem briga.",
-        "A emoção está alta. Eu vou falar pouco e com calma para não piorar.",
-        "Está escalando. Pausa agora. Eu volto em 10 minutos para retomar."
+        "Eu vejo que você ficou muito irritada. Eu quero entender, sem briga.",
+        "A emoção está alta. Eu vou falar pouco e com calma para não piorar. Vamos baixar o ritmo.",
+        "Está escalando. Pausa agora. Eu volto em 10 minutos para retomar. Eu não vou discutir assim."
       ]
     },
     {
-      title: "Acusação injusta",
-      desc: "interpretação vira certeza",
-      piora: "Isso é coisa da sua cabeça.",
-      porq: "Parece gaslighting durante crise e aumenta desconfiança.",
+      id: "acusacao",
+      title: "Ela acusou você de mentir ou trair",
+      short: "“Eu sei que você…”",
+      triggers: [
+        "“Eu sei que você está mentindo.”",
+        "“Você está me traindo.”",
+        "“Eu vi no seu olhar.”"
+      ],
+      piora: "Você está louca. Isso é coisa da sua cabeça.",
+      porq: "Parece gaslighting na crise. A pessoa sente que você está apagando a experiência dela.",
+      estrutura: "Validar impacto → esclarecer intenção (sem debate longo) → proposta de pausa/retorno.",
       resposta: [
-        "Eu entendo que isso te feriu. Quero esclarecer com calma.",
-        "Eu vejo que isso virou certeza pra você. Vamos desacelerar e eu te explico minha intenção.",
-        "Agora está muito intenso. Pausa. Eu volto e a gente conversa com calma."
+        "Eu entendo que isso te machucou. Eu quero esclarecer com calma.",
+        "Eu vejo que isso virou certeza pra você. Vamos desacelerar: eu explico minha intenção, sem ataque agora.",
+        "Agora está muito intenso. Pausa. Eu volto e a gente conversa com calma. Eu não vou brigar."
       ]
     },
     {
-      title: "Você não me ama",
-      desc: "pedido de certeza repetido",
-      piora: "Já falei mil vezes.",
-      porq: "Transforma insegurança em ‘erro’, piorando a busca por certeza.",
+      id: "certeza",
+      title: "Ela disse “você não me ama”",
+      short: "pedido de certeza repetido",
+      triggers: [
+        "“Você não me ama.”",
+        "“Se me amasse faria X.”",
+        "“Fala que me ama agora.”"
+      ],
+      piora: "De novo isso? Já falei mil vezes.",
+      porq: "Transforma insegurança em “erro”. A pessoa busca mais certeza e a crise aumenta.",
+      estrutura: "Afirmar vínculo → nomear insegurança → previsibilidade curta (o que vai acontecer agora).",
       resposta: [
-        "Eu te amo. E eu vejo que você ficou inseguro agora.",
-        "Eu te amo. Agora eu vou ser previsível: eu fico aqui e a gente fala com calma.",
-        "Eu te amo. Pausa. Eu volto em 10 minutos e continuo com você."
+        "Eu te amo. Eu vejo que você ficou insegura agora. Vamos conversar com calma.",
+        "Eu te amo. Agora eu vou ser previsível: eu fico aqui e a gente fala devagar, sem briga.",
+        "Eu te amo. Pausa. Eu volto em 10 minutos e continuo com você. Eu não vou sumir."
       ]
     },
     {
-      title: "Culpa extrema",
-      desc: "autopunição e vergonha",
-      piora: "Para de se culpar.",
-      porq: "Invalida o peso emocional e dá sensação de ‘não sou entendido’.",
+      id: "culpa",
+      title: "Ela está se culpando e se destruindo",
+      short: "autopunição • vergonha",
+      triggers: [
+        "“Eu sou um lixo.”",
+        "“Eu estraguei tudo.”",
+        "“Eu só faço merda.”"
+      ],
+      piora: "Para de drama. Você faz isso pra chamar atenção.",
+      porq: "Shame spiral: a vergonha cresce, e a pessoa se sente ainda mais sozinha.",
+      estrutura: "Validar dor → reduzir pressão → passo mínimo agora (respirar/água/pausa) → retorno.",
       resposta: [
-        "Eu vejo que você está se sentindo muito culpado. Vamos dar um passo pequeno agora.",
+        "Eu vejo que isso está doendo muito. Vamos dar um passo pequeno agora, só o suficiente.",
         "Isso está pesando muito. Vamos reduzir a pressão e organizar uma coisa de cada vez.",
-        "Primeiro vamos acalmar. Depois a gente pensa em reparação e solução."
+        "Primeiro vamos acalmar. Pausa. Água e respirar. Depois a gente pensa em reparação e solução."
       ]
     }
+  ];
+
+  // Quick tiles (o usuário em crise pensa em “o que aconteceu”, não em categoria)
+  const quickTiles = [
+    { label: "“Você vai me abandonar”", scenarioId:"abandono" },
+    { label: "Gritando / atacando", scenarioId:"raiva" },
+    { label: "“Você está mentindo / traindo”", scenarioId:"acusacao" },
+    { label: "“Você não me ama”", scenarioId:"certeza" },
+    { label: "“Eu sou um lixo / eu estraguei tudo”", scenarioId:"culpa" }
   ];
 
   function toast(msg){
@@ -524,44 +709,38 @@
   }
 
   function getHistory(){
-    try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
+    try{ return JSON.parse(localStorage.getItem(STORAGE_KEY_HISTORY) || "[]"); }
     catch(e){ return []; }
   }
-  function setHistory(arr){ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
-
-  function saveCrisis(){
-    const s = scenarios[selectedScenario];
-    const entry = {
-      ts: new Date().toISOString(),
-      scenario: s.title,
-      level: levels[selectedLevel].title,
-      reply: s.resposta[selectedLevel]
-    };
-    const h = getHistory();
-    h.unshift(entry);
-    setHistory(h);
-    toast("Registrado.");
+  function setHistory(arr){
+    localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(arr));
   }
 
-  function clearHistory(){
-    setHistory([]);
+  function saveLast(){
+    const payload = { scenario: selectedScenario, level: selectedLevel, quickMode: quickMode };
+    localStorage.setItem(STORAGE_KEY_LAST, JSON.stringify(payload));
+  }
+  function loadLast(){
+    try{
+      const p = JSON.parse(localStorage.getItem(STORAGE_KEY_LAST) || "null");
+      if(!p) return;
+      if(Number.isFinite(p.scenario)) selectedScenario = clamp(p.scenario, 0, scenariosFree.length-1);
+      if(Number.isFinite(p.level)) selectedLevel = clamp(p.level, 0, 2);
+      if(typeof p.quickMode === "boolean") quickMode = p.quickMode;
+    }catch(e){}
+  }
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+  function openTab(t){
+    tab = t;
     render();
-    toast("Limpo.");
   }
-
-  function openTab(t){ tab = t; render(); }
 
   function setNavActive(){
-    ["crise","biblioteca","padroes","guia"].forEach(id=>{
+    ["crise","situacoes","padroes","guia"].forEach(id=>{
       const el = document.getElementById("nav-"+id);
       if(el) el.classList.toggle("active", tab===id);
     });
-  }
-
-  function levelDotClass(){
-    if(selectedLevel===1) return "mod";
-    if(selectedLevel===2) return "grv";
-    return "";
   }
 
   function renderTop(){
@@ -579,118 +758,196 @@
     `;
   }
 
-  function scenarioGrid(){
-    let html = `<div class="grid">`;
-    scenarios.forEach((s,i)=>{
-      html += `
-        <div class="scenario ${i===selectedScenario ? "active":""}" onclick="selectScenario(${i})">
-          <div class="k">${s.title}</div>
-          <div class="d">${s.desc}</div>
-        </div>
-      `;
-    });
-    html += `</div>`;
-    return html;
-  }
-
   function intensitySeg(){
     let html = `<div class="seg">`;
     levels.forEach((lv,i)=>{
-      html += `
-        <button class="segBtn ${i===selectedLevel ? "active":""}" onclick="selectLevel(${i})">
-          ${lv.title}
-        </button>
-      `;
+      html += `<div class="segBtn ${i===selectedLevel ? "active":""}" onclick="selectLevel(${i})">${lv.title}</div>`;
     });
     html += `</div>`;
     html += `<div class="hint" style="margin-top:10px">${levels[selectedLevel].desc}</div>`;
     return html;
   }
 
-  function renderCrise(){
-    const s = scenarios[selectedScenario];
-    const reply = s.resposta[selectedLevel];
+  function pillIntensity(){
+    const lv = levels[selectedLevel];
+    return `<div class="pill"><span class="dot ${lv.dot}"></span>Intensidade ativa: ${lv.title}</div>`;
+  }
 
-    const pill = `
-      <div class="pill">
-        <span class="dot ${levelDotClass()}"></span>
-        Intensidade ativa: ${levels[selectedLevel].title}
-      </div>
-    `;
+  function renderQuick(){
+    let tiles = `<div class="grid">`;
+    quickTiles.forEach((t)=>{
+      tiles += `
+        <div class="tile" onclick="pickQuick('${t.scenarioId}')">
+          <div class="k">${t.label}</div>
+          <div class="d">toque para gerar resposta</div>
+          <div class="badge">crise</div>
+        </div>
+      `;
+    });
+    tiles += `</div>`;
 
     return `
-      <div class="section">
-        <div class="sectionTitle">
-          <div class="h">1 O que está acontecendo</div>
-          <div class="hint">Escolha o cenário</div>
-        </div>
-        ${scenarioGrid()}
-      </div>
-
-      <div class="section">
-        <div class="sectionTitle">
-          <div class="h">2 Intensidade da crise</div>
-          <div class="hint">Isso muda a resposta</div>
-        </div>
-        ${intensitySeg()}
-      </div>
-
-      <div class="section">
-        ${pill}
-
-        <div class="card bad">
-          <div class="label">Frase que piora</div>
-          <div class="txt">${s.piora}</div>
+      <div class="hero">
+        <div class="heroTop">
+          <div>
+            <div class="heroTitle">CRISE AGORA</div>
+            <div class="heroSub">Escolha o que aconteceu e copie a resposta. Objetivo: <b>reduzir dano</b> e evitar escalada.</div>
+          </div>
+          <div class="hint">10s</div>
         </div>
 
-        <div class="card info">
-          <div class="label">Por que piora</div>
-          <div class="txt">${s.porq}</div>
+        ${tiles}
+
+        <div class="section" style="margin-top:12px">
+          <div class="sectionTitle">
+            <div class="h">Intensidade</div>
+            <div class="hint">isso muda a resposta</div>
+          </div>
+          ${intensitySeg()}
         </div>
 
-        <div class="card good">
-          <div class="label">Substitua por</div>
-          <div class="txt">${reply}</div>
+        <div class="ctaRow">
+          <button class="ctaMini" onclick="quickMode=false; saveLast(); render();">Ver modo completo</button>
+          <button class="ctaMini" onclick="openTab('situacoes')">Ver situações</button>
         </div>
-
-        <div class="actions">
-          <button class="btn primary" onclick="copyCurrent()">Copiar resposta</button>
-          <button class="btn secondary" onclick="saveCrisis()">Registrar crise</button>
-        </div>
-
-        <div class="note">Dica: copie e envie <b>sem explicar demais</b>. Em crise, frase curta regula melhor.</div>
       </div>
     `;
   }
 
-  function renderBiblioteca(){
-    const items = scenarios.map((s,idx)=>`
+  function scenarioGrid(){
+    let html = `<div class="grid">`;
+    scenariosFree.forEach((s,i)=>{
+      html += `
+        <div class="tile ${i===selectedScenario ? "active":""}" onclick="selectScenario(${i})">
+          <div class="k">${s.title}</div>
+          <div class="d">${s.short}</div>
+          <div class="badge">free</div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+    return html;
+  }
+
+  function renderCrise(){
+    if(quickMode) return renderQuick();
+
+    const s = scenariosFree[selectedScenario];
+    const reply = s.resposta[selectedLevel];
+
+    return `
+      <div class="hero">
+        <div class="heroTop">
+          <div>
+            <div class="heroTitle">CRISE</div>
+            <div class="heroSub">Cenário + intensidade → copiar resposta. Sem debate. Frase curta regula melhor.</div>
+          </div>
+          <button class="chipBtn" onclick="quickMode=true; saveLast(); render();">CRISE AGORA</button>
+        </div>
+
+        <div class="section" style="margin-top:0">
+          <div class="sectionTitle">
+            <div class="h">1 O que aconteceu</div>
+            <div class="hint">escolha o cenário</div>
+          </div>
+          ${scenarioGrid()}
+        </div>
+
+        <div class="section">
+          <div class="sectionTitle">
+            <div class="h">2 Intensidade</div>
+            <div class="hint">muda a resposta</div>
+          </div>
+          ${intensitySeg()}
+        </div>
+
+        <div class="section">
+          ${pillIntensity()}
+
+          <div class="card bad">
+            <div class="label">Frase que piora</div>
+            <div class="txt">${s.piora}</div>
+            <div class="subtxt">Evite “corrigir” ou “ganhar a discussão” agora.</div>
+          </div>
+
+          <div class="card info">
+            <div class="label">Por que piora</div>
+            <div class="txt">${s.porq}</div>
+            <div class="subtxt">Quando a emoção sobe, lógica vira combustível.</div>
+          </div>
+
+          <div class="card good">
+            <div class="label">Substitua por</div>
+            <div class="txt">${reply}</div>
+            <div class="subtxt"><b>Estrutura:</b> ${s.estrutura}</div>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary" onclick="copyCurrent()">Copiar resposta</button>
+            <button class="btn secondary" onclick="saveCrisis()">Registrar crise</button>
+            <button class="btn ghost" onclick="openScenarioModal(${selectedScenario})">Ver exemplos</button>
+          </div>
+
+          <div class="note">
+            Atalho mental: <b>validar</b> → <b>clarear intenção</b> → <b>previsibilidade</b>. Em crise, menos é mais.
+          </div>
+        </div>
+      </div>
+
+      <div class="teaser">
+        <div class="teaserTitle">O que existe na versão completa</div>
+        <div class="teaserSub">Aqui você tem 5 situações. Na completa, você ganha o “motor”: mais cenários + scripts por mensagem + variações curtas e longas.</div>
+
+        <div class="blurRow">
+          <b>Modo Mensagem</b>
+          <div>Ela escreveu: “Você vai sumir.” → 3 respostas prontas + 1 frase de limite + 1 frase de retorno.</div>
+        </div>
+        <div class="blurRow">
+          <b>Mapa de escalada</b>
+          <div>Se ela responder X, você faz Y. Se escalar, você pausa com previsibilidade.</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderSituacoes(){
+    const items = scenariosFree.map((s,idx)=>`
       <div class="listItem" onclick="openScenarioModal(${idx})">
         <div style="font-weight:950; font-size:14px">${s.title}</div>
-        <div style="color:var(--muted); font-size:12.5px; margin-top:6px">${s.desc}</div>
+        <div style="color:var(--muted); font-size:12.5px; margin-top:6px">${s.short}</div>
+        <div class="badge" style="top:12px; right:12px">toque</div>
       </div>
     `).join("");
 
     return `
       <div class="section">
         <div class="sectionTitle">
-          <div class="h">Biblioteca</div>
-          <div class="hint">FREE</div>
+          <div class="h">Situações</div>
+          <div class="hint">toque para ver e copiar</div>
         </div>
 
         <div class="hint" style="margin-bottom:10px">
-          Toque em um cenário para ver o resumo e copiar a resposta.
+          Essa lista existe para reconhecer padrões quando você estiver mais calmo. Em crise, use <b>CRISE AGORA</b>.
+          <span class="kbd">copiar</span>
         </div>
 
         ${items}
 
-        <div class="lock">Mais cenários e módulos avançados ficam disponíveis na versão completa.</div>
+        <div class="teaser">
+          <div class="teaserTitle">Na completa, isso vira “busca por mensagem”</div>
+          <div class="teaserSub">Você cola a frase dela e o Radar sugere cenário + resposta + limite. Sem você pensar.</div>
+          <div class="blurRow">
+            <b>Detector</b>
+            <div>“Você não liga pra mim” → medo de abandono → resposta moderada pronta.</div>
+          </div>
+        </div>
       </div>
     `;
   }
 
   function renderPadroes(){
     const h = getHistory();
+
     let html = `
       <div class="section">
         <div class="sectionTitle">
@@ -700,9 +957,15 @@
     `;
 
     if(h.length===0){
-      html += `<div class="listItem" style="cursor:default">Sem registros ainda. Use “Registrar crise” após copiar a resposta.</div>`;
+      html += `
+        <div class="card">
+          <div class="label">Ainda vazio</div>
+          <div class="txt">Sem registros ainda.</div>
+          <div class="subtxt">Use <b>Registrar crise</b> após copiar a resposta. Isso ajuda você a enxergar o padrão.</div>
+        </div>
+      `;
     } else {
-      html += h.slice(0,12).map(e=>{
+      html += h.slice(0,10).map(e=>{
         const dt = new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
         return `
           <div class="listItem" style="cursor:default">
@@ -716,12 +979,21 @@
 
     html += `
         <div class="actions">
+          <button class="btn secondary" onclick="copyHistory()">Copiar resumo</button>
           <button class="btn secondary" onclick="clearHistory()">Limpar histórico</button>
         </div>
 
-        <div class="lock">No completo, esta área vira análise (horários, gatilhos, frequência e escalada).</div>
+        <div class="teaser">
+          <div class="teaserTitle">A versão completa mostra o padrão automaticamente</div>
+          <div class="teaserSub">Horário, gatilho mais comum, intensidade mais frequente e o que regula melhor.</div>
+          <div class="blurRow">
+            <b>Exemplo</b>
+            <div>“Saídas e separações” → 62% das crises → moderada → resposta curta funciona melhor.</div>
+          </div>
+        </div>
       </div>
     `;
+
     return html;
   }
 
@@ -730,22 +1002,40 @@
       <div class="section">
         <div class="sectionTitle">
           <div class="h">Guia rápido</div>
-          <div class="hint">curto e usável</div>
+          <div class="hint">sem teoria longa</div>
         </div>
 
         <div class="card">
           <div class="label">Regra 1</div>
           <div class="txt">Validação vem antes de explicação.</div>
+          <div class="subtxt">Se você tentar “corrigir”, vira gasolina. Primeiro regule, depois converse.</div>
         </div>
 
         <div class="card">
           <div class="label">Regra 2</div>
-          <div class="txt">Pausa curta com retorno reduz abandono.</div>
+          <div class="txt">Pausa com retorno reduz abandono.</div>
+          <div class="subtxt">Exemplo: “Pausa 10 minutos. Eu volto. Eu não vou sumir.”</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Regra 3</div>
+          <div class="txt">Tom crítico quebra qualquer frase.</div>
+          <div class="subtxt">Curto + neutro + previsível.</div>
         </div>
 
         <div class="card">
           <div class="label">Emergência</div>
-          <div class="txt">Em risco imediato: UPA PS • Brasil: CVV 188</div>
+          <div class="txt">Em risco imediato, procure emergência.</div>
+          <div class="subtxt">Brasil: CVV 188. Este material é educativo.</div>
+        </div>
+
+        <div class="teaser">
+          <div class="teaserTitle">Na completa, existe “treino de 2 minutos”</div>
+          <div class="teaserSub">Você pratica respostas fora da crise para usar melhor na hora.</div>
+          <div class="blurRow">
+            <b>Treino</b>
+            <div>Você escolhe uma mensagem e treina a frase curta + limite + retorno.</div>
+          </div>
         </div>
       </div>
     `;
@@ -756,48 +1046,129 @@
     setNavActive();
     const app = document.getElementById("app");
     if(tab==="crise") app.innerHTML = renderCrise();
-    if(tab==="biblioteca") app.innerHTML = renderBiblioteca();
+    if(tab==="situacoes") app.innerHTML = renderSituacoes();
     if(tab==="padroes") app.innerHTML = renderPadroes();
     if(tab==="guia") app.innerHTML = renderGuia();
+    saveLast();
   }
 
-  function selectScenario(i){ selectedScenario = i; render(); }
-  function selectLevel(i){ selectedLevel = i; render(); }
+  function selectScenario(i){
+    selectedScenario = i;
+    render();
+  }
+
+  function selectLevel(i){
+    selectedLevel = Number(i);
+    render();
+    toast("Intensidade: " + levels[selectedLevel].title);
+  }
+
+  function findScenarioIndexById(id){
+    return scenariosFree.findIndex(s => s.id === id);
+  }
+
+  function pickQuick(scenarioId){
+    const idx = findScenarioIndexById(scenarioId);
+    if(idx >= 0){
+      selectedScenario = idx;
+      quickMode = false; // após escolher, já vai direto ao motor completo e mostra os cards
+      tab = "crise";
+      render();
+      copyCurrent(); // ação de crise: copiar imediatamente
+    }
+  }
 
   function copyCurrent(){
-    const s = scenarios[selectedScenario];
+    const s = scenariosFree[selectedScenario];
     copyText(s.resposta[selectedLevel]);
   }
 
   function panic(){
-    // 1 frase universal (não 5)
-    copyText("Eu vejo que isso te deixou muito ferido. Pausa agora. Eu volto em 10 minutos e a gente conversa com calma.");
+    // 1 frase universal (curta + limite + retorno)
+    copyText("Eu entendo que isso te machucou. Pausa agora. Eu volto em 10 minutos e a gente conversa com calma.");
   }
 
-  // Modal Biblioteca
+  function saveCrisis(){
+    const s = scenariosFree[selectedScenario];
+    const entry = {
+      ts: new Date().toISOString(),
+      scenario: s.title,
+      level: levels[selectedLevel].title,
+      reply: s.resposta[selectedLevel]
+    };
+    const h = getHistory();
+    h.unshift(entry);
+    setHistory(h);
+    toast("Registrado.");
+  }
+
+  function clearHistory(){
+    if(!confirm("Limpar todo o histórico deste aparelho?")) return;
+    setHistory([]);
+    render();
+    toast("Limpo.");
+  }
+
+  function copyHistory(){
+    const h = getHistory();
+    if(!h.length){ toast("Sem histórico."); return; }
+    const lines = [];
+    lines.push("RADAR DE CRISE TPB — RESUMO");
+    lines.push("Dr Fabio Schmidt • CRM SP 183549");
+    lines.push("");
+    h.slice(0,12).forEach((e,idx)=>{
+      const dt = new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
+      lines.push(`#${idx+1} ${dt} — ${e.scenario} (${e.level})`);
+      lines.push(`Resposta: ${e.reply}`);
+      lines.push("");
+    });
+    copyText(lines.join("\n"));
+  }
+
+  // Modal (para situações / exemplos)
   function openScenarioModal(idx){
-    const s = scenarios[idx];
+    const s = scenariosFree[idx];
+
+    const triggers = s.triggers.map(t => `<div class="card" style="margin-top:10px"><div class="label">Como aparece</div><div class="txt">${t}</div></div>`).join("");
+
     document.getElementById("modalTitle").textContent = s.title;
-    document.getElementById("modalSub").textContent = "Resumo rápido e resposta usando a intensidade ativa";
+    document.getElementById("modalSub").textContent = "Exemplos reais + resposta por intensidade (usa a intensidade ativa)";
     document.getElementById("modalBody").innerHTML = `
       <div class="pill" style="margin-bottom:10px">
-        <span class="dot ${levelDotClass()}"></span>
+        <span class="dot ${levels[selectedLevel].dot}"></span>
         Intensidade ativa: ${levels[selectedLevel].title}
       </div>
 
+      ${triggers}
+
       <div class="card bad">
-        <div class="label">Frase que piora</div>
+        <div class="label">Erro que piora</div>
         <div class="txt">${s.piora}</div>
+        <div class="subtxt">O erro comum é tentar “corrigir” ou “provar”.</div>
       </div>
 
       <div class="card good">
-        <div class="label">Substitua por</div>
+        <div class="label">Resposta recomendada</div>
         <div class="txt">${s.resposta[selectedLevel]}</div>
+        <div class="subtxt"><b>Estrutura:</b> ${s.estrutura}</div>
       </div>
 
       <div class="actions">
-        <button class="btn primary" onclick="copyText(scenarios[${idx}].resposta[selectedLevel])">Copiar resposta</button>
-        <button class="btn secondary" onclick="goToCrise(${idx})">Ir para Crise</button>
+        <button class="btn primary" onclick="copyText(scenariosFree[${idx}].resposta[selectedLevel])">Copiar resposta</button>
+        <button class="btn secondary" onclick="goToCrise(${idx})">Abrir no modo Crise</button>
+      </div>
+
+      <div class="teaser" style="margin-top:14px">
+        <div class="teaserTitle">Na versão completa</div>
+        <div class="teaserSub">Você teria <b>3 variações</b> (curta, média, longa) e um “se ela responder X…” para seguir sem pensar.</div>
+        <div class="blurRow">
+          <b>Curta</b>
+          <div>Valida + previsibilidade em 1 frase.</div>
+        </div>
+        <div class="blurRow">
+          <b>Longa</b>
+          <div>Valida + limite + retorno + reparo (sem escalar).</div>
+        </div>
       </div>
     `;
     showModal();
@@ -806,7 +1177,9 @@
   function goToCrise(idx){
     selectedScenario = idx;
     hideModal();
-    openTab("crise");
+    tab = "crise";
+    quickMode = false;
+    render();
   }
 
   function showModal(){
@@ -819,6 +1192,8 @@
     if(e.target.id === "modalBackdrop") hideModal();
   }
 
+  // init
+  loadLast();
   render();
 </script>
 
