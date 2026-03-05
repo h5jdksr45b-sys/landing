@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Biblioteca de Prompts — Dr. Fábio Schmidt</title>
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#101826; --panel2:#0f1724; --text:#e8eef7; --muted:#a7b3c6;
+      --brand:#7aa2ff; --ok:#2ee59d; --warn:#ffcc66; --danger:#ff6b6b; --line:#223047;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:linear-gradient(180deg,#070a0f, #0b0f14 20%, #0b0f14);
+      color:var(--text); font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    }
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background:rgba(11,15,20,.75);
+      border-bottom:1px solid rgba(34,48,71,.7);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:18px 16px;}
+    .title{
+      display:flex; gap:12px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
+    }
+    h1{margin:0; font-size:18px; letter-spacing:.2px}
+    .sub{margin:4px 0 0; color:var(--muted); font-size:13px}
+    .toolbar{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:14px;
+    }
+    .search{
+      flex:1 1 360px; min-width:240px;
+      display:flex; gap:10px; align-items:center;
+      background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px;
+    }
+    .search input{
+      width:100%; background:transparent; border:0; outline:0; color:var(--text);
+      font-size:14px;
+    }
+    .pillrow{display:flex; gap:8px; flex-wrap:wrap}
+    .pill{
+      border:1px solid var(--line); background:var(--panel);
+      color:var(--muted); padding:8px 10px; border-radius:999px; cursor:pointer;
+      font-size:13px; user-select:none;
+    }
+    .pill.active{border-color:rgba(122,162,255,.65); color:var(--text); box-shadow:0 0 0 2px rgba(122,162,255,.15) inset}
+    main .wrap{padding-top:14px; padding-bottom:40px;}
+    .grid{
+      display:grid; grid-template-columns: 1fr; gap:12px;
+    }
+    .cat{
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--line); border-radius:16px; overflow:hidden;
+    }
+    .catHead{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px 14px; cursor:pointer; user-select:none;
+      border-bottom:1px solid rgba(34,48,71,.7);
+    }
+    .catHead .left{
+      display:flex; gap:10px; align-items:center;
+    }
+    .badge{
+      font-size:12px; padding:4px 10px; border-radius:999px;
+      border:1px solid rgba(122,162,255,.35); color:var(--text); background:rgba(122,162,255,.08);
+    }
+    .catHead .name{font-weight:700}
+    .catHead .count{color:var(--muted); font-size:13px}
+    .catBody{display:none; padding:12px 12px 14px;}
+    .cat.open .catBody{display:block}
+    .cards{
+      display:grid; grid-template-columns:repeat(12,1fr); gap:10px;
+    }
+    .card{
+      grid-column: span 12;
+      background:rgba(8,12,18,.55);
+      border:1px solid rgba(34,48,71,.7);
+      border-radius:14px; padding:12px;
+    }
+    @media (min-width: 860px){
+      .card{grid-column: span 6;}
+    }
+    .cardTop{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+      margin-bottom:10px;
+    }
+    .cardTitle{font-weight:700; margin:0; font-size:14px}
+    .cardMeta{color:var(--muted); font-size:12px; margin-top:3px}
+    .btnrow{display:flex; gap:8px; flex-wrap:wrap}
+    button{
+      border:1px solid rgba(34,48,71,.95);
+      background:rgba(16,24,38,.85);
+      color:var(--text);
+      padding:8px 10px; border-radius:10px; cursor:pointer; font-size:13px;
+    }
+    button:hover{border-color:rgba(122,162,255,.65)}
+    .copyBtn{border-color:rgba(46,229,157,.35)}
+    .copyBtn:hover{border-color:rgba(46,229,157,.75)}
+    .viewBtn{border-color:rgba(122,162,255,.35)}
+    .dangerBtn{border-color:rgba(255,107,107,.35)}
+    pre{
+      margin:0; padding:12px;
+      background:#070b12; border:1px solid rgba(34,48,71,.7);
+      border-radius:12px;
+      color:#e6f0ff; overflow:auto; white-space:pre-wrap; word-wrap:break-word;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12.8px; line-height:1.35;
+      display:none;
+    }
+    .card.open pre{display:block}
+    .toast{
+      position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+      background:rgba(16,24,38,.92);
+      border:1px solid rgba(34,48,71,.9);
+      padding:10px 12px; border-radius:12px; color:var(--text);
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      display:none; align-items:center; gap:10px;
+      max-width:92vw;
+    }
+    .toast .dot{width:10px; height:10px; border-radius:999px; background:var(--ok)}
+    .toast.show{display:flex}
+    footer{color:var(--muted); font-size:12px; padding:18px 16px 40px; text-align:center}
+    .kbd{font-family:ui-monospace,Menlo,Consolas,monospace; border:1px solid rgba(34,48,71,.9); background:rgba(16,24,38,.7); padding:2px 6px; border-radius:7px; color:var(--text)}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="title">
+      <div>
+        <h1>Biblioteca de Prompts — Dr. Fábio Schmidt</h1>
+        <div class="sub">Clique em um prompt → <b>Copiar</b>. Sem selecionar texto. Tudo organizado por módulos.</div>
+      </div>
+      <div class="sub">
+        Dica: filtre por categoria nos chips abaixo.
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search" role="search">
+        <span style="color:var(--muted)">🔎</span>
+        <input id="q" placeholder="Buscar por palavras (ex: gancho, Suno, indignação, tabela...)" autocomplete="off" />
+      </div>
+      <div class="pillrow" id="filters"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="grid" id="app"></div>
+  </div>
+</main>
+
+<div class="toast" id="toast" aria-live="polite">
+  <div class="dot"></div>
+  <div id="toastText">Copiado.</div>
+</div>
+
+<footer>
+  Salve este arquivo como <span class="kbd">prompts.html</span> e abra no navegador. Para usar no GitHub Pages: suba no repositório e ative Pages.
+</footer>
+
+<script>
+  // ====== PROMPTS (TODOS OS QUE FIZEMOS ATÉ AQUI) ======
+  const PROMPTS = [
+    // REELS / TABELA / IMAGENS
+    {
+      id:"reels_table_01",
+      cat:"Reels — Tabela / Tela",
+      title:"Tabela estratégica para Reels (texto falado × texto na tela)",
+      meta:"Gera tabela 2 colunas, sem alterar o falado",
+      text:`Crie uma tabela estratégica para Reels de até 60 segundos com duas colunas:
+
+Coluna 1: Texto falado (não altere nenhuma palavra, mantenha exatamente como fornecido).
+Coluna 2: Texto que aparece na tela (curto, impactante, com hierarquia visual, palavras-chave destacadas e pensado para retenção e salvamento).
+
+Regras importantes:
+• O texto da tela não deve repetir integralmente o texto falado.
+• Deve complementar, reforçar ou intensificar a mensagem.
+• Usar frases curtas.
+• Pode usar quebras de linha.
+• Pode sugerir destaque visual (ex: MAIÚSCULAS para palavras-chave).
+• Pensar em retenção emocional e clareza.
+• Não resumir demais.
+• Não alterar o roteiro falado.`
+    },
+    {
+      id:"reels_table_02",
+      cat:"Reels — Tabela / Tela",
+      title:"Tabela estratégica com campo “Roteiro falado:”",
+      meta:"Mesma tabela, já com campo para colar o roteiro",
+      text:`Crie uma tabela estratégica para Reels de até 60 segundos com duas colunas:
+
+Coluna 1: Texto falado (não altere nenhuma palavra, mantenha exatamente como fornecido).
+Coluna 2: Texto que aparece na tela (curto, impactante, com hierarquia visual, palavras-chave destacadas e pensado para retenção e salvamento).
+
+Regras importantes:
+• O texto da tela não deve repetir integralmente o texto falado.
+• Deve complementar, reforçar ou intensificar a mensagem.
+• Usar frases curtas.
+• Pode usar quebras de linha.
+• Pode sugerir destaque visual (ex: MAIÚSCULAS para palavras-chave).
+• Pensar em retenção emocional e clareza.
+• Não resumir demais.
+• Não alterar o roteiro falado.
+
+Roteiro falado:`
+    },
+    {
+      id:"reels_image_moments",
+      cat:"Reels — Tabela / Tela",
+      title:"Identificar 3 momentos do roteiro que pedem imagem",
+      meta:"Seleciona trechos + sugere tipo de imagem",
+      text:`Para esse texto, identifique 3 momentos que pedem imagens.
+
+Regras:
+• Escolha trechos com maior impacto emocional.
+• Indique o trecho exato.
+• Diga que tipo de imagem reforça o sentido.
+• Se possível, sugira se a imagem deve ser literal ou simbólica.`
+    },
+
+    // COPY / OTIMIZAÇÃO
+    {
+      id:"copy_reel_optimizer_pro",
+      cat:"Copy — Otimização",
+      title:"Copywriter estratégico para Reels (analisar, achar flop, reescrever)",
+      meta:"Retenção como fofoca + soco emocional",
+      text:`ANÁLISE PROFISSIONAL DE COPY PARA REELS — OTIMIZAÇÃO DE RETENÇÃO
+
+Atue como um dos melhores copywriters e estrategistas de conteúdo digital do mundo, especialista em vídeos curtos de alta retenção (Reels, TikTok, Shorts).
+
+Analise o roteiro falado fornecido para um vídeo curto.
+
+Seu objetivo é identificar pontos onde o vídeo pode perder atenção, gerar queda de retenção ou reduzir impacto emocional.
+
+AVALIAÇÃO ESTRATÉGICA:
+
+1. Identifique trechos onde a atenção do espectador pode cair.
+2. Aponte frases fracas, previsíveis ou genéricas.
+3. Detecte momentos onde a tensão narrativa diminui.
+4. Identifique excesso de explicação ou perda de ritmo.
+5. Aponte onde faltam micro-ganchos para manter curiosidade.
+
+ANÁLISE DE GANCHO:
+
+Avalie o início do roteiro considerando:
+
+• impacto imediato  
+• curiosidade  
+• tensão psicológica  
+• identificação emocional  
+• potencial de parar o scroll  
+
+Informe se o gancho inicial é forte o suficiente ou se precisa ser substituído.
+
+ESTRUTURA DE RETENÇÃO:
+
+Avalie se o roteiro possui:
+
+• progressão de tensão  
+• revelação gradual  
+• mudança de ritmo  
+• momentos de impacto  
+• fechamento memorável  
+
+Indique exatamente onde a estrutura pode melhorar.
+
+MOMENTOS CRÍTICOS:
+
+Aponte:
+
+• onde o roteiro pode flopar  
+• onde a retenção pode cair  
+• onde a mensagem pode ficar previsível  
+• onde o espectador pode abandonar o vídeo  
+
+Para cada ponto problemático, explique brevemente o motivo.
+
+OTIMIZAÇÃO:
+
+Reescreva o roteiro mantendo a mesma ideia central, porém:
+
+• aumentando impacto emocional  
+• melhorando retenção  
+• criando micro-ganchos ao longo do vídeo  
+• removendo frases fracas  
+• mantendo ritmo narrativo forte
+
+O novo roteiro deve parecer mais intenso, natural e envolvente.
+
+CRITÉRIO DE QUALIDADE:
+
+O resultado final deve funcionar como um vídeo que:
+
+• prende atenção como uma fofoca  
+• impacta como um soco emocional  
+• mantém curiosidade até o final  
+
+Forneça:
+
+1) análise crítica do roteiro  
+2) pontos de risco de flop  
+3) sugestões estratégicas  
+4) versão otimizada do texto`
+    },
+    {
+      id:"retention_hunter",
+      cat:"Copy — Otimização",
+      title:"Caça-flop (análise de retenção pelo texto)",
+      meta:"Aponta trechos fracos + onde inserir micro-ganchos",
+      text:`ANÁLISE DE RETENÇÃO PARA VÍDEOS CURTOS
+
+Atue como estrategista especialista em retenção para Reels, TikTok e Shorts.
+
+Analise o roteiro enviado e identifique pontos onde a retenção pode cair.
+
+Avalie:
+
+• ritmo narrativo
+• intensidade emocional
+• previsibilidade
+• excesso de explicação
+• falta de curiosidade
+
+Para cada trecho do roteiro:
+
+1. Indique se é forte, médio ou fraco.
+2. Explique se pode causar queda de retenção.
+3. Sugira ajustes para aumentar impacto.
+
+Depois indique:
+
+• os 3 pontos com maior risco de flop
+• as frases que deveriam ser removidas
+• onde inserir micro-ganchos
+
+Objetivo: transformar o roteiro em um vídeo que mantenha atenção contínua.`
+    },
+    {
+      id:"viral_hook_generator",
+      cat:"Copy — Otimização",
+      title:"Gerador de 10 ganchos virais (variações por tipo)",
+      meta:"Choque, fofoca, identificação, provocação, curiosidade...",
+      text:`CRIAÇÃO DE GANCHOS PARA VÍDEOS DE ALTA RETENÇÃO
+
+Atue como um copywriter especialista em vídeos virais.
+
+Com base no tema fornecido, crie 10 ganchos de abertura para Reels.
+
+Cada gancho deve ter potencial de parar o scroll imediatamente.
+
+Varie os tipos de gancho:
+
+• gancho choque
+• gancho fofoca
+• gancho identificação
+• gancho provocação
+• gancho curiosidade aberta
+• gancho revelação
+• gancho contradição
+
+Os ganchos devem:
+
+• ser curtos
+• gerar curiosidade imediata
+• criar tensão narrativa
+• parecer naturais quando falados
+
+Evite frases genéricas.
+
+Cada gancho deve parecer uma revelação que faz o espectador querer continuar assistindo.`
+    },
+
+    // VÍDEO / RETENÇÃO / GANCHOS
+    {
+      id:"video_retention_editor",
+      cat:"Vídeo — Retenção / Edição",
+      title:"Editor de retenção (onde cortar, começar, pausar, micro-impactos)",
+      meta:"Otimiza ritmo e tensão narrativa",
+      text:`ANÁLISE DE EDIÇÃO PARA RETENÇÃO EM VÍDEOS CURTOS
+
+Atue como editor especializado em vídeos virais.
+
+Analise o vídeo ou roteiro fornecido e identifique pontos de edição para aumentar retenção.
+
+Avalie:
+
+• ritmo
+• pausas
+• intensidade emocional
+• progressão narrativa
+• clareza da mensagem
+
+Indique:
+
+1. Onde o vídeo deveria começar.
+2. Quais trechos devem ser cortados.
+3. Onde inserir pausas dramáticas.
+4. Onde adicionar micro-impactos.
+5. Onde reforçar a tensão narrativa.
+
+Objetivo: transformar o vídeo em um conteúdo que prenda atenção até o final.`
+    },
+    {
+      id:"video_hook_analysis",
+      cat:"Vídeo — Retenção / Edição",
+      title:"Análise de ganchos em vídeo (segundos exatos + melhor abertura)",
+      meta:"Classifica tipos de gancho e dá nota",
+      text:`ANÁLISE DE GANCHOS EM VÍDEO
+
+Analise o vídeo enviado e identifique todos os possíveis ganchos existentes.
+
+Classifique cada gancho como:
+
+• choque
+• fofoca
+• identificação
+• provocação
+• curiosidade
+• revelação
+
+Para cada gancho encontrado informe:
+
+1. segundo exato onde começa
+2. segundo onde perde força
+3. potencial de retenção (0 a 10)
+
+Depois indique:
+
+• qual é o melhor gancho
+• qual deveria abrir o vídeo
+• quais ganchos deveriam ser removidos
+
+Objetivo: encontrar o ponto de maior impacto para prender o espectador nos primeiros segundos.`
+    },
+    {
+      id:"video_raw_analysis",
+      cat:"Vídeo — Retenção / Edição",
+      title:"Avaliar vídeo bruto (ganchos 5–7, fofoca/soco/choque, cortes e quedas)",
+      meta:"Retenção máxima + segundos exatos",
+      text:`Analise o vídeo bruto enviado desconsiderando pausas naturais de respiração.
+
+Identifique todos os ganchos existentes (entre 5 e 7 se houver) e classifique cada um como:
+
+• Gancho fofoca
+• Gancho soco
+• Gancho choque
+• Gancho curiosidade aberta
+• Gancho identificação
+• Gancho ameaça silenciosa
+• Gancho autoridade
+
+Para cada gancho encontrado, informe:
+
+1) Segundo exato em que começa
+2) Segundo exato em que perde força
+3) Se deve ir para os primeiros 3 segundos
+4) Potencial de retenção (nota de 0 a 10)
+5) Se gera curiosidade ou julgamento imediato
+
+Depois:
+
+– Aponte qual é o melhor gancho absoluto do vídeo
+– Diga em qual segundo exato ele está
+– Sugira se deve ser movido para abertura
+– Indique quais trechos cortar para aumentar retenção
+– Aponte quedas de energia (segundos exatos)
+– Identifique microexpressões fortes e momentos de intensidade narrativa
+
+Avalie como se fosse um editor de vídeos virais focado em retenção extrema.
+
+Objetivo: transformar o vídeo em conteúdo que retenha atenção como fofoca, impacte como soco e mantenha tensão psicológica até o final.`
+    },
+
+    // IMAGEM — MELHORIA / REMOVER TEXTO / CACHORRO
+    {
+      id:"image_ultra_premium",
+      cat:"Imagem — Ultra Premium",
+      title:"Melhoria de imagem profissional ultra-premium (base completa)",
+      meta:"8K, micro-detalhes, preservar identidade 100%",
+      text:`Melhoria de imagem profissional ultra-premium.
+Transforme a imagem carregada, de baixa qualidade e desfocada, em uma qualidade cinematográfica de detalhamento extremo.
+Preserve 100% da identidade original, estrutura facial, expressão, pose, vestuário, acessórios, fundo, enquadramento e composição.
+NÃO altere, redesenhe, substitua ou adicione nada.
+RECUPERAÇÃO DE MICRO-DETALHES:
+  Traços faciais nítidos
+  Textura de pele natural
+  Poros visíveis
+  Fios de cabelo realistas
+  Olhos cristalinos
+  Bordas limpas e refinadas
+Clareza de alto contraste, profundidade intensa e iluminação cinematográfica equilibrada. Realismo de nível de pôster com detalhes dramáticos, porém precisos.
+Saída em resolução 8K, qualidade
+ProRes, nitidez de nível de estúdio.
+Apenas texturas fotorrealistas. Apenas melhorias fiéis à fonte original.
+Mantenha tudo exatamente igual, apenas melhore a qualidade e realismo`
+    },
+    {
+      id:"image_remove_text_strong",
+      cat:"Imagem — Ultra Premium",
+      title:"Melhoria ultra-premium + REMOÇÃO COMPLETA de texto (inpainting/reconstrução)",
+      meta:"Remove texto/overlay/watermark e reconstrói fundo",
+      text:`Melhoria de imagem profissional ultra-premium.
+
+Transforme a imagem carregada, de baixa qualidade ou desfocada, em uma qualidade cinematográfica de detalhamento extremo.
+
+Preserve 100% da identidade original da imagem:
+estrutura facial, expressão, pose, vestuário, acessórios, fundo, enquadramento e composição.
+
+NÃO altere, redesenhe ou adicione novos elementos à cena.
+
+REMOÇÃO COMPLETA DE TEXTO:
+Detecte e remova absolutamente todo texto presente na imagem, incluindo:
+títulos, legendas, subtítulos, frases, tipografia, números, marcas d’água, logotipos, overlays e qualquer elemento gráfico textual.
+
+Após remover o texto, reconstrua automaticamente as áreas onde ele estava utilizando preenchimento contextual realista (content-aware reconstruction / inpainting), recriando o fundo original de forma natural e imperceptível.
+
+Nenhum resíduo de letra, contorno, sombra ou artefato de tipografia deve permanecer.
+
+RECUPERAÇÃO DE MICRO-DETALHES:
+Traços faciais nítidos  
+Textura de pele natural  
+Poros visíveis  
+Fios de cabelo realistas  
+Olhos cristalinos  
+Bordas limpas e refinadas  
+
+Clareza de alto contraste, profundidade intensa e iluminação cinematográfica equilibrada.
+
+Realismo de nível de pôster com detalhes dramáticos, porém precisos.
+
+Saída em resolução 8K, qualidade ProRes, nitidez de nível de estúdio.
+
+Apenas texturas fotorrealistas.
+Apenas melhorias fiéis à fonte original.
+
+Resultado final:
+imagem limpa, sem qualquer texto ou tipografia visível, com fundo reconstruído de forma natural e qualidade visual cinematográfica.`
+    },
+    {
+      id:"dog_expression_enhance",
+      cat:"Imagem — Ultra Premium",
+      title:"Melhoria ultra-premium (cachorro) com FOCO na indignação/julgamento",
+      meta:"Realçar expressão sem caricatura",
+      text:`Melhoria de imagem profissional ultra-premium.
+
+Transforme a imagem carregada, de baixa qualidade ou desfocada, em uma qualidade cinematográfica de detalhamento extremo.
+
+Preserve 100% da identidade original da imagem:
+posição do cachorro, enquadramento, fundo, iluminação geral e composição.
+
+NÃO altere, redesenhe ou adicione novos elementos à cena.
+
+FOCO NA EXPRESSÃO:
+Dê atenção especial à expressão facial do cachorro, realçando de forma natural a sensação de indignação, surpresa ou julgamento no olhar.
+
+Refine:
+• olhos
+• sobrancelhas naturais do pelo
+• tensão sutil do focinho
+• direção do olhar
+
+A expressão deve parecer ainda mais clara e expressiva, sem exageros ou caricatura.
+
+RECUPERAÇÃO DE MICRO-DETALHES:
+• textura realista do pelo  
+• fios individuais definidos  
+• olhos nítidos e reflexos naturais  
+• contornos limpos no focinho e orelhas  
+
+ILUMINAÇÃO E QUALIDADE:
+• clareza de alto contraste equilibrado  
+• profundidade de campo cinematográfica  
+• leve grão fotográfico natural  
+• aparência de fotografia profissional
+
+Saída em resolução 8K, qualidade ProRes, nitidez de nível de estúdio.
+
+Resultado final:
+imagem extremamente nítida, realista e cinematográfica, com a expressão de indignação do cachorro claramente perceptível e visualmente impactante.`
+    },
+
+    // SUNO — MÚSICA
+    {
+      id:"suno_video_analysis_prompt",
+      cat:"Suno — Música",
+      title:"Suno — analisar vídeo e gerar música sincronizada (por segundos)",
+      meta:"Indie sujo + psicodélico leve + atmosférico",
+      text:`Assista atentamente ao meu vídeo e analise ritmo, cortes, transições, micro movimentos, mudanças de expressão, clima emocional e intensidade narrativa.
+
+Crie um prompt de até 500 caracteres para o Suno AI gerar uma música indie sujo, levemente psicodélico e atmosférico.
+
+No prompt, especifique os segundos exatos do vídeo (ex: 0:00, 0:07, 0:12…) indicando onde entram: ambientação inicial, primeiro beat, pausas, crescendos, viradas, quebras, mudança de clima e finalização.
+
+A música deve começar sincronizada no primeiro frame e evoluir de forma que pareça comandar totalmente os movimentos e transições do vídeo.`
+    },
+    {
+      id:"suno_quick_reels_structure",
+      cat:"Suno — Música",
+      title:"Suno — música curta para Reels (estrutura pronta por segundos)",
+      meta:"Para vídeo vertical até 60s",
+      text:`Crie uma música curta para vídeo vertical de até 60 segundos.
+
+Estilo: indie sujo, atmosférico, levemente psicodélico, textura analógica, sensação emocional crua.
+
+Estrutura:
+0:00 ambientação tensa e minimalista
+0:05 entrada sutil de beat
+0:12 crescimento emocional
+0:25 primeira virada
+0:35 pausa curta
+0:38 retomada mais intensa
+0:50 desaceleração atmosférica
+0:58 final suspenso
+
+A música deve reforçar tensão psicológica e retenção emocional do vídeo.`
+    },
+    {
+      id:"suno_psychological_video",
+      cat:"Suno — Música",
+      title:"Suno — música para vídeo psicológico intenso (evolução lenta)",
+      meta:"Clima de revelação progressiva",
+      text:`Crie uma música para vídeo psicológico intenso.
+
+Estética sonora: indie alternativo sujo, atmosférico, levemente psicodélico, textura vintage, tensão emocional.
+
+A música deve evoluir lentamente criando sensação de revelação progressiva.
+
+Começo minimalista, batida discreta entrando após alguns segundos, crescendo gradual e final suspenso que mantenha tensão emocional.`
+    },
+    {
+      id:"suno_fast_retention",
+      cat:"Suno — Música",
+      title:"Suno — música rápida para retenção (micro crescendos e pausas)",
+      meta:"Para redes sociais / prender atenção",
+      text:`Crie uma música curta para vídeo de redes sociais com forte retenção.
+
+Estilo: indie alternativo, sujo, atmosférico, levemente psicodélico.
+
+Começo imediato com atmosfera intrigante.
+Entrada rápida de ritmo.
+Pequenos crescendos a cada 10–15 segundos.
+Pequenas pausas dramáticas.
+Final aberto e emocional.
+
+A música deve aumentar curiosidade e sensação de tensão psicológica.`
+    },
+    {
+      id:"suno_trailer_psychological",
+      cat:"Suno — Música",
+      title:"Suno — Trailer psicológico (cinematográfico, retenção máxima)",
+      meta:"Estrutura com viradas e final suspenso",
+      text:`Crie uma música curta cinematográfica para vídeo psicológico intenso.
+
+Estilo: indie alternativo sujo, atmosférico, levemente psicodélico, textura analógica vintage.
+
+Estrutura:
+0:00 ambiência tensa minimalista
+0:04 entrada de pulsação grave
+0:10 batida discreta
+0:18 primeiro crescendo emocional
+0:30 pausa curta de tensão
+0:33 retomada mais intensa
+0:45 textura sonora mais densa
+0:55 final suspenso e inquietante
+
+A música deve criar sensação de revelação, tensão psicológica e curiosidade crescente.`
+    },
+    {
+      id:"suno_a24",
+      cat:"Suno — Música",
+      title:"Suno — Indie atmosférico (vibe A24)",
+      meta:"Íntimo, melancólico, cinematográfico",
+      text:`Crie uma música curta para vídeo emocional e reflexivo.
+
+Estilo: indie alternativo atmosférico, levemente psicodélico, guitarra suja suave, textura analógica vintage.
+
+Estrutura:
+0:00 ambiente minimalista
+0:06 entrada de guitarra ambiente
+0:14 batida leve
+0:28 pequeno crescendo emocional
+0:40 momento contemplativo
+0:50 desaceleração sonora
+0:58 final aberto e melancólico
+
+A música deve soar íntima, profunda e cinematográfica.`
+    },
+    {
+      id:"suno_dark",
+      cat:"Suno — Música",
+      title:"Suno — Tensão psicológica (vibe série Dark)",
+      meta:"Suspense e descoberta",
+      text:`Crie uma música curta de tensão psicológica para vídeo narrativo.
+
+Estilo: indie eletrônico minimalista, atmosfera sombria, textura levemente psicodélica.
+
+Estrutura:
+0:00 ambiência escura e intrigante
+0:05 pulsação rítmica lenta
+0:12 entrada de textura grave
+0:22 aumento de tensão
+0:35 virada rítmica
+0:45 crescendo final
+0:57 corte abrupto
+
+A música deve gerar suspense, curiosidade e sensação de descoberta.`
+    }
+  ];
+
+  // ====== UI ======
+  const elApp = document.getElementById("app");
+  const elQ = document.getElementById("q");
+  const elFilters = document.getElementById("filters");
+  const toast = document.getElementById("toast");
+  const toastText = document.getElementById("toastText");
+
+  const cats = [...new Set(PROMPTS.map(p => p.cat))];
+
+  const state = { q:"", cat:"Todas" };
+
+  function showToast(msg){
+    toastText.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => toast.classList.remove("show"), 1400);
+  }
+
+  async function copyText(text){
+    try{
+      await navigator.clipboard.writeText(text);
+      showToast("Copiado ✅");
+    }catch(e){
+      // fallback
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+      showToast("Copiado ✅");
+    }
+  }
+
+  function buildFilters(){
+    const all = ["Todas", ...cats];
+    elFilters.innerHTML = "";
+    all.forEach(name=>{
+      const b = document.createElement("div");
+      b.className = "pill" + (state.cat===name ? " active": "");
+      b.textContent = name;
+      b.onclick = ()=>{ state.cat=name; render(); buildFilters(); };
+      elFilters.appendChild(b);
+    });
+  }
+
+  function groupByCategory(list){
+    const map = new Map();
+    list.forEach(p=>{
+      if(!map.has(p.cat)) map.set(p.cat, []);
+      map.get(p.cat).push(p);
+    });
+    return map;
+  }
+
+  function match(p, q){
+    if(!q) return true;
+    const s = (p.title + " " + p.meta + " " + p.text).toLowerCase();
+    return s.includes(q.toLowerCase());
+  }
+
+  function render(){
+    const filtered = PROMPTS
+      .filter(p => (state.cat==="Todas" ? true : p.cat===state.cat))
+      .filter(p => match(p, state.q));
+
+    const grouped = groupByCategory(filtered);
+
+    elApp.innerHTML = "";
+    const order = (state.cat==="Todas") ? cats : [state.cat];
+
+    order.forEach(cat=>{
+      const items = grouped.get(cat) || [];
+      if(!items.length) return;
+
+      const catEl = document.createElement("section");
+      catEl.className = "cat open";
+
+      const head = document.createElement("div");
+      head.className = "catHead";
+      head.innerHTML = `
+        <div class="left">
+          <span class="badge">${cat}</span>
+          <span class="name"></span>
+        </div>
+        <div class="count">${items.length} prompt(s)</div>
+      `;
+      head.querySelector(".name").textContent = "";
+
+      head.onclick = ()=>catEl.classList.toggle("open");
+
+      const body = document.createElement("div");
+      body.className = "catBody";
+
+      const cards = document.createElement("div");
+      cards.className = "cards";
+
+      items.forEach(p=>{
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const top = document.createElement("div");
+        top.className = "cardTop";
+
+        const left = document.createElement("div");
+        left.innerHTML = `
+          <div class="cardTitle">${p.title}</div>
+          <div class="cardMeta">${p.meta || ""}</div>
+        `;
+
+        const btnrow = document.createElement("div");
+        btnrow.className = "btnrow";
+
+        const btnCopy = document.createElement("button");
+        btnCopy.className = "copyBtn";
+        btnCopy.textContent = "Copiar";
+        btnCopy.onclick = (e)=>{ e.stopPropagation(); copyText(p.text); };
+
+        const btnView = document.createElement("button");
+        btnView.className = "viewBtn";
+        btnView.textContent = "Ver";
+        btnView.onclick = (e)=>{ e.stopPropagation(); card.classList.toggle("open"); };
+
+        btnrow.appendChild(btnCopy);
+        btnrow.appendChild(btnView);
+
+        top.appendChild(left);
+        top.appendChild(btnrow);
+
+        const pre = document.createElement("pre");
+        pre.textContent = p.text;
+
+        card.appendChild(top);
+        card.appendChild(pre);
+        cards.appendChild(card);
+      });
+
+      body.appendChild(cards);
+      catEl.appendChild(head);
+      catEl.appendChild(body);
+      elApp.appendChild(catEl);
+    });
+
+    if(!filtered.length){
+      const empty = document.createElement("div");
+      empty.className = "cat";
+      empty.innerHTML = `<div class="catHead"><div class="left"><span class="badge">Sem resultados</span><span class="name"></span></div><div class="count">0</div></div>
+      <div class="catBody" style="display:block; color:var(--muted); padding:14px;">Tente outra busca (ex: "Suno", "gancho", "tabela", "indignação").</div>`;
+      elApp.appendChild(empty);
+    }
+  }
+
+  elQ.addEventListener("input", (e)=>{ state.q = e.target.value.trim(); render(); });
+
+  buildFilters();
+  render();
+</script>
+</body>
+</html>
