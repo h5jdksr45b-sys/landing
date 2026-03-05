@@ -19,8 +19,7 @@
       --info:#7aa7ff;
       --shadow: 0 22px 70px rgba(0,0,0,.52);
       --radius:18px;
-      --radius2:14px;
-      --max: 880px;
+      --max: 920px;
       --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial;
     }
 
@@ -31,9 +30,9 @@
       font-family: var(--sans);
       color: var(--text);
       background:
-        radial-gradient(920px 540px at 18% -8%, rgba(102,224,166,.15), transparent 62%),
-        radial-gradient(860px 460px at 86% -8%, rgba(241,180,107,.13), transparent 66%),
-        radial-gradient(980px 820px at 50% 120%, rgba(102,224,166,.11), transparent 72%),
+        radial-gradient(980px 560px at 18% -8%, rgba(102,224,166,.15), transparent 62%),
+        radial-gradient(900px 480px at 86% -8%, rgba(241,180,107,.13), transparent 66%),
+        radial-gradient(1020px 880px at 50% 120%, rgba(102,224,166,.11), transparent 72%),
         var(--bg);
       background-attachment: fixed;
       -webkit-font-smoothing: antialiased;
@@ -41,15 +40,10 @@
       padding-bottom: 92px;
     }
 
-    .wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 14px 14px 28px;
-    }
-
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 14px 14px 28px; }
     .shell{
       border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(16,20,28,.72), rgba(16,20,28,.86));
+      background: linear-gradient(180deg, rgba(16,20,28,.72), rgba(16,20,28,.88));
       box-shadow: var(--shadow);
       border-radius: 26px;
       overflow:hidden;
@@ -61,48 +55,24 @@
       background: linear-gradient(180deg, rgba(255,255,255,.05), transparent);
     }
 
-    .brandRow{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      justify-content:space-between;
-    }
-
-    .brandLeft{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width:0;
-    }
+    .brandRow{ display:flex; gap:12px; align-items:center; justify-content:space-between; }
+    .brandLeft{ display:flex; align-items:center; gap:12px; min-width:0; }
 
     .logo{
-      width:44px;
-      height:44px;
-      border-radius: 14px;
+      width:44px; height:44px; border-radius:14px;
       border:1px solid var(--line);
       background: rgba(255,255,255,.03);
-      object-fit: cover;
-      flex: 0 0 auto;
+      object-fit: cover; flex:0 0 auto;
     }
 
     .titles{ min-width:0; }
-
     .title{
-      font-size: 30px;
-      font-weight: 950;
-      letter-spacing: .2px;
-      line-height: 1.05;
-      margin:0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 30px; font-weight: 950; letter-spacing: .2px; line-height: 1.05;
+      margin:0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-
     .subtitle{
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.35;
+      margin-top: 6px; color: var(--muted); font-size: 13px; line-height: 1.35;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
 
     .chipBtn{
@@ -123,22 +93,11 @@
 
     .section{ margin-top: 16px; }
     .sectionTitle{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom: 10px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; margin-bottom: 10px;
     }
-    .sectionTitle .h{
-      font-weight: 950;
-      font-size: 14px;
-      letter-spacing: .2px;
-    }
-    .hint{
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.35;
-    }
+    .sectionTitle .h{ font-weight: 950; font-size: 14px; letter-spacing: .2px; }
+    .hint{ color: var(--muted); font-size: 12.5px; line-height: 1.35; }
 
     .hero{
       border: 1px solid var(--line);
@@ -146,24 +105,9 @@
       border-radius: 22px;
       padding: 14px;
     }
-    .heroTop{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom: 10px;
-    }
-    .heroTitle{
-      font-weight: 950;
-      font-size: 14px;
-      letter-spacing: .2px;
-    }
-    .heroSub{
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.35;
-      margin-top: 6px;
-    }
+    .heroTop{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom: 10px; }
+    .heroTitle{ font-weight: 950; font-size: 14px; letter-spacing: .2px; }
+    .heroSub{ color: var(--muted); font-size: 12.5px; line-height: 1.35; margin-top: 6px; }
 
     .bigCTA{
       width:100%;
@@ -179,12 +123,7 @@
     }
     .bigCTA:active{ transform: translateY(1px); }
 
-    .ctaRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 10px;
-    }
+    .ctaRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
     .ctaMini{
       border:1px solid var(--line);
       background: rgba(255,255,255,.05);
@@ -198,12 +137,13 @@
       flex: 1 1 180px;
     }
     .ctaMini:active{ transform: translateY(1px); }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+    .ctaMini.primary{
+      border-color: rgba(102,224,166,.55);
+      background: rgba(102,224,166,.12);
+      color: var(--text);
     }
+
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     @media (max-width: 520px){
       .grid{ grid-template-columns: 1fr; }
       .title{ font-size: 28px; }
@@ -225,21 +165,12 @@
       border-color: rgba(102,224,166,.55);
       background: linear-gradient(180deg, rgba(102,224,166,.14), rgba(255,255,255,.02));
     }
-    .tile .k{
-      font-weight: 950;
-      font-size: 13.5px;
-      line-height: 1.2;
-    }
-    .tile .d{
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.35;
-    }
+    .tile .k{ font-weight: 950; font-size: 13.5px; line-height: 1.2; }
+    .tile .d{ margin-top: 6px; color: var(--muted); font-size: 12.5px; line-height: 1.35; }
+
     .badge{
       position:absolute;
-      top:10px;
-      right:10px;
+      top:10px; right:10px;
       border:1px solid var(--line);
       background: rgba(0,0,0,.20);
       border-radius: 999px;
@@ -248,6 +179,7 @@
       font-size: 11px;
       color: var(--muted);
       backdrop-filter: blur(8px);
+      pointer-events:none;
     }
 
     .seg{
@@ -291,9 +223,7 @@
       margin-top: 2px;
     }
     .dot{
-      width:9px;
-      height:9px;
-      border-radius: 99px;
+      width:9px; height:9px; border-radius: 99px;
       background: var(--accent);
       box-shadow: 0 0 0 4px rgba(102,224,166,.10);
     }
@@ -333,12 +263,7 @@
     .card.info{ border-color: rgba(122,167,255,.55); background: rgba(122,167,255,.10); }
     .card.good{ border-color: rgba(102,224,166,.55); background: rgba(102,224,166,.10); }
 
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 12px;
-    }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
     .btn{
       border:none;
       border-radius: 14px;
@@ -354,12 +279,7 @@
     .btn.secondary{ background: rgba(255,255,255,.05); color: var(--text); border: 1px solid var(--line); }
     .btn.ghost{ background: transparent; color: var(--muted); border: 1px dashed rgba(255,255,255,.16); }
 
-    .note{
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.35;
-    }
+    .note{ margin-top: 10px; color: var(--muted); font-size: 12.5px; line-height: 1.35; }
 
     .listItem{
       border: 1px solid var(--line);
@@ -374,12 +294,7 @@
     }
     .listItem:active{ transform: translateY(1px); }
 
-    .lock{
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.4;
-    }
+    .lock{ margin-top: 14px; color: var(--muted); font-size: 13px; line-height: 1.4; }
 
     .teaser{
       border: 1px solid rgba(255,255,255,.12);
@@ -390,16 +305,9 @@
       position: relative;
       overflow:hidden;
     }
-    .teaserTitle{
-      font-weight: 950;
-      font-size: 13.5px;
-      margin-bottom: 6px;
-    }
-    .teaserSub{
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.35;
-    }
+    .teaserTitle{ font-weight: 950; font-size: 13.5px; margin-bottom: 6px; }
+    .teaserSub{ color: var(--muted); font-size: 12.5px; line-height: 1.35; }
+
     .blurRow{
       margin-top: 12px;
       border:1px solid rgba(255,255,255,.10);
@@ -479,7 +387,7 @@
       padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
     }
     .modal{
-      width: min(880px, 100%);
+      width: min(920px, 100%);
       border:1px solid var(--line);
       background: linear-gradient(180deg, rgba(16,20,28,.92), rgba(16,20,28,.98));
       border-radius: 22px;
@@ -494,17 +402,8 @@
       gap:10px;
       align-items:flex-start;
     }
-    .modalTitle{
-      font-weight:950;
-      font-size:16px;
-      line-height:1.2;
-    }
-    .modalSub{
-      color: var(--muted);
-      font-size:12.5px;
-      margin-top:6px;
-      line-height:1.35;
-    }
+    .modalTitle{ font-weight:950; font-size:16px; line-height:1.2; }
+    .modalSub{ color: var(--muted); font-size:12.5px; margin-top:6px; line-height:1.35; }
     .xbtn{
       border:1px solid var(--line);
       background: rgba(255,255,255,.05);
@@ -518,17 +417,126 @@
     }
     .modalBody{ padding: 14px; }
 
-    .kbd{
-      display:inline-flex;
+    /* Inputs */
+    .inputWrap{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    textarea{
+      width:100%;
+      border:none;
+      outline:none;
+      background: transparent;
+      color: var(--text);
+      resize:none;
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 14px;
+      line-height: 1.35;
+      min-height: 64px;
+    }
+    textarea::placeholder{ color: rgba(167,178,204,.70); font-weight: 800; }
+
+    /* Toggle */
+    .toggleRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .switch{
+      position:relative;
+      width:50px;
+      height:30px;
+      border-radius: 999px;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.22);
-      border-radius: 10px;
-      padding: 6px 9px;
+      background: rgba(255,255,255,.06);
+      cursor:pointer;
+      user-select:none;
+      flex:0 0 auto;
+    }
+    .knob{
+      position:absolute;
+      top:3px;
+      left:3px;
+      width:24px;
+      height:24px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.85);
+      transition: transform .14s ease;
+    }
+    .switch.on{
+      border-color: rgba(102,224,166,.45);
+      background: rgba(102,224,166,.14);
+    }
+    .switch.on .knob{ transform: translateX(20px); background: rgba(102,224,166,.95); }
+
+    /* Tiny chips */
+    .chips{
+      display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px;
+    }
+    .chip{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      border-radius: 999px;
+      padding: 8px 10px;
       font-weight: 950;
       font-size: 12px;
       color: var(--muted);
-      margin-left: 6px;
+      cursor:pointer;
+      user-select:none;
     }
+    .chip:active{ transform: translateY(1px); }
+
+    /* Feedback */
+    .fbRow{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 10px;
+      align-items:center;
+    }
+    .fbBtn{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 12px 12px;
+      font-weight: 950;
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+      flex: 1 1 160px;
+      text-align:center;
+    }
+    .fbBtn.good{
+      border-color: rgba(102,224,166,.35);
+      background: rgba(102,224,166,.10);
+    }
+    .fbBtn.bad{
+      border-color: rgba(255,107,107,.35);
+      background: rgba(255,107,107,.10);
+    }
+
+    /* Onboarding */
+    .onbSteps{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin-top: 12px;
+    }
+    .step{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .step b{ display:block; font-size: 13px; }
+    .step div{ margin-top: 6px; color: var(--muted); font-size: 12.5px; line-height: 1.35; }
+
   </style>
 </head>
 
@@ -545,7 +553,7 @@
       <div class="nav active" id="nav-crise" onclick="openTab('crise')"><span class="ico">🚨</span>Crise</div>
       <div class="nav" id="nav-situacoes" onclick="openTab('situacoes')"><span class="ico">🧭</span>Situações</div>
       <div class="nav" id="nav-padroes" onclick="openTab('padroes')"><span class="ico">📊</span>Padrões</div>
-      <div class="nav" id="nav-guia" onclick="openTab('guia')"><span class="ico">⚙️</span>Guia</div>
+      <div class="nav" id="nav-mais" onclick="openTab('mais')"><span class="ico">⋯</span>Mais</div>
     </div>
   </div>
 
@@ -565,15 +573,27 @@
   </div>
 
 <script>
+  // ====== CONFIG ======
   const LOGO_FILE = "701EA1DC-33CE-40FC-BA04-F655886CBA94.png";
 
-  const STORAGE_KEY_HISTORY = "radar_tpb_free_history_v1";
-  const STORAGE_KEY_LAST = "radar_tpb_free_last_v1";
+  // WhatsApp do Dr Fabio (Brasil +55)
+  const WHATSAPP_NUMBER_E164 = "5511975074399";
 
+  // Mensagem pronta para lista de espera / beta
+  const WHATSAPP_MESSAGE = "Olá Dr Fabio. Quero entrar na lista de espera do RADAR DE CRISE TPB completo. (Vim do free)";
+
+  // ====== STORAGE KEYS ======
+  const STORAGE_KEY_HISTORY = "radar_tpb_free_history_v2";
+  const STORAGE_KEY_FAVS    = "radar_tpb_free_favs_v2";
+  const STORAGE_KEY_LAST    = "radar_tpb_free_last_v2";
+  const STORAGE_KEY_ONB     = "radar_tpb_free_onboarding_done_v1";
+  const STORAGE_KEY_METRICS = "radar_tpb_free_metrics_v1";
+
+  // ====== STATE ======
   let tab = "crise";
-  let selectedScenario = 0; // index em scenariosFree
-  let selectedLevel = 1;    // default: moderada (mais comum em crise)
-  let quickMode = true;     // abre com CRISE AGORA por padrão
+  let selectedScenario = 0;
+  let selectedLevel = 1; // default moderada
+  let quickMode = true;
 
   const levels = [
     { title: "Leve", desc: "Dá para conversar. Valide e organize o básico.", dot:"" },
@@ -581,8 +601,6 @@
     { title: "Grave", desc: "Risco de escalada. Pausa + previsibilidade.", dot:"grv" }
   ];
 
-  // FREE: 5 situações (com linguagem real)
-  // Estrutura: cada uma tem gatilhos (frases comuns), erro, e respostas por intensidade
   const scenariosFree = [
     {
       id: "abandono",
@@ -600,7 +618,8 @@
         "Eu entendo que isso te deu medo. Minha intenção não é te abandonar. Vamos conversar com calma.",
         "Eu vejo que esse medo subiu agora. Eu estou aqui. Vamos desacelerar e eu vou ser bem claro com você.",
         "Agora ficou intenso. Pausa. Eu volto em 10 minutos. Eu não vou sumir. A gente retoma com calma."
-      ]
+      ],
+      keywords: ["abandon", "sumir", "deixar", "ir embora", "não liga", "não se importa", "você vai me deixar", "vai embora"]
     },
     {
       id: "raiva",
@@ -618,7 +637,8 @@
         "Eu vejo que você ficou muito irritada. Eu quero entender, sem briga.",
         "A emoção está alta. Eu vou falar pouco e com calma para não piorar. Vamos baixar o ritmo.",
         "Está escalando. Pausa agora. Eu volto em 10 minutos para retomar. Eu não vou discutir assim."
-      ]
+      ],
+      keywords: ["grit", "raiva", "ódio", "odeio", "insulto", "xingar", "agress", "vagab", "idiota", "lixo"]
     },
     {
       id: "acusacao",
@@ -636,7 +656,8 @@
         "Eu entendo que isso te machucou. Eu quero esclarecer com calma.",
         "Eu vejo que isso virou certeza pra você. Vamos desacelerar: eu explico minha intenção, sem ataque agora.",
         "Agora está muito intenso. Pausa. Eu volto e a gente conversa com calma. Eu não vou brigar."
-      ]
+      ],
+      keywords: ["trai", "trair", "ment", "mentir", "escond", "você está", "você fez", "você é", "você tá", "prova", "certeza"]
     },
     {
       id: "certeza",
@@ -654,7 +675,8 @@
         "Eu te amo. Eu vejo que você ficou insegura agora. Vamos conversar com calma.",
         "Eu te amo. Agora eu vou ser previsível: eu fico aqui e a gente fala devagar, sem briga.",
         "Eu te amo. Pausa. Eu volto em 10 minutos e continuo com você. Eu não vou sumir."
-      ]
+      ],
+      keywords: ["não me ama", "você não ama", "me ama", "prova", "se me amasse", "fala que ama", "amor"]
     },
     {
       id: "culpa",
@@ -672,11 +694,11 @@
         "Eu vejo que isso está doendo muito. Vamos dar um passo pequeno agora, só o suficiente.",
         "Isso está pesando muito. Vamos reduzir a pressão e organizar uma coisa de cada vez.",
         "Primeiro vamos acalmar. Pausa. Água e respirar. Depois a gente pensa em reparação e solução."
-      ]
+      ],
+      keywords: ["lixo", "sou um", "estraguei", "merda", "culpa", "vergonha", "não presto", "sou horrível"]
     }
   ];
 
-  // Quick tiles (o usuário em crise pensa em “o que aconteceu”, não em categoria)
   const quickTiles = [
     { label: "“Você vai me abandonar”", scenarioId:"abandono" },
     { label: "Gritando / atacando", scenarioId:"raiva" },
@@ -685,12 +707,13 @@
     { label: "“Eu sou um lixo / eu estraguei tudo”", scenarioId:"culpa" }
   ];
 
+  // ====== UTIL ======
   function toast(msg){
     const t = document.getElementById("toast");
     t.textContent = msg;
     t.style.display = "block";
     clearTimeout(window.__toast);
-    window.__toast = setTimeout(()=> t.style.display="none", 1300);
+    window.__toast = setTimeout(()=> t.style.display="none", 1400);
   }
 
   async function copyText(text){
@@ -708,36 +731,59 @@
     }
   }
 
-  function getHistory(){
-    try{ return JSON.parse(localStorage.getItem(STORAGE_KEY_HISTORY) || "[]"); }
-    catch(e){ return []; }
-  }
-  function setHistory(arr){
-    localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(arr));
-  }
-
-  function saveLast(){
-    const payload = { scenario: selectedScenario, level: selectedLevel, quickMode: quickMode };
-    localStorage.setItem(STORAGE_KEY_LAST, JSON.stringify(payload));
-  }
-  function loadLast(){
-    try{
-      const p = JSON.parse(localStorage.getItem(STORAGE_KEY_LAST) || "null");
-      if(!p) return;
-      if(Number.isFinite(p.scenario)) selectedScenario = clamp(p.scenario, 0, scenariosFree.length-1);
-      if(Number.isFinite(p.level)) selectedLevel = clamp(p.level, 0, 2);
-      if(typeof p.quickMode === "boolean") quickMode = p.quickMode;
-    }catch(e){}
-  }
   function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
-  function openTab(t){
-    tab = t;
-    render();
+  function waLink(message){
+    const msg = encodeURIComponent(message);
+    return `https://wa.me/${WHATSAPP_NUMBER_E164}?text=${msg}`;
+  }
+
+  function openWhatsAppWaitlist(){
+    // abre whatsapp com mensagem pronta (lista de espera / beta)
+    window.open(waLink(WHATSAPP_MESSAGE), "_blank");
+  }
+
+  function getJSON(key, fallback){
+    try{
+      const v = JSON.parse(localStorage.getItem(key));
+      return (v === null || v === undefined) ? fallback : v;
+    }catch(e){ return fallback; }
+  }
+  function setJSON(key, value){
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  function getHistory(){ return getJSON(STORAGE_KEY_HISTORY, []); }
+  function setHistory(arr){ setJSON(STORAGE_KEY_HISTORY, arr); }
+
+  function getFavs(){ return getJSON(STORAGE_KEY_FAVS, []); }
+  function setFavs(arr){ setJSON(STORAGE_KEY_FAVS, arr); }
+
+  function getMetrics(){
+    return getJSON(STORAGE_KEY_METRICS, {
+      copies: 0,
+      feedback_good: 0,
+      feedback_bad: 0,
+      waitlist_clicks: 0,
+      msg_mode_uses: 0
+    });
+  }
+  function setMetrics(m){ setJSON(STORAGE_KEY_METRICS, m); }
+
+  function saveLast(){
+    setJSON(STORAGE_KEY_LAST, { tab, selectedScenario, selectedLevel, quickMode });
+  }
+  function loadLast(){
+    const p = getJSON(STORAGE_KEY_LAST, null);
+    if(!p) return;
+    if(typeof p.tab === "string") tab = p.tab;
+    if(Number.isFinite(p.selectedScenario)) selectedScenario = clamp(p.selectedScenario, 0, scenariosFree.length-1);
+    if(Number.isFinite(p.selectedLevel)) selectedLevel = clamp(p.selectedLevel, 0, 2);
+    if(typeof p.quickMode === "boolean") quickMode = p.quickMode;
   }
 
   function setNavActive(){
-    ["crise","situacoes","padroes","guia"].forEach(id=>{
+    ["crise","situacoes","padroes","mais"].forEach(id=>{
       const el = document.getElementById("nav-"+id);
       if(el) el.classList.toggle("active", tab===id);
     });
@@ -773,13 +819,28 @@
     return `<div class="pill"><span class="dot ${lv.dot}"></span>Intensidade ativa: ${lv.title}</div>`;
   }
 
+  function scenarioGrid(){
+    let html = `<div class="grid">`;
+    scenariosFree.forEach((s,i)=>{
+      html += `
+        <div class="tile ${i===selectedScenario ? "active":""}" onclick="selectScenario(${i})">
+          <div class="k">${s.title}</div>
+          <div class="d">${s.short}</div>
+          <div class="badge">free</div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+    return html;
+  }
+
   function renderQuick(){
     let tiles = `<div class="grid">`;
     quickTiles.forEach((t)=>{
       tiles += `
         <div class="tile" onclick="pickQuick('${t.scenarioId}')">
           <div class="k">${t.label}</div>
-          <div class="d">toque para gerar resposta</div>
+          <div class="d">toque para gerar e copiar</div>
           <div class="badge">crise</div>
         </div>
       `;
@@ -808,25 +869,36 @@
 
         <div class="ctaRow">
           <button class="ctaMini" onclick="quickMode=false; saveLast(); render();">Ver modo completo</button>
-          <button class="ctaMini" onclick="openTab('situacoes')">Ver situações</button>
+          <button class="ctaMini primary" onclick="waitlistClick()">Quero a versão completa</button>
         </div>
       </div>
     `;
   }
 
-  function scenarioGrid(){
-    let html = `<div class="grid">`;
-    scenariosFree.forEach((s,i)=>{
-      html += `
-        <div class="tile ${i===selectedScenario ? "active":""}" onclick="selectScenario(${i})">
-          <div class="k">${s.title}</div>
-          <div class="d">${s.short}</div>
-          <div class="badge">free</div>
+  function renderMessageModeCard(){
+    return `
+      <div class="card">
+        <div class="label">Modo Mensagem</div>
+        <div class="txt">Cole aqui uma frase dela e eu sugiro a situação provável.</div>
+        <div class="subtxt">Isso é um teaser. Na versão completa, o “modo mensagem” vira motor (muito mais preciso).</div>
+
+        <div class="inputWrap" style="margin-top:10px">
+          <textarea id="msgInput" placeholder="Cole a frase dela aqui… (ex: “você vai me abandonar”)"></textarea>
+          <div class="chips">
+            <div class="chip" onclick="pasteExample('Você vai me deixar igual todo mundo.')">exemplo 1</div>
+            <div class="chip" onclick="pasteExample('Você está mentindo pra mim.')">exemplo 2</div>
+            <div class="chip" onclick="pasteExample('Você não me ama.')">exemplo 3</div>
+          </div>
         </div>
-      `;
-    });
-    html += `</div>`;
-    return html;
+
+        <div class="actions" style="margin-top:12px">
+          <button class="btn secondary" onclick="suggestFromMessage()">Sugerir situação</button>
+          <button class="btn primary" onclick="suggestAndCopy()">Sugerir e copiar</button>
+        </div>
+
+        <div class="note" id="msgResult" style="display:none"></div>
+      </div>
+    `;
   }
 
   function renderCrise(){
@@ -840,7 +912,7 @@
         <div class="heroTop">
           <div>
             <div class="heroTitle">CRISE</div>
-            <div class="heroSub">Cenário + intensidade → copiar resposta. Sem debate. Frase curta regula melhor.</div>
+            <div class="heroSub">Cenário + intensidade → copiar resposta. Sem debate longo. Frase curta regula melhor.</div>
           </div>
           <button class="chipBtn" onclick="quickMode=true; saveLast(); render();">CRISE AGORA</button>
         </div>
@@ -884,28 +956,37 @@
 
           <div class="actions">
             <button class="btn primary" onclick="copyCurrent()">Copiar resposta</button>
-            <button class="btn secondary" onclick="saveCrisis()">Registrar crise</button>
+            <button class="btn secondary" onclick="toggleFavCurrent()">⭐ Favoritar</button>
             <button class="btn ghost" onclick="openScenarioModal(${selectedScenario})">Ver exemplos</button>
+          </div>
+
+          <div class="fbRow">
+            <div class="hint">Depois de usar, isso ajudou?</div>
+            <div class="fbBtn good" onclick="feedback(true)">👍 ajudou</div>
+            <div class="fbBtn bad" onclick="feedback(false)">👎 não ajudou</div>
           </div>
 
           <div class="note">
             Atalho mental: <b>validar</b> → <b>clarear intenção</b> → <b>previsibilidade</b>. Em crise, menos é mais.
           </div>
         </div>
-      </div>
 
-      <div class="teaser">
-        <div class="teaserTitle">O que existe na versão completa</div>
-        <div class="teaserSub">Aqui você tem 5 situações. Na completa, você ganha o “motor”: mais cenários + scripts por mensagem + variações curtas e longas.</div>
+        ${renderMessageModeCard()}
 
-        <div class="blurRow">
-          <b>Modo Mensagem</b>
-          <div>Ela escreveu: “Você vai sumir.” → 3 respostas prontas + 1 frase de limite + 1 frase de retorno.</div>
+        <div class="teaser">
+          <div class="teaserTitle">Versão completa (em construção)</div>
+          <div class="teaserSub">No free você tem 5 situações. Na completa você terá: mais cenários, variações curta/média/limite, e “modo mensagem” real (motor).</div>
+          <div class="ctaRow" style="margin-top:12px">
+            <button class="ctaMini primary" onclick="waitlistClick()">Quero entrar na lista do completo</button>
+            <button class="ctaMini" onclick="openTab('mais')">Ver detalhes</button>
+          </div>
+
+          <div class="blurRow">
+            <b>Modo Mensagem (PRO)</b>
+            <div>Ela escreveu X → 3 respostas prontas + limite + frase de retorno + “se escalar…”</div>
+          </div>
         </div>
-        <div class="blurRow">
-          <b>Mapa de escalada</b>
-          <div>Se ela responder X, você faz Y. Se escalar, você pausa com previsibilidade.</div>
-        </div>
+
       </div>
     `;
   }
@@ -927,18 +1008,17 @@
         </div>
 
         <div class="hint" style="margin-bottom:10px">
-          Essa lista existe para reconhecer padrões quando você estiver mais calmo. Em crise, use <b>CRISE AGORA</b>.
-          <span class="kbd">copiar</span>
+          Essa lista é para reconhecer padrões quando você estiver mais calmo. Em crise, use <b>CRISE AGORA</b>.
         </div>
 
         ${items}
 
         <div class="teaser">
-          <div class="teaserTitle">Na completa, isso vira “busca por mensagem”</div>
-          <div class="teaserSub">Você cola a frase dela e o Radar sugere cenário + resposta + limite. Sem você pensar.</div>
-          <div class="blurRow">
-            <b>Detector</b>
-            <div>“Você não liga pra mim” → medo de abandono → resposta moderada pronta.</div>
+          <div class="teaserTitle">Quer o completo quando sair?</div>
+          <div class="teaserSub">Entre na lista (WhatsApp) para receber a abertura primeiro.</div>
+          <div class="ctaRow" style="margin-top:12px">
+            <button class="ctaMini primary" onclick="waitlistClick()">Quero a versão completa</button>
+            <button class="ctaMini" onclick="openTab('padroes')">Ver padrões</button>
           </div>
         </div>
       </div>
@@ -947,25 +1027,39 @@
 
   function renderPadroes(){
     const h = getHistory();
+    const favs = getFavs();
+    const m = getMetrics();
 
-    let html = `
-      <div class="section">
-        <div class="sectionTitle">
-          <div class="h">Padrões</div>
-          <div class="hint">histórico local</div>
-        </div>
-    `;
+    let favHtml = "";
+    if(favs.length){
+      favHtml += `<div class="sectionTitle" style="margin-top:18px"><div class="h">Favoritos</div><div class="hint">respostas que funcionaram</div></div>`;
+      favHtml += favs.slice(0,10).map(f=>{
+        const dt = new Date(f.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
+        return `
+          <div class="listItem" style="cursor:default">
+            <div style="font-weight:950">${f.scenario} <span style="color:var(--muted)">· ${f.level}</span></div>
+            <div style="color:var(--muted); font-size:12.5px; margin-top:6px">${dt}</div>
+            <div style="margin-top:10px; line-height:1.45; font-weight:800">${f.reply}</div>
+            <div class="actions">
+              <button class="btn primary" onclick="copyText(${JSON.stringify(f.reply)})">Copiar</button>
+              <button class="btn secondary" onclick="removeFav(${JSON.stringify(f.id)})">Remover</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
 
+    let histHtml = "";
     if(h.length===0){
-      html += `
+      histHtml = `
         <div class="card">
           <div class="label">Ainda vazio</div>
           <div class="txt">Sem registros ainda.</div>
-          <div class="subtxt">Use <b>Registrar crise</b> após copiar a resposta. Isso ajuda você a enxergar o padrão.</div>
+          <div class="subtxt">Use <b>Registrar crise</b> após copiar a resposta (no modo completo).</div>
         </div>
       `;
     } else {
-      html += h.slice(0,10).map(e=>{
+      histHtml = h.slice(0,12).map(e=>{
         const dt = new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
         return `
           <div class="listItem" style="cursor:default">
@@ -977,79 +1071,103 @@
       }).join("");
     }
 
-    html += `
+    return `
+      <div class="section">
+        <div class="sectionTitle">
+          <div class="h">Padrões</div>
+          <div class="hint">histórico local</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Uso (neste aparelho)</div>
+          <div class="txt">${m.copies} cópias • ${m.feedback_good} 👍 • ${m.feedback_bad} 👎</div>
+          <div class="subtxt">Isso é só para você (não envia dados). Serve para acompanhar o que está funcionando.</div>
+        </div>
+
+        ${favHtml}
+
+        <div class="sectionTitle" style="margin-top:18px">
+          <div class="h">Histórico</div>
+          <div class="hint">últimas crises registradas</div>
+        </div>
+
+        ${histHtml}
+
         <div class="actions">
           <button class="btn secondary" onclick="copyHistory()">Copiar resumo</button>
           <button class="btn secondary" onclick="clearHistory()">Limpar histórico</button>
         </div>
 
         <div class="teaser">
-          <div class="teaserTitle">A versão completa mostra o padrão automaticamente</div>
-          <div class="teaserSub">Horário, gatilho mais comum, intensidade mais frequente e o que regula melhor.</div>
-          <div class="blurRow">
-            <b>Exemplo</b>
-            <div>“Saídas e separações” → 62% das crises → moderada → resposta curta funciona melhor.</div>
+          <div class="teaserTitle">Na versão completa</div>
+          <div class="teaserSub">Você teria análise automática de padrão: gatilho mais comum, intensidade mais frequente e o que regula melhor.</div>
+          <div class="ctaRow" style="margin-top:12px">
+            <button class="ctaMini primary" onclick="waitlistClick()">Quero entrar na lista</button>
+            <button class="ctaMini" onclick="openTab('mais')">Ver “Mais”</button>
           </div>
         </div>
       </div>
     `;
-
-    return html;
   }
 
-  function renderGuia(){
+  function renderMais(){
+    const m = getMetrics();
     return `
       <div class="section">
         <div class="sectionTitle">
-          <div class="h">Guia rápido</div>
-          <div class="hint">sem teoria longa</div>
+          <div class="h">Mais</div>
+          <div class="hint">sobre • avisos • lista</div>
         </div>
 
         <div class="card">
-          <div class="label">Regra 1</div>
-          <div class="txt">Validação vem antes de explicação.</div>
-          <div class="subtxt">Se você tentar “corrigir”, vira gasolina. Primeiro regule, depois converse.</div>
+          <div class="label">Sobre</div>
+          <div class="txt">RADAR DE CRISE TPB</div>
+          <div class="subtxt">
+            Ferramenta educativa para orientar comunicação em momentos de crise e reduzir escalada.
+            Não substitui atendimento médico/psicológico, nem avaliação de risco.
+          </div>
         </div>
 
         <div class="card">
-          <div class="label">Regra 2</div>
-          <div class="txt">Pausa com retorno reduz abandono.</div>
-          <div class="subtxt">Exemplo: “Pausa 10 minutos. Eu volto. Eu não vou sumir.”</div>
-        </div>
-
-        <div class="card">
-          <div class="label">Regra 3</div>
-          <div class="txt">Tom crítico quebra qualquer frase.</div>
-          <div class="subtxt">Curto + neutro + previsível.</div>
+          <div class="label">Uso rápido</div>
+          <div class="txt">1) Crise agora → 2) escolha → 3) intensidade → 4) copiar</div>
+          <div class="subtxt">Em crise, foque em frase curta + previsibilidade. Depois você conversa sobre fatos.</div>
         </div>
 
         <div class="card">
           <div class="label">Emergência</div>
-          <div class="txt">Em risco imediato, procure emergência.</div>
+          <div class="txt">Se houver risco imediato, procure emergência.</div>
           <div class="subtxt">Brasil: CVV 188. Este material é educativo.</div>
         </div>
 
         <div class="teaser">
-          <div class="teaserTitle">Na completa, existe “treino de 2 minutos”</div>
-          <div class="teaserSub">Você pratica respostas fora da crise para usar melhor na hora.</div>
-          <div class="blurRow">
-            <b>Treino</b>
-            <div>Você escolhe uma mensagem e treina a frase curta + limite + retorno.</div>
+          <div class="teaserTitle">Lista de espera do completo</div>
+          <div class="teaserSub">Se você quer o “motor” completo (mais cenários + modo mensagem real + variações), entre na lista no WhatsApp.</div>
+          <div class="ctaRow" style="margin-top:12px">
+            <button class="ctaMini primary" onclick="waitlistClick()">Quero a versão completa</button>
+            <button class="ctaMini" onclick="shareApp()">Compartilhar este app</button>
           </div>
+
+          <div class="blurRow">
+            <b>PRO (exemplo)</b>
+            <div>curta / média / longa • limite • retorno • “se ela responder X…”</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label">Transparência</div>
+          <div class="txt">Dados</div>
+          <div class="subtxt">O app salva histórico, favoritos e métricas apenas no seu aparelho (localStorage). Não envia para servidor.</div>
+          <div class="subtxt" style="margin-top:10px">Cliques na lista (WhatsApp): <b>${m.waitlist_clicks}</b></div>
         </div>
       </div>
     `;
   }
 
-  function render(){
-    renderTop();
-    setNavActive();
-    const app = document.getElementById("app");
-    if(tab==="crise") app.innerHTML = renderCrise();
-    if(tab==="situacoes") app.innerHTML = renderSituacoes();
-    if(tab==="padroes") app.innerHTML = renderPadroes();
-    if(tab==="guia") app.innerHTML = renderGuia();
-    saveLast();
+  // ====== ACTIONS ======
+  function openTab(t){
+    tab = t;
+    render();
   }
 
   function selectScenario(i){
@@ -1071,42 +1189,67 @@
     const idx = findScenarioIndexById(scenarioId);
     if(idx >= 0){
       selectedScenario = idx;
-      quickMode = false; // após escolher, já vai direto ao motor completo e mostra os cards
+      quickMode = false;
       tab = "crise";
       render();
-      copyCurrent(); // ação de crise: copiar imediatamente
+      copyCurrent(); // crise: copiar imediatamente
     }
   }
 
   function copyCurrent(){
     const s = scenariosFree[selectedScenario];
+    const m = getMetrics();
+    m.copies += 1;
+    setMetrics(m);
+
     copyText(s.resposta[selectedLevel]);
+    saveCrisis(); // registra no histórico automaticamente ao copiar (produto)
   }
 
   function panic(){
     // 1 frase universal (curta + limite + retorno)
+    const m = getMetrics();
+    m.copies += 1;
+    setMetrics(m);
     copyText("Eu entendo que isso te machucou. Pausa agora. Eu volto em 10 minutos e a gente conversa com calma.");
+  }
+
+  function feedback(isGood){
+    const m = getMetrics();
+    if(isGood) m.feedback_good += 1; else m.feedback_bad += 1;
+    setMetrics(m);
+    toast(isGood ? "Obrigado. 👍" : "Entendi. 👎");
+    render(); // atualiza contadores
+  }
+
+  function waitlistClick(){
+    const m = getMetrics();
+    m.waitlist_clicks += 1;
+    setMetrics(m);
+    openWhatsAppWaitlist();
   }
 
   function saveCrisis(){
     const s = scenariosFree[selectedScenario];
     const entry = {
+      id: cryptoId(),
       ts: new Date().toISOString(),
       scenario: s.title,
+      scenarioId: s.id,
       level: levels[selectedLevel].title,
+      levelIdx: selectedLevel,
       reply: s.resposta[selectedLevel]
     };
     const h = getHistory();
     h.unshift(entry);
     setHistory(h);
-    toast("Registrado.");
   }
 
   function clearHistory(){
     if(!confirm("Limpar todo o histórico deste aparelho?")) return;
     setHistory([]);
+    toast("Histórico limpo.");
     render();
-    toast("Limpo.");
   }
 
   function copyHistory(){
@@ -1116,7 +1259,7 @@
     lines.push("RADAR DE CRISE TPB — RESUMO");
     lines.push("Dr Fabio Schmidt • CRM SP 183549");
     lines.push("");
-    h.slice(0,12).forEach((e,idx)=>{
+    h.slice(0,14).forEach((e,idx)=>{
       const dt = new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
       lines.push(`#${idx+1} ${dt} — ${e.scenario} (${e.level})`);
       lines.push(`Resposta: ${e.reply}`);
@@ -1125,11 +1268,132 @@
     copyText(lines.join("\n"));
   }
 
-  // Modal (para situações / exemplos)
+  function isFav(scenarioId, levelIdx){
+    const favs = getFavs();
+    return favs.some(f => f.scenarioId === scenarioId && f.levelIdx === levelIdx);
+  }
+
+  function toggleFavCurrent(){
+    const s = scenariosFree[selectedScenario];
+    const favs = getFavs();
+    const existsIdx = favs.findIndex(f => f.scenarioId === s.id && f.levelIdx === selectedLevel);
+    if(existsIdx >= 0){
+      favs.splice(existsIdx, 1);
+      setFavs(favs);
+      toast("Removido dos favoritos.");
+    } else {
+      favs.unshift({
+        id: cryptoId(),
+        ts: new Date().toISOString(),
+        scenario: s.title,
+        scenarioId: s.id,
+        level: levels[selectedLevel].title,
+        levelIdx: selectedLevel,
+        reply: s.resposta[selectedLevel]
+      });
+      setFavs(favs);
+      toast("Favoritado ⭐");
+    }
+    render();
+  }
+
+  function removeFav(id){
+    const favs = getFavs().filter(f => f.id !== id);
+    setFavs(favs);
+    toast("Removido.");
+    render();
+  }
+
+  // ====== MESSAGE MODE (teaser inteligente) ======
+  function pasteExample(text){
+    const el = document.getElementById("msgInput");
+    if(!el) return;
+    el.value = text;
+    toast("Exemplo colado.");
+  }
+
+  function normalize(str){
+    return (str || "")
+      .toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9\s]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function scoreScenarioForText(scenario, text){
+    const t = normalize(text);
+    let score = 0;
+    for(const kw of (scenario.keywords || [])){
+      const k = normalize(kw);
+      if(!k) continue;
+      if(t.includes(k)) score += 3;
+      else{
+        const parts = k.split(" ").filter(Boolean);
+        if(parts.length >= 2){
+          let hit = 0;
+          for(const p of parts) if(t.includes(p)) hit++;
+          if(hit >= 2) score += 2;
+          else if(hit === 1) score += 1;
+        } else if(parts.length === 1 && t.includes(parts[0])) score += 1;
+      }
+    }
+    // bônus por triggers aproximados
+    for(const tr of (scenario.triggers || [])){
+      const trn = normalize(tr);
+      if(trn && trn.length >= 8 && t.includes(trn.slice(0, Math.min(14, trn.length)))) score += 1;
+    }
+    return score;
+  }
+
+  function suggestFromMessage(){
+    const el = document.getElementById("msgInput");
+    const out = document.getElementById("msgResult");
+    if(!el || !out) return;
+
+    const text = el.value || "";
+    if(normalize(text).length < 4){
+      out.style.display = "block";
+      out.innerHTML = `<b>Dica:</b> cole uma frase mais completa.`;
+      return;
+    }
+
+    let bestIdx = 0;
+    let bestScore = -1;
+    scenariosFree.forEach((s, idx)=>{
+      const sc = scoreScenarioForText(s, text);
+      if(sc > bestScore){ bestScore = sc; bestIdx = idx; }
+    });
+
+    const chosen = scenariosFree[bestIdx];
+    selectedScenario = bestIdx;
+
+    const m = getMetrics();
+    m.msg_mode_uses += 1;
+    setMetrics(m);
+
+    out.style.display = "block";
+    out.innerHTML = `
+      <b>Sugestão:</b> ${chosen.title}<br>
+      <span style="color:var(--muted)">Se não parecer certo, escolha manualmente em “O que aconteceu”.</span>
+    `;
+    render();
+  }
+
+  function suggestAndCopy(){
+    suggestFromMessage();
+    copyCurrent();
+  }
+
+  // ====== MODAL ======
   function openScenarioModal(idx){
     const s = scenariosFree[idx];
-
-    const triggers = s.triggers.map(t => `<div class="card" style="margin-top:10px"><div class="label">Como aparece</div><div class="txt">${t}</div></div>`).join("");
+    const triggers = (s.triggers || []).map(t => `
+      <div class="card" style="margin-top:10px">
+        <div class="label">Como aparece</div>
+        <div class="txt">${t}</div>
+      </div>
+    `).join("");
 
     document.getElementById("modalTitle").textContent = s.title;
     document.getElementById("modalSub").textContent = "Exemplos reais + resposta por intensidade (usa a intensidade ativa)";
@@ -1144,7 +1408,7 @@
       <div class="card bad">
         <div class="label">Erro que piora</div>
         <div class="txt">${s.piora}</div>
-        <div class="subtxt">O erro comum é tentar “corrigir” ou “provar”.</div>
+        <div class="subtxt">O erro comum é tentar “corrigir” ou “provar” na hora errada.</div>
       </div>
 
       <div class="card good">
@@ -1159,15 +1423,11 @@
       </div>
 
       <div class="teaser" style="margin-top:14px">
-        <div class="teaserTitle">Na versão completa</div>
-        <div class="teaserSub">Você teria <b>3 variações</b> (curta, média, longa) e um “se ela responder X…” para seguir sem pensar.</div>
-        <div class="blurRow">
-          <b>Curta</b>
-          <div>Valida + previsibilidade em 1 frase.</div>
-        </div>
-        <div class="blurRow">
-          <b>Longa</b>
-          <div>Valida + limite + retorno + reparo (sem escalar).</div>
+        <div class="teaserTitle">Versão completa</div>
+        <div class="teaserSub">Você teria variações <b>curta</b>, <b>média</b>, <b>limite</b> + “se ela responder X…”</div>
+        <div class="ctaRow" style="margin-top:12px">
+          <button class="ctaMini primary" onclick="waitlistClick()">Quero entrar na lista</button>
+          <button class="ctaMini" onclick="hideModal()">Voltar</button>
         </div>
       </div>
     `;
@@ -1192,9 +1452,89 @@
     if(e.target.id === "modalBackdrop") hideModal();
   }
 
-  // init
+  // ====== SHARE ======
+  async function shareApp(){
+    const text = "RADAR DE CRISE TPB (free) — frases rápidas para reduzir escalada em momentos de crise.";
+    const url = location.href;
+    try{
+      if(navigator.share){
+        await navigator.share({ title: "RADAR DE CRISE TPB", text, url });
+        toast("Compartilhado.");
+      } else {
+        await copyText(url);
+        toast("Link copiado.");
+      }
+    }catch(e){
+      try{ await copyText(url); }catch(_){}
+      toast("Link copiado.");
+    }
+  }
+
+  // ====== ONBOARDING ======
+  function onboardingDone(){
+    return localStorage.getItem(STORAGE_KEY_ONB) === "1";
+  }
+  function markOnboardingDone(){
+    localStorage.setItem(STORAGE_KEY_ONB, "1");
+  }
+
+  function maybeShowOnboarding(){
+    if(onboardingDone()) return;
+    document.getElementById("modalTitle").textContent = "Como usar (30 segundos)";
+    document.getElementById("modalSub").textContent = "Objetivo: reduzir escalada — sem discutir fatos agora.";
+    document.getElementById("modalBody").innerHTML = `
+      <div class="onbSteps">
+        <div class="step">
+          <b>1) Use CRISE AGORA</b>
+          <div>Escolha o que aconteceu e copie a resposta em 10s.</div>
+        </div>
+        <div class="step">
+          <b>2) Ajuste a intensidade</b>
+          <div>Leve / Moderada / Grave muda o tipo de frase.</div>
+        </div>
+        <div class="step">
+          <b>3) Favoritos</b>
+          <div>Quando algo funcionar, salve ⭐ para usar mais rápido depois.</div>
+        </div>
+        <div class="step">
+          <b>4) Lista do completo</b>
+          <div>Se quiser o motor completo, entre na lista no WhatsApp.</div>
+        </div>
+      </div>
+
+      <div class="ctaRow" style="margin-top:14px">
+        <button class="ctaMini primary" onclick="markOnboardingDone(); hideModal();">Entendi</button>
+        <button class="ctaMini" onclick="waitlistClick()">Quero a versão completa</button>
+      </div>
+    `;
+    showModal();
+  }
+
+  // ====== CRYPTO ID FALLBACK ======
+  function cryptoId(){
+    try{
+      if(crypto && crypto.randomUUID) return crypto.randomUUID();
+    }catch(e){}
+    return "id_" + Math.random().toString(16).slice(2) + "_" + Date.now().toString(16);
+  }
+
+  // ====== RENDER ======
+  function render(){
+    renderTop();
+    setNavActive();
+    const app = document.getElementById("app");
+    if(tab==="crise") app.innerHTML = renderCrise();
+    if(tab==="situacoes") app.innerHTML = renderSituacoes();
+    if(tab==="padroes") app.innerHTML = renderPadroes();
+    if(tab==="mais") app.innerHTML = renderMais();
+    saveLast();
+  }
+
+  // ====== INIT ======
   loadLast();
   render();
+  // onboarding apenas na primeira vez
+  setTimeout(maybeShowOnboarding, 250);
 </script>
 
 </body>
