@@ -8,8 +8,6 @@
   <style>
     :root{
       --bg:#0b0f16;
-      --surface: rgba(16,20,28,.74);
-      --surface2: rgba(255,255,255,.045);
       --text:#eef2ff;
       --muted:#a7b2cc;
       --line: rgba(255,255,255,.10);
@@ -58,9 +56,9 @@
     .brandRow{ display:flex; gap:12px; align-items:center; justify-content:space-between; }
     .brandLeft{ display:flex; align-items:center; gap:12px; min-width:0; }
 
-    .logo{
+    .appIcon{
       width:44px; height:44px; border-radius:14px;
-      border:1px solid var(--line);
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.03);
       object-fit: cover; flex:0 0 auto;
     }
@@ -93,37 +91,103 @@
 
     .section{ margin-top: 16px; }
     .sectionTitle{
-      display:flex; align-items:center; justify-content:space-between;
+      display:flex; align-items:baseline; justify-content:space-between;
       gap:10px; margin-bottom: 10px;
     }
     .sectionTitle .h{ font-weight: 950; font-size: 14px; letter-spacing: .2px; }
     .hint{ color: var(--muted); font-size: 12.5px; line-height: 1.35; }
 
-    .hero{
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(102,224,166,.14), rgba(255,255,255,.02));
+    /* HERO */
+    .heroMain{
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(700px 260px at 30% 10%, rgba(102,224,166,.14), transparent 60%),
+        radial-gradient(600px 260px at 80% 20%, rgba(241,180,107,.10), transparent 62%),
+        rgba(255,255,255,.02);
       border-radius: 22px;
       padding: 14px;
+      overflow:hidden;
     }
-    .heroTop{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom: 10px; }
-    .heroTitle{ font-weight: 950; font-size: 14px; letter-spacing: .2px; }
-    .heroSub{ color: var(--muted); font-size: 12.5px; line-height: 1.35; margin-top: 6px; }
+    .heroImgWrap{
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.20);
+      box-shadow: 0 20px 70px rgba(0,0,0,.40);
+    }
+    .heroImg{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    .heroCopy{
+      margin-top: 12px;
+    }
+    .heroKicker{
+      font-weight: 950;
+      letter-spacing:.12em;
+      font-size: 11px;
+      color: rgba(238,242,255,.70);
+      text-transform: uppercase;
+    }
+    .heroHeadline{
+      margin-top: 8px;
+      font-weight: 950;
+      font-size: 18px;
+      line-height: 1.15;
+    }
+    .heroLead{
+      margin-top: 8px;
+      color: rgba(238,242,255,.74);
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 750;
+    }
 
     .bigCTA{
       width:100%;
       border:none;
-      border-radius: 18px;
-      padding: 16px 14px;
+      border-radius: 20px;
+      padding: 20px 14px;
       font-weight: 950;
-      font-size: 15px;
+      font-size: 17px;
       cursor:pointer;
       user-select:none;
       background: var(--accent);
       color:#06110c;
+      box-shadow: 0 18px 55px rgba(102,224,166,.20);
+      margin-top: 12px;
     }
     .bigCTA:active{ transform: translateY(1px); }
 
-    .ctaRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
+    .howUse{
+      margin-top: 12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .howTitle{
+      font-weight: 950;
+      letter-spacing:.12em;
+      font-size: 11px;
+      color: rgba(238,242,255,.70);
+      text-transform: uppercase;
+    }
+    .howLine{
+      margin-top: 8px;
+      color: rgba(238,242,255,.82);
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 750;
+    }
+
+    .heroMiniRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
     .ctaMini{
       border:1px solid var(--line);
       background: rgba(255,255,255,.05);
@@ -171,13 +235,13 @@
     .badge{
       position:absolute;
       top:10px; right:10px;
-      border:1px solid var(--line);
+      border:1px solid rgba(255,255,255,.10);
       background: rgba(0,0,0,.20);
       border-radius: 999px;
       padding: 6px 10px;
       font-weight: 950;
       font-size: 11px;
-      color: var(--muted);
+      color: rgba(238,242,255,.60);
       backdrop-filter: blur(8px);
       pointer-events:none;
     }
@@ -293,8 +357,6 @@
       overflow:hidden;
     }
     .listItem:active{ transform: translateY(1px); }
-
-    .lock{ margin-top: 14px; color: var(--muted); font-size: 13px; line-height: 1.4; }
 
     .teaser{
       border: 1px solid rgba(255,255,255,.12);
@@ -439,44 +501,6 @@
     }
     textarea::placeholder{ color: rgba(167,178,204,.70); font-weight: 800; }
 
-    /* Toggle */
-    .toggleRow{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top:1px solid rgba(255,255,255,.08);
-    }
-    .switch{
-      position:relative;
-      width:50px;
-      height:30px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      cursor:pointer;
-      user-select:none;
-      flex:0 0 auto;
-    }
-    .knob{
-      position:absolute;
-      top:3px;
-      left:3px;
-      width:24px;
-      height:24px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.85);
-      transition: transform .14s ease;
-    }
-    .switch.on{
-      border-color: rgba(102,224,166,.45);
-      background: rgba(102,224,166,.14);
-    }
-    .switch.on .knob{ transform: translateX(20px); background: rgba(102,224,166,.95); }
-
-    /* Tiny chips */
     .chips{
       display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px;
     }
@@ -536,7 +560,6 @@
     }
     .step b{ display:block; font-size: 13px; }
     .step div{ margin-top: 6px; color: var(--muted); font-size: 12.5px; line-height: 1.35; }
-
   </style>
 </head>
 
@@ -573,34 +596,34 @@
   </div>
 
 <script>
-  // ====== CONFIG ======
-  const LOGO_FILE = "701EA1DC-33CE-40FC-BA04-F655886CBA94.png";
+  // ====== ARQUIVOS NA MESMA PASTA landing ======
+  const HERO_IMAGE = "imagemradar.PNG"; // <-- conforme você pediu (maiúsculo)
+  const APP_ICON = "imagemradar.PNG";   // ícone do topo (usando o mesmo, para não depender de outro arquivo)
 
   // WhatsApp do Dr Fabio (Brasil +55)
   const WHATSAPP_NUMBER_E164 = "5511975074399";
-
-  // Mensagem pronta para lista de espera / beta
   const WHATSAPP_MESSAGE = "Olá Dr Fabio. Quero entrar na lista de espera do RADAR DE CRISE TPB completo. (Vim do free)";
 
   // ====== STORAGE KEYS ======
-  const STORAGE_KEY_HISTORY = "radar_tpb_free_history_v2";
-  const STORAGE_KEY_FAVS    = "radar_tpb_free_favs_v2";
-  const STORAGE_KEY_LAST    = "radar_tpb_free_last_v2";
-  const STORAGE_KEY_ONB     = "radar_tpb_free_onboarding_done_v1";
-  const STORAGE_KEY_METRICS = "radar_tpb_free_metrics_v1";
+  const STORAGE_KEY_HISTORY = "radar_tpb_free_history_v3";
+  const STORAGE_KEY_FAVS    = "radar_tpb_free_favs_v3";
+  const STORAGE_KEY_LAST    = "radar_tpb_free_last_v3";
+  const STORAGE_KEY_ONB     = "radar_tpb_free_onboarding_done_v2";
+  const STORAGE_KEY_METRICS = "radar_tpb_free_metrics_v2";
 
   // ====== STATE ======
   let tab = "crise";
   let selectedScenario = 0;
-  let selectedLevel = 1; // default moderada
-  let quickMode = true;
+  let selectedLevel = 1; // 0 leve, 1 moderada, 2 grave
+  let mode = "home"; // home (hero+crise agora) / full (modo completo)
 
   const levels = [
-    { title: "Leve", desc: "Dá para conversar. Valide e organize o básico.", dot:"" },
+    { title: "Leve",     desc: "Dá para conversar. Valide e organize o básico.", dot:"" },
     { title: "Moderada", desc: "Emoção alta. Reduza estímulo e debate.", dot:"mod" },
-    { title: "Grave", desc: "Risco de escalada. Pausa + previsibilidade.", dot:"grv" }
+    { title: "Grave",    desc: "Risco de escalada. Pausa + previsibilidade + segurança.", dot:"grv" }
   ];
 
+  // ====== CENÁRIOS FREE (5) com respostas por intensidade (3) ======
   const scenariosFree = [
     {
       id: "abandono",
@@ -609,17 +632,20 @@
       triggers: [
         "“Você vai me deixar igual todo mundo.”",
         "“Você vai sumir.”",
-        "“Você não me ama de verdade.”"
+        "“Você não liga pra mim.”"
       ],
       piora: "Para com isso. Você está exagerando.",
       porq: "Minimiza o medo e vira prova de abandono. A crise escala mais rápido.",
       estrutura: "Validar o medo → declarar intenção → dar previsibilidade (tempo/retorno).",
       resposta: [
-        "Eu entendo que isso te deu medo. Minha intenção não é te abandonar. Vamos conversar com calma.",
+        // Leve
+        "Eu entendo que isso te deixou insegura. Minha intenção não é te abandonar. Vamos conversar com calma.",
+        // Moderada
         "Eu vejo que esse medo subiu agora. Eu estou aqui. Vamos desacelerar e eu vou ser bem claro com você.",
-        "Agora ficou intenso. Pausa. Eu volto em 10 minutos. Eu não vou sumir. A gente retoma com calma."
+        // Grave
+        "Agora está muito intenso. Pausa. Eu volto em 10 minutos. Eu não vou sumir. A gente retoma com calma."
       ],
-      keywords: ["abandon", "sumir", "deixar", "ir embora", "não liga", "não se importa", "você vai me deixar", "vai embora"]
+      keywords: ["abandon", "sumir", "deixar", "ir embora", "não liga", "não se importa", "vai embora", "vai me deixar", "vai me abandonar"]
     },
     {
       id: "raiva",
@@ -638,26 +664,26 @@
         "A emoção está alta. Eu vou falar pouco e com calma para não piorar. Vamos baixar o ritmo.",
         "Está escalando. Pausa agora. Eu volto em 10 minutos para retomar. Eu não vou discutir assim."
       ],
-      keywords: ["grit", "raiva", "ódio", "odeio", "insulto", "xingar", "agress", "vagab", "idiota", "lixo"]
+      keywords: ["grit", "raiva", "odeio", "insulto", "xingar", "agress", "idiota", "lixo", "vagab", "vagabunda"]
     },
     {
       id: "acusacao",
       title: "Ela acusou você de mentir ou trair",
-      short: "“Eu sei que você…”",
+      short: "interpretação vira certeza",
       triggers: [
         "“Eu sei que você está mentindo.”",
         "“Você está me traindo.”",
         "“Eu vi no seu olhar.”"
       ],
       piora: "Você está louca. Isso é coisa da sua cabeça.",
-      porq: "Parece gaslighting na crise. A pessoa sente que você está apagando a experiência dela.",
+      porq: "Parece apagamento da experiência dela. A pessoa sente que você está invalidando e a crise sobe.",
       estrutura: "Validar impacto → esclarecer intenção (sem debate longo) → proposta de pausa/retorno.",
       resposta: [
         "Eu entendo que isso te machucou. Eu quero esclarecer com calma.",
         "Eu vejo que isso virou certeza pra você. Vamos desacelerar: eu explico minha intenção, sem ataque agora.",
         "Agora está muito intenso. Pausa. Eu volto e a gente conversa com calma. Eu não vou brigar."
       ],
-      keywords: ["trai", "trair", "ment", "mentir", "escond", "você está", "você fez", "você é", "você tá", "prova", "certeza"]
+      keywords: ["trai", "trair", "ment", "mentir", "escond", "certeza", "prova", "você fez", "você tá"]
     },
     {
       id: "certeza",
@@ -669,14 +695,14 @@
         "“Fala que me ama agora.”"
       ],
       piora: "De novo isso? Já falei mil vezes.",
-      porq: "Transforma insegurança em “erro”. A pessoa busca mais certeza e a crise aumenta.",
+      porq: "Transforma insegurança em erro. A pessoa busca mais certeza e a escalada aumenta.",
       estrutura: "Afirmar vínculo → nomear insegurança → previsibilidade curta (o que vai acontecer agora).",
       resposta: [
-        "Eu te amo. Eu vejo que você ficou insegura agora. Vamos conversar com calma.",
-        "Eu te amo. Agora eu vou ser previsível: eu fico aqui e a gente fala devagar, sem briga.",
-        "Eu te amo. Pausa. Eu volto em 10 minutos e continuo com você. Eu não vou sumir."
+        "Eu me importo com você. Eu vejo que você ficou insegura agora. Vamos conversar com calma.",
+        "Eu me importo com você. Agora eu vou ser previsível: eu fico aqui e a gente fala devagar, sem briga.",
+        "Eu me importo com você. Pausa. Eu volto em 10 minutos e continuo com você. Eu não vou sumir."
       ],
-      keywords: ["não me ama", "você não ama", "me ama", "prova", "se me amasse", "fala que ama", "amor"]
+      keywords: ["não me ama", "me ama", "prova", "se me amasse", "fala que me ama", "amor"]
     },
     {
       id: "culpa",
@@ -688,23 +714,24 @@
         "“Eu só faço merda.”"
       ],
       piora: "Para de drama. Você faz isso pra chamar atenção.",
-      porq: "Shame spiral: a vergonha cresce, e a pessoa se sente ainda mais sozinha.",
+      porq: "Shame spiral: a vergonha cresce e a pessoa se sente ainda mais sozinha.",
       estrutura: "Validar dor → reduzir pressão → passo mínimo agora (respirar/água/pausa) → retorno.",
       resposta: [
         "Eu vejo que isso está doendo muito. Vamos dar um passo pequeno agora, só o suficiente.",
         "Isso está pesando muito. Vamos reduzir a pressão e organizar uma coisa de cada vez.",
         "Primeiro vamos acalmar. Pausa. Água e respirar. Depois a gente pensa em reparação e solução."
       ],
-      keywords: ["lixo", "sou um", "estraguei", "merda", "culpa", "vergonha", "não presto", "sou horrível"]
+      keywords: ["lixo", "estraguei", "merda", "culpa", "vergonha", "não presto", "sou horrível"]
     }
   ];
 
+  // CRISE AGORA (tiles rápidos)
   const quickTiles = [
     { label: "“Você vai me abandonar”", scenarioId:"abandono" },
     { label: "Gritando / atacando", scenarioId:"raiva" },
     { label: "“Você está mentindo / traindo”", scenarioId:"acusacao" },
     { label: "“Você não me ama”", scenarioId:"certeza" },
-    { label: "“Eu sou um lixo / eu estraguei tudo”", scenarioId:"culpa" }
+    { label: "“Eu sou um lixo / estraguei tudo”", scenarioId:"culpa" }
   ];
 
   // ====== UTIL ======
@@ -739,7 +766,6 @@
   }
 
   function openWhatsAppWaitlist(){
-    // abre whatsapp com mensagem pronta (lista de espera / beta)
     window.open(waLink(WHATSAPP_MESSAGE), "_blank");
   }
 
@@ -765,13 +791,14 @@
       feedback_good: 0,
       feedback_bad: 0,
       waitlist_clicks: 0,
-      msg_mode_uses: 0
+      msg_mode_uses: 0,
+      panic_copies: 0
     });
   }
   function setMetrics(m){ setJSON(STORAGE_KEY_METRICS, m); }
 
   function saveLast(){
-    setJSON(STORAGE_KEY_LAST, { tab, selectedScenario, selectedLevel, quickMode });
+    setJSON(STORAGE_KEY_LAST, { tab, selectedScenario, selectedLevel, mode });
   }
   function loadLast(){
     const p = getJSON(STORAGE_KEY_LAST, null);
@@ -779,7 +806,7 @@
     if(typeof p.tab === "string") tab = p.tab;
     if(Number.isFinite(p.selectedScenario)) selectedScenario = clamp(p.selectedScenario, 0, scenariosFree.length-1);
     if(Number.isFinite(p.selectedLevel)) selectedLevel = clamp(p.selectedLevel, 0, 2);
-    if(typeof p.quickMode === "boolean") quickMode = p.quickMode;
+    if(typeof p.mode === "string") mode = p.mode;
   }
 
   function setNavActive(){
@@ -789,11 +816,18 @@
     });
   }
 
+  function cryptoId(){
+    try{
+      if(crypto && crypto.randomUUID) return crypto.randomUUID();
+    }catch(e){}
+    return "id_" + Math.random().toString(16).slice(2) + "_" + Date.now().toString(16);
+  }
+
   function renderTop(){
     document.getElementById("top").innerHTML = `
       <div class="brandRow">
         <div class="brandLeft">
-          <img class="logo" src="${LOGO_FILE}" alt="Logo">
+          <img class="appIcon" src="${APP_ICON}" alt="Radar">
           <div class="titles">
             <h1 class="title">RADAR DE CRISE TPB</h1>
             <div class="subtitle">Dr Fabio Schmidt • Médico • CRM SP 183549</div>
@@ -834,13 +868,47 @@
     return html;
   }
 
-  function renderQuick(){
+  function renderHeroHome(){
+    return `
+      <div class="heroMain">
+        <div class="heroImgWrap">
+          <img class="heroImg" src="${HERO_IMAGE}" alt="Radar de Crise">
+        </div>
+
+        <div class="heroCopy">
+          <div class="heroKicker">Ferramenta educativa</div>
+          <div class="heroHeadline">A frase certa antes da crise piorar.</div>
+          <div class="heroLead">Escolha o cenário → ajuste a intensidade → copie a resposta. Sem debate longo agora.</div>
+        </div>
+
+        <button class="bigCTA" onclick="mode='home_crise_agora'; saveLast(); render();">🚨 CRISE AGORA</button>
+
+        <div class="howUse">
+          <div class="howTitle">Como usar</div>
+          <div class="howLine">
+            1) Toque em <b>CRISE AGORA</b>
+            &nbsp;&nbsp;2) Escolha o que aconteceu
+            &nbsp;&nbsp;3) Ajuste a intensidade
+            &nbsp;&nbsp;4) Copie
+            <br><span style="color:rgba(238,242,255,.70)">Depois de copiar: não discuta fatos por alguns minutos. Primeiro regula.</span>
+          </div>
+        </div>
+
+        <div class="heroMiniRow">
+          <button class="ctaMini" onclick="mode='full'; saveLast(); render();">Ver modo completo</button>
+          <button class="ctaMini primary" onclick="waitlistClick()">Quero a versão completa</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderCriseAgoraTiles(){
     let tiles = `<div class="grid">`;
     quickTiles.forEach((t)=>{
       tiles += `
         <div class="tile" onclick="pickQuick('${t.scenarioId}')">
           <div class="k">${t.label}</div>
-          <div class="d">toque para gerar e copiar</div>
+          <div class="d">toque para copiar a resposta</div>
           <div class="badge">crise</div>
         </div>
       `;
@@ -848,18 +916,19 @@
     tiles += `</div>`;
 
     return `
-      <div class="hero">
-        <div class="heroTop">
-          <div>
-            <div class="heroTitle">CRISE AGORA</div>
-            <div class="heroSub">Escolha o que aconteceu e copie a resposta. Objetivo: <b>reduzir dano</b> e evitar escalada.</div>
-          </div>
-          <div class="hint">10s</div>
+      <div class="section">
+        <div class="sectionTitle">
+          <div class="h">CRISE AGORA</div>
+          <div class="hint">uso em 10 segundos</div>
+        </div>
+
+        <div class="hint" style="margin-bottom:10px">
+          Escolha o que aconteceu e copie. Objetivo: <b>reduzir dano</b> e evitar escalada.
         </div>
 
         ${tiles}
 
-        <div class="section" style="margin-top:12px">
+        <div class="section">
           <div class="sectionTitle">
             <div class="h">Intensidade</div>
             <div class="hint">isso muda a resposta</div>
@@ -867,8 +936,8 @@
           ${intensitySeg()}
         </div>
 
-        <div class="ctaRow">
-          <button class="ctaMini" onclick="quickMode=false; saveLast(); render();">Ver modo completo</button>
+        <div class="heroMiniRow">
+          <button class="ctaMini" onclick="mode='full'; saveLast(); render();">Modo completo</button>
           <button class="ctaMini primary" onclick="waitlistClick()">Quero a versão completa</button>
         </div>
       </div>
@@ -878,9 +947,9 @@
   function renderMessageModeCard(){
     return `
       <div class="card">
-        <div class="label">Modo Mensagem</div>
-        <div class="txt">Cole aqui uma frase dela e eu sugiro a situação provável.</div>
-        <div class="subtxt">Isso é um teaser. Na versão completa, o “modo mensagem” vira motor (muito mais preciso).</div>
+        <div class="label">Modo Mensagem (teaser)</div>
+        <div class="txt">Cole uma frase dela e eu sugiro a situação provável.</div>
+        <div class="subtxt">Na versão completa, isso vira motor mais preciso (e com variações curta/média/limite).</div>
 
         <div class="inputWrap" style="margin-top:10px">
           <textarea id="msgInput" placeholder="Cole a frase dela aqui… (ex: “você vai me abandonar”)"></textarea>
@@ -901,23 +970,22 @@
     `;
   }
 
-  function renderCrise(){
-    if(quickMode) return renderQuick();
-
+  function renderCriseFull(){
     const s = scenariosFree[selectedScenario];
     const reply = s.resposta[selectedLevel];
 
     return `
-      <div class="hero">
-        <div class="heroTop">
-          <div>
-            <div class="heroTitle">CRISE</div>
-            <div class="heroSub">Cenário + intensidade → copiar resposta. Sem debate longo. Frase curta regula melhor.</div>
-          </div>
-          <button class="chipBtn" onclick="quickMode=true; saveLast(); render();">CRISE AGORA</button>
+      <div class="section">
+        <div class="sectionTitle">
+          <div class="h">Crise</div>
+          <div class="hint">cenário + intensidade → copiar</div>
         </div>
 
-        <div class="section" style="margin-top:0">
+        <div class="hint">
+          Sem debate longo agora. Frase curta regula melhor. Depois você conversa sobre fatos.
+        </div>
+
+        <div class="section">
           <div class="sectionTitle">
             <div class="h">1 O que aconteceu</div>
             <div class="hint">escolha o cenário</div>
@@ -933,61 +1001,88 @@
           ${intensitySeg()}
         </div>
 
-        <div class="section">
-          ${pillIntensity()}
+        ${pillIntensity()}
 
-          <div class="card bad">
-            <div class="label">Frase que piora</div>
-            <div class="txt">${s.piora}</div>
-            <div class="subtxt">Evite “corrigir” ou “ganhar a discussão” agora.</div>
-          </div>
+        <div class="card bad">
+          <div class="label">Frase que piora</div>
+          <div class="txt">${s.piora}</div>
+          <div class="subtxt">Evite “corrigir” ou “ganhar a discussão” agora.</div>
+        </div>
 
-          <div class="card info">
-            <div class="label">Por que piora</div>
-            <div class="txt">${s.porq}</div>
-            <div class="subtxt">Quando a emoção sobe, lógica vira combustível.</div>
-          </div>
+        <div class="card info">
+          <div class="label">Por que piora</div>
+          <div class="txt">${s.porq}</div>
+          <div class="subtxt">Quando a emoção sobe, lógica vira combustível.</div>
+        </div>
 
-          <div class="card good">
-            <div class="label">Substitua por</div>
-            <div class="txt">${reply}</div>
-            <div class="subtxt"><b>Estrutura:</b> ${s.estrutura}</div>
-          </div>
+        <div class="card good">
+          <div class="label">Substitua por</div>
+          <div class="txt">${reply}</div>
+          <div class="subtxt"><b>Estrutura:</b> ${s.estrutura}</div>
+        </div>
 
-          <div class="actions">
-            <button class="btn primary" onclick="copyCurrent()">Copiar resposta</button>
-            <button class="btn secondary" onclick="toggleFavCurrent()">⭐ Favoritar</button>
-            <button class="btn ghost" onclick="openScenarioModal(${selectedScenario})">Ver exemplos</button>
-          </div>
+        <div class="actions">
+          <button class="btn primary" onclick="copyCurrent()">Copiar resposta</button>
+          <button class="btn secondary" onclick="toggleFavCurrent()">⭐ Favoritar</button>
+          <button class="btn ghost" onclick="openScenarioModal(${selectedScenario})">Ver exemplos</button>
+        </div>
 
-          <div class="fbRow">
-            <div class="hint">Depois de usar, isso ajudou?</div>
-            <div class="fbBtn good" onclick="feedback(true)">👍 ajudou</div>
-            <div class="fbBtn bad" onclick="feedback(false)">👎 não ajudou</div>
-          </div>
+        <div class="fbRow">
+          <div class="hint">Depois de usar, isso ajudou?</div>
+          <div class="fbBtn good" onclick="feedback(true)">👍 ajudou</div>
+          <div class="fbBtn bad" onclick="feedback(false)">👎 não ajudou</div>
+        </div>
 
-          <div class="note">
-            Atalho mental: <b>validar</b> → <b>clarear intenção</b> → <b>previsibilidade</b>. Em crise, menos é mais.
-          </div>
+        <div class="note">
+          Atalho mental: <b>validar</b> → <b>clarear intenção</b> → <b>previsibilidade</b>. Em crise, menos é mais.
         </div>
 
         ${renderMessageModeCard()}
 
         <div class="teaser">
           <div class="teaserTitle">Versão completa (em construção)</div>
-          <div class="teaserSub">No free você tem 5 situações. Na completa você terá: mais cenários, variações curta/média/limite, e “modo mensagem” real (motor).</div>
-          <div class="ctaRow" style="margin-top:12px">
+          <div class="teaserSub">
+            No free você tem 5 situações. Na completa você terá: mais cenários, variações curta/média/limite, e “modo mensagem” com motor.
+          </div>
+          <div class="heroMiniRow" style="margin-top:12px">
             <button class="ctaMini primary" onclick="waitlistClick()">Quero entrar na lista do completo</button>
-            <button class="ctaMini" onclick="openTab('mais')">Ver detalhes</button>
+            <button class="ctaMini" onclick="mode='home'; saveLast(); render();">Voltar ao topo</button>
           </div>
 
           <div class="blurRow">
-            <b>Modo Mensagem (PRO)</b>
+            <b>PRO (exemplo)</b>
             <div>Ela escreveu X → 3 respostas prontas + limite + frase de retorno + “se escalar…”</div>
           </div>
         </div>
 
       </div>
+    `;
+  }
+
+  function renderCrise(){
+    if(mode === "home"){
+      return renderHeroHome();
+    }
+
+    if(mode === "home_crise_agora"){
+      return `
+        ${renderHeroHome()}
+        ${renderCriseAgoraTiles()}
+        <div class="heroMiniRow">
+          <button class="ctaMini" onclick="mode='home'; saveLast(); render();">Voltar</button>
+          <button class="ctaMini primary" onclick="mode='full'; saveLast(); render();">Modo completo</button>
+        </div>
+      `;
+    }
+
+    // mode === "full"
+    return `
+      ${renderHeroHome()}
+      <div class="heroMiniRow" style="margin-top:12px">
+        <button class="ctaMini primary" onclick="mode='home_crise_agora'; saveLast(); render();">🚨 CRISE AGORA</button>
+        <button class="ctaMini" onclick="mode='home'; saveLast(); render();">Topo</button>
+      </div>
+      ${renderCriseFull()}
     `;
   }
 
@@ -1008,7 +1103,7 @@
         </div>
 
         <div class="hint" style="margin-bottom:10px">
-          Essa lista é para reconhecer padrões quando você estiver mais calmo. Em crise, use <b>CRISE AGORA</b>.
+          Use esta lista para reconhecer padrões quando estiver mais calmo. Em crise, use <b>CRISE AGORA</b>.
         </div>
 
         ${items}
@@ -1016,9 +1111,9 @@
         <div class="teaser">
           <div class="teaserTitle">Quer o completo quando sair?</div>
           <div class="teaserSub">Entre na lista (WhatsApp) para receber a abertura primeiro.</div>
-          <div class="ctaRow" style="margin-top:12px">
+          <div class="heroMiniRow" style="margin-top:12px">
             <button class="ctaMini primary" onclick="waitlistClick()">Quero a versão completa</button>
-            <button class="ctaMini" onclick="openTab('padroes')">Ver padrões</button>
+            <button class="ctaMini" onclick="openTab('crise')">Voltar para Crise</button>
           </div>
         </div>
       </div>
@@ -1033,7 +1128,7 @@
     let favHtml = "";
     if(favs.length){
       favHtml += `<div class="sectionTitle" style="margin-top:18px"><div class="h">Favoritos</div><div class="hint">respostas que funcionaram</div></div>`;
-      favHtml += favs.slice(0,10).map(f=>{
+      favHtml += favs.slice(0,12).map(f=>{
         const dt = new Date(f.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
         return `
           <div class="listItem" style="cursor:default">
@@ -1055,11 +1150,11 @@
         <div class="card">
           <div class="label">Ainda vazio</div>
           <div class="txt">Sem registros ainda.</div>
-          <div class="subtxt">Use <b>Registrar crise</b> após copiar a resposta (no modo completo).</div>
+          <div class="subtxt">Ao copiar uma resposta, o app registra automaticamente no histórico deste aparelho.</div>
         </div>
       `;
     } else {
-      histHtml = h.slice(0,12).map(e=>{
+      histHtml = h.slice(0,14).map(e=>{
         const dt = new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
         return `
           <div class="listItem" style="cursor:default">
@@ -1081,7 +1176,7 @@
         <div class="card">
           <div class="label">Uso (neste aparelho)</div>
           <div class="txt">${m.copies} cópias • ${m.feedback_good} 👍 • ${m.feedback_bad} 👎</div>
-          <div class="subtxt">Isso é só para você (não envia dados). Serve para acompanhar o que está funcionando.</div>
+          <div class="subtxt">O app salva histórico, favoritos e contadores apenas neste aparelho (não envia para servidor).</div>
         </div>
 
         ${favHtml}
@@ -1100,8 +1195,8 @@
 
         <div class="teaser">
           <div class="teaserTitle">Na versão completa</div>
-          <div class="teaserSub">Você teria análise automática de padrão: gatilho mais comum, intensidade mais frequente e o que regula melhor.</div>
-          <div class="ctaRow" style="margin-top:12px">
+          <div class="teaserSub">Você teria análise automática: gatilho mais comum, intensidade mais frequente e o que regula melhor.</div>
+          <div class="heroMiniRow" style="margin-top:12px">
             <button class="ctaMini primary" onclick="waitlistClick()">Quero entrar na lista</button>
             <button class="ctaMini" onclick="openTab('mais')">Ver “Mais”</button>
           </div>
@@ -1124,7 +1219,7 @@
           <div class="txt">RADAR DE CRISE TPB</div>
           <div class="subtxt">
             Ferramenta educativa para orientar comunicação em momentos de crise e reduzir escalada.
-            Não substitui atendimento médico/psicológico, nem avaliação de risco.
+            Não substitui atendimento médico/psicológico, nem avaliação individual de risco.
           </div>
         </div>
 
@@ -1142,15 +1237,15 @@
 
         <div class="teaser">
           <div class="teaserTitle">Lista de espera do completo</div>
-          <div class="teaserSub">Se você quer o “motor” completo (mais cenários + modo mensagem real + variações), entre na lista no WhatsApp.</div>
-          <div class="ctaRow" style="margin-top:12px">
+          <div class="teaserSub">Se você quer o motor completo (mais cenários + modo mensagem real + variações), entre na lista no WhatsApp.</div>
+          <div class="heroMiniRow" style="margin-top:12px">
             <button class="ctaMini primary" onclick="waitlistClick()">Quero a versão completa</button>
             <button class="ctaMini" onclick="shareApp()">Compartilhar este app</button>
           </div>
 
           <div class="blurRow">
             <b>PRO (exemplo)</b>
-            <div>curta / média / longa • limite • retorno • “se ela responder X…”</div>
+            <div>curta / média / limite • retorno • “se ela responder X…”</div>
           </div>
         </div>
 
@@ -1164,7 +1259,7 @@
     `;
   }
 
-  // ====== ACTIONS ======
+  // ====== NAV ======
   function openTab(t){
     tab = t;
     render();
@@ -1189,46 +1284,14 @@
     const idx = findScenarioIndexById(scenarioId);
     if(idx >= 0){
       selectedScenario = idx;
-      quickMode = false;
+      mode = "full";
       tab = "crise";
       render();
-      copyCurrent(); // crise: copiar imediatamente
+      copyCurrent();
     }
   }
 
-  function copyCurrent(){
-    const s = scenariosFree[selectedScenario];
-    const m = getMetrics();
-    m.copies += 1;
-    setMetrics(m);
-
-    copyText(s.resposta[selectedLevel]);
-    saveCrisis(); // registra no histórico automaticamente ao copiar (produto)
-  }
-
-  function panic(){
-    // 1 frase universal (curta + limite + retorno)
-    const m = getMetrics();
-    m.copies += 1;
-    setMetrics(m);
-    copyText("Eu entendo que isso te machucou. Pausa agora. Eu volto em 10 minutos e a gente conversa com calma.");
-  }
-
-  function feedback(isGood){
-    const m = getMetrics();
-    if(isGood) m.feedback_good += 1; else m.feedback_bad += 1;
-    setMetrics(m);
-    toast(isGood ? "Obrigado. 👍" : "Entendi. 👎");
-    render(); // atualiza contadores
-  }
-
-  function waitlistClick(){
-    const m = getMetrics();
-    m.waitlist_clicks += 1;
-    setMetrics(m);
-    openWhatsAppWaitlist();
-  }
-
+  // ====== CORE ACTIONS ======
   function saveCrisis(){
     const s = scenariosFree[selectedScenario];
     const entry = {
@@ -1245,6 +1308,43 @@
     setHistory(h);
   }
 
+  function copyCurrent(){
+    const s = scenariosFree[selectedScenario];
+    const m = getMetrics();
+    m.copies += 1;
+    setMetrics(m);
+
+    copyText(s.resposta[selectedLevel]);
+    saveCrisis();
+    toast("Copiado. Agora: não discuta fatos por alguns minutos.");
+  }
+
+  function panic(){
+    const m = getMetrics();
+    m.copies += 1;
+    m.panic_copies += 1;
+    setMetrics(m);
+
+    copyText("Eu entendo que isso te machucou. Pausa agora. Eu volto em 10 minutos e a gente conversa com calma.");
+    toast("Copiado. Pausa + previsibilidade.");
+  }
+
+  function feedback(isGood){
+    const m = getMetrics();
+    if(isGood) m.feedback_good += 1; else m.feedback_bad += 1;
+    setMetrics(m);
+    toast(isGood ? "Obrigado. 👍" : "Entendi. 👎");
+    render();
+  }
+
+  function waitlistClick(){
+    const m = getMetrics();
+    m.waitlist_clicks += 1;
+    setMetrics(m);
+    openWhatsAppWaitlist();
+  }
+
+  // ====== HISTORY ======
   function clearHistory(){
     if(!confirm("Limpar todo o histórico deste aparelho?")) return;
     setHistory([]);
@@ -1259,7 +1359,7 @@
     lines.push("RADAR DE CRISE TPB — RESUMO");
     lines.push("Dr Fabio Schmidt • CRM SP 183549");
     lines.push("");
-    h.slice(0,14).forEach((e,idx)=>{
+    h.slice(0,18).forEach((e,idx)=>{
       const dt = new Date(e.ts).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"});
       lines.push(`#${idx+1} ${dt} — ${e.scenario} (${e.level})`);
       lines.push(`Resposta: ${e.reply}`);
@@ -1268,11 +1368,7 @@
     copyText(lines.join("\n"));
   }
 
-  function isFav(scenarioId, levelIdx){
-    const favs = getFavs();
-    return favs.some(f => f.scenarioId === scenarioId && f.levelIdx === levelIdx);
-  }
-
+  // ====== FAVORITES ======
   function toggleFavCurrent(){
     const s = scenariosFree[selectedScenario];
     const favs = getFavs();
@@ -1304,7 +1400,7 @@
     render();
   }
 
-  // ====== MESSAGE MODE (teaser inteligente) ======
+  // ====== MESSAGE MODE ======
   function pasteExample(text){
     const el = document.getElementById("msgInput");
     if(!el) return;
@@ -1338,7 +1434,6 @@
         } else if(parts.length === 1 && t.includes(parts[0])) score += 1;
       }
     }
-    // bônus por triggers aproximados
     for(const tr of (scenario.triggers || [])){
       const trn = normalize(tr);
       if(trn && trn.length >= 8 && t.includes(trn.slice(0, Math.min(14, trn.length)))) score += 1;
@@ -1375,7 +1470,7 @@
     out.style.display = "block";
     out.innerHTML = `
       <b>Sugestão:</b> ${chosen.title}<br>
-      <span style="color:var(--muted)">Se não parecer certo, escolha manualmente em “O que aconteceu”.</span>
+      <span style="color:var(--muted)">Se não parecer certo, escolha manualmente no cenário.</span>
     `;
     render();
   }
@@ -1396,7 +1491,7 @@
     `).join("");
 
     document.getElementById("modalTitle").textContent = s.title;
-    document.getElementById("modalSub").textContent = "Exemplos reais + resposta por intensidade (usa a intensidade ativa)";
+    document.getElementById("modalSub").textContent = "Exemplos + resposta por intensidade (usa a intensidade ativa)";
     document.getElementById("modalBody").innerHTML = `
       <div class="pill" style="margin-bottom:10px">
         <span class="dot ${levels[selectedLevel].dot}"></span>
@@ -1425,7 +1520,7 @@
       <div class="teaser" style="margin-top:14px">
         <div class="teaserTitle">Versão completa</div>
         <div class="teaserSub">Você teria variações <b>curta</b>, <b>média</b>, <b>limite</b> + “se ela responder X…”</div>
-        <div class="ctaRow" style="margin-top:12px">
+        <div class="heroMiniRow" style="margin-top:12px">
           <button class="ctaMini primary" onclick="waitlistClick()">Quero entrar na lista</button>
           <button class="ctaMini" onclick="hideModal()">Voltar</button>
         </div>
@@ -1438,7 +1533,7 @@
     selectedScenario = idx;
     hideModal();
     tab = "crise";
-    quickMode = false;
+    mode = "full";
     render();
   }
 
@@ -1502,7 +1597,7 @@
         </div>
       </div>
 
-      <div class="ctaRow" style="margin-top:14px">
+      <div class="heroMiniRow" style="margin-top:14px">
         <button class="ctaMini primary" onclick="markOnboardingDone(); hideModal();">Entendi</button>
         <button class="ctaMini" onclick="waitlistClick()">Quero a versão completa</button>
       </div>
@@ -1510,30 +1605,23 @@
     showModal();
   }
 
-  // ====== CRYPTO ID FALLBACK ======
-  function cryptoId(){
-    try{
-      if(crypto && crypto.randomUUID) return crypto.randomUUID();
-    }catch(e){}
-    return "id_" + Math.random().toString(16).slice(2) + "_" + Date.now().toString(16);
-  }
-
   // ====== RENDER ======
   function render(){
     renderTop();
     setNavActive();
+
     const app = document.getElementById("app");
     if(tab==="crise") app.innerHTML = renderCrise();
     if(tab==="situacoes") app.innerHTML = renderSituacoes();
     if(tab==="padroes") app.innerHTML = renderPadroes();
     if(tab==="mais") app.innerHTML = renderMais();
+
     saveLast();
   }
 
   // ====== INIT ======
   loadLast();
   render();
-  // onboarding apenas na primeira vez
   setTimeout(maybeShowOnboarding, 250);
 </script>
 
