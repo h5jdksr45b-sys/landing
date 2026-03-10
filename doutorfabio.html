@@ -1,429 +1,142 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Biblioteca Master de Prompts — Dr. Fábio Schmidt</title>
   <style>
     :root{
-      --bg:#0b0f14;
-      --bg2:#0f1622;
-      --panel:#101826;
-      --panel2:#0f1724;
-      --text:#e8eef7;
-      --muted:#a7b3c6;
-      --brand:#7aa2ff;
-      --ok:#2ee59d;
-      --line:#223047;
-      --shadow:0 10px 30px rgba(0,0,0,.28);
-      --radius:16px;
+      --bg:#0b1220; --bg2:#0f172a; --panel:#111c30; --panel2:#0f1a2d; --line:#24344f;
+      --text:#e7eef9; --muted:#9fb0c8; --brand:#7aa2ff; --ok:#2ee59d; --shadow:0 12px 32px rgba(0,0,0,.25);
+      --radius:18px;
     }
-
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
-      margin:0;
+      margin:0; color:var(--text); font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(122,162,255,.08), transparent 28%),
-        linear-gradient(180deg,#070a0f 0%, #0b0f14 18%, #0b0f14 100%);
-      color:var(--text);
-      font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+        radial-gradient(circle at top left, rgba(122,162,255,.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(46,229,157,.06), transparent 18%),
+        linear-gradient(180deg, #08101c 0%, #0b1220 35%, #0b1220 100%);
     }
-
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:1280px;margin:0 auto;padding:18px 16px}
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:60;
-      backdrop-filter: blur(10px);
-      background:rgba(11,15,20,.78);
-      border-bottom:1px solid rgba(34,48,71,.8);
+    .wrap{max-width:1280px;margin:0 auto;padding:22px 16px 48px}
+    .top{margin-bottom:16px;display:grid;grid-template-columns:1.2fr .9fr;gap:14px}
+    .hero,.links,.searchbox,.quicknav,.section{
+      background:linear-gradient(180deg, rgba(17,28,48,.92), rgba(15,26,45,.92));
+      border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
     }
-
-    .topbar{
-      display:flex;
-      gap:14px;
-      justify-content:space-between;
-      align-items:flex-start;
-      flex-wrap:wrap;
+    .hero,.links,.searchbox,.quicknav{padding:18px}
+    h1{margin:0;font-size:24px;line-height:1.2}
+    .sub{margin-top:8px;color:var(--muted);font-size:13px}
+    .links .line{
+      padding:10px 12px; border:1px solid rgba(36,52,79,.8); border-radius:12px;
+      background:rgba(7,12,22,.38); margin-top:10px; color:var(--muted); word-break:break-word;
     }
-
-    h1{
-      margin:0;
-      font-size:22px;
-      letter-spacing:.2px;
+    .links b{color:var(--text)}
+    .toolbar{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;margin:0 0 16px}
+    .search{display:flex;align-items:center;gap:10px;background:#0a1424;border:1px solid var(--line);border-radius:12px;padding:12px}
+    .search input{width:100%;border:0;outline:0;color:var(--text);background:transparent;font-size:14px}
+    .chips,.quicknavBtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip,.quickbtn{
+      border:1px solid var(--line); background:#0b1526; color:var(--muted); border-radius:999px;
+      padding:8px 10px; font-size:13px; cursor:pointer; transition:.18s ease; user-select:none;
     }
-
-    .sub{
-      color:var(--muted);
-      font-size:13px;
-      margin-top:6px;
+    .chip:hover,.quickbtn:hover{border-color:var(--brand);color:var(--text)}
+    .chip.active{border-color:var(--brand);color:var(--text);box-shadow:0 0 0 2px rgba(122,162,255,.12) inset}
+    .section{margin-top:14px;overflow:hidden}
+    .sectionHead{
+      display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;
+      background:rgba(255,255,255,.01); border-bottom:1px solid rgba(36,52,79,.7);
     }
-
-    .miniInfo{
-      display:grid;
-      gap:6px;
-      color:var(--muted);
-      font-size:12px;
-      text-align:right;
-    }
-
-    .toolbar{
-      margin-top:16px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-
-    .search{
-      flex:1 1 360px;
-      min-width:240px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:11px 12px;
-      box-shadow:var(--shadow);
-    }
-
-    .search input{
-      width:100%;
-      background:transparent;
-      border:0;
-      outline:0;
-      color:var(--text);
-      font-size:14px;
-    }
-
-    .pillrow,.quicknav{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
-    .pill,.navbtn{
-      border:1px solid var(--line);
-      background:var(--panel);
-      color:var(--muted);
-      padding:8px 10px;
-      border-radius:999px;
-      cursor:pointer;
-      font-size:13px;
-      user-select:none;
-      transition:.18s ease;
-    }
-
-    .pill:hover,.navbtn:hover{
-      border-color:rgba(122,162,255,.7);
-      color:var(--text);
-    }
-
-    .pill.active{
-      border-color:rgba(122,162,255,.7);
-      color:var(--text);
-      box-shadow:0 0 0 2px rgba(122,162,255,.12) inset;
-    }
-
-    .hero{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns:1.25fr .95fr;
-      gap:12px;
-    }
-
-    .heroCard{
-      background:linear-gradient(180deg,var(--panel),var(--panel2));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:14px;
-      box-shadow:var(--shadow);
-    }
-
-    .heroCard h2{
-      margin:0 0 8px;
-      font-size:15px;
-    }
-
-    .heroCard p{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .linksBox{
-      display:grid;
-      gap:10px;
-      margin-top:8px;
-      font-size:13px;
-    }
-
-    .linkLine{
-      padding:10px 12px;
-      border:1px solid rgba(34,48,71,.75);
-      background:rgba(8,12,18,.36);
-      border-radius:12px;
-      color:var(--muted);
-      word-break:break-word;
-    }
-
-    .linkLine b{color:var(--text)}
-
-    main .wrap{
-      padding-top:16px;
-      padding-bottom:46px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:14px;
-    }
-
-    .cat{
-      scroll-margin-top:110px;
-      background:linear-gradient(180deg,var(--panel),var(--panel2));
-      border:1px solid var(--line);
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-    }
-
-    .catHead{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:14px;
-      cursor:pointer;
-      user-select:none;
-      border-bottom:1px solid rgba(34,48,71,.75);
-    }
-
-    .catHead .left{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-
-    .badge{
-      font-size:12px;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid rgba(122,162,255,.35);
-      color:var(--text);
-      background:rgba(122,162,255,.08);
-    }
-
-    .catHead .count{
-      color:var(--muted);
-      font-size:13px;
-      white-space:nowrap;
-    }
-
-    .catBody{display:none;padding:12px 12px 14px}
-    .cat.open .catBody{display:block}
-
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(12,1fr);
-      gap:10px;
-    }
-
+    .sectionHeadLeft{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .badge{background:rgba(122,162,255,.1);color:var(--text);border:1px solid rgba(122,162,255,.35);padding:5px 10px;border-radius:999px;font-size:12px}
+    .count{color:var(--muted);font-size:13px}
+    .sectionBody{display:block;padding:12px}
+    .cards{display:grid;grid-template-columns:repeat(12,1fr);gap:10px}
     .card{
-      grid-column:span 12;
-      background:rgba(8,12,18,.56);
-      border:1px solid rgba(34,48,71,.78);
-      border-radius:14px;
-      padding:12px;
+      grid-column:span 12; background:rgba(8,14,24,.52); border:1px solid rgba(36,52,79,.76);
+      border-radius:14px; padding:12px;
     }
-
-    .cardTop{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:10px;
-      margin-bottom:10px;
-    }
-
-    .cardTitle{
-      font-weight:700;
-      margin:0;
-      font-size:14px;
-      color:var(--text);
-    }
-
-    .cardMeta{
-      color:var(--muted);
-      font-size:12px;
-      margin-top:4px;
-    }
-
-    .btnrow{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
+    .cardTop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+    .cardTitle{font-size:14px;font-weight:700}
+    .cardMeta{color:var(--muted);font-size:12px;margin-top:4px}
+    .btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
     button{
-      border:1px solid rgba(34,48,71,.95);
-      background:rgba(16,24,38,.88);
-      color:var(--text);
-      padding:8px 10px;
-      border-radius:10px;
-      cursor:pointer;
-      font-size:13px;
-      transition:.18s ease;
+      border:1px solid var(--line); background:#0b1526; color:var(--text); border-radius:10px;
+      padding:8px 10px; font-size:13px; cursor:pointer; transition:.18s ease;
     }
-
-    button:hover{border-color:rgba(122,162,255,.7)}
-    .copyBtn{border-color:rgba(46,229,157,.32)}
-    .copyBtn:hover{border-color:rgba(46,229,157,.82)}
-    .viewBtn{border-color:rgba(122,162,255,.35)}
-    .openBtn{border-color:rgba(122,162,255,.35)}
-
+    button:hover{border-color:var(--brand)}
+    .copyBtn{border-color:rgba(46,229,157,.38)}
+    .copyBtn:hover{border-color:rgba(46,229,157,.9)}
     pre{
-      margin:0;
-      padding:12px;
-      background:#070b12;
-      border:1px solid rgba(34,48,71,.72);
-      border-radius:12px;
-      color:#e6f0ff;
-      overflow:auto;
-      white-space:pre-wrap;
-      word-wrap:break-word;
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
-      font-size:12.8px;
-      line-height:1.38;
-      display:none;
+      margin:0; padding:12px; white-space:pre-wrap; word-wrap:break-word; overflow:auto; background:#07101c;
+      color:#eaf2ff; border:1px solid rgba(36,52,79,.72); border-radius:12px;
+      font:12.8px/1.42 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      display:none; max-height:560px;
     }
-
     .card.open pre{display:block}
-
     .toast{
-      position:fixed;
-      left:50%;
-      bottom:18px;
-      transform:translateX(-50%);
-      display:none;
-      align-items:center;
-      gap:10px;
-      background:rgba(16,24,38,.96);
-      color:var(--text);
-      border:1px solid rgba(34,48,71,.92);
-      padding:10px 12px;
-      border-radius:12px;
-      box-shadow:var(--shadow);
-      max-width:94vw;
-      z-index:80;
+      position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:none;align-items:center;gap:10px;z-index:50;
+      background:rgba(12,20,34,.96); border:1px solid rgba(36,52,79,.92); border-radius:12px; padding:10px 12px;
+      box-shadow:var(--shadow); max-width:94vw;
     }
-
     .toast.show{display:flex}
-    .toast .dot{
-      width:10px;height:10px;border-radius:999px;background:var(--ok)
-    }
-
-    footer{
-      color:var(--muted);
-      font-size:12px;
-      text-align:center;
-      padding:16px 16px 40px;
-    }
-
-    .kbd{
-      font-family:ui-monospace,Menlo,Consolas,monospace;
-      border:1px solid rgba(34,48,71,.9);
-      background:rgba(16,24,38,.7);
-      padding:2px 6px;
-      border-radius:7px;
-      color:var(--text);
-    }
-
-    @media (min-width:900px){
-      .card{grid-column:span 6}
-    }
-
-    @media (max-width:899px){
-      .hero{grid-template-columns:1fr}
-      .miniInfo{text-align:left}
-    }
+    .dot{width:10px;height:10px;border-radius:999px;background:var(--ok)}
+    .muted{color:var(--muted)}
+    footer{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
+    .kbd{font-family:ui-monospace,Menlo,Consolas,monospace;border:1px solid rgba(36,52,79,.9);background:#0b1526;border-radius:8px;padding:2px 6px;color:var(--text)}
+    @media (min-width:960px){.card{grid-column:span 6}}
+    @media (max-width:959px){.top,.toolbar{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-<header>
   <div class="wrap">
-    <div class="topbar">
-      <div>
+    <div class="top">
+      <div class="hero">
         <h1>Biblioteca Master de Prompts — Dr. Fábio Schmidt</h1>
-        <div class="sub">Versão final completa com família, Clarice, imagem, thumb, story, carrossel, reels, ganchos, flop, anúncios, Suno, site e planejamento.</div>
+        <div class="sub">Versão completa, sem barra travando a tela. Busca, filtros por categoria, navegação rápida, botões de copiar e prompts organizados por módulos.</div>
       </div>
-      <div class="miniInfo">
-        <div>Salvar como <span class="kbd">prompts_master.html</span></div>
-        <div>Abrir no navegador</div>
+      <div class="links">
+        <div><b>Links fixos</b></div>
+        <div class="line"><b>Protocolo 7 Dias</b><br>https://h5jdksr45b-sys.github.io/landing/curso7.html</div>
+        <div class="line"><b>Clarice secretária</b><br>https://wa.me/5575998828037</div>
       </div>
     </div>
 
     <div class="toolbar">
-      <div class="search" role="search">
-        <span style="color:var(--muted)">🔎</span>
-        <input id="q" type="text" placeholder="Buscar por palavras (ex: mãe, Clarice, blur, thumb, react, gancho, CTA...)" autocomplete="off" />
-      </div>
-      <div class="pillrow" id="filters"></div>
-    </div>
-
-    <div class="hero">
-      <div class="heroCard">
-        <h2>Navegação rápida</h2>
-        <div class="quicknav" id="quicknav"></div>
-        <p>Clique no módulo para pular direto. Depois clique em <b>Ver</b> para abrir o prompt e <b>Copiar</b> para copiar.</p>
-      </div>
-
-      <div class="heroCard">
-        <h2>Links fixos</h2>
-        <div class="linksBox">
-          <div class="linkLine"><b>Protocolo 7 Dias</b><br>https://h5jdksr45b-sys.github.io/landing/curso7.html</div>
-          <div class="linkLine"><b>Clarice secretária</b><br>https://wa.me/5575998828037</div>
+      <div class="searchbox">
+        <div><b>Buscar</b></div>
+        <div class="search">
+          <span class="muted">🔎</span>
+          <input id="searchInput" placeholder="Buscar por mãe, Clarice, blur, thumb, react, gancho, CTA..." />
         </div>
+        <div class="chips" id="chips"></div>
+      </div>
+      <div class="quicknav">
+        <div><b>Navegação rápida</b></div>
+        <div class="quicknavBtns" id="quicknavBtns"></div>
       </div>
     </div>
+
+    <div id="app"></div>
+
+    <footer>
+      Salve como <span class="kbd">prompts_master.html</span> e abra no navegador.
+    </footer>
   </div>
-</header>
 
-<main>
-  <div class="wrap">
-    <div class="grid" id="app"></div>
+  <div class="toast" id="toast">
+    <div class="dot"></div>
+    <div id="toastText">Copiado ✅</div>
   </div>
-</main>
 
-<div class="toast" id="toast" aria-live="polite">
-  <div class="dot"></div>
-  <div id="toastText">Copiado.</div>
-</div>
+  <script>
+    const SITE = "https://h5jdksr45b-sys.github.io/landing/curso7.html";
+    const CLARICE = "https://wa.me/5575998828037";
 
-<footer>
-  Copie todo este código, salve como <span class="kbd">prompts_master.html</span> e abra no navegador.
-</footer>
-
-<script>
-const SITE = "https://h5jdksr45b-sys.github.io/landing/curso7.html";
-const CLARICE = "https://wa.me/5575998828037";
-
-const PROMPTS = [
-  // =========================
-  // FAMÍLIA
-  // =========================
-  {
-    id:"familia_mae_desesperada",
-    cat:"Família — Encaminhamento",
-    title:"Mãe desesperada",
-    meta:"Empático, acolhe o caos e leva ao Protocolo + Clarice",
-    text:`Eu entendo completamente o desespero que muitas mães sentem quando as crises começam a dominar a rotina da casa.
+    const PROMPTS = [
+      {id:"familia_mae_desesperada",cat:"Família — Encaminhamento",title:"Mãe desesperada",meta:"Empático, acolhe o caos e leva ao Protocolo + Clarice",text:`Eu entendo completamente o desespero que muitas mães sentem quando as crises começam a dominar a rotina da casa.
 
 Muitas vezes parece que nada funciona. Você explica, tenta ajudar, tenta manter a calma… e mesmo assim tudo volta a explodir.
 
@@ -436,15 +149,10 @@ Ele mostra, de forma muito prática, o que realmente acontece nas crises e como 
 Você pode ver aqui:
 ${SITE}
 
-Se preferir conversar com minha secretária para entender melhor como funciona, pode falar com a Clarice:
-${CLARICE}`
-  },
-  {
-    id:"familia_mae_brava",
-    cat:"Família — Encaminhamento",
-    title:"Mãe brava",
-    meta:"Para quem está no limite",
-    text:`Muitas mães chegam exatamente nesse ponto.
+Se preferir conversar com minha secretária para entender melhor como funciona:
+Clarice
+${CLARICE}`},
+      {id:"familia_mae_brava",cat:"Família — Encaminhamento",title:"Mãe brava",meta:"Para quem está no limite",text:`Muitas mães chegam exatamente nesse ponto.
 
 Bravas, exaustas e com a sensação de que qualquer conversa termina mal.
 
@@ -457,16 +165,10 @@ Existem alguns mecanismos emocionais muito específicos nesses momentos, e quand
 Eu explico isso no Protocolo 7 Dias:
 ${SITE}
 
-Se quiser conversar com minha secretária para entender melhor:
+Se quiser conversar com minha secretária:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_mae_culpada",
-    cat:"Família — Encaminhamento",
-    title:"Mãe culpada",
-    meta:"Tira o peso moral e traz clareza",
-    text:`Muitas mães carregam culpa demais porque acham que já deveriam saber lidar com tudo isso.
+${CLARICE}`},
+      {id:"familia_mae_culpada",cat:"Família — Encaminhamento",title:"Mãe culpada",meta:"Tira o peso moral e traz clareza",text:`Muitas mães carregam culpa demais porque acham que já deveriam saber lidar com tudo isso.
 
 Mas ninguém nasce sabendo manejar crises emocionais intensas.
 
@@ -479,34 +181,20 @@ ${SITE}
 
 Se quiser tirar dúvidas antes:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_mae_cansada",
-    cat:"Família — Encaminhamento",
-    title:"Mãe cansada",
-    meta:"Quando já está esgotada",
-    text:`Muitas mães chegam exatamente nesse ponto: cansadas de tentar, cansadas de explicar e cansadas de sentir que nada muda.
+${CLARICE}`},
+      {id:"familia_mae_cansada",cat:"Família — Encaminhamento",title:"Mãe cansada",meta:"Quando já está esgotada",text:`Muitas mães chegam exatamente nesse ponto: cansadas de tentar, explicar e sentir que nada muda.
 
-O problema é que, em crises emocionais intensas, a comunicação deixa de funcionar da forma normal.
+Durante crises emocionais intensas a comunicação muitas vezes deixa de funcionar da forma normal.
 
-Não é só uma discussão comum.
+Existem mecanismos emocionais que mudam a forma como a pessoa interpreta o que foi dito.
 
-Existem alguns mecanismos emocionais que acabam mudando a forma como a pessoa ouve, interpreta e reage naquele momento.
-
-Eu explico isso e mostro como agir nessas situações no Protocolo 7 Dias:
+Eu explico isso no Protocolo 7 Dias:
 ${SITE}
 
-Se quiser falar diretamente com minha secretária:
+Se quiser falar com minha secretária:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_mae_confusa",
-    cat:"Família — Encaminhamento",
-    title:"Mãe confusa",
-    meta:"Para quem não entende o que está acontecendo",
-    text:`É muito comum a mãe se sentir perdida porque as reações parecem mudar rápido demais.
+${CLARICE}`},
+      {id:"familia_mae_confusa",cat:"Família — Encaminhamento",title:"Mãe confusa",meta:"Para quem não entende o que está acontecendo",text:`É muito comum a mãe se sentir perdida porque as reações parecem mudar rápido demais.
 
 Uma hora parece conversa. Na outra vira briga, afastamento, culpa, acusação ou desespero.
 
@@ -517,14 +205,8 @@ ${SITE}
 
 Se quiser falar com minha secretária:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_mae_sem_esperanca",
-    cat:"Família — Encaminhamento",
-    title:"Mãe sem esperança",
-    meta:"Quando já acha que nada muda",
-    text:`Quando uma mãe começa a sentir que nada mais vai mudar, normalmente ela já está carregando exaustão, frustração e muita impotência.
+${CLARICE}`},
+      {id:"familia_mae_sem_esperanca",cat:"Família — Encaminhamento",title:"Mãe sem esperança",meta:"Quando já acha que nada muda",text:`Quando uma mãe começa a sentir que nada mais vai mudar, normalmente ela já está carregando exaustão, frustração e muita impotência.
 
 Mas em crises emocionais intensas, muitas vezes o problema não é “falta de tentativa”. É falta de mapa.
 
@@ -534,14 +216,8 @@ Foi por isso que eu organizei o Protocolo 7 Dias:
 ${SITE}
 
 Se quiser conversar com a Clarice:
-${CLARICE}`
-  },
-  {
-    id:"familia_mae_esperancosa",
-    cat:"Família — Encaminhamento",
-    title:"Mãe esperançosa",
-    meta:"Para quem ainda quer entender e agir melhor",
-    text:`Fico feliz de ver mães que ainda estão tentando entender e melhorar a forma como lidam com essas situações.
+${CLARICE}`},
+      {id:"familia_mae_esperancosa",cat:"Família — Encaminhamento",title:"Mãe esperançosa",meta:"Para quem ainda quer entender e agir melhor",text:`Fico feliz de ver mães que ainda estão tentando entender e melhorar a forma como lidam com essas situações.
 
 Isso faz uma diferença enorme.
 
@@ -550,16 +226,10 @@ Muitas famílias descobrem que pequenas mudanças na forma de reagir durante as 
 No Protocolo 7 Dias eu explico exatamente esses pontos de forma prática:
 ${SITE}
 
-Se quiser conversar com minha secretária para entender melhor:
+Se quiser conversar com minha secretária:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_mae_quer_ajudar",
-    cat:"Família — Encaminhamento",
-    title:"Mãe que quer ajudar",
-    meta:"Boa intenção com direção prática",
-    text:`A vontade de ajudar já mostra o quanto isso importa para você.
+${CLARICE}`},
+      {id:"familia_mae_quer_ajudar",cat:"Família — Encaminhamento",title:"Mãe que quer ajudar",meta:"Boa intenção com direção prática",text:`A vontade de ajudar já mostra o quanto isso importa para você.
 
 O problema é que, durante crises emocionais intensas, algumas atitudes que parecem ajuda podem acabar alimentando ainda mais o conflito sem querer.
 
@@ -570,14 +240,8 @@ ${SITE}
 
 Se quiser saber mais:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_mae_ja_tentou_tudo",
-    cat:"Família — Encaminhamento",
-    title:"Mãe que já tentou de tudo",
-    meta:"Quando diz que nada funciona",
-    text:`Quando uma mãe diz que já tentou de tudo, normalmente o que existe por trás é exaustão real.
+${CLARICE}`},
+      {id:"familia_mae_ja_tentou_tudo",cat:"Família — Encaminhamento",title:"Mãe que já tentou de tudo",meta:"Quando diz que nada funciona",text:`Quando uma mãe diz que já tentou de tudo, normalmente o que existe por trás é exaustão real.
 
 Mas em crises emocionais intensas, às vezes não é questão de tentar mais coisas — e sim de entender o que está acontecendo para parar de repetir erros que parecem ajuda, mas pioram a dinâmica.
 
@@ -585,14 +249,8 @@ Foi por isso que eu organizei o Protocolo 7 Dias de forma muito prática:
 ${SITE}
 
 Se quiser falar com a Clarice:
-${CLARICE}`
-  },
-  {
-    id:"familia_filha_brava",
-    cat:"Família — Encaminhamento",
-    title:"Filha brava",
-    meta:"Para pessoa reativa e magoada",
-    text:`Muitas pessoas em crise descrevem exatamente essa sensação.
+${CLARICE}`},
+      {id:"familia_filha_brava",cat:"Família — Encaminhamento",title:"Filha brava",meta:"Para pessoa reativa e magoada",text:`Muitas pessoas em crise descrevem exatamente essa sensação.
 
 A de tentar falar da dor… e tudo voltar como cobrança, briga ou julgamento.
 
@@ -605,14 +263,8 @@ ${SITE}
 
 Se quiser mais informações:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_filha_magoada",
-    cat:"Família — Encaminhamento",
-    title:"Filha magoada",
-    meta:"Valida dor e direciona",
-    text:`Muitas pessoas que vivem crises emocionais intensas descrevem exatamente essa sensação:
+${CLARICE}`},
+      {id:"familia_filha_magoada",cat:"Família — Encaminhamento",title:"Filha magoada",meta:"Valida dor e direciona",text:`Muitas pessoas que vivem crises emocionais intensas descrevem exatamente essa sensação:
 
 a de falar, tentar se explicar, e ainda assim sentir que ninguém realmente entendeu.
 
@@ -625,14 +277,8 @@ ${SITE}
 
 Se quiser falar com minha secretária:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_filha_incompreendida",
-    cat:"Família — Encaminhamento",
-    title:"Filha que se sente incompreendida",
-    meta:"Para quando se sente sozinha e julgada",
-    text:`Muita gente vive com a sensação de estar tentando explicar uma dor real e, ainda assim, parecer exagerada, confusa ou injusta aos olhos da família.
+${CLARICE}`},
+      {id:"familia_filha_incompreendida",cat:"Família — Encaminhamento",title:"Filha que se sente incompreendida",meta:"Para quando se sente sozinha e julgada",text:`Muita gente vive com a sensação de estar tentando explicar uma dor real e, ainda assim, parecer exagerada, confusa ou injusta aos olhos da família.
 
 Isso gera mais frustração, mais reatividade e mais solidão.
 
@@ -642,14 +288,8 @@ Eu explico isso no Protocolo 7 Dias:
 ${SITE}
 
 Se quiser conversar com a Clarice:
-${CLARICE}`
-  },
-  {
-    id:"familia_filha_quer_melhorar",
-    cat:"Família — Encaminhamento",
-    title:"Filha que quer melhorar",
-    meta:"Quando a própria pessoa quer entender",
-    text:`Quando a pessoa começa a tentar entender o que está acontecendo com ela, já existe uma chance muito maior de quebrar o ciclo.
+${CLARICE}`},
+      {id:"familia_filha_quer_melhorar",cat:"Família — Encaminhamento",title:"Filha que quer melhorar",meta:"Quando a própria pessoa quer entender",text:`Quando a pessoa começa a tentar entender o que está acontecendo com ela, já existe uma chance muito maior de quebrar o ciclo.
 
 Muitas crises não nascem só do momento: elas envolvem emoção intensa, interpretação distorcida e dificuldade de regulação.
 
@@ -658,14 +298,8 @@ ${SITE}
 
 Se quiser tirar dúvidas:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_conjuge_bravo",
-    cat:"Família — Encaminhamento",
-    title:"Cônjuge bravo",
-    meta:"Para parceiro no limite",
-    text:`Quando o parceiro já está bravo, normalmente ele não está apenas irritado: ele está exausto, confuso e sem saber como sair do ciclo.
+${CLARICE}`},
+      {id:"familia_conjuge_bravo",cat:"Família — Encaminhamento",title:"Cônjuge bravo",meta:"Para parceiro no limite",text:`Quando o parceiro já está bravo, normalmente ele não está apenas irritado: ele está exausto, confuso e sem saber como sair do ciclo.
 
 O problema é que reagir só no impulso costuma aumentar ainda mais a intensidade do conflito.
 
@@ -673,16 +307,10 @@ Por isso eu organizei o Protocolo 7 Dias, para mostrar o que acontece nessas din
 ${SITE}
 
 Se quiser falar com a Clarice:
-${CLARICE}`
-  },
-  {
-    id:"familia_conjuge_cansado",
-    cat:"Família — Encaminhamento",
-    title:"Cônjuge cansado",
-    meta:"Para parceiro que sente que tudo piora",
-    text:`Muitos parceiros chegam nesse ponto: querem ajudar, mas sentem que qualquer palavra piora a situação.
+${CLARICE}`},
+      {id:"familia_conjuge_cansado",cat:"Família — Encaminhamento",title:"Cônjuge cansado",meta:"Para parceiro que sente que tudo piora",text:`Muitos parceiros chegam nesse ponto: querem ajudar, mas sentem que qualquer coisa que falem piora a situação.
 
-Isso acontece porque durante crises emocionais intensas algumas coisas que funcionariam numa conversa comum deixam de funcionar.
+Isso acontece porque durante crises emocionais intensas algumas coisas que funcionariam numa conversa normal deixam de funcionar.
 
 Não é apenas uma discussão comum.
 
@@ -693,14 +321,8 @@ ${SITE}
 
 Se quiser conversar com minha secretária:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_conjuge_confuso",
-    cat:"Família — Encaminhamento",
-    title:"Cônjuge confuso",
-    meta:"Para quem não sabe mais o que fazer",
-    text:`Muitos parceiros tentam resolver tudo com lógica, explicação e boa intenção — e acabam se frustrando porque nada disso parece funcionar.
+${CLARICE}`},
+      {id:"familia_conjuge_confuso",cat:"Família — Encaminhamento",title:"Cônjuge confuso",meta:"Para quem não sabe mais o que fazer",text:`Muitos parceiros tentam resolver tudo com lógica, explicação e boa intenção — e acabam se frustrando porque nada disso parece funcionar.
 
 Durante crises emocionais intensas, a forma como a pessoa recebe a fala pode mudar completamente.
 
@@ -711,14 +333,8 @@ ${SITE}
 
 Se quiser saber mais:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_conjuge_sem_esperanca",
-    cat:"Família — Encaminhamento",
-    title:"Cônjuge sem esperança",
-    meta:"Quando já está desistindo",
-    text:`Quando o parceiro começa a sentir que não existe saída, geralmente ele já está vivendo há muito tempo um ciclo de tentativa, erro, culpa e desgaste.
+${CLARICE}`},
+      {id:"familia_conjuge_sem_esperanca",cat:"Família — Encaminhamento",title:"Cônjuge sem esperança",meta:"Quando já está desistindo",text:`Quando o parceiro começa a sentir que não existe saída, geralmente ele já está vivendo há muito tempo um ciclo de tentativa, erro, culpa e desgaste.
 
 Mas muitas vezes o problema não é falta de cuidado. É falta de compreensão do padrão.
 
@@ -728,14 +344,8 @@ Foi por isso que eu organizei o Protocolo 7 Dias:
 ${SITE}
 
 Se quiser conversar com a Clarice:
-${CLARICE}`
-  },
-  {
-    id:"familia_pai_confuso",
-    cat:"Família — Encaminhamento",
-    title:"Pai confuso",
-    meta:"Para figura paterna que não entende as crises",
-    text:`Muitos pais tentam resolver a situação com lógica, firmeza ou orientação direta — e acabam se frustrando porque nada disso parece funcionar.
+${CLARICE}`},
+      {id:"familia_pai_confuso",cat:"Família — Encaminhamento",title:"Pai confuso",meta:"Para figura paterna que não entende as crises",text:`Muitos pais tentam resolver a situação com lógica, firmeza ou orientação direta — e acabam se frustrando porque nada disso parece funcionar.
 
 Durante crises emocionais intensas, a forma como a pessoa recebe a fala pode mudar completamente.
 
@@ -746,14 +356,8 @@ ${SITE}
 
 Se quiser saber mais:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_outro_familiar",
-    cat:"Família — Encaminhamento",
-    title:"Outro familiar ou amigo próximo",
-    meta:"Versão neutra e ampla",
-    text:`Quem convive de perto com crises emocionais intensas costuma se sentir impotente, confuso e sem saber como ajudar sem piorar.
+${CLARICE}`},
+      {id:"familia_outro_familiar",cat:"Família — Encaminhamento",title:"Outro familiar ou amigo próximo",meta:"Versão neutra e ampla",text:`Quem convive de perto com crises emocionais intensas costuma se sentir impotente, confuso e sem saber como ajudar sem piorar.
 
 Isso é mais comum do que parece.
 
@@ -764,14 +368,8 @@ ${SITE}
 
 Se quiser conversar com minha secretária:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"familia_paciente",
-    cat:"Família — Encaminhamento",
-    title:"Para o próprio paciente",
-    meta:"Quando a própria pessoa quer entender o que vive",
-    text:`Muitas pessoas que vivem crises emocionais intensas descrevem algo muito parecido:
+${CLARICE}`},
+      {id:"familia_paciente",cat:"Família — Encaminhamento",title:"Para o próprio paciente",meta:"Quando a própria pessoa quer entender o que vive",text:`Muitas pessoas que vivem crises emocionais intensas descrevem algo muito parecido:
 
 a sensação de que as emoções ficam tão fortes que tudo parece sair do controle.
 
@@ -784,75 +382,33 @@ ${SITE}
 
 Se quiser tirar dúvidas:
 Clarice
-${CLARICE}`
-  },
+${CLARICE}`},
 
-  // =========================
-  // CLARICE
-  // =========================
-  {
-    id:"clarice_geral",
-    cat:"Clarice — Encaminhamento",
-    title:"Encaminhar para Clarice",
-    meta:"Texto curto e direto",
-    text:`Para informações sobre consultas ou orientações mais específicas, você pode falar diretamente com minha secretária.
+      {id:"clarice_geral",cat:"Clarice — Encaminhamento",title:"Encaminhar para Clarice",meta:"Texto curto e direto",text:`Para informações sobre consultas ou orientações mais específicas, você pode falar diretamente com minha secretária.
 
 Clarice:
-${CLARICE}`
-  },
-  {
-    id:"clarice_story",
-    cat:"Clarice — Encaminhamento",
-    title:"Story chamando a Clarice",
-    meta:"Curto para story ou resposta rápida",
-    text:`Se você quiser falar com minha secretária para informações sobre consultas ou orientações:
+${CLARICE}`},
+      {id:"clarice_story",cat:"Clarice — Encaminhamento",title:"Story chamando a Clarice",meta:"Curto para story ou resposta rápida",text:`Se você quiser falar com minha secretária para informações sobre consultas ou orientações:
 
 Clarice
 WhatsApp:
-${CLARICE}`
-  },
-  {
-    id:"clarice_agendamento",
-    cat:"Clarice — Encaminhamento",
-    title:"Agendamento de consulta",
-    meta:"Focado em agenda",
-    text:`Para agendamento e informações sobre consulta, fale com minha secretária:
+${CLARICE}`},
+      {id:"clarice_agendamento",cat:"Clarice — Encaminhamento",title:"Agendamento de consulta",meta:"Focado em agenda",text:`Para agendamento e informações sobre consulta, fale com minha secretária:
 
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"clarice_curso_consulta",
-    cat:"Clarice — Encaminhamento",
-    title:"Separar curso de consulta",
-    meta:"Diferencia site do curso e atendimento",
-    text:`Se a sua dúvida for sobre o Protocolo 7 Dias, você pode ver por aqui:
+${CLARICE}`},
+      {id:"clarice_curso_consulta",cat:"Clarice — Encaminhamento",title:"Separar curso de consulta",meta:"Diferencia site do curso e atendimento",text:`Se a sua dúvida for sobre o Protocolo 7 Dias, você pode ver por aqui:
 ${SITE}
 
 Se for sobre consulta ou agenda, fale com minha secretária:
 Clarice
-${CLARICE}`
-  },
-  {
-    id:"clarice_urgente",
-    cat:"Clarice — Encaminhamento",
-    title:"Encaminhamento mais urgente",
-    meta:"Tom mais direto",
-    text:`Para te orientar melhor e verificar isso da forma certa, fale diretamente com minha secretária:
+${CLARICE}`},
+      {id:"clarice_urgente",cat:"Clarice — Encaminhamento",title:"Encaminhamento mais urgente",meta:"Tom mais direto",text:`Para te orientar melhor e verificar isso da forma certa, fale diretamente com minha secretária:
 
 Clarice
-${CLARICE}`
-  },
+${CLARICE}`},
 
-  // =========================
-  // IMAGEM
-  // =========================
-  {
-    id:"img_melhorar_qualidade",
-    cat:"Imagem — Base Visual",
-    title:"Manter imagem e melhorar qualidade",
-    meta:"Preserva tudo, melhora nitidez e aparência profissional",
-    text:`Preserve completamente a imagem original carregada.
+      {id:"img_melhorar_qualidade",cat:"Imagem — Base Visual",title:"Manter imagem e melhorar qualidade",meta:"Preserva tudo, melhora nitidez e aparência profissional",text:`Preserve completamente a imagem original carregada.
 
 NÃO alterar:
 
@@ -887,14 +443,8 @@ EFEITOS VISUAIS
 
 RESULTADO FINAL
 
-Imagem mais limpa, mais refinada, mais profissional e mais premium, sem perder a identidade original.`
-  },
-  {
-    id:"img_ultra_premium",
-    cat:"Imagem — Base Visual",
-    title:"Melhoria ultra-premium",
-    meta:"Mais forte, mais cinematográfica, mais detalhada",
-    text:`Melhoria de imagem profissional ultra-premium.
+Imagem mais limpa, mais refinada, mais profissional e mais premium, sem perder a identidade original.`},
+      {id:"img_ultra_premium",cat:"Imagem — Base Visual",title:"Melhoria ultra-premium",meta:"Mais forte, mais cinematográfica, mais detalhada",text:`Melhoria de imagem profissional ultra-premium.
 
 Transforme a imagem carregada, de baixa qualidade ou desfocada, em uma qualidade cinematográfica de detalhamento extremo.
 
@@ -916,14 +466,8 @@ Apenas texturas fotorrealistas.
 Apenas melhorias fiéis à fonte original.
 
 Resultado final:
-imagem extremamente nítida, realista e premium, mantendo tudo igual, apenas melhorando a qualidade.`
-  },
-  {
-    id:"img_remove_text",
-    cat:"Imagem — Base Visual",
-    title:"Manter imagem e remover texto",
-    meta:"Reconstrução natural do fundo",
-    text:`Preserve completamente a imagem original carregada.
+imagem extremamente nítida, realista e premium, mantendo tudo igual, apenas melhorando a qualidade.`},
+      {id:"img_remove_text",cat:"Imagem — Base Visual",title:"Manter imagem e remover texto",meta:"Reconstrução natural do fundo",text:`Preserve completamente a imagem original carregada.
 
 NÃO alterar:
 
@@ -957,14 +501,8 @@ EFEITOS VISUAIS
 
 RESULTADO FINAL
 
-A imagem deve permanecer a mesma, porém completamente limpa, sem qualquer texto visível.`
-  },
-  {
-    id:"img_add_text_free",
-    cat:"Imagem — Base Visual",
-    title:"Manter imagem e inserir texto livre",
-    meta:"Template coringa com campo [TEXTO A INSERIR]",
-    text:`Preserve completamente a imagem original carregada.
+A imagem deve permanecer a mesma, porém completamente limpa, sem qualquer texto visível.`},
+      {id:"img_add_text_free",cat:"Imagem — Base Visual",title:"Manter imagem e inserir texto livre",meta:"Template coringa com campo [TEXTO A INSERIR]",text:`Preserve completamente a imagem original carregada.
 
 NÃO alterar:
 
@@ -1006,14 +544,8 @@ POSICIONAMENTO
 
 TEXTO A INSERIR
 
-[TEXTO A INSERIR]`
-  },
-  {
-    id:"img_blur_text",
-    cat:"Imagem — Base Visual",
-    title:"Blur cinematográfico + texto",
-    meta:"Seu prompt mais usado",
-    text:`Preserve completamente a imagem original carregada.
+[TEXTO A INSERIR]`},
+      {id:"img_blur_text",cat:"Imagem — Base Visual",title:"Blur cinematográfico + texto",meta:"Seu prompt mais usado",text:`Preserve completamente a imagem original carregada.
 
 NÃO alterar:
 
@@ -1072,14 +604,8 @@ POSICIONAMENTO
 
 TEXTO A INSERIR
 
-[TEXTO AQUI]`
-  },
-  {
-    id:"img_texto_discreto",
-    cat:"Imagem — Base Visual",
-    title:"Texto discreto cinematográfico",
-    meta:"Assinatura conceitual sutil",
-    text:`Aprimoramento visual cinematográfico com integração tipográfica.
+[TEXTO AQUI]`},
+      {id:"img_texto_discreto",cat:"Imagem — Base Visual",title:"Texto discreto cinematográfico",meta:"Assinatura conceitual sutil",text:`Aprimoramento visual cinematográfico com integração tipográfica.
 
 Preserve 100% da imagem original enviada.
 
@@ -1125,14 +651,8 @@ ESTÉTICA
 
 TEXTO A INSERIR
 
-[TEXTO AQUI]`
-  },
-  {
-    id:"img_blur_so_fundo",
-    cat:"Imagem — Base Visual",
-    title:"Blur só no fundo",
-    meta:"Para deixar a foto pronta para texto depois",
-    text:`Preserve completamente a imagem original carregada.
+[TEXTO AQUI]`},
+      {id:"img_blur_so_fundo",cat:"Imagem — Base Visual",title:"Blur só no fundo",meta:"Para deixar a foto pronta para texto depois",text:`Preserve completamente a imagem original carregada.
 
 NÃO alterar:
 • rosto
@@ -1162,18 +682,9 @@ EFEITOS VISUAIS
 
 RESULTADO FINAL
 
-A imagem deve permanecer idêntica, apenas com fundo mais desfocado, profissional e cinematográfico.`
-  },
+A imagem deve permanecer idêntica, apenas com fundo mais desfocado, profissional e cinematográfico.`},
 
-  // =========================
-  // THUMB
-  // =========================
-  {
-    id:"thumb_reels_dominante",
-    cat:"Thumbnail / Capa",
-    title:"Thumbnail cinematográfica dominante",
-    meta:"Texto grande estilo capa de documentário",
-    text:`Aprimoramento visual cinematográfico com integração tipográfica de capa para thumbnail de Reels.
+      {id:"thumb_reels_dominante",cat:"Thumbnail / Capa",title:"Thumbnail cinematográfica dominante",meta:"Texto grande estilo capa de documentário",text:`Aprimoramento visual cinematográfico com integração tipográfica de capa para thumbnail de Reels.
 
 Preserve 100% da imagem original enviada.
 
@@ -1216,14 +727,8 @@ POSICIONAMENTO
 
 TEXTO A INSERIR
 
-[TEXTO AQUI]`
-  },
-  {
-    id:"thumb_pergunta",
-    cat:"Thumbnail / Capa",
-    title:"Thumbnail em formato pergunta",
-    meta:"Para gerar curiosidade e comentário",
-    text:`Aprimoramento visual cinematográfico com integração tipográfica de capa.
+[TEXTO AQUI]`},
+      {id:"thumb_pergunta",cat:"Thumbnail / Capa",title:"Thumbnail em formato pergunta",meta:"Para gerar curiosidade e comentário",text:`Aprimoramento visual cinematográfico com integração tipográfica de capa.
 
 Preserve 100% da imagem original enviada.
 
@@ -1263,14 +768,8 @@ POSICIONAMENTO
 
 TEXTO A INSERIR
 
-[PERGUNTA AQUI]`
-  },
-  {
-    id:"thumb_react",
-    cat:"Thumbnail / Capa",
-    title:"Thumb de react profissional",
-    meta:"Sua imagem + título forte + aparência premium",
-    text:`Crie uma thumbnail vertical 9:16 para Reels no estilo react profissional.
+[PERGUNTA AQUI]`},
+      {id:"thumb_react",cat:"Thumbnail / Capa",title:"Thumb de react profissional",meta:"Sua imagem + título forte + aparência premium",text:`Crie uma thumbnail vertical 9:16 para Reels no estilo react profissional.
 
 Usar a imagem original como base principal, preservando completamente:
 • rosto
@@ -1307,14 +806,8 @@ TEXTO A INSERIR
 
 IMPORTANTE
 
-A thumb deve parecer forte, profissional e nativa de Reels, sem parecer anúncio genérico ou montagem exagerada.`
-  },
-  {
-    id:"thumb_react_dupla",
-    cat:"Thumbnail / Capa",
-    title:"Thumb react com duas pessoas",
-    meta:"Você + outra pessoa / referência",
-    text:`Crie uma thumbnail vertical 9:16 para Reels no estilo react profissional com duas presenças visuais.
+A thumb deve parecer forte, profissional e nativa de Reels, sem parecer anúncio genérico ou montagem exagerada.`},
+      {id:"thumb_react_dupla",cat:"Thumbnail / Capa",title:"Thumb react com duas pessoas",meta:"Você + outra pessoa / referência",text:`Crie uma thumbnail vertical 9:16 para Reels no estilo react profissional com duas presenças visuais.
 
 Preserve minha imagem principal e integre de forma elegante a segunda referência visual.
 
@@ -1340,18 +833,9 @@ TIPOGRAFIA
 
 TEXTO A INSERIR
 
-[TÍTULO AQUI]`
-  },
+[TÍTULO AQUI]`},
 
-  // =========================
-  // STORY
-  // =========================
-  {
-    id:"story_caixinha",
-    cat:"Story / Caixinha",
-    title:"Story com caixinha de perguntas",
-    meta:"Com espaço inferior livre",
-    text:`Preserve completamente a imagem original carregada.
+      {id:"story_caixinha",cat:"Story / Caixinha",title:"Story com caixinha de perguntas",meta:"Com espaço inferior livre",text:`Preserve completamente a imagem original carregada.
 
 NÃO alterar:
 • rosto
@@ -1392,14 +876,8 @@ POSICIONAMENTO
 
 TEXTO A INSERIR
 
-[TEXTO AQUI]`
-  },
-  {
-    id:"story_pergunta_aberta",
-    cat:"Story / Caixinha",
-    title:"Gerar pergunta aberta para caixinha",
-    meta:"Curiosidade e identificação sem vender direto",
-    text:`Crie 10 perguntas abertas para caixa de perguntas nos Stories.
+[TEXTO AQUI]`},
+      {id:"story_pergunta_aberta",cat:"Story / Caixinha",title:"Gerar pergunta aberta para caixinha",meta:"Curiosidade e identificação sem vender direto",text:`Crie 10 perguntas abertas para caixa de perguntas nos Stories.
 
 Objetivo:
 • gerar identificação imediata
@@ -1415,14 +893,8 @@ As perguntas devem:
 • gerar curiosidade ou confissão
 • funcionar para mães, pais, familiares ou pacientes, dependendo do tema
 
-Evite perguntas genéricas.`
-  },
-  {
-    id:"story_frase_curta",
-    cat:"Story / Caixinha",
-    title:"Frase curta para story",
-    meta:"Direta, emocional e forte",
-    text:`Crie 20 frases curtas para story, com forte identificação emocional e linguagem simples.
+Evite perguntas genéricas.`},
+      {id:"story_frase_curta",cat:"Story / Caixinha",title:"Frase curta para story",meta:"Direta, emocional e forte",text:`Crie 20 frases curtas para story, com forte identificação emocional e linguagem simples.
 
 Objetivo:
 • parar o olhar
@@ -1436,14 +908,8 @@ As frases devem:
 • ter impacto rápido
 • ser curtas
 • parecer profundas sem ficar abstratas demais
-• soar reais e compartilháveis`
-  },
-  {
-    id:"story_curiosidade",
-    cat:"Story / Caixinha",
-    title:"Story de curiosidade",
-    meta:"Para fazer a pessoa querer responder",
-    text:`Crie 15 frases curtas para story com curiosidade aberta.
+• soar reais e compartilháveis`},
+      {id:"story_curiosidade",cat:"Story / Caixinha",title:"Story de curiosidade",meta:"Para fazer a pessoa querer responder",text:`Crie 15 frases curtas para story com curiosidade aberta.
 
 Objetivo:
 • fazer a pessoa parar
@@ -1458,18 +924,9 @@ As frases devem ser:
 • curtas
 • intrigantes
 • simples
-• emocionalmente reconhecíveis`
-  },
+• emocionalmente reconhecíveis`},
 
-  // =========================
-  // CARROSSEL
-  // =========================
-  {
-    id:"carrossel_slide_prompt",
-    cat:"Carrossel",
-    title:"Prompt base para slide de carrossel",
-    meta:"Cinematográfico, minimalista, legível",
-    text:`Cinematic psychological Instagram carousel slide, vertical 9:16.
+      {id:"carrossel_slide_prompt",cat:"Carrossel",title:"Prompt base para slide de carrossel",meta:"Cinematográfico, minimalista, legível",text:`Cinematic psychological Instagram carousel slide, vertical 9:16.
 
 Minimalist composition with dark emotional atmosphere.
 
@@ -1496,14 +953,8 @@ Color palette:
 • psychological documentary mood
 
 TEXT:
-[SLIDE TEXT]`
-  },
-  {
-    id:"carrossel_roteiro",
-    cat:"Carrossel",
-    title:"Transformar tema em carrossel",
-    meta:"Capa + desenvolvimento + fechamento",
-    text:`Crie um carrossel estratégico para Instagram em formato 9:16 com até 6 slides.
+[SLIDE TEXT]`},
+      {id:"carrossel_roteiro",cat:"Carrossel",title:"Transformar tema em carrossel",meta:"Capa + desenvolvimento + fechamento",text:`Crie um carrossel estratégico para Instagram em formato 9:16 com até 6 slides.
 
 Tema:
 [COLOCAR TEMA]
@@ -1525,14 +976,8 @@ Regras:
 
 Me entregue:
 • texto de cada slide
-• sugestão visual curta para cada slide`
-  },
-  {
-    id:"carrossel_complexo_simples",
-    cat:"Carrossel",
-    title:"Conceito complexo em carrossel simples",
-    meta:"Transforma tema denso em conteúdo claro",
-    text:`Transforme o tema abaixo em um carrossel para Instagram que explique um conceito psicológico complexo de forma simples, clara e útil.
+• sugestão visual curta para cada slide`},
+      {id:"carrossel_complexo_simples",cat:"Carrossel",title:"Conceito complexo em carrossel simples",meta:"Transforma tema denso em conteúdo claro",text:`Transforme o tema abaixo em um carrossel para Instagram que explique um conceito psicológico complexo de forma simples, clara e útil.
 
 Tema:
 [COLOCAR TEMA]
@@ -1546,18 +991,9 @@ Objetivo:
 Quero:
 • título da capa
 • texto de cada slide
-• CTA final`
-  },
+• CTA final`},
 
-  // =========================
-  // REELS
-  // =========================
-  {
-    id:"reels_table_01",
-    cat:"Reels — Tabela / Tela",
-    title:"Tabela estratégica para Reels",
-    meta:"Texto falado × texto na tela",
-    text:`Crie uma tabela estratégica para Reels de até 60 segundos com duas colunas:
+      {id:"reels_table_01",cat:"Reels — Tabela / Tela",title:"Tabela estratégica para Reels",meta:"Texto falado × texto na tela",text:`Crie uma tabela estratégica para Reels de até 60 segundos com duas colunas:
 
 Coluna 1: Texto falado (não altere nenhuma palavra, mantenha exatamente como fornecido).
 Coluna 2: Texto que aparece na tela (curto, impactante, com hierarquia visual, palavras-chave destacadas e pensado para retenção e salvamento).
@@ -1573,14 +1009,8 @@ Regras importantes:
 • Não alterar o roteiro falado.
 
 Roteiro falado:
-[COLAR AQUI]`
-  },
-  {
-    id:"reels_imagens_momentos",
-    cat:"Reels — Tabela / Tela",
-    title:"Identificar momentos que pedem imagem",
-    meta:"Seleciona trechos e sugere imagem",
-    text:`Para esse texto, identifique 3 a 5 momentos que pedem imagens.
+[COLAR AQUI]`},
+      {id:"reels_imagens_momentos",cat:"Reels — Tabela / Tela",title:"Identificar momentos que pedem imagem",meta:"Seleciona trechos e sugere imagem",text:`Para esse texto, identifique 3 a 5 momentos que pedem imagens.
 
 Regras:
 • Escolha trechos com maior impacto emocional.
@@ -1589,14 +1019,8 @@ Regras:
 • Se possível, sugira se a imagem deve ser literal ou simbólica.
 
 Texto:
-[COLAR AQUI]`
-  },
-  {
-    id:"reels_tela_concisa",
-    cat:"Reels — Tabela / Tela",
-    title:"Texto de tela mais conciso",
-    meta:"Quando o texto de tela ficou longo demais",
-    text:`Pegue o roteiro abaixo e crie apenas o texto que aparece na tela, de forma mais concisa, forte e visual.
+[COLAR AQUI]`},
+      {id:"reels_tela_concisa",cat:"Reels — Tabela / Tela",title:"Texto de tela mais conciso",meta:"Quando o texto de tela ficou longo demais",text:`Pegue o roteiro abaixo e crie apenas o texto que aparece na tela, de forma mais concisa, forte e visual.
 
 Regras:
 • não repetir tudo que está sendo falado
@@ -1606,14 +1030,8 @@ Regras:
 • pensar em retenção e leitura no celular
 
 Roteiro:
-[COLAR AQUI]`
-  },
-  {
-    id:"reels_roteiro_viral",
-    cat:"Reels — Tabela / Tela",
-    title:"Roteiro curto viral",
-    meta:"Tema em reel com retenção",
-    text:`Crie um roteiro para Reels curto com alto potencial de retenção.
+[COLAR AQUI]`},
+      {id:"reels_roteiro_viral",cat:"Reels — Tabela / Tela",title:"Roteiro curto viral",meta:"Tema em reel com retenção",text:`Crie um roteiro para Reels curto com alto potencial de retenção.
 
 Tema:
 [COLOCAR TEMA]
@@ -1628,18 +1046,9 @@ Quero:
 Objetivo:
 • parar scroll
 • gerar identificação
-• aumentar salvamento`
-  },
+• aumentar salvamento`},
 
-  // =========================
-  // COPY
-  // =========================
-  {
-    id:"copy_optimizer_pro",
-    cat:"Copy — Ganchos / Flop / Retenção",
-    title:"Análise profissional de copy para Reels",
-    meta:"Achar risco de flop e reescrever",
-    text:`ANÁLISE PROFISSIONAL DE COPY PARA REELS — OTIMIZAÇÃO DE RETENÇÃO
+      {id:"copy_optimizer_pro",cat:"Copy — Ganchos / Flop / Retenção",title:"Análise profissional de copy para Reels",meta:"Achar risco de flop e reescrever",text:`ANÁLISE PROFISSIONAL DE COPY PARA REELS — OTIMIZAÇÃO DE RETENÇÃO
 
 Atue como um dos melhores copywriters e estrategistas de conteúdo digital do mundo, especialista em vídeos curtos de alta retenção (Reels, TikTok, Shorts).
 
@@ -1688,14 +1097,8 @@ Depois:
 4) reescreva o roteiro otimizado
 
 Roteiro:
-[COLAR AQUI]`
-  },
-  {
-    id:"copy_caca_flop",
-    cat:"Copy — Ganchos / Flop / Retenção",
-    title:"Caça-flop",
-    meta:"Aponta trechos fracos e onde inserir micro-ganchos",
-    text:`ANÁLISE DE RETENÇÃO PARA VÍDEOS CURTOS
+[COLAR AQUI]`},
+      {id:"copy_caca_flop",cat:"Copy — Ganchos / Flop / Retenção",title:"Caça-flop",meta:"Aponta trechos fracos e onde inserir micro-ganchos",text:`ANÁLISE DE RETENÇÃO PARA VÍDEOS CURTOS
 
 Atue como estrategista especialista em retenção para Reels, TikTok e Shorts.
 
@@ -1719,14 +1122,8 @@ Depois indique:
 • onde inserir micro-ganchos
 
 Roteiro:
-[COLAR AQUI]`
-  },
-  {
-    id:"copy_10_ganchos",
-    cat:"Copy — Ganchos / Flop / Retenção",
-    title:"Gerador de 10 ganchos virais",
-    meta:"Choque, fofoca, identificação, provocação e curiosidade",
-    text:`CRIAÇÃO DE GANCHOS PARA VÍDEOS DE ALTA RETENÇÃO
+[COLAR AQUI]`},
+      {id:"copy_10_ganchos",cat:"Copy — Ganchos / Flop / Retenção",title:"Gerador de 10 ganchos virais",meta:"Choque, fofoca, identificação, provocação e curiosidade",text:`CRIAÇÃO DE GANCHOS PARA VÍDEOS DE ALTA RETENÇÃO
 
 Atue como um copywriter especialista em vídeos virais.
 
@@ -1750,14 +1147,8 @@ Os ganchos devem:
 • parecer naturais quando falados
 
 Tema:
-[COLOCAR TEMA]`
-  },
-  {
-    id:"copy_melhorar_gancho",
-    cat:"Copy — Ganchos / Flop / Retenção",
-    title:"Melhorar um gancho existente",
-    meta:"Aumenta scroll stop e curiosidade",
-    text:`Analise o gancho abaixo e crie 10 versões melhores.
+[COLOCAR TEMA]`},
+      {id:"copy_melhorar_gancho",cat:"Copy — Ganchos / Flop / Retenção",title:"Melhorar um gancho existente",meta:"Aumenta scroll stop e curiosidade",text:`Analise o gancho abaixo e crie 10 versões melhores.
 
 Objetivo:
 • aumentar impacto imediato
@@ -1771,14 +1162,8 @@ Gancho original:
 Me entregue:
 • 10 versões melhores
 • qual é a melhor
-• por que ela tende a performar melhor`
-  },
-  {
-    id:"copy_conceito_simples",
-    cat:"Copy — Ganchos / Flop / Retenção",
-    title:"Explicar conceito complexo de forma simples",
-    meta:"Clareza e utilidade",
-    text:`Explique o tema abaixo de forma simples, útil e visualmente clara, como se fosse para um conteúdo de Instagram.
+• por que ela tende a performar melhor`},
+      {id:"copy_conceito_simples",cat:"Copy — Ganchos / Flop / Retenção",title:"Explicar conceito complexo de forma simples",meta:"Clareza e utilidade",text:`Explique o tema abaixo de forma simples, útil e visualmente clara, como se fosse para um conteúdo de Instagram.
 
 Tema:
 [COLOCAR TEMA]
@@ -1788,18 +1173,9 @@ Regras:
 • linguagem simples
 • explicar sem infantilizar
 • manter profundidade
-• gerar sensação de “agora eu entendi”`
-  },
+• gerar sensação de “agora eu entendi”`},
 
-  // =========================
-  // VÍDEO
-  // =========================
-  {
-    id:"video_edicao_retencao",
-    cat:"Vídeo — Edição / Retenção",
-    title:"Editor de retenção",
-    meta:"Onde cortar, começar, pausar e intensificar",
-    text:`ANÁLISE DE EDIÇÃO PARA RETENÇÃO EM VÍDEOS CURTOS
+      {id:"video_edicao_retencao",cat:"Vídeo — Edição / Retenção",title:"Editor de retenção",meta:"Onde cortar, começar, pausar e intensificar",text:`ANÁLISE DE EDIÇÃO PARA RETENÇÃO EM VÍDEOS CURTOS
 
 Atue como editor especializado em vídeos virais.
 
@@ -1819,14 +1195,8 @@ Indique:
 4. Onde adicionar micro-impactos.
 5. Onde reforçar a tensão narrativa.
 
-Objetivo: transformar o vídeo em um conteúdo que prenda atenção até o final.`
-  },
-  {
-    id:"video_hook_analysis",
-    cat:"Vídeo — Edição / Retenção",
-    title:"Análise de ganchos em vídeo",
-    meta:"Segundos exatos e melhor abertura",
-    text:`ANÁLISE DE GANCHOS EM VÍDEO
+Objetivo: transformar o vídeo em um conteúdo que prenda atenção até o final.`},
+      {id:"video_hook_analysis",cat:"Vídeo — Edição / Retenção",title:"Análise de ganchos em vídeo",meta:"Segundos exatos e melhor abertura",text:`ANÁLISE DE GANCHOS EM VÍDEO
 
 Analise o vídeo enviado e identifique todos os possíveis ganchos existentes.
 
@@ -1846,14 +1216,8 @@ Para cada gancho encontrado informe:
 Depois indique:
 • qual é o melhor gancho
 • qual deveria abrir o vídeo
-• quais ganchos deveriam ser removidos`
-  },
-  {
-    id:"video_bruto_extremo",
-    cat:"Vídeo — Edição / Retenção",
-    title:"Avaliar vídeo bruto",
-    meta:"Fofoca, soco, choque, quedas e cortes",
-    text:`Analise o vídeo bruto enviado desconsiderando pausas naturais de respiração.
+• quais ganchos deveriam ser removidos`},
+      {id:"video_bruto_extremo",cat:"Vídeo — Edição / Retenção",title:"Avaliar vídeo bruto",meta:"Fofoca, soco, choque, quedas e cortes",text:`Analise o vídeo bruto enviado desconsiderando pausas naturais de respiração.
 
 Identifique todos os ganchos existentes e classifique cada um como:
 • Gancho fofoca
@@ -1879,14 +1243,8 @@ Depois:
 • aponte quedas de energia
 • identifique microexpressões fortes
 
-Objetivo: máxima retenção.`
-  },
-  {
-    id:"video_anuncio_prompt",
-    cat:"Vídeo — Edição / Retenção",
-    title:"Prompt para vídeo anúncio",
-    meta:"Para gerar ou orientar vídeo mais comercial",
-    text:`Crie um conceito de vídeo anúncio curto, sofisticado e premium para Instagram.
+Objetivo: máxima retenção.`},
+      {id:"video_anuncio_prompt",cat:"Vídeo — Edição / Retenção",title:"Prompt para vídeo anúncio",meta:"Para gerar ou orientar vídeo mais comercial",text:`Crie um conceito de vídeo anúncio curto, sofisticado e premium para Instagram.
 
 Produto:
 [COLOCAR PRODUTO]
@@ -1902,18 +1260,9 @@ Quero:
 Tom:
 • sofisticado
 • direto
-• sem parecer propaganda genérica`
-  },
+• sem parecer propaganda genérica`},
 
-  // =========================
-  // COMENTÁRIOS / CTA / LEGENDAS
-  // =========================
-  {
-    id:"comentario_empatico",
-    cat:"Comentários / CTA / Legendas",
-    title:"Resposta empática para comentário",
-    meta:"Acolhe e abre caminho",
-    text:`Crie 10 respostas curtas, empáticas e inteligentes para comentários em posts sobre crises emocionais intensas.
+      {id:"comentario_empatico",cat:"Comentários / CTA / Legendas",title:"Resposta empática para comentário",meta:"Acolhe e abre caminho",text:`Crie 10 respostas curtas, empáticas e inteligentes para comentários em posts sobre crises emocionais intensas.
 
 Objetivo:
 • acolher sem parecer automático
@@ -1922,14 +1271,8 @@ Objetivo:
 • abrir espaço para continuar a conversa
 
 Tema do post:
-[COLOCAR TEMA]`
-  },
-  {
-    id:"comentario_cta",
-    cat:"Comentários / CTA / Legendas",
-    title:"Comentário com CTA leve",
-    meta:"Chama para o Protocolo sem parecer agressivo",
-    text:`Crie 10 respostas de comentário que acolham a pessoa e, ao mesmo tempo, abram um CTA leve para o Protocolo 7 Dias.
+[COLOCAR TEMA]`},
+      {id:"comentario_cta",cat:"Comentários / CTA / Legendas",title:"Comentário com CTA leve",meta:"Chama para o Protocolo sem parecer agressivo",text:`Crie 10 respostas de comentário que acolham a pessoa e, ao mesmo tempo, abram um CTA leve para o Protocolo 7 Dias.
 
 Regras:
 • tom humano
@@ -1938,14 +1281,8 @@ Regras:
 • pode mencionar que eu explico melhor no Protocolo 7 Dias
 
 Tema:
-[COLOCAR TEMA]`
-  },
-  {
-    id:"legenda_viral",
-    cat:"Comentários / CTA / Legendas",
-    title:"Legenda viral",
-    meta:"Identificação + utilidade + fechamento",
-    text:`Crie 5 legendas para Instagram com alto potencial de identificação, compartilhamento e salvamento.
+[COLOCAR TEMA]`},
+      {id:"legenda_viral",cat:"Comentários / CTA / Legendas",title:"Legenda viral",meta:"Identificação + utilidade + fechamento",text:`Crie 5 legendas para Instagram com alto potencial de identificação, compartilhamento e salvamento.
 
 Tema:
 [COLOCAR TEMA]
@@ -1960,14 +1297,8 @@ Tom:
 • emocional
 • claro
 • inteligente
-• direto`
-  },
-  {
-    id:"legenda_cta",
-    cat:"Comentários / CTA / Legendas",
-    title:"Legenda com CTA",
-    meta:"Para levar ao site ou Clarice",
-    text:`Crie 5 legendas com CTA para o Protocolo 7 Dias.
+• direto`},
+      {id:"legenda_cta",cat:"Comentários / CTA / Legendas",title:"Legenda com CTA",meta:"Para levar ao site ou Clarice",text:`Crie 5 legendas com CTA para o Protocolo 7 Dias.
 
 Objetivo:
 • gerar identificação
@@ -1982,14 +1313,8 @@ Tom:
 • humano
 • claro
 • sem exagero
-• sem promessa rasa`
-  },
-  {
-    id:"cta_story",
-    cat:"Comentários / CTA / Legendas",
-    title:"CTA curto para story",
-    meta:"Rápido, limpo e clicável",
-    text:`Crie 15 CTAs curtos para story com foco em levar para o Protocolo 7 Dias.
+• sem promessa rasa`},
+      {id:"cta_story",cat:"Comentários / CTA / Legendas",title:"CTA curto para story",meta:"Rápido, limpo e clicável",text:`Crie 15 CTAs curtos para story com foco em levar para o Protocolo 7 Dias.
 
 Regras:
 • poucas palavras
@@ -1998,18 +1323,9 @@ Regras:
 • sem cara de anúncio antigo
 
 Link:
-${SITE}`
-  },
+${SITE}`},
 
-  // =========================
-  // PLANEJAMENTO
-  // =========================
-  {
-    id:"planejamento_dia",
-    cat:"Planejamento / Estratégia",
-    title:"Planejar dia de conteúdo",
-    meta:"1 carrossel + 1 reel + 1 reel teste",
-    text:`Atue como minha equipe estratégica de conteúdo.
+      {id:"planejamento_dia",cat:"Planejamento / Estratégia",title:"Planejar dia de conteúdo",meta:"1 carrossel + 1 reel + 1 reel teste",text:`Atue como minha equipe estratégica de conteúdo.
 
 Com base no que performou recentemente, planeje meu próximo dia de conteúdo com:
 • 1 carrossel para o dia
@@ -2025,14 +1341,8 @@ Objetivo:
 Me entregue:
 1. os 3 temas
 2. por que cada um faz sentido
-3. qual tem maior chance de performar melhor`
-  },
-  {
-    id:"tema_complexo_simples",
-    cat:"Planejamento / Estratégia",
-    title:"Tema complexo explicado simples",
-    meta:"Utilidade, clareza e salvamento",
-    text:`Me dê 20 ideias de conteúdo com o seguinte critério:
+3. qual tem maior chance de performar melhor`},
+      {id:"tema_complexo_simples",cat:"Planejamento / Estratégia",title:"Tema complexo explicado simples",meta:"Utilidade, clareza e salvamento",text:`Me dê 20 ideias de conteúdo com o seguinte critério:
 
 • tema psicológico complexo
 • explicado de forma simples
@@ -2047,14 +1357,8 @@ Público:
 Evite:
 • generalidades
 • frases vazias
-• tema já muito saturado`
-  },
-  {
-    id:"equipe_dos_sonhos",
-    cat:"Planejamento / Estratégia",
-    title:"Equipe dos sonhos",
-    meta:"Trend analyst + strategist + hook + format + cultural + data",
-    text:`Atue como uma Equipe dos Sonhos de crescimento de conteúdo formada por:
+• tema já muito saturado`},
+      {id:"equipe_dos_sonhos",cat:"Planejamento / Estratégia",title:"Equipe dos sonhos",meta:"Trend analyst + strategist + hook + format + cultural + data",text:`Atue como uma Equipe dos Sonhos de crescimento de conteúdo formada por:
 
 • Trend Intelligence Analyst
 • Content Strategist
@@ -2069,14 +1373,8 @@ deliberar juntos sobre o melhor tema e melhor formato para conteúdo sobre saúd
 Tarefa:
 [COLOCAR TAREFA]
 
-Quero que cada especialista dê sua visão e depois vocês cheguem a uma decisão final única, prática e clara.`
-  },
-  {
-    id:"ideias_bestas_virais",
-    cat:"Planejamento / Estratégia",
-    title:"Coisinhas bestas que viralizam",
-    meta:"Mais simples, mais óbvio, maior chance de alcance",
-    text:`Me dê 20 ideias de conteúdo muito simples, quase bobas, mas com alto potencial de viralização.
+Quero que cada especialista dê sua visão e depois vocês cheguem a uma decisão final única, prática e clara.`},
+      {id:"ideias_bestas_virais",cat:"Planejamento / Estratégia",title:"Coisinhas bestas que viralizam",meta:"Mais simples, mais óbvio, maior chance de alcance",text:`Me dê 20 ideias de conteúdo muito simples, quase bobas, mas com alto potencial de viralização.
 
 Regras:
 • não sofisticar demais
@@ -2086,18 +1384,9 @@ Regras:
 • cara de coisa que a pessoa comenta ou envia
 • simples de produzir
 
-Quero priorização de alcance antes de profundidade.`
-  },
+Quero priorização de alcance antes de profundidade.`},
 
-  // =========================
-  // ANÚNCIOS
-  // =========================
-  {
-    id:"anuncio_curso_simples",
-    cat:"Anúncios",
-    title:"Criativo simples para anunciar curso",
-    meta:"Bloco premium, sofisticado e direto",
-    text:`Crie um conceito de criativo simples para anunciar o Protocolo 7 Dias.
+      {id:"anuncio_curso_simples",cat:"Anúncios",title:"Criativo simples para anunciar curso",meta:"Bloco premium, sofisticado e direto",text:`Crie um conceito de criativo simples para anunciar o Protocolo 7 Dias.
 
 Características:
 • um bloco principal
@@ -2113,14 +1402,8 @@ Quero:
 • subheadline
 • CTA
 • sugestão visual do criativo
-• sensação estética geral`
-  },
-  {
-    id:"anuncio_copy",
-    cat:"Anúncios",
-    title:"Copy para anúncio",
-    meta:"Dor + clareza + estrutura + CTA",
-    text:`Crie 10 copies curtas para anúncio do Protocolo 7 Dias.
+• sensação estética geral`},
+      {id:"anuncio_copy",cat:"Anúncios",title:"Copy para anúncio",meta:"Dor + clareza + estrutura + CTA",text:`Crie 10 copies curtas para anúncio do Protocolo 7 Dias.
 
 Objetivo:
 • gerar identificação imediata
@@ -2134,14 +1417,8 @@ ${SITE}
 Evite:
 • promessas grandiosas
 • linguagem vaga
-• tom publicitário demais`
-  },
-  {
-    id:"anuncio_thumb",
-    cat:"Anúncios",
-    title:"Thumb para anúncio",
-    meta:"Visual sofisticado e premium",
-    text:`Crie um conceito de thumbnail para anúncio do Protocolo 7 Dias.
+• tom publicitário demais`},
+      {id:"anuncio_thumb",cat:"Anúncios",title:"Thumb para anúncio",meta:"Visual sofisticado e premium",text:`Crie um conceito de thumbnail para anúncio do Protocolo 7 Dias.
 
 Quero:
 • headline curta
@@ -2153,18 +1430,9 @@ Quero:
 Evite:
 • aparência genérica
 • poluição visual
-• cara de anúncio barato`
-  },
+• cara de anúncio barato`},
 
-  // =========================
-  // REACT / IDEIAS / TEMAS
-  // =========================
-  {
-    id:"react_ideia",
-    cat:"React / Ideias / Temas",
-    title:"Ideia de react forte",
-    meta:"Tema quente e com potencial de comentário",
-    text:`Crie 10 ideias de react para Reels.
+      {id:"react_ideia",cat:"React / Ideias / Temas",title:"Ideia de react forte",meta:"Tema quente e com potencial de comentário",text:`Crie 10 ideias de react para Reels.
 
 Quero reacts que:
 • tenham forte potencial de curiosidade
@@ -2174,14 +1442,8 @@ Quero reacts que:
 • não pareçam repetitivos
 
 Tema central:
-[COLOCAR TEMA]`
-  },
-  {
-    id:"react_com_titulo",
-    cat:"React / Ideias / Temas",
-    title:"Título para react",
-    meta:"Curto, forte e chamativo",
-    text:`Crie 20 títulos curtos para Reels de react.
+[COLOCAR TEMA]`},
+      {id:"react_com_titulo",cat:"React / Ideias / Temas",title:"Título para react",meta:"Curto, forte e chamativo",text:`Crie 20 títulos curtos para Reels de react.
 
 Objetivo:
 • parar o scroll
@@ -2190,14 +1452,8 @@ Objetivo:
 • combinar com thumb forte
 
 Tema:
-[COLOCAR TEMA]`
-  },
-  {
-    id:"tema_util_imediato",
-    cat:"React / Ideias / Temas",
-    title:"Tema muito útil para agora",
-    meta:"Mais utilidade, menos abstração",
-    text:`Me dê 15 ideias de conteúdo muito úteis para postar agora.
+[COLOCAR TEMA]`},
+      {id:"tema_util_imediato",cat:"React / Ideias / Temas",title:"Tema muito útil para agora",meta:"Mais utilidade, menos abstração",text:`Me dê 15 ideias de conteúdo muito úteis para postar agora.
 
 Critérios:
 • utilidade imediata
@@ -2206,31 +1462,16 @@ Critérios:
 • sem focar só em família
 • pode ser curiosidade, dado, padrão, erro comum ou insight prático
 
-Quero ideias que pareçam realmente úteis e não genéricas.`
-  },
+Quero ideias que pareçam realmente úteis e não genéricas.`},
 
-  // =========================
-  // SUNO
-  // =========================
-  {
-    id:"suno_video_analysis_prompt",
-    cat:"Suno — Música",
-    title:"Suno — analisar vídeo e gerar música sincronizada",
-    meta:"Por segundos",
-    text:`Assista atentamente ao meu vídeo e analise ritmo, cortes, transições, micro movimentos, mudanças de expressão, clima emocional e intensidade narrativa.
+      {id:"suno_video_analysis_prompt",cat:"Suno — Música",title:"Suno — analisar vídeo e gerar música sincronizada",meta:"Por segundos",text:`Assista atentamente ao meu vídeo e analise ritmo, cortes, transições, micro movimentos, mudanças de expressão, clima emocional e intensidade narrativa.
 
 Crie um prompt de até 500 caracteres para o Suno AI gerar uma música indie sujo, levemente psicodélico e atmosférico.
 
 No prompt, especifique os segundos exatos do vídeo (ex: 0:00, 0:07, 0:12…) indicando onde entram: ambientação inicial, primeiro beat, pausas, crescendos, viradas, quebras, mudança de clima e finalização.
 
-A música deve começar sincronizada no primeiro frame e evoluir de forma que pareça comandar totalmente os movimentos e transições do vídeo.`
-  },
-  {
-    id:"suno_quick_reels_structure",
-    cat:"Suno — Música",
-    title:"Suno — música curta para Reels",
-    meta:"Estrutura pronta por segundos",
-    text:`Crie uma música curta para vídeo vertical de até 60 segundos.
+A música deve começar sincronizada no primeiro frame e evoluir de forma que pareça comandar totalmente os movimentos e transições do vídeo.`},
+      {id:"suno_quick_reels_structure",cat:"Suno — Música",title:"Suno — música curta para Reels",meta:"Estrutura pronta por segundos",text:`Crie uma música curta para vídeo vertical de até 60 segundos.
 
 Estilo: indie sujo, atmosférico, levemente psicodélico, textura analógica, sensação emocional crua.
 
@@ -2244,27 +1485,15 @@ Estrutura:
 0:50 desaceleração atmosférica
 0:58 final suspenso
 
-A música deve reforçar tensão psicológica e retenção emocional do vídeo.`
-  },
-  {
-    id:"suno_psychological_video",
-    cat:"Suno — Música",
-    title:"Suno — música para vídeo psicológico intenso",
-    meta:"Evolução lenta",
-    text:`Crie uma música para vídeo psicológico intenso.
+A música deve reforçar tensão psicológica e retenção emocional do vídeo.`},
+      {id:"suno_psychological_video",cat:"Suno — Música",title:"Suno — música para vídeo psicológico intenso",meta:"Evolução lenta",text:`Crie uma música para vídeo psicológico intenso.
 
 Estética sonora: indie alternativo sujo, atmosférico, levemente psicodélico, textura vintage, tensão emocional.
 
 A música deve evoluir lentamente criando sensação de revelação progressiva.
 
-Começo minimalista, batida discreta entrando após alguns segundos, crescendo gradual e final suspenso que mantenha tensão emocional.`
-  },
-  {
-    id:"suno_dark",
-    cat:"Suno — Música",
-    title:"Suno — tensão psicológica",
-    meta:"Mais suspense e descoberta",
-    text:`Crie uma música curta de tensão psicológica para vídeo narrativo.
+Começo minimalista, batida discreta entrando após alguns segundos, crescendo gradual e final suspenso que mantenha tensão emocional.`},
+      {id:"suno_dark",cat:"Suno — Música",title:"Suno — tensão psicológica",meta:"Mais suspense e descoberta",text:`Crie uma música curta de tensão psicológica para vídeo narrativo.
 
 Estilo: indie eletrônico minimalista, atmosfera sombria, textura levemente psicodélica.
 
@@ -2277,18 +1506,9 @@ Estrutura:
 0:45 crescendo final
 0:57 corte abrupto
 
-A música deve gerar suspense, curiosidade e sensação de descoberta.`
-  },
+A música deve gerar suspense, curiosidade e sensação de descoberta.`},
 
-  // =========================
-  // SITE / OFERTA
-  // =========================
-  {
-    id:"copy_site_protocolo",
-    cat:"Site / Oferta",
-    title:"Melhorar texto do site do Protocolo",
-    meta:"Mais claro, mais direto, mais conversão",
-    text:`Atue como copywriter estratégico especialista em páginas de venda.
+      {id:"copy_site_protocolo",cat:"Site / Oferta",title:"Melhorar texto do site do Protocolo",meta:"Mais claro, mais direto, mais conversão",text:`Atue como copywriter estratégico especialista em páginas de venda.
 
 Analise o texto atual do meu site do Protocolo 7 Dias e reescreva para aumentar clareza, autoridade e conversão.
 
@@ -2302,14 +1522,8 @@ Quero:
 • CTA melhor
 
 Link:
-${SITE}`
-  },
-  {
-    id:"secretaria_prompt",
-    cat:"Site / Oferta",
-    title:"Chamar a secretária com contexto",
-    meta:"Versões mais elegantes",
-    text:`Crie 10 formas curtas, elegantes e humanas de dizer para a pessoa falar com minha secretária.
+${SITE}`},
+      {id:"secretaria_prompt",cat:"Site / Oferta",title:"Chamar a secretária com contexto",meta:"Versões mais elegantes",text:`Crie 10 formas curtas, elegantes e humanas de dizer para a pessoa falar com minha secretária.
 
 Dados:
 Nome: Clarice
@@ -2320,14 +1534,8 @@ Quero versões para:
 • direct
 • comentário
 • resposta curta
-• resposta mais acolhedora`
-  },
-  {
-    id:"oferta_protocolo",
-    cat:"Site / Oferta",
-    title:"Melhorar oferta do Protocolo",
-    meta:"Mais clareza de valor",
-    text:`Melhore a oferta do Protocolo 7 Dias.
+• resposta mais acolhedora`},
+      {id:"oferta_protocolo",cat:"Site / Oferta",title:"Melhorar oferta do Protocolo",meta:"Mais clareza de valor",text:`Melhore a oferta do Protocolo 7 Dias.
 
 Quero:
 • promessa mais clara
@@ -2337,199 +1545,137 @@ Quero:
 • mais desejo de clicar
 
 Base atual:
-${SITE}`
-  }
-];
+${SITE}`}
+    ];
 
-const elApp = document.getElementById("app");
-const elQ = document.getElementById("q");
-const elFilters = document.getElementById("filters");
-const toast = document.getElementById("toast");
-const toastText = document.getElementById("toastText");
-const elQuickNav = document.getElementById("quicknav");
+    const app = document.getElementById("app");
+    const chipsEl = document.getElementById("chips");
+    const quicknavEl = document.getElementById("quicknavBtns");
+    const searchInput = document.getElementById("searchInput");
+    const toast = document.getElementById("toast");
+    const toastText = document.getElementById("toastText");
+    const categories = [...new Set(PROMPTS.map(p => p.cat))];
+    const state = { q:"", cat:"Todas" };
 
-const cats = [...new Set(PROMPTS.map(p => p.cat))];
-const state = { q:"", cat:"Todas" };
-
-function slugify(s){
-  return s.toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-    .replace(/[^a-z0-9]+/g,"-")
-    .replace(/^-+|-+$/g,"");
-}
-
-function showToast(msg){
-  toastText.textContent = msg;
-  toast.classList.add("show");
-  clearTimeout(showToast._t);
-  showToast._t = setTimeout(() => toast.classList.remove("show"), 1400);
-}
-
-async function copyText(text){
-  try{
-    await navigator.clipboard.writeText(text);
-    showToast("Copiado ✅");
-  }catch(e){
-    const ta = document.createElement("textarea");
-    ta.value = text;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    ta.remove();
-    showToast("Copiado ✅");
-  }
-}
-
-function buildFilters(){
-  const all = ["Todas", ...cats];
-  elFilters.innerHTML = "";
-  all.forEach(name=>{
-    const b = document.createElement("div");
-    b.className = "pill" + (state.cat===name ? " active" : "");
-    b.textContent = name;
-    b.onclick = ()=>{ state.cat=name; render(); buildFilters(); };
-    elFilters.appendChild(b);
-  });
-}
-
-function buildQuickNav(){
-  elQuickNav.innerHTML = "";
-  cats.forEach(cat=>{
-    const a = document.createElement("a");
-    a.className = "navbtn";
-    a.href = "#" + slugify(cat);
-    a.textContent = cat;
-    elQuickNav.appendChild(a);
-  });
-}
-
-function groupByCategory(list){
-  const map = new Map();
-  list.forEach(p=>{
-    if(!map.has(p.cat)) map.set(p.cat, []);
-    map.get(p.cat).push(p);
-  });
-  return map;
-}
-
-function match(p, q){
-  if(!q) return true;
-  const s = (p.title + " " + p.meta + " " + p.text + " " + p.cat).toLowerCase();
-  return s.includes(q.toLowerCase());
-}
-
-function render(){
-  const filtered = PROMPTS
-    .filter(p => state.cat === "Todas" ? true : p.cat === state.cat)
-    .filter(p => match(p, state.q));
-
-  const grouped = groupByCategory(filtered);
-  const order = state.cat === "Todas" ? cats : [state.cat];
-
-  elApp.innerHTML = "";
-
-  order.forEach(cat=>{
-    const items = grouped.get(cat) || [];
-    if(!items.length) return;
-
-    const catEl = document.createElement("section");
-    catEl.className = "cat open";
-    catEl.id = slugify(cat);
-
-    const head = document.createElement("div");
-    head.className = "catHead";
-    head.innerHTML = `
-      <div class="left">
-        <span class="badge">${cat}</span>
-      </div>
-      <div class="count">${items.length} prompt(s)</div>
-    `;
-    head.onclick = ()=>catEl.classList.toggle("open");
-
-    const body = document.createElement("div");
-    body.className = "catBody";
-
-    const cards = document.createElement("div");
-    cards.className = "cards";
-
-    items.forEach(p=>{
-      const card = document.createElement("div");
-      card.className = "card";
-
-      const top = document.createElement("div");
-      top.className = "cardTop";
-
-      const left = document.createElement("div");
-      left.innerHTML = `
-        <div class="cardTitle">${p.title}</div>
-        <div class="cardMeta">${p.meta || ""}</div>
-      `;
-
-      const btnrow = document.createElement("div");
-      btnrow.className = "btnrow";
-
-      const btnCopy = document.createElement("button");
-      btnCopy.className = "copyBtn";
-      btnCopy.textContent = "Copiar";
-      btnCopy.onclick = (e)=>{
-        e.stopPropagation();
-        copyText(p.text);
-      };
-
-      const btnView = document.createElement("button");
-      btnView.className = "viewBtn";
-      btnView.textContent = "Ver";
-      btnView.onclick = (e)=>{
-        e.stopPropagation();
-        card.classList.toggle("open");
-      };
-
-      btnrow.appendChild(btnCopy);
-      btnrow.appendChild(btnView);
-
-      top.appendChild(left);
-      top.appendChild(btnrow);
-
-      const pre = document.createElement("pre");
-      pre.textContent = p.text;
-
-      card.appendChild(top);
-      card.appendChild(pre);
-      cards.appendChild(card);
-    });
-
-    body.appendChild(cards);
-    catEl.appendChild(head);
-    catEl.appendChild(body);
-    elApp.appendChild(catEl);
-  });
-
-  if(!filtered.length){
-    const empty = document.createElement("div");
-    empty.className = "cat";
-    empty.innerHTML = `
-      <div class="catHead">
-        <div class="left">
-          <span class="badge">Sem resultados</span>
-        </div>
-        <div class="count">0</div>
-      </div>
-      <div class="catBody" style="display:block;color:var(--muted);padding:14px;">
-        Tente outra busca. Exemplos: mãe, Clarice, blur, thumb, react, gancho, CTA.
-      </div>
-    `;
-    elApp.appendChild(empty);
-  }
-}
-
-elQ.addEventListener("input", (e)=>{
-  state.q = e.target.value.trim();
-  render();
-});
-
-buildFilters();
-buildQuickNav();
-render();
-</script>
+    function slugify(s){
+      return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+    }
+    function showToast(msg){
+      toastText.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=>toast.classList.remove("show"), 1400);
+    }
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast("Copiado ✅");
+      }catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        showToast("Copiado ✅");
+      }
+    }
+    function buildChips(){
+      chipsEl.innerHTML = "";
+      ["Todas", ...categories].forEach(cat => {
+        const el = document.createElement("button");
+        el.className = "chip" + (state.cat === cat ? " active" : "");
+        el.textContent = cat;
+        el.onclick = () => {
+          state.cat = cat;
+          buildChips();
+          render();
+        };
+        chipsEl.appendChild(el);
+      });
+    }
+    function buildQuicknav(){
+      quicknavEl.innerHTML = "";
+      categories.forEach(cat => {
+        const a = document.createElement("a");
+        a.className = "quickbtn";
+        a.href = "#" + slugify(cat);
+        a.textContent = cat;
+        quicknavEl.appendChild(a);
+      });
+    }
+    function matches(p, q){
+      if(!q) return true;
+      const hay = (p.title + " " + p.meta + " " + p.text + " " + p.cat).toLowerCase();
+      return hay.includes(q.toLowerCase());
+    }
+    function groupByCategory(list){
+      const map = new Map();
+      list.forEach(item=>{
+        if(!map.has(item.cat)) map.set(item.cat, []);
+        map.get(item.cat).push(item);
+      });
+      return map;
+    }
+    function render(){
+      const filtered = PROMPTS.filter(p => state.cat === "Todas" ? true : p.cat === state.cat).filter(p => matches(p, state.q));
+      const grouped = groupByCategory(filtered);
+      const order = state.cat === "Todas" ? categories : [state.cat];
+      app.innerHTML = "";
+      order.forEach(cat => {
+        const items = grouped.get(cat) || [];
+        if(!items.length) return;
+        const section = document.createElement("section");
+        section.className = "section";
+        section.id = slugify(cat);
+        const head = document.createElement("div");
+        head.className = "sectionHead";
+        head.innerHTML = `<div class="sectionHeadLeft"><span class="badge">${cat}</span></div><div class="count">${items.length} prompt(s)</div>`;
+        const body = document.createElement("div");
+        body.className = "sectionBody";
+        head.onclick = () => { body.style.display = body.style.display === "none" ? "block" : "none"; };
+        const cards = document.createElement("div");
+        cards.className = "cards";
+        items.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "card";
+          const top = document.createElement("div");
+          top.className = "cardTop";
+          top.innerHTML = `<div><div class="cardTitle">${p.title}</div><div class="cardMeta">${p.meta || ""}</div></div>`;
+          const btns = document.createElement("div");
+          btns.className = "btns";
+          const copyBtn = document.createElement("button");
+          copyBtn.className = "copyBtn";
+          copyBtn.textContent = "Copiar";
+          copyBtn.onclick = (e) => { e.stopPropagation(); copyText(p.text); };
+          const viewBtn = document.createElement("button");
+          viewBtn.textContent = "Ver";
+          viewBtn.onclick = (e) => { e.stopPropagation(); card.classList.toggle("open"); };
+          btns.appendChild(copyBtn);
+          btns.appendChild(viewBtn);
+          top.appendChild(btns);
+          const pre = document.createElement("pre");
+          pre.textContent = p.text;
+          card.appendChild(top);
+          card.appendChild(pre);
+          cards.appendChild(card);
+        });
+        body.appendChild(cards);
+        section.appendChild(head);
+        section.appendChild(body);
+        app.appendChild(section);
+      });
+      if(!filtered.length){
+        const empty = document.createElement("section");
+        empty.className = "section";
+        empty.innerHTML = `<div class="sectionHead"><div class="sectionHeadLeft"><span class="badge">Sem resultados</span></div><div class="count">0</div></div><div class="sectionBody"><div class="muted">Tente outra busca. Exemplos: mãe, Clarice, blur, thumb, react, gancho, CTA.</div></div>`;
+        app.appendChild(empty);
+      }
+    }
+    searchInput.addEventListener("input", (e)=>{ state.q = e.target.value.trim(); render(); });
+    buildChips();
+    buildQuicknav();
+    render();
+  </script>
 </body>
 </html>
