@@ -1,0 +1,585 @@
+import { useState, useEffect, useRef } from "react";
+
+const posts = [
+  { id:1, tema:"Frases que machucam", tipo:"Reel", data:"2026-01-15", views:230000, curtidas:23100, comentarios:501, eng_total:23601, eng_rate:10.26, saves:3465, shares:1848, viral_score:79.55 },
+  { id:2, tema:"Borderline explode/implode", tipo:"Reel", data:"2025-12-10", views:85100, curtidas:15800, comentarios:402, eng_total:16202, eng_rate:19.04, saves:2370, shares:1264, viral_score:81.45 },
+  { id:3, tema:"Crises Borderline", tipo:"Carrossel", data:"2026-02-15", views:18000, curtidas:3500, comentarios:180, eng_total:3680, eng_rate:20.44, saves:525, shares:280, viral_score:55.3 },
+  { id:4, tema:"Família e borderline", tipo:"Reel", data:"2025-07-24", views:15200, curtidas:2983, comentarios:103, eng_total:3086, eng_rate:20.3, saves:447, shares:238, viral_score:49.1 },
+  { id:5, tema:"Sinais borderline", tipo:"Carrossel", data:"2026-01-20", views:14000, curtidas:2800, comentarios:140, eng_total:2940, eng_rate:21.0, saves:420, shares:224, viral_score:52.81 },
+  { id:6, tema:"Impulsividade", tipo:"Carrossel", data:"2025-12-05", views:11500, curtidas:2200, comentarios:110, eng_total:2310, eng_rate:20.09, saves:330, shares:176, viral_score:48.33 },
+  { id:7, tema:"Diagnóstico tardio", tipo:"Reel", data:"2025-03-18", views:12000, curtidas:2061, comentarios:121, eng_total:2182, eng_rate:18.18, saves:309, shares:164, viral_score:45.32 },
+  { id:8, tema:"Família e borderline", tipo:"Carrossel", data:"2025-11-10", views:9800, curtidas:1900, comentarios:88, eng_total:1988, eng_rate:20.29, saves:285, shares:152, viral_score:46.84 },
+  { id:9, tema:"Estigma borderline", tipo:"Reel", data:"2025-09-01", views:10500, curtidas:1800, comentarios:95, eng_total:1895, eng_rate:18.05, saves:270, shares:144, viral_score:42.96 },
+  { id:10, tema:"Medicação", tipo:"Carrossel", data:"2025-10-05", views:8200, curtidas:1600, comentarios:72, eng_total:1672, eng_rate:20.39, saves:240, shares:128, viral_score:45.6 },
+  { id:11, tema:"Tratamento DBT", tipo:"Carrossel", data:"2025-09-15", views:7600, curtidas:1400, comentarios:65, eng_total:1465, eng_rate:19.28, saves:210, shares:112, viral_score:42.77 },
+  { id:12, tema:"Abandono/medo", tipo:"Carrossel", data:"2025-08-20", views:6900, curtidas:1200, comentarios:55, eng_total:1255, eng_rate:18.19, saves:180, shares:96, viral_score:39.79 },
+  { id:13, tema:"Abandono/medo", tipo:"Reel", data:"2026-01-28", views:9993, curtidas:888, comentarios:64, eng_total:952, eng_rate:9.53, saves:133, shares:71, viral_score:null },
+  { id:14, tema:"Estigma borderline", tipo:"Carrossel", data:"2025-07-10", views:5400, curtidas:900, comentarios:42, eng_total:942, eng_rate:17.44, saves:135, shares:72, viral_score:37.14 },
+  { id:15, tema:"Scrolling/anestesia", tipo:"Reel", data:"2025-11-05", views:9877, curtidas:520, comentarios:15, eng_total:535, eng_rate:5.42, saves:78, shares:41, viral_score:null },
+  { id:16, tema:"Médico vs paciente", tipo:"Reel", data:"2025-12-28", views:4212, curtidas:520, comentarios:15, eng_total:535, eng_rate:12.7, saves:78, shares:41, viral_score:null },
+  { id:17, tema:"Medicação", tipo:"Reel", data:"2025-11-22", views:3626, curtidas:450, comentarios:38, eng_total:488, eng_rate:13.46, saves:67, shares:36, viral_score:28.78 },
+  { id:18, tema:"Impulsividade", tipo:"Reel", data:"2026-02-20", views:15200, curtidas:415, comentarios:18, eng_total:433, eng_rate:2.85, saves:62, shares:33, viral_score:null },
+  { id:19, tema:"Frase motivacional", tipo:"Foto", data:"2026-01-10", views:3200, curtidas:380, comentarios:28, eng_total:408, eng_rate:12.75, saves:57, shares:30, viral_score:26.65 },
+  { id:20, tema:"Dica psiquiatria", tipo:"Foto", data:"2025-12-20", views:2800, curtidas:290, comentarios:22, eng_total:312, eng_rate:11.14, saves:43, shares:23, viral_score:null },
+  { id:21, tema:"7 sinais antes da crise", tipo:"Reel", data:"2026-02-10", views:6220, curtidas:243, comentarios:28, eng_total:271, eng_rate:4.36, saves:36, shares:19, viral_score:null },
+  { id:22, tema:"Borderline mito/fato", tipo:"Foto", data:"2025-11-15", views:2100, curtidas:210, comentarios:18, eng_total:228, eng_rate:10.86, saves:31, shares:16, viral_score:null },
+  { id:23, tema:"Vítimas de borderline", tipo:"Reel", data:"2025-10-18", views:8512, curtidas:207, comentarios:12, eng_total:219, eng_rate:2.57, saves:31, shares:16, viral_score:null },
+  { id:24, tema:"Automutilação", tipo:"Foto", data:"2025-10-25", views:1900, curtidas:180, comentarios:14, eng_total:194, eng_rate:10.21, saves:27, shares:14, viral_score:null },
+  { id:25, tema:"Amor e borderline", tipo:"Reel", data:"2025-10-30", views:2271, curtidas:140, comentarios:18, eng_total:158, eng_rate:6.96, saves:21, shares:11, viral_score:null },
+  { id:26, tema:"Saúde mental geral", tipo:"Foto", data:"2025-09-20", views:1600, curtidas:140, comentarios:12, eng_total:152, eng_rate:9.5, saves:21, shares:11, viral_score:null },
+  { id:27, tema:"Intensidade emocional", tipo:"Reel", data:"2026-01-05", views:5674, curtidas:140, comentarios:5, eng_total:145, eng_rate:2.56, saves:21, shares:11, viral_score:null },
+  { id:28, tema:"Relacionamentos BPD", tipo:"Foto", data:"2025-08-10", views:1400, curtidas:120, comentarios:10, eng_total:130, eng_rate:9.29, saves:18, shares:9, viral_score:null },
+  { id:29, tema:"Crise emocional", tipo:"Foto", data:"2025-07-05", views:1200, curtidas:100, comentarios:8, eng_total:108, eng_rate:9.0, saves:15, shares:8, viral_score:null },
+  { id:30, tema:"Crises Borderline", tipo:"Reel", data:"2026-03-01", views:363000, curtidas:87, comentarios:20, eng_total:107, eng_rate:0.03, saves:13, shares:6, viral_score:null },
+];
+
+const horarios = [
+  { h:"06h", views:8200, eng:14.2 }, { h:"07h", views:9500, eng:15.1 },
+  { h:"08h", views:11200, eng:16.3 }, { h:"09h", views:15300, eng:17.8 },
+  { h:"12h", views:12100, eng:15.6 }, { h:"13h", views:10800, eng:14.9 },
+  { h:"18h", views:18400, eng:18.2 }, { h:"19h", views:21600, eng:19.6 },
+  { h:"20h", views:19800, eng:18.9 }, { h:"21h", views:16200, eng:17.1 },
+  { h:"22h", views:13500, eng:15.8 },
+];
+
+const capas = [
+  { el:"Texto provocativo", eng:19.8, views:45200, save:8.2, ok:true },
+  { el:"Pergunta retórica", eng:18.4, views:38600, save:7.6, ok:true },
+  { el:"Número (lista)", eng:20.1, views:29800, save:9.1, ok:true },
+  { el:"Rosto/expressão", eng:16.2, views:22100, save:5.4, ok:true },
+  { el:"Só texto técnico", eng:10.3, views:8400, save:4.2, ok:null },
+  { el:"Fundo colorido", eng:14.7, views:12300, save:5.8, ok:null },
+  { el:"Sem texto", eng:8.9, views:6200, save:3.1, ok:false },
+];
+
+const formatoStats = [
+  { tipo:"Reel", posts:15, views_media:52092, eng_rate:9.75, saves:7401 },
+  { tipo:"Carrossel", posts:8, views_media:10175, eng_rate:19.64, saves:2325 },
+  { tipo:"Foto", posts:7, views_media:2029, eng_rate:10.39, saves:212 },
+];
+
+const mensal = [
+  { mes:"Mar/25", posts:1, views:12000, eng:18.18 },
+  { mes:"Jul/25", posts:3, views:21800, eng:15.58 },
+  { mes:"Ago/25", posts:2, views:8300, eng:13.74 },
+  { mes:"Set/25", posts:3, views:19700, eng:15.61 },
+  { mes:"Out/25", posts:4, views:20883, eng:10.03 },
+  { mes:"Nov/25", posts:4, views:25403, eng:12.5 },
+  { mes:"Dez/25", posts:4, views:103612, eng:15.74 },
+  { mes:"Jan/26", posts:5, views:262867, eng:11.22 },
+  { mes:"Fev/26", posts:3, views:39420, eng:9.22 },
+  { mes:"Mar/26", posts:1, views:363000, eng:0.03 },
+];
+
+function fmt(n) {
+  if (n >= 1000000) return (n/1000000).toFixed(1)+"M";
+  if (n >= 1000) return (n/1000).toFixed(1)+"K";
+  return n;
+}
+
+function ScoreBadge({ score }) {
+  if (!score) return <span style={{color:"#666",fontSize:12}}>—</span>;
+  const color = score >= 70 ? "#00e5a0" : score >= 45 ? "#f5c542" : "#ff6b6b";
+  return (
+    <span style={{
+      background: color+"22", color, border:`1px solid ${color}55`,
+      borderRadius:20, padding:"2px 10px", fontSize:13, fontWeight:700
+    }}>{score.toFixed(1)}</span>
+  );
+}
+
+function MiniBar({ value, max, color="#00e5a0" }) {
+  return (
+    <div style={{background:"#1a1a2e", borderRadius:4, height:6, width:"100%", overflow:"hidden"}}>
+      <div style={{width:`${Math.min(100,(value/max)*100)}%`, height:"100%", background:color, borderRadius:4, transition:"width 0.6s ease"}}/>
+    </div>
+  );
+}
+
+function Tab({ label, active, onClick }) {
+  return (
+    <button onClick={onClick} style={{
+      background: active ? "#00e5a0" : "transparent",
+      color: active ? "#0a0a14" : "#888",
+      border: active ? "none" : "1px solid #2a2a3e",
+      borderRadius:8, padding:"8px 18px", fontSize:13, fontWeight:700,
+      cursor:"pointer", transition:"all 0.2s", letterSpacing:"0.5px"
+    }}>{label}</button>
+  );
+}
+
+export default function App() {
+  const [tab, setTab] = useState("ranking");
+  const [sortBy, setSortBy] = useState("viral_score");
+  const [filterTipo, setFilterTipo] = useState("Todos");
+  const [selected, setSelected] = useState(null);
+  const [aiAnalysis, setAiAnalysis] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiQuestion, setAiQuestion] = useState("");
+  const [chatHistory, setChatHistory] = useState([]);
+
+  const filtered = posts
+    .filter(p => filterTipo === "Todos" || p.tipo === filterTipo)
+    .sort((a,b) => {
+      if (sortBy === "viral_score") return (b.viral_score||0)-(a.viral_score||0);
+      if (sortBy === "views") return b.views-a.views;
+      if (sortBy === "eng_rate") return b.eng_rate-a.eng_rate;
+      if (sortBy === "saves") return b.saves-a.saves;
+      return 0;
+    });
+
+  const maxViews = Math.max(...posts.map(p=>p.views));
+  const maxEng = Math.max(...posts.map(p=>p.eng_rate));
+  const maxSaves = Math.max(...posts.map(p=>p.saves));
+
+  async function askAI(question) {
+    setAiLoading(true);
+    const context = `Você é um analista de marketing digital especialista em Instagram para médicos/psiquiatras. 
+Analise os dados do Dr. Fábio Schmidt (psiquiatra especializado em Borderline/BPD):
+
+POSTS (tema, tipo, views, curtidas, comentários, eng_rate%, viral_score):
+${posts.map(p=>`- ${p.tema} | ${p.tipo} | ${fmt(p.views)} views | ${p.eng_rate}% eng | VS:${p.viral_score||'N/A'}`).join('\n')}
+
+TOP FORMATOS: Reel (média 52K views, eng 9.75%), Carrossel (10K views, eng 19.64%), Foto (2K views, eng 10.39%)
+MELHOR HORÁRIO: 19h (21.600 views, 19.6% eng)
+MELHOR CAPA: Número/lista (eng 20.1%), Texto provocativo (19.8%), Pergunta retórica (18.4%)
+
+Responda em português de forma direta, prática e com dados específicos. Máximo 200 palavras.`;
+
+    const msgs = [...chatHistory, { role:"user", content: question }];
+    
+    try {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({
+          model:"claude-sonnet-4-20250514",
+          max_tokens:1000,
+          system: context,
+          messages: msgs
+        })
+      });
+      const data = await res.json();
+      const reply = data.content?.map(c=>c.text||"").join("") || "Erro na resposta.";
+      setChatHistory([...msgs, { role:"assistant", content: reply }]);
+      setAiAnalysis(reply);
+    } catch(e) {
+      setAiAnalysis("Erro ao consultar IA.");
+    }
+    setAiLoading(false);
+  }
+
+  useEffect(() => {
+    if (tab === "ia" && chatHistory.length === 0) {
+      askAI("Faça uma análise geral dos dados e diga quais são os 3 principais insights para o Dr. Fábio melhorar o desempenho do perfil.");
+    }
+  }, [tab]);
+
+  const suggestedQuestions = [
+    "Qual tipo de post devo priorizar?",
+    "Por que o último Reel teve 363K views mas eng 0.03%?",
+    "Quais temas têm maior potencial de viralizar?",
+    "Qual a melhor estratégia para próxima semana?",
+  ];
+
+  return (
+    <div style={{
+      minHeight:"100vh", background:"#0a0a14",
+      fontFamily:"'DM Sans', 'Segoe UI', sans-serif", color:"#e8e8f0",
+      padding:"0 0 60px"
+    }}>
+      {/* Header */}
+      <div style={{
+        background:"linear-gradient(135deg,#0d0d20 0%,#141428 100%)",
+        borderBottom:"1px solid #1e1e35", padding:"24px 28px 20px"
+      }}>
+        <div style={{display:"flex", alignItems:"center", gap:12, marginBottom:6}}>
+          <div style={{
+            width:36, height:36, borderRadius:10,
+            background:"linear-gradient(135deg,#00e5a0,#00bfff)",
+            display:"flex", alignItems:"center", justifyContent:"center",
+            fontSize:18
+          }}>📊</div>
+          <div>
+            <div style={{fontSize:18, fontWeight:800, letterSpacing:"-0.3px"}}>
+              Dr. Fábio Schmidt — Analytics
+            </div>
+            <div style={{fontSize:12, color:"#666"}}>Instagram · {posts.length} posts analisados</div>
+          </div>
+        </div>
+
+        {/* KPIs */}
+        <div style={{display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginTop:16}}>
+          {[
+            { label:"Total Views", val: fmt(posts.reduce((a,p)=>a+p.views,0)), sub:"todos os posts", color:"#00e5a0" },
+            { label:"Melhor Viral Score", val:"81.4", sub:"Borderline explode", color:"#f5c542" },
+            { label:"Maior Eng Rate", val:"21.0%", sub:"Sinais borderline", color:"#00bfff" },
+            { label:"Maior Post", val:"363K", sub:"Crises Borderline Reel", color:"#ff6b6b" },
+          ].map(k => (
+            <div key={k.label} style={{
+              background:"#111122", borderRadius:12, padding:"12px 14px",
+              border:"1px solid #1e1e35"
+            }}>
+              <div style={{fontSize:11, color:"#555", marginBottom:4, textTransform:"uppercase", letterSpacing:"0.8px"}}>{k.label}</div>
+              <div style={{fontSize:22, fontWeight:800, color:k.color}}>{k.val}</div>
+              <div style={{fontSize:11, color:"#555", marginTop:2}}>{k.sub}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div style={{display:"flex", gap:8, padding:"16px 28px", borderBottom:"1px solid #1a1a2e", flexWrap:"wrap"}}>
+        {[
+          { id:"ranking", label:"🏆 Ranking" },
+          { id:"formatos", label:"📋 Formatos" },
+          { id:"horarios", label:"⏰ Horários" },
+          { id:"capas", label:"🎨 Capas" },
+          { id:"mensal", label:"📅 Mensal" },
+          { id:"ia", label:"🤖 IA Consultora" },
+        ].map(t => <Tab key={t.id} label={t.label} active={tab===t.id} onClick={()=>setTab(t.id)}/>)}
+      </div>
+
+      <div style={{padding:"20px 28px"}}>
+
+        {/* RANKING */}
+        {tab === "ranking" && (
+          <div>
+            <div style={{display:"flex", gap:8, marginBottom:16, flexWrap:"wrap", alignItems:"center"}}>
+              <span style={{color:"#555", fontSize:13}}>Ordenar por:</span>
+              {["viral_score","views","eng_rate","saves"].map(s=>(
+                <button key={s} onClick={()=>setSortBy(s)} style={{
+                  background: sortBy===s ? "#00e5a022" : "transparent",
+                  color: sortBy===s ? "#00e5a0" : "#666",
+                  border: `1px solid ${sortBy===s?"#00e5a055":"#2a2a3e"}`,
+                  borderRadius:6, padding:"4px 12px", fontSize:12, cursor:"pointer"
+                }}>{s==="viral_score"?"Viral Score":s==="views"?"Views":s==="eng_rate"?"Eng Rate":"Saves"}</button>
+              ))}
+              <span style={{marginLeft:"auto", color:"#555", fontSize:13}}>Filtrar:</span>
+              {["Todos","Reel","Carrossel","Foto"].map(t=>(
+                <button key={t} onClick={()=>setFilterTipo(t)} style={{
+                  background: filterTipo===t?"#00bfff22":"transparent",
+                  color: filterTipo===t?"#00bfff":"#666",
+                  border:`1px solid ${filterTipo===t?"#00bfff55":"#2a2a3e"}`,
+                  borderRadius:6, padding:"4px 12px", fontSize:12, cursor:"pointer"
+                }}>{t}</button>
+              ))}
+            </div>
+
+            <div style={{display:"flex", flexDirection:"column", gap:8}}>
+              {filtered.map((p,i) => (
+                <div key={p.id} onClick={()=>setSelected(selected?.id===p.id?null:p)}
+                  style={{
+                    background: selected?.id===p.id ? "#141428" : "#0f0f1e",
+                    border: `1px solid ${selected?.id===p.id?"#00e5a055":"#1a1a2e"}`,
+                    borderRadius:12, padding:"14px 16px", cursor:"pointer",
+                    transition:"all 0.2s"
+                  }}>
+                  <div style={{display:"flex", alignItems:"center", gap:12}}>
+                    <div style={{
+                      width:28, height:28, borderRadius:8,
+                      background: i<3?"linear-gradient(135deg,#f5c542,#ff9500)":"#1a1a2e",
+                      display:"flex", alignItems:"center", justifyContent:"center",
+                      fontSize:12, fontWeight:800, color: i<3?"#0a0a14":"#444",
+                      flexShrink:0
+                    }}>{i+1}</div>
+                    
+                    <div style={{flex:1, minWidth:0}}>
+                      <div style={{display:"flex", alignItems:"center", gap:8, marginBottom:4, flexWrap:"wrap"}}>
+                        <span style={{fontWeight:700, fontSize:14}}>{p.tema}</span>
+                        <span style={{
+                          fontSize:11, padding:"2px 8px", borderRadius:20,
+                          background: p.tipo==="Reel"?"#ff6b6b22":p.tipo==="Carrossel"?"#00bfff22":"#a78bfa22",
+                          color: p.tipo==="Reel"?"#ff6b6b":p.tipo==="Carrossel"?"#00bfff":"#a78bfa",
+                          border:`1px solid ${p.tipo==="Reel"?"#ff6b6b33":p.tipo==="Carrossel"?"#00bfff33":"#a78bfa33"}`
+                        }}>{p.tipo}</span>
+                        <ScoreBadge score={p.viral_score}/>
+                      </div>
+                      <div style={{display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:8}}>
+                        {[
+                          { label:"Views", val:fmt(p.views), bar:p.views/maxViews, color:"#00e5a0" },
+                          { label:"Eng Rate", val:p.eng_rate+"%", bar:p.eng_rate/maxEng, color:"#f5c542" },
+                          { label:"Saves", val:fmt(p.saves), bar:p.saves/maxSaves, color:"#00bfff" },
+                          { label:"Coments", val:p.comentarios, bar:p.comentarios/501, color:"#a78bfa" },
+                        ].map(m=>(
+                          <div key={m.label}>
+                            <div style={{display:"flex", justifyContent:"space-between", marginBottom:3}}>
+                              <span style={{fontSize:10, color:"#555"}}>{m.label}</span>
+                              <span style={{fontSize:11, fontWeight:700, color:m.color}}>{m.val}</span>
+                            </div>
+                            <MiniBar value={m.bar*100} max={100} color={m.color}/>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {selected?.id===p.id && (
+                    <div style={{marginTop:14, paddingTop:14, borderTop:"1px solid #1e1e35",
+                      display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:12}}>
+                      {[
+                        ["Data", p.data],
+                        ["Curtidas", fmt(p.curtidas)],
+                        ["Eng Total", fmt(p.eng_total)],
+                        ["Shares est.", fmt(p.shares)],
+                        ["Saves est.", fmt(p.saves)],
+                        ["Viral Score", p.viral_score ? p.viral_score.toFixed(1) : "N/A"],
+                      ].map(([k,v])=>(
+                        <div key={k} style={{background:"#0a0a14", borderRadius:8, padding:"8px 12px"}}>
+                          <div style={{fontSize:10, color:"#555", marginBottom:2}}>{k}</div>
+                          <div style={{fontSize:15, fontWeight:700}}>{v}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* FORMATOS */}
+        {tab === "formatos" && (
+          <div style={{display:"flex", flexDirection:"column", gap:16}}>
+            <div style={{fontSize:14, color:"#666", marginBottom:4}}>Comparativo por formato de conteúdo</div>
+            {formatoStats.map(f => (
+              <div key={f.tipo} style={{background:"#0f0f1e", border:"1px solid #1a1a2e", borderRadius:14, padding:20}}>
+                <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16}}>
+                  <div>
+                    <span style={{
+                      fontSize:15, fontWeight:800,
+                      color: f.tipo==="Reel"?"#ff6b6b":f.tipo==="Carrossel"?"#00bfff":"#a78bfa"
+                    }}>{f.tipo}</span>
+                    <span style={{fontSize:12, color:"#555", marginLeft:8}}>{f.posts} posts</span>
+                  </div>
+                  <div style={{fontSize:12, color:"#555"}}>
+                    {f.tipo==="Reel"?"🚀 Maior alcance":f.tipo==="Carrossel"?"⭐ Maior engajamento":"📷 Menor alcance"}
+                  </div>
+                </div>
+                <div style={{display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:12}}>
+                  {[
+                    { l:"Views Médias", v:fmt(f.views_media), color:"#00e5a0", max:52092 },
+                    { l:"Eng Rate Média", v:f.eng_rate+"%", color:"#f5c542", max:19.64 },
+                    { l:"Saves Total", v:fmt(f.saves), color:"#00bfff", max:7401 },
+                  ].map(m=>(
+                    <div key={m.l} style={{background:"#141428", borderRadius:10, padding:"12px 14px"}}>
+                      <div style={{fontSize:11, color:"#555", marginBottom:6}}>{m.l}</div>
+                      <div style={{fontSize:20, fontWeight:800, color:m.color, marginBottom:8}}>{m.v}</div>
+                      <MiniBar value={f.views_media===m.max?100:f.eng_rate===parseFloat(m.max)?100:f.saves===m.max?100:(parseFloat(m.v)/m.max)*100} max={100} color={m.color}/>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            <div style={{background:"#0f0f1e", border:"1px solid #f5c54222", borderRadius:14, padding:20}}>
+              <div style={{fontSize:13, fontWeight:700, color:"#f5c542", marginBottom:12}}>💡 Insight estratégico</div>
+              <p style={{fontSize:13, color:"#aaa", lineHeight:1.7, margin:0}}>
+                <strong style={{color:"#e8e8f0"}}>Reels</strong> têm 5x mais views médias que Carrosséis, mas <strong style={{color:"#e8e8f0"}}>Carrosséis têm 2x mais engajamento</strong>. 
+                A estratégia ideal é usar Reels para alcance e viralização, e Carrosséis para conversão e relacionamento com a audiência existente.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* HORÁRIOS */}
+        {tab === "horarios" && (
+          <div>
+            <div style={{fontSize:14, color:"#666", marginBottom:16}}>Melhor horário para publicar</div>
+            <div style={{display:"flex", flexDirection:"column", gap:8}}>
+              {horarios.sort((a,b)=>b.eng-a.eng).map((h,i) => (
+                <div key={h.h} style={{
+                  background:"#0f0f1e", border:`1px solid ${i===0?"#00e5a055":"#1a1a2e"}`,
+                  borderRadius:12, padding:"14px 16px",
+                  display:"flex", alignItems:"center", gap:16
+                }}>
+                  {i===0 && <span style={{fontSize:18}}>🏆</span>}
+                  {i===1 && <span style={{fontSize:18}}>🥈</span>}
+                  {i===2 && <span style={{fontSize:18}}>🥉</span>}
+                  {i>2 && <span style={{width:24, textAlign:"center", color:"#444", fontSize:13}}>{i+1}</span>}
+                  
+                  <div style={{width:50, fontWeight:800, fontSize:16, color: i<3?"#00e5a0":"#e8e8f0"}}>{h.h}</div>
+                  
+                  <div style={{flex:1}}>
+                    <div style={{display:"flex", justifyContent:"space-between", marginBottom:4}}>
+                      <span style={{fontSize:11, color:"#555"}}>Views médias</span>
+                      <span style={{fontSize:12, fontWeight:700, color:"#00e5a0"}}>{fmt(h.views)}</span>
+                    </div>
+                    <MiniBar value={h.views} max={21600} color="#00e5a0"/>
+                    <div style={{display:"flex", justifyContent:"space-between", marginTop:6, marginBottom:4}}>
+                      <span style={{fontSize:11, color:"#555"}}>Eng Rate estimado</span>
+                      <span style={{fontSize:12, fontWeight:700, color:"#f5c542"}}>{h.eng}%</span>
+                    </div>
+                    <MiniBar value={h.eng} max={19.6} color="#f5c542"/>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{
+              marginTop:16, background:"#0f0f1e", border:"1px solid #00e5a033",
+              borderRadius:12, padding:16
+            }}>
+              <div style={{fontSize:13, fontWeight:700, color:"#00e5a0", marginBottom:8}}>⏰ Janelas ideais de publicação</div>
+              <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:10}}>
+                <div style={{background:"#141428", borderRadius:8, padding:"10px 14px"}}>
+                  <div style={{fontSize:11, color:"#555"}}>Manhã</div>
+                  <div style={{fontSize:15, fontWeight:700}}>09h</div>
+                  <div style={{fontSize:11, color:"#f5c542"}}>17.8% eng · 15.3K views</div>
+                </div>
+                <div style={{background:"#141428", borderRadius:8, padding:"10px 14px"}}>
+                  <div style={{fontSize:11, color:"#555"}}>Noite (melhor)</div>
+                  <div style={{fontSize:15, fontWeight:700, color:"#00e5a0"}}>19h</div>
+                  <div style={{fontSize:11, color:"#00e5a0"}}>19.6% eng · 21.6K views</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* CAPAS */}
+        {tab === "capas" && (
+          <div>
+            <div style={{fontSize:14, color:"#666", marginBottom:16}}>Elementos de capa que mais convertem</div>
+            <div style={{display:"flex", flexDirection:"column", gap:8}}>
+              {capas.sort((a,b)=>b.eng-a.eng).map((c,i)=>(
+                <div key={c.el} style={{
+                  background:"#0f0f1e",
+                  border:`1px solid ${c.ok===true?"#00e5a033":c.ok===false?"#ff6b6b33":"#1a1a2e"}`,
+                  borderRadius:12, padding:"14px 16px"
+                }}>
+                  <div style={{display:"flex", alignItems:"center", gap:12, marginBottom:10}}>
+                    <span style={{fontSize:16}}>
+                      {c.ok===true?"✅":c.ok===false?"❌":"⚠️"}
+                    </span>
+                    <span style={{fontWeight:700, fontSize:14, flex:1}}>{c.el}</span>
+                    <span style={{
+                      fontSize:12, fontWeight:700,
+                      color: c.ok===true?"#00e5a0":c.ok===false?"#ff6b6b":"#f5c542"
+                    }}>{c.eng}% eng</span>
+                  </div>
+                  <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:8}}>
+                    <div>
+                      <div style={{display:"flex", justifyContent:"space-between", marginBottom:3}}>
+                        <span style={{fontSize:10, color:"#555"}}>Views médias</span>
+                        <span style={{fontSize:11, fontWeight:700}}>{fmt(c.views)}</span>
+                      </div>
+                      <MiniBar value={c.views} max={45200} color="#00e5a0"/>
+                    </div>
+                    <div>
+                      <div style={{display:"flex", justifyContent:"space-between", marginBottom:3}}>
+                        <span style={{fontSize:10, color:"#555"}}>Save rate</span>
+                        <span style={{fontSize:11, fontWeight:700}}>{c.save}%</span>
+                      </div>
+                      <MiniBar value={c.save} max={9.1} color="#f5c542"/>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* MENSAL */}
+        {tab === "mensal" && (
+          <div>
+            <div style={{fontSize:14, color:"#666", marginBottom:16}}>Evolução mensal do perfil</div>
+            <div style={{display:"flex", flexDirection:"column", gap:8}}>
+              {mensal.map((m,i)=>{
+                const maxV = Math.max(...mensal.map(x=>x.views));
+                return (
+                  <div key={m.mes} style={{
+                    background:"#0f0f1e", border:"1px solid #1a1a2e",
+                    borderRadius:12, padding:"12px 16px"
+                  }}>
+                    <div style={{display:"flex", alignItems:"center", gap:12}}>
+                      <div style={{width:56, fontSize:13, fontWeight:700, color:"#888"}}>{m.mes}</div>
+                      <div style={{flex:1}}>
+                        <div style={{display:"flex", justifyContent:"space-between", marginBottom:4}}>
+                          <span style={{fontSize:11, color:"#555"}}>{m.posts} posts · {fmt(m.views)} views</span>
+                          <span style={{fontSize:11, fontWeight:700, color:"#f5c542"}}>{m.eng}% eng</span>
+                        </div>
+                        <MiniBar value={m.views} max={maxV} color={i===mensal.length-1?"#ff6b6b":"#00e5a0"}/>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div style={{
+              marginTop:16, background:"#0f0f1e", border:"1px solid #ff6b6b33",
+              borderRadius:12, padding:16
+            }}>
+              <div style={{fontSize:13, fontWeight:700, color:"#ff6b6b", marginBottom:6}}>⚠️ Anomalia detectada — Mar/26</div>
+              <p style={{fontSize:13, color:"#aaa", margin:0, lineHeight:1.6}}>
+                363K views com apenas 0.03% de engajamento indica tráfego inorgânico ou público não-segmentado. 
+                Investigar a origem das views — pode ser explorar/não-seguidores que não interagiram.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* IA */}
+        {tab === "ia" && (
+          <div>
+            <div style={{
+              background:"#0f0f1e", border:"1px solid #1a1a2e",
+              borderRadius:14, padding:20, marginBottom:16, minHeight:120
+            }}>
+              <div style={{fontSize:12, color:"#00e5a0", marginBottom:12, fontWeight:700}}>🤖 Análise da IA</div>
+              {aiLoading ? (
+                <div style={{display:"flex", alignItems:"center", gap:10, color:"#555"}}>
+                  <div style={{
+                    width:16, height:16, border:"2px solid #00e5a0",
+                    borderTopColor:"transparent", borderRadius:"50%",
+                    animation:"spin 0.8s linear infinite"
+                  }}/>
+                  <span style={{fontSize:13}}>Analisando seus dados...</span>
+                </div>
+              ) : (
+                <div style={{fontSize:13, color:"#ccc", lineHeight:1.8, whiteSpace:"pre-wrap"}}>{aiAnalysis}</div>
+              )}
+            </div>
+
+            <div style={{marginBottom:16}}>
+              <div style={{fontSize:12, color:"#555", marginBottom:8}}>Perguntas sugeridas:</div>
+              <div style={{display:"flex", flexWrap:"wrap", gap:8}}>
+                {suggestedQuestions.map(q=>(
+                  <button key={q} onClick={()=>{ setAiQuestion(q); askAI(q); }} style={{
+                    background:"#141428", border:"1px solid #2a2a3e",
+                    borderRadius:20, padding:"6px 14px", fontSize:12,
+                    color:"#aaa", cursor:"pointer", textAlign:"left"
+                  }}>{q}</button>
+                ))}
+              </div>
+            </div>
+
+            <div style={{display:"flex", gap:10}}>
+              <input
+                value={aiQuestion}
+                onChange={e=>setAiQuestion(e.target.value)}
+                onKeyDown={e=>{ if(e.key==="Enter" && aiQuestion.trim()) { askAI(aiQuestion); setAiQuestion(""); }}}
+                placeholder="Faça sua pergunta sobre os dados..."
+                style={{
+                  flex:1, background:"#111122", border:"1px solid #2a2a3e",
+                  borderRadius:10, padding:"10px 16px", fontSize:13,
+                  color:"#e8e8f0", outline:"none"
+                }}
+              />
+              <button
+                onClick={()=>{ if(aiQuestion.trim()) { askAI(aiQuestion); setAiQuestion(""); }}}
+                disabled={aiLoading || !aiQuestion.trim()}
+                style={{
+                  background: aiLoading||!aiQuestion.trim() ? "#1a1a2e" : "#00e5a0",
+                  color: aiLoading||!aiQuestion.trim() ? "#444" : "#0a0a14",
+                  border:"none", borderRadius:10, padding:"10px 20px",
+                  fontSize:13, fontWeight:700, cursor:"pointer", transition:"all 0.2s"
+                }}
+              >Enviar</button>
+            </div>
+            <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
