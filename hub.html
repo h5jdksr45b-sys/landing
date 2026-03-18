@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Fabio Schmidt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+/* RESET TOTAL */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* FUNDO PRETO FORÇADO — nunca será branco */
+html {
+background-color: #0C0C0C !important;
+scroll-behavior: smooth;
+}
+
+body {
+background-color: #0C0C0C !important;
+color: #F0EBE3 !important;
+font-family: ‘DM Sans’, ‘Helvetica Neue’, Helvetica, Arial, sans-serif;
+font-weight: 300;
+min-height: 100vh;
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+}
+
+/* Garante que nenhum elemento filho vire branco */
+*, *::before, *::after {
+color: inherit;
+}
+
+/* NOISE OVERLAY */
+body::after {
+content: ‘’;
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: 9999;
+opacity: 0.02;
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘300’ height=‘300’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.85’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘300’ height=‘300’ filter=‘url(%23n)’/%3E%3C/svg%3E”);
+}
+
+/* HEADER */
+header {
+padding: 36px 24px 0;
+text-align: center;
+position: relative;
+z-index: 2;
+background-color: #0C0C0C;
+}
+.logo-name {
+font-family: ‘Bebas Neue’, ‘Impact’, sans-serif;
+font-size: 15px;
+letter-spacing: 0.35em;
+color: #C9A84C;
+text-transform: uppercase;
+}
+.logo-title {
+font-size: 11px;
+letter-spacing: 0.2em;
+color: #555555;
+text-transform: uppercase;
+margin-top: 4px;
+}
+
+/* HERO */
+.hero {
+position: relative;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 44px 24px 0;
+overflow: hidden;
+background-color: #0C0C0C;
+}
+.hero-glow {
+position: absolute;
+top: -40px;
+left: 50%;
+transform: translateX(-50%);
+width: 500px;
+height: 280px;
+background: radial-gradient(ellipse, rgba(192,57,43,0.16) 0%, transparent 70%);
+pointer-events: none;
+}
+.hero-photo {
+width: clamp(130px, 36vw, 200px);
+height: clamp(130px, 36vw, 200px);
+border-radius: 50%;
+object-fit: cover;
+object-position: center 15%;
+border: 2px solid rgba(201,168,76,0.25);
+box-shadow: 0 0 50px rgba(192,57,43,0.18), 0 0 0 8px rgba(201,168,76,0.05);
+position: relative;
+z-index: 2;
+animation: fadeUp 0.7s ease both;
+display: block;
+}
+.hero-text {
+text-align: center;
+margin-top: 26px;
+position: relative;
+z-index: 2;
+animation: fadeUp 0.8s 0.1s ease both;
+}
+.hero-headline {
+font-family: ‘Bebas Neue’, ‘Impact’, sans-serif;
+font-size: clamp(36px, 10vw, 54px);
+line-height: 0.95;
+letter-spacing: 0.03em;
+color: #FFFFFF;
+}
+.hero-headline .red {
+color: #C0392B;
+display: block;
+}
+.hero-tagline {
+font-family: ‘Playfair Display’, Georgia, ‘Times New Roman’, serif;
+font-style: italic;
+font-size: clamp(13px, 3.2vw, 16px);
+color: #C9A84C;
+margin-top: 12px;
+line-height: 1.55;
+}
+.divider {
+width: 36px;
+height: 1px;
+background: rgba(201,168,76,0.35);
+margin: 18px auto;
+}
+.hero-desc {
+font-size: clamp(12px, 3.2vw, 14px);
+color: #888888;
+max-width: 300px;
+margin: 0 auto;
+line-height: 1.75;
+}
+
+/* SECTION LABEL */
+.section-label {
+text-align: center;
+font-size: 10px;
+letter-spacing: 0.28em;
+text-transform: uppercase;
+color: #444444;
+padding: 48px 24px 18px;
+background-color: #0C0C0C;
+}
+
+/* CARDS WRAPPER */
+.cards {
+display: flex;
+flex-direction: column;
+gap: 14px;
+padding: 0 16px 72px;
+max-width: 480px;
+margin: 0 auto;
+width: 100%;
+background-color: #0C0C0C;
+}
+
+/* CARD */
+.card {
+background-color: #141414;
+border: 1px solid #1e1e1e;
+border-radius: 14px;
+overflow: hidden;
+text-decoration: none;
+color: #F0EBE3;
+display: block;
+position: relative;
+transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+animation: fadeUp 0.8s ease both;
+}
+.card:nth-child(1) { animation-delay: 0.2s; }
+.card:nth-child(2) { animation-delay: 0.3s; }
+.card:nth-child(3) { animation-delay: 0.4s; }
+.card:hover {
+transform: translateY(-4px);
+border-color: rgba(201,168,76,0.2);
+box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.08);
+}
+
+/* CARD IMAGE */
+.card-img-wrap {
+width: 100%;
+height: 195px;
+overflow: hidden;
+position: relative;
+background-color: #1a1a1a;
+}
+.card-img-wrap img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: center top;
+transition: transform 0.4s ease;
+display: block;
+}
+.card:hover .card-img-wrap img {
+transform: scale(1.04);
+}
+.card-img-overlay {
+position: absolute;
+inset: 0;
+background: linear-gradient(180deg, transparent 25%, rgba(20,20,20,0.92) 100%);
+}
+
+/* BADGE */
+.card-tag {
+position: absolute;
+top: 12px;
+left: 12px;
+font-size: 9px;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+padding: 4px 10px;
+border-radius: 20px;
+font-weight: 500;
+z-index: 2;
+}
+.tag-course { background: rgba(192,57,43,0.92); color: #ffffff; }
+.tag-app    { background: rgba(201,168,76,0.92); color: #111111; }
+.tag-book   { background: rgba(255,255,255,0.1); color: #F0EBE3; border: 1px solid rgba(255,255,255,0.18); }
+
+/* CARD BODY */
+.card-body {
+padding: 18px 20px 22px;
+background-color: #141414;
+}
+.card-title {
+font-family: ‘Bebas Neue’, ‘Impact’, sans-serif;
+font-size: clamp(20px, 5.5vw, 26px);
+letter-spacing: 0.04em;
+line-height: 1;
+color: #ffffff;
+margin-bottom: 8px;
+}
+.card-desc {
+font-size: 13px;
+color: #777777;
+line-height: 1.65;
+margin-bottom: 16px;
+}
+
+/* CTA padrão */
+.card-cta {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: #C9A84C;
+transition: gap 0.2s ease;
+text-decoration: none;
+}
+.card:hover .card-cta { gap: 12px; }
+.card-cta svg {
+width: 13px;
+height: 13px;
+flex-shrink: 0;
+transition: transform 0.2s ease;
+}
+.card:hover .card-cta svg { transform: translateX(3px); }
+
+/* CTA destaque — curso */
+.card-featured {
+border-color: rgba(192,57,43,0.25);
+}
+.card-featured .card-cta {
+background-color: #C0392B;
+color: #ffffff;
+padding: 10px 20px;
+border-radius: 8px;
+letter-spacing: 0.12em;
+}
+.card-featured:hover .card-cta {
+background-color: #a93226;
+}
+
+/* FOOTER */
+footer {
+text-align: center;
+padding: 0 24px 44px;
+font-size: 11px;
+color: #333333;
+letter-spacing: 0.04em;
+line-height: 1.9;
+background-color: #0C0C0C;
+}
+footer a {
+color: #4a4a4a;
+text-decoration: none;
+}
+footer a:hover { color: #888888; }
+
+/* ANIMATION */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(18px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 640px) {
+.card-img-wrap { height: 230px; }
+.cards { max-width: 500px; }
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="logo-name">Dr. Fabio Schmidt</div>
+  <div class="logo-title">Médico · CRM/SP 183549</div>
+</header>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <img
+    class="hero-photo"
+    src="IMG_5187.jpeg"
+    alt="Dr. Fabio Schmidt"
+    onerror="this.style.display='none'"
+  >
+  <div class="hero-text">
+    <div class="hero-headline">
+      FABIO<br><span class="red">SCHMIDT</span>
+    </div>
+    <div class="hero-tagline">
+      Médico especializado em<br>desregulação emocional e borderline
+    </div>
+    <div class="divider"></div>
+    <p class="hero-desc">
+      Conteúdo clínico para quem convive com intensidade emocional — e precisa de estratégia, não só de amor.
+    </p>
+  </div>
+</section>
+
+<p class="section-label">Escolha por onde começar</p>
+
+<div class="cards">
+
+  <!-- CURSO -->
+
+  <a class="card card-featured" href="https://h5jdksr45b-sys.github.io/landing/curso7.html" target="_blank" rel="noopener">
+    <div class="card-img-wrap">
+      <img src="B87AC2FDE1A748C287336C50C89B4F5E.png" alt="Protocolo 7 Dias">
+      <div class="card-img-overlay"></div>
+      <span class="card-tag tag-course">Curso</span>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Protocolo 7 Dias</div>
+      <p class="card-desc">Aprenda a desativar crises, colocar limites sem brigar e sair do modo sobrevivência — método clínico em 6 aulas.</p>
+      <span class="card-cta">
+        Quero o Protocolo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
+    </div>
+  </a>
+
+  <!-- APP -->
+
+  <a class="card" href="https://h5jdksr45b-sys.github.io/landing/aplicativo.html" target="_blank" rel="noopener">
+    <div class="card-img-wrap">
+      <img src="CC58255162CD42DCB45C4B64398F89FF.png" alt="Aplicativo Vive em Alerta">
+      <div class="card-img-overlay"></div>
+      <span class="card-tag tag-app">Aplicativo</span>
+    </div>
+    <div class="card-body">
+      <div class="card-title">App Vive em Alerta</div>
+      <p class="card-desc">Scripts prontos, plano de crise e suporte no momento que mais importa — direto no seu celular.</p>
+      <span class="card-cta">
+        Conhecer o App
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
+    </div>
+  </a>
+
+  <!-- LIVRO -->
+
+  <a class="card" href="https://pay.hotmart.com/U103950622S?off=3xv992tf&hotfeature=51&_hi=eyJjaWQiOiIxNzY4ODI2Njc3MzMwNDI5NjIwODIyOTgxNzE1MjAwIiwiYmlkIjoiMTc2ODgyNjY3NzMzMDQyOTYyMDgyMjk4MTcxNTIwMCIsInNpZCI6IjU2YzZkMmJkYTk3ZjRkNzBiZGUxZTZhMWU3ZjcyN2IyIn0=.1768870014918&bid=1768870016316" target="_blank" rel="noopener">
+    <div class="card-img-wrap">
+      <img src="0A29D7DE-6CF5-4419-AAE7-EA81AAE1B223.png" alt="Livro Quando Escolher Não É Possível" style="object-position: center center;">
+      <div class="card-img-overlay"></div>
+      <span class="card-tag tag-book">Livro</span>
+    </div>
+    <div class="card-body">
+      <div class="card-title">Quando Escolher Não É Possível</div>
+      <p class="card-desc">O livro que explica o que acontece dentro de quem vive em crise — e o que quem convive precisa entender.</p>
+      <span class="card-cta">
+        Adquirir o Livro
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
+    </div>
+  </a>
+
+</div>
+
+<footer>
+  © 2025 Dr. Fabio Schmidt · CRM/SP 183549<br>
+  <a href="#">Política de Privacidade</a> &nbsp;·&nbsp; <a href="#">Termos de Uso</a>
+</footer>
+
+</body>
+</html>
