@@ -8,51 +8,36 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
-/* RESET TOTAL */
 *, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; padding: 0; box-sizing: border-box;
 }
-
-/* FUNDO PRETO FORÇADO — nunca será branco */
 html {
-background-color: #0C0C0C !important;
-scroll-behavior: smooth;
+  background-color: #0C0C0C !important;
+  scroll-behavior: smooth;
 }
-
 body {
-background-color: #0C0C0C !important;
-color: #F0EBE3 !important;
-font-family: ‘DM Sans’, ‘Helvetica Neue’, Helvetica, Arial, sans-serif;
-font-weight: 300;
-min-height: 100vh;
-overflow-x: hidden;
--webkit-font-smoothing: antialiased;
+  background-color: #0C0C0C !important;
+  color: #F0EBE3 !important;
+  font-family: 'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
-
-/* Garante que nenhum elemento filho vire branco */
-*, *::before, *::after {
-color: inherit;
-}
-
-/* NOISE OVERLAY */
 body::after {
-content: ‘’;
-position: fixed;
-inset: 0;
-pointer-events: none;
-z-index: 9999;
-opacity: 0.02;
-background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘300’ height=‘300’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.85’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘300’ height=‘300’ filter=‘url(%23n)’/%3E%3C/svg%3E”);
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* HEADER */
 header {
 padding: 36px 24px 0;
 text-align: center;
-position: relative;
-z-index: 2;
 background-color: #0C0C0C;
 }
 .logo-name {
@@ -95,7 +80,7 @@ width: clamp(130px, 36vw, 200px);
 height: clamp(130px, 36vw, 200px);
 border-radius: 50%;
 object-fit: cover;
-object-position: center 15%;
+object-position: center 20%;
 border: 2px solid rgba(201,168,76,0.25);
 box-shadow: 0 0 50px rgba(192,57,43,0.18), 0 0 0 8px rgba(201,168,76,0.05);
 position: relative;
@@ -154,7 +139,7 @@ padding: 48px 24px 18px;
 background-color: #0C0C0C;
 }
 
-/* CARDS WRAPPER */
+/* CARDS */
 .cards {
 display: flex;
 flex-direction: column;
@@ -165,8 +150,6 @@ margin: 0 auto;
 width: 100%;
 background-color: #0C0C0C;
 }
-
-/* CARD */
 .card {
 background-color: #141414;
 border: 1px solid #1e1e1e;
@@ -187,8 +170,6 @@ transform: translateY(-4px);
 border-color: rgba(201,168,76,0.2);
 box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.08);
 }
-
-/* CARD IMAGE */
 .card-img-wrap {
 width: 100%;
 height: 195px;
@@ -204,16 +185,12 @@ object-position: center top;
 transition: transform 0.4s ease;
 display: block;
 }
-.card:hover .card-img-wrap img {
-transform: scale(1.04);
-}
+.card:hover .card-img-wrap img { transform: scale(1.04); }
 .card-img-overlay {
 position: absolute;
 inset: 0;
 background: linear-gradient(180deg, transparent 25%, rgba(20,20,20,0.92) 100%);
 }
-
-/* BADGE */
 .card-tag {
 position: absolute;
 top: 12px;
@@ -230,7 +207,6 @@ z-index: 2;
 .tag-app    { background: rgba(201,168,76,0.92); color: #111111; }
 .tag-book   { background: rgba(255,255,255,0.1); color: #F0EBE3; border: 1px solid rgba(255,255,255,0.18); }
 
-/* CARD BODY */
 .card-body {
 padding: 18px 20px 22px;
 background-color: #141414;
@@ -249,8 +225,6 @@ color: #777777;
 line-height: 1.65;
 margin-bottom: 16px;
 }
-
-/* CTA padrão */
 .card-cta {
 display: inline-flex;
 align-items: center;
@@ -265,17 +239,13 @@ text-decoration: none;
 }
 .card:hover .card-cta { gap: 12px; }
 .card-cta svg {
-width: 13px;
-height: 13px;
+width: 13px; height: 13px;
 flex-shrink: 0;
 transition: transform 0.2s ease;
 }
 .card:hover .card-cta svg { transform: translateX(3px); }
 
-/* CTA destaque — curso */
-.card-featured {
-border-color: rgba(192,57,43,0.25);
-}
+.card-featured { border-color: rgba(192,57,43,0.25); }
 .card-featured .card-cta {
 background-color: #C0392B;
 color: #ffffff;
@@ -283,9 +253,7 @@ padding: 10px 20px;
 border-radius: 8px;
 letter-spacing: 0.12em;
 }
-.card-featured:hover .card-cta {
-background-color: #a93226;
-}
+.card-featured:hover .card-cta { background-color: #a93226; }
 
 /* FOOTER */
 footer {
@@ -297,18 +265,13 @@ letter-spacing: 0.04em;
 line-height: 1.9;
 background-color: #0C0C0C;
 }
-footer a {
-color: #4a4a4a;
-text-decoration: none;
-}
+footer a { color: #4a4a4a; text-decoration: none; }
 footer a:hover { color: #888888; }
 
-/* ANIMATION */
 @keyframes fadeUp {
 from { opacity: 0; transform: translateY(18px); }
 to   { opacity: 1; transform: translateY(0); }
 }
-
 @media (min-width: 640px) {
 .card-img-wrap { height: 230px; }
 .cards { max-width: 500px; }
@@ -325,23 +288,12 @@ to   { opacity: 1; transform: translateY(0); }
 
 <section class="hero">
   <div class="hero-glow"></div>
-  <img
-    class="hero-photo"
-    src="IMG_5187.jpeg"
-    alt="Dr. Fabio Schmidt"
-    onerror="this.style.display='none'"
-  >
+  <img class="hero-photo" src="IMG_5187.jpeg" alt="Dr. Fabio Schmidt" onerror="this.style.display='none'">
   <div class="hero-text">
-    <div class="hero-headline">
-      FABIO<br><span class="red">SCHMIDT</span>
-    </div>
-    <div class="hero-tagline">
-      Médico especializado em<br>desregulação emocional e borderline
-    </div>
+    <div class="hero-headline">FABIO<span class="red">SCHMIDT</span></div>
+    <div class="hero-tagline">Médico especializado em<br>desregulação emocional e borderline</div>
     <div class="divider"></div>
-    <p class="hero-desc">
-      Conteúdo clínico para quem convive com intensidade emocional — e precisa de estratégia, não só de amor.
-    </p>
+    <p class="hero-desc">Conteúdo clínico para quem convive com intensidade emocional — e precisa de estratégia, não só de amor.</p>
   </div>
 </section>
 
@@ -353,7 +305,7 @@ to   { opacity: 1; transform: translateY(0); }
 
   <a class="card card-featured" href="https://h5jdksr45b-sys.github.io/landing/curso7.html" target="_blank" rel="noopener">
     <div class="card-img-wrap">
-      <img src="B87AC2FDE1A748C287336C50C89B4F5E.png" alt="Protocolo 7 Dias">
+      <img src="IMG_5187.jpeg" alt="Protocolo 7 Dias" style="object-position: center 30%;">
       <div class="card-img-overlay"></div>
       <span class="card-tag tag-course">Curso</span>
     </div>
@@ -371,7 +323,7 @@ to   { opacity: 1; transform: translateY(0); }
 
   <a class="card" href="https://h5jdksr45b-sys.github.io/landing/aplicativo.html" target="_blank" rel="noopener">
     <div class="card-img-wrap">
-      <img src="CC58255162CD42DCB45C4B64398F89FF.png" alt="Aplicativo Vive em Alerta">
+      <img src="814096F8-F9FD-45C0-8628-4CD9F2EADA3F.png" alt="Aplicativo Vive em Alerta" style="object-position: center center;">
       <div class="card-img-overlay"></div>
       <span class="card-tag tag-app">Aplicativo</span>
     </div>
