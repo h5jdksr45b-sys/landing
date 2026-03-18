@@ -242,9 +242,12 @@ footer a:hover{color:var(–gold2)}
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
-.hero{grid-template-columns:1fr;min-height:auto}
-.hero-right{height:520px}
-.hero-left{padding:100px 32px 48px}
+.hero{grid-template-columns:1fr;min-height:auto;background:var(–navy)}
+.hero::after{background:linear-gradient(180deg,rgba(13,27,42,.92) 0%,rgba(13,27,42,.75) 60%,rgba(13,27,42,.4) 100%)}
+.hero-right{height:480px;order:2}
+.hero-left{padding:80px 32px 48px;background:var(–navy);order:1}
+.hero h1{color:var(–white)}
+.hero-sub{color:rgba(255,255,255,.7)}
 .inside-wrap{grid-template-columns:1fr;gap:44px}
 .inside-cta{position:static}
 .for-who-grid{grid-template-columns:1fr}
@@ -255,14 +258,19 @@ footer a:hover{color:var(–gold2)}
 .testimonial-card.featured{grid-column:span 1}
 }
 @media(max-width:600px){
-.hero-left{padding:90px 20px 40px}
-.hero-right{height:440px}
+.hero{background:var(–navy)}
+.hero-left{padding:80px 20px 40px;background:var(–navy)}
+.hero-right{height:420px;order:2}
+.hero h1{color:var(–white);font-size:clamp(2rem,7vw,2.6rem)}
+.hero-sub{color:rgba(255,255,255,.7);font-size:.97rem}
+.hero-badge{color:var(–gold2)}
 .trust-bar{gap:20px}
 .pain,.inside,.for-who,.faq,.final-cta,.quote-section,.authority,.transformation,.testimonials,.urgency{padding:64px 20px}
 .pain-grid{grid-template-columns:1fr}
 .sticky-bar{flex-direction:column;gap:8px;text-align:center}
-.btn-primary{padding:16px 28px;font-size:.96rem}
+.btn-primary{padding:16px 24px;font-size:.93rem;width:100%;justify-content:center}
 .authority-stats{grid-template-columns:1fr 1fr}
+.hero-cta-wrap{width:100%}
 }
 </style>
 
