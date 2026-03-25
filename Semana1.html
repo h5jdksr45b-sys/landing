@@ -1,0 +1,559 @@
+import { useState } from “react”;
+
+const themes = [
+{
+id: 1,
+emoji: “🔥”,
+title: “DESINFORMAÇÃO EM SAÚDE MENTAL NAS REDES”,
+subtitle: “O Psiquiatra Reage ao TikTok”,
+series: “Série: "O PSIQUIATRA REAGE" — Ep. 1 a 8”,
+why: “Estudo de março/2026 revelou: 56% dos posts sobre saúde mental no TikTok contêm desinformação. ADHD tem 52%, autismo 41%. O World Happiness Report 2026 conectou Instagram/TikTok a piores resultados de saúde mental. 67% dos brasileiros planejam investir mais em saúde mental em 2026. Tema QUENTE, gatilho de indignação + autoridade.”,
+hook: “"56% do que você vê sobre saúde mental no TikTok é MENTIRA.\nEu sou psiquiatra. Vou provar."”,
+textScreen: [
+“0-1.5s → "56% É MENTIRA" (texto grande, vermelho, impacto)”,
+“1.5-4s → "Estudo de 2026: 5.000 posts analisados"”,
+“4-8s → "Exemplo 1: ‘BPD é só ser dramático’" ❌”,
+“8-12s → "A VERDADE: amígdala 2x mais ativa" ✅”,
+“12-18s → "Exemplo 2: ‘Remédio psiquiátrico vicia’" ❌”,
+“18-22s → "A VERDADE: neuroplasticidade é real" ✅”,
+“22-28s → "Quem te disse isso NÃO tem CRM"”,
+“28-30s → CTA: "Manda pra alguém que precisa saber a verdade"”
+],
+cta: “"Manda esse vídeo pra alguém que acredita em TUDO que vê no TikTok. Pode salvar a saúde mental dessa pessoa."”,
+caption: “56% do conteúdo sobre saúde mental no TikTok é desinformação. Isso não é opinião. É um estudo com 5.000 posts.\n\nComo psiquiatra com CRM, eu vejo pacientes chegando no consultório com "diagnósticos" do TikTok. E isso está fazendo MAL.\n\nSalva esse vídeo. Manda pro seu amigo que acha que tem "todos os transtornos".\n\nA informação CORRETA pode mudar uma vida.\n\n#SaúdeMental #Psiquiatria #BPD #Borderline #Desinformação #TherapyTok #MentalHealth #DrFabioSchmidt”,
+metrics: { views: “500K-800K”, saves: “12K+”, shares: “8K+”, comments: “3K+”, newFollowers: “+15K-25K” },
+nextEp: “Ep. 2: "3 ‘diagnósticos’ do TikTok que NÃO existem" — mesmo formato, aprofunda mitos específicos sobre BPD”,
+pilar: [“Autenticidade (CRM = prova)”, “Relabilidade (todo mundo vê isso)”, “Esperança (a verdade liberta)”, “Compartilhabilidade (indignação = share)”, “Validação (você não é o diagnóstico do TikTok)”],
+science: “Estudo Chatburn/University of East Anglia 2026: 56% misinformation. Quinn et al. JMIR Mental Health 2025: tom positivo = 120% mais views. World Happiness Report 2026: scrolling passivo = menor satisfação.”
+},
+{
+id: 2,
+emoji: “💔”,
+title: “BORDERLINE x NARCISISTA: A ARMADILHA PERFEITA”,
+subtitle: “Por que vocês se atraem e como sair”,
+series: “Série: "BORDERLINE x NARCISISTA" — Ep. 1 a 6”,
+why: “"BPD relationship" = 5.9M searches no TikTok. 40% das pessoas com BPD também têm traços narcisistas. O ciclo idealização→desvalorização→abandono é o conteúdo MAIS relatable do nicho. Pesquisa mostra 76% relatam dependência emocional extrema, 81% medo de abandono. Conteúdo sobre relacionamentos = ALTAMENTE ressonante segundo a pesquisa.”,
+hook: “"A pessoa com Borderline é a PRESA PERFEITA do narcisista.\nE eu vou te explicar EXATAMENTE por quê."”,
+textScreen: [
+“0-1.5s → "A PRESA PERFEITA" (texto branco em fundo escuro)”,
+“1.5-5s → "Borderline: medo de abandono + necessidade de validação"”,
+“5-10s → "Narcisista: precisa de admiração + controle"”,
+“10-15s → "ELES SE ENCAIXAM COMO PEÇAS" (animação de puzzle)”,
+“15-20s → "Fase 1: IDEALIZAÇÃO — ‘Você é PERFEITO’"”,
+“20-25s → "Fase 2: DESVALORIZAÇÃO — ‘Você me destruiu’"”,
+“25-30s → "Fase 3: ABANDONO — ‘Eu sabia que ia me deixar’"”,
+“30-35s → "O CICLO RECOMEÇA"”,
+“35-40s → "MAS TEM SAÍDA." (texto verde, esperança)”,
+“40-45s → CTA final”
+],
+cta: “"Se você se viu nesse ciclo, manda esse vídeo pra aquela pessoa que PRECISA entender o que está vivendo."”,
+caption: “Borderline + Narcisista = a combinação mais destrutiva que existe nos relacionamentos.\n\nMas NÃO é culpa sua.\n\nSeu cérebro foi PROGRAMADO pra buscar esse tipo de conexão. Amígdala hiperativa + medo de abandono = presa perfeita.\n\nA boa notícia? Neuroplasticidade. Você PODE reprogramar.\n\nEp. 2 na quinta: O CICLO — como ele funciona passo a passo.\n\nManda pra quem precisa ouvir isso.\n\n#Borderline #Narcisista #BPD #Relacionamento #CicloTóxico #FavoritePerson #SaúdeMental #DrFabioSchmidt”,
+metrics: { views: “600K-1M”, saves: “15K+”, shares: “12K+”, comments: “4K+”, newFollowers: “+20K-35K” },
+nextEp: “Ep. 2: "O CICLO: Como o narcisista prende o borderline em 4 fases" — storytelling visual com quadro clínico real”,
+pilar: [“Autenticidade (caso clínico real, sem nomes)”, “Relabilidade (81% do público vive isso)”, “Esperança (neuroplasticidade = saída)”, “Compartilhabilidade (identifica amigo/familiar)”, “Validação (não é culpa sua, é neurobiologia)”],
+science: “Stein & Johnson 2025: 76% dependência emocional, 81% fear of abandonment. Kreisman: ciclo idealização→desvalorização→abandono. Grant et al.: 40% comorbidade BPD/NPD. Pesquisa search: 5.9M buscas ‘BPD relationship’.”
+},
+{
+id: 3,
+emoji: “🧠”,
+title: “SEU CÉREBRO NÃO ESTÁ QUEBRADO”,
+subtitle: “A neurociência que ninguém te contou sobre BPD”,
+series: “Série: "SEU CÉREBRO EXPLICADO" — Ep. 1 a 5”,
+why: “Reframing/Psychoeducation = Rank 4 na pesquisa (14-17% engagement, 1.2M-1.8M views). MAS quando combinado com vulnerabilidade + esperança, sobe pra Rank 1-2. ‘67% dos brasileiros querem investir mais em saúde mental em 2026’. Pessoas com BPD buscam ENTENDER a si mesmas. Saber que é cérebro ≠ culpa = profundamente validante. Conteúdo educativo que é entertaining = viraliza.”,
+hook: “"Seu cérebro NÃO está quebrado.\nEstá fazendo EXATAMENTE o que foi programado pra fazer.\nE eu vou te provar em 30 segundos."”,
+textScreen: [
+“0-1.5s → "SEU CÉREBRO NÃO ESTÁ QUEBRADO" (grande, impactante)”,
+“1.5-5s → "Você cresceu em ambiente instável?"”,
+“5-10s → "Sua AMÍGDALA aprendeu: TUDO é ameaça" (diagrama cerebral)”,
+“10-15s → "Reage 2X MAIS RÁPIDO que o normal"”,
+“15-20s → "Seu CÓRTEX PRÉ-FRONTAL nunca aprendeu a frear"”,
+“20-25s → "Resultado: emoções INTENSAS + reação IMEDIATA"”,
+“25-30s → "Isso NÃO é defeito. É SOBREVIVÊNCIA."”,
+“30-35s → "A boa notícia? NEUROPLASTICIDADE."”,
+“35-40s → "Seu cérebro PODE ser reprogramado."”,
+“40-42s → CTA esperança”
+],
+cta: “"Manda esse vídeo pra alguém que acha que é ‘defeituoso’. Essa pessoa precisa saber que NÃO é."”,
+caption: “Você não é quebrado.\nVocê não é defeituoso.\nVocê não é "louco".\n\nSeu cérebro está fazendo EXATAMENTE o que aprendeu a fazer pra te proteger.\n\nAmígdala hiperativa = reage 2x mais rápido.\nCórtex pré-frontal subativo = freia menos.\nHipocampo menor = perde o contexto.\n\nIsso é neurobiologia. Não é fraqueza.\n\nE a melhor parte? Neuroplasticidade existe.\nVocê PODE mudar esses circuitos.\n\nSalva esse vídeo. Volta quando precisar lembrar.\n\n#BPD #Borderline #Neurociência #SaúdeMental #Amígdala #Neuroplasticidade #VocêNãoEstáQuebrado #DrFabioSchmidt”,
+metrics: { views: “400K-700K”, saves: “18K+”, shares: “10K+”, comments: “2.5K+”, newFollowers: “+12K-20K” },
+nextEp: “Ep. 2: "Por que sua emoção muda a cada 10 minutos — O hipocampo explica" — mesma estrutura, aprofunda outro sistema cerebral”,
+pilar: [“Autenticidade (CRM + ciência real)”, “Relabilidade (todo borderline sente isso)”, “Esperança (neuroplasticidade = pode mudar)”, “Compartilhabilidade ("manda pra quem se acha defeituoso")”, “Validação (não é defeito, é sobrevivência)”],
+science: “Kreisman & Straus: amígdala 2x overativa, córtex pré-frontal subativo, hipocampo menor. Lau et al. UW 2025: reframing com esperança = high engagement. Scientific Reports 2025: pessoas com BPD buscam compreender a si mesmas (51% auto-confiança).”
+}
+];
+
+const weekPlan = [
+{ day: “Segunda”, theme: 1, type: “Reel”, title: “O Psiquiatra Reage — Ep. 1: 56% é mentira” },
+{ day: “Terça”, theme: 3, type: “Carrossel”, title: “Seu Cérebro Explicado — Infográfico Amígdala” },
+{ day: “Quarta”, theme: 2, type: “Reel”, title: “Borderline x Narcisista — Ep. 1: A Presa Perfeita” },
+{ day: “Quinta”, theme: 1, type: “Story”, title: “Quiz: Verdade ou Mito? (3 frames interativos)” },
+{ day: “Sexta”, theme: 3, type: “Reel”, title: “Seu Cérebro NÃO Está Quebrado — Ep. 1” },
+];
+
+export default function Strategy() {
+const [activeTheme, setActiveTheme] = useState(0);
+const [activeTab, setActiveTab] = useState(“script”);
+const [expandedSection, setExpandedSection] = useState(null);
+
+const theme = themes[activeTheme];
+
+return (
+<div style={{
+fontFamily: “‘Courier New’, monospace”,
+background: “#0a0a0a”,
+color: “#e8e8e8”,
+minHeight: “100vh”,
+padding: “16px”,
+maxWidth: “100%”,
+overflow: “hidden”
+}}>
+{/* Header */}
+<div style={{
+borderBottom: “2px solid #ff3333”,
+paddingBottom: “16px”,
+marginBottom: “20px”
+}}>
+<div style={{
+fontSize: “10px”,
+letterSpacing: “4px”,
+color: “#ff3333”,
+textTransform: “uppercase”,
+marginBottom: “4px”
+}}>
+ESTRATÉGIA DE VIRALIZAÇÃO 2026
+</div>
+<div style={{
+fontSize: “22px”,
+fontWeight: “900”,
+letterSpacing: “-0.5px”,
+lineHeight: “1.1”
+}}>
+@drfabioschmidt
+</div>
+<div style={{
+fontSize: “11px”,
+color: “#888”,
+marginTop: “6px”,
+lineHeight: “1.4”
+}}>
+96.5K → 300K em 12 semanas · 5,72% eng · $3.6K → $12-18K/mês
+</div>
+</div>
+
+```
+  {/* Status Bar */}
+  <div style={{
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr",
+    gap: "8px",
+    marginBottom: "20px"
+  }}>
+    {[
+      { label: "SEGUIDORES", value: "96.5K", target: "→ 300K" },
+      { label: "ENGAJAMENTO", value: "5.72%", target: "→ 7%+" },
+      { label: "RECEITA", value: "$3.6K", target: "→ $15K" }
+    ].map((s, i) => (
+      <div key={i} style={{
+        background: "#111",
+        border: "1px solid #222",
+        padding: "10px 8px",
+        textAlign: "center"
+      }}>
+        <div style={{ fontSize: "9px", color: "#666", letterSpacing: "1px" }}>{s.label}</div>
+        <div style={{ fontSize: "16px", fontWeight: "900", color: "#fff", marginTop: "2px" }}>{s.value}</div>
+        <div style={{ fontSize: "10px", color: "#ff3333", marginTop: "2px" }}>{s.target}</div>
+      </div>
+    ))}
+  </div>
+
+  {/* 3 Themes Selector */}
+  <div style={{
+    fontSize: "9px",
+    letterSpacing: "3px",
+    color: "#ff3333",
+    textTransform: "uppercase",
+    marginBottom: "10px"
+  }}>
+    3 TEMAS QUENTES — SELECIONE
+  </div>
+
+  <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "20px" }}>
+    {themes.map((t, i) => (
+      <button
+        key={i}
+        onClick={() => { setActiveTheme(i); setActiveTab("script"); }}
+        style={{
+          background: activeTheme === i ? "#ff3333" : "#111",
+          border: activeTheme === i ? "1px solid #ff3333" : "1px solid #333",
+          color: activeTheme === i ? "#000" : "#ccc",
+          padding: "12px",
+          textAlign: "left",
+          cursor: "pointer",
+          fontFamily: "'Courier New', monospace",
+          transition: "all 0.2s"
+        }}
+      >
+        <div style={{ fontSize: "13px", fontWeight: "900" }}>
+          {t.emoji} TEMA {i + 1}: {t.title}
+        </div>
+        <div style={{ fontSize: "10px", opacity: 0.7, marginTop: "2px" }}>{t.subtitle}</div>
+      </button>
+    ))}
+  </div>
+
+  {/* Active Theme Detail */}
+  <div style={{
+    border: "1px solid #ff3333",
+    background: "#0d0d0d",
+    marginBottom: "20px"
+  }}>
+    {/* Series Tag */}
+    <div style={{
+      background: "#ff3333",
+      color: "#000",
+      padding: "8px 12px",
+      fontSize: "10px",
+      fontWeight: "900",
+      letterSpacing: "1px"
+    }}>
+      {theme.series}
+    </div>
+
+    {/* Tabs */}
+    <div style={{
+      display: "flex",
+      borderBottom: "1px solid #222"
+    }}>
+      {[
+        { id: "script", label: "SCRIPT" },
+        { id: "visual", label: "VISUAL" },
+        { id: "metrics", label: "MÉTRICAS" },
+        { id: "science", label: "CIÊNCIA" }
+      ].map(tab => (
+        <button
+          key={tab.id}
+          onClick={() => setActiveTab(tab.id)}
+          style={{
+            flex: 1,
+            padding: "10px 4px",
+            background: activeTab === tab.id ? "#1a1a1a" : "transparent",
+            border: "none",
+            borderBottom: activeTab === tab.id ? "2px solid #ff3333" : "2px solid transparent",
+            color: activeTab === tab.id ? "#ff3333" : "#666",
+            fontSize: "9px",
+            fontWeight: "700",
+            letterSpacing: "1px",
+            cursor: "pointer",
+            fontFamily: "'Courier New', monospace"
+          }}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+
+    {/* Tab Content */}
+    <div style={{ padding: "16px" }}>
+      {activeTab === "script" && (
+        <div>
+          {/* Why */}
+          <div style={{ marginBottom: "16px" }}>
+            <div style={{ fontSize: "9px", color: "#ff3333", letterSpacing: "2px", marginBottom: "6px" }}>POR QUE FUNCIONA</div>
+            <div style={{ fontSize: "11px", lineHeight: "1.5", color: "#aaa" }}>{theme.why}</div>
+          </div>
+
+          {/* Hook */}
+          <div style={{ marginBottom: "16px" }}>
+            <div style={{ fontSize: "9px", color: "#ff3333", letterSpacing: "2px", marginBottom: "6px" }}>HOOK — 1.5 SEGUNDOS</div>
+            <div style={{
+              background: "#1a0000",
+              border: "1px solid #ff3333",
+              padding: "12px",
+              fontSize: "14px",
+              fontWeight: "900",
+              lineHeight: "1.4",
+              color: "#fff",
+              whiteSpace: "pre-line"
+            }}>
+              {theme.hook}
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div style={{ marginBottom: "16px" }}>
+            <div style={{ fontSize: "9px", color: "#ff3333", letterSpacing: "2px", marginBottom: "6px" }}>CTA — COMPARTILHAMENTO</div>
+            <div style={{
+              background: "#001a00",
+              border: "1px solid #33ff33",
+              padding: "12px",
+              fontSize: "12px",
+              lineHeight: "1.4",
+              color: "#33ff33"
+            }}>
+              {theme.cta}
+            </div>
+          </div>
+
+          {/* Caption */}
+          <div>
+            <div style={{ fontSize: "9px", color: "#ff3333", letterSpacing: "2px", marginBottom: "6px" }}>CAPTION — PRONTO PRA POSTAR</div>
+            <div style={{
+              background: "#111",
+              border: "1px solid #333",
+              padding: "12px",
+              fontSize: "11px",
+              lineHeight: "1.6",
+              color: "#ccc",
+              whiteSpace: "pre-line"
+            }}>
+              {theme.caption}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {activeTab === "visual" && (
+        <div>
+          <div style={{ fontSize: "9px", color: "#ff3333", letterSpacing: "2px", marginBottom: "12px" }}>TEXTO DINÂMICO NA TELA — 85% ASSISTE NO MUDO</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+            {theme.textScreen.map((line, i) => (
+              <div key={i} style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "8px",
+                padding: "8px",
+                background: i === 0 ? "#1a0000" : i === theme.textScreen.length - 1 ? "#001a00" : "#111",
+                border: `1px solid ${i === 0 ? "#ff3333" : i === theme.textScreen.length - 1 ? "#33ff33" : "#222"}`
+              }}>
+                <div style={{
+                  fontSize: "10px",
+                  color: "#ff3333",
+                  fontWeight: "900",
+                  minWidth: "20px"
+                }}>
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <div style={{ fontSize: "11px", lineHeight: "1.4" }}>{line}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* 5 Pilares */}
+          <div style={{ marginTop: "16px" }}>
+            <div style={{ fontSize: "9px", color: "#ff3333", letterSpacing: "2px", marginBottom: "8px" }}>5 PILARES APLICADOS</div>
+            {theme.pilar.map((p, i) => (
+              <div key={i} style={{
+                padding: "6px 0",
+                borderBottom: "1px solid #1a1a1a",
+                fontSize: "11px",
+                color: "#aaa"
+              }}>
+                <span style={{ color: "#33ff33", marginRight: "6px" }}>✓</span>{p}
+              </div>
+            ))}
+          </div>
+
+          {/* Next Episode */}
+          <div style={{
+            marginTop: "16px",
+            background: "#0a0a1a",
+            border: "1px solid #3333ff",
+            padding: "12px"
+          }}>
+            <div style={{ fontSize: "9px", color: "#3333ff", letterSpacing: "2px", marginBottom: "4px" }}>PRÓXIMO EPISÓDIO</div>
+            <div style={{ fontSize: "11px", lineHeight: "1.4" }}>{theme.nextEp}</div>
+          </div>
+        </div>
+      )}
+
+      {activeTab === "metrics" && (
+        <div>
+          <div style={{ fontSize: "9px", color: "#ff3333", letterSpacing: "2px", marginBottom: "12px" }}>MÉTRICAS ESPERADAS — BASEADO NOS 7 PADRÕES</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            {Object.entries(theme.metrics).map(([key, val]) => {
+              const labels = {
+                views: "VIEWS",
+                saves: "SALVAMENTOS",
+                shares: "COMPARTILHAMENTOS",
+                comments: "COMENTÁRIOS",
+                newFollowers: "NOVOS SEGUIDORES"
+              };
+              const colors = {
+                views: "#ff3333",
+                saves: "#ffaa33",
+                shares: "#33ff33",
+                comments: "#3399ff",
+                newFollowers: "#ff33ff"
+              };
+              return (
+                <div key={key} style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "10px 12px",
+                  background: "#111",
+                  border: "1px solid #222"
+                }}>
+                  <div style={{ fontSize: "10px", color: "#888", letterSpacing: "1px" }}>{labels[key]}</div>
+                  <div style={{ fontSize: "16px", fontWeight: "900", color: colors[key] }}>{val}</div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div style={{
+            marginTop: "16px",
+            padding: "12px",
+            background: "#0a1a0a",
+            border: "1px solid #33ff33",
+            fontSize: "11px",
+            lineHeight: "1.5",
+            color: "#aaa"
+          }}>
+            <span style={{ color: "#33ff33", fontWeight: "900" }}>IMPACTO FINANCEIRO: </span>
+            Cada 10K novos seguidores engajados = +$800-1.200/mês em receita de produtos. Meta de 3 temas rodando simultaneamente = aceleração de crescimento em 3x vs posts soltos.
+          </div>
+        </div>
+      )}
+
+      {activeTab === "science" && (
+        <div>
+          <div style={{ fontSize: "9px", color: "#ff3333", letterSpacing: "2px", marginBottom: "12px" }}>BASE CIENTÍFICA — PESQUISA QUE SUSTENTA ESTE TEMA</div>
+          <div style={{
+            background: "#111",
+            border: "1px solid #333",
+            padding: "12px",
+            fontSize: "11px",
+            lineHeight: "1.7",
+            color: "#aaa"
+          }}>
+            {theme.science}
+          </div>
+
+          <div style={{ marginTop: "16px" }}>
+            <div style={{ fontSize: "9px", color: "#ff3333", letterSpacing: "2px", marginBottom: "8px" }}>DADOS DO PÚBLICO-ALVO</div>
+            <div style={{ fontSize: "11px", lineHeight: "1.6", color: "#aaa" }}>
+              <div style={{ marginBottom: "6px" }}><span style={{color:"#ff3333"}}>•</span> 18-24 anos: 38% do público (maior grupo)</div>
+              <div style={{ marginBottom: "6px" }}><span style={{color:"#ff3333"}}>•</span> Mulheres: 68% | Homens: 26%</div>
+              <div style={{ marginBottom: "6px" }}><span style={{color:"#ff3333"}}>•</span> 41% "suspeitam ter BPD" — audiência ENORME</div>
+              <div style={{ marginBottom: "6px" }}><span style={{color:"#ff3333"}}>•</span> 56% buscam validação/comunidade</div>
+              <div style={{ marginBottom: "6px" }}><span style={{color:"#ff3333"}}>•</span> 54% buscam recovery/suporte</div>
+              <div><span style={{color:"#ff3333"}}>•</span> Postam 4.2x mais que média — audiência ATIVA</div>
+            </div>
+          </div>
+
+          <div style={{
+            marginTop: "16px",
+            padding: "12px",
+            background: "#1a0a0a",
+            border: "1px solid #ff3333",
+            fontSize: "11px",
+            lineHeight: "1.5"
+          }}>
+            <span style={{ color: "#ff3333", fontWeight: "900" }}>FÓRMULA COMPROVADA: </span>
+            Sucesso = Autenticidade × Relabilidade × Esperança × Compartilhabilidade. Rank 1 científico: Personal story + Vulnerability + Humor + Validation = 20-24% engagement.
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+
+  {/* Week 1 Calendar */}
+  <div style={{
+    marginBottom: "20px"
+  }}>
+    <div style={{
+      fontSize: "9px",
+      letterSpacing: "3px",
+      color: "#ff3333",
+      textTransform: "uppercase",
+      marginBottom: "10px"
+    }}>
+      CALENDÁRIO — SEMANA 1
+    </div>
+
+    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+      {weekPlan.map((d, i) => (
+        <div key={i} style={{
+          display: "grid",
+          gridTemplateColumns: "70px 50px 1fr",
+          gap: "8px",
+          alignItems: "center",
+          padding: "10px 8px",
+          background: "#111",
+          border: "1px solid #1a1a1a"
+        }}>
+          <div style={{ fontSize: "10px", fontWeight: "900", color: "#ff3333" }}>{d.day.toUpperCase()}</div>
+          <div style={{
+            fontSize: "8px",
+            padding: "3px 6px",
+            background: d.type === "Reel" ? "#ff333322" : d.type === "Carrossel" ? "#3333ff22" : "#33ff3322",
+            color: d.type === "Reel" ? "#ff3333" : d.type === "Carrossel" ? "#3333ff" : "#33ff33",
+            textAlign: "center",
+            fontWeight: "700",
+            letterSpacing: "1px"
+          }}>
+            {d.type.toUpperCase()}
+          </div>
+          <div style={{ fontSize: "10px", color: "#aaa" }}>{d.title}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Rules */}
+  <div style={{
+    border: "1px solid #333",
+    padding: "16px",
+    marginBottom: "20px"
+  }}>
+    <div style={{
+      fontSize: "9px",
+      letterSpacing: "3px",
+      color: "#ff3333",
+      textTransform: "uppercase",
+      marginBottom: "10px"
+    }}>
+      7 PADRÕES INVIOLÁVEIS — CHECKLIST
+    </div>
+    {[
+      "Hook 1,5s (decide tudo)",
+      "Texto dinâmico na tela (85% no mudo)",
+      "CTA compartilhamento (NUNCA \"curte\")",
+      "Loop retenção a cada 10s",
+      "Série recorrente (NUNCA post solto)",
+      "Mix: educativo + emocional + relatable",
+      "Consistência 3-5x por semana"
+    ].map((rule, i) => (
+      <div key={i} style={{
+        padding: "6px 0",
+        borderBottom: i < 6 ? "1px solid #1a1a1a" : "none",
+        fontSize: "11px",
+        display: "flex",
+        alignItems: "center",
+        gap: "8px"
+      }}>
+        <span style={{ color: "#33ff33", fontSize: "12px" }}>✓</span>
+        <span style={{ color: "#aaa" }}>{rule}</span>
+      </div>
+    ))}
+  </div>
+
+  {/* Footer */}
+  <div style={{
+    textAlign: "center",
+    padding: "16px 0",
+    borderTop: "1px solid #222"
+  }}>
+    <div style={{ fontSize: "9px", color: "#444", letterSpacing: "2px" }}>
+      MARÇO 2026 · CRM/SP 183549 · DADOS-DRIVEN
+    </div>
+    <div style={{ fontSize: "8px", color: "#333", marginTop: "4px" }}>
+      Baseado em pesquisa científica 2025-2026 + dados reais @drfabioschmidt
+    </div>
+  </div>
+</div>
+```
+
+);
+}
