@@ -7,7 +7,7 @@
 <title>Protocolo 7 Dias — Dr. Fabio Schmidt</title>
 <meta name="description" content="Protocolo clínico para familiares de pessoas com Borderline. Scripts prontos, gestão de crises e limites sem confronto. Dr. Fabio Schmidt, Médico Psiquiatra.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -17,68 +17,105 @@
 html{scroll-behavior:smooth}
 body{font-family:'Lato',sans-serif;color:#1A1A1A;background:#FAF7F0;overflow-x:hidden;line-height:1.6}
 
-/* STICKY */
-.sticky-bar{position:fixed;top:0;left:0;right:0;z-index:999;background:#0D1B2A;padding:10px 24px;display:flex;align-items:center;justify-content:center;gap:24px;transform:translateY(-100%);transition:transform .4s ease;box-shadow:0 4px 24px rgba(0,0,0,.35)}
+/* ── STICKY BAR ── */
+.sticky-bar{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(13,27,42,.97);backdrop-filter:blur(12px);padding:10px 24px;display:flex;align-items:center;justify-content:center;gap:24px;transform:translateY(-100%);transition:transform .4s ease;box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .sticky-bar.visible{transform:translateY(0)}
-.sticky-bar p{color:rgba(255,255,255,.8);font-size:.88rem}
+.sticky-bar p{color:rgba(255,255,255,.8);font-size:.85rem}
 .sticky-bar strong{color:#E8B85A}
-.sticky-btn{background:#C9963A;color:#fff;padding:9px 26px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;transition:background .2s}
+.sticky-btn{background:#C9963A;color:#fff;padding:9px 26px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;transition:background .2s}
 .sticky-btn:hover{background:#E8B85A}
 
-/* HERO DESKTOP */
-.hero{min-height:100vh;background:#0D1B2A;display:grid;grid-template-columns:55% 45%;align-items:stretch;position:relative;overflow:hidden}
-.hero::after{content:’’;position:absolute;inset:0;z-index:1;background:linear-gradient(95deg,rgba(13,27,42,1) 48%,rgba(13,27,42,.55) 75%,rgba(13,27,42,.15) 100%);pointer-events:none}
-.hero-left{position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;padding:120px 60px 80px 80px}
-.hero-right{position:relative;z-index:2;overflow:hidden}
-.hero-right img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;filter:grayscale(10%)}
-.hero-right::after{content:’’;position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,27,42,.3) 0%,transparent 40%,rgba(13,27,42,.5) 100%)}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,150,58,.15);border:1px solid rgba(201,150,58,.35);color:#E8B85A;padding:7px 18px;border-radius:30px;font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:28px;width:fit-content;animation:fadeUp .8s ease both}
-.hero-badge::before{content:‘●’;font-size:.45rem}
-.hero h1{font-family:‘Playfair Display’,serif;font-size:clamp(2.4rem,4vw,3.7rem);font-weight:900;color:#fff;line-height:1.12;margin-bottom:26px;animation:fadeUp .8s .1s ease both}
-.hero h1 em{font-style:italic;color:#E8B85A;display:block}
-.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.65);line-height:1.8;max-width:460px;margin-bottom:44px;animation:fadeUp .8s .2s ease both}
-.hero-sub strong{color:#fff}
-.hero-cta-wrap{display:flex;flex-direction:column;gap:14px;align-items:flex-start;animation:fadeUp .8s .3s ease both}
-.btn-primary{display:inline-flex;align-items:center;gap:10px;background:#C9963A;color:#fff;padding:18px 42px;border-radius:6px;text-decoration:none;font-weight:700;font-size:1.05rem;transition:all .25s;box-shadow:0 8px 32px rgba(201,150,58,.38);position:relative;overflow:hidden}
+/* ── HERO ── */
+.hero{min-height:100vh;background:#0D1B2A;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;position:relative;overflow:hidden}
+.hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,150,58,.06) 0%,transparent 60%);pointer-events:none}
+.hero-logo{width:80px;height:auto;margin-bottom:28px;opacity:.9;animation:fadeUp .7s ease both}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,150,58,.12);border:1px solid rgba(201,150,58,.3);color:#E8B85A;padding:7px 18px;border-radius:30px;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:32px;animation:fadeUp .7s .05s ease both}
+.hero-badge::before{content:‘●’;font-size:.4rem}
+.hero h1{font-family:‘Playfair Display’,serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:900;color:#fff;line-height:1.15;max-width:780px;margin-bottom:24px;animation:fadeUp .8s .1s ease both}
+.hero h1 em{font-style:italic;color:#E8B85A;display:block;margin-top:4px}
+.hero-sub{font-size:1.02rem;color:rgba(255,255,255,.6);line-height:1.8;max-width:520px;margin:0 auto 40px;animation:fadeUp .8s .2s ease both}
+.hero-sub strong{color:rgba(255,255,255,.9)}
+.hero-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;animation:fadeUp .8s .3s ease both}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:#C9963A;color:#fff;padding:18px 44px;border-radius:6px;text-decoration:none;font-weight:700;font-size:1.02rem;transition:all .25s;box-shadow:0 8px 32px rgba(201,150,58,.38);position:relative;overflow:hidden}
 .btn-primary::after{content:’’;position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.14) 0%,transparent 55%)}
 .btn-primary:hover{background:#E8B85A;transform:translateY(-2px);box-shadow:0 14px 40px rgba(201,150,58,.48)}
 .btn-primary svg{width:18px;height:18px;flex-shrink:0}
-.hero-guarantee{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-size:.8rem}
-.hero-guarantee svg{width:15px;height:15px;color:#27AE60;flex-shrink:0}
-.hero-doctor-label{position:absolute;bottom:28px;left:0;right:0;text-align:center;z-index:4;padding:0 16px}
-.hero-doctor-label strong{display:block;font-family:‘Playfair Display’,serif;font-size:1.2rem;font-weight:700;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6)}
-.hero-doctor-label span{font-size:.73rem;color:#E8B85A;letter-spacing:.1em;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.hero-guarantee{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.38);font-size:.78rem}
+.hero-guarantee svg{width:14px;height:14px;color:#27AE60;flex-shrink:0}
 
-/* TRUST BAR */
+/* ── TRUST BAR ── */
 .trust-bar{background:#fff;border-bottom:1px solid #E0D8CC;padding:18px 40px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
-.trust-item{display:flex;align-items:center;gap:10px;font-size:.84rem;color:#5A5A5A}
-.trust-icon{font-size:1.2rem}
-.trust-item strong{color:#0D1B2A;font-size:.88rem}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:.82rem;color:#5A5A5A}
+.trust-icon{font-size:1.15rem}
+.trust-item strong{color:#0D1B2A;font-size:.86rem}
 
-/* SECTIONS */
-.section-label{font-size:.73rem;letter-spacing:.2em;text-transform:uppercase;color:#C9963A;font-weight:700;margin-bottom:10px}
-.section-title{font-family:‘Playfair Display’,serif;font-size:clamp(1.9rem,3vw,2.9rem);font-weight:700;color:#0D1B2A;line-height:1.22}
-.section-sub{font-size:1rem;color:#5A5A5A;line-height:1.75}
+/* ── GLOBAL SECTION ── */
+.section-label{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#C9963A;font-weight:700;margin-bottom:10px}
+.section-title{font-family:‘Playfair Display’,serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;color:#0D1B2A;line-height:1.22}
+.section-sub{font-size:.97rem;color:#5A5A5A;line-height:1.75}
 
-/* PAIN */
+/* ── VSL SECTION ── */
+.vsl-section{background:#0D1B2A;padding:80px 24px;text-align:center}
+.vsl-section .section-label{color:#E8B85A}
+.vsl-section .section-title{color:#fff;max-width:640px;margin:0 auto 12px}
+.vsl-section .section-sub{color:rgba(255,255,255,.5);max-width:500px;margin:0 auto 40px}
+.vsl-container{max-width:800px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5);border:1px solid rgba(201,150,58,.15);position:relative;aspect-ratio:16/9;background:#000}
+.vsl-container iframe{width:100%;height:100%;border:none}
+.vsl-caption{color:rgba(255,255,255,.35);font-size:.78rem;margin-top:18px;font-style:italic}
+
+/* ── PAIN / RECOGNITION ── */
 .pain{background:#F3EDE0;padding:100px 40px;text-align:center}
 .pain .section-title{max-width:660px;margin:0 auto 14px}
-.pain .section-sub{max-width:540px;margin:0 auto 56px}
-.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:20px;max-width:1080px;margin:0 auto}
-.pain-card{background:#fff;border:1px solid #E0D8CC;border-radius:14px;padding:28px 24px;text-align:left;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.pain .section-sub{max-width:540px;margin:0 auto 52px}
+.pain-visual{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.pain-img{border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.1)}
+.pain-img img{width:100%;height:100%;object-fit:cover;display:block}
+.pain-text-cards{display:flex;flex-direction:column;gap:16px}
+.pain-card{background:#fff;border:1px solid #E0D8CC;border-radius:14px;padding:22px 20px;text-align:left;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
 .pain-card::before{content:’’;position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C9963A,#E8B85A)}
-.pain-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.07)}
-.pain-icon{font-size:1.9rem;margin-bottom:14px}
-.pain-card h3{font-family:‘Playfair Display’,serif;font-size:1.12rem;color:#0D1B2A;margin-bottom:9px;font-weight:700}
-.pain-card p{font-size:.88rem;color:#5A5A5A;line-height:1.65}
+.pain-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.07)}
+.pain-icon{font-size:1.5rem;margin-bottom:8px}
+.pain-card h3{font-family:‘Playfair Display’,serif;font-size:1.02rem;color:#0D1B2A;margin-bottom:6px;font-weight:700}
+.pain-card p{font-size:.84rem;color:#5A5A5A;line-height:1.6}
 
-/* QUOTE */
-.quote-section{background:#0D1B2A;padding:80px 40px;text-align:center;position:relative;overflow:hidden}
-.quote-section::before{content:’\201C’;position:absolute;top:-40px;left:50%;transform:translateX(-50%);font-family:‘Playfair Display’,serif;font-size:20rem;color:rgba(201,150,58,.05);line-height:1;pointer-events:none}
-.quote-text{font-family:‘Playfair Display’,serif;font-size:clamp(1.4rem,2.5vw,2.15rem);color:#fff;max-width:820px;margin:0 auto 22px;line-height:1.55;font-style:italic;position:relative;z-index:1}
-.quote-author{color:#E8B85A;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase}
+/* ── CYCLE BREAKER ── */
+.cycle-section{background:#0D1B2A;padding:90px 24px;text-align:center;position:relative;overflow:hidden}
+.cycle-section::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(139,26,26,.08) 0%,transparent 50%);pointer-events:none}
+.cycle-section .section-label{color:#E8B85A}
+.cycle-section .section-title{color:#fff;max-width:600px;margin:0 auto 14px}
+.cycle-section .section-sub{color:rgba(255,255,255,.5);max-width:480px;margin:0 auto 48px}
+.cycle-images{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.cycle-img{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 16px 48px rgba(0,0,0,.3);transition:transform .3s}
+.cycle-img:hover{transform:scale(1.02)}
+.cycle-img img{width:100%;display:block}
 
-/* AUTHORITY */
+/* ── QUOTE ── */
+.quote-section{background:#F3EDE0;padding:70px 40px;text-align:center;position:relative;overflow:hidden}
+.quote-section::before{content:’\201C’;position:absolute;top:-50px;left:50%;transform:translateX(-50%);font-family:‘Playfair Display’,serif;font-size:18rem;color:rgba(201,150,58,.06);line-height:1;pointer-events:none}
+.quote-text{font-family:‘Playfair Display’,serif;font-size:clamp(1.3rem,2.2vw,1.9rem);color:#0D1B2A;max-width:750px;margin:0 auto 18px;line-height:1.55;font-style:italic;position:relative;z-index:1}
+.quote-author{color:#C9963A;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+
+/* ── ESCALATION CURVE ── */
+.escalation{padding:90px 40px;background:#FAF7F0}
+.escalation-wrap{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.escalation-img{border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(13,27,42,.15);border:1px solid #E0D8CC}
+.escalation-img img{width:100%;display:block}
+.escalation-content .section-label{text-align:left}
+.escalation-content .section-title{text-align:left;margin:0 0 16px}
+.escalation-content p{font-size:.93rem;color:#5A5A5A;line-height:1.8;margin-bottom:14px}
+.escalation-content p strong{color:#0D1B2A}
+
+/* ── TRANSFORMATION BEFORE/AFTER ── */
+.transformation{background:#0D1B2A;padding:90px 24px}
+.transformation-wrap{max-width:960px;margin:0 auto;text-align:center}
+.transformation .section-label{color:#E8B85A}
+.transformation .section-title{color:#fff;margin:0 auto 14px;max-width:660px}
+.transformation .section-sub{color:rgba(255,255,255,.5);margin:0 auto 48px;max-width:540px}
+.transformation-img{max-width:860px;margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 64px rgba(0,0,0,.4)}
+.transformation-img img{width:100%;display:block}
+.transformation-cta{margin-top:48px}
+
+/* ── AUTHORITY ── */
 .authority{background:#FAF7F0;padding:100px 40px}
 .authority-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
 .authority-img{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 32px 80px rgba(13,27,42,.18)}
@@ -89,243 +126,290 @@ body{font-family:'Lato',sans-serif;color:#1A1A1A;background:#FAF7F0;overflow-x:h
 .authority-img-label span{font-size:.72rem;color:#E8B85A;letter-spacing:.12em;text-transform:uppercase}
 .authority-content .section-label{text-align:left}
 .authority-content .section-title{text-align:left;margin:0 0 20px}
-.authority-content p{font-size:.97rem;color:#5A5A5A;line-height:1.8;margin-bottom:16px}
+.authority-content p{font-size:.95rem;color:#5A5A5A;line-height:1.8;margin-bottom:16px}
 .authority-content p strong{color:#0D1B2A}
-.authority-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
-.authority-stat{background:#F3EDE0;border:1px solid #E0D8CC;border-radius:12px;padding:20px;text-align:center}
-.authority-stat strong{display:block;font-family:‘Playfair Display’,serif;font-size:1.9rem;color:#0D1B2A;font-weight:900;line-height:1}
-.authority-stat span{font-size:.78rem;color:#5A5A5A;margin-top:4px;display:block}
+.authority-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.authority-stat{background:#F3EDE0;border:1px solid #E0D8CC;border-radius:12px;padding:18px;text-align:center}
+.authority-stat strong{display:block;font-family:‘Playfair Display’,serif;font-size:1.8rem;color:#0D1B2A;font-weight:900;line-height:1}
+.authority-stat span{font-size:.76rem;color:#5A5A5A;margin-top:4px;display:block}
 
-/* TRANSFORMATION */
-.transformation{background:#0D1B2A;padding:90px 40px}
-.transformation-wrap{max-width:900px;margin:0 auto;text-align:center}
-.transformation .section-label{color:#E8B85A}
-.transformation .section-title{color:#fff;margin:0 auto 14px;max-width:660px}
-.transformation .section-sub{color:rgba(255,255,255,.5);margin:0 auto 56px;max-width:540px}
-.before-after{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
-.ba-col{padding:36px 32px}
-.ba-col.before{background:rgba(192,57,43,.08);border-right:1px solid rgba(255,255,255,.06)}
-.ba-col.after{background:rgba(39,174,96,.08)}
-.ba-header{display:flex;align-items:center;gap:10px;margin-bottom:24px}
-.ba-header h3{font-family:‘Playfair Display’,serif;font-size:1.1rem;font-weight:700}
-.ba-col.before .ba-header h3{color:rgba(192,57,43,.9)}
-.ba-col.after .ba-header h3{color:rgba(39,174,96,.9)}
-.ba-icon{font-size:1.3rem}
-.ba-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
-.ba-item:last-child{border:none}
-.ba-marker{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;margin-top:2px}
-.ba-col.before .ba-marker{background:rgba(192,57,43,.2);color:rgba(192,57,43,.9)}
-.ba-col.after .ba-marker{background:rgba(39,174,96,.2);color:rgba(39,174,96,.9)}
-.ba-item p{font-size:.87rem;color:rgba(255,255,255,.7);line-height:1.5}
-
-/* MODULES */
+/* ── MODULES + PRICE ── */
 .inside{padding:100px 40px;background:#FAF7F0}
 .inside-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
 .inside-left .section-title{text-align:left;margin:0 0 14px}
-.inside-left .section-sub{text-align:left;margin:0 0 36px}
-.inside-modules{display:flex;flex-direction:column;gap:14px}
-.module{display:flex;gap:18px;align-items:flex-start;background:#fff;border:1px solid #E0D8CC;border-radius:12px;padding:20px 22px;transition:border-color .2s,box-shadow .2s}
+.inside-left .section-sub{text-align:left;margin:0 0 32px}
+.inside-modules{display:flex;flex-direction:column;gap:12px}
+.module{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid #E0D8CC;border-radius:12px;padding:18px 20px;transition:border-color .2s,box-shadow .2s}
 .module:hover{border-color:#C9963A;box-shadow:0 6px 24px rgba(201,150,58,.1)}
-.module-num{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:#0D1B2A;color:#E8B85A;display:flex;align-items:center;justify-content:center;font-family:‘Playfair Display’,serif;font-size:.95rem;font-weight:700}
-.module-body h4{font-weight:700;color:#0D1B2A;font-size:.93rem;margin-bottom:4px}
-.module-body p{font-size:.83rem;color:#5A5A5A;line-height:1.5}
-.module-result{font-size:.78rem;color:#C9963A;font-weight:700;margin-top:6px;font-style:italic}
-
-/* PRICE */
-.inside-cta{position:sticky;top:100px;display:flex;flex-direction:column;gap:24px}
-.price-card{background:#0D1B2A;border-radius:20px;padding:38px;color:#fff;position:relative;overflow:hidden}
-.price-card::after{content:’’;position:absolute;bottom:-40px;right:-40px;width:220px;height:220px;border-radius:50%;background:rgba(201,150,58,.07)}
-.price-label{font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px}
+.module-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:#0D1B2A;color:#E8B85A;display:flex;align-items:center;justify-content:center;font-family:‘Playfair Display’,serif;font-size:.9rem;font-weight:700}
+.module-body h4{font-weight:700;color:#0D1B2A;font-size:.9rem;margin-bottom:4px}
+.module-body p{font-size:.82rem;color:#5A5A5A;line-height:1.5}
+.module-result{font-size:.76rem;color:#C9963A;font-weight:700;margin-top:5px;font-style:italic}
+.inside-cta{position:sticky;top:100px;display:flex;flex-direction:column;gap:20px}
+.deliverables-img{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 16px 48px rgba(0,0,0,.15)}
+.deliverables-img img{width:100%;display:block}
+.price-card{background:#0D1B2A;border-radius:20px;padding:36px;color:#fff;position:relative;overflow:hidden}
+.price-card::after{content:’’;position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(201,150,58,.07)}
+.price-label{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px}
 .price-anchor{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
-.price-old{font-size:1.1rem;color:rgba(255,255,255,.3);text-decoration:line-through}
-.price-badge-off{background:rgba(39,174,96,.2);color:#4fd98e;font-size:.72rem;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:.06em}
-.price-value{font-family:‘Playfair Display’,serif;font-size:3.4rem;font-weight:900;color:#fff;line-height:1;margin-bottom:4px}
-.price-value sup{font-size:1.4rem;vertical-align:top;margin-top:8px}
-.price-period{color:rgba(255,255,255,.4);font-size:.83rem;margin-bottom:26px}
-.price-includes{list-style:none;margin-bottom:28px}
-.price-includes li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:.86rem;color:rgba(255,255,255,.78)}
+.price-old{font-size:1.05rem;color:rgba(255,255,255,.3);text-decoration:line-through}
+.price-badge-off{background:rgba(39,174,96,.2);color:#4fd98e;font-size:.7rem;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:.06em}
+.price-value{font-family:‘Playfair Display’,serif;font-size:3.2rem;font-weight:900;color:#fff;line-height:1;margin-bottom:4px}
+.price-value sup{font-size:1.3rem;vertical-align:top;margin-top:6px}
+.price-period{color:rgba(255,255,255,.4);font-size:.82rem;margin-bottom:24px}
+.price-includes{list-style:none;margin-bottom:24px}
+.price-includes li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:.84rem;color:rgba(255,255,255,.75)}
 .price-includes li:last-child{border:none}
 .price-includes li::before{content:‘✓’;color:#E8B85A;font-weight:700;flex-shrink:0}
-.btn-buy{display:block;background:#C9963A;color:#fff;text-align:center;padding:18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:1.02rem;transition:all .25s;box-shadow:0 8px 32px rgba(201,150,58,.42);position:relative;z-index:1}
+.btn-buy{display:block;background:#C9963A;color:#fff;text-align:center;padding:18px;border-radius:8px;text-decoration:none;font-weight:700;font-size:1rem;transition:all .25s;box-shadow:0 8px 32px rgba(201,150,58,.42);position:relative;z-index:1}
 .btn-buy:hover{background:#E8B85A;transform:translateY(-2px)}
-.guarantee-strip{display:flex;align-items:flex-start;gap:14px;background:#F3EDE0;border:1px solid #E0D8CC;border-radius:12px;padding:20px}
-.guarantee-icon{font-size:1.9rem;flex-shrink:0}
-.guarantee-text h4{font-size:.88rem;font-weight:700;color:#0D1B2A;margin-bottom:4px}
-.guarantee-text p{font-size:.8rem;color:#5A5A5A;line-height:1.55}
+.guarantee-strip{display:flex;align-items:flex-start;gap:14px;background:#F3EDE0;border:1px solid #E0D8CC;border-radius:12px;padding:18px}
+.guarantee-icon{font-size:1.7rem;flex-shrink:0}
+.guarantee-text h4{font-size:.86rem;font-weight:700;color:#0D1B2A;margin-bottom:4px}
+.guarantee-text p{font-size:.78rem;color:#5A5A5A;line-height:1.55}
 
-/* TESTIMONIALS */
-.testimonials{background:#F3EDE0;padding:100px 40px}
-.testimonials .section-title{text-align:center;margin:0 auto 14px;max-width:560px}
-.testimonials .section-sub{text-align:center;margin:0 auto 52px;max-width:480px}
-.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;max-width:1080px;margin:0 auto}
-.testimonial-card{background:#fff;border:1px solid #E0D8CC;border-radius:16px;padding:32px 28px;position:relative;transition:transform .3s,box-shadow .3s}
-.testimonial-card:hover{transform:translateY(-4px);box-shadow:0 20px 56px rgba(0,0,0,.07)}
-.testimonial-card::before{content:’\201C’;position:absolute;top:20px;right:24px;font-family:‘Playfair Display’,serif;font-size:4rem;color:rgba(201,150,58,.12);line-height:1}
-.testimonial-card.featured{grid-column:span 2;background:#0D1B2A;border-color:rgba(201,150,58,.2)}
-.testimonial-text{font-size:.93rem;color:#1A1A1A;line-height:1.75;margin-bottom:20px;position:relative;z-index:1}
-.testimonial-card.featured .testimonial-text{color:rgba(255,255,255,.78)}
-.testimonial-footer{display:flex;align-items:center;gap:12px;border-top:1px solid #E0D8CC;padding-top:16px}
-.testimonial-card.featured .testimonial-footer{border-color:rgba(255,255,255,.08)}
-.testimonial-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#C9963A,#E8B85A);display:flex;align-items:center;justify-content:center;font-family:‘Playfair Display’,serif;font-size:.95rem;font-weight:700;color:#fff;flex-shrink:0}
-.testimonial-author{font-weight:700;font-size:.88rem;color:#0D1B2A}
-.testimonial-card.featured .testimonial-author{color:#E8B85A}
-.testimonial-role{font-size:.77rem;color:#5A5A5A}
-.testimonial-card.featured .testimonial-role{color:rgba(255,255,255,.4)}
-.testimonial-stars{color:#C9963A;font-size:.85rem;margin-left:auto}
+/* ── TESTIMONIALS ── */
+.testimonials{background:#0D1B2A;padding:100px 40px;position:relative;overflow:hidden}
+.testimonials::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,150,58,.05) 0%,transparent 50%);pointer-events:none}
+.testimonials .section-label{text-align:center;color:#E8B85A}
+.testimonials .section-title{text-align:center;margin:0 auto 14px;max-width:560px;color:#fff}
+.testimonials .section-sub{text-align:center;margin:0 auto 48px;max-width:480px;color:rgba(255,255,255,.45)}
+.testimonials-layout{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.testimonial-screenshot{border-radius:16px;overflow:hidden;border:1px solid rgba(201,150,58,.15);box-shadow:0 24px 64px rgba(0,0,0,.4)}
+.testimonial-screenshot img{width:100%;display:block}
+.testimonial-cards{display:flex;flex-direction:column;gap:16px}
+.testimonial-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:24px 22px;position:relative;transition:transform .3s}
+.testimonial-card:hover{transform:translateY(-3px)}
+.testimonial-card::before{content:’\201C’;position:absolute;top:14px;right:18px;font-family:‘Playfair Display’,serif;font-size:3rem;color:rgba(201,150,58,.1);line-height:1}
+.testimonial-text{font-size:.9rem;color:rgba(255,255,255,.72);line-height:1.7;margin-bottom:16px;position:relative;z-index:1}
+.testimonial-footer{display:flex;align-items:center;gap:10px;border-top:1px solid rgba(255,255,255,.06);padding-top:12px}
+.testimonial-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#C9963A,#E8B85A);display:flex;align-items:center;justify-content:center;font-family:‘Playfair Display’,serif;font-size:.85rem;font-weight:700;color:#fff;flex-shrink:0}
+.testimonial-author{font-weight:700;font-size:.84rem;color:#E8B85A}
+.testimonial-role{font-size:.72rem;color:rgba(255,255,255,.35)}
+.testimonial-stars{color:#C9963A;font-size:.8rem;margin-left:auto}
 
-/* FOR WHO */
+/* ── FOR WHO ── */
 .for-who{padding:100px 40px;background:#FAF7F0}
-.for-who .section-title{text-align:center;margin:0 auto 48px;max-width:600px}
+.for-who .section-title{text-align:center;margin:0 auto 44px;max-width:600px}
 .for-who-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:880px;margin:0 auto}
-.for-who-card{border-radius:14px;padding:28px}
+.for-who-card{border-radius:14px;padding:26px}
 .for-who-card.yes{background:rgba(39,174,96,.06);border:1px solid rgba(39,174,96,.25)}
 .for-who-card.no{background:rgba(192,57,43,.06);border:1px solid rgba(192,57,43,.2)}
-.for-who-card h3{font-family:‘Playfair Display’,serif;font-size:1.1rem;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.for-who-card h3{font-family:‘Playfair Display’,serif;font-size:1.05rem;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .for-who-card.yes h3{color:#27AE60}
 .for-who-card.no h3{color:#C0392B}
 .for-who-card ul{list-style:none}
-.for-who-card ul li{font-size:.87rem;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:flex-start;gap:10px;color:#1A1A1A;line-height:1.5}
+.for-who-card ul li{font-size:.85rem;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:flex-start;gap:10px;color:#1A1A1A;line-height:1.5}
 .for-who-card ul li:last-child{border:none}
 .for-who-card.yes ul li::before{content:‘✓’;color:#27AE60;font-weight:700;flex-shrink:0}
 .for-who-card.no ul li::before{content:‘✕’;color:#C0392B;font-weight:700;flex-shrink:0}
 
-/* FAQ */
+/* ── FAQ ── */
 .faq{background:#F3EDE0;padding:100px 40px}
-.faq .section-title{text-align:center;margin:0 auto 46px;max-width:600px}
-.faq-list{max-width:740px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq .section-title{text-align:center;margin:0 auto 44px;max-width:600px}
+.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
 .faq-item{background:#fff;border:1px solid #E0D8CC;border-radius:12px;overflow:hidden}
-.faq-question{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;font-weight:700;font-size:.93rem;color:#0D1B2A;transition:background .2s;user-select:none}
+.faq-question{padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;font-weight:700;font-size:.9rem;color:#0D1B2A;transition:background .2s;user-select:none}
 .faq-question:hover{background:#FAF7F0}
-.faq-toggle{width:28px;height:28px;border-radius:50%;background:#0D1B2A;color:#E8B85A;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:transform .3s}
+.faq-toggle{width:26px;height:26px;border-radius:50%;background:#0D1B2A;color:#E8B85A;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:transform .3s}
 .faq-item.open .faq-toggle{transform:rotate(45deg)}
-.faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;font-size:.88rem;color:#5A5A5A;line-height:1.72;padding:0 24px}
-.faq-item.open .faq-answer{max-height:300px;padding:0 24px 20px}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;font-size:.86rem;color:#5A5A5A;line-height:1.72;padding:0 22px}
+.faq-item.open .faq-answer{max-height:300px;padding:0 22px 18px}
 
-/* URGENCY */
+/* ── URGENCY ── */
 .urgency{background:#FAF7F0;padding:80px 40px;text-align:center;border-top:1px solid #E0D8CC}
-.urgency-wrap{max-width:700px;margin:0 auto}
-.urgency h2{font-family:‘Playfair Display’,serif;font-size:clamp(1.7rem,2.8vw,2.4rem);color:#0D1B2A;margin-bottom:16px;line-height:1.25}
+.urgency-wrap{max-width:680px;margin:0 auto}
+.urgency h2{font-family:‘Playfair Display’,serif;font-size:clamp(1.6rem,2.6vw,2.3rem);color:#0D1B2A;margin-bottom:14px;line-height:1.25}
 .urgency h2 em{color:#C9963A;font-style:italic}
-.urgency p{color:#5A5A5A;font-size:1rem;line-height:1.75;margin-bottom:36px;max-width:560px;margin-left:auto;margin-right:auto}
+.urgency p{color:#5A5A5A;font-size:.95rem;line-height:1.75;margin-bottom:32px;max-width:540px;margin-left:auto;margin-right:auto}
 .urgency-cta{display:flex;flex-direction:column;align-items:center;gap:12px}
 
-/* FINAL CTA */
+/* ── FINAL CTA ── */
 .final-cta{background:#0D1B2A;padding:100px 40px;text-align:center;position:relative;overflow:hidden}
 .final-cta::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at 50% 110%,rgba(201,150,58,.12) 0%,transparent 55%);pointer-events:none}
-.final-cta h2{font-family:‘Playfair Display’,serif;font-size:clamp(2rem,3.5vw,3.2rem);color:#fff;max-width:700px;margin:0 auto 20px;line-height:1.2}
+.final-cta h2{font-family:‘Playfair Display’,serif;font-size:clamp(1.9rem,3.5vw,3rem);color:#fff;max-width:680px;margin:0 auto 18px;line-height:1.2}
 .final-cta h2 em{color:#E8B85A;font-style:italic}
-.final-cta p{color:rgba(255,255,255,.55);max-width:500px;margin:0 auto 44px;font-size:1rem;line-height:1.75}
-.final-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
-.final-price{color:rgba(255,255,255,.4);font-size:.86rem}
-.final-price strong{color:#fff;font-size:1.35rem}
+.final-cta p{color:rgba(255,255,255,.5);max-width:480px;margin:0 auto 40px;font-size:.97rem;line-height:1.75}
+.final-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.final-price{color:rgba(255,255,255,.4);font-size:.84rem}
+.final-price strong{color:#fff;font-size:1.3rem}
+.final-mockup{max-width:600px;margin:40px auto 0;border-radius:14px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.4)}
+.final-mockup img{width:100%;display:block}
 
-footer{background:#070E18;padding:32px 40px;text-align:center;color:rgba(255,255,255,.22);font-size:.77rem;line-height:1.85}
-footer a{color:rgba(255,255,255,.38);text-decoration:none}
+/* ── FOOTER ── */
+footer{background:#070E18;padding:28px 40px;text-align:center;color:rgba(255,255,255,.2);font-size:.75rem;line-height:1.85}
+footer a{color:rgba(255,255,255,.35);text-decoration:none}
 footer a:hover{color:#E8B85A}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:1;transform:none}
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
 /* ── MOBILE ── */
 @media(max-width:960px){
-.hero{display:block;min-height:auto;background:#0D1B2A}
-.hero::after{display:none}
-.hero-left{padding:48px 28px 52px;background:#0D1B2A}
-.hero-right{height:460px;overflow:hidden;position:relative}
-.hero-right img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-.hero-right::after{content:’’;position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,27,42,0) 30%,rgba(13,27,42,.7) 100%)}
-.hero-doctor-label{display:none}
-.inside-wrap{grid-template-columns:1fr;gap:44px}
+.pain-visual{grid-template-columns:1fr;gap:32px}
+.pain-img{max-width:480px;margin:0 auto}
+.cycle-images{grid-template-columns:1fr;max-width:500px}
+.escalation-wrap{grid-template-columns:1fr;gap:36px}
+.escalation-img{max-width:500px}
+.inside-wrap{grid-template-columns:1fr;gap:40px}
 .inside-cta{position:static}
-.for-who-grid{grid-template-columns:1fr}
-.authority-wrap{grid-template-columns:1fr;gap:44px}
+.authority-wrap{grid-template-columns:1fr;gap:40px}
 .authority-img{max-width:480px}
-.before-after{grid-template-columns:1fr}
-.ba-col.before{border-right:none;border-bottom:1px solid rgba(255,255,255,.06)}
-.testimonial-card.featured{grid-column:span 1}
+.testimonials-layout{grid-template-columns:1fr;max-width:500px;margin:0 auto}
+.for-who-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
-.hero-left{padding:36px 20px 44px;background:#0D1B2A}
-.hero-right{height:360px}
-.hero h1{font-size:clamp(1.85rem,7vw,2.4rem)}
-.trust-bar{gap:16px;padding:16px 20px}
-.pain,.inside,.for-who,.faq,.final-cta,.quote-section,.authority,.transformation,.testimonials,.urgency{padding:60px 20px}
-.pain-grid{grid-template-columns:1fr}
-.sticky-bar{flex-direction:column;gap:8px;text-align:center}
-.btn-primary{padding:16px 20px;font-size:.93rem;width:100%;justify-content:center}
+.hero{padding:60px 20px 48px}
+.hero h1{font-size:clamp(1.7rem,6.5vw,2.2rem)}
+.trust-bar{gap:14px;padding:14px 16px}
+.pain,.inside,.for-who,.faq,.final-cta,.quote-section,.authority,.transformation,.testimonials,.urgency,.escalation,.vsl-section,.cycle-section{padding:56px 18px}
+.sticky-bar{flex-direction:column;gap:8px;text-align:center;padding:8px 16px}
+.btn-primary{padding:16px 20px;font-size:.92rem;width:100%;justify-content:center}
 .hero-cta-wrap{width:100%}
 .authority-stats{grid-template-columns:1fr 1fr}
-.before-after{border-radius:12px}
-.ba-col{padding:24px 20px}
+.vsl-container{border-radius:10px}
 }
 </style>
 
 </head>
 <body>
 
+<!-- STICKY BAR -->
+
 <div class="sticky-bar" id="stickyBar">
-  <p>Protocolo 7 Dias — <strong>R$ 219</strong> · Acesso imediato e vitalício</p>
-  <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="sticky-btn">Quero Começar Agora</a>
+  <p>Protocolo 7 Dias — <strong>R$ 219</strong> · Acesso imediato</p>
+  <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="sticky-btn">Quero Começar</a>
 </div>
 
-<section class="hero" style="background:#0D1B2A">
-  <div class="hero-left" style="background:#0D1B2A;color:#ffffff">
-    <div class="hero-badge">Protocolo Clínico — Dr. Fabio Schmidt</div>
-    <h1 style="color:#ffffff">Sua filha tem Borderline —<em style="color:#E8B85A;display:block">e você está se destruindo</em> tentando ajudá-la sem saber como.</h1>
-    <p class="hero-sub" style="color:rgba(255,255,255,.7)">
-      Você acorda com medo do humor do dia. Cede por exaustão. E ainda se sente culpada por isso.<br><br>
-      Não é falta de amor — <strong>é falta de método. E existe saída.</strong>
-    </p>
-    <div class="hero-cta-wrap">
-      <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-primary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Quero parar de improvisar nas crises
-      </a>
-      <div class="hero-guarantee">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        Garantia de 7 dias · Acesso imediato e vitalício
-      </div>
-    </div>
-  </div>
-  <div class="hero-right">
-    <img src="IMG_9940.jpeg" alt="Dr. Fabio Schmidt">
-    <div class="hero-doctor-label">
-      <strong>Dr. Fabio Schmidt</strong>
-      <span>Médico · Psiquiatria · CRM/SP 183549</span>
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+
+<section class="hero">
+  <img src="logo_dark.png" alt="Protocolo 7 Dias" class="hero-logo">
+  <div class="hero-badge">Protocolo Clínico — Dr. Fabio Schmidt</div>
+  <h1>Sua filha tem Borderline —<em>e você está se destruindo tentando ajudá-la sem saber como.</em></h1>
+  <p class="hero-sub">
+    Você acorda com medo do humor do dia. Cede por exaustão. E ainda se sente culpada por isso.<br><br>
+    Não é falta de amor — <strong>é falta de método. E existe saída.</strong>
+  </p>
+  <div class="hero-cta-wrap">
+    <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Quero saber o que fazer na próxima crise
+    </a>
+    <div class="hero-guarantee">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Garantia de 7 dias · Acesso imediato e vitalício
     </div>
   </div>
 </section>
 
-<div class="trust-bar reveal">
+<!-- ═══════════════════════════════ TRUST BAR ═══════════════════════════════ -->
+
+<div class="trust-bar">
   <div class="trust-item"><span class="trust-icon">🛡️</span><div><strong>Garantia 7 dias</strong><br>Reembolso sem perguntas</div></div>
   <div class="trust-item"><span class="trust-icon">⚡</span><div><strong>Acesso imediato</strong><br>Após confirmação</div></div>
   <div class="trust-item"><span class="trust-icon">♾️</span><div><strong>Acesso vitalício</strong><br>Assista quando quiser</div></div>
-  <div class="trust-item"><span class="trust-icon">🎓</span><div><strong>Conteúdo clínico</strong><br>Desenvolvido por médico psiquiatra</div></div>
+  <div class="trust-item"><span class="trust-icon">👨‍⚕️</span><div><strong>90mil+ seguidores</strong><br>Referência em Borderline</div></div>
 </div>
+
+<!-- ═══════════════════════════════ VSL ═══════════════════════════════ -->
+
+<section class="vsl-section">
+  <div class="section-label">Assista antes de decidir</div>
+  <h2 class="section-title">3 minutos que podem mudar a forma como você vive em casa</h2>
+  <p class="section-sub">O Dr. Fabio explica por que tudo que você tentou até agora não funcionou — e o que funciona.</p>
+  <div class="vsl-container">
+    <iframe src="https://player.vimeo.com/video/1175944292?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <p class="vsl-caption">Dr. Fabio Schmidt · CRM/SP 183549 · Médico Psiquiatra</p>
+</section>
+
+<!-- ═══════════════════════════════ PAIN + RECOGNITION ═══════════════════════════════ -->
 
 <section class="pain">
   <div class="section-label">Você reconhece isso?</div>
   <h2 class="section-title">O ciclo que ninguém te ensinou a quebrar</h2>
   <p class="section-sub">Familiares de pessoas com Borderline vivem padrões que se repetem — e se destroem tentando resolver no improviso.</p>
-  <div class="pain-grid">
-    <div class="pain-card reveal"><div class="pain-icon">😰</div><h3>Crises que escalam do nada</h3><p>Uma conversa comum vira confronto em segundos. Você não entende o gatilho e fica sem chão, sem saber se age ou recua.</p></div>
-    <div class="pain-card reveal"><div class="pain-icon">🔁</div><h3>Ceder por exaustão</h3><p>Você explica, argumenta, tenta raciocinar. Quando não aguenta mais, cede. E o ciclo recomeça — mais intenso na próxima vez.</p></div>
-    <div class="pain-card reveal"><div class="pain-icon">😶</div><h3>Silêncio que paralisa</h3><p>Há coisas que você não sabe mais se deve falar ou calar. Cada palavra parece uma bomba. Você se policia o tempo todo.</p></div>
-    <div class="pain-card reveal"><div class="pain-icon">💔</div><h3>Culpa constante</h3><p>Quando tenta impor limite, se sente cruel. Quando cede, se sente fraca. Qualquer caminho parece errado.</p></div>
-    <div class="pain-card reveal"><div class="pain-icon">😴</div><h3>Esgotamento invisível</h3><p>Ninguém de fora entende o quanto você carrega. A tensão constante corrói sua saúde, seus relacionamentos, seu sono.</p></div>
-    <div class="pain-card reveal"><div class="pain-icon">🆘</div><h3>Sem saber o que fazer na ameaça</h3><p>Diante de uma ameaça ou acusação grave, você congela. Não sabe o que dizer, o que fazer, se chama ajuda ou aguarda.</p></div>
+  <div class="pain-visual">
+    <div class="pain-img reveal">
+      <img src="ciclo_problema.jpeg" alt="Você não é o problema, mas pode estar alimentando">
+    </div>
+    <div class="pain-text-cards">
+      <div class="pain-card reveal"><div class="pain-icon">😰</div><h3>Crises que escalam do nada</h3><p>Uma conversa comum vira confronto em segundos. Você não entende o gatilho e fica sem chão.</p></div>
+      <div class="pain-card reveal"><div class="pain-icon">🔁</div><h3>Ceder por exaustão</h3><p>Você explica, argumenta, tenta raciocinar. Quando não aguenta mais, cede. E o ciclo recomeça.</p></div>
+      <div class="pain-card reveal"><div class="pain-icon">💔</div><h3>Culpa constante</h3><p>Quando tenta impor limite, se sente cruel. Quando cede, se sente fraca. Qualquer caminho parece errado.</p></div>
+      <div class="pain-card reveal"><div class="pain-icon">😴</div><h3>Esgotamento invisível</h3><p>Ninguém de fora entende o quanto você carrega. A tensão constante corrói sua saúde e seus relacionamentos.</p></div>
+    </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════ CYCLE VISUAL ═══════════════════════════════ -->
+
+<section class="cycle-section">
+  <div class="section-label">Por que a crise sempre volta</div>
+  <h2 class="section-title">O cérebro registra: "essa intensidade funcionou"</h2>
+  <p class="section-sub">Não é maldade. É um padrão neurológico que se repete — e que você pode aprender a interromper.</p>
+  <div class="cycle-images">
+    <div class="cycle-img reveal">
+      <img src="ciclo_5fases.jpeg" alt="Ciclo da crise em 5 fases">
+    </div>
+    <div class="cycle-img reveal">
+      <img src="cerebro_alarme.jpeg" alt="Alarme ativado: a lógica desaparece">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ QUOTE ═══════════════════════════════ -->
 
 <section class="quote-section reveal">
   <p class="quote-text">"Crises escalam por padrão, não por maldade. Quando você aprende a reconhecer o ponto de virada, muda completamente sua posição nesse jogo."</p>
   <div class="quote-author">— Dr. Fabio Schmidt · Médico Psiquiatra</div>
 </section>
 
+<!-- ═══════════════════════════════ ESCALATION CURVE ═══════════════════════════════ -->
+
+<section class="escalation">
+  <div class="escalation-wrap">
+    <div class="escalation-img reveal">
+      <img src="curva_escalada.jpeg" alt="Curva da escalada emocional em 5 fases">
+    </div>
+    <div class="escalation-content reveal">
+      <div class="section-label">O que o Módulo 1 ensina</div>
+      <h2 class="section-title">O mapa da crise que você nunca recebeu</h2>
+      <p>A crise tem 5 fases previsíveis. Na fase 1, parece "nada demais". Na fase 3, <strong>seus instintos já estão sabotando você</strong> — explicar, argumentar, racionalizar. Tudo que piora.</p>
+      <p>O protocolo te ensina a reconhecer <strong>o ponto exato em que você ainda pode mudar o rumo</strong> — antes que vire incêndio.</p>
+      <p>Quando você entende o mapa, para de reagir no susto e começa a agir com estratégia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ TRANSFORMATION ═══════════════════════════════ -->
+
+<section class="transformation">
+  <div class="transformation-wrap">
+    <div class="section-label reveal">A diferença na prática</div>
+    <h2 class="section-title reveal">Sobrevivência vs. Transformação</h2>
+    <p class="section-sub reveal">A crise vai acontecer de novo. A diferença é como você vai estar preparada para ela.</p>
+    <div class="transformation-img reveal">
+      <img src="antes_depois.jpeg" alt="Sem o conhecimento vs. Com o Protocolo 7 Dias">
+    </div>
+    <div class="transformation-cta reveal">
+      <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-primary" style="margin-top:8px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Quero sair do modo sobrevivência
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ AUTHORITY ═══════════════════════════════ -->
+
 <section class="authority">
   <div class="authority-wrap">
     <div class="authority-img reveal">
-      <img src="IMG_9954.jpeg" alt="Dr. Fabio Schmidt">
+      <img src="IMG_9940.jpeg" alt="Dr. Fabio Schmidt">
       <div class="authority-img-label">
         <strong>Dr. Fabio Schmidt</strong>
         <span>Médico · CRM/SP 183549 · Especialista em Borderline</span>
@@ -338,67 +422,46 @@ footer a:hover{color:#E8B85A}
       <p>A maioria não precisava de mais amor. Precisava de <strong>um mapa para navegar dentro da crise</strong> — o que falar, o que não falar, quando agir e quando parar.</p>
       <p>Esse protocolo é o que eu ensino clinicamente, condensado em linguagem que você pode usar amanhã de manhã.</p>
       <div class="authority-stats">
-        <div class="authority-stat reveal"><strong>90k+</strong><span>seguidores especializados em Borderline</span></div>
-        <div class="authority-stat reveal"><strong>CRM/SP</strong><span>183549 · Médico ativo e regulamentado</span></div>
-        <div class="authority-stat reveal"><strong>100%</strong><span>foco em Transtorno de Personalidade Borderline</span></div>
-        <div class="authority-stat reveal"><strong>Clínica</strong><span>real — não teoria de livro</span></div>
+        <div class="authority-stat"><strong>90k+</strong><span>seguidores especializados em Borderline</span></div>
+        <div class="authority-stat"><strong>CRM/SP</strong><span>183549 · Médico ativo</span></div>
+        <div class="authority-stat"><strong>100%</strong><span>foco em Borderline</span></div>
+        <div class="authority-stat"><strong>Clínica</strong><span>real — não teoria de livro</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="transformation">
-  <div class="transformation-wrap">
-    <div class="section-label reveal">A diferença na prática</div>
-    <h2 class="section-title reveal">Quando você reage no automático vs. depois do protocolo</h2>
-    <p class="section-sub reveal">A crise vai acontecer de novo. A única diferença é como você vai estar preparada para ela.</p>
-    <div class="before-after reveal">
-      <div class="ba-col before">
-        <div class="ba-header"><span class="ba-icon">⚡</span><h3>Reagindo no automático</h3></div>
-        <div class="ba-item"><div class="ba-marker">✕</div><p>Tenta acalmar com argumentos e piora tudo</p></div>
-        <div class="ba-item"><div class="ba-marker">✕</div><p>Anda "pisando em ovos" o dia inteiro</p></div>
-        <div class="ba-item"><div class="ba-marker">✕</div><p>Cede por exaustão e se arrepende depois</p></div>
-        <div class="ba-item"><div class="ba-marker">✕</div><p>Sai de cada conversa mais destruída</p></div>
-        <div class="ba-item"><div class="ba-marker">✕</div><p>Congela diante de ameaças e acusações</p></div>
-      </div>
-      <div class="ba-col after">
-        <div class="ba-header"><span class="ba-icon">🛡️</span><h3>Depois do Protocolo 7 Dias</h3></div>
-        <div class="ba-item"><div class="ba-marker">✓</div><p>Responde com estratégia — não com instinto</p></div>
-        <div class="ba-item"><div class="ba-marker">✓</div><p>Interrompe a escalada antes de virar incêndio</p></div>
-        <div class="ba-item"><div class="ba-marker">✓</div><p>Impõe limite sem gerar guerra</p></div>
-        <div class="ba-item"><div class="ba-marker">✓</div><p>Sai da conversa em paz, sem culpa</p></div>
-        <div class="ba-item"><div class="ba-marker">✓</div><p>Sabe exatamente o que dizer em cada situação</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ═══════════════════════════════ MODULES + PRICE ═══════════════════════════════ -->
 
 <section class="inside">
   <div class="inside-wrap">
     <div class="inside-left">
       <div class="section-label">O que tem dentro</div>
       <h2 class="section-title">Cada módulo resolve um problema real</h2>
-      <p class="section-sub">Não é conteúdo genérico de autoajuda. É um protocolo clínico desenhado para a situação específica de quem convive com Borderline.</p>
+      <p class="section-sub">Protocolo clínico desenhado para a situação específica de quem convive com Borderline.</p>
       <div class="inside-modules">
-        <div class="module reveal"><div class="module-num">1</div><div class="module-body"><h4>Mapa da Crise</h4><p>Reconheça o ponto de virada antes que a situação escale. Identifique os gatilhos e o que acontece em cada fase da crise emocional.</p><div class="module-result">→ Você vai identificar a escalada 2 etapas antes de virar confronto</div></div></div>
-        <div class="module reveal"><div class="module-num">2</div><div class="module-body"><h4>Scripts Prontos para a Acusação e a Ameaça</h4><p>O que dizer — palavra por palavra — nas situações mais difíceis. Frases testadas clinicamente que desarmam sem confrontar.</p><div class="module-result">→ Você nunca mais vai congelar sem saber o que responder</div></div></div>
-        <div class="module reveal"><div class="module-num">3</div><div class="module-body"><h4>O que NÃO fazer</h4><p>Os erros mais comuns que intensificam tudo — explicar demais, discutir no pico, ameaçar sem cumprir.</p><div class="module-result">→ Você vai parar de alimentar o ciclo sem perceber</div></div></div>
-        <div class="module reveal"><div class="module-num">4</div><div class="module-body"><h4>Limites Estruturados</h4><p>Como impor firmeza sem virar guerra. A diferença entre limite e punição — e como comunicar o primeiro sem parecer o segundo.</p><div class="module-result">→ Você vai impor limite e sair sem culpa</div></div></div>
-        <div class="module reveal"><div class="module-num">5</div><div class="module-body"><h4>Protocolo de Emergência</h4><p>O passo a passo para as situações de risco: quando acionar ajuda, o que dizer para equipes de saúde, como proteger você e seu familiar.</p><div class="module-result">→ Você vai ter um plano quando mais precisar</div></div></div>
+        <div class="module reveal"><div class="module-num">1</div><div class="module-body"><h4>Mapa da Crise</h4><p>Reconheça o ponto de virada antes que a situação escale. Identifique os gatilhos e cada fase da crise.</p><div class="module-result">→ Você vai identificar a escalada 2 etapas antes do confronto</div></div></div>
+        <div class="module reveal"><div class="module-num">2</div><div class="module-body"><h4>Scripts Prontos para a Acusação e a Ameaça</h4><p>O que dizer — palavra por palavra — nas situações mais difíceis. Frases testadas clinicamente que desarmam sem confrontar.</p><div class="module-result">→ Nunca mais vai congelar sem saber o que responder</div></div></div>
+        <div class="module reveal"><div class="module-num">3</div><div class="module-body"><h4>O que NÃO fazer</h4><p>Os erros que intensificam tudo — explicar demais, discutir no pico, ameaçar sem cumprir.</p><div class="module-result">→ Pare de alimentar o ciclo sem perceber</div></div></div>
+        <div class="module reveal"><div class="module-num">4</div><div class="module-body"><h4>Limites Estruturados</h4><p>Como impor firmeza sem virar guerra. A diferença entre limite e punição — e como comunicar o primeiro.</p><div class="module-result">→ Imponha limite e saia sem culpa</div></div></div>
+        <div class="module reveal"><div class="module-num">5</div><div class="module-body"><h4>Protocolo de Emergência</h4><p>O passo a passo para situações de risco: quando acionar ajuda, o que dizer, como proteger vocês.</p><div class="module-result">→ Tenha um plano quando mais precisar</div></div></div>
       </div>
     </div>
     <div class="inside-cta">
+      <div class="deliverables-img reveal">
+        <img src="entregaveis.jpeg" alt="O que você recebe: 7 aulas, scripts, checklist, livro digital">
+      </div>
       <div class="price-card reveal">
         <div class="price-label">Investimento único</div>
         <div class="price-anchor"><span class="price-old">R$ 297</span><span class="price-badge-off">26% OFF</span></div>
         <div class="price-value"><sup>R$</sup>219</div>
         <div class="price-period">pagamento único · sem mensalidade</div>
         <ul class="price-includes">
-          <li>5 módulos em vídeo — acesso imediato</li>
-          <li>Scripts prontos em PDF para imprimir</li>
-          <li>Protocolo de emergência passo a passo</li>
-          <li>Acesso vitalício — assista quando quiser</li>
-          <li>Atualizações inclusas sem custo extra</li>
+          <li>7 aulas em vídeo — linguagem clara</li>
+          <li>Scripts prontos em PDF para crises</li>
+          <li>Checklist de manejo para imprimir</li>
+          <li>Livro digital exclusivo</li>
+          <li>Acesso vitalício + atualizações</li>
         </ul>
         <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-buy">Quero o protocolo para a próxima crise →</a>
       </div>
@@ -406,52 +469,53 @@ footer a:hover{color:#E8B85A}
         <div class="guarantee-icon">🛡️</div>
         <div class="guarantee-text">
           <h4>Garantia incondicional de 7 dias</h4>
-          <p>Se em 7 dias você sentir que o conteúdo não é para você, basta pedir reembolso. Sem perguntas, sem burocracia. O risco é zero.</p>
+          <p>Se em 7 dias você sentir que não é para você, basta pedir reembolso. Sem perguntas, sem burocracia.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ═══════════════════════════════ TESTIMONIALS ═══════════════════════════════ -->
+
 <section class="testimonials">
-  <div class="section-label" style="text-align:center">O que dizem sobre o conteúdo</div>
-  <h2 class="section-title">Quem já passou por isso reconhece</h2>
-  <p class="section-sub">Mensagens reais de pessoas que acompanham o trabalho do Dr. Fabio.</p>
-  <div class="testimonials-grid">
-    <div class="testimonial-card featured reveal">
-      <p class="testimonial-text">"Os conteúdos me despertaram para entender o que acontece nas emoções e o que posso fazer dentro disso. Aprendi muita coisa — como me regular, como não ser reativa mesmo quando foge do controle. Já encaminhei para outras pessoas, e tudo que ouvi de volta foi gratidão."</p>
-      <div class="testimonial-footer">
-        <div class="testimonial-avatar">A</div>
-        <div><div class="testimonial-author">Ana Paula</div><div class="testimonial-role">Seguidora · Instagram</div></div>
-        <div class="testimonial-stars">★★★★★</div>
-      </div>
+  <div class="section-label">O que diz quem confia</div>
+  <h2 class="section-title">Mensagens reais de quem acompanha o trabalho</h2>
+  <p class="section-sub">Prints de DMs e comentários de seguidores que aplicaram o conteúdo do Dr. Fabio.</p>
+  <div class="testimonials-layout">
+    <div class="testimonial-screenshot reveal">
+      <img src="depoimentos_dm.jpeg" alt="Depoimentos reais em DM">
     </div>
-    <div class="testimonial-card reveal">
-      <p class="testimonial-text">"No acolhimento que você oferece no conteúdo, a vida tem tido mais leveza. Um despertar de que as coisas podem ser melhores. Gratidão."</p>
-      <div class="testimonial-footer">
-        <div class="testimonial-avatar">M</div>
-        <div><div class="testimonial-author">Mariana</div><div class="testimonial-role">Seguidora · Instagram</div></div>
-        <div class="testimonial-stars">★★★★★</div>
+    <div class="testimonial-cards">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">"Os conteúdos me despertaram para entender o que acontece nas emoções e o que posso fazer dentro disso. Aprendi muita coisa — como me regular, como não ser reativa mesmo quando foge do controle."</p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">A</div>
+          <div><div class="testimonial-author">Ana Paula</div><div class="testimonial-role">Seguidora · Instagram</div></div>
+          <div class="testimonial-stars">★★★★★</div>
+        </div>
       </div>
-    </div>
-    <div class="testimonial-card reveal">
-      <p class="testimonial-text">"Adorei o conteúdo profissional. Acredito que isso me trará mais avanço no entendimento de tudo que envolve esse tema. Gratidão."</p>
-      <div class="testimonial-footer">
-        <div class="testimonial-avatar">C</div>
-        <div><div class="testimonial-author">Claudia</div><div class="testimonial-role">Seguidora · Instagram</div></div>
-        <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">"Sensacional o material. Isso é exatamente o que faltava — algo prático, sem rodeios."</p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">R</div>
+          <div><div class="testimonial-author">Roberta</div><div class="testimonial-role">Seguidora · Instagram</div></div>
+          <div class="testimonial-stars">★★★★★</div>
+        </div>
       </div>
-    </div>
-    <div class="testimonial-card reveal" style="background:#0D1B2A;border-color:rgba(201,150,58,.15)">
-      <p class="testimonial-text" style="color:rgba(255,255,255,.75)">"Sensacional o material. Isso é exatamente o que faltava — algo prático, sem rodeios."</p>
-      <div class="testimonial-footer" style="border-color:rgba(255,255,255,.08)">
-        <div class="testimonial-avatar">R</div>
-        <div><div class="testimonial-author" style="color:#E8B85A">Roberta</div><div class="testimonial-role" style="color:rgba(255,255,255,.4)">Seguidora · Instagram</div></div>
-        <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">"No acolhimento que você oferece no conteúdo, a vida tem tido mais leveza. Um despertar de que as coisas podem ser melhores."</p>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">M</div>
+          <div><div class="testimonial-author">Mariana</div><div class="testimonial-role">Seguidora · Instagram</div></div>
+          <div class="testimonial-stars">★★★★★</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════ FOR WHO ═══════════════════════════════ -->
 
 <section class="for-who">
   <div class="section-label" style="text-align:center">Para quem é?</div>
@@ -471,7 +535,7 @@ footer a:hover{color:#E8B85A}
     <div class="for-who-card no reveal">
       <h3>✕ Não é para você se…</h3>
       <ul>
-        <li>Você está buscando substituto para o acompanhamento médico do seu familiar</li>
+        <li>Você está buscando substituto para acompanhamento médico do seu familiar</li>
         <li>Espera uma solução sem nenhuma mudança de postura</li>
         <li>Seu familiar não tem histórico de desregulação emocional ou crises intensas</li>
         <li>Você está em situação de risco imediato — busque suporte presencial primeiro</li>
@@ -480,61 +544,78 @@ footer a:hover{color:#E8B85A}
   </div>
 </section>
 
+<!-- ═══════════════════════════════ FAQ ═══════════════════════════════ -->
+
 <section class="faq">
   <div class="section-label" style="text-align:center">Dúvidas frequentes</div>
   <h2 class="section-title">Perguntas que surgem antes de comprar</h2>
   <div class="faq-list">
-    <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Como vou acessar o conteúdo após a compra?<div class="faq-toggle">+</div></div><div class="faq-answer">Imediatamente após a confirmação do pagamento, você recebe um e-mail com o link de acesso. O conteúdo fica disponível na plataforma Hotmart, que funciona em celular, tablet e computador — sem necessidade de baixar nada.</div></div>
-    <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">O conteúdo é ao vivo ou gravado?<div class="faq-toggle">+</div></div><div class="faq-answer">É 100% gravado. Você assiste no seu ritmo, pausando e voltando quantas vezes precisar. Sem horário fixo, sem perder nada.</div></div>
-    <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">E se eu comprar e não gostar?<div class="faq-toggle">+</div></div><div class="faq-answer">Você tem 7 dias de garantia incondicional. Se por qualquer motivo sentir que o conteúdo não é para você, basta enviar um e-mail pedindo reembolso. O valor é devolvido integralmente, sem perguntas.</div></div>
-    <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Funciona mesmo sem diagnóstico oficial?<div class="faq-toggle">+</div></div><div class="faq-answer">Sim. O protocolo foi desenvolvido para situações de desregulação emocional intensa em ambiente familiar. Se os padrões descritos na página descrevem o que você vive — crises, acusações, ciclos de tensão — o conteúdo vai ser relevante independentemente de diagnóstico formal.</div></div>
-    <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Isso substitui o acompanhamento psiquiátrico do meu familiar?<div class="faq-toggle">+</div></div><div class="faq-answer">Não. O Protocolo 7 Dias é um conteúdo educativo para você — o familiar — desenvolver estratégias de manejo em casa. Ele complementa, mas nunca substitui, o tratamento médico e psicológico.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Como vou acessar o conteúdo após a compra?<div class="faq-toggle">+</div></div><div class="faq-answer">Imediatamente após a confirmação do pagamento, você recebe um e-mail com o link de acesso. O conteúdo fica disponível na plataforma Hotmart, que funciona em celular, tablet e computador.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">O conteúdo é ao vivo ou gravado?<div class="faq-toggle">+</div></div><div class="faq-answer">É 100% gravado. Você assiste no seu ritmo, pausando e voltando quantas vezes precisar. Sem horário fixo.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">E se eu comprar e não gostar?<div class="faq-toggle">+</div></div><div class="faq-answer">Você tem 7 dias de garantia incondicional. Se por qualquer motivo sentir que não é para você, basta pedir reembolso. O valor é devolvido integralmente, sem perguntas.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Funciona mesmo sem diagnóstico oficial?<div class="faq-toggle">+</div></div><div class="faq-answer">Sim. O protocolo foi desenvolvido para situações de desregulação emocional intensa em ambiente familiar. Se os padrões descritos aqui descrevem o que você vive, o conteúdo vai ser relevante independentemente de diagnóstico formal.</div></div>
+    <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Isso substitui o psiquiatra do meu familiar?<div class="faq-toggle">+</div></div><div class="faq-answer">Não. O Protocolo 7 Dias é conteúdo educativo para você — o familiar — desenvolver estratégias de manejo em casa. Complementa, mas nunca substitui, o tratamento médico e psicológico.</div></div>
     <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Por quanto tempo tenho acesso?<div class="faq-toggle">+</div></div><div class="faq-answer">O acesso é vitalício. Uma vez comprado, você assiste para sempre — incluindo todas as atualizações futuras.</div></div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════ URGENCY ═══════════════════════════════ -->
 
 <section class="urgency reveal">
   <div class="urgency-wrap">
     <h2>A próxima crise <em>vai acontecer.</em></h2>
     <p>A diferença é se você vai enfrentá-la no improviso — congelando, cedendo, saindo destruída — ou com um protocolo clínico na mão, sabendo exatamente o que fazer em cada etapa.</p>
     <div class="urgency-cta">
-      <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-primary" style="font-size:1.05rem;padding:18px 44px">
+      <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-primary" style="font-size:1.02rem;padding:18px 42px">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Quero estar preparada
       </a>
-      <div style="font-size:.82rem;color:#5A5A5A">R$ 219 · pagamento único · garantia de 7 dias</div>
+      <div style="font-size:.8rem;color:#5A5A5A">R$ 219 · pagamento único · garantia de 7 dias</div>
     </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════ FINAL CTA ═══════════════════════════════ -->
 
 <section class="final-cta">
   <h2>Você já carregou isso <em>sozinha por tempo demais.</em></h2>
   <p>Não porque é fraca. Porque estava sem as ferramentas certas. Agora você tem onde buscar.</p>
   <div class="final-cta-wrap">
-    <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-primary" style="font-size:1.08rem;padding:20px 50px">
+    <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-primary" style="font-size:1.05rem;padding:20px 48px">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       Quero o Protocolo 7 Dias
     </a>
     <div class="final-price">Acesso imediato · <strong>R$ 219</strong> · Garantia de 7 dias</div>
   </div>
+  <div class="final-mockup reveal">
+    <img src="mockup_curso.jpeg" alt="Protocolo 7 Dias — Curso + Livro Digital">
+  </div>
 </section>
 
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+
 <footer>
-  <p><strong style="color:rgba(255,255,255,.45)">Protocolo 7 Dias</strong> · Dr. Fabio Schmidt · CRM/SP 183549</p>
+  <p><img src="logo_light.png" alt="Protocolo 7 Dias" style="height:36px;vertical-align:middle;opacity:.5;margin-bottom:8px;display:block;margin:0 auto 10px"></p>
+  <p><strong style="color:rgba(255,255,255,.4)">Protocolo 7 Dias</strong> · Dr. Fabio Schmidt · CRM/SP 183549</p>
   <p style="margin-top:6px">Este conteúdo é educativo e não substitui acompanhamento médico ou psicológico. Em situação de emergência, procure serviços locais de saúde.</p>
   <p style="margin-top:8px"><a href="mailto:drfabioschmidt@gmail.com">drfabioschmidt@gmail.com</a> &nbsp;·&nbsp; <a href="#">Política de Privacidade</a> &nbsp;·&nbsp; <a href="#">Termos de Uso</a></p>
 </footer>
 
 <script>
+// Sticky bar
 window.addEventListener('scroll',()=>{
-  document.getElementById('stickyBar').classList.toggle('visible',window.scrollY>300)
+  document.getElementById('stickyBar').classList.toggle('visible',window.scrollY>600)
 });
+
+// Reveal on scroll
 const obs=new IntersectionObserver((entries)=>{
-  entries.forEach((e,i)=>{
-    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*75);obs.unobserve(e.target)}
+  entries.forEach((e)=>{
+    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
   })
-},{threshold:.1});
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// FAQ toggle
 function toggleFaq(el){
   const item=el.parentElement;
   const isOpen=item.classList.contains('open');
