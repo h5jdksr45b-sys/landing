@@ -84,10 +84,9 @@ body{font-family:'Lato',sans-serif;color:#1A1A1A;background:#FAF7F0;overflow-x:h
 .cycle-section .section-label{color:#E8B85A}
 .cycle-section .section-title{color:#fff;max-width:600px;margin:0 auto 14px}
 .cycle-section .section-sub{color:rgba(255,255,255,.5);max-width:480px;margin:0 auto 48px}
-.cycle-images{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.cycle-img{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 16px 48px rgba(0,0,0,.3);transition:transform .3s}
-.cycle-img:hover{transform:scale(1.02)}
-.cycle-img img{width:100%;display:block}
+.cycle-img-single{max-width:600px;margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 16px 48px rgba(0,0,0,.3);transition:transform .3s}
+.cycle-img-single:hover{transform:scale(1.02)}
+.cycle-img-single img{width:100%;display:block}
 
 /* ── QUOTE ── */
 .quote-section{background:#F3EDE0;padding:70px 40px;text-align:center;position:relative;overflow:hidden}
@@ -105,7 +104,7 @@ body{font-family:'Lato',sans-serif;color:#1A1A1A;background:#FAF7F0;overflow-x:h
 .escalation-content p{font-size:.93rem;color:#5A5A5A;line-height:1.8;margin-bottom:14px}
 .escalation-content p strong{color:#0D1B2A}
 
-/* ── TRANSFORMATION BEFORE/AFTER ── */
+/* ── TRANSFORMATION ── */
 .transformation{background:#0D1B2A;padding:90px 24px}
 .transformation-wrap{max-width:960px;margin:0 auto;text-align:center}
 .transformation .section-label{color:#E8B85A}
@@ -174,13 +173,11 @@ body{font-family:'Lato',sans-serif;color:#1A1A1A;background:#FAF7F0;overflow-x:h
 .testimonials .section-label{text-align:center;color:#E8B85A}
 .testimonials .section-title{text-align:center;margin:0 auto 14px;max-width:560px;color:#fff}
 .testimonials .section-sub{text-align:center;margin:0 auto 48px;max-width:480px;color:rgba(255,255,255,.45)}
-.testimonials-layout{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
-.testimonial-screenshot{border-radius:16px;overflow:hidden;border:1px solid rgba(201,150,58,.15);box-shadow:0 24px 64px rgba(0,0,0,.4)}
-.testimonial-screenshot img{width:100%;display:block}
-.testimonial-cards{display:flex;flex-direction:column;gap:16px}
-.testimonial-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:24px 22px;position:relative;transition:transform .3s}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:1000px;margin:0 auto}
+.testimonial-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:28px 24px;position:relative;transition:transform .3s}
 .testimonial-card:hover{transform:translateY(-3px)}
 .testimonial-card::before{content:’\201C’;position:absolute;top:14px;right:18px;font-family:‘Playfair Display’,serif;font-size:3rem;color:rgba(201,150,58,.1);line-height:1}
+.testimonial-card.featured{grid-column:span 2;background:rgba(201,150,58,.06);border-color:rgba(201,150,58,.15)}
 .testimonial-text{font-size:.9rem;color:rgba(255,255,255,.72);line-height:1.7;margin-bottom:16px;position:relative;z-index:1}
 .testimonial-footer{display:flex;align-items:center;gap:10px;border-top:1px solid rgba(255,255,255,.06);padding-top:12px}
 .testimonial-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#C9963A,#E8B85A);display:flex;align-items:center;justify-content:center;font-family:‘Playfair Display’,serif;font-size:.85rem;font-weight:700;color:#fff;flex-shrink:0}
@@ -250,15 +247,14 @@ footer a:hover{color:#E8B85A}
 @media(max-width:960px){
 .pain-visual{grid-template-columns:1fr;gap:32px}
 .pain-img{max-width:480px;margin:0 auto}
-.cycle-images{grid-template-columns:1fr;max-width:500px}
 .escalation-wrap{grid-template-columns:1fr;gap:36px}
 .escalation-img{max-width:500px}
 .inside-wrap{grid-template-columns:1fr;gap:40px}
 .inside-cta{position:static}
 .authority-wrap{grid-template-columns:1fr;gap:40px}
 .authority-img{max-width:480px}
-.testimonials-layout{grid-template-columns:1fr;max-width:500px;margin:0 auto}
 .for-who-grid{grid-template-columns:1fr}
+.testimonial-card.featured{grid-column:span 1}
 }
 @media(max-width:600px){
 .hero{padding:60px 20px 48px}
@@ -286,7 +282,7 @@ footer a:hover{color:#E8B85A}
 <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
 
 <section class="hero">
-  <img src="logo_dark.png" alt="Protocolo 7 Dias" class="hero-logo">
+  <img src="IMG_9520.png" alt="Protocolo 7 Dias" class="hero-logo">
   <div class="hero-badge">Protocolo Clínico — Dr. Fabio Schmidt</div>
   <h1>Sua filha tem Borderline —<em>e você está se destruindo tentando ajudá-la sem saber como.</em></h1>
   <p class="hero-sub">
@@ -334,7 +330,7 @@ footer a:hover{color:#E8B85A}
   <p class="section-sub">Familiares de pessoas com Borderline vivem padrões que se repetem — e se destroem tentando resolver no improviso.</p>
   <div class="pain-visual">
     <div class="pain-img reveal">
-      <img src="ciclo_problema.jpeg" alt="Você não é o problema, mas pode estar alimentando">
+      <img src="IMG_0296.jpeg" alt="Você não é o problema, mas pode estar alimentando o ciclo">
     </div>
     <div class="pain-text-cards">
       <div class="pain-card reveal"><div class="pain-icon">😰</div><h3>Crises que escalam do nada</h3><p>Uma conversa comum vira confronto em segundos. Você não entende o gatilho e fica sem chão.</p></div>
@@ -345,19 +341,14 @@ footer a:hover{color:#E8B85A}
   </div>
 </section>
 
-<!-- ═══════════════════════════════ CYCLE VISUAL ═══════════════════════════════ -->
+<!-- ═══════════════════════════════ CYCLE / BRAIN ═══════════════════════════════ -->
 
 <section class="cycle-section">
   <div class="section-label">Por que a crise sempre volta</div>
   <h2 class="section-title">O cérebro registra: "essa intensidade funcionou"</h2>
   <p class="section-sub">Não é maldade. É um padrão neurológico que se repete — e que você pode aprender a interromper.</p>
-  <div class="cycle-images">
-    <div class="cycle-img reveal">
-      <img src="ciclo_5fases.jpeg" alt="Ciclo da crise em 5 fases">
-    </div>
-    <div class="cycle-img reveal">
-      <img src="cerebro_alarme.jpeg" alt="Alarme ativado: a lógica desaparece">
-    </div>
+  <div class="cycle-img-single reveal">
+    <img src="IMG_0292.jpeg" alt="Alarme ativado: a lógica desaparece">
   </div>
 </section>
 
@@ -373,7 +364,7 @@ footer a:hover{color:#E8B85A}
 <section class="escalation">
   <div class="escalation-wrap">
     <div class="escalation-img reveal">
-      <img src="curva_escalada.jpeg" alt="Curva da escalada emocional em 5 fases">
+      <img src="IMG_0297.jpeg" alt="Curva da escalada emocional em 5 fases">
     </div>
     <div class="escalation-content reveal">
       <div class="section-label">O que o Módulo 1 ensina</div>
@@ -393,7 +384,7 @@ footer a:hover{color:#E8B85A}
     <h2 class="section-title reveal">Sobrevivência vs. Transformação</h2>
     <p class="section-sub reveal">A crise vai acontecer de novo. A diferença é como você vai estar preparada para ela.</p>
     <div class="transformation-img reveal">
-      <img src="antes_depois.jpeg" alt="Sem o conhecimento vs. Com o Protocolo 7 Dias">
+      <img src="IMG_0290.jpeg" alt="Sem o conhecimento vs. Com o Protocolo 7 Dias">
     </div>
     <div class="transformation-cta reveal">
       <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-primary" style="margin-top:8px">
@@ -449,7 +440,7 @@ footer a:hover{color:#E8B85A}
     </div>
     <div class="inside-cta">
       <div class="deliverables-img reveal">
-        <img src="entregaveis.jpeg" alt="O que você recebe: 7 aulas, scripts, checklist, livro digital">
+        <img src="IMG_0300.jpeg" alt="O que você recebe: 7 aulas, scripts, checklist, livro digital">
       </div>
       <div class="price-card reveal">
         <div class="price-label">Investimento único</div>
@@ -480,36 +471,31 @@ footer a:hover{color:#E8B85A}
 
 <section class="testimonials">
   <div class="section-label">O que diz quem confia</div>
-  <h2 class="section-title">Mensagens reais de quem acompanha o trabalho</h2>
-  <p class="section-sub">Prints de DMs e comentários de seguidores que aplicaram o conteúdo do Dr. Fabio.</p>
-  <div class="testimonials-layout">
-    <div class="testimonial-screenshot reveal">
-      <img src="depoimentos_dm.jpeg" alt="Depoimentos reais em DM">
+  <h2 class="section-title">Quem já passou por isso reconhece</h2>
+  <p class="section-sub">Mensagens reais de pessoas que acompanham o trabalho do Dr. Fabio.</p>
+  <div class="testimonials-grid">
+    <div class="testimonial-card featured reveal">
+      <p class="testimonial-text">"Os conteúdos me despertaram para entender o que acontece nas emoções e o que posso fazer dentro disso. Aprendi muita coisa — como me regular, como não ser reativa mesmo quando foge do controle. Já encaminhei para outras pessoas, e tudo que ouvi de volta foi gratidão."</p>
+      <div class="testimonial-footer">
+        <div class="testimonial-avatar">A</div>
+        <div><div class="testimonial-author">Ana Paula</div><div class="testimonial-role">Seguidora · Instagram</div></div>
+        <div class="testimonial-stars">★★★★★</div>
+      </div>
     </div>
-    <div class="testimonial-cards">
-      <div class="testimonial-card reveal">
-        <p class="testimonial-text">"Os conteúdos me despertaram para entender o que acontece nas emoções e o que posso fazer dentro disso. Aprendi muita coisa — como me regular, como não ser reativa mesmo quando foge do controle."</p>
-        <div class="testimonial-footer">
-          <div class="testimonial-avatar">A</div>
-          <div><div class="testimonial-author">Ana Paula</div><div class="testimonial-role">Seguidora · Instagram</div></div>
-          <div class="testimonial-stars">★★★★★</div>
-        </div>
+    <div class="testimonial-card reveal">
+      <p class="testimonial-text">"Sensacional o material. Isso é exatamente o que faltava — algo prático, sem rodeios."</p>
+      <div class="testimonial-footer">
+        <div class="testimonial-avatar">R</div>
+        <div><div class="testimonial-author">Roberta</div><div class="testimonial-role">Seguidora · Instagram</div></div>
+        <div class="testimonial-stars">★★★★★</div>
       </div>
-      <div class="testimonial-card reveal">
-        <p class="testimonial-text">"Sensacional o material. Isso é exatamente o que faltava — algo prático, sem rodeios."</p>
-        <div class="testimonial-footer">
-          <div class="testimonial-avatar">R</div>
-          <div><div class="testimonial-author">Roberta</div><div class="testimonial-role">Seguidora · Instagram</div></div>
-          <div class="testimonial-stars">★★★★★</div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal">
-        <p class="testimonial-text">"No acolhimento que você oferece no conteúdo, a vida tem tido mais leveza. Um despertar de que as coisas podem ser melhores."</p>
-        <div class="testimonial-footer">
-          <div class="testimonial-avatar">M</div>
-          <div><div class="testimonial-author">Mariana</div><div class="testimonial-role">Seguidora · Instagram</div></div>
-          <div class="testimonial-stars">★★★★★</div>
-        </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <p class="testimonial-text">"No acolhimento que você oferece no conteúdo, a vida tem tido mais leveza. Um despertar de que as coisas podem ser melhores. Gratidão."</p>
+      <div class="testimonial-footer">
+        <div class="testimonial-avatar">M</div>
+        <div><div class="testimonial-author">Mariana</div><div class="testimonial-role">Seguidora · Instagram</div></div>
+        <div class="testimonial-stars">★★★★★</div>
       </div>
     </div>
   </div>
@@ -587,35 +573,27 @@ footer a:hover{color:#E8B85A}
     </a>
     <div class="final-price">Acesso imediato · <strong>R$ 219</strong> · Garantia de 7 dias</div>
   </div>
-  <div class="final-mockup reveal">
-    <img src="mockup_curso.jpeg" alt="Protocolo 7 Dias — Curso + Livro Digital">
-  </div>
 </section>
 
 <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
 
 <footer>
-  <p><img src="logo_light.png" alt="Protocolo 7 Dias" style="height:36px;vertical-align:middle;opacity:.5;margin-bottom:8px;display:block;margin:0 auto 10px"></p>
+  <p><img src="IMG_9520.png" alt="Protocolo 7 Dias" style="height:36px;vertical-align:middle;opacity:.4;display:block;margin:0 auto 10px"></p>
   <p><strong style="color:rgba(255,255,255,.4)">Protocolo 7 Dias</strong> · Dr. Fabio Schmidt · CRM/SP 183549</p>
   <p style="margin-top:6px">Este conteúdo é educativo e não substitui acompanhamento médico ou psicológico. Em situação de emergência, procure serviços locais de saúde.</p>
   <p style="margin-top:8px"><a href="mailto:drfabioschmidt@gmail.com">drfabioschmidt@gmail.com</a> &nbsp;·&nbsp; <a href="#">Política de Privacidade</a> &nbsp;·&nbsp; <a href="#">Termos de Uso</a></p>
 </footer>
 
 <script>
-// Sticky bar
 window.addEventListener('scroll',()=>{
   document.getElementById('stickyBar').classList.toggle('visible',window.scrollY>600)
 });
-
-// Reveal on scroll
 const obs=new IntersectionObserver((entries)=>{
   entries.forEach((e)=>{
     if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
   })
 },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-// FAQ toggle
 function toggleFaq(el){
   const item=el.parentElement;
   const isOpen=item.classList.contains('open');
