@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Protocolo da Crise — Dr. Fábio Schmidt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EFE6;
+    --paper-2:#EDE6D8;
+    --ink:#1A1714;
+    --ink-soft:#3A332B;
+    --ink-mute:#6B6256;
+    --rule:#C9BFA8;
+    --red:#B01B1B;
+    --red-deep:#7A1010;
+    --gold:#9C7A3A;
+    --gold-soft:#C8A96E;
+    --cream-line:#E4DBC7;
+  }
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+background:#2a2622;
+font-family:‘Fraunces’, Georgia, serif;
+color:var(–ink);
+-webkit-font-smoothing:antialiased;
+}
+
+/* –– PAGE (A4) –– */
+.page{
+width:210mm;
+height:297mm;
+margin:12mm auto;
+background:var(–paper);
+position:relative;
+overflow:hidden;
+box-shadow:0 30px 80px rgba(0,0,0,.5);
+padding:22mm 20mm 22mm 22mm;
+background-image:
+radial-gradient(ellipse at 20% 10%, rgba(156,122,58,.04), transparent 50%),
+radial-gradient(ellipse at 90% 95%, rgba(176,27,27,.03), transparent 40%),
+url(“data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0.035 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>”);
+}
+
+/* page number + running head */
+.page::after{
+content:attr(data-page);
+position:absolute;
+bottom:10mm;
+right:20mm;
+font-family:‘Inter’,sans-serif;
+font-size:8.5pt;
+letter-spacing:.25em;
+color:var(–ink-mute);
+font-weight:500;
+}
+.runhead{
+position:absolute;
+top:10mm;
+left:22mm;
+right:20mm;
+display:flex;
+justify-content:space-between;
+font-family:‘Inter’,sans-serif;
+font-size:7.5pt;
+letter-spacing:.3em;
+text-transform:uppercase;
+color:var(–ink-mute);
+font-weight:500;
+padding-bottom:3mm;
+border-bottom:.5px solid var(–rule);
+}
+.runhead .mark{color:var(–red);font-weight:600}
+
+/* –– COVER –– */
+.cover{
+padding:0;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+background:var(–paper);
+background-image:
+linear-gradient(180deg, transparent 0%, transparent 55%, rgba(176,27,27,.04) 100%),
+url(“data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0.045 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>”);
+}
+.cover::after{content:none}
+
+.cover-top{
+padding:24mm 24mm 0 24mm;
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+}
+.monogram{
+font-family:‘Fraunces’,serif;
+font-style:italic;
+font-weight:400;
+font-size:22pt;
+color:var(–ink);
+letter-spacing:-.02em;
+}
+.monogram span{color:var(–red);font-weight:600}
+.cover-meta{
+font-family:‘Inter’,sans-serif;
+font-size:8pt;
+letter-spacing:.35em;
+text-transform:uppercase;
+color:var(–ink-mute);
+text-align:right;
+line-height:1.9;
+}
+
+.cover-center{
+padding:0 24mm;
+margin-top:60mm;
+}
+.eyebrow{
+font-family:‘Inter’,sans-serif;
+font-size:9pt;
+font-weight:600;
+letter-spacing:.4em;
+text-transform:uppercase;
+color:var(–red);
+margin-bottom:8mm;
+display:flex;
+align-items:center;
+gap:4mm;
+}
+.eyebrow::before{
+content:””;
+width:14mm;
+height:1.5px;
+background:var(–red);
+}
+.cover-title{
+font-family:‘Fraunces’,serif;
+font-weight:400;
+font-size:72pt;
+line-height:.92;
+letter-spacing:-.035em;
+color:var(–ink);
+margin-bottom:10mm;
+}
+.cover-title em{
+font-style:italic;
+font-weight:300;
+color:var(–red-deep);
+}
+.cover-sub{
+font-family:‘Fraunces’,serif;
+font-style:italic;
+font-weight:300;
+font-size:18pt;
+line-height:1.3;
+color:var(–ink-soft);
+max-width:140mm;
+letter-spacing:-.01em;
+}
+
+.cover-rule{
+margin:14mm 24mm 0 24mm;
+height:1px;
+background:linear-gradient(90deg, var(–rule) 0%, transparent 100%);
+}
+
+.cover-bottom{
+padding:0 24mm 22mm 24mm;
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+}
+.author{
+font-family:‘Fraunces’,serif;
+}
+.author .name{
+font-size:15pt;
+font-weight:500;
+color:var(–ink);
+letter-spacing:-.01em;
+}
+.author .role{
+font-family:‘Inter’,sans-serif;
+font-size:8pt;
+font-weight:500;
+letter-spacing:.3em;
+text-transform:uppercase;
+color:var(–ink-mute);
+margin-top:2mm;
+}
+.cover-audience{
+font-family:‘Fraunces’,serif;
+font-style:italic;
+font-size:10pt;
+color:var(–ink-mute);
+text-align:right;
+max-width:70mm;
+line-height:1.5;
+}
+
+/* ornament */
+.ornament{
+position:absolute;
+top:50%;
+right:24mm;
+transform:translateY(-50%);
+width:12mm;
+height:120mm;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+align-items:center;
+}
+.ornament .line{width:.5px;height:100%;background:var(–rule)}
+.ornament .dot{width:4mm;height:4mm;border:1px solid var(–red);border-radius:50%;background:var(–paper)}
+
+/* –– INDEX –– */
+.section-label{
+font-family:‘Inter’,sans-serif;
+font-size:8.5pt;
+font-weight:600;
+letter-spacing:.4em;
+text-transform:uppercase;
+color:var(–red);
+margin-bottom:6mm;
+}
+.page-title{
+font-family:‘Fraunces’,serif;
+font-weight:400;
+font-size:42pt;
+line-height:.95;
+letter-spacing:-.03em;
+color:var(–ink);
+margin-bottom:3mm;
+}
+.page-title em{font-style:italic;font-weight:300;color:var(–red-deep)}
+.page-subtitle{
+font-family:‘Fraunces’,serif;
+font-style:italic;
+font-weight:300;
+font-size:14pt;
+color:var(–ink-soft);
+margin-bottom:14mm;
+line-height:1.3;
+}
+
+.toc{margin-top:8mm}
+.toc-item{
+display:grid;
+grid-template-columns:18mm 1fr 14mm;
+align-items:baseline;
+padding:5mm 0;
+border-bottom:.5px solid var(–cream-line);
+gap:6mm;
+}
+.toc-item:first-child{border-top:.5px solid var(–cream-line)}
+.toc-num{
+font-family:‘JetBrains Mono’,monospace;
+font-size:9pt;
+color:var(–red);
+letter-spacing:.1em;
+font-weight:500;
+}
+.toc-name{
+font-family:‘Fraunces’,serif;
+font-size:13pt;
+color:var(–ink);
+font-weight:400;
+letter-spacing:-.01em;
+}
+.toc-name em{font-style:italic;color:var(–ink-soft);font-weight:300}
+.toc-page{
+font-family:‘JetBrains Mono’,monospace;
+font-size:9pt;
+color:var(–ink-mute);
+text-align:right;
+}
+
+.clinical-note{
+margin-top:14mm;
+padding:6mm 7mm;
+background:var(–paper-2);
+border-left:2px solid var(–gold);
+font-family:‘Fraunces’,serif;
+font-style:italic;
+font-size:10pt;
+color:var(–ink-soft);
+line-height:1.5;
+}
+.clinical-note strong{
+font-family:‘Inter’,sans-serif;
+font-style:normal;
+font-weight:600;
+font-size:8pt;
+letter-spacing:.3em;
+text-transform:uppercase;
+color:var(–gold);
+display:block;
+margin-bottom:2mm;
+}
+
+/* –– CONTENT PAGES –– */
+.section-opener .page-title{font-size:46pt}
+.section-n{
+font-family:‘JetBrains Mono’,monospace;
+font-size:10pt;
+letter-spacing:.2em;
+color:var(–red);
+font-weight:500;
+margin-bottom:4mm;
+display:block;
+}
+
+p.body{
+font-family:‘Fraunces’,serif;
+font-weight:400;
+font-size:11.5pt;
+line-height:1.55;
+color:var(–ink);
+margin-bottom:4.5mm;
+text-align:justify;
+hyphens:auto;
+}
+p.body.lead{
+font-size:13pt;
+font-style:italic;
+font-weight:300;
+color:var(–ink-soft);
+line-height:1.45;
+margin-bottom:7mm;
+text-align:left;
+}
+p.body strong{font-weight:600;color:var(–ink)}
+p.body em{font-style:italic}
+
+.drop::first-letter{
+font-family:‘Fraunces’,serif;
+font-weight:400;
+font-size:46pt;
+line-height:.85;
+float:left;
+padding:3mm 3mm 0 0;
+color:var(–red);
+font-style:italic;
+}
+
+h3.sub{
+font-family:‘Fraunces’,serif;
+font-weight:500;
+font-style:italic;
+font-size:18pt;
+color:var(–ink);
+letter-spacing:-.015em;
+margin:8mm 0 4mm 0;
+line-height:1.15;
+}
+h4.subsub{
+font-family:‘Inter’,sans-serif;
+font-weight:600;
+font-size:8.5pt;
+letter-spacing:.3em;
+text-transform:uppercase;
+color:var(–red);
+margin:6mm 0 3mm 0;
+}
+
+.divider{
+height:.5px;
+background:var(–rule);
+margin:6mm 0;
+position:relative;
+}
+.divider::before{
+content:“❧”;
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+background:var(–paper);
+padding:0 4mm;
+color:var(–gold);
+font-size:12pt;
+}
+
+/* phase block */
+.phase{
+margin:6mm 0 7mm;
+padding-left:8mm;
+border-left:2px solid var(–red);
+position:relative;
+}
+.phase-tag{
+font-family:‘JetBrains Mono’,monospace;
+font-size:8.5pt;
+letter-spacing:.2em;
+color:var(–red);
+font-weight:500;
+display:block;
+margin-bottom:1.5mm;
+}
+.phase-title{
+font-family:‘Fraunces’,serif;
+font-weight:500;
+font-size:20pt;
+color:var(–ink);
+letter-spacing:-.02em;
+margin-bottom:1mm;
+line-height:1.05;
+}
+.phase-time{
+font-family:‘Fraunces’,serif;
+font-style:italic;
+font-size:11pt;
+color:var(–ink-mute);
+margin-bottom:4mm;
+}
+.phase h5{
+font-family:‘Inter’,sans-serif;
+font-weight:600;
+font-size:8pt;
+letter-spacing:.25em;
+text-transform:uppercase;
+color:var(–ink-soft);
+margin:4mm 0 1.5mm 0;
+}
+.phase p{
+font-family:‘Fraunces’,serif;
+font-size:11pt;
+line-height:1.5;
+color:var(–ink);
+margin-bottom:2mm;
+}
+
+/* callout */
+.callout{
+margin:6mm 0;
+padding:6mm 7mm 6mm 7mm;
+background:var(–paper-2);
+border-left:3px solid var(–gold);
+position:relative;
+}
+.callout .c-label{
+font-family:‘Inter’,sans-serif;
+font-weight:700;
+font-size:7.5pt;
+letter-spacing:.35em;
+text-transform:uppercase;
+color:var(–gold);
+margin-bottom:2mm;
+}
+.callout p{
+font-family:‘Fraunces’,serif;
+font-style:italic;
+font-size:11.5pt;
+line-height:1.45;
+color:var(–ink);
+}
+
+.callout.red{border-left-color:var(–red);background:#F0E4DE}
+.callout.red .c-label{color:var(–red)}
+
+/* phrase blocks */
+.phrase-block{
+margin:5mm 0 5mm;
+padding:5mm 6mm;
+background:var(–paper-2);
+border-left:2px solid var(–rule);
+}
+.phrase-block.destroy{border-left-color:var(–red)}
+.phrase-block.help{border-left-color:var(–gold)}
+.phrase-quote{
+font-family:‘Fraunces’,serif;
+font-style:italic;
+font-weight:500;
+font-size:14pt;
+color:var(–ink);
+line-height:1.25;
+margin-bottom:3mm;
+letter-spacing:-.01em;
+}
+.phrase-quote::before{content:”“”;color:var(–red);margin-right:1mm}
+.phrase-quote::after{content:”””;color:var(–red);margin-left:1mm}
+.phrase-block.help .phrase-quote::before,
+.phrase-block.help .phrase-quote::after{color:var(–gold)}
+.phrase-label{
+font-family:‘Inter’,sans-serif;
+font-size:7.5pt;
+font-weight:700;
+letter-spacing:.25em;
+text-transform:uppercase;
+color:var(–ink-mute);
+display:block;
+margin-top:2mm;
+margin-bottom:1mm;
+}
+.phrase-label.why{color:var(–red-deep)}
+.phrase-block.help .phrase-label.why{color:var(–gold)}
+.phrase-text{
+font-family:‘Fraunces’,serif;
+font-size:10.5pt;
+line-height:1.45;
+color:var(–ink-soft);
+margin-bottom:0;
+}
+.clinical-example{
+margin-top:3mm;
+padding:3mm 4mm;
+background:rgba(255,255,255,.45);
+border-top:.5px dashed var(–rule);
+font-family:‘Fraunces’,serif;
+font-size:10pt;
+font-style:italic;
+color:var(–ink-soft);
+line-height:1.45;
+}
+.clinical-example strong{
+font-family:‘Inter’,sans-serif;
+font-style:normal;
+font-weight:700;
+font-size:7pt;
+letter-spacing:.3em;
+text-transform:uppercase;
+color:var(–gold);
+display:block;
+margin-bottom:1.5mm;
+}
+
+/* protocolo minuto */
+.protocol-block{
+margin:5mm 0 6mm;
+padding:5mm 0;
+border-top:.5px solid var(–rule);
+}
+.protocol-head{
+display:flex;
+align-items:baseline;
+gap:6mm;
+margin-bottom:4mm;
+}
+.protocol-time{
+font-family:‘Fraunces’,serif;
+font-weight:400;
+font-size:26pt;
+color:var(–red);
+letter-spacing:-.02em;
+line-height:1;
+font-style:italic;
+}
+.protocol-name{
+font-family:‘Inter’,sans-serif;
+font-size:9pt;
+font-weight:600;
+letter-spacing:.3em;
+text-transform:uppercase;
+color:var(–ink);
+}
+.checklist{list-style:none;padding:0;margin:0}
+.checklist li{
+font-family:‘Fraunces’,serif;
+font-size:11pt;
+line-height:1.45;
+color:var(–ink);
+padding:2.5mm 0 2.5mm 8mm;
+position:relative;
+border-bottom:.5px dotted var(–cream-line);
+}
+.checklist li:last-child{border-bottom:none}
+.checklist.do li::before{
+content:“✓”;
+position:absolute;
+left:0;
+top:2.5mm;
+color:var(–gold);
+font-weight:700;
+font-family:‘Inter’,sans-serif;
+font-size:11pt;
+}
+.checklist.dont li::before{
+content:“✕”;
+position:absolute;
+left:0;
+top:2.5mm;
+color:var(–red);
+font-weight:700;
+font-family:‘Inter’,sans-serif;
+font-size:11pt;
+}
+.checklist-title{
+font-family:‘Inter’,sans-serif;
+font-weight:700;
+font-size:7.5pt;
+letter-spacing:.3em;
+text-transform:uppercase;
+color:var(–ink-soft);
+margin-bottom:2mm;
+margin-top:4mm;
+}
+.checklist-title.do{color:var(–gold)}
+.checklist-title.dont{color:var(–red)}
+
+/* –– FINAL CTA PAGE –– */
+.cta-page{
+background:#F4EFE6;
+background-image:
+radial-gradient(ellipse at 50% 30%, rgba(176,27,27,.07), transparent 60%),
+url(“data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='11'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>”);
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:24mm;
+text-align:left;
+}
+.cta-page::after{content:none}
+.cta-eyebrow{
+font-family:‘Inter’,sans-serif;
+font-size:9pt;
+font-weight:700;
+letter-spacing:.4em;
+text-transform:uppercase;
+color:var(–red);
+margin-bottom:6mm;
+display:flex;
+align-items:center;
+gap:4mm;
+}
+.cta-eyebrow::before{content:””;width:14mm;height:1.5px;background:var(–red)}
+.cta-title{
+font-family:‘Fraunces’,serif;
+font-weight:400;
+font-size:58pt;
+line-height:.95;
+letter-spacing:-.035em;
+color:var(–ink);
+margin-bottom:8mm;
+}
+.cta-title em{font-style:italic;font-weight:300;color:var(–red-deep)}
+.cta-lead{
+font-family:‘Fraunces’,serif;
+font-style:italic;
+font-weight:300;
+font-size:16pt;
+line-height:1.4;
+color:var(–ink-soft);
+margin-bottom:10mm;
+max-width:155mm;
+}
+.cta-body{
+font-family:‘Fraunces’,serif;
+font-size:12pt;
+line-height:1.55;
+color:var(–ink);
+margin-bottom:6mm;
+max-width:155mm;
+}
+.cta-list{
+list-style:none;
+padding:0;
+margin:0 0 10mm 0;
+border-top:.5px solid var(–rule);
+}
+.cta-list li{
+font-family:‘Fraunces’,serif;
+font-size:12pt;
+line-height:1.4;
+color:var(–ink);
+padding:3.5mm 0 3.5mm 10mm;
+border-bottom:.5px solid var(–rule);
+position:relative;
+}
+.cta-list li::before{
+content:”—”;
+position:absolute;
+left:0;
+top:3.5mm;
+color:var(–gold);
+font-weight:600;
+}
+.cta-list li strong{font-weight:600;color:var(–red-deep)}
+
+.cta-button-block{
+margin-top:4mm;
+padding:8mm 10mm;
+background:var(–ink);
+color:var(–paper);
+text-decoration:none;
+display:block;
+border-radius:2px;
+position:relative;
+overflow:hidden;
+}
+.cta-button-block::before{
+content:””;
+position:absolute;
+top:0;left:0;
+width:4mm;
+height:100%;
+background:var(–red);
+}
+.cta-btn-eyebrow{
+font-family:‘Inter’,sans-serif;
+font-size:8pt;
+font-weight:600;
+letter-spacing:.4em;
+text-transform:uppercase;
+color:var(–gold-soft);
+margin-bottom:3mm;
+}
+.cta-btn-title{
+font-family:‘Fraunces’,serif;
+font-weight:400;
+font-size:22pt;
+line-height:1.1;
+letter-spacing:-.02em;
+color:var(–paper);
+margin-bottom:2mm;
+}
+.cta-btn-title em{font-style:italic;color:var(–gold-soft)}
+.cta-btn-url{
+font-family:‘JetBrains Mono’,monospace;
+font-size:9pt;
+color:var(–gold-soft);
+letter-spacing:.05em;
+margin-top:3mm;
+display:block;
+word-break:break-all;
+}
+
+.cta-foot{
+margin-top:14mm;
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+padding-top:5mm;
+border-top:.5px solid var(–rule);
+}
+.cta-foot .sig{
+font-family:‘Fraunces’,serif;
+font-style:italic;
+font-size:12pt;
+color:var(–ink-soft);
+}
+.cta-foot .sig strong{
+display:block;
+font-style:normal;
+font-weight:500;
+font-size:11pt;
+color:var(–ink);
+letter-spacing:-.01em;
+margin-top:1mm;
+}
+.cta-foot .crm{
+font-family:‘Inter’,sans-serif;
+font-size:7.5pt;
+letter-spacing:.3em;
+text-transform:uppercase;
+color:var(–ink-mute);
+text-align:right;
+line-height:1.8;
+}
+
+/* print */
+@media print{
+html,body{background:white}
+.page{
+margin:0;
+box-shadow:none;
+page-break-after:always;
+}
+.page:last-child{page-break-after:auto}
+}
+
+@page{size:A4;margin:0}
+</style>
+
+</head>
+<body>
+
+<!-- ============================ -->
+
+<!-- PAGE 1 — COVER                -->
+
+<!-- ============================ -->
+
+<div class="page cover">
+  <div class="ornament">
+    <div class="dot"></div>
+    <div class="line"></div>
+    <div class="dot"></div>
+  </div>
+
+  <div class="cover-top">
+    <div class="monogram">F<span>.</span>S</div>
+    <div class="cover-meta">
+      Guia Clínico<br>
+      Volume I<br>
+      2026
+    </div>
+  </div>
+
+  <div class="cover-center">
+    <div class="eyebrow">Borderline · Guia Clínico</div>
+    <h1 class="cover-title">Protocolo<br>da <em>Crise</em></h1>
+    <p class="cover-sub">O que fazer nos 60 minutos mais difíceis — para parceiros e familiares de pessoas com Transtorno de Personalidade Borderline.</p>
+  </div>
+
+  <div class="cover-rule"></div>
+
+  <div class="cover-bottom">
+    <div class="author">
+      <div class="name">Dr. Fábio Schmidt</div>
+      <div class="role">Médico · CRM-SP 183549</div>
+    </div>
+    <div class="cover-audience">
+      Baseado em neurobiologia clínica e Terapia Comportamental Dialética (DBT) familiar.
+    </div>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 2 — INDEX                -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="02">
+  <div class="runhead">
+    <span>Protocolo da Crise</span>
+    <span class="mark">Dr. Fábio Schmidt</span>
+  </div>
+
+  <div class="section-label">Sumário</div>
+  <h2 class="page-title">Índice<br>do <em>guia</em></h2>
+  <p class="page-subtitle">Oito seções. Um mapa. Leia antes da próxima crise — não durante.</p>
+
+  <div class="toc">
+    <div class="toc-item">
+      <div class="toc-num">§ 01</div>
+      <div class="toc-name">Você não está despreparado. <em>Está desinformado.</em></div>
+      <div class="toc-page">03</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">§ 02</div>
+      <div class="toc-name">O que acontece no <em>cérebro</em> durante uma crise borderline</div>
+      <div class="toc-page">04</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">§ 03</div>
+      <div class="toc-name">As <em>4 fases</em> da crise: mapa completo</div>
+      <div class="toc-page">05</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">§ 04</div>
+      <div class="toc-name">Frases que <em>ajudam</em> e frases que <em>destroem</em></div>
+      <div class="toc-page">08</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">§ 05</div>
+      <div class="toc-name">Protocolo <em>minuto a minuto</em></div>
+      <div class="toc-page">12</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">§ 06</div>
+      <div class="toc-name">Sinais de <em>risco real</em>: quando chamar ajuda</div>
+      <div class="toc-page">15</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">§ 07</div>
+      <div class="toc-name">A conversa <em>depois</em> da crise</div>
+      <div class="toc-page">17</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-num">§ 08</div>
+      <div class="toc-name">Cuidando de <em>você</em></div>
+      <div class="toc-page">20</div>
+    </div>
+  </div>
+
+  <div class="clinical-note">
+    <strong>Nota clínica</strong>
+    Este material é psicoeducativo e não substitui acompanhamento psiquiátrico ou psicológico especializado. Em situações de risco imediato, consulte a Seção 6 ou acione o SAMU 192 / CVV 188.
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 3 — SECTION 1            -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="03">
+  <div class="runhead"><span>§ 01 · Você não está despreparado</span><span class="mark">Protocolo da Crise</span></div>
+
+<span class="section-n">Seção 01</span>
+
+  <h2 class="page-title">Você não está<br>despreparado.<br><em>Está desinformado.</em></h2>
+
+  <p class="body lead">Se você está lendo isso, provavelmente já viveu pelo menos uma cena que não soube como atravessar.</p>
+
+  <p class="body drop">Uma explosão que pareceu sair do nada. Um silêncio que durou dias. Uma reação que te pareceu desproporcional e que, mesmo tentando ajudar, você piorou sem entender como. Isso não significa que você falhou. Significa que ninguém te preparou.</p>
+
+  <p class="body">Conviver com alguém que tem Transtorno de Personalidade Borderline (TPB) exige algo que a maioria das pessoas nunca recebeu: <strong>informação clínica traduzida para o cotidiano</strong>. Não teoria. Não julgamento. Protocolo.</p>
+
+  <p class="body">Esse guia existe porque a boa intenção, sozinha, não é suficiente. Amar alguém com borderline sem entender o que acontece no cérebro dele durante uma crise é como tentar apagar um incêndio sem saber que tipo de fogo está na sua frente. A intenção de ajudar é real. Mas a ferramenta errada pode alimentar as chamas.</p>
+
+  <p class="body">O que você vai encontrar nas próximas páginas não é uma lista de regras para "lidar com pessoas difíceis". É um mapa baseado em neurobiologia clínica e em Terapia Comportamental Dialética (DBT) familiar, a abordagem com maior evidência científica para quem convive com alguém com TPB.</p>
+
+  <p class="body">Você vai entender o que acontece no cérebro durante uma crise e por que certas respostas instintivas pioram a situação. Vai ter um protocolo claro de quanto tempo dura cada fase e o que fazer em cada uma. Vai ter frases exatas para usar — e frases que precisam sair do seu vocabulário de crise. E vai ter um roteiro para a conversa que precisa acontecer depois, no momento certo, do jeito que funciona.</p>
+
+  <div class="callout">
+    <div class="c-label">Observação importante</div>
+    <p>Este material foi desenvolvido para crises com intensidade emocional elevada, mas sem risco imediato de vida. A Seção 6 trata especificamente de quando o protocolo padrão não é suficiente e quando chamar ajuda de emergência. Leia essa seção <em>antes</em> da próxima crise, não durante.</p>
+  </div>
+
+  <p class="body">Você não precisa ser terapeuta para fazer diferença. Precisa saber o que fazer nos próximos 60 minutos.</p>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 4 — SECTION 2            -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="04">
+  <div class="runhead"><span>§ 02 · O que acontece no cérebro</span><span class="mark">Protocolo da Crise</span></div>
+
+<span class="section-n">Seção 02</span>
+
+  <h2 class="page-title">O que acontece<br>no <em>cérebro</em><br>durante a crise.</h2>
+
+  <p class="body lead">Antes de falar o que fazer, você precisa entender por que o que parece óbvio geralmente não funciona.</p>
+
+  <p class="body">O cérebro humano tem duas estruturas que precisam trabalhar juntas para que uma pessoa atravesse momentos de estresse de forma regulada. A <strong>amígdala</strong> é o sistema de alarme — detecta ameaças e dispara respostas de emergência em milissegundos. O <strong>córtex pré-frontal</strong> é o sistema executivo — raciocina, pondera consequências, regula emoções e toma decisões.</p>
+
+  <p class="body">Em condições normais, quando a amígdala dispara, o córtex pré-frontal entra em ação e modula a resposta. A pessoa sente a ameaça, mas consegue pensar antes de agir. No Transtorno de Personalidade Borderline, essa comunicação é significativamente diferente.</p>
+
+  <p class="body">Estudos de neuroimagem mostram que a amígdala de pessoas com TPB apresenta reatividade aumentada a estímulos emocionais, especialmente estímulos relacionais como tom de voz, expressões faciais e percepção de rejeição (Donegan et al., 2003). Ao mesmo tempo, o córtex pré-frontal tem menor ativação regulatória nesses momentos — ou seja, o freio neurológico é menos eficiente precisamente quando mais é necessário.</p>
+
+  <div class="callout red">
+    <div class="c-label">O ponto central</div>
+    <p>A reação chega antes do pensamento. Sempre. Isso é o que os clínicos chamam de <em>sequestro emocional</em> — um estado em que o sistema límbico assume o controle e o córtex pré-frontal temporariamente perde o comando.</p>
+  </div>
+
+  <h3 class="sub">A janela de tolerância</h3>
+
+  <p class="body">O psiquiatra Daniel Siegel descreve o conceito de Janela de Tolerância como o estado em que o sistema nervoso consegue processar experiências sem entrar em colapso. Quando alguém com TPB é exposto a um gatilho relacional — real ou percebido — a intensidade emocional ultrapassa essa janela com uma velocidade muito maior do que em pessoas neurotípicas. Não existe mais meio-termo disponível. Existe sobrevivência.</p>
+
+  <h3 class="sub">Por que argumentar não funciona</h3>
+
+  <p class="body">Imagine que você está dirigindo a 120 km/h em uma estrada e o pneu estoura. Naquele momento, seu cérebro não está processando a lista de tarefas do dia seguinte. Está sobrevivendo. Tentar ter uma conversa racional com alguém em crise borderline é equivalente a pedir para essa pessoa resolver uma equação de matemática enquanto o pneu está estourando.</p>
+
+  <p class="body">É por isso que <em>o que</em> você diz durante uma crise importa menos do que <em>como</em> você está presente. O sistema nervoso em hiperativação não processa conteúdo. Processa tom, ritmo, presença e segurança.</p>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 5 — SECTION 3 (parte 1)  -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="05">
+  <div class="runhead"><span>§ 03 · As 4 fases da crise</span><span class="mark">Protocolo da Crise</span></div>
+
+<span class="section-n">Seção 03</span>
+
+  <h2 class="page-title">As <em>4 fases</em><br>da crise.</h2>
+  <p class="page-subtitle">Uma crise borderline não começa na explosão. E não termina quando o silêncio volta. Ela tem estrutura previsível.</p>
+
+  <div class="phase">
+    <span class="phase-tag">Fase 01 · Gatilho</span>
+    <div class="phase-title">O Gatilho</div>
+    <div class="phase-time">0 a 5 minutos antes da escalada visível</div>
+
+```
+<h5>Neurologicamente</h5>
+<p>A amígdala detectou algo — um tom de voz ligeiramente diferente, uma pausa na mensagem, um olhar, uma mudança de planos. A amígdala hiperativa lê como ameaça relacional potencial e inicia a cascata de estresse.</p>
+
+<h5>No comportamento</h5>
+<p>Quase nada visível. A pessoa pode ficar mais quieta, responder com monossílabos, cruzar os braços, olhar para o celular. Sinais pequenos que a maioria não identifica como início de crise.</p>
+
+<h5>O que fazer</h5>
+<p>Se você conhece os padrões da pessoa, essa é a janela de ouro. Uma presença gentil e previsível — uma frase simples, um toque no ombro se for bem recebido, uma pergunta direta e calma ("você está bem?") — pode evitar que a escalada continue.</p>
+
+<h5>O que não fazer</h5>
+<p>Ignorar completamente os sinais, ou pressionar por explicação imediata. Perguntas como "o que foi agora?" com tom impaciente confirmam a percepção de ameaça.</p>
+```
+
+  </div>
+
+  <div class="callout">
+    <div class="c-label">Janela de ouro</div>
+    <p>A fase 1 é a única em que uma intervenção simples pode evitar a crise inteira. Aprenda a reconhecer os sinais específicos da pessoa que você convive.</p>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 6 — SECTION 3 (parte 2)  -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="06">
+  <div class="runhead"><span>§ 03 · As 4 fases da crise</span><span class="mark">Protocolo da Crise</span></div>
+
+  <div class="phase">
+    <span class="phase-tag">Fase 02 · Escalada</span>
+    <div class="phase-title">A Escalada</div>
+    <div class="phase-time">5 a 15 minutos</div>
+
+```
+<h5>Neurologicamente</h5>
+<p>O córtex pré-frontal está progressivamente perdendo o comando. A janela de tolerância está sendo ultrapassada. O sistema nervoso autônomo ativa a resposta de luta ou fuga — frequência cardíaca sobe, adrenalina e cortisol são liberados, a percepção de ameaça torna-se global.</p>
+
+<h5>No comportamento</h5>
+<p>Agitação visível. Voz que começa a mudar de tom. Respostas mais curtas e tensas. Isolamento — a pessoa vai para outro cômodo, para de responder mensagens. Ou o oposto: aproximação intensa, demanda por resposta imediata, questionamentos repetitivos.</p>
+
+<h5>O que fazer</h5>
+<p>Reduza a estimulação. Baixe o tom — não o volume. Fale mais devagar. Evite movimentos bruscos. Não se aproxime fisicamente sem permissão. Frase útil: <em>"Eu estou aqui. Não precisa explicar nada agora."</em></p>
+
+<h5>O que não fazer</h5>
+<p>Tentar resolver o problema. Dar ultimatos. Usar linguagem de cobrança ("mas você prometeu", "eu já disse", "sempre a mesma coisa"). Cada resposta dessas confirma a narrativa de ameaça.</p>
+```
+
+  </div>
+
+  <div class="callout">
+    <div class="c-label">Objetivo realista</div>
+    <p>Na fase 2, você ainda pode desacelerar a escalada. O objetivo não é resolver. É não piorar.</p>
+  </div>
+
+  <div class="phase">
+    <span class="phase-tag">Fase 03 · Pico</span>
+    <div class="phase-title">O Pico</div>
+    <div class="phase-time">15 a 35 minutos</div>
+
+```
+<h5>Neurologicamente</h5>
+<p>Sequestro emocional completo. A amígdala está no comando. O córtex pré-frontal não processa linguagem racional, não avalia consequências, não regula respostas. A pessoa está em modo de sobrevivência total.</p>
+
+<h5>No comportamento</h5>
+<p>Explosão verbal, choro intenso, isolamento completo, comportamentos impulsivos, ou dissociação — a pessoa parece "ausente", olhos sem foco, respostas mínimas. Independentemente da forma, o mecanismo é o mesmo.</p>
+
+<h5>O que fazer</h5>
+<p>Sua única função agora é <strong>garantir segurança física e não amplificar</strong>. Presença silenciosa é mais terapêutica do que qualquer palavra. Frase única permitida, dita uma vez: <em>"Eu estou aqui. Você não vai me perder."</em></p>
+
+<h5>O que não fazer</h5>
+<p>Argumentar. Usar lógica. Ameaçar ir embora. Dizer "acalma" ou "para com isso". Comparar com situações anteriores. Pedir que ela se controle.</p>
+```
+
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 7 — SECTION 3 (parte 3)  -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="07">
+  <div class="runhead"><span>§ 03 · As 4 fases da crise</span><span class="mark">Protocolo da Crise</span></div>
+
+  <div class="callout red">
+    <div class="c-label">Durante o pico</div>
+    <p>Você não vai "resolver" a crise com palavras. Sua presença calma é o recurso mais poderoso disponível. Use-a.</p>
+  </div>
+
+  <div class="phase">
+    <span class="phase-tag">Fase 04 · Ressaca</span>
+    <div class="phase-title">A Ressaca</div>
+    <div class="phase-time">35 a 60 minutos após o pico</div>
+
+```
+<h5>Neurologicamente</h5>
+<p>O sistema nervoso começa a desativar. Adrenalina e cortisol diminuem. O córtex pré-frontal retoma o comando gradualmente. A pessoa começa a processar o que aconteceu — e o que quase sempre vem junto é vergonha.</p>
+
+<h5>No comportamento</h5>
+<p>Quietude, exaustão, distanciamento. Choro silencioso ou pedido de desculpas excessivo. Em alguns casos, busca de reassurance — a pessoa quer confirmar que você não vai embora. É o momento mais silencioso da crise — e frequentemente o mais perigoso emocionalmente, porque a vergonha crônica é fator de maior risco no TPB.</p>
+
+<h5>O que fazer</h5>
+<p>Presença gentil e não invasiva. Não exija conversa. Não resuma o que aconteceu. Não peça explicações. Uma frase simples, dita uma vez: <em>"Eu continuo aqui. Quando você quiser conversar, eu vou estar disponível."</em> Depois, silêncio e presença.</p>
+
+<h5>O que não fazer</h5>
+<p>Iniciar a "conversa sobre o que aconteceu" agora. Expressar mágoa ou frustração acumulada. Usar o estado de vulnerabilidade para colocar pontos que precisam ser discutidos. A janela certa para essa conversa está na Seção 7.</p>
+```
+
+  </div>
+
+  <div class="callout">
+    <div class="c-label">Onde mora a vergonha</div>
+    <p>A ressaca é onde a vergonha vive. Não é hora de resolver. É hora de confirmar que você ainda está ali.</p>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 8 — SECTION 4 (destroy)  -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="08">
+  <div class="runhead"><span>§ 04 · Frases</span><span class="mark">Protocolo da Crise</span></div>
+
+<span class="section-n">Seção 04</span>
+
+  <h2 class="page-title">Frases que <em>ajudam</em><br>e frases que <em>destroem</em>.</h2>
+  <p class="page-subtitle">Baseado em padrões observados clinicamente e no protocolo de comunicação validante da DBT (Linehan, 1993).</p>
+
+  <h4 class="subsub">Frases que destroem</h4>
+
+  <div class="phrase-block destroy">
+    <div class="phrase-quote">Você está exagerando.</div>
+    <span class="phrase-label">Por que parece certo</span>
+    <p class="phrase-text">Você acredita que nomear o exagero vai ajudar a pessoa a recalibrar.</p>
+    <span class="phrase-label why">Por que piora</span>
+    <p class="phrase-text">Invalida a experiência emocional no momento em que ela precisa ser reconhecida. A amígdala em hiperativação intensifica a resposta quando a experiência é negada. A crise escala.</p>
+  </div>
+
+  <div class="phrase-block destroy">
+    <div class="phrase-quote">Acalma.</div>
+    <span class="phrase-label">Por que parece certo</span>
+    <p class="phrase-text">Parece uma instrução simples e razoável.</p>
+    <span class="phrase-label why">Por que piora</span>
+    <p class="phrase-text">Ninguém em sequestro emocional consegue "acalmar" por instrução verbal. Pedir isso aumenta a sensação de não ser compreendido.</p>
+  </div>
+
+  <div class="phrase-block destroy">
+    <div class="phrase-quote">Você sempre faz isso.</div>
+    <span class="phrase-label">Por que parece certo</span>
+    <p class="phrase-text">Expressa um padrão real que você observou.</p>
+    <span class="phrase-label why">Por que piora</span>
+    <p class="phrase-text">Generalização + acusação durante crise = confirmação da narrativa de que você é uma ameaça. Acende a amígdala, não a apaga.</p>
+  </div>
+
+  <div class="phrase-block destroy">
+    <div class="phrase-quote">Se você continuar assim, eu vou embora.</div>
+    <span class="phrase-label">Por que parece certo</span>
+    <p class="phrase-text">Você está colocando um limite legítimo.</p>
+    <span class="phrase-label why">Por que piora</span>
+    <p class="phrase-text">Ameaça de abandono durante crise borderline é o gatilho mais potente que existe. Você não está colocando limite — está confirmando o maior medo do sistema nervoso dela naquele momento.</p>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 9 — SECTION 4 (destroy pt 2) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="09">
+  <div class="runhead"><span>§ 04 · Frases</span><span class="mark">Protocolo da Crise</span></div>
+
+  <div class="phrase-block destroy">
+    <div class="phrase-quote">Eu não mereço ser tratado assim.</div>
+    <span class="phrase-label">Por que parece certo</span>
+    <p class="phrase-text">É verdade, e expressar isso parece legítimo.</p>
+    <span class="phrase-label why">Por que piora</span>
+    <p class="phrase-text">Durante o pico, essa frase é processada como acusação e abandono simultâneos. A conversa sobre o impacto nos dois é necessária — mas não agora. Ver Seção 7.</p>
+  </div>
+
+  <div class="phrase-block destroy">
+    <div class="phrase-quote">Você estava bem há pouco tempo.</div>
+    <span class="phrase-label">Por que parece certo</span>
+    <p class="phrase-text">Tenta mostrar que as emoções mudam e que a crise vai passar.</p>
+    <span class="phrase-label why">Por que piora</span>
+    <p class="phrase-text">Invalida a intensidade do momento presente. Para alguém em crise, "estava bem" não é confortante — é evidência de que você não entende a profundidade do que está sendo sentido agora.</p>
+  </div>
+
+  <div class="phrase-block destroy">
+    <div class="phrase-quote">Para de ser assim.</div>
+    <span class="phrase-label">Por que parece certo</span>
+    <p class="phrase-text">Expressa um desejo legítimo.</p>
+    <span class="phrase-label why">Por que piora</span>
+    <p class="phrase-text">Implica escolha. O transtorno não é uma escolha. Essa frase confirma a crença mais dolorosa de alguém com TPB: a de que seu sofrimento é voluntário e inaceitável.</p>
+  </div>
+
+  <div class="phrase-block destroy">
+    <div class="phrase-quote">Eu já estou cansado disso.</div>
+    <span class="phrase-label">Por que parece certo</span>
+    <p class="phrase-text">É honesto — e você provavelmente está mesmo cansado.</p>
+    <span class="phrase-label why">Por que piora</span>
+    <p class="phrase-text">Confirma que você está a ponto de ir embora. Combustível direto no medo de abandono. A hora certa para essa conversa existe — e é na Seção 7.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h4 class="subsub">Frases que ajudam</h4>
+
+  <div class="phrase-block help">
+    <div class="phrase-quote">Eu estou aqui. Você não vai me perder.</div>
+    <span class="phrase-label why">Por que funciona</span>
+    <p class="phrase-text">Endereça diretamente o medo central ativado durante a crise. Não resolve o problema — ancora o sistema nervoso.</p>
+    <span class="phrase-label">Como adaptar</span>
+    <p class="phrase-text">"Eu não vou a lugar nenhum. Pode continuar sentindo."</p>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 10 — SECTION 4 (help)    -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="10">
+  <div class="runhead"><span>§ 04 · Frases</span><span class="mark">Protocolo da Crise</span></div>
+
+  <div class="phrase-block help">
+    <div class="phrase-quote">Eu vejo que você está sofrendo. Não precisa explicar agora.</div>
+    <span class="phrase-label why">Por que funciona</span>
+    <p class="phrase-text">Valida sem demandar. O cérebro em crise não consegue narrar o que está acontecendo — pedir explicação nesse momento é pedir algo neurologicamente indisponível.</p>
+    <div class="clinical-example">
+      <strong>Exemplo clínico</strong>
+      Durante uma crise iniciada porque o parceiro chegou 20 minutos atrasado, essa frase foi suficiente para a pessoa sair da postura de explosão e começar a chorar — o que indicou início de desescalada.
+    </div>
+  </div>
+
+  <div class="phrase-block help">
+    <div class="phrase-quote">Eu não entendo tudo, mas eu estou do seu lado.</div>
+    <span class="phrase-label why">Por que funciona</span>
+    <p class="phrase-text">Honestidade sem abandono. Não finge entender o que não entende — isso seria percebido como falso. Mas confirma presença.</p>
+    <span class="phrase-label">Como adaptar</span>
+    <p class="phrase-text">"Talvez eu não entenda exatamente o que você está sentindo, mas eu quero estar aqui."</p>
+  </div>
+
+  <div class="phrase-block help">
+    <div class="phrase-quote">Não precisamos resolver isso agora.</div>
+    <span class="phrase-label why">Por que funciona</span>
+    <p class="phrase-text">Remove a pressão do momento. A crise frequentemente se intensifica quando a pessoa sente que precisa resolver algo imediatamente enquanto não tem capacidade neurológica para isso.</p>
+    <span class="phrase-label">Como adaptar</span>
+    <p class="phrase-text">"Isso pode esperar. Agora só importa que você esteja bem."</p>
+  </div>
+
+  <div class="phrase-block help">
+    <div class="phrase-quote">Hoje às 19h eu mando mensagem. Pode contar com isso.</div>
+    <span class="phrase-label why">Por que funciona</span>
+    <p class="phrase-text">Previsibilidade é a linguagem do sistema nervoso. Uma promessa concreta e cumprida comunica segurança de forma que palavras abstratas não conseguem.</p>
+    <div class="clinical-example">
+      <strong>Exemplo clínico</strong>
+      Um familiar que passou a enviar mensagens em horários fixos ("Bom dia" às 8h, sem exceção) relatou redução significativa de crises noturnas em três semanas. A previsibilidade substituiu parcialmente a necessidade de confirmar vínculo a cada hora.
+    </div>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 11 — SECTION 4 (help pt 2) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="11">
+  <div class="runhead"><span>§ 04 · Frases</span><span class="mark">Protocolo da Crise</span></div>
+
+  <div class="phrase-block help">
+    <div class="phrase-quote">Quando você estiver pronto, eu vou estar aqui.</div>
+    <span class="phrase-label why">Por que funciona</span>
+    <p class="phrase-text">Não pressiona e não abandona simultaneamente. Resolve a tensão entre dar espaço e confirmar presença.</p>
+    <span class="phrase-label">Como adaptar</span>
+    <p class="phrase-text">"Não tem pressa. Quando quiser falar, me fala."</p>
+  </div>
+
+  <div class="phrase-block help">
+    <div class="phrase-quote">Eu vejo o quanto você está lutando.</div>
+    <span class="phrase-label why">Por que funciona</span>
+    <p class="phrase-text">Reconhece o esforço invisível. Alguém em crise borderline está fazendo um esforço neurológico imenso só para continuar presente na situação — reconhecer isso, mesmo sem entender, tem efeito regulatório.</p>
+    <div class="clinical-example">
+      <strong>Exemplo clínico</strong>
+      Uma parceira relatou que essa frase foi a primeira vez que sentiu que o companheiro enxergava o que acontecia por dentro, não só o comportamento de fora. A crise desescalou em menos de cinco minutos após a frase.
+    </div>
+  </div>
+
+  <div class="phrase-block help">
+    <div class="phrase-quote">Você não me assusta. Eu fico.</div>
+    <span class="phrase-label why">Por que funciona</span>
+    <p class="phrase-text">Endereça o medo específico de que a intensidade emocional afasta as pessoas. Muitas pessoas com TPB aprenderam que sentir muito = ser abandonado.</p>
+    <span class="phrase-label">Como adaptar</span>
+    <p class="phrase-text">"Pode ser grande o que você está sentindo. Eu não vou a lugar nenhum."</p>
+  </div>
+
+  <div class="callout">
+    <div class="c-label">Princípio geral</div>
+    <p>Cada frase que ajuda tem um denominador comum: <em>confirma presença sem exigir nada em troca</em>. Cada frase que destrói tem o oposto: exige, compara, ameaça ou nega.</p>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 12 — SECTION 5 (parte 1) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="12">
+  <div class="runhead"><span>§ 05 · Protocolo minuto a minuto</span><span class="mark">Protocolo da Crise</span></div>
+
+<span class="section-n">Seção 05</span>
+
+  <h2 class="page-title">Protocolo<br><em>minuto a minuto</em>.</h2>
+  <p class="page-subtitle">Cada instrução é específica e acionável. "Mantenha a calma" não está nesta lista.</p>
+
+  <div class="protocol-block">
+    <div class="protocol-head">
+      <div class="protocol-time">0–10<sup style="font-size:.4em;letter-spacing:.2em;color:var(--ink-mute);margin-left:2mm">MIN</sup></div>
+      <div class="protocol-name">Contenção imediata</div>
+    </div>
+
+```
+<div class="checklist-title do">O que fazer</div>
+<ul class="checklist do">
+  <li>Reduza sua própria frequência cardíaca primeiro. Respire lentamente antes de fazer qualquer coisa. Você não pode regular o sistema nervoso de outra pessoa se o seu está disparado.</li>
+  <li>Baixe o tom de voz — não o volume, o tom. Voz mais grave e mais lenta tem efeito regulatório documentado.</li>
+  <li>Reduza estímulos do ambiente: televisão, música, outras pessoas no cômodo amplificam a hiperativação.</li>
+  <li>Não toque a pessoa sem permissão. Toque não convidado durante hiperativação pode ser lido como ameaça física.</li>
+  <li>Use a frase âncora <em>uma vez</em>: "Eu estou aqui. Você não vai me perder."</li>
+  <li>Fique no mesmo nível físico que a pessoa. Altura cria hierarquia de poder que o sistema nervoso em alerta processa como dominância.</li>
+</ul>
+
+<div class="checklist-title dont">O que não fazer</div>
+<ul class="checklist dont">
+  <li>Tentar descobrir o que causou a crise agora.</li>
+  <li>Ligar para outros familiares sem avisar — chegada de pessoas inesperadas pode escalar.</li>
+  <li>Checar o celular. Atenção dividida é percebida como desinteresse.</li>
+</ul>
+```
+
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 13 — SECTION 5 (parte 2) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="13">
+  <div class="runhead"><span>§ 05 · Protocolo minuto a minuto</span><span class="mark">Protocolo da Crise</span></div>
+
+  <div class="protocol-block">
+    <div class="protocol-head">
+      <div class="protocol-time">10–25<sup style="font-size:.4em;letter-spacing:.2em;color:var(--ink-mute);margin-left:2mm">MIN</sup></div>
+      <div class="protocol-name">Presença ativa</div>
+    </div>
+
+```
+<div class="checklist-title do">O que fazer</div>
+<ul class="checklist do">
+  <li>Mantenha presença sem demandar interação. Estar no mesmo cômodo, em silêncio, fazendo algo simples — comunica que você ficou sem precisar de palavras.</li>
+  <li>Se a pessoa falar, use validação reflexiva: repita o que ela disse com suas próprias palavras, sem adicionar interpretação. Não é concordar — é mostrar que ouviu.</li>
+  <li>Observe sinais de desescalada: respiração mais lenta, ombros que relaxam, contato visual que volta, choro que transita de intenso para silencioso.</li>
+  <li>Mantenha seu tom de voz constante. Variações bruscas — mesmo em direção ao carinho excessivo — podem ser lidas como imprevisibilidade.</li>
+</ul>
+
+<div class="checklist-title dont">O que não fazer</div>
+<ul class="checklist dont">
+  <li>Iniciar resolução de problemas.</li>
+  <li>Expressar frustração acumulada.</li>
+  <li>Usar humor para aliviar o clima — raramente funciona e costuma ser lido como desrespeito ao sofrimento.</li>
+</ul>
+```
+
+  </div>
+
+  <div class="protocol-block">
+    <div class="protocol-head">
+      <div class="protocol-time">25–40<sup style="font-size:.4em;letter-spacing:.2em;color:var(--ink-mute);margin-left:2mm">MIN</sup></div>
+      <div class="protocol-name">Janela de transição</div>
+    </div>
+
+```
+<div class="checklist-title do">O que fazer</div>
+<ul class="checklist do">
+  <li>A maioria das crises borderline, sem amplificação externa, começa a desescalar nessa janela. Você vai perceber pela mudança na qualidade do silêncio — ele fica menos tenso.</li>
+  <li>Ofereça algo concreto e simples, sem cobrar resposta: "Vou buscar água. Você quer?" Atos concretos comunicam presença.</li>
+  <li>Se a pessoa se aproximar fisicamente, responda com reciprocidade suave. É sinal de que o sistema nervoso dela busca co-regulação.</li>
+  <li>Você pode dizer, com calma: "Quando você quiser conversar sobre o que aconteceu, eu vou estar disponível. Não precisa ser hoje."</li>
+</ul>
+
+<div class="checklist-title dont">O que não fazer</div>
+<ul class="checklist dont">
+  <li>Tratar a aproximação física como sinal de que a crise passou e tentar resolver o conflito imediatamente.</li>
+  <li>Demonstrar alívio excessivo — pode ser lido como "finalmente acabou" e gerar vergonha adicional.</li>
+</ul>
+```
+
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 14 — SECTION 5 (parte 3) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="14">
+  <div class="runhead"><span>§ 05 · Protocolo minuto a minuto</span><span class="mark">Protocolo da Crise</span></div>
+
+  <div class="protocol-block">
+    <div class="protocol-head">
+      <div class="protocol-time">40–60<sup style="font-size:.4em;letter-spacing:.2em;color:var(--ink-mute);margin-left:2mm">MIN</sup></div>
+      <div class="protocol-name">Estabilização e ressaca</div>
+    </div>
+
+```
+<div class="checklist-title do">O que fazer</div>
+<ul class="checklist do">
+  <li>A crise passou, mas o sistema nervoso ainda está em recuperação. Pense em pós-maratona — o esforço acabou, mas o corpo ainda processa.</li>
+  <li>Presença gentil e não invasiva. Estar no mesmo espaço, disponível, sem cobrar interação.</li>
+  <li>Se houver pedido de desculpas excessivo — e frequentemente haverá — valide sem minimizar: "Você não precisa se desculpar agora. Eu sei que foi difícil para os dois."</li>
+  <li>Anote mentalmente o que funcionou nessa crise. Cada pessoa tem padrões específicos.</li>
+</ul>
+
+<div class="checklist-title dont">O que não fazer</div>
+<ul class="checklist dont">
+  <li>Iniciar a conversa sobre o impacto que a crise teve em você. Essa conversa existe — e está na Seção 7.</li>
+  <li>Fazer promessas que não pode cumprir para aliviar o momento.</li>
+</ul>
+```
+
+  </div>
+
+  <div class="callout">
+    <div class="c-label">Reconheça isso</div>
+    <p>A crise que dura menos de 60 minutos com esses protocolos, sem amplificação externa, é uma crise que você atravessou da forma tecnicamente mais eficaz possível. Não é pouco. É o que um profissional treinado faria.</p>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 15 — SECTION 6 (parte 1) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="15">
+  <div class="runhead"><span>§ 06 · Sinais de risco real</span><span class="mark">Protocolo da Crise</span></div>
+
+<span class="section-n">Seção 06</span>
+
+  <h2 class="page-title">Sinais de <em>risco real</em>:<br>quando chamar ajuda.</h2>
+  <p class="page-subtitle">O protocolo padrão funciona para crises intensas com segurança preservada. Existem situações em que ele não basta.</p>
+
+  <p class="body">Uma crise intensa se caracteriza por explosão emocional, choro, isolamento, agitação ou dissociação — com preservação da segurança física. A pessoa está sofrendo, mas está segura. Risco de vida se caracteriza por indicadores específicos que exigem ação imediata.</p>
+
+  <p class="body">Reconhecer a diferença entre os dois não é opcional. É a habilidade mais importante que você pode ter. Quando o risco está presente, o objetivo deixa de ser regulação emocional e passa a ser <strong>segurança imediata</strong>.</p>
+
+  <div class="callout red">
+    <div class="c-label">Alerta vermelho · Chame ajuda agora</div>
+    <p>Acione emergência se qualquer um dos sinais abaixo estiver presente:</p>
+    <ul style="margin-top:4mm;padding-left:5mm;list-style:none">
+      <li style="padding:1.5mm 0 1.5mm 5mm;position:relative;font-family:Fraunces;font-style:italic;font-size:11pt;line-height:1.4"><span style="position:absolute;left:0;color:var(--red);font-weight:700">›</span>Menção direta a suicídio com plano específico ("eu vou fazer X").</li>
+      <li style="padding:1.5mm 0 1.5mm 5mm;position:relative;font-family:Fraunces;font-style:italic;font-size:11pt;line-height:1.4"><span style="position:absolute;left:0;color:var(--red);font-weight:700">›</span>Presença de objetos potencialmente letais ao alcance (medicamentos em excesso, armas, objetos cortantes expostos).</li>
+      <li style="padding:1.5mm 0 1.5mm 5mm;position:relative;font-family:Fraunces;font-style:italic;font-size:11pt;line-height:1.4"><span style="position:absolute;left:0;color:var(--red);font-weight:700">›</span>Comportamento autolesivo em curso ou feridas recentes que você não conhecia.</li>
+      <li style="padding:1.5mm 0 1.5mm 5mm;position:relative;font-family:Fraunces;font-style:italic;font-size:11pt;line-height:1.4"><span style="position:absolute;left:0;color:var(--red);font-weight:700">›</span>Ingestão de medicamentos, álcool em grande quantidade ou substâncias desconhecidas durante a crise.</li>
+      <li style="padding:1.5mm 0 1.5mm 5mm;position:relative;font-family:Fraunces;font-style:italic;font-size:11pt;line-height:1.4"><span style="position:absolute;left:0;color:var(--red);font-weight:700">›</span>Declaração de "despedida" — frases de encerramento, entrega de objetos pessoais, mensagens finais.</li>
+      <li style="padding:1.5mm 0 1.5mm 5mm;position:relative;font-family:Fraunces;font-style:italic;font-size:11pt;line-height:1.4"><span style="position:absolute;left:0;color:var(--red);font-weight:700">›</span>Dissociação prolongada (acima de 30 minutos) com perda de contato com o ambiente.</li>
+      <li style="padding:1.5mm 0 1.5mm 5mm;position:relative;font-family:Fraunces;font-style:italic;font-size:11pt;line-height:1.4"><span style="position:absolute;left:0;color:var(--red);font-weight:700">›</span>Sintomas psicóticos transitórios (alucinações, delírios, desorganização do pensamento).</li>
+      <li style="padding:1.5mm 0 1.5mm 5mm;position:relative;font-family:Fraunces;font-style:italic;font-size:11pt;line-height:1.4"><span style="position:absolute;left:0;color:var(--red);font-weight:700">›</span>Agressão física real dirigida a você, a terceiros ou a si mesma.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 16 — SECTION 6 (parte 2) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="16">
+  <div class="runhead"><span>§ 06 · Sinais de risco real</span><span class="mark">Protocolo da Crise</span></div>
+
+  <h3 class="sub">O que fazer antes de chegar ajuda</h3>
+
+  <p class="body">Se você identificou qualquer sinal da lista anterior, as próximas ações são protocolares — não improvisadas.</p>
+
+  <div class="phase">
+    <span class="phase-tag">Passo 01 · Acione</span>
+    <div class="phase-title" style="font-size:16pt">Ligue para o serviço de emergência</div>
+    <h5>O que acionar</h5>
+    <p><strong>SAMU 192</strong> para emergência médica. <strong>CVV 188</strong> (24h, gratuito) para suporte imediato em ideação suicida. Em risco iminente e presença de armas ou agressão, <strong>Polícia 190</strong>. Informe que se trata de crise psiquiátrica — isso muda o protocolo da equipe.</p>
+  </div>
+
+  <div class="phase">
+    <span class="phase-tag">Passo 02 · Remova</span>
+    <div class="phase-title" style="font-size:16pt">Retire acesso a meios letais</div>
+    <h5>O que fazer</h5>
+    <p>Remova discretamente — sem confronto — medicamentos, objetos cortantes, armas e chaves de veículo do alcance imediato. Se a pessoa estiver em dissociação ou agressão, priorize sua segurança primeiro: saia do cômodo, tranque a porta se necessário, e aguarde a equipe em local seguro.</p>
+  </div>
+
+  <div class="phase">
+    <span class="phase-tag">Passo 03 · Permaneça</span>
+    <div class="phase-title" style="font-size:16pt">Presença sem confronto</div>
+    <h5>O que fazer</h5>
+    <p>Enquanto a ajuda não chega, mantenha presença física à distância segura. Fale pouco. Frase única: <em>"Eu estou aqui. A ajuda está vindo."</em> Não negocie a entrega de objetos. Não confronte. Não faça promessas que você não pode cumprir.</p>
+  </div>
+
+  <div class="callout">
+    <div class="c-label">Depois da emergência</div>
+    <p>Uma crise com risco real muda o que vem depois. Internação, ajuste medicamentoso, avaliação psiquiátrica de urgência e retomada do tratamento são passos clínicos — não sinais de fracasso do protocolo. São a continuação dele.</p>
+  </div>
+
+  <p class="body" style="margin-top:6mm;font-style:italic;color:var(--ink-soft);font-size:10.5pt">Anote em local visível (geladeira, celular): telefone do psiquiatra que acompanha a pessoa, hospital de referência mais próximo com retaguarda psiquiátrica, e um contato de emergência familiar. Essa informação precisa estar acessível <em>antes</em> de ser necessária.</p>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 17 — SECTION 7 (parte 1) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="17">
+  <div class="runhead"><span>§ 07 · A conversa depois</span><span class="mark">Protocolo da Crise</span></div>
+
+<span class="section-n">Seção 07</span>
+
+  <h2 class="page-title">A conversa<br><em>depois</em> da crise.</h2>
+  <p class="page-subtitle">Existe uma conversa que precisa acontecer. Mas não é agora. E não é do jeito que a maioria das pessoas faz.</p>
+
+  <p class="body lead">Não ter essa conversa é tão prejudicial quanto tê-la no momento errado.</p>
+
+  <p class="body">O que aconteceu durante a crise teve impacto em você. Esse impacto é real, é legítimo, e precisa de espaço. O problema é que a maioria das pessoas tenta ter essa conversa 10 minutos depois da crise passar — quando o sistema nervoso da pessoa com TPB ainda está em ressaca e a vergonha está no auge. Nesse estado, qualquer tentativa de falar sobre o impacto é processada como confirmação de que ela é um fardo. A conversa vira gatilho.</p>
+
+  <h3 class="sub">Quando ter a conversa</h3>
+
+  <p class="body">A janela adequada é entre <strong>24 e 72 horas depois</strong> do episódio, em um momento em que os dois estejam neurologicamente regulados. Não logo ao acordar. Não à noite, quando o cansaço reduz a tolerância dos dois. Um momento tranquilo, sem pressa, em um lugar neutro — não no cômodo onde a crise aconteceu.</p>
+
+  <h3 class="sub">Como começar</h3>
+
+  <p class="body">Comece pedindo permissão, não avisando que vai falar. Pedir permissão comunica que você reconhece que essa conversa requer abertura dos dois. A diferença parece pequena e não é.</p>
+
+  <div class="phrase-block help">
+    <div class="phrase-quote">Eu queria conversar com você sobre o que aconteceu na terça. Você se sente em condições de falar sobre isso hoje, ou prefere que a gente marque outro momento?</div>
+    <span class="phrase-label why">Por que funciona</span>
+    <p class="phrase-text">Dá agência. Não impõe. Sinaliza que a conversa é importante, mas que o momento dela também é. Uma resposta "hoje não" é resposta válida — e precisa ser respeitada.</p>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 18 — SECTION 7 (parte 2) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="18">
+  <div class="runhead"><span>§ 07 · A conversa depois</span><span class="mark">Protocolo da Crise</span></div>
+
+  <h3 class="sub">A estrutura que funciona</h3>
+
+  <p class="body">A conversa eficaz segue três movimentos, nessa ordem. Inverter a ordem desmonta o efeito.</p>
+
+  <div class="phase">
+    <span class="phase-tag">Movimento 01</span>
+    <div class="phase-title" style="font-size:18pt">Validar a experiência dela</div>
+    <p>Antes de falar de você, reconheça o que ela atravessou. Não é concordar com o comportamento — é reconhecer a dor que o gerou. "Eu sei que você estava sofrendo. Eu vi."</p>
+  </div>
+
+  <div class="phase">
+    <span class="phase-tag">Movimento 02</span>
+    <div class="phase-title" style="font-size:18pt">Falar do seu impacto sem acusar</div>
+    <p>Use linguagem de observação, não de veredito. Fale em "eu senti", não em "você fez". Exemplo: <em>"Quando você disse que ia embora, eu senti medo. Não estou dizendo que você quis me machucar — estou te contando o que aconteceu comigo."</em> A distinção entre observação e acusação é toda a diferença.</p>
+  </div>
+
+  <div class="phase">
+    <span class="phase-tag">Movimento 03</span>
+    <div class="phase-title" style="font-size:18pt">Construir um combinado, não impor uma regra</div>
+    <p>O objetivo da conversa não é estabelecer punições. É construir, em conjunto, o que cada um pode fazer diferente na próxima vez. "O que a gente pode combinar pra quando isso acontecer de novo?" A palavra <em>combinar</em> é clínica — ela comunica parceria.</p>
+  </div>
+
+  <div class="callout red">
+    <div class="c-label">Limite legítimo, não ameaça</div>
+    <p>Limites existem e são saudáveis. A diferença entre limite e ameaça está no tom, no momento e na condicionalidade. "Eu não consigo conversar quando há gritos — quando isso acontecer, eu vou sair do cômodo e volto em 15 minutos" é limite. "Se você continuar assim, eu vou embora" é ameaça de abandono. A primeira frase regula. A segunda traumatiza.</p>
+  </div>
+
+  <p class="body">Se a conversa começar a escalar — se você perceber os sinais da Fase 1 novamente — pausem. Não insistam. Uma conversa que vira crise deixa marca dupla: a da crise original, mais a de tentar conversar sobre ela. Melhor pausar e retomar em outro momento do que forçar e comprometer as duas.</p>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 19 — SECTION 7 (parte 3) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="19">
+  <div class="runhead"><span>§ 07 · A conversa depois</span><span class="mark">Protocolo da Crise</span></div>
+
+  <h3 class="sub">O que não cabe nessa conversa</h3>
+
+  <ul class="checklist dont" style="margin-top:3mm">
+    <li>Relembrar crises anteriores para construir um argumento acumulado. Cada crise precisa ser tratada dentro da sua própria janela.</li>
+    <li>Fazer diagnóstico leigo do comportamento dela ("isso é o borderline falando"). Mesmo quando tecnicamente correto, essa frase reduz a pessoa ao transtorno.</li>
+    <li>Usar o que ela disse durante o pico contra ela agora. O que é dito em sequestro emocional não é o que a pessoa pensa — é o que o sistema nervoso produziu em modo de sobrevivência.</li>
+    <li>Exigir promessa de que "não vai acontecer de novo". O transtorno não funciona assim, e exigir isso coloca um peso impossível sobre ela.</li>
+  </ul>
+
+  <h3 class="sub">Quando a conversa não acontece</h3>
+
+  <p class="body">Pode ser que, em alguns casos, a pessoa recuse repetidamente a conversa. Quando isso se torna padrão, e não exceção, é sinal de que o sistema dos dois precisa de suporte externo — terapia individual para ela, terapia individual para você, e, idealmente, um espaço terapêutico conjunto com profissional treinado em DBT ou abordagem familiar específica para TPB.</p>
+
+  <p class="body">Recusa crônica de conversa não é falha moral. É sinal clínico de que o volume emocional da relação está acima do que os dois conseguem processar sozinhos. E isso tem tratamento.</p>
+
+  <div class="callout">
+    <div class="c-label">Princípio central</div>
+    <p>A conversa depois da crise não é sobre <em>quem errou</em>. É sobre <em>o que vocês fazem agora</em>. A primeira pergunta gera defesa. A segunda gera construção.</p>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 20 — SECTION 8 (parte 1) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="20">
+  <div class="runhead"><span>§ 08 · Cuidando de você</span><span class="mark">Protocolo da Crise</span></div>
+
+<span class="section-n">Seção 08</span>
+
+  <h2 class="page-title">Cuidando<br>de <em>você</em>.</h2>
+  <p class="page-subtitle">A pessoa que sustenta alguém em crise precisa ser sustentada também. Isso não é opcional.</p>
+
+  <p class="body lead">Conviver cronicamente com crises de regulação emocional — mesmo quando você ama a pessoa, mesmo quando você é tecnicamente competente — tem custo neurológico real sobre você.</p>
+
+  <p class="body">A literatura de cuidadores de pessoas com TPB descreve um fenômeno chamado <em>estresse de cuidador familiar</em> (Hoffman et al., 2003). Os marcadores são específicos: sono fragmentado mesmo em dias sem crise, estado de hipervigilância (você percebe sinais que antes passariam despercebidos), redução de atividades prazerosas, sintomas físicos inespecíficos (dores de cabeça, tensão, problemas gastrointestinais) e, frequentemente, um tipo de tristeza que você tem dificuldade de nomear.</p>
+
+  <p class="body">Nada disso significa que você não ama. Significa que o sistema nervoso humano não foi desenhado para estar de plantão permanente sem manutenção. Você precisa de protocolo para você também.</p>
+
+  <h3 class="sub">Os três pilares do cuidado próprio</h3>
+
+  <div class="phase">
+    <span class="phase-tag">Pilar 01 · Corpo</span>
+    <div class="phase-title" style="font-size:17pt">Regulação fisiológica não negociável</div>
+    <p>Sono em janela fixa. Movimento corporal diário, mesmo que breve. Alimentação em horários previsíveis. Nada disso é luxo — é manutenção do sistema que você usa para regular a outra pessoa. Um cuidador em privação de sono tem capacidade regulatória reduzida e escala crises que poderiam ter sido contornadas.</p>
+  </div>
+
+  <div class="phase">
+    <span class="phase-tag">Pilar 02 · Vínculo</span>
+    <div class="phase-title" style="font-size:17pt">Rede que não depende da pessoa em crise</div>
+    <p>Pelo menos uma pessoa com quem você pode falar sem filtro sobre o que está vivendo. Não para pedir solução. Para não ficar sozinho com isso. Pode ser um amigo treinado, um grupo de apoio para familiares (existem grupos gratuitos de DBT familiar em várias cidades), ou terapia individual. O isolamento do cuidador é um dos fatores mais silenciosos de colapso da relação.</p>
+  </div>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 21 — SECTION 8 (parte 2) -->
+
+<!-- ============================ -->
+
+<div class="page" data-page="21">
+  <div class="runhead"><span>§ 08 · Cuidando de você</span><span class="mark">Protocolo da Crise</span></div>
+
+  <div class="phase">
+    <span class="phase-tag">Pilar 03 · Identidade</span>
+    <div class="phase-title" style="font-size:17pt">Espaço que é só seu</div>
+    <p>Pelo menos uma atividade, um interesse, um tempo de cada semana que existe independente da relação. Leitura, corrida, culto, hobby, estudo — o conteúdo importa menos que a existência. Pessoas que dissolvem a identidade dentro do papel de cuidador frequentemente adoecem antes da pessoa que elas estão cuidando.</p>
+  </div>
+
+  <h3 class="sub">Os sinais de que você precisa de suporte profissional</h3>
+
+  <p class="body">Procure um profissional se você reconhecer em si mesmo, com frequência, pelo menos um dos sinais abaixo. Isso não é exagero — é triagem clínica.</p>
+
+  <ul class="checklist dont" style="margin-top:3mm">
+    <li>Sensação persistente de que você está pisando em ovos mesmo em dias de estabilidade.</li>
+    <li>Pensamentos intrusivos sobre a próxima crise, mesmo quando nada indica que ela esteja vindo.</li>
+    <li>Ressentimento crescente, intercalado com culpa pelo ressentimento.</li>
+    <li>Fantasia recorrente de ir embora da relação, seguida de pânico diante da fantasia.</li>
+    <li>Redução de prazer em atividades que antes te faziam bem.</li>
+    <li>Uso aumentado de álcool, medicação não prescrita ou comportamentos compensatórios.</li>
+    <li>Sintomas de ansiedade ou depressão que persistem mesmo em períodos sem crise.</li>
+  </ul>
+
+  <div class="callout">
+    <div class="c-label">O que funciona clinicamente</div>
+    <p>Psicoterapia individual, grupos estruturados para familiares de pessoas com TPB e, em alguns casos, acompanhamento psiquiátrico para o cuidador. A Terapia Comportamental Dialética familiar (DBT-F) é atualmente a abordagem com maior evidência para essa demanda específica.</p>
+  </div>
+
+  <h3 class="sub">A verdade difícil e necessária</h3>
+
+  <p class="body">Amar alguém com TPB pode, em alguns momentos, ser exatamente como este guia descreveu — possível, atravessável, e transformador para os dois. Em outros momentos, pode estar além do que você, sozinho, consegue sustentar. As duas realidades são verdadeiras. Reconhecer a segunda não te torna uma pessoa pior. Te torna alguém capaz de buscar a ajuda que muda a primeira.</p>
+
+  <p class="body" style="margin-top:6mm;font-style:italic;color:var(--ink-soft)">Este guia termina aqui. O trabalho continua — e não precisa ser feito sozinho.</p>
+</div>
+
+<!-- ============================ -->
+
+<!-- PAGE 22 — FINAL CTA           -->
+
+<!-- ============================ -->
+
+<div class="page cta-page">
+  <div class="cta-eyebrow">Próximo passo · Protocolo 7 Dias</div>
+  <h2 class="cta-title">Você leu<br>o <em>protocolo</em>.<br>Agora <em>pratique.</em></h2>
+  <p class="cta-lead">Saber o que fazer nos 60 minutos da crise é o primeiro passo. O segundo é instalar isso no seu cotidiano — antes da próxima crise acontecer.</p>
+
+  <p class="cta-body">O <strong>Protocolo 7 Dias</strong> é um programa guiado para parceiros e familiares que querem transformar o conteúdo deste guia em prática diária. Sete dias, sete movimentos clínicos, construídos para quem convive com alguém com TPB.</p>
+
+  <ul class="cta-list">
+    <li><strong>Dia 1 a 3</strong> — Reconhecer os sinais da Fase 1 na pessoa específica que você ama.</li>
+    <li><strong>Dia 4 e 5</strong> — Instalar as frases-âncora até saírem sem esforço no momento da crise.</li>
+    <li><strong>Dia 6</strong> — O roteiro da conversa depois, com adaptações para sua realidade.</li>
+    <li><strong>Dia 7</strong> — O plano de manutenção da sua própria saúde emocional como cuidador.</li>
+  </ul>
+
+  <a href="https://h5jdksr45b-sys.github.io/landing/curso7.html" class="cta-button-block">
+    <div class="cta-btn-eyebrow">Acessar agora</div>
+    <div class="cta-btn-title">Começar o <em>Protocolo 7 Dias</em> →</div>
+    <span class="cta-btn-url">h5jdksr45b-sys.github.io/landing/curso7.html</span>
+  </a>
+
+  <div class="cta-foot">
+    <div class="sig">
+      Com rigor e presença,
+      <strong>Dr. Fábio Schmidt</strong>
+    </div>
+    <div class="crm">
+      Médico<br>
+      CRM-SP 183549<br>
+      @drfabioschmidt
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
