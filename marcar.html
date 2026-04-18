@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Fabio Schmidt — Médico com Pós-Graduação em Psiquiatria</title>
+  <meta name="description" content="Atendimento médico ambulatorial por telemedicina. Consultas individuais, receitas digitais e pedidos de exame. Todo o Brasil e exterior." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:     #1a1a18;
+      --paper:   #f5f2eb;
+      --sage:    #7a8c72;
+      --sage-lt: #b4c4ac;
+      --rust:    #9e4e2e;
+      --line:    rgba(26,26,24,0.12);
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.5;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(245,242,235,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .header-crm {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--sage);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    nav { display: flex; gap: 2rem; }
+
+    nav a {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    nav a:hover { opacity: 1; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 5rem;
+    }
+
+    .hero-left {
+      padding: 6rem 4rem 4rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--line);
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--sage);
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+
+    .hero-desc {
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 38ch;
+      color: rgba(26,26,24,0.75);
+      margin-bottom: 3rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      transition: background 0.25s, transform 0.2s;
+      align-self: flex-start;
+    }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+
+    .hero-right {
+      padding: 6rem 4rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: fadeUp 0.9s 0.15s ease both;
+    }
+
+    .stat-block {
+      border-top: 1px solid var(--line);
+      padding: 2rem 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .stat-block:last-child { border-bottom: 1px solid var(--line); }
+
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-value {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+    }
+
+    .stat-note {
+      font-size: 0.78rem;
+      color: rgba(26,26,24,0.5);
+      font-weight: 300;
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      padding: 6rem 5rem;
+      border-top: 1px solid var(--line);
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .section-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-tag::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+      max-width: 4rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 3rem;
+      max-width: 24ch;
+    }
+
+    /* ── COMO FUNCIONA ── */
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--line);
+    }
+
+    .flow-item {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--line);
+      position: relative;
+    }
+    .flow-item:last-child { border-right: none; }
+
+    .flow-number {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--sage-lt);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .flow-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .flow-desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(26,26,24,0.65);
+      line-height: 1.7;
+    }
+
+    /* ── VALORES ── */
+    .pricing-section {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .pricing-section .section-tag { color: var(--sage-lt); }
+    .pricing-section .section-tag::after { background: rgba(255,255,255,0.1); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      max-width: 700px;
+    }
+
+    .price-card {
+      background: var(--ink);
+      padding: 3rem;
+    }
+
+    .price-type {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sage-lt);
+      margin-bottom: 1rem;
+    }
+
+    .price-value {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-duration {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(245,242,235,0.45);
+    }
+
+    .pricing-note {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(245,242,235,0.45);
+      max-width: 48ch;
+      line-height: 1.8;
+    }
+
+    /* ── LIMITES ── */
+    .limits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem 6rem;
+    }
+
+    .limit-item { border-top: 1px solid var(--line); padding-top: 1.5rem; }
+
+    .limit-icon {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .limit-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .limit-desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(26,26,24,0.65);
+      line-height: 1.7;
+    }
+
+    /* ── URGÊNCIA ── */
+    .urgency-section {
+      background: #2d1a14;
+      color: var(--paper);
+      padding: 4rem 5rem;
+      border-top: none;
+    }
+
+    .urgency-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+      max-width: 900px;
+    }
+
+    .urgency-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c47a5a;
+      margin-bottom: 1rem;
+    }
+
+    .urgency-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .urgency-desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(245,242,235,0.6);
+      max-width: 44ch;
+    }
+
+    .urgency-numbers {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      white-space: nowrap;
+    }
+
+    .urgency-number {
+      text-align: right;
+    }
+
+    .urgency-number-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #c47a5a;
+      margin-bottom: 0.2rem;
+    }
+
+    .urgency-number-val {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+    }
+
+    /* ── AGENDAMENTO ── */
+    .schedule-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+    }
+
+    .schedule-left {
+      padding: 6rem 4rem 6rem 5rem;
+      border-right: 1px solid var(--line);
+    }
+
+    .schedule-right {
+      padding: 6rem 5rem 6rem 4rem;
+      background: rgba(122,140,114,0.06);
+    }
+
+    .form-field {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      padding: 0.6rem 0;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-bottom-color: var(--sage);
+    }
+
+    .form-textarea { resize: vertical; min-height: 90px; }
+
+    .form-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a8c72' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+      padding-right: 2rem;
+      cursor: pointer;
+    }
+
+    .form-submit {
+      width: 100%;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      padding: 1rem 2rem;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+      margin-top: 1rem;
+    }
+    .form-submit:hover { background: var(--sage); transform: translateY(-1px); }
+
+    #form-success {
+      display: none;
+      padding: 1.5rem;
+      border: 1px solid var(--sage);
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--sage);
+      line-height: 1.7;
+      margin-top: 1rem;
+    }
+
+    .info-block {
+      border-top: 1px solid var(--line);
+      padding: 1.5rem 0;
+    }
+
+    .info-block-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-block-value {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .info-block-note {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(26,26,24,0.5);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 5rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: rgba(26,26,24,0.4);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      header { padding: 1rem 1.5rem; }
+      nav { display: none; }
+
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 7rem 1.5rem 3rem; border-right: none; border-bottom: 1px solid var(--line); }
+      .hero-right { padding: 3rem 1.5rem; }
+      .stat-block { grid-template-columns: 1fr 1fr; }
+
+      section { padding: 4rem 1.5rem; }
+      .flow-grid { grid-template-columns: 1fr 1fr; }
+      .flow-item { border-right: none; border-bottom: 1px solid var(--line); }
+      .flow-item:nth-child(odd) { border-right: 1px solid var(--line); }
+      .flow-item:last-child { border-bottom: none; }
+
+      .pricing-section { padding: 4rem 1.5rem; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
+
+      .limits-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+      .urgency-section { padding: 3rem 1.5rem; }
+      .urgency-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .urgency-numbers { flex-direction: row; justify-content: flex-start; gap: 2rem; }
+      .urgency-number { text-align: left; }
+
+      .schedule-section { grid-template-columns: 1fr; }
+      .schedule-left { padding: 4rem 1.5rem 3rem; border-right: none; border-bottom: 1px solid var(--line); }
+      .schedule-right { padding: 3rem 1.5rem 4rem; }
+
+      footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+    <div>
+      <div class="header-name">Dr. Fabio Schmidt</div>
+      <div class="header-crm">CRM-SP 183549</div>
+    </div>
+    <nav>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#valores">Valores</a>
+      <a href="#limites">Limites</a>
+      <a href="#agendar">Agendar</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+
+  <section class="hero" style="border-top:none; padding:0; animation: fadeUp 0.8s ease both;">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Telemedicina · Todo o Brasil e exterior</p>
+      <h1 class="hero-name">Dr. Fabio<br><em>Henrique</em><br>Schmidt</h1>
+      <p class="hero-title">Médico com pós-graduação em psiquiatria</p>
+      <p class="hero-desc">
+        Atendimento médico ambulatorial por videochamada. Consultas individuais, receitas digitais e pedidos de exame com assinatura eletrônica — onde quer que você esteja.
+      </p>
+      <a href="#agendar" class="btn-primary">Solicitar agendamento</a>
+    </div>
+    <div class="hero-right">
+      <div class="stat-block">
+        <div>
+          <div class="stat-label">Modalidade</div>
+          <div class="stat-value">Telemedicina</div>
+          <div class="stat-note">Videochamada segura</div>
+        </div>
+        <div>
+          <div class="stat-label">Abrangência</div>
+          <div class="stat-value">Todo o Brasil</div>
+          <div class="stat-note">E exterior</div>
+        </div>
+      </div>
+      <div class="stat-block">
+        <div>
+          <div class="stat-label">Horários</div>
+          <div class="stat-value">Seg–Sex</div>
+          <div class="stat-note">9h–13h e 14h–16h</div>
+        </div>
+        <div>
+          <div class="stat-label">Duração</div>
+          <div class="stat-value">Até 45 min</div>
+          <div class="stat-note">Por consulta</div>
+        </div>
+      </div>
+      <div class="stat-block">
+        <div>
+          <div class="stat-label">Convênios</div>
+          <div class="stat-value">Não</div>
+          <div class="stat-note">Somente particular</div>
+        </div>
+        <div>
+          <div class="stat-label">CRM</div>
+          <div class="stat-value">SP 183549</div>
+          <div class="stat-note">Verificar no CFM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+
+  <section id="como-funciona">
+    <div class="section-tag">Como funciona</div>
+    <h2 class="section-title">Do agendamento à consulta em quatro passos</h2>
+    <div class="flow-grid">
+      <div class="flow-item">
+        <div class="flow-number">01</div>
+        <div class="flow-title">Solicitação</div>
+        <p class="flow-desc">Preencha o formulário abaixo ou entre em contato pelo WhatsApp. O agendamento é feito exclusivamente por escrito.</p>
+      </div>
+      <div class="flow-item">
+        <div class="flow-number">02</div>
+        <div class="flow-title">Confirmação</div>
+        <p class="flow-desc">Você recebe a confirmação do horário com as instruções de pagamento e o link da videochamada.</p>
+      </div>
+      <div class="flow-item">
+        <div class="flow-number">03</div>
+        <div class="flow-title">Consulta</div>
+        <p class="flow-desc">Atendimento por videochamada. Duração de até 45 minutos. Você pode estar em qualquer lugar do Brasil ou do exterior.</p>
+      </div>
+      <div class="flow-item">
+        <div class="flow-number">04</div>
+        <div class="flow-title">Documentos</div>
+        <p class="flow-desc">Receitas digitais e pedidos de exame enviados com assinatura eletrônica válida. Exceto receituários azuis e amarelos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALORES -->
+
+  <section class="pricing-section" id="valores">
+    <div class="section-tag">Investimento</div>
+    <h2 class="section-title" style="color: var(--paper);">Valores por modalidade de consulta</h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-type">Primeira consulta</div>
+        <div class="price-value">R$ 700</div>
+        <div class="price-duration">Até 45 minutos</div>
+      </div>
+      <div class="price-card" style="border-left: 1px solid rgba(255,255,255,0.08);">
+        <div class="price-type">Retorno</div>
+        <div class="price-value">R$ 650</div>
+        <div class="price-duration">Até 45 minutos</div>
+      </div>
+    </div>
+    <p class="pricing-note">
+      Pagamento confirmado antes da consulta. Não atendemos convênios ou planos de saúde. Consultas sociais não estão disponíveis no momento.
+    </p>
+  </section>
+
+  <!-- LIMITES DO ATENDIMENTO -->
+
+  <section id="limites">
+    <div class="section-tag">Limites do atendimento</div>
+    <h2 class="section-title">O que está e o que não está incluído</h2>
+    <div class="limits-grid">
+      <div class="limit-item">
+        <div class="limit-icon">✓</div>
+        <div class="limit-title">Consultas ambulatoriais</div>
+        <p class="limit-desc">Atendimento médico estruturado por videochamada. Avaliação, orientação, prescrição e pedidos de exame dentro da consulta.</p>
+      </div>
+      <div class="limit-item">
+        <div class="limit-icon">✓</div>
+        <div class="limit-title">Receitas digitais</div>
+        <p class="limit-desc">Emissão com assinatura eletrônica válida. Exceto receituários de controle especial azuis e amarelos, que exigem receituário físico.</p>
+      </div>
+      <div class="limit-item">
+        <div class="limit-icon">✗</div>
+        <div class="limit-title">Mensagens fora da consulta</div>
+        <p class="limit-desc">O atendimento ambulatorial não inclui troca de mensagens entre consultas, exceto em situações específicas previamente acordadas e com limite definido.</p>
+      </div>
+      <div class="limit-item">
+        <div class="limit-icon">✗</div>
+        <div class="limit-title">Atendimento de urgência</div>
+        <p class="limit-desc">Este é um serviço ambulatorial eletivo. Situações de crise ou emergência devem ser encaminhadas ao SAMU (192), CVV (188) ou à UPA mais próxima.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- URGÊNCIA -->
+
+  <div class="urgency-section">
+    <div class="urgency-inner">
+      <div>
+        <div class="urgency-label">⚠ Atenção</div>
+        <h3 class="urgency-title">Em caso de crise ou emergência, não aguarde retorno aqui</h3>
+        <p class="urgency-desc">Este serviço é ambulatorial. Se você está em sofrimento agudo agora, acione diretamente os serviços de urgência.</p>
+      </div>
+      <div class="urgency-numbers">
+        <div class="urgency-number">
+          <div class="urgency-number-label">SAMU</div>
+          <div class="urgency-number-val">192</div>
+        </div>
+        <div class="urgency-number">
+          <div class="urgency-number-label">CVV</div>
+          <div class="urgency-number-val">188</div>
+        </div>
+        <div class="urgency-number">
+          <div class="urgency-number-label">Emergência</div>
+          <div class="urgency-number-val">UPA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AGENDAMENTO -->
+
+  <div class="schedule-section" id="agendar">
+    <div class="schedule-left">
+      <div class="section-tag">Agendamento</div>
+      <h2 class="section-title">Solicite sua consulta</h2>
+      <form id="schedule-form">
+        <div class="form-field">
+          <label class="form-label" for="nome">Nome completo</label>
+          <input class="form-input" type="text" id="nome" name="nome" required placeholder="Seu nome" />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="email">E-mail</label>
+          <input class="form-input" type="email" id="email" name="email" required placeholder="seu@email.com" />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="whatsapp">WhatsApp</label>
+          <input class="form-input" type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 99999-9999" />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="tipo">Tipo de consulta</label>
+          <select class="form-select" id="tipo" name="tipo" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="primeira">Primeira consulta — R$ 700</option>
+            <option value="retorno">Retorno — R$ 650</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="disponibilidade">Disponibilidade</label>
+          <textarea class="form-textarea" id="disponibilidade" name="disponibilidade" placeholder="Ex: prefiro segundas ou terças pela manhã" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Enviar via WhatsApp</button>
+        <div id="form-success">
+          Solicitação recebida. Você receberá a confirmação do horário, link e instruções de pagamento em breve pelo WhatsApp ou e-mail informado.
+        </div>
+      </form>
+      <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--line);">
+        <div class="form-label" style="margin-bottom: 1rem;">Ou agende diretamente pela agenda online</div>
+        <a href="https://cal.com/drfabioschmidt" target="_blank" class="btn-primary" style="display:inline-block;background:var(--sage);">Ver horários disponíveis →</a>
+      </div>
+    </div>
+    <div class="schedule-right">
+      <div class="section-tag">Informações</div>
+      <div class="info-block">
+        <div class="info-block-label">Horário de atendimento</div>
+        <div class="info-block-value">Segunda a sexta-feira</div>
+        <div class="info-block-note">9h–13h e 14h–16h (horário de Brasília)</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">Modalidade</div>
+        <div class="info-block-value">Telemedicina por videochamada</div>
+        <div class="info-block-note">Todo o Brasil e exterior</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">Pagamento</div>
+        <div class="info-block-value">Confirmado antes da consulta</div>
+        <div class="info-block-note">Informações enviadas após confirmação do horário</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">Agendamento</div>
+        <div class="info-block-value">Exclusivamente por escrito</div>
+        <div class="info-block-note">Via formulário ou WhatsApp</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">Convênios</div>
+        <div class="info-block-value">Não aceitos</div>
+        <div class="info-block-note">Atendimento particular apenas</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">CRM</div>
+        <div class="info-block-value">SP 183549</div>
+        <div class="info-block-note">Verificável no portal do CFM</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="footer-name">Dr. Fabio Henrique de Lima Schmidt</div>
+    <div>Médico com pós-graduação em psiquiatria · CRM-SP 183549</div>
+    <div>Telemedicina · Todo o Brasil e exterior</div>
+  </footer>
+
+  <script>
+    // Form submission handler
+    document.getElementById('schedule-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nome = document.getElementById('nome').value;
+      const email = document.getElementById('email').value;
+      const whatsapp = document.getElementById('whatsapp').value;
+      const tipo = document.getElementById('tipo').value;
+      const disponibilidade = document.getElementById('disponibilidade').value;
+
+      const tipoLabel = tipo === 'primeira' ? 'Primeira consulta (R$ 700)' : 'Retorno (R$ 650)';
+
+      // Build WhatsApp message
+      const msg = encodeURIComponent(
+        `Olá, Dr. Fabio! Estou solicitando agendamento pelo site.\n\n` +
+        `*Nome:* ${nome}\n` +
+        `*E-mail:* ${email}\n` +
+        `*WhatsApp:* ${whatsapp}\n` +
+        `*Tipo:* ${tipoLabel}\n` +
+        `*Disponibilidade:* ${disponibilidade}`
+      );
+
+      // Show success message
+      document.getElementById('form-success').style.display = 'block';
+      document.getElementById('schedule-form').querySelector('.form-submit').disabled = true;
+
+      // Open WhatsApp after short delay
+      setTimeout(() => {
+        // Replace with your actual WhatsApp number (with country code, no spaces or symbols)
+        window.open(`https://wa.me/5511975074399?text=${msg}`, '_blank');
+      }, 800);
+    });
+
+    // Scroll animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(el => {
+      el.style.animationPlayState = 'paused';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
