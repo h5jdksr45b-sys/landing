@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca · Dr. Fábio Schmidt</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0ebe0;
+    --card-bg: #f7f3eb;
+    --red: #8b1a1a;
+    --gold: #b8962e;
+    --dark: #1a1410;
+    --mid: #5a4f42;
+    --light: #9a8f82;
+    --inactive: #c8c0b4;
+    --line: rgba(90,79,66,0.13);
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+font-family: ‘Montserrat’, sans-serif;
+color: var(–dark);
+min-height: 100vh;
+}
+
+/* ── HEADER ── */
+header {
+padding: 56px 0 44px;
+text-align: center;
+border-bottom: 1px solid var(–line);
+}
+
+.header-label {
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 4px;
+color: var(–red);
+text-transform: uppercase;
+margin-bottom: 14px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+}
+
+.header-label::before,
+.header-label::after {
+content: ‘’;
+width: 24px;
+height: 1px;
+background: var(–red);
+opacity: 0.5;
+}
+
+.header-name {
+font-family: ‘Playfair Display’, serif;
+font-size: 30px;
+font-weight: 700;
+color: var(–dark);
+letter-spacing: -0.3px;
+}
+
+.header-crm {
+font-size: 9px;
+font-weight: 500;
+letter-spacing: 3px;
+color: var(–light);
+text-transform: uppercase;
+margin-top: 7px;
+}
+
+.header-sub {
+font-family: ‘Playfair Display’, serif;
+font-size: 13px;
+font-style: italic;
+color: var(–gold);
+margin-top: 18px;
+}
+
+/* ── MAIN ── */
+main {
+max-width: 1080px;
+margin: 0 auto;
+padding: 64px 40px 100px;
+}
+
+.section-label {
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 4px;
+color: var(–light);
+text-transform: uppercase;
+margin-bottom: 40px;
+display: flex;
+align-items: center;
+gap: 14px;
+}
+
+.section-label::after {
+content: ‘’;
+flex: 1;
+height: 1px;
+background: var(–line);
+}
+
+/* ── SHELF ── */
+.shelf {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+gap: 36px;
+}
+
+/* ── BOOK CARD ── */
+.book-card {
+display: block;
+text-decoration: none;
+color: inherit;
+border-radius: 2px;
+overflow: hidden;
+box-shadow: 0 2px 16px rgba(26,20,16,0.07), 0 1px 4px rgba(26,20,16,0.04);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+background: var(–card-bg);
+}
+
+.book-card:not(.inactive):hover {
+transform: translateY(-8px);
+box-shadow: 0 20px 48px rgba(26,20,16,0.13), 0 4px 16px rgba(26,20,16,0.06);
+}
+
+.book-card.inactive {
+cursor: default;
+opacity: 0.45;
+filter: grayscale(0.5);
+}
+
+/* ── CAPA ── */
+.cover {
+width: 100%;
+aspect-ratio: 3 / 3.8;
+background: #f2ece0;
+position: relative;
+overflow: hidden;
+padding: 36px 32px 28px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+border-bottom: 1px solid var(–line);
+}
+
+.cover-line {
+position: absolute;
+right: 28px;
+top: 0;
+bottom: 0;
+width: 1px;
+background: linear-gradient(to bottom, transparent 10%, rgba(139,26,26,0.18) 35%, rgba(139,26,26,0.18) 70%, transparent 90%);
+}
+
+.cover-line::before,
+.cover-line::after {
+content: ‘’;
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+width: 6px;
+height: 6px;
+border-radius: 50%;
+border: 1px solid rgba(139,26,26,0.25);
+background: #f2ece0;
+}
+
+.cover-line::before { top: 18%; }
+.cover-line::after  { bottom: 18%; }
+
+.cover-num {
+position: absolute;
+right: -16px;
+top: 44%;
+transform: translateY(-50%);
+font-family: ‘Playfair Display’, serif;
+font-size: 190px;
+font-weight: 900;
+color: transparent;
+-webkit-text-stroke: 1px rgba(139,26,26,0.055);
+line-height: 1;
+pointer-events: none;
+user-select: none;
+}
+
+.cover-eyebrow {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-bottom: 22px;
+}
+
+.eyebrow-line {
+width: 22px;
+height: 1px;
+background: var(–red);
+opacity: 0.65;
+flex-shrink: 0;
+}
+
+.eyebrow-text {
+font-size: 8px;
+font-weight: 700;
+letter-spacing: 2.5px;
+color: var(–red);
+text-transform: uppercase;
+line-height: 1.4;
+}
+
+.cover-series {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 9px;
+font-weight: 600;
+letter-spacing: 3.5px;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 10px;
+opacity: 0.9;
+}
+
+.cover-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 58px;
+font-weight: 900;
+line-height: 0.9;
+color: var(–dark);
+letter-spacing: -1.5px;
+}
+
+.cover-title em {
+font-style: italic;
+color: var(–red);
+display: block;
+}
+
+.cover-desc {
+font-family: ‘Playfair Display’, serif;
+font-size: 11px;
+font-style: italic;
+color: var(–mid);
+line-height: 1.7;
+margin-top: 20px;
+padding-left: 14px;
+border-left: 1px solid rgba(90,79,66,0.18);
+max-width: 72%;
+}
+
+.cover-bottom {
+border-top: 1px solid var(–line);
+padding-top: 14px;
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+}
+
+.cover-author {
+font-size: 10px;
+font-weight: 700;
+color: var(–dark);
+letter-spacing: 0.2px;
+}
+
+.cover-crm {
+font-size: 8px;
+font-weight: 400;
+letter-spacing: 1.5px;
+color: var(–light);
+text-transform: uppercase;
+margin-top: 3px;
+}
+
+.cover-year {
+font-family: ‘Playfair Display’, serif;
+font-size: 11px;
+font-style: italic;
+color: var(–gold);
+opacity: 0.7;
+}
+
+/* badge */
+.badge {
+position: absolute;
+top: 14px;
+left: 14px;
+background: rgba(200,192,180,0.9);
+font-size: 8px;
+font-weight: 700;
+letter-spacing: 2px;
+color: #888;
+text-transform: uppercase;
+padding: 4px 10px;
+border-radius: 2px;
+}
+
+/* ── CARD INFO ── */
+.book-info {
+padding: 20px 24px 18px;
+}
+
+.book-meta {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.book-price {
+font-family: ‘Playfair Display’, serif;
+font-size: 22px;
+font-weight: 700;
+color: var(–dark);
+}
+
+.book-price span {
+font-family: ‘Montserrat’, sans-serif;
+font-size: 10px;
+font-weight: 500;
+color: var(–light);
+vertical-align: super;
+margin-right: 1px;
+}
+
+.book-cta {
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 2px;
+color: var(–red);
+text-transform: uppercase;
+display: flex;
+align-items: center;
+gap: 5px;
+transition: gap 0.2s;
+}
+
+.book-card:hover .book-cta { gap: 9px; }
+.book-cta::after { content: ‘→’; font-size: 13px; }
+
+.inactive-note {
+font-size: 10px;
+font-style: italic;
+color: var(–inactive);
+}
+
+/* ── FOOTER ── */
+footer {
+text-align: center;
+padding: 44px 20px;
+border-top: 1px solid var(–line);
+}
+
+.footer-sig {
+font-family: ‘Playfair Display’, serif;
+font-size: 14px;
+font-style: italic;
+color: var(–light);
+margin-bottom: 10px;
+}
+
+.footer-insta {
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 3px;
+color: var(–gold);
+text-transform: uppercase;
+text-decoration: none;
+transition: color 0.2s;
+}
+
+.footer-insta:hover { color: var(–red); }
+
+@media (max-width: 640px) {
+main { padding: 40px 20px 60px; }
+.shelf { grid-template-columns: 1fr; gap: 28px; }
+.cover-title { font-size: 46px; }
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="header-label">Borderline · Guia Clínico</div>
+  <div class="header-name">Dr. Fábio Schmidt</div>
+  <div class="header-crm">Médico · CRM-SP 183549</div>
+  <div class="header-sub">Biblioteca clínica</div>
+</header>
+
+<main>
+  <div class="section-label">Publicações</div>
+
+  <div class="shelf">
+
+```
+<!-- VOL 01 · ATIVO -->
+<a class="book-card" href="https://go.hotmart.com/H105440271K" target="_blank" rel="noopener">
+  <div class="cover">
+    <div class="cover-line"></div>
+    <div class="cover-num">01</div>
+
+    <div>
+      <div class="cover-eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">Borderline · Guia Clínico</div>
+      </div>
+      <div class="cover-series">Protocolo</div>
+      <div class="cover-title">da <em>Crise</em></div>
+      <div class="cover-desc">O que fazer nos 60 minutos mais difíceis — para parceiros e familiares de pessoas com TPB.</div>
+    </div>
+
+    <div class="cover-bottom">
+      <div>
+        <div class="cover-author">Dr. Fábio Schmidt</div>
+        <div class="cover-crm">Médico · CRM-SP 183549</div>
+      </div>
+      <div class="cover-year">2026</div>
+    </div>
+  </div>
+
+  <div class="book-info">
+    <div class="book-meta">
+      <div class="book-price"><span>R$</span>27</div>
+      <div class="book-cta">Acessar</div>
+    </div>
+  </div>
+</a>
+
+<!-- VOL 02 · INATIVO -->
+<div class="book-card inactive">
+  <div class="cover">
+    <div class="badge">Em breve</div>
+    <div class="cover-line"></div>
+    <div class="cover-num">02</div>
+
+    <div>
+      <div class="cover-eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">Borderline · Kit de Regulação</div>
+      </div>
+      <div class="cover-series">Kit de</div>
+      <div class="cover-title">Regu<em>lação.</em></div>
+      <div class="cover-desc">10 ferramentas DBT para usar sozinho — antes que a crise chegue.</div>
+    </div>
+
+    <div class="cover-bottom">
+      <div>
+        <div class="cover-author">Dr. Fábio Schmidt</div>
+        <div class="cover-crm">Médico · CRM-SP 183549</div>
+      </div>
+      <div class="cover-year">2026</div>
+    </div>
+  </div>
+
+  <div class="book-info">
+    <div class="book-meta">
+      <div class="inactive-note">Disponível em breve</div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-sig">Com rigor e presença,</div>
+  <a class="footer-insta" href="https://instagram.com/drfabioschmidt" target="_blank">@drfabioschmidt</a>
+</footer>
+
+</body>
+</html>
