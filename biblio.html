@@ -5,473 +5,314 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Biblioteca · Dr. Fábio Schmidt</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="Livros e materiais clínicos sobre Transtorno de Personalidade Borderline — por Dr. Fábio Schmidt.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f0ebe0;
-    --card-bg: #f7f3eb;
-    --red: #8b1a1a;
-    --gold: #b8962e;
-    --dark: #1a1410;
-    --mid: #5a4f42;
-    --light: #9a8f82;
-    --inactive: #c8c0b4;
-    --line: rgba(90,79,66,0.13);
+    --bg: #ece6d9;
+    --paper: #f4efe4;
+    --ink: #171310;
+    --ink-soft: #3d342c;
+    --mute: #7a6f60;
+    --rule: rgba(23,19,16,0.12);
+    --red: #7a1818;
+    --gold: #a8872a;
+    --terracotta: #b04a32;
+    --terracotta-deep: #8a3622;
   }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
+.topbar { border-bottom: 1px solid var(–rule); padding: 18px 0; }
+.topbar-inner { max-width: 1180px; margin: 0 auto; padding: 0 28px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.brand { font-family: ‘Playfair Display’, serif; font-weight: 700; font-size: 17px; letter-spacing: -0.2px; }
+.brand-sub { font-size: 10px; font-weight: 500; letter-spacing: 2.5px; color: var(–mute); text-transform: uppercase; margin-top: 2px; }
+.topbar-right { font-size: 10px; letter-spacing: 2.5px; color: var(–mute); text-transform: uppercase; font-weight: 600; }
 
-body {
-background: var(–bg);
-font-family: ‘Montserrat’, sans-serif;
-color: var(–dark);
-min-height: 100vh;
-}
+.hero-intro { max-width: 1180px; margin: 0 auto; padding: 72px 28px 12px; text-align: center; }
+.hero-eyebrow { font-size: 10px; letter-spacing: 3.5px; color: var(–red); text-transform: uppercase; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.hero-eyebrow::before, .hero-eyebrow::after { content: ‘’; width: 30px; height: 1px; background: var(–red); opacity: 0.5; }
+.hero-title { font-family: ‘Playfair Display’, serif; font-weight: 900; font-size: 46px; line-height: 1.05; letter-spacing: -1.2px; max-width: 780px; margin: 0 auto 18px; }
+.hero-title em { font-style: italic; font-weight: 400; color: var(–red); }
+.hero-sub { font-family: ‘Playfair Display’, serif; font-size: 17px; font-style: italic; color: var(–mute); max-width: 580px; margin: 0 auto; }
 
-/* ── HEADER ── */
-header {
-padding: 56px 0 44px;
-text-align: center;
-border-bottom: 1px solid var(–line);
-}
+.shelf { max-width: 1180px; margin: 0 auto; padding: 60px 28px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.book-card { display: flex; flex-direction: column; gap: 36px; }
+.book-stage { perspective: 1800px; display: flex; justify-content: center; padding: 20px 0 8px; }
+.book { position: relative; width: 280px; aspect-ratio: 3 / 4.4; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(.2,.7,.2,1); }
+.book-a { transform: rotateY(-14deg) rotateX(3deg); filter: drop-shadow(26px 34px 44px rgba(23,19,16,0.26)) drop-shadow(0 2px 4px rgba(23,19,16,0.15)); }
+.book-b { transform: rotateY(14deg) rotateX(3deg); filter: drop-shadow(-26px 34px 44px rgba(23,19,16,0.26)) drop-shadow(0 2px 4px rgba(23,19,16,0.15)); }
+.book-card:hover .book-a { transform: rotateY(-6deg) rotateX(2deg); }
+.book-card:hover .book-b { transform: rotateY(6deg) rotateX(2deg); }
 
-.header-label {
-font-size: 9px;
-font-weight: 700;
-letter-spacing: 4px;
-color: var(–red);
-text-transform: uppercase;
-margin-bottom: 14px;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 10px;
-}
+.book-front { position: absolute; inset: 0; padding: 42px 32px 28px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 2px 4px 4px 2px; overflow: hidden; box-shadow: inset 2px 0 0 rgba(255,255,255,0.05), inset -2px 0 0 rgba(0,0,0,0.35); }
+.book-front::before { content: ‘’; position: absolute; inset: 0; pointer-events: none; }
+.book-front::after { content: ‘’; position: absolute; left: 14px; top: 18px; bottom: 18px; width: 1px; opacity: 0.18; }
 
-.header-label::before,
-.header-label::after {
-content: ‘’;
-width: 24px;
-height: 1px;
-background: var(–red);
-opacity: 0.5;
-}
+.book-a .book-front { background: #1a1410; color: #f4efe4; }
+.book-a .book-front::before { background: radial-gradient(ellipse at top left, rgba(168,135,42,0.08), transparent 60%), radial-gradient(ellipse at bottom right, rgba(122,24,24,0.1), transparent 60%); }
+.book-a .book-front::after { background: linear-gradient(to bottom, transparent, rgba(244,239,228,0.4) 20%, rgba(244,239,228,0.4) 80%, transparent); }
+.book-a .book-eyebrow { color: var(–gold); }
+.book-a .book-title-text { color: #f4efe4; }
+.book-a .book-title-text em { color: #c99a2e; }
+.book-a .book-rule { background: var(–red); }
+.book-a .book-sub { color: rgba(244,239,228,0.72); }
+.book-a .book-author { color: rgba(244,239,228,0.85); }
+.book-a .book-author-crm { color: rgba(244,239,228,0.45); }
+.book-a .book-year { color: rgba(244,239,228,0.55); }
 
-.header-name {
-font-family: ‘Playfair Display’, serif;
-font-size: 30px;
-font-weight: 700;
-color: var(–dark);
-letter-spacing: -0.3px;
-}
+.book-b .book-front { background: var(–terracotta); color: #f4efe4; text-align: center; padding: 52px 30px 32px; align-items: stretch; }
+.book-b .book-front::before { background: radial-gradient(ellipse at center, rgba(255,255,255,0.07), transparent 65%), repeating-linear-gradient(135deg, rgba(0,0,0,0.02) 0 2px, transparent 2px 5px); }
+.book-b .book-front::after { background: none; }
+.book-b .book-eyebrow { color: rgba(244,239,228,0.75); justify-content: center; }
+.book-b .book-eyebrow::before { background: rgba(244,239,228,0.5); }
+.book-b .book-title-text { font-family: ‘Playfair Display’, serif; font-weight: 700; font-size: 32px; line-height: 1.05; letter-spacing: 0.5px; text-transform: uppercase; color: #f4efe4; }
+.book-b .book-rule { background: rgba(244,239,228,0.5); margin: 22px auto; width: 40px; }
+.book-b .book-sub { color: rgba(244,239,228,0.8); margin: 0 auto; text-align: center; max-width: 85%; }
+.book-b .book-bottom { justify-content: center; text-align: center; font-family: ‘Inter’, sans-serif; letter-spacing: 4px; color: rgba(244,239,228,0.75); }
+.book-b .book-author { color: rgba(244,239,228,0.95); letter-spacing: 4px; }
 
-.header-crm {
-font-size: 9px;
-font-weight: 500;
-letter-spacing: 3px;
-color: var(–light);
-text-transform: uppercase;
-margin-top: 7px;
-}
+.book-eyebrow { font-size: 9px; letter-spacing: 3px; font-weight: 600; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+.book-eyebrow::before { content: ‘’; width: 14px; height: 1px; background: currentColor; opacity: 0.6; }
+.book-b .book-eyebrow { margin-bottom: 30px; }
+.book-title-text { font-family: ‘Playfair Display’, serif; font-weight: 900; font-size: 40px; line-height: 0.95; letter-spacing: -1.2px; position: relative; z-index: 2; }
+.book-title-text em { font-style: italic; font-weight: 700; display: block; margin-top: 2px; }
+.book-rule { width: 32px; height: 2px; margin: 22px 0 18px; }
+.book-sub { font-family: ‘Playfair Display’, serif; font-style: italic; font-size: 12.5px; line-height: 1.55; max-width: 85%; position: relative; z-index: 2; }
+.book-bottom { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: flex-end; font-size: 8.5px; letter-spacing: 2px; text-transform: uppercase; }
+.book-author { font-weight: 700; letter-spacing: 1.5px; font-size: 9px; }
+.book-author-crm { font-size: 7.5px; font-weight: 400; margin-top: 3px; letter-spacing: 2px; }
 
-.header-sub {
-font-family: ‘Playfair Display’, serif;
-font-size: 13px;
-font-style: italic;
-color: var(–gold);
-margin-top: 18px;
-}
+.book-spine { position: absolute; left: -12px; top: 4px; bottom: 4px; width: 12px; transform: rotateY(-90deg) translateZ(-6px); transform-origin: right; border-radius: 2px 0 0 2px; }
+.book-a .book-spine { background: linear-gradient(to right, #0a0705, #1a1410); }
+.book-b .book-spine { background: linear-gradient(to right, #6a2414, var(–terracotta-deep)); }
+.book-pages { position: absolute; right: -6px; top: 6px; bottom: 6px; width: 6px; background: repeating-linear-gradient(to bottom, #f4efe4 0 2px, #d8cfbd 2px 3px); transform: rotateY(90deg) translateZ(-3px); transform-origin: left; }
 
-/* ── MAIN ── */
-main {
-max-width: 1080px;
-margin: 0 auto;
-padding: 64px 40px 100px;
-}
+.book-info { padding: 0 8px; }
+.book-info-eyebrow { font-size: 10px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.book-a .book-info-eyebrow { color: var(–red); }
+.book-b .book-info-eyebrow { color: var(–terracotta-deep); }
+.book-info-eyebrow::before { content: ‘’; width: 20px; height: 1px; background: currentColor; }
+.book-info h2 { font-family: ‘Playfair Display’, serif; font-size: 30px; font-weight: 700; letter-spacing: -0.4px; line-height: 1.1; margin-bottom: 12px; }
+.book-a .book-info h2 em { font-style: italic; color: var(–red); }
+.book-b .book-info h2 em { font-style: italic; color: var(–terracotta-deep); }
+.book-info .desc { font-size: 14.5px; color: var(–ink-soft); line-height: 1.6; margin-bottom: 22px; }
 
-.section-label {
-font-size: 9px;
-font-weight: 700;
-letter-spacing: 4px;
-color: var(–light);
-text-transform: uppercase;
-margin-bottom: 40px;
-display: flex;
-align-items: center;
-gap: 14px;
-}
+.book-meta { display: flex; gap: 24px; border-top: 1px solid var(–rule); border-bottom: 1px solid var(–rule); padding: 14px 0; margin-bottom: 22px; font-size: 11px; color: var(–mute); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+.book-meta strong { color: var(–ink); font-weight: 700; }
+.book-meta-item { display: flex; flex-direction: column; gap: 2px; }
 
-.section-label::after {
-content: ‘’;
-flex: 1;
-height: 1px;
-background: var(–line);
-}
+.cta-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.price-block { line-height: 1.2; }
+.price { font-family: ‘Playfair Display’, serif; font-size: 34px; font-weight: 700; letter-spacing: -1px; }
+.price span { font-family: ‘Inter’, sans-serif; font-size: 13px; font-weight: 500; color: var(–mute); vertical-align: super; margin-right: 2px; }
+.price-note { font-size: 10.5px; color: var(–mute); margin-top: 3px; }
+.btn { background: var(–ink); color: var(–paper); padding: 16px 26px; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: background 0.2s, transform 0.2s; border: 1px solid var(–ink); white-space: nowrap; }
+.btn-a:hover { background: var(–red); border-color: var(–red); transform: translateY(-1px); }
+.btn-b:hover { background: var(–terracotta-deep); border-color: var(–terracotta-deep); transform: translateY(-1px); }
+.btn-arrow { transition: transform 0.2s; }
+.btn:hover .btn-arrow { transform: translateX(4px); }
 
-/* ── SHELF ── */
-.shelf {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-gap: 36px;
-}
+.section { max-width: 1180px; margin: 0 auto; padding: 72px 28px; border-top: 1px solid var(–rule); }
+.section-label { font-size: 10px; font-weight: 700; letter-spacing: 3px; color: var(–mute); text-transform: uppercase; margin-bottom: 28px; }
+.section h2 { font-family: ‘Playfair Display’, serif; font-weight: 700; font-size: 34px; line-height: 1.15; letter-spacing: -0.5px; max-width: 720px; }
+.section h2 em { font-style: italic; color: var(–red); }
 
-/* ── BOOK CARD ── */
-.book-card {
-display: block;
-text-decoration: none;
-color: inherit;
-border-radius: 2px;
-overflow: hidden;
-box-shadow: 0 2px 16px rgba(26,20,16,0.07), 0 1px 4px rgba(26,20,16,0.04);
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-background: var(–card-bg);
-}
+.author { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: start; margin-top: 36px; }
+.author p { font-size: 15px; color: var(–ink-soft); line-height: 1.65; margin-bottom: 14px; }
+.author-card { background: var(–paper); padding: 32px 30px; border: 1px solid var(–rule); }
+.author-card .section-label { margin-bottom: 16px; }
+.author-card h3 { font-family: ‘Playfair Display’, serif; font-size: 24px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.3px; }
+.author-crm { font-size: 10px; letter-spacing: 2px; color: var(–mute); text-transform: uppercase; margin-bottom: 18px; }
+.author-card p { font-size: 14px; margin-bottom: 0; }
+.author-stats { border-top: 1px solid var(–rule); margin-top: 22px; padding-top: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.stat-num { font-family: ‘Playfair Display’, serif; font-size: 22px; font-weight: 700; color: var(–red); letter-spacing: -0.5px; }
+.stat-label { font-size: 10px; letter-spacing: 1.5px; color: var(–mute); text-transform: uppercase; margin-top: 2px; }
 
-.book-card:not(.inactive):hover {
-transform: translateY(-8px);
-box-shadow: 0 20px 48px rgba(26,20,16,0.13), 0 4px 16px rgba(26,20,16,0.06);
-}
+.vol2 { background: var(–paper); padding: 42px 36px; border: 1px solid var(–rule); display: flex; gap: 28px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-top: 36px; }
+.vol2-left { flex: 1; min-width: 260px; }
+.vol2-eyebrow { font-size: 10px; letter-spacing: 3px; color: var(–gold); font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+.vol2 h3 { font-family: ‘Playfair Display’, serif; font-size: 26px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 8px; }
+.vol2 h3 em { font-style: italic; color: var(–red); }
+.vol2 p { font-size: 14px; color: var(–ink-soft); line-height: 1.55; max-width: 480px; }
+.vol2-tag { font-size: 10px; letter-spacing: 2px; color: var(–red); text-transform: uppercase; font-weight: 700; padding: 10px 16px; border: 1px solid var(–red); }
 
-.book-card.inactive {
-cursor: default;
-opacity: 0.45;
-filter: grayscale(0.5);
-}
-
-/* ── CAPA ── */
-.cover {
-width: 100%;
-aspect-ratio: 3 / 3.8;
-background: #f2ece0;
-position: relative;
-overflow: hidden;
-padding: 36px 32px 28px;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-border-bottom: 1px solid var(–line);
-}
-
-.cover-line {
-position: absolute;
-right: 28px;
-top: 0;
-bottom: 0;
-width: 1px;
-background: linear-gradient(to bottom, transparent 10%, rgba(139,26,26,0.18) 35%, rgba(139,26,26,0.18) 70%, transparent 90%);
-}
-
-.cover-line::before,
-.cover-line::after {
-content: ‘’;
-position: absolute;
-left: 50%;
-transform: translateX(-50%);
-width: 6px;
-height: 6px;
-border-radius: 50%;
-border: 1px solid rgba(139,26,26,0.25);
-background: #f2ece0;
-}
-
-.cover-line::before { top: 18%; }
-.cover-line::after  { bottom: 18%; }
-
-.cover-num {
-position: absolute;
-right: -16px;
-top: 44%;
-transform: translateY(-50%);
-font-family: ‘Playfair Display’, serif;
-font-size: 190px;
-font-weight: 900;
-color: transparent;
--webkit-text-stroke: 1px rgba(139,26,26,0.055);
-line-height: 1;
-pointer-events: none;
-user-select: none;
-}
-
-.cover-eyebrow {
-display: flex;
-align-items: center;
-gap: 8px;
-margin-bottom: 22px;
-}
-
-.eyebrow-line {
-width: 22px;
-height: 1px;
-background: var(–red);
-opacity: 0.65;
-flex-shrink: 0;
-}
-
-.eyebrow-text {
-font-size: 8px;
-font-weight: 700;
-letter-spacing: 2.5px;
-color: var(–red);
-text-transform: uppercase;
-line-height: 1.4;
-}
-
-.cover-series {
-font-family: ‘Montserrat’, sans-serif;
-font-size: 9px;
-font-weight: 600;
-letter-spacing: 3.5px;
-color: var(–gold);
-text-transform: uppercase;
-margin-bottom: 10px;
-opacity: 0.9;
-}
-
-.cover-title {
-font-family: ‘Playfair Display’, serif;
-font-size: 58px;
-font-weight: 900;
-line-height: 0.9;
-color: var(–dark);
-letter-spacing: -1.5px;
-}
-
-.cover-title em {
-font-style: italic;
-color: var(–red);
-display: block;
-}
-
-.cover-desc {
-font-family: ‘Playfair Display’, serif;
-font-size: 11px;
-font-style: italic;
-color: var(–mid);
-line-height: 1.7;
-margin-top: 20px;
-padding-left: 14px;
-border-left: 1px solid rgba(90,79,66,0.18);
-max-width: 72%;
-}
-
-.cover-bottom {
-border-top: 1px solid var(–line);
-padding-top: 14px;
-display: flex;
-justify-content: space-between;
-align-items: flex-end;
-}
-
-.cover-author {
-font-size: 10px;
-font-weight: 700;
-color: var(–dark);
-letter-spacing: 0.2px;
-}
-
-.cover-crm {
-font-size: 8px;
-font-weight: 400;
-letter-spacing: 1.5px;
-color: var(–light);
-text-transform: uppercase;
-margin-top: 3px;
-}
-
-.cover-year {
-font-family: ‘Playfair Display’, serif;
-font-size: 11px;
-font-style: italic;
-color: var(–gold);
-opacity: 0.7;
-}
-
-/* badge */
-.badge {
-position: absolute;
-top: 14px;
-left: 14px;
-background: rgba(200,192,180,0.9);
-font-size: 8px;
-font-weight: 700;
-letter-spacing: 2px;
-color: #888;
-text-transform: uppercase;
-padding: 4px 10px;
-border-radius: 2px;
-}
-
-/* ── CARD INFO ── */
-.book-info {
-padding: 20px 24px 18px;
-}
-
-.book-meta {
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-
-.book-price {
-font-family: ‘Playfair Display’, serif;
-font-size: 22px;
-font-weight: 700;
-color: var(–dark);
-}
-
-.book-price span {
-font-family: ‘Montserrat’, sans-serif;
-font-size: 10px;
-font-weight: 500;
-color: var(–light);
-vertical-align: super;
-margin-right: 1px;
-}
-
-.book-cta {
-font-size: 9px;
-font-weight: 700;
-letter-spacing: 2px;
-color: var(–red);
-text-transform: uppercase;
-display: flex;
-align-items: center;
-gap: 5px;
-transition: gap 0.2s;
-}
-
-.book-card:hover .book-cta { gap: 9px; }
-.book-cta::after { content: ‘→’; font-size: 13px; }
-
-.inactive-note {
-font-size: 10px;
-font-style: italic;
-color: var(–inactive);
-}
-
-/* ── FOOTER ── */
-footer {
-text-align: center;
-padding: 44px 20px;
-border-top: 1px solid var(–line);
-}
-
-.footer-sig {
-font-family: ‘Playfair Display’, serif;
-font-size: 14px;
-font-style: italic;
-color: var(–light);
-margin-bottom: 10px;
-}
-
-.footer-insta {
-font-size: 9px;
-font-weight: 700;
-letter-spacing: 3px;
-color: var(–gold);
-text-transform: uppercase;
-text-decoration: none;
-transition: color 0.2s;
-}
-
+footer { border-top: 1px solid var(–rule); padding: 40px 28px; text-align: center; margin-top: 40px; }
+.footer-brand { font-family: ‘Playfair Display’, serif; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.footer-meta { font-size: 10px; letter-spacing: 2px; color: var(–mute); text-transform: uppercase; margin-bottom: 18px; }
+.footer-insta { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: var(–gold); text-transform: uppercase; text-decoration: none; transition: color 0.2s; }
 .footer-insta:hover { color: var(–red); }
+.footer-legal { font-size: 10px; color: var(–mute); margin-top: 22px; line-height: 1.6; max-width: 540px; margin-left: auto; margin-right: auto; }
 
-@media (max-width: 640px) {
-main { padding: 40px 20px 60px; }
-.shelf { grid-template-columns: 1fr; gap: 28px; }
-.cover-title { font-size: 46px; }
+@media (max-width: 900px) {
+.hero-title { font-size: 34px; }
+.hero-sub { font-size: 15px; }
+.shelf { grid-template-columns: 1fr; gap: 64px; padding: 40px 22px 60px; }
+.book { width: 240px; }
+.book-a, .book-b { transform: rotateY(-8deg) rotateX(2deg); }
+.book-b { transform: rotateY(8deg) rotateX(2deg); }
+.book-title-text { font-size: 32px; }
+.book-b .book-title-text { font-size: 26px; }
+.author { grid-template-columns: 1fr; gap: 28px; }
+.section { padding: 56px 22px; }
+.section h2 { font-size: 26px; }
+.hero-intro { padding: 52px 22px 8px; }
+}
+@media (max-width: 420px) {
+.cta-row { flex-direction: column; align-items: stretch; }
+.btn { justify-content: center; }
+.price { font-size: 30px; }
+.book-info h2 { font-size: 24px; }
 }
 </style>
 
 </head>
 <body>
 
-<header>
-  <div class="header-label">Borderline · Guia Clínico</div>
-  <div class="header-name">Dr. Fábio Schmidt</div>
-  <div class="header-crm">Médico · CRM-SP 183549</div>
-  <div class="header-sub">Biblioteca clínica</div>
-</header>
-
-<main>
-  <div class="section-label">Publicações</div>
-
-  <div class="shelf">
-
-```
-<!-- VOL 01 · ATIVO -->
-<a class="book-card" href="https://go.hotmart.com/H105440271K" target="_blank" rel="noopener">
-  <div class="cover">
-    <div class="cover-line"></div>
-    <div class="cover-num">01</div>
-
+<div class="topbar">
+  <div class="topbar-inner">
     <div>
-      <div class="cover-eyebrow">
-        <div class="eyebrow-line"></div>
-        <div class="eyebrow-text">Borderline · Guia Clínico</div>
-      </div>
-      <div class="cover-series">Protocolo</div>
-      <div class="cover-title">da <em>Crise</em></div>
-      <div class="cover-desc">O que fazer nos 60 minutos mais difíceis — para parceiros e familiares de pessoas com TPB.</div>
+      <div class="brand">Dr. Fábio Schmidt</div>
+      <div class="brand-sub">Médico · Pós-graduado em Psiquiatria · CRM-SP 183549</div>
     </div>
-
-    <div class="cover-bottom">
-      <div>
-        <div class="cover-author">Dr. Fábio Schmidt</div>
-        <div class="cover-crm">Médico · CRM-SP 183549</div>
-      </div>
-      <div class="cover-year">2026</div>
-    </div>
-  </div>
-
-  <div class="book-info">
-    <div class="book-meta">
-      <div class="book-price"><span>R$</span>27</div>
-      <div class="book-cta">Acessar</div>
-    </div>
-  </div>
-</a>
-
-<!-- VOL 02 · INATIVO -->
-<div class="book-card inactive">
-  <div class="cover">
-    <div class="badge">Em breve</div>
-    <div class="cover-line"></div>
-    <div class="cover-num">02</div>
-
-    <div>
-      <div class="cover-eyebrow">
-        <div class="eyebrow-line"></div>
-        <div class="eyebrow-text">Borderline · Kit de Regulação</div>
-      </div>
-      <div class="cover-series">Kit de</div>
-      <div class="cover-title">Regu<em>lação.</em></div>
-      <div class="cover-desc">10 ferramentas DBT para usar sozinho — antes que a crise chegue.</div>
-    </div>
-
-    <div class="cover-bottom">
-      <div>
-        <div class="cover-author">Dr. Fábio Schmidt</div>
-        <div class="cover-crm">Médico · CRM-SP 183549</div>
-      </div>
-      <div class="cover-year">2026</div>
-    </div>
-  </div>
-
-  <div class="book-info">
-    <div class="book-meta">
-      <div class="inactive-note">Disponível em breve</div>
-    </div>
+    <div class="topbar-right">Borderline · Biblioteca clínica</div>
   </div>
 </div>
-```
 
+<section class="hero-intro">
+  <div class="hero-eyebrow">Duas obras · Dois caminhos</div>
+  <h1 class="hero-title">O que escrever quando o <em>silêncio</em> já não basta.</h1>
+  <p class="hero-sub">Uma leitura para entender. Um protocolo para agir. Escritos de dentro da clínica real.</p>
+</section>
+
+<section class="shelf">
+
+  <div class="book-card">
+    <div class="book-stage">
+      <div class="book book-a">
+        <div class="book-spine"></div>
+        <div class="book-pages"></div>
+        <div class="book-front">
+          <div>
+            <div class="book-eyebrow">Volume 01 · TPB</div>
+            <div class="book-title-text">Protocolo<br>da <em>Crise</em></div>
+            <div class="book-rule"></div>
+            <div class="book-sub">O que fazer nos 60 minutos mais difíceis.</div>
+          </div>
+          <div class="book-bottom">
+            <div>
+              <div class="book-author">Dr. Fábio Schmidt</div>
+              <div class="book-author-crm">CRM-SP 183549</div>
+            </div>
+            <div class="book-year">MMXXVI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="book-info">
+      <div class="book-info-eyebrow">Guia prático</div>
+      <h2>Protocolo da <em>Crise</em></h2>
+      <p class="desc">O que dizer, o que silenciar e quando agir nos primeiros 60 minutos de uma crise borderline. Escrito para parceiros e familiares — não para profissionais.</p>
+      <div class="book-meta">
+        <div class="book-meta-item"><span>Formato</span><strong>PDF · Mobile</strong></div>
+        <div class="book-meta-item"><span>Entrega</span><strong>Imediata</strong></div>
+      </div>
+      <div class="cta-row">
+        <div class="price-block">
+          <div class="price"><span>R$</span>27</div>
+          <div class="price-note">Pagamento único</div>
+        </div>
+        <a class="btn btn-a" href="https://go.hotmart.com/H105440271K" target="_blank" rel="noopener">
+          Quero o protocolo
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+    </div>
   </div>
-</main>
+
+  <div class="book-card">
+    <div class="book-stage">
+      <div class="book book-b">
+        <div class="book-spine"></div>
+        <div class="book-pages"></div>
+        <div class="book-front">
+          <div>
+            <div class="book-eyebrow">Ensaio · Borderline</div>
+            <div class="book-title-text">Quando<br>Escolher<br>Não É<br>Possível</div>
+            <div class="book-rule"></div>
+            <div class="book-sub">Sobre o limite entre sofrer e decidir.</div>
+          </div>
+          <div class="book-bottom">
+            <div class="book-author">Fábio Schmidt</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="book-info">
+      <div class="book-info-eyebrow">Livro · Obra de fundo</div>
+      <h2>Quando Escolher <em>Não É Possível</em></h2>
+      <p class="desc">Um ensaio sobre o que acontece quando a dor ultrapassa o domínio da vontade. Uma leitura densa para quem quer entender o Transtorno Borderline para além dos sintomas — no lugar onde ele se confunde com a própria condição humana.</p>
+      <div class="book-meta">
+        <div class="book-meta-item"><span>Formato</span><strong>eBook</strong></div>
+        <div class="book-meta-item"><span>Parcelamento</span><strong>Até 9×</strong></div>
+      </div>
+      <div class="cta-row">
+        <div class="price-block">
+          <div class="price"><span>R$</span>69</div>
+          <div class="price-note">Ou 9× de R$ 7,67</div>
+        </div>
+        <a class="btn btn-b" href="https://pay.hotmart.com/U103950622S?off=3xv992tf" target="_blank" rel="noopener">
+          Quero o livro
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="section">
+  <div class="section-label">Sobre o autor</div>
+  <h2>Um médico que trabalha com TPB todos os dias — <em>não um coach, não um influencer.</em></h2>
+  <div class="author">
+    <div>
+      <p>Atendo pacientes borderline no sistema público (CAPS) e em consultório há anos. Supervisiono outros médicos em casos complexos de TPB. Escrevo sobre isso todos os dias no Instagram para quase 100 mil pessoas que vivem essa realidade de perto.</p>
+      <p>Os dois materiais desta página não são teoria. São o que eu venho testando, corrigindo e refinando nos bastidores da clínica real — um como guia de emergência para quem convive, outro como leitura de fundo para quem quer entender o que é viver assim.</p>
+    </div>
+    <div class="author-card">
+      <div class="section-label">Credenciais</div>
+      <h3>Dr. Fábio Schmidt</h3>
+      <div class="author-crm">Médico · Pós-graduado em Psiquiatria · CRM-SP 183549</div>
+      <p>Com atuação clínica focada em Transtorno de Personalidade Borderline (TPB), em CAPS e em supervisão para outros médicos.</p>
+      <div class="author-stats">
+        <div><div class="stat-num">97K</div><div class="stat-label">Comunidade</div></div>
+        <div><div class="stat-num">TPB</div><div class="stat-label">Foco clínico</div></div>
+        <div><div class="stat-num">CAPS</div><div class="stat-label">Saúde pública</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="vol2">
+    <div class="vol2-left">
+      <div class="vol2-eyebrow">Volume 02 · Chega amanhã</div>
+      <h3>Kit de <em>Regulação</em></h3>
+      <p>10 ferramentas práticas baseadas em DBT — para a pessoa com TPB usar sozinha, <em>antes</em> que a crise comece. Prevenção, não emergência.</p>
+    </div>
+    <div class="vol2-tag">Em breve</div>
+  </div>
+</section>
 
 <footer>
-  <div class="footer-sig">Com rigor e presença,</div>
-  <a class="footer-insta" href="https://instagram.com/drfabioschmidt" target="_blank">@drfabioschmidt</a>
+  <div class="footer-brand">Dr. Fábio Schmidt</div>
+  <div class="footer-meta">Médico · Pós-graduado em Psiquiatria · CRM-SP 183549</div>
+  <a class="footer-insta" href="https://instagram.com/drfabioschmidt" target="_blank" rel="noopener">@drfabioschmidt</a>
+  <div class="footer-legal">
+    Materiais informativos e educacionais, voltados a familiares, parceiros e leitores interessados em Transtorno de Personalidade Borderline. Não substituem avaliação, diagnóstico ou tratamento individualizado. Em situações de risco imediato, procure o serviço de emergência mais próximo ou o CVV (188).
+  </div>
 </footer>
 
 </body>
