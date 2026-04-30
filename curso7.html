@@ -29,16 +29,30 @@
   --text:#1A1A1A;
   --muted:#5C5648;
 }
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;background:#F4EFE6 !important;color-scheme:light}
-body{font-family:'Inter',system-ui,sans-serif;color:#1A1A1A;background:#F4EFE6 !important;line-height:1.55;overflow-x:hidden;-webkit-text-size-adjust:100%;forced-color-adjust:none}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;background-color:#F4EFE6;color-scheme:light}
+body{font-family:'Inter',system-ui,sans-serif;color:#1A1A1A;background-color:#F4EFE6;line-height:1.55;overflow-x:hidden;-webkit-text-size-adjust:100%}
 
-/* Forçar Safari iOS a respeitar cores definidas (anti dark mode auto) */
+/* Forçar Safari iOS — todas as seções com cores absolutas, sem variáveis */
+.hero{background-color:#0A0A0A !important;color:#FFFFFF !important}
+.hero h1{color:#FFFFFF !important}
+.hero-sub{color:rgba(255,255,255,.65) !important}
+.hero-sub strong{color:#FFFFFF !important}
+.hero-meta{color:rgba(255,255,255,.45) !important}
+.ticker{background-color:#0A0A0A !important;color:rgba(255,255,255,.55) !important}
+.confront{background-color:#0A0A0A !important;color:#FFFFFF !important}
+.confront h2{color:#FFFFFF !important}
+.transform{background-color:#0A0A0A !important;color:#FFFFFF !important}
+.transform-head h2{color:#FFFFFF !important}
+.offer{background-color:#0A0A0A !important;color:#FFFFFF !important}
+.offer-left h2{color:#FFFFFF !important}
+.testimonials{background-color:#FBF8F1 !important}
+.scarcity{background-color:#A53A2A !important;color:#FFFFFF !important}
+.final{background-color:#0A0A0A !important;color:#FFFFFF !important}
+.final h2{color:#FFFFFF !important}
+footer{background-color:#050505 !important}
+
 @media (prefers-color-scheme: dark){
-html, body{background:#F4EFE6 !important;color:#1A1A1A !important}
-.hero, .confront, .transform, .offer, .testimonials, .final, footer, .ticker{background-color:#0A0A0A !important;color:#fff !important}
-.recog, .vsl, .authority, .inside, .forwho{background-color:#F4EFE6 !important}
-.method, .faq{background-color:#FBF8F1 !important}
-.scarcity{background-color:#A53A2A !important}
+html, body{background-color:#F4EFE6 !important;color:#1A1A1A !important}
 }
 
 /* TYPOGRAPHY UTILS */
