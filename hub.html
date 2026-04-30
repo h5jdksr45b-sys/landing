@@ -1,194 +1,389 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Fabio Schmidt — Médico</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #ffffff; /* Fundo branco puro para ser mais minimalista */
-  --ink: #000000;
-  --ink-soft: #444444;
-  --ink-mute: #999999;
-  --line: #e0e0e0;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Fabio Schmidt — Médico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #000000;
+      --ink-soft: #444444;
+      --ink-mute: #999999;
+      --line: #e0e0e0;
+    }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Fraunces', serif;
-  -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
-}
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* LABELS MONO - Estilo Editorial */
-.label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--ink-mute);
-  display: block;
-  margin-bottom: 20px;
-}
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Fraunces', serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
 
-/* HEADER */
-header {
-  padding: 40px;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 0.5px solid var(--line);
-}
-.brand-name { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--ink-mute);
+      display: block;
+      margin-bottom: 20px;
+    }
 
-/* HERO SECTION */
-.hero {
-  padding: 80px 40px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-}
+    /* ── HEADER ── */
+    header {
+      padding: 32px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 0.5px solid var(--line);
+    }
+    header .label { margin-bottom: 0; }
 
-.hero-title {
-  font-size: clamp(48px, 10vw, 120px);
-  font-weight: 300;
-  line-height: 0.9;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-}
+    .brand-name {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
 
-.hero-title span { font-style: italic; font-weight: 200; color: var(--ink-soft); }
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 40px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
 
-.hero-description {
-  max-width: 400px;
-  font-size: 18px;
-  color: var(--ink-soft);
-  margin-top: 20px;
-}
+    .hero-title {
+      font-size: clamp(52px, 10vw, 120px);
+      font-weight: 300;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
 
-/* IMAGE SECTION (Estilo Margiela) */
-.featured-image {
-  width: 100%;
-  height: 60vh;
-  background-color: #f0f0f0;
-  background-image: url('SUA-FOTO-AQUI.jpg'); /* Coloque sua foto aqui */
-  background-size: cover;
-  background-position: center;
-  filter: grayscale(100%);
-  margin: 40px 0;
-}
+    .hero-title span {
+      font-style: italic;
+      font-weight: 200;
+      color: var(--ink-soft);
+    }
 
-/* CONTENT GRID */
-.grid-section {
-  display: grid;
-  grid-template-columns: 1fr;
-  padding: 80px 40px;
-  border-top: 0.5px solid var(--line);
-}
+    .hero-description {
+      max-width: 400px;
+      font-size: 18px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin-top: 20px;
+    }
 
-.item-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  padding: 40px 0;
-  border-bottom: 0.5px solid var(--line);
-  text-decoration: none;
-  color: inherit;
-  transition: opacity 0.3s ease;
-}
+    /* ── IMAGEM ── */
+    .featured-image {
+      width: 100%;
+      height: 62vh;
+      background-color: #d8d8d8;
+      background-image: url('https://img.youtube.com/vi/3Ad6NqShGOs/maxresdefault.jpg');
+      background-size: cover;
+      background-position: center top;
+      filter: grayscale(100%);
+    }
 
-.item-row:hover { opacity: 0.6; }
+    /* ── GRID MATERIAIS + MÉTODO ── */
+    .grid-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 60px;
+      padding: 80px 40px;
+      border-top: 0.5px solid var(--line);
+    }
 
-.item-title {
-  font-size: clamp(32px, 5vw, 64px);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
+    .item-row {
+      display: flex;
+      flex-direction: column;
+      padding: 36px 0;
+      border-bottom: 0.5px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.3s ease;
+    }
 
-.item-meta {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  margin-top: 10px;
-}
+    .item-row:first-of-type {
+      border-top: 0.5px solid var(--line);
+      margin-top: 20px;
+    }
 
-@media (min-width: 768px) {
-  .hero { grid-template-columns: 1.5fr 1fr; align-items: end; }
-  .grid-section { grid-template-columns: 1fr 1fr; gap: 80px; }
-  .item-row { grid-template-columns: 1fr; }
-}
+    .item-row:hover { opacity: 0.55; }
 
-/* CTA - CONSULTA */
-.cta-section {
-  padding: 120px 40px;
-  text-align: center;
-  border-top: 0.5px solid var(--line);
-}
+    .item-title {
+      font-size: clamp(26px, 4vw, 52px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
 
-.btn-large {
-  font-size: 32px;
-  text-decoration: none;
-  color: var(--ink);
-  font-style: italic;
-  border-bottom: 1px solid var(--ink);
-  transition: all 0.3s ease;
-}
+    .item-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-mute);
+      margin-top: 10px;
+    }
 
-.btn-large:hover { color: var(--ink-mute); border-color: var(--ink-mute); }
+    .method-text {
+      font-size: 19px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin-top: 8px;
+    }
 
-</style>
+    /* ── CONSULTAS ── */
+    .consulta-section {
+      padding: 80px 40px;
+      border-top: 0.5px solid var(--line);
+    }
+
+    .consulta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 36px 0;
+      border-bottom: 0.5px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.3s ease;
+    }
+
+    .consulta-row:first-of-type {
+      border-top: 0.5px solid var(--line);
+      margin-top: 20px;
+    }
+
+    .consulta-row:hover { opacity: 0.55; }
+
+    .consulta-info { display: flex; flex-direction: column; gap: 8px; }
+
+    .consulta-name {
+      font-size: clamp(22px, 3.5vw, 42px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .consulta-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-shrink: 0;
+    }
+
+    .consulta-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--ink-mute);
+    }
+
+    .consulta-arrow {
+      font-size: 22px;
+      color: var(--ink-soft);
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 120px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      border-top: 0.5px solid var(--line);
+    }
+
+    .cta-section .label { margin-bottom: 0; }
+
+    .btn-large {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(24px, 4vw, 42px);
+      text-decoration: none;
+      color: var(--ink);
+      font-style: italic;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-large:hover {
+      color: var(--ink-mute);
+      border-color: var(--ink-mute);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 36px 40px;
+      border-top: 0.5px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer .label { margin-bottom: 0; }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    footer a:hover { opacity: 0.5; }
+
+    /* ── RESPONSIVO ── */
+    @media (min-width: 768px) {
+      .hero {
+        grid-template-columns: 1.5fr 1fr;
+        align-items: end;
+      }
+      .grid-section {
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header, .hero, .grid-section,
+      .consulta-section, .cta-section, footer {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="brand-name">Dr. Fabio Schmidt</div>
-  <div class="label">CRM-SP 183549</div>
-</header>
+  <!-- HEADER -->
+  <header>
+    <div class="brand-name">Dr. Fabio Schmidt</div>
+    <div class="label">CRM-SP 183549</div>
+  </header>
 
-<section class="hero">
-  <div>
-    <span class="label">// Medicina & Saúde Mental</span>
-    <h1 class="hero-title">FABIO<br><span>Schmidt</span></h1>
-  </div>
-  <div class="hero-description">
-    Especializado em desregulação emocional e Borderline. Uma abordagem clínica, humana e técnica para quem vive com intensidade.
-  </div>
-</section>
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <span class="label">// Medicina &amp; Saúde Mental</span>
+      <h1 class="hero-title">FABIO<br><span>Schmidt</span></h1>
+    </div>
+    <p class="hero-description">
+      Especializado em desregulação emocional e Borderline. Uma abordagem clínica humana e técnica para quem vive com intensidade.
+    </p>
+  </section>
 
-<div class="featured-image"></div>
+  <!-- FOTO -->
+  <div
+    class="featured-image"
+    role="img"
+    aria-label="Dr. Fabio Schmidt — Médico especialista em Borderline"
+  ></div>
 
-<section class="grid-section">
-  <div>
-    <span class="label">01 / Materiais e Cursos</span>
-    
-    <a href="#" class="item-row">
-      <div class="item-title">Protocolo 7 Dias</div>
-      <div class="item-meta">CURSO — MÉTODO CLÍNICO</div>
+  <!-- MATERIAIS + MÉTODO -->
+  <section class="grid-section">
+    <div>
+      <span class="label">01 / Materiais</span>
+
+      <a
+        href="https://bit.ly/4rARbML"
+        class="item-row"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="item-title">Protocolo 7 Dias</div>
+        <div class="item-meta">CURSO — MÉTODO CLÍNICO · R$ 219</div>
+      </a>
+
+      <a
+        href="https://bit.ly/4rARbML"
+        class="item-row"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="item-title">Quando Escolher Não É Possível</div>
+        <div class="item-meta">LIVRO DIGITAL — INCLUSO NO PROTOCOLO</div>
+      </a>
+    </div>
+
+    <div>
+      <span class="label">02 / O Método</span>
+      <p class="method-text">
+        Minha prática foca na redução do estigma e na aplicação de limites saudáveis. O objetivo é transformar a crise em estabilidade através do conhecimento clínico compartilhado.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONSULTAS -->
+  <section class="consulta-section">
+    <span class="label">03 / Agendamentos</span>
+
+    <a
+      href="https://cal.com/drfabioschmidt/consulta"
+      class="consulta-row"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div class="consulta-info">
+        <div class="consulta-name">Primeira Consulta</div>
+        <div class="item-meta">CONSULTA ONLINE · SEM CONVÊNIO</div>
+      </div>
+      <div class="consulta-right">
+        <span class="consulta-price">R$ 700</span>
+        <span class="consulta-arrow">→</span>
+      </div>
     </a>
 
-    <a href="#" class="item-row">
-      <div class="item-title">Quando Escolher Não É Possível</div>
-      <div class="item-meta">LIVRO — GUIA DE CONVIVÊNCIA</div>
+    <a
+      href="https://cal.com/drfabioschmidt/retorno"
+      class="consulta-row"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div class="consulta-info">
+        <div class="consulta-name">Retorno</div>
+        <div class="item-meta">CONSULTA ONLINE · PACIENTES ATIVOS</div>
+      </div>
+      <div class="consulta-right">
+        <span class="consulta-price">R$ 650</span>
+        <span class="consulta-arrow">→</span>
+      </div>
     </a>
-  </div>
+  </section>
 
-  <div>
-    <span class="label">02 / O Método</span>
-    <p style="font-size: 20px; color: var(--ink-soft);">Minha prática foca na redução do estigma e na aplicação de limites saudáveis. O objetivo é transformar a crise em estabilidade através do conhecimento clínico compartilhado.</p>
-  </div>
-</section>
+  <!-- CTA -->
+  <section class="cta-section">
+    <span class="label">Disponibilidade</span>
+    <a
+      href="https://cal.com/drfabioschmidt/consulta"
+      class="btn-large"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Agendar consulta online →
+    </a>
+  </section>
 
-<section class="cta-section">
-  <span class="label" style="margin-bottom: 40px;">Disponibilidade</span>
-  <a href="https://cal.com/drfabioschmidt" class="btn-large">Agendar consulta online →</a>
-</section>
-
-<footer style="padding: 40px; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between;">
-  <div class="label">© 2026 Fabio Schmidt</div>
-  <div class="label"><a href="#" style="color: inherit; text-decoration: none;">Instagram ↗</a></div>
-</footer>
+  <!-- FOOTER -->
+  <footer>
+    <div class="label">© 2026 Fabio Schmidt</div>
+    <div class="label">
+      <a
+        href="https://www.instagram.com/drfabioschmidt"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Instagram ↗</a>
+    </div>
+  </footer>
 
 </body>
 </html>
