@@ -29,8 +29,17 @@
   --text:#1A1A1A;
   --muted:#5C5648;
 }
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--paper);line-height:1.55;overflow-x:hidden}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;background:#F4EFE6 !important;color-scheme:light}
+body{font-family:'Inter',system-ui,sans-serif;color:#1A1A1A;background:#F4EFE6 !important;line-height:1.55;overflow-x:hidden;-webkit-text-size-adjust:100%;forced-color-adjust:none}
+
+/* Forçar Safari iOS a respeitar cores definidas (anti dark mode auto) */
+@media (prefers-color-scheme: dark){
+html, body{background:#F4EFE6 !important;color:#1A1A1A !important}
+.hero, .confront, .transform, .offer, .testimonials, .final, footer, .ticker{background-color:#0A0A0A !important;color:#fff !important}
+.recog, .vsl, .authority, .inside, .forwho{background-color:#F4EFE6 !important}
+.method, .faq{background-color:#FBF8F1 !important}
+.scarcity{background-color:#A53A2A !important}
+}
 
 /* TYPOGRAPHY UTILS */
 .serif{font-family:‘Fraunces’,Georgia,serif;font-feature-settings:“ss01”,“ss02”}
