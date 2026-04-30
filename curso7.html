@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="light only">
 <meta name="supported-color-schemes" content="light">
 <title>Protocolo 7 Dias — Dr. Fabio Schmidt</title>
-<meta name="description" content="Método clínico para familiares de pessoas com Borderline. Pare de reagir no improviso. Aprenda o que dizer, quando agir, como impor limite sem virar guerra.">
+<meta name="description" content="Protocolo clínico para familiares de pessoas com Borderline. Pare de reagir no improviso. Aprenda o que dizer, quando agir, como impor limite sem virar guerra. Por Dr. Fabio Schmidt.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -46,6 +46,13 @@ body{font-family:'Inter',system-ui,sans-serif;color:#1A1A1A;background-color:#F4
 .offer{background-color:#0A0A0A !important;color:#FFFFFF !important}
 .offer-left h2{color:#FFFFFF !important}
 .testimonials{background-color:#FBF8F1 !important}
+.test-card{background-color:#F4EFE6 !important;color:#1A1A1A !important}
+.test-card .test-quote{color:#1A1A1A !important}
+.test-card .test-name{color:#1A1A1A !important}
+.test-card.feature{background-color:#0A0A0A !important;color:#FFFFFF !important}
+.test-card.feature .test-quote{color:#FFFFFF !important}
+.test-card.feature .test-name{color:#E5BE7A !important}
+.test-card.feature .test-role{color:rgba(255,255,255,.5) !important}
 .scarcity{background-color:#A53A2A !important;color:#FFFFFF !important}
 .final{background-color:#0A0A0A !important;color:#FFFFFF !important}
 .final h2{color:#FFFFFF !important}
@@ -155,35 +162,6 @@ background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse
 .confront p{font-size:1.05rem;color:rgba(255,255,255,.65);line-height:1.7;max-width:640px;margin:0 auto 20px}
 .confront p strong{color:#fff}
 .confront-mark{display:inline-block;font-family:‘Fraunces’,serif;font-style:italic;color:var(–gold-light);border-bottom:1px solid var(–gold);padding-bottom:1px}
-
-/* ===== METHOD (PARE) ===== */
-.method{padding:120px 32px;background:var(–bone);position:relative}
-.method-inner{max-width:1180px;margin:0 auto}
-.method-head{text-align:center;margin-bottom:80px}
-.method-head .kicker{margin-bottom:24px}
-.method-head h2{font-family:‘Fraunces’,serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:600;line-height:1.05;letter-spacing:-.02em;color:var(–ink);margin-bottom:20px}
-.method-head h2 em{font-style:italic;color:var(–rust);font-weight:400}
-.method-head p{font-size:1.05rem;color:var(–muted);max-width:620px;margin:0 auto;line-height:1.7}
-
-.pare{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:56px}
-
-.pare-curve{max-width:980px;margin:0 auto 56px;background:var(–ink);border-radius:2px;padding:48px 40px;position:relative;overflow:hidden}
-.pare-curve::before{content:””;position:absolute;top:-1px;left:-1px;width:32px;height:32px;border-top:2px solid var(–rust);border-left:2px solid var(–rust)}
-.pare-curve::after{content:””;position:absolute;bottom:-1px;right:-1px;width:32px;height:32px;border-bottom:2px solid var(–gold);border-right:2px solid var(–gold)}
-.pare-curve img{width:100%;height:auto;display:block}
-.pare-card{background:var(–paper);border:1px solid var(–line-soft);padding:36px 24px;border-radius:2px;position:relative;transition:transform .3s ease, box-shadow .3s ease}
-.pare-card:hover{transform:translateY(-4px);box-shadow:0 24px 60px -20px rgba(10,10,10,.18)}
-.pare-letter{font-family:‘Fraunces’,serif;font-size:5rem;font-weight:800;line-height:.9;color:var(–rust);margin-bottom:16px;letter-spacing:-.04em}
-.pare-card:nth-child(2) .pare-letter{color:var(–gold)}
-.pare-card:nth-child(3) .pare-letter{color:var(–rust-deep)}
-.pare-card:nth-child(4) .pare-letter{color:var(–ink)}
-.pare-word{font-family:‘Fraunces’,serif;font-size:1.3rem;font-weight:600;color:var(–ink);margin-bottom:10px;letter-spacing:-.01em}
-.pare-desc{font-size:.86rem;color:var(–muted);line-height:1.6}
-
-.method-quote{max-width:760px;margin:0 auto;padding:48px 0;text-align:center;border-top:1px solid var(–line-soft);border-bottom:1px solid var(–line-soft)}
-.method-quote p{font-family:‘Fraunces’,serif;font-size:1.4rem;line-height:1.5;color:var(–ink);font-style:italic;font-weight:400}
-.method-quote p::before{content:”\201C”;color:var(–rust);font-size:1.2em;margin-right:4px}
-.method-quote cite{display:block;margin-top:18px;font-style:normal;font-family:‘JetBrains Mono’,monospace;font-size:.75rem;letter-spacing:.1em;color:var(–rust);text-transform:uppercase}
 
 /* ===== AUTHORITY ===== */
 .authority{padding:120px 32px;background:var(–paper)}
@@ -392,7 +370,6 @@ footer{background:#050505;padding:48px 32px;color:rgba(255,255,255,.35);border-t
 @media(max-width:1100px){
 .hero-grid{gap:48px}
 .recog-grid{grid-template-columns:repeat(2,1fr)}
-.pare{grid-template-columns:repeat(2,1fr)}
 .auth-inner,.offer-inner{grid-template-columns:1fr;gap:48px}
 .price-card{position:static}
 .test-grid{grid-template-columns:1fr 1fr}
@@ -405,10 +382,6 @@ footer{background:#050505;padding:48px 32px;color:rgba(255,255,255,.35);border-t
 .hero-image-caption p{font-size:.98rem}
 .recog-header{grid-template-columns:1fr;gap:24px}
 .recog-grid{grid-template-columns:1fr}
-.pare{grid-template-columns:1fr}
-.pare-card{padding:28px 22px}
-.pare-letter{font-size:4rem}
-.pare-curve{padding:24px 16px}
 .module{grid-template-columns:60px 1fr;gap:20px}
 .mod-result{grid-column:1/-1;padding-left:80px;padding-top:0}
 .mod-num{font-size:2rem}
@@ -424,7 +397,7 @@ footer{background:#050505;padding:48px 32px;color:rgba(255,255,255,.35);border-t
 .auth-stat{border-right:none;border-bottom:1px solid var(–line-soft);padding:16px}
 .price-card{padding:32px 24px}
 .price-now{font-size:3.2rem}
-.recog,.confront,.vsl,.method,.authority,.transform,.inside,.offer,.testimonials,.forwho,.faq,.final{padding:72px 22px}
+.recog,.confront,.vsl,.authority,.transform,.inside,.offer,.testimonials,.forwho,.faq,.final{padding:72px 22px}
 .scarcity{padding:28px 22px}
 .scarcity-divider{display:none}
 .footer-inner{grid-template-columns:1fr;text-align:left}
@@ -572,54 +545,7 @@ footer{background:#050505;padding:48px 32px;color:rgba(255,255,255,.35);border-t
   </div>
 </section>
 
-<!-- ═══════════════════ METHOD - PARE ═══════════════════ -->
-
-<section class="method">
-  <div class="method-inner">
-    <div class="method-head reveal">
-      <span class="kicker">O método clínico</span>
-      <h2>Método <em>P.A.R.E.</em></h2>
-      <p>Quatro movimentos clínicos que substituem o improviso. É o que ensino no consultório, condensado em linguagem que você usa amanhã de manhã.</p>
-    </div>
-
-```
-<div class="pare">
-  <div class="pare-card reveal">
-    <div class="pare-letter">P</div>
-    <div class="pare-word">Padrão</div>
-    <p class="pare-desc">Reconhecer a estrutura da crise. Identificar gatilhos, fases e ponto de virada — antes que vire incêndio.</p>
-  </div>
-  <div class="pare-card reveal">
-    <div class="pare-letter">A</div>
-    <div class="pare-word">Antecipação</div>
-    <p class="pare-desc">Agir 2 etapas antes do confronto. Quebrar o automatismo de explicar, argumentar, racionalizar no pior momento.</p>
-  </div>
-  <div class="pare-card reveal">
-    <div class="pare-letter">R</div>
-    <div class="pare-word">Resposta</div>
-    <p class="pare-desc">Scripts prontos para acusação, ameaça e chantagem. Frases testadas que desarmam sem confrontar.</p>
-  </div>
-  <div class="pare-card reveal">
-    <div class="pare-letter">E</div>
-    <div class="pare-word">Estabilização</div>
-    <p class="pare-desc">Limites firmes sem virar guerra. Protocolo de emergência para quando o risco é real.</p>
-  </div>
-</div>
-
-<div class="pare-curve reveal">
-  <img src="metodo-pare.png" alt="Curva da escalada emocional — 4 fases do método P.A.R.E.">
-</div>
-
-<div class="method-quote reveal">
-  <p>P.A.R.E. não é técnica de comunicação. É reposicionamento clínico de quem está dentro da crise junto com o paciente.</p>
-  <cite>— Dr. Fabio Schmidt</cite>
-</div>
-```
-
-  </div>
-</section>
-
-<!-- ═══════════════════ AUTHORITY ═══════════════════ -->
+<!-- ═══════════════════ AUTHORITY ═══════════════════ ---->
 
 <section class="authority">
   <div class="auth-inner">
@@ -669,7 +595,7 @@ footer{background:#050505;padding:48px 32px;color:rgba(255,255,255,.35);border-t
         </ul>
       </div>
       <div class="transform-col after reveal">
-        <div class="transform-tag good">Depois · com P.A.R.E.</div>
+        <div class="transform-tag good">Depois · com o Protocolo</div>
         <h3 class="transform-h">Você conduz com método</h3>
         <ul class="transform-list">
           <li>Identifica a escalada na fase 1, antes do confronto</li>
