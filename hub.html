@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-
 :root {
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-ui: 'Inter', system-ui, sans-serif;
@@ -20,476 +18,94 @@
   --line: #e6e6e6;
   --pad: 48px;
 }
-
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-ui); -webkit-font-smoothing: antialiased; line-height: 1.5; }
 
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--font-ui);
-  -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
-}
+header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); padding: 20px var(--pad); display: flex; justify-content: space-between; align-items: center; border-bottom: 0.5px solid var(--line); }
+.brand { font-weight: 500; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+.crm { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
 
-/* HEADER */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(255,255,255,0.96);
-  backdrop-filter: blur(10px);
-  padding: 20px var(--pad);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 0.5px solid var(--line);
-}
-.brand {
-  font-family: var(--font-ui);
-  font-weight: 500;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.crm {
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
+.hero { padding: 88px var(--pad) 104px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: end; border-bottom: 0.5px solid var(--line); }
+.hero-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 28px; }
+.hero-title { font-family: var(--font-display); font-size: clamp(64px, 9vw, 130px); font-weight: 300; line-height: 0.86; letter-spacing: -0.02em; }
+.hero-title em { font-style: italic; color: var(--ink-soft); }
+.hero-right { display: flex; flex-direction: column; gap: 36px; padding-bottom: 12px; }
+.hero-desc { font-size: 16px; line-height: 1.8; color: var(--ink-soft); }
+.hero-stats { display: flex; gap: 40px; padding-top: 28px; border-top: 0.5px solid var(--line); }
+.stat-num { font-family: var(--font-display); font-size: 40px; font-weight: 300; display: block; line-height: 1; }
+.stat-label { font-size: 10px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; display: block; }
 
-/* HERO */
-.hero {
-  padding: 88px var(--pad) 104px;
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 64px;
-  align-items: end;
-  border-bottom: 0.5px solid var(--line);
-}
-.hero-eyebrow {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin-bottom: 28px;
-}
-.hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(64px, 9vw, 130px);
-  font-weight: 300;
-  line-height: 0.86;
-  letter-spacing: -0.02em;
-}
-.hero-title em {
-  font-style: italic;
-  color: var(--ink-soft);
-}
-.hero-right {
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-  padding-bottom: 12px;
-}
-.hero-desc {
-  font-size: 16px;
-  line-height: 1.8;
-  color: var(--ink-soft);
-}
-.hero-stats {
-  display: flex;
-  gap: 40px;
-  padding-top: 28px;
-  border-top: 0.5px solid var(--line);
-}
-.stat-num {
-  font-family: var(--font-display);
-  font-size: 40px;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  display: block;
-  line-height: 1;
-}
-.stat-label {
-  font-size: 10px;
-  color: var(--ink-mute);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: 6px;
-  display: block;
-}
+.featured-image { width: 100%; height: 65vh; background-color: #c8c8c8; background-image: url('https://img.youtube.com/vi/3Ad6NqShGOs/maxresdefault.jpg'); background-size: cover; background-position: center top; filter: grayscale(100%); }
 
-/* FOTO */
-.featured-image {
-  width: 100%;
-  height: 65vh;
-  background-color: #c8c8c8;
-  background-image: url('https://img.youtube.com/vi/3Ad6NqShGOs/maxresdefault.jpg');
-  background-size: cover;
-  background-position: center top;
-  filter: grayscale(100%);
-}
+.page-body { display: grid; grid-template-columns: 200px 1fr; min-height: 100vh; }
 
-/* LAYOUT COM SIDEBAR */
-.page-body {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  min-height: 100vh;
-}
-
-/* SIDEBAR */
-.sidebar {
-  border-right: 0.5px solid var(--line);
-  padding: 56px 32px;
-  position: sticky;
-  top: 61px;
-  height: calc(100vh - 61px);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.sidebar-label {
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin-bottom: 16px;
-  margin-top: 24px;
-  display: block;
-}
+.sidebar { border-right: 0.5px solid var(--line); padding: 56px 32px; position: sticky; top: 61px; height: calc(100vh - 61px); display: flex; flex-direction: column; gap: 8px; }
+.sidebar-label { font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 16px; margin-top: 24px; display: block; }
 .sidebar-label:first-child { margin-top: 0; }
-.sidebar a {
-  font-size: 13px;
-  color: var(--ink-soft);
-  text-decoration: none;
-  padding: 6px 0;
-  transition: color 0.2s;
-  display: block;
-}
+.sidebar a { font-size: 13px; color: var(--ink-soft); text-decoration: none; padding: 6px 0; transition: color 0.2s; display: block; }
 .sidebar a:hover { color: var(--ink); }
 
-/* MAIN CONTENT */
-.main {
-  padding: 56px 56px 80px;
-}
-
-/* SECTION TITLE */
-.section-eyebrow {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin-bottom: 40px;
-  padding-bottom: 16px;
-  border-bottom: 0.5px solid var(--line);
-  display: block;
-}
-
-/* SECTION SPACING */
-.section-block {
-  padding: 56px 0;
-  border-bottom: 0.5px solid var(--line);
-}
+.main { padding: 56px 56px 80px; }
+.section-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 40px; padding-bottom: 16px; border-bottom: 0.5px solid var(--line); display: block; }
+.section-block { padding: 56px 0; border-bottom: 0.5px solid var(--line); }
 .section-block:last-child { border-bottom: none; }
 
-/* CURSO DESTAQUE */
-.course-card {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  align-items: start;
-}
-.course-title {
-  font-family: var(--font-display);
-  font-size: clamp(36px, 4vw, 60px);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  margin-bottom: 16px;
-}
-.course-desc {
-  font-size: 15px;
-  color: var(--ink-soft);
-  line-height: 1.75;
-  max-width: 520px;
-  margin-bottom: 28px;
-}
-.course-meta {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 32px;
-}
-.meta-tag {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  border: 0.5px solid var(--line);
-  padding: 5px 12px;
-  border-radius: 2px;
-}
-.price-block {
-  text-align: right;
-}
-.price-old {
-  font-size: 12px;
-  color: var(--ink-mute);
-  text-decoration: line-through;
-  display: block;
-  margin-bottom: 4px;
-}
-.price-new {
-  font-family: var(--font-display);
-  font-size: 44px;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  display: block;
-  line-height: 1;
-}
-.price-note {
-  font-size: 10px;
-  color: var(--ink-mute);
-  display: block;
-  margin-top: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
+.course-card { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: start; }
+.course-title { font-family: var(--font-display); font-size: clamp(36px, 4vw, 60px); font-weight: 400; letter-spacing: -0.02em; line-height: 1; margin-bottom: 16px; }
+.course-desc { font-size: 15px; color: var(--ink-soft); line-height: 1.75; max-width: 520px; margin-bottom: 28px; }
+.course-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.meta-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); border: 0.5px solid var(--line); padding: 5px 12px; border-radius: 2px; }
+.price-block { text-align: right; }
+.price-old { font-size: 12px; color: var(--ink-mute); text-decoration: line-through; display: block; margin-bottom: 4px; }
+.price-new { font-family: var(--font-display); font-size: 44px; font-weight: 300; letter-spacing: -0.02em; display: block; line-height: 1; }
+.price-note { font-size: 10px; color: var(--ink-mute); display: block; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
 
-/* BOTÕES */
-.btn {
-  display: inline-block;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 14px 28px;
-  border-radius: 2px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-.btn-primary {
-  background: var(--ink);
-  color: #fff;
-  border: 1px solid var(--ink);
-}
-.btn-primary:hover {
-  background: var(--ink-soft);
-  border-color: var(--ink-soft);
-}
-.btn-outline {
-  background: transparent;
-  color: var(--ink);
-  border: 0.5px solid var(--ink);
-}
-.btn-outline:hover {
-  background: var(--ink);
-  color: #fff;
-}
+.btn { display: inline-block; text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 14px 28px; border-radius: 2px; transition: all 0.2s ease; cursor: pointer; }
+.btn-primary { background: var(--ink); color: #fff; border: 1px solid var(--ink); }
+.btn-primary:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
+.btn-outline { background: transparent; color: var(--ink); border: 0.5px solid var(--ink); }
+.btn-outline:hover { background: var(--ink); color: #fff; }
 
-/* BIBLIOTECA GRID */
-.biblio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
-  margin-top: 8px;
-}
-.biblio-card {
-  border: 0.5px solid var(--line);
-  padding: 32px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  transition: border-color 0.2s;
-  border-radius: 2px;
-}
+.biblio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+.biblio-card { border: 0.5px solid var(--line); padding: 32px 28px; display: flex; flex-direction: column; gap: 16px; transition: border-color 0.2s; border-radius: 2px; }
 .biblio-card:hover { border-color: #aaa; }
-.biblio-num {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
-.biblio-serie {
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
-.biblio-title {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-}
-.biblio-desc {
-  font-size: 13px;
-  color: var(--ink-soft);
-  line-height: 1.65;
-  flex: 1;
-}
-.biblio-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 16px;
-  border-top: 0.5px solid var(--line);
-  margin-top: auto;
-}
-.biblio-price {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 300;
-}
-.badge-new {
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background: var(--ink);
-  color: #fff;
-  padding: 3px 8px;
-  border-radius: 2px;
-}
+.biblio-num { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-mute); }
+.biblio-serie { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); }
+.biblio-title { font-family: var(--font-display); font-size: 26px; font-weight: 400; line-height: 1.1; }
+.biblio-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.65; flex: 1; }
+.biblio-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 0.5px solid var(--line); margin-top: auto; }
+.biblio-price { font-family: var(--font-display); font-size: 28px; font-weight: 300; }
+.badge-new { font-size: 9px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--ink); color: #fff; padding: 3px 8px; border-radius: 2px; }
 
-/* CONSULTAS */
-.consulta-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-.consulta-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 28px 0;
-  border-bottom: 0.5px solid var(--line);
-  text-decoration: none;
-  color: inherit;
-  transition: opacity 0.2s;
-}
+.consulta-list { display: flex; flex-direction: column; }
+.consulta-item { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; border-bottom: 0.5px solid var(--line); text-decoration: none; color: inherit; transition: opacity 0.2s; }
 .consulta-item:first-child { border-top: 0.5px solid var(--line); }
 .consulta-item:hover { opacity: 0.6; }
-.consulta-name {
-  font-family: var(--font-display);
-  font-size: clamp(24px, 2.5vw, 38px);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-}
-.consulta-tag {
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin-top: 6px;
-  display: block;
-}
-.consulta-right {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  flex-shrink: 0;
-}
-.consulta-price {
-  font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 300;
-}
+.consulta-name { font-family: var(--font-display); font-size: clamp(24px, 2.5vw, 38px); font-weight: 400; letter-spacing: -0.01em; }
+.consulta-tag { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-top: 6px; display: block; }
+.consulta-right { display: flex; align-items: center; gap: 28px; flex-shrink: 0; }
+.consulta-price { font-family: var(--font-display); font-size: 32px; font-weight: 300; }
 .arrow { font-size: 20px; color: var(--ink-mute); }
 
-/* MÉTODO */
-.metodo-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: start;
-}
-.metodo-title {
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-.metodo-text {
-  font-size: 15px;
-  line-height: 1.8;
-  color: var(--ink-soft);
-}
-.metodo-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.metodo-list li {
-  font-size: 14px;
-  color: var(--ink-soft);
-  padding-left: 20px;
-  position: relative;
-  line-height: 1.6;
-}
-.metodo-list li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--ink-mute);
-}
+.metodo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.metodo-title { font-family: var(--font-display); font-size: 36px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 20px; }
+.metodo-text { font-size: 15px; line-height: 1.8; color: var(--ink-soft); }
+.metodo-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+.metodo-list li { font-size: 14px; color: var(--ink-soft); padding-left: 20px; position: relative; line-height: 1.6; }
+.metodo-list li::before { content: '—'; position: absolute; left: 0; color: var(--ink-mute); }
 
-/* FOOTER */
-footer {
-  padding: 32px var(--pad);
-  border-top: 0.5px solid var(--line);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.footer-copy {
-  font-size: 11px;
-  color: var(--ink-mute);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-.footer-links {
-  display: flex;
-  gap: 32px;
-}
-.footer-links a {
-  font-size: 11px;
-  color: var(--ink-mute);
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: color 0.2s;
-}
+footer { padding: 32px var(--pad); border-top: 0.5px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: 11px; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.08em; }
+.footer-links { display: flex; gap: 32px; }
+.footer-links a { font-size: 11px; color: var(--ink-mute); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.2s; }
 .footer-links a:hover { color: var(--ink); }
 
-/* RESPONSIVO */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; gap: 48px; }
   .page-body { grid-template-columns: 1fr; }
-  .sidebar {
-    position: static;
-    height: auto;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 20px var(--pad);
-    border-right: none;
-    border-bottom: 0.5px solid var(--line);
-    gap: 16px;
-  }
+  .sidebar { position: static; height: auto; flex-direction: row; flex-wrap: wrap; padding: 20px var(--pad); border-right: none; border-bottom: 0.5px solid var(--line); gap: 16px; }
   .sidebar-label { display: none; }
-  .sidebar a { font-size: 12px; }
   .course-card { grid-template-columns: 1fr; }
   .price-block { text-align: left; }
   .metodo-grid { grid-template-columns: 1fr; }
@@ -500,28 +116,22 @@ footer {
   .biblio-grid { grid-template-columns: 1fr; }
   .hero-stats { flex-direction: column; gap: 20px; }
 }
-
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="brand">Dr. Fabio Schmidt</div>
   <div class="crm">CRM-SP 183549</div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div>
     <p class="hero-eyebrow">Medicina &amp; Saúde Mental</p>
     <h1 class="hero-title">Fabio<br><em>Schmidt</em></h1>
   </div>
   <div class="hero-right">
-    <p class="hero-desc">
-      Especializado em desregulação emocional e Transtorno Borderline.
-      Uma abordagem clínica humana e técnica para quem vive com intensidade.
-    </p>
+    <p class="hero-desc">Especializado em desregulação emocional e Transtorno Borderline. Uma abordagem clínica humana e técnica para quem vive com intensidade.</p>
     <div class="hero-stats">
       <div>
         <span class="stat-num">+90k</span>
@@ -535,17 +145,10 @@ footer {
   </div>
 </section>
 
-<!-- FOTO -->
-<div
-  class="featured-image"
-  role="img"
-  aria-label="Dr. Fabio Schmidt — Médico especialista em Borderline"
-></div>
+<div class="featured-image" role="img" aria-label="Dr. Fabio Schmidt"></div>
 
-<!-- CORPO COM SIDEBAR -->
 <div class="page-body">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <span class="sidebar-label">Conteúdo</span>
     <a href="#curso">Curso</a>
@@ -556,58 +159,43 @@ footer {
     <a href="#metodo">O Método</a>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
 
-    <!-- CURSO -->
     <section id="curso" class="section-block">
       <span class="section-eyebrow">01 — Curso</span>
       <div class="course-card">
         <div>
           <h2 class="course-title">Protocolo 7 Dias</h2>
-          <p class="course-desc">
-            O mapa clínico que transforma exaustão em estratégia — para mães, pais,
-            cônjuges e irmãos de pessoas com Borderline. 7 aulas, scripts prontos
-            e acesso vitalício.
-          </p>
+          <p class="course-desc">O mapa clínico que transforma exaustão em estratégia — para mães, pais, cônjuges e irmãos de pessoas com Borderline. 7 aulas, scripts prontos e acesso vitalício.</p>
           <div class="course-meta">
             <span class="meta-tag">7 aulas em vídeo</span>
             <span class="meta-tag">Acesso vitalício</span>
             <span class="meta-tag">Garantia 7 dias</span>
           </div>
-          <a href="https://bit.ly/4rARbML" class="btn btn-primary" target="_blank" rel="noopener">
-            Acessar o curso →
-          </a>
+          <a href="https://bit.ly/4rARbML" class="btn btn-primary" target="_blank" rel="noopener">Acessar o curso →</a>
         </div>
         <div class="price-block">
           <span class="price-old">R$ 297</span>
-          <span class="price-new">R$&nbsp;219</span>
+          <span class="price-new">R$ 219</span>
           <span class="price-note">pagamento único</span>
         </div>
       </div>
     </section>
 
-    <!-- BIBLIOTECA -->
     <section id="biblioteca" class="section-block">
       <span class="section-eyebrow">02 — Biblioteca</span>
       <div class="biblio-grid">
 
-        <!-- LIVRO: Quando Escolher -->
         <div class="biblio-card">
           <span class="biblio-num">Vol. 00</span>
           <h3 class="biblio-title">Quando Escolher Não É Possível</h3>
-          <p class="biblio-desc">
-            Guia de convivência para quem vive ao lado de alguém com desregulação emocional intensa.
-          </p>
+          <p class="biblio-desc">Guia de convivência para quem vive ao lado de alguém com desregulação emocional intensa.</p>
           <div class="biblio-footer">
-            <span class="biblio-price">$15</span>
-            <a href="https://pay.hotmart.com/U103950622S?off=3xv992tf" class="btn btn-outline" target="_blank" rel="noopener">
-              Comprar
-            </a>
+            <span class="biblio-price">R$ 69</span>
+            <a href="https://pay.hotmart.com/U103950622S?off=3xv992tf" class="btn btn-outline" target="_blank" rel="noopener">Comprar</a>
           </div>
         </div>
 
-        <!-- LIVRO: Protocolo da Crise -->
         <div class="biblio-card">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <span class="biblio-num">Vol. 01</span>
@@ -615,18 +203,13 @@ footer {
           </div>
           <span class="biblio-serie">Borderline · Guia Clínico</span>
           <h3 class="biblio-title">Protocolo da Crise</h3>
-          <p class="biblio-desc">
-            O que fazer nos 60 minutos mais difíceis — para parceiros e familiares de pessoas com TPB.
-          </p>
+          <p class="biblio-desc">O que fazer nos 60 minutos mais difíceis — para parceiros e familiares de pessoas com TPB.</p>
           <div class="biblio-footer">
-            <span class="biblio-price">R$&nbsp;27</span>
-            <a href="https://h5jdksr45b-sys.github.io/landing/biblio.html" class="btn btn-outline" target="_blank" rel="noopener">
-              Acessar
-            </a>
+            <span class="biblio-price">R$ 27</span>
+            <a href="https://h5jdksr45b-sys.github.io/landing/biblio.html" class="btn btn-outline" target="_blank" rel="noopener">Acessar</a>
           </div>
         </div>
 
-        <!-- LIVRO: Kit de Regulação -->
         <div class="biblio-card">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <span class="biblio-num">Vol. 02</span>
@@ -634,21 +217,16 @@ footer {
           </div>
           <span class="biblio-serie">Borderline · Kit de Regulação</span>
           <h3 class="biblio-title">Kit de Regulação</h3>
-          <p class="biblio-desc">
-            10 ferramentas DBT para usar sozinho — antes que a crise chegue.
-          </p>
+          <p class="biblio-desc">10 ferramentas DBT para usar sozinho — antes que a crise chegue.</p>
           <div class="biblio-footer">
-            <span class="biblio-price">R$&nbsp;27</span>
-            <a href="https://h5jdksr45b-sys.github.io/landing/biblio.html" class="btn btn-outline" target="_blank" rel="noopener">
-              Acessar
-            </a>
+            <span class="biblio-price">R$ 27</span>
+            <a href="https://h5jdksr45b-sys.github.io/landing/biblio.html" class="btn btn-outline" target="_blank" rel="noopener">Acessar</a>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- CONSULTAS -->
     <section id="consultas" class="section-block">
       <span class="section-eyebrow">03 — Consultas Online</span>
       <div class="consulta-list">
@@ -675,18 +253,12 @@ footer {
       </div>
     </section>
 
-    <!-- MÉTODO -->
     <section id="metodo" class="section-block">
       <span class="section-eyebrow">04 — O Método</span>
       <div class="metodo-grid">
         <div>
           <h2 class="metodo-title">Clínica sem rodeio.<br><em>Resultado real.</em></h2>
-          <p class="metodo-text">
-            Minha prática foca na redução do estigma e na aplicação de limites
-            saudáveis. O objetivo é transformar a crise em estabilidade através
-            do conhecimento clínico compartilhado — sem linguagem acadêmica, sem
-            promessa vazia.
-          </p>
+          <p class="metodo-text">Minha prática foca na redução do estigma e na aplicação de limites saudáveis. O objetivo é transformar a crise em estabilidade através do conhecimento clínico compartilhado — sem linguagem acadêmica, sem promessa vazia.</p>
         </div>
         <ul class="metodo-list">
           <li>Referência nacional no transtorno Borderline</li>
@@ -701,7 +273,6 @@ footer {
   </main>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <span class="footer-copy">© 2026 Fabio Schmidt</span>
   <div class="footer-links">
@@ -712,5 +283,3 @@ footer {
 
 </body>
 </html>
-
-
