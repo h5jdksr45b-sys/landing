@@ -1,399 +1,193 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dr. Fabio Schmidt — Médico</title>
-<meta name="description" content="Médico especializado em desregulação emocional e borderline. CRM/SP 183549.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#F2EFE9;
-  --ink:#0A0A0A;
-  --ink-soft:#3A3A3A;
-  --ink-mute:#7A7A7A;
-  --line:#0A0A0A;
-  --accent:#A8341F;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{background:var(--bg);scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--ink);
-  font-family:'Fraunces','Times New Roman',serif;
-  font-weight:400;
-  min-height:100vh;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  overflow-x:hidden;
+:root {
+  --bg: #ffffff; /* Fundo branco puro para ser mais minimalista */
+  --ink: #000000;
+  --ink-soft: #444444;
+  --ink-mute: #999999;
+  --line: #e0e0e0;
 }
 
-/* GRAIN OVERLAY */
-body::before{
-content:’’;
-position:fixed;
-inset:0;
-pointer-events:none;
-z-index:9998;
-opacity:.04;
-background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘400’ height=‘400’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.85’ numOctaves=‘3’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘400’ height=‘400’ filter=‘url(%23n)’/%3E%3C/svg%3E”);
-mix-blend-mode:multiply;
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Fraunces', serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
 }
 
-/* MONO LABELS */
-.mono{
-font-family:‘JetBrains Mono’,monospace;
-font-weight:500;
-font-size:10px;
-letter-spacing:0.12em;
-text-transform:uppercase;
-color:var(–ink-soft);
+/* LABELS MONO - Estilo Editorial */
+.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-mute);
+  display: block;
+  margin-bottom: 20px;
 }
 
-/* TOP BAR */
-.topbar{
-border-bottom:1px solid var(–line);
-padding:14px 32px;
-display:flex;
-justify-content:space-between;
-align-items:center;
+/* HEADER */
+header {
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.5px solid var(--line);
 }
-.topbar .brand{font-family:‘JetBrains Mono’,monospace;font-weight:500;font-size:10px;letter-spacing:0.18em;text-transform:uppercase}
-.topbar .brand span{color:var(–ink-mute);margin-left:6px}
-.topbar .meta{font-family:‘JetBrains Mono’,monospace;font-weight:500;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(–ink-soft)}
-.topbar .meta-mid{display:none}
+.brand-name { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; }
 
-@media(min-width:780px){
-.topbar{padding:18px 48px}
-.topbar .meta-mid{display:block}
-}
-
-/* HERO */
-.hero{
-padding:80px 32px 56px;
-display:grid;
-grid-template-columns:1fr;
-gap:36px;
-border-bottom:1px solid var(–line);
-}
-.hero-left{
-display:flex;
-flex-direction:column;
-justify-content:flex-end;
-}
-.hero-label{margin-bottom:18px}
-.hero-bio{
-font-family:‘Fraunces’,serif;
-font-weight:400;
-font-size:14px;
-line-height:1.65;
-color:var(–ink-soft);
-max-width:280px;
-}
-.hero-headline{
-font-family:‘Fraunces’,serif;
-font-weight:800;
-font-size:clamp(56px,14vw,160px);
-line-height:0.86;
-letter-spacing:-0.035em;
-color:var(–ink);
-}
-.hero-headline .it{
-font-style:italic;
-font-weight:400;
-display:block;
-font-size:0.78em;
-margin-top:0.05em;
-color:var(–ink-soft);
+/* HERO SECTION */
+.hero {
+  padding: 80px 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
 }
 
-@media(min-width:780px){
-.hero{
-grid-template-columns:280px 1fr;
-gap:64px;
-padding:120px 48px 88px;
-}
-.hero-bio{max-width:240px}
-}
-
-/* PRODUCTS GRID */
-.products-section{
-padding:56px 32px 0;
-}
-.products-header{
-display:flex;
-justify-content:space-between;
-align-items:baseline;
-padding-bottom:24px;
-border-bottom:1px solid var(–line);
-margin-bottom:0;
-}
-.products-header .count{font-family:‘JetBrains Mono’,monospace;font-size:10px;letter-spacing:0.12em;color:var(–ink-mute)}
-
-.products{
-display:grid;
-grid-template-columns:1fr;
-gap:0;
-}
-.product{
-display:grid;
-grid-template-columns:1fr;
-gap:14px;
-padding:32px 0;
-border-bottom:1px solid var(–line);
-text-decoration:none;
-color:var(–ink);
-position:relative;
-transition:padding .35s cubic-bezier(.2,.8,.2,1);
-}
-.product .num{
-font-family:‘JetBrains Mono’,monospace;
-font-size:11px;
-letter-spacing:0.1em;
-color:var(–ink-mute);
-font-weight:500;
-}
-.product .title{
-font-family:‘Fraunces’,serif;
-font-weight:600;
-font-size:clamp(34px,7vw,72px);
-line-height:0.95;
-letter-spacing:-0.025em;
-color:var(–ink);
-display:flex;
-align-items:baseline;
-flex-wrap:wrap;
-gap:0 18px;
-transition:color .25s ease, transform .35s cubic-bezier(.2,.8,.2,1);
-}
-.product .title .arrow{
-display:inline-flex;
-align-items:center;
-font-size:0.55em;
-font-weight:400;
-font-style:italic;
-color:var(–ink-soft);
-transition:transform .35s cubic-bezier(.2,.8,.2,1), color .25s ease;
-}
-.product .desc{
-font-family:‘Fraunces’,serif;
-font-weight:400;
-font-size:14px;
-line-height:1.6;
-color:var(–ink-soft);
-max-width:480px;
-margin-top:6px;
-}
-.product .meta-row{
-display:flex;
-gap:18px;
-align-items:center;
-margin-top:8px;
-}
-.product .tag{
-font-family:‘JetBrains Mono’,monospace;
-font-size:9px;
-letter-spacing:0.14em;
-text-transform:uppercase;
-color:var(–ink-soft);
-padding:4px 10px;
-border:1px solid var(–ink-soft);
-border-radius:100px;
-}
-.product .tag.featured{background:var(–ink);color:var(–bg);border-color:var(–ink)}
-
-.product:hover{padding-left:14px}
-.product:hover .title{color:var(–accent)}
-.product:hover .arrow{transform:translateX(10px);color:var(–accent)}
-
-@media(min-width:780px){
-.products-section{padding:88px 48px 0}
-.product{
-grid-template-columns:80px 1fr;
-gap:32px;
-padding:40px 0;
-align-items:start;
-}
-.product .num{padding-top:14px}
-.product .desc{margin-top:14px}
+.hero-title {
+  font-size: clamp(48px, 10vw, 120px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
 }
 
-/* CONSULTA — destaque diferente */
-.consulta-section{
-margin-top:0;
-padding:56px 32px 72px;
-border-bottom:1px solid var(–line);
-background:var(–ink);
-color:var(–bg);
-}
-.consulta-section .mono{color:#9A9A9A}
-.consulta-inner{
-display:grid;
-grid-template-columns:1fr;
-gap:24px;
-align-items:end;
-}
-.consulta-headline{
-font-family:‘Fraunces’,serif;
-font-weight:400;
-font-style:italic;
-font-size:clamp(40px,9vw,88px);
-line-height:0.95;
-letter-spacing:-0.02em;
-color:var(–bg);
-margin-top:14px;
-}
-.consulta-desc{
-font-family:‘Fraunces’,serif;
-font-size:14px;
-line-height:1.65;
-color:#B8B8B8;
-max-width:340px;
-}
-.consulta-cta{
-display:inline-flex;
-align-items:center;
-gap:14px;
-font-family:‘JetBrains Mono’,monospace;
-font-size:11px;
-letter-spacing:0.16em;
-text-transform:uppercase;
-color:var(–bg);
-text-decoration:none;
-padding:18px 28px;
-border:1px solid var(–bg);
-border-radius:100px;
-margin-top:18px;
-transition:background .25s ease, color .25s ease, gap .25s ease;
-align-self:start;
-width:fit-content;
-}
-.consulta-cta:hover{background:var(–bg);color:var(–ink);gap:18px}
-.consulta-cta svg{width:14px;height:14px}
+.hero-title span { font-style: italic; font-weight: 200; color: var(--ink-soft); }
 
-@media(min-width:780px){
-.consulta-section{padding:96px 48px 96px}
-.consulta-inner{
-grid-template-columns:1fr auto;
-gap:64px;
-}
-.consulta-right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:14px}
+.hero-description {
+  max-width: 400px;
+  font-size: 18px;
+  color: var(--ink-soft);
+  margin-top: 20px;
 }
 
-/* FOOTER */
-footer{
-padding:32px;
-display:grid;
-grid-template-columns:1fr;
-gap:18px;
-font-family:‘JetBrains Mono’,monospace;
-font-size:10px;
-letter-spacing:0.12em;
-text-transform:uppercase;
-color:var(–ink-mute);
-}
-footer a{color:var(–ink-mute);text-decoration:none;transition:color .2s ease}
-footer a:hover{color:var(–ink)}
-footer .row{display:flex;gap:18px;flex-wrap:wrap}
-
-@media(min-width:780px){
-footer{
-grid-template-columns:1fr 1fr 1fr;
-padding:32px 48px;
-}
-footer .right{text-align:right;justify-content:flex-end}
+/* IMAGE SECTION (Estilo Margiela) */
+.featured-image {
+  width: 100%;
+  height: 60vh;
+  background-color: #f0f0f0;
+  background-image: url('SUA-FOTO-AQUI.jpg'); /* Coloque sua foto aqui */
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%);
+  margin: 40px 0;
 }
 
-/* FADE IN */
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.product,.hero-headline,.hero-bio,.consulta-headline{animation:fadeUp .8s cubic-bezier(.2,.8,.2,1) both}
-.product:nth-child(1){animation-delay:.05s}
-.product:nth-child(2){animation-delay:.12s}
-.product:nth-child(3){animation-delay:.19s}
-.hero-bio{animation-delay:.25s}
+/* CONTENT GRID */
+.grid-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 80px 40px;
+  border-top: 0.5px solid var(--line);
+}
+
+.item-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 40px 0;
+  border-bottom: 0.5px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s ease;
+}
+
+.item-row:hover { opacity: 0.6; }
+
+.item-title {
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.item-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+  .hero { grid-template-columns: 1.5fr 1fr; align-items: end; }
+  .grid-section { grid-template-columns: 1fr 1fr; gap: 80px; }
+  .item-row { grid-template-columns: 1fr; }
+}
+
+/* CTA - CONSULTA */
+.cta-section {
+  padding: 120px 40px;
+  text-align: center;
+  border-top: 0.5px solid var(--line);
+}
+
+.btn-large {
+  font-size: 32px;
+  text-decoration: none;
+  color: var(--ink);
+  font-style: italic;
+  border-bottom: 1px solid var(--ink);
+  transition: all 0.3s ease;
+}
+
+.btn-large:hover { color: var(--ink-mute); border-color: var(--ink-mute); }
+
 </style>
-
 </head>
 <body>
 
-<div class="topbar">
-  <div class="brand">Dr. Fabio Schmidt <span>// CRM-SP 183549</span></div>
-  <div class="meta meta-mid">Borderline · Desregulação Emocional</div>
-  <div class="meta">[ São Paulo ]</div>
-</div>
+<header>
+  <div class="brand-name">Dr. Fabio Schmidt</div>
+  <div class="label">CRM-SP 183549</div>
+</header>
 
 <section class="hero">
-  <div class="hero-left">
-    <div class="mono hero-label">[ Sobre ]</div>
-    <p class="hero-bio">Médico dedicado a quem convive com intensidade emocional. Conteúdo clínico, prático e sem estigma — para famílias, parceiros e profissionais.</p>
-  </div>
-  <h1 class="hero-headline">FABIO<br>SCHMIDT<span class="it">— médico</span></h1>
-</section>
-
-<section class="products-section">
-  <div class="products-header">
-    <div class="mono">[ Materiais ]</div>
-    <div class="count">02 / itens</div>
-  </div>
-
-  <div class="products">
-
-```
-<a class="product" href="https://h5jdksr45b-sys.github.io/landing/curso7.html" target="_blank" rel="noopener">
-  <div class="num">01</div>
   <div>
-    <div class="title">Protocolo 7 Dias <span class="arrow">→</span></div>
-    <p class="desc">Método clínico em 6 aulas. Desative crises, coloque limites sem brigar e saia do modo sobrevivência.</p>
-    <div class="meta-row">
-      <span class="tag featured">Curso</span>
-      <span class="mono">R$ 219</span>
-    </div>
+    <span class="label">// Medicina & Saúde Mental</span>
+    <h1 class="hero-title">FABIO<br><span>Schmidt</span></h1>
   </div>
-</a>
+  <div class="hero-description">
+    Especializado em desregulação emocional e Borderline. Uma abordagem clínica, humana e técnica para quem vive com intensidade.
+  </div>
+</section>
 
-<a class="product" href="https://pay.hotmart.com/U103950622S?off=3xv992tf" target="_blank" rel="noopener">
-  <div class="num">02</div>
+<div class="featured-image"></div>
+
+<section class="grid-section">
   <div>
-    <div class="title">Quando Escolher Não É Possível <span class="arrow">→</span></div>
-    <p class="desc">Livro para quem convive com quem vive em crise. Leitura direta, sem rodeios clínicos.</p>
-    <div class="meta-row">
-      <span class="tag">Livro</span>
-    </div>
-  </div>
-</a>
-```
+    <span class="label">01 / Materiais e Cursos</span>
+    
+    <a href="#" class="item-row">
+      <div class="item-title">Protocolo 7 Dias</div>
+      <div class="item-meta">CURSO — MÉTODO CLÍNICO</div>
+    </a>
 
+    <a href="#" class="item-row">
+      <div class="item-title">Quando Escolher Não É Possível</div>
+      <div class="item-meta">LIVRO — GUIA DE CONVIVÊNCIA</div>
+    </a>
+  </div>
+
+  <div>
+    <span class="label">02 / O Método</span>
+    <p style="font-size: 20px; color: var(--ink-soft);">Minha prática foca na redução do estigma e na aplicação de limites saudáveis. O objetivo é transformar a crise em estabilidade através do conhecimento clínico compartilhado.</p>
   </div>
 </section>
 
-<section class="consulta-section">
-  <div class="consulta-inner">
-    <div class="consulta-left">
-      <div class="mono">[ Atendimento ]</div>
-      <h2 class="consulta-headline">Agendar uma<br>consulta.</h2>
-    </div>
-    <div class="consulta-right">
-      <p class="consulta-desc">Consulta médica online. Avaliação clínica e plano de cuidado individualizado.</p>
-      <a class="consulta-cta" href="https://cal.com/drfabioschmidt" target="_blank" rel="noopener">
-        Ver horários
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
+<section class="cta-section">
+  <span class="label" style="margin-bottom: 40px;">Disponibilidade</span>
+  <a href="https://cal.com/drfabioschmidt" class="btn-large">Agendar consulta online →</a>
 </section>
 
-<footer>
-  <div>© 2026 — Dr. Fabio Schmidt</div>
-  <div class="row" style="justify-content:center">
-    <a href="https://instagram.com/drfabioschmidt" target="_blank" rel="noopener">Instagram ↗</a>
-  </div>
-  <div class="row right">
-    <a href="#">Privacidade</a>
-    <a href="#">Termos</a>
-  </div>
+<footer style="padding: 40px; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between;">
+  <div class="label">© 2026 Fabio Schmidt</div>
+  <div class="label"><a href="#" style="color: inherit; text-decoration: none;">Instagram ↗</a></div>
 </footer>
 
 </body>
