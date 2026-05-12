@@ -1,924 +1,261 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light only">
-<meta name="supported-color-schemes" content="light">
-<title>Protocolo 7 Dias — Dr. Fabio Schmidt</title>
-<meta name="description" content="Protocolo clínico para familiares de pessoas com Borderline. Pare de reagir no improviso. Aprenda o que dizer, quando agir, como impor limite sem virar guerra. Por Dr. Fabio Schmidt, Médico CRM-SP 183549.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  color-scheme: light only;
-  --black:#080808;
-  --black-pure:#000000;
-  --black-2:#141414;
-  --red-deep:#8b1a1a;
-  --red-ember:#c83c1e;
-  --gold:#d4a853;
-  --gold-light:#e5be7a;
-  --cream:#F5F0EB;
-  --cream-hub:#F2EFE9;
-  --bone:#FBF8F1;
-  --grey-line:#1f1f1f;
-  --grey-line-soft:#d9cfb9;
-  --grey-dim:#5C5648;
-  --grey-muted:#3a3a3a;
-}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;background:var(--black);color-scheme:light}
-body{font-family:'DM Sans',system-ui,sans-serif;color:var(--cream);background:var(--black);line-height:1.55;overflow-x:hidden;-webkit-text-size-adjust:100%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo 7 Dias · Dr. Fabio Schmidt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=DM+Sans:wght@300;400;500;700&family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #080808;
+            --black-pure: #000000;
+            --red-deep: #8b1a1a;
+            --red-ember: #c83c1e;
+            --gold: #d4a853;
+            --cream: #F5F0EB;
+            --grey-dim: #3a3a3a;
+            --grey-line: #1a1a1a;
+        }
 
-/* Safari iOS — backgrounds fixos */
-.hero,.ticker,.confront,.transform,.offer,.final{background-color:#080808 !important}
-.recog,.vsl,.authority,.inside,.forwho{background-color:#080808 !important}
-.testimonials,.faq{background-color:#0d0d0d !important}
-.scarcity{background-color:#c83c1e !important}
-footer{background-color:#050505 !important}
-@media (prefers-color-scheme: dark){
-html,body{background-color:#080808 !important;color:#F5F0EB !important}
-}
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--black);
+            color: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
 
-/* UTILS */
-.serif{font-family:‘Playfair Display’,serif}
-.mono{font-family:‘JetBrains Mono’,monospace}
-.kicker{font-family:‘JetBrains Mono’,monospace;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(–gold);font-weight:500;display:inline-flex;align-items:center;gap:12px}
-.kicker::before{content:””;width:24px;height:1px;background:var(–gold)}
+        section { padding: 100px 8vw; border-bottom: 1px solid var(--grey-line); position: relative; }
 
-/* ===== STICKY BAR ===== */
-.sticky{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,8,.96);backdrop-filter:blur(14px);padding:11px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;transform:translateY(-100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);border-bottom:1px solid rgba(255,255,255,.08)}
-.sticky.show{transform:translateY(0)}
-.sticky-left{display:flex;align-items:center;gap:14px;color:#fff;font-size:.82rem;font-weight:400;font-family:‘DM Sans’,sans-serif}
-.sticky-left strong{color:var(–gold-light);font-family:‘Playfair Display’,serif;font-weight:700;font-style:italic}
-.sticky-dot{width:6px;height:6px;border-radius:50%;background:var(–red-ember);box-shadow:0 0 0 3px rgba(200,60,30,.25);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-.sticky-btn{background:var(–red-ember);color:#fff;padding:10px 22px;border-radius:2px;text-decoration:none;font-family:‘Bebas Neue’,sans-serif;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;transition:background .2s}
-.sticky-btn:hover{background:#a33218}
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: var(--black);
+        }
 
-/* ===== HERO ===== */
-.hero{min-height:100vh;background:var(–black);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:80px 32px 60px;position:relative;overflow:hidden}
-.hero::before{content:””;position:absolute;inset:0;background:
-radial-gradient(circle at 15% 20%, rgba(200,60,30,.10) 0%, transparent 35%),
-radial-gradient(circle at 85% 80%, rgba(212,168,83,.06) 0%, transparent 40%);
-pointer-events:none}
-.hero::after{content:””;position:absolute;inset:0;background-image:
-linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
-background-size:60px 60px;pointer-events:none;
-mask-image:radial-gradient(ellipse at center, #000 30%, transparent 75%)}
-.hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:1}
-.hero-meta{display:flex;align-items:center;gap:14px;margin-bottom:48px;font-family:‘JetBrains Mono’,monospace;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);flex-wrap:wrap}
-.hero-meta span{display:inline-flex;align-items:center;gap:8px}
-.hero-meta i{font-style:normal;color:var(–gold-light)}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.hero h1{font-family:‘Playfair Display’,serif;font-size:clamp(2.6rem,5.2vw,4.6rem);font-weight:900;font-style:italic;line-height:.98;letter-spacing:-.025em;margin-bottom:32px;color:#fff}
-.hero h1 em{font-style:italic;font-weight:400;color:var(–gold-light)}
-.hero h1 strong{font-weight:900;color:#fff;background:linear-gradient(180deg, transparent 68%, rgba(200,60,30,.45) 68%);padding:0 4px;font-style:normal}
-.hero-sub{font-family:‘Fraunces’,serif;font-weight:300;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:40px;max-width:480px}
-.hero-sub strong{color:#fff;font-weight:400;font-style:normal;font-family:‘DM Sans’,sans-serif}
-.hero-cta-stack{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
-.btn-main{display:inline-flex;align-items:center;gap:14px;background:var(–red-ember);color:#fff;padding:20px 36px;border-radius:2px;text-decoration:none;font-family:‘Bebas Neue’,sans-serif;font-size:.98rem;letter-spacing:.18em;text-transform:uppercase;transition:all .25s;position:relative;overflow:hidden;border:1px solid var(–red-ember)}
-.btn-main::before{content:””;position:absolute;inset:0;background:#a33218;transform:translateY(100%);transition:transform .3s ease}
-.btn-main:hover::before{transform:translateY(0)}
-.btn-main span,.btn-main svg{position:relative;z-index:1}
-.btn-main svg{width:18px;height:18px;transition:transform .25s}
-.btn-main:hover svg{transform:translateX(4px)}
-.hero-trust{display:flex;align-items:center;gap:18px;font-family:‘JetBrains Mono’,monospace;font-size:.74rem;color:rgba(255,255,255,.45);letter-spacing:.08em}
-.hero-trust .sep{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.3)}
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 80px;
+            background: var(--gold);
+        }
 
-/* HERO IMAGE */
-.hero-image{position:relative;border-radius:2px;overflow:hidden;aspect-ratio:4/5;max-height:600px;width:100%}
-.hero-image img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;filter:contrast(1.05) saturate(.92)}
-.hero-image-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(8,8,8,.4) 65%,rgba(8,8,8,.95) 100%);pointer-events:none}
-.hero-image-corner{position:absolute;top:0;left:0;width:32px;height:32px;border-top:2px solid var(–red-ember);border-left:2px solid var(–red-ember);z-index:2}
-.hero-image-corner.br{top:auto;left:auto;bottom:0;right:0;border:none;border-bottom:2px solid var(–gold);border-right:2px solid var(–gold)}
-.hero-image-caption{position:absolute;bottom:0;left:0;right:0;padding:32px 28px;z-index:2;color:#fff}
-.hero-image-num{font-family:‘JetBrains Mono’,monospace;font-size:.72rem;color:var(–gold-light);letter-spacing:.22em;text-transform:uppercase;margin-bottom:12px}
-.hero-image-caption p{font-family:‘Fraunces’,serif;font-style:italic;font-weight:400;font-size:1.1rem;line-height:1.45;color:#fff;border-left:2px solid var(–red-ember);padding-left:14px}
+        .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            padding-top: 40px;
+        }
 
-/* ===== TICKER ===== */
-.ticker{background:var(–black);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:18px 0;overflow:hidden;color:rgba(255,255,255,.55);font-family:‘JetBrains Mono’,monospace;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase}
-.ticker-track{display:flex;gap:48px;animation:scroll 40s linear infinite;width:max-content}
-.ticker-item{display:flex;align-items:center;gap:14px;white-space:nowrap}
-.ticker-item span{color:var(–gold-light)}
-@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-style: italic;
+            font-size: clamp(40px, 6vw, 80px);
+            line-height: 0.95;
+            letter-spacing: -0.025em;
+            margin-bottom: 24px;
+            max-width: 1000px;
+            color: var(--cream);
+        }
 
-/* ===== RECOGNITION ===== */
-.recog{padding:120px 32px;background:var(–black);position:relative}
-.recog-inner{max-width:1180px;margin:0 auto}
-.recog-header{display:grid;grid-template-columns:1fr 1.5fr;gap:80px;margin-bottom:80px;align-items:end}
-.recog-title{font-family:‘Playfair Display’,serif;font-style:italic;font-size:clamp(2rem,3.8vw,3.4rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(–cream)}
-.recog-title em{font-style:italic;color:var(–red-ember);font-weight:400}
-.recog-lead{font-family:‘Fraunces’,serif;font-style:italic;font-weight:300;font-size:1.05rem;color:#bdb7ad;line-height:1.7;padding-bottom:8px;max-width:460px}
-.recog-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(255,255,255,.08);border-left:1px solid rgba(255,255,255,.08)}
-.recog-cell{padding:36px 28px;border-right:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);transition:background .3s;position:relative}
-.recog-cell:hover{background:rgba(212,168,83,.04)}
-.recog-num{font-family:‘Bebas Neue’,sans-serif;font-size:1.1rem;color:var(–gold);letter-spacing:.3em;margin-bottom:16px}
-.recog-h{font-family:‘Playfair Display’,serif;font-weight:700;font-style:italic;font-size:1.2rem;color:var(–cream);margin-bottom:10px;line-height:1.25}
-.recog-p{font-family:‘DM Sans’,sans-serif;font-size:.88rem;color:#bdb7ad;line-height:1.65}
+        h1 span.red { color: var(--red-ember); font-style: normal; }
 
-/* ===== VSL ===== */
-.vsl{padding:120px 32px;background:var(–black);position:relative}
-.vsl-inner{max-width:920px;margin:0 auto;text-align:center}
-.vsl-title{font-family:‘Playfair Display’,serif;font-weight:700;font-style:italic;font-size:clamp(2rem,3.6vw,3rem);line-height:1.1;letter-spacing:-.02em;color:var(–cream);margin:24px 0 16px}
-.vsl-title em{font-style:italic;color:var(–red-ember);font-weight:400}
-.vsl-sub{font-family:‘Fraunces’,serif;font-style:italic;font-weight:300;font-size:1.05rem;color:#bdb7ad;max-width:560px;margin:0 auto 48px;line-height:1.7}
-.vsl-frame{position:relative;aspect-ratio:16/9;background:var(–black);border-radius:2px;overflow:hidden;box-shadow:0 32px 80px -20px rgba(0,0,0,.6);margin-bottom:24px;border:1px solid rgba(255,255,255,.08)}
-.vsl-frame iframe{width:100%;height:100%;border:none;display:block}
-.vsl-corner{position:absolute;width:32px;height:32px;z-index:2;pointer-events:none}
-.vsl-corner.tl{top:0;left:0;border-top:2px solid var(–red-ember);border-left:2px solid var(–red-ember)}
-.vsl-corner.br{bottom:0;right:0;border-bottom:2px solid var(–gold);border-right:2px solid var(–gold)}
-.vsl-caption{font-family:‘JetBrains Mono’,monospace;font-size:.74rem;letter-spacing:.16em;color:rgba(255,255,255,.45);margin-top:18px;text-transform:uppercase}
+        .sub-lead {
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-size: clamp(18px, 1.5vw, 22px);
+            color: #bdb7ad;
+            max-width: 650px;
+            margin: 0 auto 48px;
+            font-style: italic;
+        }
 
-/* ===== CONFRONT ===== */
-.confront{background:var(–black);color:#fff;padding:120px 32px;position:relative;overflow:hidden}
-.confront::before{content:””;position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(180deg,var(–gold),transparent)}
-.confront-inner{max-width:880px;margin:0 auto;text-align:center}
-.confront h2{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:clamp(2rem,4.2vw,3.6rem);line-height:1.1;letter-spacing:-.02em;margin:24px 0 32px}
-.confront h2 em{font-style:italic;color:var(–red-ember);display:block;margin-top:8px;font-weight:900}
-.confront p{font-family:‘Fraunces’,serif;font-style:italic;font-weight:300;font-size:1.1rem;color:rgba(255,255,255,.7);line-height:1.7;max-width:640px;margin:0 auto 20px}
-.confront p strong{color:#fff;font-weight:400;font-family:‘DM Sans’,sans-serif;font-style:normal}
-.confront-mark{display:inline-block;font-family:‘Playfair Display’,serif;font-style:italic;color:var(–gold-light);border-bottom:1px solid var(–gold);padding-bottom:2px}
+        .cta-button {
+            display: inline-block;
+            background: var(--red-ember);
+            color: var(--cream);
+            padding: 22px 56px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            letter-spacing: 0.25em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--red-ember);
+            text-transform: uppercase;
+        }
 
-/* ===== AUTHORITY ===== */
-.authority{padding:120px 32px;background:var(–black)}
-.auth-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center}
-.auth-img-wrap{position:relative}
-.auth-img-wrap::before{content:””;position:absolute;inset:-12px -12px 12px 12px;border:1px solid var(–red-ember);z-index:0}
-.auth-img{position:relative;z-index:1;background:var(–black);aspect-ratio:4/5;overflow:hidden;border-radius:2px}
-.auth-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:contrast(1.05) saturate(.95)}
-.auth-img.no-img{background:linear-gradient(135deg,#161616 0%,#080808 50%,#1a0d08 100%);position:relative}
-.auth-img.no-img::before{content:“DR. F. S.”;position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);font-family:‘Playfair Display’,serif;font-style:italic;font-size:4rem;font-weight:800;color:rgba(212,168,83,.18);letter-spacing:-.04em}
-.auth-img-tag{position:absolute;bottom:0;left:0;right:0;padding:24px;background:linear-gradient(180deg,transparent,rgba(8,8,8,.95));z-index:2;color:#fff}
-.auth-img-tag strong{font-family:‘Bebas Neue’,sans-serif;font-size:1.1rem;letter-spacing:.18em;color:#fff;display:block;margin-bottom:4px}
-.auth-img-tag span{font-family:‘JetBrains Mono’,monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(–gold-light)}
-.auth-content h2{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:clamp(1.9rem,3.2vw,2.8rem);line-height:1.1;letter-spacing:-.02em;margin:24px 0 24px;color:var(–cream)}
-.auth-content h2 em{font-style:italic;color:var(–red-ember);font-weight:400;display:block}
-.auth-content p{font-family:‘DM Sans’,sans-serif;font-size:1rem;color:#bdb7ad;line-height:1.75;margin-bottom:18px}
-.auth-content p strong{color:var(–cream);font-weight:500}
-.auth-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
-.auth-stat{padding:24px 16px;border-right:1px solid rgba(255,255,255,.08);text-align:center}
-.auth-stat:last-child{border-right:none}
-.auth-stat strong{font-family:‘Bebas Neue’,sans-serif;font-size:2.2rem;color:var(–gold);display:block;letter-spacing:.05em;line-height:1}
-.auth-stat span{font-family:‘JetBrains Mono’,monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:8px;display:block}
+        .cta-button:hover {
+            background: transparent;
+            color: var(--red-ember);
+        }
 
-/* ===== TRANSFORM ===== */
-.transform{padding:120px 32px;background:var(–black);color:#fff;position:relative;overflow:hidden}
-.transform::before{content:””;position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(200,60,30,.1) 0%,transparent 50%);pointer-events:none}
-.transform-inner{max-width:1080px;margin:0 auto;position:relative}
-.transform-head{text-align:center;margin-bottom:64px}
-.transform-head h2{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:clamp(2rem,3.6vw,3.2rem);line-height:1.1;color:var(–cream);margin:24px 0 16px;letter-spacing:-.02em}
-.transform-head h2 em{font-style:italic;color:var(–gold-light);font-weight:400}
-.transform-head p{font-family:‘Fraunces’,serif;font-style:italic;font-size:1.05rem;color:rgba(255,255,255,.55);max-width:560px;margin:0 auto;line-height:1.7}
-.transform-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(255,255,255,.1)}
-.transform-col{padding:48px 40px;position:relative}
-.transform-col.before{background:rgba(200,60,30,.04);border-right:1px solid rgba(255,255,255,.1)}
-.transform-col.after{background:rgba(212,168,83,.04)}
-.transform-tag{font-family:‘JetBrains Mono’,monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:10px;font-weight:500}
-.transform-tag.bad{color:#E66B5C}
-.transform-tag.good{color:var(–gold-light)}
-.transform-tag::before{content:””;width:8px;height:8px;border-radius:50%}
-.transform-tag.bad::before{background:#E66B5C}
-.transform-tag.good::before{background:var(–gold-light)}
-.transform-h{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:1.5rem;line-height:1.25;margin-bottom:20px;color:#fff}
-.transform-list{list-style:none;display:flex;flex-direction:column;gap:14px}
-.transform-list li{font-family:‘DM Sans’,sans-serif;font-size:.94rem;color:rgba(255,255,255,.72);line-height:1.55;display:flex;gap:12px;align-items:flex-start}
-.transform-list li::before{content:””;width:14px;height:1px;background:rgba(255,255,255,.25);margin-top:11px;flex-shrink:0}
+        .price-info {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--grey-dim);
+            margin-top: 24px;
+            letter-spacing: 0.15em;
+        }
 
-/* ===== INSIDE ===== */
-.inside{padding:120px 32px;background:var(–black)}
-.inside-inner{max-width:1180px;margin:0 auto}
-.inside-head{text-align:center;margin-bottom:72px;max-width:680px;margin-left:auto;margin-right:auto}
-.inside-head h2{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:clamp(2rem,3.8vw,3.2rem);line-height:1.1;letter-spacing:-.02em;color:var(–cream);margin:24px 0 16px}
-.inside-head h2 em{font-style:italic;color:var(–red-ember);font-weight:400}
-.inside-head p{font-family:‘Fraunces’,serif;font-style:italic;font-size:1.05rem;color:#bdb7ad;line-height:1.7}
-.modules{max-width:920px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08)}
-.module{display:grid;grid-template-columns:80px 1fr 1fr;gap:32px;padding:32px 0;border-bottom:1px solid rgba(255,255,255,.08);align-items:start;transition:background .3s;position:relative}
-.module:hover{background:rgba(212,168,83,.03);padding-left:16px;padding-right:16px;margin-left:-16px;margin-right:-16px}
-.mod-num{font-family:‘Bebas Neue’,sans-serif;font-size:2.8rem;color:var(–gold);line-height:1;letter-spacing:.05em}
-.mod-content h3{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:1.4rem;color:var(–cream);margin-bottom:8px;line-height:1.25}
-.mod-content p{font-family:‘DM Sans’,sans-serif;font-size:.92rem;color:#bdb7ad;line-height:1.65}
-.mod-result{padding-top:6px}
-.mod-result-label{font-family:‘JetBrains Mono’,monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(–red-ember);margin-bottom:8px;font-weight:500}
-.mod-result-text{font-family:‘Fraunces’,serif;font-style:italic;font-size:1rem;color:var(–cream);line-height:1.45}
+        /* PROMISE SECTION */
+        .promise { background: var(--cream); color: var(--black); }
+        .promise-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: start;
+        }
 
-/* ===== OFFER ===== */
-.offer{padding:120px 32px;background:var(–black);color:#fff;position:relative;overflow:hidden}
-.offer::before{content:””;position:absolute;inset:0;background:
-radial-gradient(circle at 20% 30%,rgba(200,60,30,.1) 0%,transparent 40%),
-radial-gradient(circle at 80% 70%,rgba(212,168,83,.06) 0%,transparent 40%);
-pointer-events:none}
-.offer-inner{max-width:1080px;margin:0 auto;position:relative;display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:start}
-.offer-left h2{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:clamp(2rem,3.6vw,3rem);line-height:1.1;color:var(–cream);margin:24px 0 32px;letter-spacing:-.02em}
-.offer-left h2 em{font-style:italic;color:var(–gold-light);font-weight:400}
-.stack{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,.08)}
-.stack-item{padding:22px 0;border-bottom:1px solid rgba(255,255,255,.08)}
-.stack-item.bonus{background:linear-gradient(90deg,rgba(212,168,83,.06),transparent);padding-left:18px;margin-left:-18px;padding-right:18px;margin-right:-18px}
-.stack-name{display:flex;flex-direction:column;gap:4px}
-.stack-name strong{font-family:‘Playfair Display’,serif;font-style:italic;font-size:1.1rem;font-weight:700;color:#fff;line-height:1.3}
-.stack-name .item-tag,.stack-name .bonus-tag{font-family:‘JetBrains Mono’,monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;margin-bottom:2px}
-.stack-name .item-tag{color:rgba(255,255,255,.5)}
-.stack-name .bonus-tag{color:var(–gold-light)}
-.stack-name .bonus-tag::before{content:”+ “;font-weight:700}
-.stack-name span:not(.item-tag):not(.bonus-tag){font-family:‘DM Sans’,sans-serif;font-size:.86rem;color:rgba(255,255,255,.6);line-height:1.5;margin-top:4px;font-style:normal}
+        .promise h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: clamp(32px, 4vw, 48px);
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
 
-/* PRICE CARD */
-.price-card{background:var(–cream);color:var(–black);padding:44px 36px;border-radius:2px;position:sticky;top:100px;border:1px solid var(–grey-line-soft);box-shadow:0 32px 80px -30px rgba(0,0,0,.6)}
-.price-corner{position:absolute;top:-8px;left:-8px;background:var(–red-ember);color:#fff;font-family:‘JetBrains Mono’,monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;padding:8px 14px;font-weight:500}
-.price-eyebrow{font-family:‘JetBrains Mono’,monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(–red-ember);margin-bottom:12px;font-weight:500;margin-top:8px}
-.price-row{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
-.price-old{font-family:‘JetBrains Mono’,monospace;font-size:1rem;color:var(–grey-dim);text-decoration:line-through;text-decoration-color:var(–red-ember)}
-.price-badge{font-family:‘JetBrains Mono’,monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;background:var(–red-ember);color:#fff;padding:3px 8px;font-weight:500;border-radius:2px}
-.price-now{font-family:‘Playfair Display’,serif;font-style:italic;font-size:4.2rem;font-weight:900;color:var(–black);line-height:.95;letter-spacing:-.04em}
-.price-now sup{font-size:1.4rem;vertical-align:top;margin-top:8px;font-weight:700}
-.price-meta{font-family:‘DM Sans’,sans-serif;font-size:.84rem;color:var(–grey-dim);margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(–grey-line-soft)}
-.price-meta strong{color:var(–black);font-weight:600}
-.price-includes{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
-.price-includes li{font-family:‘DM Sans’,sans-serif;display:flex;gap:12px;align-items:flex-start;font-size:.88rem;color:var(–black);line-height:1.45}
-.price-includes li::before{content:””;width:16px;height:16px;border:1.5px solid var(–red-ember);border-radius:50%;flex-shrink:0;margin-top:2px;background:var(–red-ember) url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘10’ height=‘10’ viewBox=‘0 0 24 24’ fill=‘none’ stroke=‘white’ stroke-width=‘3’ stroke-linecap=‘round’ stroke-linejoin=‘round’%3E%3Cpolyline points=‘20 6 9 17 4 12’/%3E%3C/svg%3E”) center/9px no-repeat}
-.btn-buy{display:flex;align-items:center;justify-content:center;gap:12px;background:var(–red-ember);color:#fff;padding:20px;border-radius:2px;text-decoration:none;font-family:‘Bebas Neue’,sans-serif;font-size:1rem;letter-spacing:.18em;text-transform:uppercase;transition:all .25s;width:100%;border:1px solid var(–red-ember)}
-.btn-buy:hover{background:#a33218}
-.btn-buy svg{width:18px;height:18px}
-.guarantee{margin-top:24px;padding:20px;background:var(–bone);border:1px solid var(–grey-line-soft);border-radius:2px;display:flex;gap:14px;align-items:flex-start}
-.guarantee-icon{width:42px;height:42px;background:var(–black);color:var(–gold-light);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:‘Playfair Display’,serif;font-style:italic;font-size:1.2rem;font-weight:900}
-.guarantee-text strong{display:block;font-family:‘Playfair Display’,serif;font-style:italic;font-size:.98rem;font-weight:700;color:var(–black);margin-bottom:4px}
-.guarantee-text p{font-family:‘DM Sans’,sans-serif;font-size:.8rem;color:var(–grey-dim);line-height:1.5}
+        .bullets { list-style: none; border-top: 1px solid #d8d2c4; }
+        .bullets li {
+            padding: 20px 0;
+            border-bottom: 1px solid #d8d2c4;
+            display: flex;
+            gap: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
 
-/* ===== SCARCITY ===== */
-.scarcity{background:var(–red-ember);color:#fff;padding:40px 32px;text-align:center;position:relative;overflow:hidden}
-.scarcity::before{content:””;position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.04) 20px,rgba(255,255,255,.04) 40px);pointer-events:none}
-.scarcity-inner{max-width:880px;margin:0 auto;position:relative;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap}
-.scarcity strong{font-family:‘Playfair Display’,serif;font-style:italic;font-size:1.2rem;font-weight:700}
-.scarcity span{font-family:‘JetBrains Mono’,monospace;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.92)}
-.scarcity-divider{width:1px;height:30px;background:rgba(255,255,255,.3)}
+        .bullets li .num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            color: var(--red-ember);
+            min-width: 35px;
+        }
 
-/* ===== TESTIMONIALS ===== */
-.testimonials{padding:120px 32px;background:#0d0d0d}
-.test-inner{max-width:1180px;margin:0 auto}
-.test-head{text-align:center;margin-bottom:72px;max-width:620px;margin-left:auto;margin-right:auto}
-.test-head h2{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:clamp(2rem,3.6vw,3rem);line-height:1.1;color:var(–cream);margin:24px 0 16px;letter-spacing:-.02em}
-.test-head h2 em{font-style:italic;color:var(–red-ember);font-weight:400}
-.test-head p{font-family:‘Fraunces’,serif;font-style:italic;font-size:1.02rem;color:#bdb7ad;line-height:1.7}
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.test-card{background:rgba(245,240,235,.04);border:1px solid rgba(255,255,255,.08);padding:36px 32px;border-radius:2px;display:flex;flex-direction:column;transition:transform .3s ease, box-shadow .3s ease, border-color .3s;position:relative}
-.test-card:hover{transform:translateY(-4px);border-color:rgba(212,168,83,.3);box-shadow:0 24px 60px -20px rgba(0,0,0,.4)}
-.test-card.feature{grid-column:span 2;background:rgba(200,60,30,.08);border-color:rgba(200,60,30,.3)}
-.test-stars{color:var(–gold);font-size:.95rem;margin-bottom:18px;letter-spacing:3px}
-.test-quote{font-family:‘Fraunces’,serif;font-style:italic;font-weight:400;font-size:1.05rem;line-height:1.55;color:var(–cream);margin-bottom:24px;flex:1}
-.test-card.feature .test-quote{font-size:1.3rem;font-weight:400}
-.test-quote::before{content:”\201C”;color:var(–red-ember);font-family:‘Playfair Display’,serif;font-size:1.4em;margin-right:4px;line-height:0;vertical-align:-.3em}
-.test-card.feature .test-quote::before{color:var(–gold-light)}
-.test-attr{display:flex;align-items:center;gap:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:18px}
-.test-avatar{width:42px;height:42px;border-radius:50%;background:var(–red-ember);color:#fff;display:flex;align-items:center;justify-content:center;font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:1.1rem;flex-shrink:0}
-.test-card.feature .test-avatar{background:var(–gold);color:var(–black)}
-.test-name{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:.98rem;color:var(–cream)}
-.test-card.feature .test-name{color:var(–gold-light)}
-.test-role{font-family:‘JetBrains Mono’,monospace;font-size:.7rem;color:#bdb7ad;letter-spacing:.1em;margin-top:2px;text-transform:uppercase}
+        /* GUARANTEE */
+        .guarantee { text-align: center; padding: 100px 8vw; border-bottom: none; }
+        .seal {
+            display: inline-block;
+            border: 1px solid var(--gold);
+            padding: 32px 48px;
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--gold);
+            font-size: 18px;
+            letter-spacing: 0.3em;
+            margin-bottom: 32px;
+            position: relative;
+        }
 
-/* ===== FORWHO ===== */
-.forwho{padding:120px 32px;background:var(–black)}
-.fw-inner{max-width:1080px;margin:0 auto}
-.fw-head{text-align:center;margin-bottom:64px}
-.fw-head h2{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:clamp(2rem,3.6vw,3rem);line-height:1.1;color:var(–cream);margin:24px 0 16px;letter-spacing:-.02em}
-.fw-head h2 em{font-style:italic;color:var(–red-ember);font-weight:400}
-.fw-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(255,255,255,.1)}
-.fw-col{padding:48px 40px}
-.fw-col.yes{background:rgba(212,168,83,.03)}
-.fw-col.no{background:rgba(255,255,255,.02);border-left:1px solid rgba(255,255,255,.1)}
-.fw-tag{font-family:‘JetBrains Mono’,monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;margin-bottom:20px;display:flex;align-items:center;gap:10px}
-.fw-tag.yes{color:var(–gold-light)}
-.fw-tag.no{color:rgba(255,255,255,.4)}
-.fw-tag::before{content:””;width:24px;height:1px}
-.fw-tag.yes::before{background:var(–gold-light)}
-.fw-tag.no::before{background:rgba(255,255,255,.3)}
-.fw-h{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:1.4rem;color:var(–cream);margin-bottom:24px;line-height:1.25}
-.fw-list{list-style:none;display:flex;flex-direction:column;gap:14px}
-.fw-list li{font-family:‘DM Sans’,sans-serif;font-size:.94rem;line-height:1.6;display:flex;gap:14px;align-items:flex-start}
-.fw-list li::before{font-family:‘Playfair Display’,serif;font-style:italic;font-size:1.15rem;font-weight:900;flex-shrink:0;line-height:1.4}
-.fw-col.yes .fw-list li{color:var(–cream)}
-.fw-col.yes .fw-list li::before{content:”+”;color:var(–gold-light)}
-.fw-col.no .fw-list li{color:rgba(255,255,255,.5)}
-.fw-col.no .fw-list li::before{content:“−”;color:rgba(255,255,255,.35)}
+        .seal::before, .seal::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 1px solid var(--gold);
+        }
+        .seal::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .seal::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 
-/* ===== FAQ ===== */
-.faq{padding:120px 32px;background:#0d0d0d}
-.faq-inner{max-width:840px;margin:0 auto}
-.faq-head{text-align:center;margin-bottom:56px}
-.faq-head h2{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:clamp(2rem,3.6vw,3rem);line-height:1.1;color:var(–cream);margin:24px 0 0;letter-spacing:-.02em}
-.faq-head h2 em{font-style:italic;color:var(–red-ember);font-weight:400}
-.faq-list{border-top:1px solid rgba(255,255,255,.08)}
-.faq-item{border-bottom:1px solid rgba(255,255,255,.08)}
-.faq-q{padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:24px;cursor:pointer;font-family:‘Playfair Display’,serif;font-style:italic;font-size:1.1rem;font-weight:700;color:var(–cream);transition:color .2s;user-select:none}
-.faq-q:hover{color:var(–gold-light)}
-.faq-toggle{font-family:‘Playfair Display’,serif;font-style:italic;font-size:1.6rem;font-weight:400;color:var(–gold);flex-shrink:0;transition:transform .3s;line-height:.8}
-.faq-item.open .faq-toggle{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease, padding .4s ease;font-family:‘DM Sans’,sans-serif;font-size:.95rem;color:#bdb7ad;line-height:1.7;padding:0}
-.faq-item.open .faq-a{max-height:400px;padding-bottom:24px}
+        .guarantee p {
+            max-width: 560px;
+            margin: 0 auto;
+            color: #bdb7ad;
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 18px;
+        }
 
-/* ===== FINAL ===== */
-.final{padding:140px 32px;background:var(–black);color:#fff;text-align:center;position:relative;overflow:hidden}
-.final::before{content:””;position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%, rgba(200,60,30,.15) 0%, transparent 60%);pointer-events:none}
-.final-inner{max-width:780px;margin:0 auto;position:relative}
-.final h2{font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:clamp(2.4rem,4.8vw,4rem);line-height:1.05;color:var(–cream);margin:24px 0 24px;letter-spacing:-.02em}
-.final h2 em{font-style:italic;color:var(–gold-light);font-weight:400;display:block}
-.final p{font-family:‘Fraunces’,serif;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,.65);max-width:520px;margin:0 auto 40px;line-height:1.7}
-.final-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
-.final-meta{font-family:‘JetBrains Mono’,monospace;font-size:.78rem;color:rgba(255,255,255,.5);letter-spacing:.12em;display:flex;align-items:center;gap:14px;text-transform:uppercase}
-.final-meta strong{color:var(–gold-light);font-family:‘Playfair Display’,serif;font-style:italic;font-weight:700;font-size:1.05rem;letter-spacing:0;text-transform:none}
-.final-meta .sep{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.3)}
+        footer {
+            padding: 80px 8vw;
+            text-align: center;
+            background: var(--black-pure);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            color: var(--grey-dim);
+            text-transform: uppercase;
+        }
 
-/* ===== FOOTER ===== */
-footer{background:#050505;padding:48px 32px;color:rgba(255,255,255,.4);border-top:1px solid rgba(255,255,255,.06)}
-.footer-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
-.footer-brand{font-family:‘Playfair Display’,serif;font-style:italic;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:6px}
-.footer-meta{font-family:‘JetBrains Mono’,monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
-.footer-disclaimer{grid-column:1/-1;font-family:‘DM Sans’,sans-serif;font-size:.78rem;line-height:1.7;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);margin-top:8px}
-.footer-disclaimer a{color:rgba(255,255,255,.55);text-decoration:none}
-.footer-disclaimer a:hover{color:var(–gold-light)}
+        .footer-name {
+            color: var(--cream);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            margin-bottom: 12px;
+            letter-spacing: 0.4em;
+            display: block;
+        }
 
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1)}
-.reveal.show{opacity:1;transform:translateY(0)}
-
-/* RESPONSIVE */
-@media(max-width:1100px){
-.hero-grid{gap:48px}
-.recog-grid{grid-template-columns:repeat(2,1fr)}
-.auth-inner,.offer-inner{grid-template-columns:1fr;gap:48px}
-.price-card{position:static}
-.test-grid{grid-template-columns:1fr 1fr}
-.test-card.feature{grid-column:span 2}
-}
-@media(max-width:760px){
-.hero{padding:64px 22px 56px;min-height:auto}
-.hero-grid{grid-template-columns:1fr;gap:48px}
-.hero-image{max-height:500px}
-.hero-image-caption p{font-size:.98rem}
-.recog-header{grid-template-columns:1fr;gap:24px}
-.recog-grid{grid-template-columns:1fr}
-.module{grid-template-columns:60px 1fr;gap:20px}
-.mod-result{grid-column:1/-1;padding-left:80px;padding-top:0}
-.mod-num{font-size:2.2rem}
-.transform-grid{grid-template-columns:1fr}
-.transform-col.before{border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
-.transform-col{padding:36px 28px}
-.test-grid{grid-template-columns:1fr}
-.test-card.feature{grid-column:span 1}
-.fw-grid{grid-template-columns:1fr}
-.fw-col.no{border-left:none;border-top:1px solid rgba(255,255,255,.1)}
-.fw-col{padding:36px 28px}
-.auth-stats{grid-template-columns:1fr;border-bottom:none}
-.auth-stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.08);padding:16px}
-.price-card{padding:32px 24px}
-.price-now{font-size:3.4rem}
-.recog,.confront,.vsl,.authority,.transform,.inside,.offer,.testimonials,.forwho,.faq,.final{padding:72px 22px}
-.scarcity{padding:28px 22px}
-.scarcity-divider{display:none}
-.footer-inner{grid-template-columns:1fr;text-align:left}
-.sticky{padding:9px 16px}
-.sticky-left{font-size:.74rem}
-.sticky-btn{padding:9px 14px;font-size:.74rem}
-.hero-meta{flex-wrap:wrap;gap:8px;font-size:.62rem}
-}
-</style>
-
+        @media (max-width: 880px) {
+            .promise-grid { grid-template-columns: 1fr; gap: 48px; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- STICKY -->
+    <section class="hero">
+        <div class="eyebrow">Protocolo 7 Dias · @drfabioschmidt</div>
+        <h1>Você não causou a crise.<br>Mas pode estar <span class="red">alimentando</span>.</h1>
+        <p class="sub-lead">O método médico que ensina familiares, cônjuges e pais a parar de sangrar dentro de casa — sem virar refém, sem virar carrasco.</p>
+        <a href="https://pay.hotmart.com/S104212285E?bid=1778553156563" class="cta-button">Quero o Protocolo</a>
+        <div class="price-info">12x R$ 21,90 ou R$ 219 à vista · <strong>Acesso imediato</strong></div>
+    </section>
 
-<div class="sticky" id="sticky">
-  <div class="sticky-left">
-    <span class="sticky-dot"></span>
-    Protocolo 7 Dias <strong>· R$ 219</strong> · acesso vitalício
-  </div>
-  <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="sticky-btn">Começar agora</a>
-</div>
-
-<!-- HERO -->
-
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-meta">
-      <span><i>●</i> Dr. Fabio Schmidt</span>
-      <span>CRM-SP 183549</span>
-      <span>Médico</span>
-      <span>Foco clínico em Borderline</span>
-    </div>
-    <div class="hero-grid">
-      <div>
-        <h1>Você não está <em>brigando com</em> seu familiar.<br>Você está <strong>brigando com a crise</strong> — e perdendo no improviso.</h1>
-        <p class="hero-sub">Não falta amor. <strong>Falta método.</strong> O Protocolo 7 Dias é o mapa clínico que transforma exaustão em estratégia — para mães, pais, cônjuges e irmãos de pessoas com Borderline.</p>
-        <div class="hero-cta-stack">
-          <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-main">
-            <span>Quero o protocolo</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <div class="hero-trust">
-            <span>R$ 219</span>
-            <span class="sep"></span>
-            <span>Garantia 7 dias</span>
-            <span class="sep"></span>
-            <span>Acesso imediato</span>
-          </div>
+    <section class="promise">
+        <div class="promise-grid">
+            <div>
+                <h2>Sete dias.<br>Um <span style="color:var(--red-ember)">procedimento</span> por dia.</h2>
+                <p style="margin-bottom: 24px; font-size: 17px;">Este curso não é para você se tornar perfeito. É para você parar de sangrar. A cada dia, você aplica uma técnica específica, treinada em consultório e validada com famílias reais.</p>
+                <p style="font-family: 'Fraunces', serif; font-style: italic; color: #6b6358; font-size: 16px;">Sem teoria longa. Sem promessas vazias. Apenas procedimento.</p>
+                <div style="margin-top: 40px;">
+                    <a href="https://pay.hotmart.com/S104212285E?bid=1778553156563" style="color: var(--red-ember); font-family: 'Bebas Neue', sans-serif; text-decoration: none; letter-spacing: 0.1em; font-size: 18px;">Começar agora →</a>
+                </div>
+            </div>
+            <ul class="bullets">
+                <li><span class="num">1</span><span>Frase fixa de presença que interrompe a escalada.</span></li>
+                <li><span class="num">2</span><span>Limite que funciona sem virar briga ou confronto.</span></li>
+                <li><span class="num">3</span><span>Pausa combinada — o protocolo de 20 minutos.</span></li>
+                <li><span class="num">4</span><span>Roteiro de pós-crise para aplicar em 10 minutos.</span></li>
+                <li><span class="num">5</span><span>Como parar de discutir detalhes inúteis no auge do conflito.</span></li>
+                <li><span class="num">6</span><span>Regra de previsibilidade que reduz a incerteza do ambiente.</span></li>
+                <li><span class="num">7</span><span>Autocuidado obrigatório para quem cuida não adoecer.</span></li>
+            </ul>
         </div>
-      </div>
-      <div class="hero-image">
-        <div class="hero-image-corner"></div>
-        <div class="hero-image-corner br"></div>
-        <img src="hero-cuidadora.png" alt="Familiar exausta — a realidade silenciosa de quem convive com Borderline">
-        <div class="hero-image-overlay"></div>
-        <div class="hero-image-caption">
-          <div class="hero-image-num">Princípio nº 1</div>
-          <p>A crise escala por padrão neurológico — não por maldade. Quem entende o ponto de virada deixa de reagir e começa a conduzir.</p>
+    </section>
+
+    <section class="guarantee">
+        <div class="seal">Garantia · 7 dias</div>
+        <p>
+            Se em sete dias o protocolo não fizer sentido para a realidade da sua casa, você solicita o reembolso. Sem perguntas. Sem burocracia.
+        </p>
+        <div style="margin-top: 60px;">
+             <a href="https://pay.hotmart.com/S104212285E?bid=1778553156563" class="cta-button" style="background: transparent; color: var(--gold); border-color: var(--gold);">Inscrever-se com segurança</a>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- TICKER -->
-
-<div class="ticker">
-  <div class="ticker-track">
-    <div class="ticker-item">+90.000 <span>familiares acompanham o trabalho</span></div>
-    <div class="ticker-item">CRM-SP 183549 <span>· médico ativo</span></div>
-    <div class="ticker-item">Foco clínico <span>100% Borderline</span></div>
-    <div class="ticker-item">Acesso vitalício <span>· atualizações inclusas</span></div>
-    <div class="ticker-item">Garantia 7 dias <span>· reembolso integral</span></div>
-    <div class="ticker-item">+90.000 <span>familiares acompanham o trabalho</span></div>
-    <div class="ticker-item">CRM-SP 183549 <span>· médico ativo</span></div>
-    <div class="ticker-item">Foco clínico <span>100% Borderline</span></div>
-    <div class="ticker-item">Acesso vitalício <span>· atualizações inclusas</span></div>
-    <div class="ticker-item">Garantia 7 dias <span>· reembolso integral</span></div>
-  </div>
-</div>
-
-<!-- RECOGNITION -->
-
-<section class="recog">
-  <div class="recog-inner">
-    <div class="recog-header reveal">
-      <h2 class="recog-title">Você reconhece <em>esses padrões.</em><br>O problema é que tentou resolver no improviso.</h2>
-      <p class="recog-lead">Quatro situações que se repetem em quase toda casa onde mora alguém com Borderline. Nenhuma se resolve com mais paciência. Todas se resolvem com método.</p>
-    </div>
-    <div class="recog-grid">
-      <div class="recog-cell reveal">
-        <div class="recog-num">i.</div>
-        <h3 class="recog-h">A escalada de 0 a 100</h3>
-        <p class="recog-p">Conversa banal vira confronto em segundos. Você não vê o gatilho — e fica sem chão antes de processar o que aconteceu.</p>
-      </div>
-      <div class="recog-cell reveal">
-        <div class="recog-num">ii.</div>
-        <h3 class="recog-h">Ceder por exaustão</h3>
-        <p class="recog-p">Você explica, argumenta, tenta raciocinar. Quando não aguenta mais, cede. O cérebro do outro registra: "intensidade funcionou".</p>
-      </div>
-      <div class="recog-cell reveal">
-        <div class="recog-num">iii.</div>
-        <h3 class="recog-h">Culpa em qualquer escolha</h3>
-        <p class="recog-p">Impôs limite? Se sente cruel. Cedeu? Se sente fraca. Qualquer caminho parece errado — e isso te paralisa na próxima crise.</p>
-      </div>
-      <div class="recog-cell reveal">
-        <div class="recog-num">iv.</div>
-        <h3 class="recog-h">Esgotamento invisível</h3>
-        <p class="recog-p">Ninguém de fora entende o que você carrega. A tensão constante corrói saúde, casamento, trabalho — e você só percebe quando já adoeceu.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- VSL -->
-
-<section class="vsl">
-  <div class="vsl-inner reveal">
-    <span class="kicker">Antes de continuar</span>
-    <h2 class="vsl-title">Por que <em>tudo o que você já tentou</em> não funcionou.</h2>
-    <p class="vsl-sub">Em poucos minutos, o Dr. Fabio explica o mecanismo neurológico por trás da escalada — e o que muda quando você passa a operar com método.</p>
-    <div class="vsl-frame">
-      <div class="vsl-corner tl"></div>
-      <div class="vsl-corner br"></div>
-      <iframe src="https://player.vimeo.com/video/1175944292?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-    </div>
-    <p class="vsl-caption">Dr. Fabio Schmidt · Médico · CRM-SP 183549</p>
-  </div>
-</section>
-
-<!-- CONFRONT -->
-
-<section class="confront">
-  <div class="confront-inner reveal">
-    <span class="kicker">A verdade que ninguém te disse</span>
-    <h2>Tudo o que você faz com o melhor da intenção <em>está alimentando o ciclo.</em></h2>
-    <p>Explicar no pico da crise. Argumentar racionalmente com cérebro em alarme. Ameaçar o que não vai cumprir. Ceder pra ter paz. <strong>Cada uma dessas reações é um treino.</strong> Você está ensinando, sem querer, que a crise é o caminho mais curto pra conseguir o que ela quer.</p>
-    <p>Isso não é culpa sua. <span class="confront-mark">É falta de mapa.</span> E é exatamente isso que o protocolo corrige.</p>
-  </div>
-</section>
-
-<!-- AUTHORITY -->
-
-<section class="authority">
-  <div class="auth-inner">
-    <div class="auth-img-wrap reveal">
-      <div class="auth-img">
-        <img src="IMG_9940.jpeg" alt="Dr. Fabio Schmidt" onerror="this.style.display='none';this.parentElement.classList.add('no-img')">
-        <div class="auth-img-tag">
-          <strong>Dr. Fabio Schmidt</strong>
-          <span>Médico · CRM-SP 183549</span>
-        </div>
-      </div>
-    </div>
-    <div class="auth-content reveal">
-      <span class="kicker">Quem desenvolveu</span>
-      <h2>Não é autoajuda.<em>É clínica aplicada à sua casa.</em></h2>
-      <p>Atendi <strong>centenas de famílias</strong> que chegavam ao consultório destruídas — sem dormir, sem entender o que estava acontecendo, repetindo os mesmos erros de boa-fé.</p>
-      <p>A maioria não precisava de mais amor. Precisava de <strong>um mapa para navegar dentro da crise</strong> — o que falar, o que silenciar, quando agir e quando recuar.</p>
-      <p>O Protocolo 7 Dias é exatamente isso: o que ensino clinicamente, em linguagem direta, sem rodeio acadêmico.</p>
-      <div class="auth-stats">
-        <div class="auth-stat"><strong>+90k</strong><span>familiares orientados</span></div>
-        <div class="auth-stat"><strong>100%</strong><span>foco em Borderline</span></div>
-        <div class="auth-stat"><strong>7 dias</strong><span>protocolo completo</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TRANSFORMATION -->
-
-<section class="transform">
-  <div class="transform-inner">
-    <div class="transform-head reveal">
-      <span class="kicker">A diferença na prática</span>
-      <h2>A próxima crise <em>vai acontecer.</em></h2>
-      <p>O que muda é como você chega nela.</p>
-    </div>
-    <div class="transform-grid">
-      <div class="transform-col before reveal">
-        <div class="transform-tag bad">Hoje · sem o protocolo</div>
-        <h3 class="transform-h">Você reage no susto</h3>
-        <ul class="transform-list">
-          <li>Tenta explicar quando o cérebro do outro está em alarme</li>
-          <li>Cede por exaustão e treina a próxima crise</li>
-          <li>Impõe limite que não consegue sustentar</li>
-          <li>Sai destruída fisicamente — e culpada psiquicamente</li>
-          <li>Vive em alerta esperando o próximo episódio</li>
-        </ul>
-      </div>
-      <div class="transform-col after reveal">
-        <div class="transform-tag good">Depois · com o Protocolo</div>
-        <h3 class="transform-h">Você conduz com método</h3>
-        <ul class="transform-list">
-          <li>Identifica a escalada na fase 1, antes do confronto</li>
-          <li>Tem scripts prontos para os 8 cenários mais comuns</li>
-          <li>Impõe limite firme sem virar punição</li>
-          <li>Sabe quando agir, quando silenciar, quando se afastar</li>
-          <li>Recupera sono, foco e identidade fora do papel de cuidadora</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- INSIDE -->
-
-<section class="inside">
-  <div class="inside-inner">
-    <div class="inside-head reveal">
-      <span class="kicker">Dentro do protocolo</span>
-      <h2>Cada módulo resolve <em>um problema real.</em></h2>
-      <p>Sem encheção de linguiça. Cada aula entrega uma capacidade prática que você usa na próxima vez.</p>
-    </div>
-    <div class="modules">
-      <div class="module reveal">
-        <div class="mod-num">01</div>
-        <div class="mod-content">
-          <h3>Mapa da Crise</h3>
-          <p>As 5 fases previsíveis de uma escalada. Como reconhecer o ponto de virada — o instante exato em que ainda dá pra mudar o rumo.</p>
-        </div>
-        <div class="mod-result">
-          <div class="mod-result-label">Resultado</div>
-          <p class="mod-result-text">Você identifica a crise duas etapas antes do confronto.</p>
-        </div>
-      </div>
-      <div class="module reveal">
-        <div class="mod-num">02</div>
-        <div class="mod-content">
-          <h3>Scripts para Acusação e Ameaça</h3>
-          <p>Frases prontas — palavra por palavra — para os cenários mais difíceis. "Você nunca me amou", "vou me machucar", "a culpa é sua". Testadas clinicamente.</p>
-        </div>
-        <div class="mod-result">
-          <div class="mod-result-label">Resultado</div>
-          <p class="mod-result-text">Nunca mais congelar sem saber o que dizer.</p>
-        </div>
-      </div>
-      <div class="module reveal">
-        <div class="mod-num">03</div>
-        <div class="mod-content">
-          <h3>O que NÃO fazer</h3>
-          <p>Os erros bem-intencionados que treinam a crise: explicar no pico, argumentar com cérebro em alarme, ameaçar sem cumprir, ceder por exaustão.</p>
-        </div>
-        <div class="mod-result">
-          <div class="mod-result-label">Resultado</div>
-          <p class="mod-result-text">Para de alimentar o ciclo sem perceber.</p>
-        </div>
-      </div>
-      <div class="module reveal">
-        <div class="mod-num">04</div>
-        <div class="mod-content">
-          <h3>Limites Estruturados</h3>
-          <p>A diferença clínica entre limite e punição. Como impor firmeza sem virar guerra — e como sustentar quando a outra pessoa testa.</p>
-        </div>
-        <div class="mod-result">
-          <div class="mod-result-label">Resultado</div>
-          <p class="mod-result-text">Impõe limite e dorme em paz.</p>
-        </div>
-      </div>
-      <div class="module reveal">
-        <div class="mod-num">05</div>
-        <div class="mod-content">
-          <h3>Protocolo de Emergência</h3>
-          <p>Passo a passo para situações de risco real: quando acionar ajuda, o que dizer ao serviço de emergência, como proteger todos.</p>
-        </div>
-        <div class="mod-result">
-          <div class="mod-result-label">Resultado</div>
-          <p class="mod-result-text">Tem plano quando mais precisar.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- OFFER -->
-
-<section class="offer">
-  <div class="offer-inner">
-    <div class="offer-left">
-      <span class="kicker">A oferta completa</span>
-      <h2>Tudo que você recebe<em>ao garantir o protocolo.</em></h2>
-      <div class="stack">
-        <div class="stack-item">
-          <div class="stack-name">
-            <span class="item-tag">Núcleo do método</span>
-            <strong>Protocolo 7 Dias · 7 aulas em vídeo</strong>
-            <span>Linguagem clínica direta, sem teoria de livro. Cada aula resolve um problema real.</span>
-          </div>
-        </div>
-        <div class="stack-item">
-          <div class="stack-name">
-            <span class="item-tag">Material de apoio</span>
-            <strong>Livro digital exclusivo</strong>
-            <span>"Quando Escolher Não É Possível" · leitura complementar ao método</span>
-          </div>
-        </div>
-        <div class="stack-item bonus">
-          <div class="stack-name">
-            <span class="bonus-tag">Bônus incluso</span>
-            <strong>Scripts de Crise TPB</strong>
-            <span>Frases prontas — palavra por palavra — para os 12 cenários mais difíceis</span>
-          </div>
-        </div>
-        <div class="stack-item bonus">
-          <div class="stack-name">
-            <span class="bonus-tag">Bônus incluso</span>
-            <strong>Checklist de Crise em 60 Segundos</strong>
-            <span>Guia rápido para imprimir e ter à mão na hora do confronto</span>
-          </div>
-        </div>
-        <div class="stack-item bonus">
-          <div class="stack-name">
-            <span class="bonus-tag">Bônus incluso</span>
-            <strong>Guia para Sócios e Colegas de Trabalho</strong>
-            <span>Quando o Borderline aparece no ambiente profissional</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="price-card reveal">
-      <div class="price-corner">Acesso imediato</div>
-      <div class="price-eyebrow">Investimento único</div>
-      <div class="price-row">
-        <span class="price-old">R$ 297</span>
-        <span class="price-badge">26% OFF</span>
-      </div>
-      <div class="price-now"><sup>R$</sup>219</div>
-      <p class="price-meta"><strong>Pagamento único.</strong> Sem mensalidade. Acesso vitalício.</p>
-      <ul class="price-includes">
-        <li>7 aulas em vídeo · linguagem clínica direta</li>
-        <li>Livro digital exclusivo</li>
-        <li>3 bônus em PDF (Scripts, Checklist, Guia)</li>
-        <li>Acesso vitalício · atualizações futuras</li>
-        <li>Compatível com celular, tablet e computador</li>
-      </ul>
-      <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-buy">
-        Quero o protocolo agora
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <div class="guarantee">
-        <div class="guarantee-icon">7</div>
-        <div class="guarantee-text">
-          <strong>Garantia incondicional de 7 dias</strong>
-          <p>Assista, aplique, e se em 7 dias não fizer sentido pra você, devolvemos 100% — sem perguntas.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SCARCITY -->
-
-<section class="scarcity">
-  <div class="scarcity-inner">
-    <strong>Os 3 bônus podem sair do pacote em breve.</strong>
-    <div class="scarcity-divider"></div>
-    <span>Quem entra agora leva tudo · R$ 219</span>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-
-<section class="testimonials">
-  <div class="test-inner">
-    <div class="test-head reveal">
-      <span class="kicker">O que dizem</span>
-      <h2>Quem já passou por isso <em>reconhece.</em></h2>
-      <p>Mensagens de pessoas que acompanham o trabalho clínico do Dr. Fabio.</p>
-    </div>
-    <div class="test-grid">
-      <div class="test-card feature reveal">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-quote">Os conteúdos me despertaram para entender o que acontece nas emoções e o que posso fazer dentro disso. Aprendi muita coisa — como me regular, como não ser reativa mesmo quando foge do controle. Já encaminhei para outras pessoas, e tudo que ouvi de volta foi gratidão.</p>
-        <div class="test-attr">
-          <div class="test-avatar">A</div>
-          <div>
-            <div class="test-name">Ana Paula</div>
-            <div class="test-role">Mãe · acompanha há 8 meses</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-card reveal">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-quote">Sensacional o material. Exatamente o que faltava — algo prático, sem rodeios.</p>
-        <div class="test-attr">
-          <div class="test-avatar">R</div>
-          <div>
-            <div class="test-name">Roberta</div>
-            <div class="test-role">Cônjuge</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-card reveal">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-quote">No acolhimento que você oferece, a vida tem tido mais leveza. Um despertar de que as coisas podem ser melhores.</p>
-        <div class="test-attr">
-          <div class="test-avatar">M</div>
-          <div>
-            <div class="test-name">Mariana</div>
-            <div class="test-role">Irmã</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FORWHO -->
-
-<section class="forwho">
-  <div class="fw-inner">
-    <div class="fw-head reveal">
-      <span class="kicker">Para quem é</span>
-      <h2>Honestidade <em>antes da compra.</em></h2>
-    </div>
-    <div class="fw-grid">
-      <div class="fw-col yes reveal">
-        <div class="fw-tag yes">É para você</div>
-        <h3 class="fw-h">O protocolo serve se você...</h3>
-        <ul class="fw-list">
-          <li>É mãe, pai, cônjuge ou familiar de alguém com Borderline ou desregulação emocional intensa</li>
-          <li>Vive em estado constante de alerta dentro de casa</li>
-          <li>Já tentou de tudo e os ciclos continuam idênticos</li>
-          <li>Cede por exaustão e depois se arrepende</li>
-          <li>Não sabe o que dizer nas crises e acaba piorando</li>
-          <li>Quer agir com estratégia clínica, não no improviso</li>
-        </ul>
-      </div>
-      <div class="fw-col no reveal">
-        <div class="fw-tag no">Não é para você</div>
-        <h3 class="fw-h">Não compre se você...</h3>
-        <ul class="fw-list">
-          <li>Busca substituto para acompanhamento médico do familiar</li>
-          <li>Está em risco imediato — procure suporte presencial primeiro</li>
-          <li>Seu familiar não tem histórico de desregulação intensa</li>
-          <li>Quer mudança no outro sem mudar nada na própria postura</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-
-<section class="faq">
-  <div class="faq-inner">
-    <div class="faq-head reveal">
-      <span class="kicker">Dúvidas</span>
-      <h2>Antes de <em>decidir.</em></h2>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-q">Como acesso o conteúdo após a compra?<span class="faq-toggle">+</span></div>
-        <div class="faq-a">Imediatamente após confirmação do pagamento, você recebe e-mail com link de acesso. O conteúdo fica na plataforma Hotmart, que funciona em celular, tablet e computador.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">É ao vivo ou gravado?<span class="faq-toggle">+</span></div>
-        <div class="faq-a">100% gravado. Você assiste no seu ritmo, pausa e volta quantas vezes precisar. Sem horário fixo.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">E se eu comprar e não gostar?<span class="faq-toggle">+</span></div>
-        <div class="faq-a">7 dias de garantia incondicional. Se sentir que não é pra você, basta pedir reembolso. Devolvemos 100% — sem perguntas, sem burocracia.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Funciona sem diagnóstico oficial de Borderline?<span class="faq-toggle">+</span></div>
-        <div class="faq-a">Sim. O protocolo foi desenhado para situações de desregulação emocional intensa em ambiente familiar. Se os padrões aqui descrevem o que você vive, o conteúdo é relevante — independente de diagnóstico formal.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Substitui o tratamento médico do meu familiar?<span class="faq-toggle">+</span></div>
-        <div class="faq-a">Não. É conteúdo educativo para você — o familiar — desenvolver estratégias de manejo em casa. Complementa, mas nunca substitui, tratamento médico e psicológico do paciente.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Por quanto tempo tenho acesso?<span class="faq-toggle">+</span></div>
-        <div class="faq-a">Vitalício. Uma vez comprado, você assiste para sempre — incluindo todas atualizações futuras sem custo adicional.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Vou conseguir aplicar mesmo cansada?<span class="faq-toggle">+</span></div>
-        <div class="faq-a">Sim. O protocolo foi desenhado pra cuidador exausto. Aulas curtas, scripts pra imprimir, checklist pra ter à mão. Você não precisa decorar nada — basta consultar quando precisar.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL -->
-
-<section class="final">
-  <div class="final-inner">
-    <span class="kicker">Decisão</span>
-    <h2>Você carregou isso sozinha por tempo demais.<em>Agora você tem onde buscar.</em></h2>
-    <p>Não porque é fraca. Porque ninguém te entregou o método antes. O Protocolo 7 Dias é esse método.</p>
-    <div class="final-cta-wrap">
-      <a href="https://pay.hotmart.com/S104212285E?bid=1771854323602" class="btn-main" style="padding:22px 44px;font-size:1rem">
-        <span>Quero o Protocolo 7 Dias</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <div class="final-meta">
-        <span>Acesso imediato</span>
-        <span class="sep"></span>
-        <strong>R$ 219</strong>
-        <span class="sep"></span>
-        <span>Garantia 7 dias</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">Protocolo 7 Dias</div>
-      <div class="footer-meta">Dr. Fabio Schmidt · CRM-SP 183549</div>
-    </div>
-    <div class="footer-meta">drfabioschmidt@gmail.com</div>
-    <div class="footer-disclaimer">
-      Conteúdo educativo. Não substitui acompanhamento médico ou psicológico. Em situação de emergência, procure serviços locais de saúde.
-      &nbsp;·&nbsp; <a href="#">Política de Privacidade</a> &nbsp;·&nbsp; <a href="#">Termos de Uso</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-window.addEventListener('scroll',()=>{
-  document.getElementById('sticky').classList.toggle('show',window.scrollY>700);
-});
-const obs=new IntersectionObserver((entries)=>{
-  entries.forEach((e)=>{
-    if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target);}
-  });
-},{threshold:.1,rootMargin:'0px 0px -60px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-document.querySelectorAll('.faq-q').forEach(q=>{
-  q.addEventListener('click',()=>{
-    const item=q.parentElement;
-    const isOpen=item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-    if(!isOpen)item.classList.add('open');
-  });
-});
-</script>
+    <footer>
+        <span class="footer-name">Dr. Fabio Schmidt</span>
+        Médico · CRM-SP 183549 · @drfabioschmidt<br>
+        Borderline Sem Estigma · 2026
+    </footer>
 
 </body>
 </html>
